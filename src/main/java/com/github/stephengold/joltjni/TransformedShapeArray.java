@@ -31,6 +31,13 @@ import com.github.stephengold.joltjni.readonly.ConstTransformedShape;
  */
 public class TransformedShapeArray extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * length (in shapes)
+     */
+    final private int length;
+    // *************************************************************************
     // constructors
 
     /**
@@ -41,6 +48,7 @@ public class TransformedShapeArray extends JoltPhysicsObject {
     public TransformedShapeArray(int length) {
         assert length > 0 : "length=" + length;
 
+        this.length = length;
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
@@ -50,10 +58,13 @@ public class TransformedShapeArray extends JoltPhysicsObject {
     /**
      * Access the shape at the specified index.
      *
-     * @param elementIndex the index (&ge;0)
+     * @param elementIndex the index (&ge;0, &lt;length)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public TransformedShape get(int elementIndex) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         long shapeVa = getShape(arrayVa, elementIndex);
         TransformedShape result = new TransformedShape(this, shapeVa);
@@ -62,12 +73,25 @@ public class TransformedShapeArray extends JoltPhysicsObject {
     }
 
     /**
+     * Return the length of the array.
+     *
+     * @return the length (in shapes, &gt;0)
+     */
+    public int length() {
+        return length;
+    }
+
+    /**
      * Store the specified shape at the specified index.
      *
-     * @param elementIndex the index at which to store the shape (&ge;0)
+     * @param elementIndex the index at which to store the shape (&ge;0,
+     * &lt;length)
      * @param shape the shape to store (not {@code null}, unaffected)
      */
     public void set(int elementIndex, ConstTransformedShape shape) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         long shapeVa = shape.targetVa();
         setShape(arrayVa, elementIndex, shapeVa);
