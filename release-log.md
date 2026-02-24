@@ -1,5 +1,21 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.7.0 released on TBD
+
++ Bugfix:  missing `TRACE_NEW` in `BodyInterface_getTransformedShape`
+  (issue #37)
+
++ Added classes:
+  + `BatchBodyInterface`
+  + `RMat44Array`
+  + `ShapeRefCArray`
+  + `TransformedShapeArray`
+
++ Added method `Mat44Array.length()`.
++ Added runtime checks to `Mat44Array`.
++ Updated the Jolt-Physics source and assets to sg260221 (=f8a329a).
+
+
 ## Version 3.6.0 released on 11 February 2026
 
 + Bugfixes:
@@ -92,10 +108,12 @@
 + Updated the Jolt-Physics source and assets to sg260209 (=49f60cb).
 + Updated the OSHI library v6.9.3 .
 
+
 ## Version 3.5.2 released on 7 January 2026
 
 + Bugfix:  logic error in `Body.applyBuoyancyImpulse()` (issue #31)
 + Updated the Checkstyle tool to v13, requiring JDK 21+ to build.
+
 
 ## Version 3.5.1 released on 28 December 2025
 
