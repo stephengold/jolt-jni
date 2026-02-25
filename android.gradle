@@ -44,7 +44,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         aarMetadata {
             minCompileSdk = 33
