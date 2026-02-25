@@ -372,7 +372,7 @@ static bool CrashAssertFailed(const char *inExpression, const char *inMessage,
     std::cout << inFile << ":" << inLine << ": (" << inExpression << ") "
             << (inMessage != nullptr ? inMessage : "") << std::endl;
 
-    bool result = *(bool *)0;
+    bool result = *(volatile bool *)0;
     return result;
 };
 
