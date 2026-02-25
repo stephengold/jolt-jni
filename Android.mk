@@ -17,6 +17,7 @@ LOCAL_CFLAGS := \
 -std=c++17
 
 LOCAL_CPP_EXTENSION := .cpp
+LOCAL_LDLIBS := -lvulkan
 LOCAL_MODULE := joltjni
 
 LOCAL_SRC_FILES := \
@@ -380,6 +381,12 @@ $(N)/Jolt/Compute/ComputeSystem.cpp \
 $(N)/Jolt/Compute/CPU/ComputeBufferCPU.cpp \
 $(N)/Jolt/Compute/CPU/ComputeQueueCPU.cpp \
 $(N)/Jolt/Compute/CPU/ComputeSystemCPU.cpp \
+$(N)/Jolt/Compute/VK/ComputeBufferVK.cpp \
+$(N)/Jolt/Compute/VK/ComputeQueueVK.cpp \
+$(N)/Jolt/Compute/VK/ComputeShaderVK.cpp \
+$(N)/Jolt/Compute/VK/ComputeSystemVK.cpp \
+$(N)/Jolt/Compute/VK/ComputeSystemVKImpl.cpp \
+$(N)/Jolt/Compute/VK/ComputeSystemVKWithAllocator.cpp \
 $(N)/Jolt/Core/Color.cpp \
 $(N)/Jolt/Core/Factory.cpp \
 $(N)/Jolt/Core/IssueReporting.cpp \

@@ -9,8 +9,8 @@ plugins {
     alias(libs.plugins.android.library) // to build Android libraries
 }
 
-// $artifact and $jjVersion are set in the gradle.properties file
-// or by -P options on the Gradle command line.
+// $artifact, $jjVersion, and $useVK are set in
+// the gradle.properties file or by -P options on the Gradle command line.
 
 ext {
     baseName = "${artifact}-${jjVersion}" // for artifacts
@@ -26,6 +26,9 @@ android {
                     cppFlags '-DJOLT_JNI_VERSION_STRING=' + jjVersion
                     cppFlags '-DJPH_DEBUG_RENDERER'
                     cppFlags '-DJPH_ENABLE_ASSERTS'
+                    if (project.hasProperty('useVK')) {
+                        cppFlags '-DJPH_USE_VK'
+                    }
                 }
             }
             jniDebuggable = true
@@ -35,6 +38,9 @@ android {
                 ndkBuild {
                     cppFlags '-DJOLT_JNI_VERSION_STRING=' + jjVersion
                     cppFlags '-DJPH_NO_DEBUG'
+                    if (project.hasProperty('useVK')) {
+                        cppFlags '-DJPH_USE_VK'
+                    }
                 }
             }
             minifyEnabled = true
