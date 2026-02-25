@@ -26,8 +26,6 @@ android {
                     cppFlags '-DJOLT_JNI_VERSION_STRING=' + jjVersion
                     cppFlags '-DJPH_DEBUG_RENDERER'
                     cppFlags '-DJPH_ENABLE_ASSERTS'
-                    cppFlags '-DJPH_OBJECT_STREAM'
-                    cppFlags '-DJPH_USE_CPU_COMPUTE'
                 }
             }
             jniDebuggable = true
@@ -37,8 +35,6 @@ android {
                 ndkBuild {
                     cppFlags '-DJOLT_JNI_VERSION_STRING=' + jjVersion
                     cppFlags '-DJPH_NO_DEBUG'
-                    cppFlags '-DJPH_OBJECT_STREAM'
-                    cppFlags '-DJPH_USE_CPU_COMPUTE'
                 }
             }
             minifyEnabled = true

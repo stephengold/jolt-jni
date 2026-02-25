@@ -12,6 +12,7 @@ LOCAL_CFLAGS := \
 -DANDROID_STL=c++_static \
 -DANDROID_TOOLCHAIN=clang \
 -DJPH_OBJECT_STREAM \
+-DJPH_USE_CPU_COMPUTE \
 -Werror=return-type \
 -std=c++17
 
