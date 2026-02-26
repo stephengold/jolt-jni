@@ -326,6 +326,74 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsDe
 #endif
 }
 
+JavaVM *gpVM; // the virtual machine used by both AndroidTrace() and JavaTrace()
+
+#ifdef ANDROID
+jclass gLogClass;
+jint gPriority;
+jmethodID gPrintlnMethodId;
+jstring gTag;
+static void AndroidTrace(const char *inFormat, ...) {
+    // Format the message:
+    va_list list;
+    va_start(list, inFormat);
+    char buffer[1024];
+    vsnprintf(buffer, sizeof(buffer), inFormat, list);
+    va_end(list);
+    //
+    bool attachedHere = false;
+    JNIEnv *pAttachEnv;
+    jint retCode = gpVM->GetEnv((void**)&pAttachEnv, JNI_VERSION_1_6);
+    if (JNI_EDETACHED == retCode) { // Attach env to the JVM:
+        JavaVMAttachArgs jvmArgs;
+        jvmArgs.version = JNI_VERSION_1_6;
+        retCode = gpVM->AttachCurrentThread(reinterpret_cast<JNIEnv **>(&pAttachEnv), &jvmArgs);
+    }
+    JPH_ASSERT(JNI_OK == retCode);
+    // Create a Java string for the message:
+    jstring javaString = pAttachEnv->NewStringUTF(buffer);
+    JPH_ASSERT(NULL != javaString);
+    EXCEPTION_CHECK(pAttachEnv)
+    // Send the message to the log with the configured priority and tag:
+    pAttachEnv->CallStaticIntMethod(
+            gLogClass, gPrintlnMethodId, gPriority, gTag, javaString);
+    // Ignore the return value; don't check for exceptions.
+    //
+    if (attachedHere) { // Detach env from the JVM:
+        gpVM->DetachCurrentThread();
+    }
+}
+#endif
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    installAndroidTraceCallback
+ * Signature: (ILjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installAndroidTraceCallback
+  (JNIEnv *pEnv, jclass, jint priority, jstring tag) {
+#ifdef ANDROID
+    jint fail = pEnv->GetJavaVM(&gpVM);
+    JPH_ASSERT(0 == fail);
+    gLogClass = pEnv->FindClass("android/util/Log");
+    JPH_ASSERT(NULL != gLogClass);
+    EXCEPTION_CHECK(pEnv)
+    gLogClass = (jclass) pEnv->NewGlobalRef(gLogClass);
+    JPH_ASSERT(NULL != gLogClass);
+    gPrintlnMethodId = pEnv->GetStaticMethodID(
+            gLogClass, "println", "(ILjava/lang/String;Ljava/lang/String;)I");
+    JPH_ASSERT(NULL != gPrintlnMethodId);
+    EXCEPTION_CHECK(pEnv)
+    //
+    gPriority = priority;
+    gTag = (NULL == tag) ? NULL : (jstring) pEnv->NewGlobalRef(tag);
+    Trace = AndroidTrace;
+#elif defined(JPH_DEBUG)
+    std::cout << "Jolt.installAndroidTraceCallback() has no effect on desktop platforms."
+            << std::endl;
+#endif
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    installAssertCallback
@@ -469,7 +537,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installIgnoreAss
 #endif
 }
 
-JavaVM *gpVM;
 jmethodID gFlushMethodId, gPrintMethodId;
 jobject gTraceStream;
 static void JavaTrace(const char *inFormat, ...) {

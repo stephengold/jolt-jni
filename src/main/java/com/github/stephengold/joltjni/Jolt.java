@@ -431,6 +431,16 @@ final public class Jolt {
     native public static boolean implementsDeterminismLog();
 
     /**
+     * Install an alternative trace callback that sends to the Android log with
+     * the specified priority and tag.
+     *
+     * @param priority the desired priority of trace output in the log
+     * @param tag the log tag to identify trace output (may be {@code null})
+     */
+    native public static void installAndroidTraceCallback(
+            int priority, String tag);
+
+    /**
      * Install the specified assert callback.
      *
      * @param callbackVa the virtual address of the desired callback
