@@ -47,6 +47,7 @@ public:
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomContactListener");
+        JPH_ASSERT(NULL != clss);
         EXCEPTION_CHECK(pEnv)
 
         mAddedMethodId = pEnv->GetMethodID(clss, "onContactAdded", "(JJJJ)V");

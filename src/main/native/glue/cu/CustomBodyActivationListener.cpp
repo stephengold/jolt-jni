@@ -47,6 +47,7 @@ public:
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomBodyActivationListener");
+        JPH_ASSERT(NULL != clss);
         EXCEPTION_CHECK(pEnv)
 
         mActivatedMethodId = pEnv->GetMethodID(clss, "onBodyActivated", "(IJ)V");

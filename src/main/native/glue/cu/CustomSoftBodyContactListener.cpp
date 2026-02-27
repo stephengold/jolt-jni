@@ -46,6 +46,7 @@ public:
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomSoftBodyContactListener");
+        JPH_ASSERT(NULL != clss);
         EXCEPTION_CHECK(pEnv)
 
         mAddedMethodId = pEnv->GetMethodID(clss, "onSoftBodyContactAdded", "(JJ)V");

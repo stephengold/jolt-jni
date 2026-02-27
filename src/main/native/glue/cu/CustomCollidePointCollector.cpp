@@ -44,6 +44,7 @@ public:
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomCollidePointCollector");
+        JPH_ASSERT(NULL != clss);
         EXCEPTION_CHECK(pEnv)
 
         mAddMethodId = pEnv->GetMethodID(clss, "addHit", "(J)V");

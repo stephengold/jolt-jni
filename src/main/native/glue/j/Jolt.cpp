@@ -580,6 +580,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installJavaTrace
     gTraceStream = pEnv->NewGlobalRef(stream);
     EXCEPTION_CHECK(pEnv)
     const jclass clss = pEnv->FindClass("java/io/PrintStream");
+    JPH_ASSERT(NULL != clss);
     EXCEPTION_CHECK(pEnv)
     gFlushMethodId = pEnv->GetMethodID(clss, "flush", "()V");
     JPH_ASSERT(NULL != gFlushMethodId);

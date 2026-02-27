@@ -47,6 +47,7 @@ public:
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomDebugRendererSimple");
+        JPH_ASSERT(NULL != clss);
         EXCEPTION_CHECK(pEnv)
 
         mDrawLineId = pEnv->GetMethodID(clss, "drawLine", "(DDDDDDI)V");

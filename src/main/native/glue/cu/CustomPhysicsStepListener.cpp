@@ -44,6 +44,7 @@ public:
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomPhysicsStepListener");
+        JPH_ASSERT(NULL != clss);
         EXCEPTION_CHECK(pEnv)
 
         mStepMethodId = pEnv->GetMethodID(clss, "onStep", "(J)V");

@@ -66,6 +66,7 @@ public:
         EXCEPTION_CHECK(pEnv)
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/FilteredContactListener");
+        JPH_ASSERT(NULL != clss);
         EXCEPTION_CHECK(pEnv)
         mAddedMethodId = pEnv->GetMethodID(clss, "onContactAdded", "(JJJJ)V");
         JPH_ASSERT(NULL != mAddedMethodId);

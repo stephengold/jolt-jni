@@ -48,6 +48,7 @@ public:
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/vhacd/Decomposer");
+        JPH_ASSERT(NULL != clss);
         EXCEPTION_CHECK(pEnv)
 
         mAddMethodId = pEnv->GetMethodID(clss, "addHull", "(J)V");
