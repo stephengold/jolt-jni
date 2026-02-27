@@ -348,6 +348,7 @@ static void AndroidTrace(const char *inFormat, ...) {
         JavaVMAttachArgs jvmArgs;
         jvmArgs.version = JNI_VERSION_1_6;
         retCode = gpVM->AttachCurrentThread(reinterpret_cast<JNIEnv **>(&pAttachEnv), &jvmArgs);
+        attachedHere = true;
     }
     JPH_ASSERT(JNI_OK == retCode);
     // Create a Java string for the message:
