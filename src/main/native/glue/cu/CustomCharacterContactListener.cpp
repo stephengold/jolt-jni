@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -58,46 +58,57 @@ public:
 
         mAddedMethodId = pEnv->GetMethodID(
                 clss, "onContactAdded", "(JIIDDDFFFJ)V");
+        JPH_ASSERT(NULL != mAddedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mAdjustMethodId = pEnv->GetMethodID(
                 clss, "onAdjustBodyVelocity", "(JJ[F)V");
+        JPH_ASSERT(NULL != mAdjustMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcAddedMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactAdded", "(JJIDDDFFFJ)V");
+        JPH_ASSERT(NULL != mCcAddedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcPersistedMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactPersisted", "(JJIDDDFFFJ)V");
+        JPH_ASSERT(NULL != mCcPersistedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcRemovedMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactRemoved", "(JII)V");
+        JPH_ASSERT(NULL != mCcRemovedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcSolveMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactSolve", "(JJIDDDFFFFFFJFFF[F)V");
+        JPH_ASSERT(NULL != mCcSolveMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcValidateMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactValidate", "(JJI)Z");
+        JPH_ASSERT(NULL != mCcValidateMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mPersistedMethodId = pEnv->GetMethodID(
                 clss, "onContactPersisted", "(JIIDDDFFFJ)V");
+        JPH_ASSERT(NULL != mPersistedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mRemovedMethodId = pEnv->GetMethodID(
                 clss, "onContactRemoved", "(JII)V");
+        JPH_ASSERT(NULL != mRemovedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mSolveMethodId = pEnv->GetMethodID(
                 clss, "onContactSolve", "(JIIDDDFFFFFFJFFF[F)V");
+        JPH_ASSERT(NULL != mSolveMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mValidateMethodId = pEnv->GetMethodID(
                 clss, "onContactValidate", "(JII)Z");
+        JPH_ASSERT(NULL != mValidateMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 

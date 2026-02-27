@@ -50,14 +50,17 @@ public:
         EXCEPTION_CHECK(pEnv)
 
         mDrawLineId = pEnv->GetMethodID(clss, "drawLine", "(DDDDDDI)V");
+        JPH_ASSERT(NULL != mDrawLineId);
         EXCEPTION_CHECK(pEnv)
 
         mDrawTextId = pEnv->GetMethodID(
                 clss, "drawText3d", "(DDDLjava/lang/String;IF)V");
+        JPH_ASSERT(NULL != mDrawTextId);
         EXCEPTION_CHECK(pEnv)
 
         mDrawTriangleId
                 = pEnv->GetMethodID(clss, "drawTriangle", "(DDDDDDDDDII)V");
+        JPH_ASSERT(NULL != mDrawTriangleId);
         EXCEPTION_CHECK(pEnv)
     }
 

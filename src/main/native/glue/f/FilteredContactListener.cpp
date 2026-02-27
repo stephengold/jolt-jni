@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,14 +68,18 @@ public:
                 "com/github/stephengold/joltjni/FilteredContactListener");
         EXCEPTION_CHECK(pEnv)
         mAddedMethodId = pEnv->GetMethodID(clss, "onContactAdded", "(JJJJ)V");
+        JPH_ASSERT(NULL != mAddedMethodId);
         EXCEPTION_CHECK(pEnv)
         mPersistedMethodId
                 = pEnv->GetMethodID(clss, "onContactPersisted", "(JJJJ)V");
+        JPH_ASSERT(NULL != mPersistedMethodId);
         EXCEPTION_CHECK(pEnv)
         mRemovedMethodId = pEnv->GetMethodID(clss, "onContactRemoved", "(J)V");
+        JPH_ASSERT(NULL != mRemovedMethodId);
         EXCEPTION_CHECK(pEnv)
         mValidateMethodId
                 = pEnv->GetMethodID(clss, "onContactValidate", "(JJDDDJ)I");
+        JPH_ASSERT(NULL != mValidateMethodId);
         EXCEPTION_CHECK(pEnv)
     }
     void OnContactAdded(const Body& inBody1, const Body& inBody2,

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,6 +47,7 @@ public:
         EXCEPTION_CHECK(pEnv)
 
         mStepMethodId = pEnv->GetMethodID(clss, "onStep", "(J)V");
+        JPH_ASSERT(NULL != mStepMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 

@@ -51,10 +51,12 @@ public:
         EXCEPTION_CHECK(pEnv)
 
         mAddMethodId = pEnv->GetMethodID(clss, "addHull", "(J)V");
+        JPH_ASSERT(NULL != mAddMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mUpdateMethodId = pEnv->GetMethodID(
                 clss, "update", "(DDDLjava/lang/String;Ljava/lang/String;)V");
+        JPH_ASSERT(NULL != mUpdateMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 
