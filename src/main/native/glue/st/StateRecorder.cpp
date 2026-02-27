@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -154,6 +154,8 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_StateRecorder_read
     pRecorder->Read(cppString);
     const char * const pResult = cppString.c_str();
     const jstring result = pEnv->NewStringUTF(pResult);
+    JPH_ASSERT(NULL != result);
+    EXCEPTION_CHECK(pEnv)
     return result;
 }
 

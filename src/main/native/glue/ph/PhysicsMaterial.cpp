@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -64,6 +64,8 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_ge
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     const char * const pName = pMaterial->GetDebugName();
     const jstring result = pEnv->NewStringUTF(pName);
+    JPH_ASSERT(NULL != result);
+    EXCEPTION_CHECK(pEnv)
     return result;
 }
 

@@ -186,6 +186,8 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     const String& message = pResult->GetError(); \
     const char* const str = message.c_str(); \
     const jstring result = pEnv->NewStringUTF(str); \
+    JPH_ASSERT(NULL != result); \
+    EXCEPTION_CHECK(pEnv) \
     return result; \
   } \
   JNIEXPORT jboolean JNICALL hasErrorName(JNIEnv *, jobject, jlong resultVa) { \

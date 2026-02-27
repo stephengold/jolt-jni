@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -58,6 +58,8 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Joint_getName
     const String name = pJoint->mName;
     const char * const pName = name.c_str();
     const jstring result = pEnv->NewStringUTF(pName);
+    JPH_ASSERT(NULL != result);
+    EXCEPTION_CHECK(pEnv)
     return result;
 }
 
@@ -86,5 +88,7 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Joint_getParentNam
     const String name = pJoint->mParentName;
     const char * const pName = name.c_str();
     const jstring result = pEnv->NewStringUTF(pName);
+    JPH_ASSERT(NULL != result);
+    EXCEPTION_CHECK(pEnv)
     return result;
 }

@@ -97,6 +97,8 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_buildType
 #else
     result = pEnv->NewStringUTF("Release");
 #endif
+    JPH_ASSERT(NULL != result);
+    EXCEPTION_CHECK(pEnv)
     return result;
 }
 
@@ -203,6 +205,8 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_getConfigurat
   (JNIEnv *pEnv, jclass) {
     const char * const pString = GetConfigurationString();
     const jstring result = pEnv->NewStringUTF(pString);
+    JPH_ASSERT(NULL != result);
+    EXCEPTION_CHECK(pEnv)
     return result;
 }
 
@@ -554,6 +558,7 @@ static void JavaTrace(const char *inFormat, ...) {
     // Create a Java string:
     jstring javaString = pAttachEnv->NewStringUTF(buffer);
     JPH_ASSERT(javaString != NULL);
+    EXCEPTION_CHECK(pAttachEnv)
     // Print to the configured PrintStream:
     pAttachEnv->CallVoidMethod(gTraceStream, gPrintMethodId, javaString);
     EXCEPTION_CHECK(pAttachEnv)
@@ -871,6 +876,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_unregisterTypes
 JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_versionString
   (JNIEnv *pEnv, jclass) {
     const jstring result = pEnv->NewStringUTF(STRING(JOLT_JNI_VERSION_STRING));
+    JPH_ASSERT(NULL != result);
+    EXCEPTION_CHECK(pEnv)
     return result;
 }
 
