@@ -618,7 +618,8 @@ tasks.withType(Sign).configureEach {
 // Register tasks to download ZIP archives:
 
 tasks.register('downloadHairStraightZip', Download) {
-    src "https://www.cemyuksel.com/research/hairmodels/wStraight.zip"
+    //src "https://www.cemyuksel.com/research/hairmodels/wStraight.zip"
+    src "https://raw.githubusercontent.com/stephengold/hair-model-files/refs/heads/master/wStraight.zip" 
     dest file(downloadedHairStraightZip)
     overwrite false
 }
