@@ -40,8 +40,8 @@ public:
      * constructor:
      */
     Decomposer(JNIEnv *pEnv, jobject javaObject) {
-        pEnv->GetJavaVM(&mpVM);
-        EXCEPTION_CHECK(pEnv)
+        const jint retCode = pEnv->GetJavaVM(&mpVM);
+        JPH_ASSERT(JNI_OK == retCode);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
         JPH_ASSERT(NULL != mJavaObject);

@@ -378,8 +378,8 @@ static void AndroidTrace(const char *inFormat, ...) {
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installAndroidTraceCallback
   (JNIEnv *pEnv, jclass, jint priority, jstring tag) {
 #ifdef ANDROID
-    jint fail = pEnv->GetJavaVM(&gpVM);
-    JPH_ASSERT(0 == fail);
+    const jint retCode = pEnv->GetJavaVM(&gpVM);
+    JPH_ASSERT(JNI_OK == retCode);
     gLogClass = pEnv->FindClass("android/util/Log");
     JPH_ASSERT(NULL != gLogClass);
     EXCEPTION_CHECK(pEnv)
@@ -576,7 +576,8 @@ static void JavaTrace(const char *inFormat, ...) {
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installJavaTraceCallback
   (JNIEnv *pEnv, jclass, jobject stream) {
-    pEnv->GetJavaVM(&gpVM);
+    const jint retCode = pEnv->GetJavaVM(&gpVM);
+    JPH_ASSERT(JNI_OK == retCode);
     gTraceStream = pEnv->NewGlobalRef(stream);
     JPH_ASSERT(NULL != gTraceStream);
     //

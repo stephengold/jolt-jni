@@ -37,7 +37,8 @@ class CustomCastRayCollector : CastRayCollector {
 
 public:
     CustomCastRayCollector(JNIEnv *pEnv, jobject javaObject) {
-        pEnv->GetJavaVM(&mpVM);
+        const jint retCode = pEnv->GetJavaVM(&mpVM);
+        JPH_ASSERT(JNI_OK == retCode);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
         JPH_ASSERT(NULL != mJavaObject);
