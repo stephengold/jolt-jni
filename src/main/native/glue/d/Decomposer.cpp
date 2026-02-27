@@ -44,7 +44,7 @@ public:
         EXCEPTION_CHECK(pEnv)
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        EXCEPTION_CHECK(pEnv)
+        JPH_ASSERT(NULL != mJavaObject);
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/vhacd/Decomposer");

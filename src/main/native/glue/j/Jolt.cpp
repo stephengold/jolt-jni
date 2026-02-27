@@ -578,7 +578,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installJavaTrace
   (JNIEnv *pEnv, jclass, jobject stream) {
     pEnv->GetJavaVM(&gpVM);
     gTraceStream = pEnv->NewGlobalRef(stream);
-    EXCEPTION_CHECK(pEnv)
+    JPH_ASSERT(NULL != gTraceStream);
+    //
     const jclass clss = pEnv->FindClass("java/io/PrintStream");
     JPH_ASSERT(NULL != clss);
     EXCEPTION_CHECK(pEnv)

@@ -43,7 +43,7 @@ public:
         pEnv->GetJavaVM(&mpVM);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        EXCEPTION_CHECK(pEnv)
+        JPH_ASSERT(NULL != mJavaObject);
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomContactListener");

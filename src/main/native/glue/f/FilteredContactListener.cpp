@@ -63,7 +63,7 @@ public:
     FilteredContactListener(JNIEnv *pEnv, jobject javaObject) {
         pEnv->GetJavaVM(&mpVM);
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        EXCEPTION_CHECK(pEnv)
+        JPH_ASSERT(NULL != mJavaObject);
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/FilteredContactListener");
         JPH_ASSERT(NULL != clss);
