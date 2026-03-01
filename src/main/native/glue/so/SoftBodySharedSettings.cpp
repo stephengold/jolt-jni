@@ -241,7 +241,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
     for (size_t index = 0; index < numVertices; ++index) {
         const SoftBodySharedSettings::Vertex& vertex
                 = pSettings->mVertices.at(index);
-        if (vertex.mInvMass == 0) {
+        if (0 == vertex.mInvMass) {
             ++result;
         }
     }

@@ -56,7 +56,7 @@ public:
     void OnStep(const PhysicsStepListenerContext& inContext) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong contextVa = reinterpret_cast<jlong> (&inContext);
         pAttachEnv->CallVoidMethod(mJavaObject, mStepMethodId, contextVa);
@@ -67,7 +67,7 @@ public:
     ~CustomPhysicsStepListener() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)

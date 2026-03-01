@@ -165,7 +165,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_ini
     const char *pMessage;
     const ConvexHullBuilder::EResult result
             = pBuilder->Initialize(maxVertices, tolerance, pMessage);
-    if (result == ConvexHullBuilder::EResult::Success) {
+    if (ConvexHullBuilder::EResult::Success == result) {
         pMessage = "";
     }
     jstring message = pEnv->NewStringUTF(pMessage);

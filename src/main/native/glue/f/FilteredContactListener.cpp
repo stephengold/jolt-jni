@@ -95,7 +95,7 @@ public:
         }
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
         const jlong manifoldVa = reinterpret_cast<jlong> (&inManifold);
@@ -116,7 +116,7 @@ public:
         }
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
         const jlong manifoldVa = reinterpret_cast<jlong> (&inManifold);
@@ -130,14 +130,14 @@ public:
         if (!mEnableRemoved) {
             return;
         }
-        if (mBodyFilterMode == EFilterMode::Skip) {
+        if (EFilterMode::Skip == mBodyFilterMode) {
             return;
         }
         if (mpBodyFilter) {
             const BodyID& id1 = pair.GetBody1ID();
             const bool collide1 = mpBodyFilter->ShouldCollide(id1);
-            if (mBodyFilterMode == EFilterMode::Both && !collide1) return;
-            if (mBodyFilterMode == EFilterMode::Neither && collide1) return;
+            if (EFilterMode::Both == mBodyFilterMode && !collide1) return;
+            if (EFilterMode::Neither == mBodyFilterMode && collide1) return;
             const BodyID& id2 = pair.GetBody2ID();
             const bool collide2 = mpBodyFilter->ShouldCollide(id2);
             switch (mBodyFilterMode) {
@@ -159,7 +159,7 @@ public:
         }
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
         const jlong pairVa = reinterpret_cast<jlong> (&pair);
         pAttachEnv->CallVoidMethod(mJavaObject, mRemovedMethodId, pairVa);
         EXCEPTION_CHECK(pAttachEnv)
@@ -176,7 +176,7 @@ public:
         }
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
         const jdouble offsetX = inBaseOffset.GetX();
@@ -191,15 +191,15 @@ public:
         return (ValidateResult) jintResult;
     }
     bool SkipBodyPair(const Body& inBody1, const Body& inBody2) {
-        if (mBodyFilterMode == EFilterMode::Skip
-                || mBplFilterMode == EFilterMode::Skip) {
+        if (EFilterMode::Skip == mBodyFilterMode
+                || EFilterMode::Skip == mBplFilterMode) {
             return true;
         }
         if (mpBodyFilter) {
             const BodyID& id1 = inBody1.GetID();
             const bool collide1 = mpBodyFilter->ShouldCollide(id1);
-            if (mBodyFilterMode == EFilterMode::Both && !collide1) return true;
-            if (mBodyFilterMode == EFilterMode::Neither && collide1) return true;
+            if (EFilterMode::Both == mBodyFilterMode && !collide1) return true;
+            if (EFilterMode::Neither == mBodyFilterMode && collide1) return true;
             const BodyID& id2 = inBody2.GetID();
             const bool collide2 = mpBodyFilter->ShouldCollide(id2);
             switch (mBodyFilterMode) {
@@ -222,8 +222,8 @@ public:
         if (mpBplFilter) {
             const BroadPhaseLayer bpl1 = inBody1.GetBroadPhaseLayer();
             const bool collide1 = mpBplFilter->ShouldCollide(bpl1);
-            if (mBplFilterMode == EFilterMode::Both && !collide1) return true;
-            if (mBplFilterMode == EFilterMode::Neither && collide1) return true;
+            if (EFilterMode::Both == mBplFilterMode && !collide1) return true;
+            if (EFilterMode::Neither == mBplFilterMode && collide1) return true;
             const BroadPhaseLayer bpl2 = inBody2.GetBroadPhaseLayer();
             const bool collide2 = mpBplFilter->ShouldCollide(bpl2);
             switch (mBplFilterMode) {
@@ -254,7 +254,7 @@ public:
     ~FilteredContactListener() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();

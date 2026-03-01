@@ -56,7 +56,7 @@ public:
     void AddHit(const ShapeCastResult& inResult) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong resultVa = reinterpret_cast<jlong> (&inResult);
         pAttachEnv->CallVoidMethod(mJavaObject, mAddMethodId, resultVa);
@@ -67,7 +67,7 @@ public:
     ~CustomCastShapeCollector() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)

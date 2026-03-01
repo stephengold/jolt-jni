@@ -554,7 +554,7 @@ static void JavaTrace(const char *inFormat, ...) {
     // Attach to the JVM:
     JNIEnv *pAttachEnv;
     jint retCode = ATTACH_CURRENT_THREAD(gpVM, &pAttachEnv);
-    JPH_ASSERT(retCode == JNI_OK);
+    JPH_ASSERT(JNI_OK == retCode);
     // Create a Java string:
     jstring javaString = pAttachEnv->NewStringUTF(buffer);
     JPH_ASSERT(javaString);

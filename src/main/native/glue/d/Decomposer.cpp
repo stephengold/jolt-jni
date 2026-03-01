@@ -101,7 +101,7 @@ public:
             const char* const stageName, const char* operationName) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         jfloat arg1 = overallPercent;
         jfloat arg2 = stagePercent;

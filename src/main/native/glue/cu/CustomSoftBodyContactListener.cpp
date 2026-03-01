@@ -62,7 +62,7 @@ public:
     void OnSoftBodyContactAdded(const Body& inSoftBody, const SoftBodyManifold& inManifold) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong bodyVa = reinterpret_cast<jlong> (&inSoftBody);
         const jlong manifoldVa = reinterpret_cast<jlong> (&inManifold);
@@ -75,7 +75,7 @@ public:
                 const Body& inOtherBody, SoftBodyContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong softBodyVa = reinterpret_cast<jlong> (&inSoftBody);
         const jlong otherBodyVa = reinterpret_cast<jlong> (&inOtherBody);
@@ -90,7 +90,7 @@ public:
     ~CustomSoftBodyContactListener() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)

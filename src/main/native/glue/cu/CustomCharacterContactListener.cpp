@@ -119,7 +119,7 @@ public:
             Vec3& ioAngularVelocity) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
@@ -155,7 +155,7 @@ public:
             Vec3Arg inContactNormal, CharacterContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jlong otherCharacterVa
@@ -184,7 +184,7 @@ public:
             Vec3Arg inContactNormal, CharacterContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jlong otherCharacterVa
@@ -212,7 +212,7 @@ public:
             const SubShapeID& inSubShapeID2) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jint otherCharacterId = inOtherCharacterID.GetValue();
@@ -233,7 +233,7 @@ public:
             Vec3Arg inCharacterVelocity, Vec3& ioNewCharacterVelocity) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jlong otherCharacterVa
@@ -286,7 +286,7 @@ public:
             const SubShapeID& inSubShapeID2) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jlong otherCharacterVa
@@ -307,7 +307,7 @@ public:
             CharacterContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
@@ -335,7 +335,7 @@ public:
             CharacterContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
@@ -361,7 +361,7 @@ public:
             const BodyID& inBodyID2, const SubShapeID& inSubShapeID2) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
@@ -381,7 +381,7 @@ public:
             Vec3Arg inCharacterVelocity, Vec3& ioNewCharacterVelocity) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
@@ -431,7 +431,7 @@ public:
             const BodyID& inBodyID2, const SubShapeID& inSubShapeID2) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
@@ -447,7 +447,7 @@ public:
     ~CustomCharacterContactListener() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)

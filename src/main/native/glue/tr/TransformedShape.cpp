@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -183,7 +183,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_copy
             const int numTrianglesCopied
                     = pSh->GetTrianglesNext(context, maxRequest, pFloat3);
             JPH_ASSERT(numTrianglesCopied <= numTriangles);
-            if (numTrianglesCopied == 0) {
+            if (0 == numTrianglesCopied) {
                 break;
             }
             pFloat3 += 3 * numTrianglesCopied;
@@ -217,7 +217,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_TransformedShape_coun
             Float3 vertices[3 * cMaxTriangles];
             const int numTrianglesCopied
                     = pSh->GetTrianglesNext(context, cMaxTriangles, vertices);
-            if (numTrianglesCopied == 0) {
+            if (0 == numTrianglesCopied) {
                 break;
             }
             result += numTrianglesCopied;

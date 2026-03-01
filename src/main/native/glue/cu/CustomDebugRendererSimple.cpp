@@ -69,7 +69,7 @@ public:
     void DrawLine(RVec3Arg inFrom, RVec3Arg inTo, ColorArg inColor) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const double x1 = inFrom.GetX();
         const double y1 = inFrom.GetY();
@@ -88,7 +88,7 @@ public:
       ColorArg inColor, float inHeight) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const double xx = inPosition.GetX();
         const double yy = inPosition.GetY();
@@ -113,7 +113,7 @@ public:
       ColorArg inColor, ECastShadow inCastShadow) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const double x1 = inV1.GetX();
         const double y1 = inV1.GetY();
@@ -135,7 +135,7 @@ public:
     ~CustomDebugRendererSimple() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)

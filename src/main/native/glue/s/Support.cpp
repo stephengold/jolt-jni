@@ -72,7 +72,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Support_getSupportBul
     const ConvexShape::Support * const pSupport
             = reinterpret_cast<ConvexShape::Support *> (supportVa);
     const DIRECT_FLOAT_BUFFER(pEnv, directions, pFloatsIn, capacityFloatsIn);
-    JPH_ASSERT((capacityFloatsIn % 3) == 0);
+    JPH_ASSERT(0 == (capacityFloatsIn % 3));
     DIRECT_FLOAT_BUFFER(pEnv, storePoints, pFloatsOut, capacityFloatsOut);
     JPH_ASSERT(capacityFloatsOut == capacityFloatsIn);
     for (jlong offset = 0; offset < capacityFloatsIn; offset += 3) {

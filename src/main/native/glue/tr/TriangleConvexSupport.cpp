@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -75,11 +75,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleConvexSupport
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     Vec3 result;
-    if (vertexIndex == 0) {
+    if (0 == vertexIndex) {
         result = pTriangle->mV1;
-    } else if (vertexIndex == 1) {
+    } else if (1 == vertexIndex) {
         result = pTriangle->mV2;
-    } else if (vertexIndex == 2) {
+    } else if (2 == vertexIndex) {
         result = pTriangle->mV3;
     }
     pFloats[0] = result.GetX();

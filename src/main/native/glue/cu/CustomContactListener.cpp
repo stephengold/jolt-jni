@@ -72,7 +72,7 @@ public:
             const ContactManifold& inManifold, ContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
@@ -87,7 +87,7 @@ public:
             const ContactManifold& inManifold, ContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
@@ -102,7 +102,7 @@ public:
     void OnContactRemoved(const SubShapeIDPair& pair) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong pairVa = reinterpret_cast<jlong> (&pair);
         pAttachEnv->CallVoidMethod(mJavaObject, mRemovedMethodId, pairVa);
@@ -114,7 +114,7 @@ public:
             RVec3Arg inBaseOffset, const CollideShapeResult& inCollisionResult) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
@@ -132,7 +132,7 @@ public:
     ~CustomContactListener() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)

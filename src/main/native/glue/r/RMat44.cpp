@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -202,8 +202,8 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getElement
   (JNIEnv *, jclass, jlong matrixVa, jint row, jint column) {
     const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
     Real result;
-    if (column == 3) {
-        if (row == 3) {
+    if (3 == column) {
+        if (3 == row) {
             result = 1;
         } else {
             result = pMatrix->GetTranslation()[row];
@@ -535,7 +535,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_setAxisZ
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_setElement
   (JNIEnv *, jclass, jlong matrixVa, jint row, jint column, jdouble value) {
     RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
-    if (column == 3) {
+    if (3 == column) {
         if (row < 3) {
             RVec3 copy = pMatrix->GetTranslation();
             copy.SetComponent(row, value);

@@ -66,7 +66,7 @@ public:
     bool loadShader(const char *inName, Array<uint8> &outData, String &outError) const override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jstring name = pAttachEnv->NewStringUTF(inName);
         JPH_ASSERT(name);
@@ -96,7 +96,7 @@ public:
     ~CustomLoader() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)

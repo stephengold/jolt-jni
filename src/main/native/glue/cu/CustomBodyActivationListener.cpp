@@ -63,7 +63,7 @@ public:
     void OnBodyActivated(const BodyID& inBodyID, uint64 inBodyUserData) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jint id = inBodyID.GetIndexAndSequenceNumber();
         const jlong userData = inBodyUserData;
@@ -75,7 +75,7 @@ public:
     void OnBodyDeactivated(const BodyID& inBodyID, uint64 inBodyUserData) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         const jint id = inBodyID.GetIndexAndSequenceNumber();
         const jlong userData = inBodyUserData;
@@ -87,7 +87,7 @@ public:
     ~CustomBodyActivationListener() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(retCode == JNI_OK);
+        JPH_ASSERT(JNI_OK == retCode);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)
