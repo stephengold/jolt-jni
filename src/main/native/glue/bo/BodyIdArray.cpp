@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,9 +50,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_create
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_createFromBuffer
   (JNIEnv *pEnv, jclass, jobject intBuffer) {
     const jint * const pIds = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv);
     const jlong numIds = pEnv->GetDirectBufferCapacity(intBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv);
     BodyID * const pArray = new BodyID[numIds];
     TRACE_NEW("BodyID[]", pArray)
     for (jlong i = 0; i < numIds; ++i) {

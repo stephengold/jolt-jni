@@ -156,17 +156,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_Decomposer_deco
 
     jboolean isCopy;
     jfloat * const pPoints = pEnv->GetFloatArrayElements(locations, &isCopy);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv)
 
     const jsize numFloats = pEnv->GetArrayLength(locations);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv)
     const int32_t numPoints = numFloats / 3;
 
     jint * const pIndices = pEnv->GetIntArrayElements(indices, &isCopy);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv)
 
     const jsize numIndices = pEnv->GetArrayLength(indices);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv)
     const int32_t numTriangles = numIndices / 3;
 
     // on some platforms, jint != uint32_t
@@ -175,7 +175,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_Decomposer_deco
         pCopyIndices[i] = (uint32_t) pIndices[i];
     }
     pEnv->ReleaseIntArrayElements(indices, pIndices, JNI_ABORT);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv)
 
     const IVHACD::Parameters * const pParams
             = reinterpret_cast<IVHACD::Parameters *> (paramsVa);
@@ -191,7 +191,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_Decomposer_deco
     delete[] pCopyIndices;
 
     pEnv->ReleaseFloatArrayElements(locations, pPoints, JNI_ABORT);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv)
 }
 
 /*
@@ -211,10 +211,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_Decomposer_deco
 
     const jint * const pIndices
             = (jint *) pEnv->GetDirectBufferAddress(indices);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv)
 
     const jlong numIndices = pEnv->GetDirectBufferCapacity(indices);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    EXCEPTION_CHECK(pEnv)
     const int32_t numTriangles = numIndices / 3;
 
     // on some platforms, jint != uint32_t
