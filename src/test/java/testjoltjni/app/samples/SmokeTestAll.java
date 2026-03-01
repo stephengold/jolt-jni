@@ -192,7 +192,7 @@ final public class SmokeTestAll {
      * @param maxBodies the desired number of bodies (&ge;1)
      * @return a new system
      */
-    static private PhysicsSystem newPhysicsSystem(int maxBodies) {
+    private static PhysicsSystem newPhysicsSystem(int maxBodies) {
         BPLayerInterfaceImpl mapObj2Bp = new BPLayerInterfaceImpl();
         ObjectVsBroadPhaseLayerFilterImpl objVsBpFilter
                 = new ObjectVsBroadPhaseLayerFilterImpl();
@@ -214,7 +214,7 @@ final public class SmokeTestAll {
      *
      * @param test the Test object to use (not {@code null})
      */
-    static private void smokeTest(Test test) {
+    private static void smokeTest(Test test) {
         smokeTest(test, defaultNumSteps);
     }
 
@@ -225,7 +225,7 @@ final public class SmokeTestAll {
      * @param numSteps the number of physics steps to simulate (&ge;0,
      * default=defaultNumSteps)
      */
-    static private void smokeTest(Test test, int numSteps) {
+    private static void smokeTest(Test test, int numSteps) {
         ++numTests;
 
         // Log the name of the test:
