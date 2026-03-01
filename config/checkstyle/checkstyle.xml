@@ -214,6 +214,7 @@
             <property name="throwsIndent" value="4"/>
         </module>
         <module name="NoCodeInFile"/>
+        <module name="NumericalPrefixesInfixesSuffixesCharacterCase"/>
         <module name="OuterTypeFilename"/>
         <module name="UpperEll"/>
 
