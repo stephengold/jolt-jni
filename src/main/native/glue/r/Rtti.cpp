@@ -41,7 +41,7 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Rtti_getName
     const String& message = pRtti->GetName();
     const char* const str = message.c_str();
     const jstring result = pEnv->NewStringUTF(str);
-    JPH_ASSERT(NULL != result);
+    JPH_ASSERT(result);
     EXCEPTION_CHECK(pEnv)
     return result;
 }

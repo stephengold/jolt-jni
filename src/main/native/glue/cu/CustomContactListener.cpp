@@ -44,27 +44,27 @@ public:
         JPH_ASSERT(JNI_OK == retCode);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(NULL != mJavaObject);
+        JPH_ASSERT(mJavaObject);
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomContactListener");
-        JPH_ASSERT(NULL != clss);
+        JPH_ASSERT(clss);
         EXCEPTION_CHECK(pEnv)
 
         mAddedMethodId = pEnv->GetMethodID(clss, "onContactAdded", "(JJJJ)V");
-        JPH_ASSERT(NULL != mAddedMethodId);
+        JPH_ASSERT(mAddedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mPersistedMethodId = pEnv->GetMethodID(clss, "onContactPersisted", "(JJJJ)V");
-        JPH_ASSERT(NULL != mPersistedMethodId);
+        JPH_ASSERT(mPersistedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mRemovedMethodId = pEnv->GetMethodID(clss, "onContactRemoved", "(J)V");
-        JPH_ASSERT(NULL != mRemovedMethodId);
+        JPH_ASSERT(mRemovedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mValidateMethodId = pEnv->GetMethodID(clss, "onContactValidate", "(JJDDDJ)I");
-        JPH_ASSERT(NULL != mValidateMethodId);
+        JPH_ASSERT(mValidateMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 

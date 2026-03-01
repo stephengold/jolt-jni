@@ -154,7 +154,7 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_StateRecorder_read
     pRecorder->Read(cppString);
     const char * const pResult = cppString.c_str();
     const jstring result = pEnv->NewStringUTF(pResult);
-    JPH_ASSERT(NULL != result);
+    JPH_ASSERT(result);
     EXCEPTION_CHECK(pEnv)
     return result;
 }

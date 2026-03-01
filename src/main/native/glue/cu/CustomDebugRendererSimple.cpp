@@ -44,25 +44,25 @@ public:
         JPH_ASSERT(JNI_OK == retCode);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(NULL != mJavaObject);
+        JPH_ASSERT(mJavaObject);
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomDebugRendererSimple");
-        JPH_ASSERT(NULL != clss);
+        JPH_ASSERT(clss);
         EXCEPTION_CHECK(pEnv)
 
         mDrawLineId = pEnv->GetMethodID(clss, "drawLine", "(DDDDDDI)V");
-        JPH_ASSERT(NULL != mDrawLineId);
+        JPH_ASSERT(mDrawLineId);
         EXCEPTION_CHECK(pEnv)
 
         mDrawTextId = pEnv->GetMethodID(
                 clss, "drawText3d", "(DDDLjava/lang/String;IF)V");
-        JPH_ASSERT(NULL != mDrawTextId);
+        JPH_ASSERT(mDrawTextId);
         EXCEPTION_CHECK(pEnv)
 
         mDrawTriangleId
                 = pEnv->GetMethodID(clss, "drawTriangle", "(DDDDDDDDDII)V");
-        JPH_ASSERT(NULL != mDrawTriangleId);
+        JPH_ASSERT(mDrawTriangleId);
         EXCEPTION_CHECK(pEnv)
     }
 

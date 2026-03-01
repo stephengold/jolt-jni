@@ -169,7 +169,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_ini
         pMessage = "";
     }
     jstring message = pEnv->NewStringUTF(pMessage);
-    JPH_ASSERT(NULL != message);
+    JPH_ASSERT(message);
     EXCEPTION_CHECK(pEnv)
     pEnv->SetObjectArrayElement(storeMessage, (jsize)0, message);
     return (jint) result;

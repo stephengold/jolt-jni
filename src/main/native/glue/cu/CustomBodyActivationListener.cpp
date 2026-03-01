@@ -44,19 +44,19 @@ public:
         JPH_ASSERT(JNI_OK == retCode);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(NULL != mJavaObject);
+        JPH_ASSERT(mJavaObject);
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomBodyActivationListener");
-        JPH_ASSERT(NULL != clss);
+        JPH_ASSERT(clss);
         EXCEPTION_CHECK(pEnv)
 
         mActivatedMethodId = pEnv->GetMethodID(clss, "onBodyActivated", "(IJ)V");
-        JPH_ASSERT(NULL != mActivatedMethodId);
+        JPH_ASSERT(mActivatedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mDeactivatedMethodId = pEnv->GetMethodID(clss, "onBodyDeactivated", "(IJ)V");
-        JPH_ASSERT(NULL != mDeactivatedMethodId);
+        JPH_ASSERT(mDeactivatedMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 

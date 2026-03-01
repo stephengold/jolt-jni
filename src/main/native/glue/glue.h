@@ -73,7 +73,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
  */
 #define DIRECT_BYTE_BUFFER(pEnv, byteBuffer, pBytes, capacityBytes) \
   jbyte * const pBytes = (jbyte *) (pEnv)->GetDirectBufferAddress(byteBuffer); \
-  JPH_ASSERT(pBytes != NULL); \
+  JPH_ASSERT(pBytes); \
   const jlong capacityBytes = (pEnv)->GetDirectBufferCapacity(byteBuffer); \
   JPH_ASSERT(capacityBytes >= 0)
 /*
@@ -81,7 +81,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
  */
 #define DIRECT_DOUBLE_BUFFER(pEnv, doubleBuffer, pDoubles, capacityDoubles) \
   jdouble * const pDoubles = (jdouble *) (pEnv)->GetDirectBufferAddress(doubleBuffer); \
-  JPH_ASSERT(pDoubles != NULL); \
+  JPH_ASSERT(pDoubles); \
   const jlong capacityDoubles = (pEnv)->GetDirectBufferCapacity(doubleBuffer); \
   JPH_ASSERT(capacityDoubles >= 0)
 /*
@@ -89,7 +89,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
  */
 #define DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats) \
   jfloat * const pFloats = (jfloat *) (pEnv)->GetDirectBufferAddress(floatBuffer); \
-  JPH_ASSERT(pFloats != NULL); \
+  JPH_ASSERT(pFloats); \
   const jlong capacityFloats = (pEnv)->GetDirectBufferCapacity(floatBuffer); \
   JPH_ASSERT(capacityFloats >= 0)
 /*
@@ -97,7 +97,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
  */
 #define DIRECT_INT_BUFFER(pEnv, intBuffer, pInts, capacityInts) \
   jint * const pInts = (jint *) (pEnv)->GetDirectBufferAddress(intBuffer); \
-  JPH_ASSERT(pInts != NULL); \
+  JPH_ASSERT(pInts); \
   const jlong capacityInts = (pEnv)->GetDirectBufferCapacity(intBuffer); \
   JPH_ASSERT(capacityInts >= 0)
 /*
@@ -105,7 +105,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
  */
 #define DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs) \
   jlong * const pLongs = (jlong *) (pEnv)->GetDirectBufferAddress(longBuffer); \
-  JPH_ASSERT(pLongs != NULL); \
+  JPH_ASSERT(pLongs); \
   const jlong capacityLongs = (pEnv)->GetDirectBufferCapacity(longBuffer); \
   JPH_ASSERT(capacityLongs >= 0)
 /*
@@ -186,7 +186,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     const String& message = pResult->GetError(); \
     const char* const str = message.c_str(); \
     const jstring result = pEnv->NewStringUTF(str); \
-    JPH_ASSERT(NULL != result); \
+    JPH_ASSERT(result); \
     EXCEPTION_CHECK(pEnv) \
     return result; \
   } \

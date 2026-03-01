@@ -43,19 +43,19 @@ public:
         JPH_ASSERT(JNI_OK == retCode);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(NULL != mJavaObject);
+        JPH_ASSERT(mJavaObject);
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomSoftBodyContactListener");
-        JPH_ASSERT(NULL != clss);
+        JPH_ASSERT(clss);
         EXCEPTION_CHECK(pEnv)
 
         mAddedMethodId = pEnv->GetMethodID(clss, "onSoftBodyContactAdded", "(JJ)V");
-        JPH_ASSERT(NULL != mAddedMethodId);
+        JPH_ASSERT(mAddedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mValidateMethodId = pEnv->GetMethodID(clss, "onSoftBodyContactValidate", "(JJJ)I");
-        JPH_ASSERT(NULL != mValidateMethodId);
+        JPH_ASSERT(mValidateMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 

@@ -97,7 +97,7 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_buildType
 #else
     result = pEnv->NewStringUTF("Release");
 #endif
-    JPH_ASSERT(NULL != result);
+    JPH_ASSERT(result);
     EXCEPTION_CHECK(pEnv)
     return result;
 }
@@ -205,7 +205,7 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_getConfigurat
   (JNIEnv *pEnv, jclass) {
     const char * const pString = GetConfigurationString();
     const jstring result = pEnv->NewStringUTF(pString);
-    JPH_ASSERT(NULL != result);
+    JPH_ASSERT(result);
     EXCEPTION_CHECK(pEnv)
     return result;
 }
@@ -357,7 +357,7 @@ static void AndroidTrace(const char *inFormat, ...) {
     JPH_ASSERT(JNI_OK == retCode);
     // Create a Java string for the message:
     jstring javaString = pAttachEnv->NewStringUTF(buffer);
-    JPH_ASSERT(NULL != javaString);
+    JPH_ASSERT(javaString);
     EXCEPTION_CHECK(pAttachEnv)
     // Send the message to the log with the configured priority and tag:
     pAttachEnv->CallStaticIntMethod(
@@ -381,13 +381,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installAndroidTr
     const jint retCode = pEnv->GetJavaVM(&gpVM);
     JPH_ASSERT(JNI_OK == retCode);
     gLogClass = pEnv->FindClass("android/util/Log");
-    JPH_ASSERT(NULL != gLogClass);
+    JPH_ASSERT(gLogClass);
     EXCEPTION_CHECK(pEnv)
     gLogClass = (jclass) pEnv->NewGlobalRef(gLogClass);
-    JPH_ASSERT(NULL != gLogClass);
+    JPH_ASSERT(gLogClass);
     gPrintlnMethodId = pEnv->GetStaticMethodID(
             gLogClass, "println", "(ILjava/lang/String;Ljava/lang/String;)I");
-    JPH_ASSERT(NULL != gPrintlnMethodId);
+    JPH_ASSERT(gPrintlnMethodId);
     EXCEPTION_CHECK(pEnv)
     //
     gPriority = priority;
@@ -557,7 +557,7 @@ static void JavaTrace(const char *inFormat, ...) {
     JPH_ASSERT(retCode == JNI_OK);
     // Create a Java string:
     jstring javaString = pAttachEnv->NewStringUTF(buffer);
-    JPH_ASSERT(javaString != NULL);
+    JPH_ASSERT(javaString);
     EXCEPTION_CHECK(pAttachEnv)
     // Print to the configured PrintStream:
     pAttachEnv->CallVoidMethod(gTraceStream, gPrintMethodId, javaString);
@@ -579,17 +579,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installJavaTrace
     const jint retCode = pEnv->GetJavaVM(&gpVM);
     JPH_ASSERT(JNI_OK == retCode);
     gTraceStream = pEnv->NewGlobalRef(stream);
-    JPH_ASSERT(NULL != gTraceStream);
+    JPH_ASSERT(gTraceStream);
     //
     const jclass clss = pEnv->FindClass("java/io/PrintStream");
-    JPH_ASSERT(NULL != clss);
+    JPH_ASSERT(clss);
     EXCEPTION_CHECK(pEnv)
     gFlushMethodId = pEnv->GetMethodID(clss, "flush", "()V");
-    JPH_ASSERT(NULL != gFlushMethodId);
+    JPH_ASSERT(gFlushMethodId);
     EXCEPTION_CHECK(pEnv)
     gPrintMethodId
             = pEnv->GetMethodID(clss, "println", "(Ljava/lang/String;)V");
-    JPH_ASSERT(NULL != gPrintMethodId);
+    JPH_ASSERT(gPrintMethodId);
     EXCEPTION_CHECK(pEnv)
     //
     Trace = JavaTrace;
@@ -881,7 +881,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_unregisterTypes
 JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_versionString
   (JNIEnv *pEnv, jclass) {
     const jstring result = pEnv->NewStringUTF(STRING(JOLT_JNI_VERSION_STRING));
-    JPH_ASSERT(NULL != result);
+    JPH_ASSERT(result);
     EXCEPTION_CHECK(pEnv)
     return result;
 }

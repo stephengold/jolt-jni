@@ -41,15 +41,15 @@ public:
         JPH_ASSERT(JNI_OK == retCode);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(NULL != mJavaObject);
+        JPH_ASSERT(mJavaObject);
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomCastShapeBodyCollector");
-        JPH_ASSERT(NULL != clss);
+        JPH_ASSERT(clss);
         EXCEPTION_CHECK(pEnv)
 
         mAddMethodId = pEnv->GetMethodID(clss, "addHit", "(J)V");
-        JPH_ASSERT(NULL != mAddMethodId);
+        JPH_ASSERT(mAddMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 

@@ -64,7 +64,7 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_ge
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     const char * const pName = pMaterial->GetDebugName();
     const jstring result = pEnv->NewStringUTF(pName);
-    JPH_ASSERT(NULL != result);
+    JPH_ASSERT(result);
     EXCEPTION_CHECK(pEnv)
     return result;
 }

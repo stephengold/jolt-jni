@@ -41,15 +41,15 @@ public:
         JPH_ASSERT(JNI_OK == retCode);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(NULL != mJavaObject);
+        JPH_ASSERT(mJavaObject);
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomPhysicsStepListener");
-        JPH_ASSERT(NULL != clss);
+        JPH_ASSERT(clss);
         EXCEPTION_CHECK(pEnv)
 
         mStepMethodId = pEnv->GetMethodID(clss, "onStep", "(J)V");
-        JPH_ASSERT(NULL != mStepMethodId);
+        JPH_ASSERT(mStepMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 

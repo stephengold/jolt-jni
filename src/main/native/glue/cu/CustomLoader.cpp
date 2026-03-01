@@ -45,16 +45,16 @@ public:
         JPH_ASSERT(mJavaObject);
 
         mByteBufferClass = pEnv->FindClass("java/nio/ByteBuffer");
-        JPH_ASSERT(NULL != mByteBufferClass);
+        JPH_ASSERT(mByteBufferClass);
         EXCEPTION_CHECK(pEnv)
 
         mStringClass = pEnv->FindClass("java/lang/String");
-        JPH_ASSERT(NULL != mStringClass);
+        JPH_ASSERT(mStringClass);
         EXCEPTION_CHECK(pEnv)
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomLoader");
-        JPH_ASSERT(NULL != clss);
+        JPH_ASSERT(clss);
         EXCEPTION_CHECK(pEnv)
 
         mLoadShaderMethodId = pEnv->GetMethodID(clss, "loadShader",
@@ -69,7 +69,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         const jstring name = pAttachEnv->NewStringUTF(inName);
-        JPH_ASSERT(NULL != name);
+        JPH_ASSERT(name);
         EXCEPTION_CHECK(pAttachEnv)
 
         const jobject data = pAttachEnv->CallObjectMethod(

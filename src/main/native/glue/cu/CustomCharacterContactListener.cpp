@@ -51,66 +51,66 @@ public:
         JPH_ASSERT(JNI_OK == retCode);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(NULL != mJavaObject);
+        JPH_ASSERT(mJavaObject);
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomCharacterContactListener");
-        JPH_ASSERT(NULL != clss);
+        JPH_ASSERT(clss);
         EXCEPTION_CHECK(pEnv)
 
         mAddedMethodId = pEnv->GetMethodID(
                 clss, "onContactAdded", "(JIIDDDFFFJ)V");
-        JPH_ASSERT(NULL != mAddedMethodId);
+        JPH_ASSERT(mAddedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mAdjustMethodId = pEnv->GetMethodID(
                 clss, "onAdjustBodyVelocity", "(JJ[F)V");
-        JPH_ASSERT(NULL != mAdjustMethodId);
+        JPH_ASSERT(mAdjustMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcAddedMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactAdded", "(JJIDDDFFFJ)V");
-        JPH_ASSERT(NULL != mCcAddedMethodId);
+        JPH_ASSERT(mCcAddedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcPersistedMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactPersisted", "(JJIDDDFFFJ)V");
-        JPH_ASSERT(NULL != mCcPersistedMethodId);
+        JPH_ASSERT(mCcPersistedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcRemovedMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactRemoved", "(JII)V");
-        JPH_ASSERT(NULL != mCcRemovedMethodId);
+        JPH_ASSERT(mCcRemovedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcSolveMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactSolve", "(JJIDDDFFFFFFJFFF[F)V");
-        JPH_ASSERT(NULL != mCcSolveMethodId);
+        JPH_ASSERT(mCcSolveMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mCcValidateMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactValidate", "(JJI)Z");
-        JPH_ASSERT(NULL != mCcValidateMethodId);
+        JPH_ASSERT(mCcValidateMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mPersistedMethodId = pEnv->GetMethodID(
                 clss, "onContactPersisted", "(JIIDDDFFFJ)V");
-        JPH_ASSERT(NULL != mPersistedMethodId);
+        JPH_ASSERT(mPersistedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mRemovedMethodId = pEnv->GetMethodID(
                 clss, "onContactRemoved", "(JII)V");
-        JPH_ASSERT(NULL != mRemovedMethodId);
+        JPH_ASSERT(mRemovedMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mSolveMethodId = pEnv->GetMethodID(
                 clss, "onContactSolve", "(JIIDDDFFFFFFJFFF[F)V");
-        JPH_ASSERT(NULL != mSolveMethodId);
+        JPH_ASSERT(mSolveMethodId);
         EXCEPTION_CHECK(pEnv)
 
         mValidateMethodId = pEnv->GetMethodID(
                 clss, "onContactValidate", "(JII)Z");
-        JPH_ASSERT(NULL != mValidateMethodId);
+        JPH_ASSERT(mValidateMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 
