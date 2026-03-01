@@ -81,6 +81,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleConvexSupport
         result = pTriangle->mV2;
     } else if (2 == vertexIndex) {
         result = pTriangle->mV3;
+    } else {
+        JPH_ASSERT(false);
     }
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
