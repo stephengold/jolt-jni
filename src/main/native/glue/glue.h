@@ -31,17 +31,20 @@ SOFTWARE.
  */
 extern bool gTypesAreRegistered;
 
-/*
- * pre-processor macros for tracing heap allocations by glue code:
- */
 #ifdef JPH_DEBUG
 
+/*
+ * test for a JVM exception:
+ */
 #define EXCEPTION_CHECK(pEnv) \
     if ((pEnv)->ExceptionCheck()) { \
             (pEnv)->ExceptionDescribe(); \
             JPH_ASSERT(false); \
     }
 
+/*
+ * trace heap allocations in glue code:
+ */
 #include <atomic>
 extern bool gTraceAllocations;
 extern std::atomic<JPH::uint32> gNewCount;
@@ -68,8 +71,9 @@ extern std::atomic<JPH::uint32> gDeleteCount;
 #define TRACE_NEW_TARGET(className, pointer)
 #define TRACE_DELETE(className, pointer)
 #endif
+
 /*
- * pre-processor macro to generate code to access a direct ByteBuffer:
+ * access a direct ByteBuffer:
  */
 #define DIRECT_BYTE_BUFFER(pEnv, byteBuffer, pBytes, capacityBytes) \
   jbyte * const pBytes = (jbyte *) (pEnv)->GetDirectBufferAddress(byteBuffer); \
@@ -77,7 +81,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   const jlong capacityBytes = (pEnv)->GetDirectBufferCapacity(byteBuffer); \
   JPH_ASSERT(capacityBytes >= 0)
 /*
- * pre-processor macro to generate code to access a direct DoubleBuffer:
+ * access a direct DoubleBuffer:
  */
 #define DIRECT_DOUBLE_BUFFER(pEnv, doubleBuffer, pDoubles, capacityDoubles) \
   jdouble * const pDoubles = (jdouble *) (pEnv)->GetDirectBufferAddress(doubleBuffer); \
@@ -85,7 +89,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   const jlong capacityDoubles = (pEnv)->GetDirectBufferCapacity(doubleBuffer); \
   JPH_ASSERT(capacityDoubles >= 0)
 /*
- * pre-processor macro to generate code to access a direct FloatBuffer:
+ * access a direct FloatBuffer:
  */
 #define DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats) \
   jfloat * const pFloats = (jfloat *) (pEnv)->GetDirectBufferAddress(floatBuffer); \
@@ -93,7 +97,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   const jlong capacityFloats = (pEnv)->GetDirectBufferCapacity(floatBuffer); \
   JPH_ASSERT(capacityFloats >= 0)
 /*
- * pre-processor macro to generate code to access a direct IntBuffer:
+ * access a direct IntBuffer:
  */
 #define DIRECT_INT_BUFFER(pEnv, intBuffer, pInts, capacityInts) \
   jint * const pInts = (jint *) (pEnv)->GetDirectBufferAddress(intBuffer); \
@@ -101,7 +105,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   const jlong capacityInts = (pEnv)->GetDirectBufferCapacity(intBuffer); \
   JPH_ASSERT(capacityInts >= 0)
 /*
- * pre-processor macro to generate code to access a direct LongBuffer:
+ * access a direct LongBuffer:
  */
 #define DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs) \
   jlong * const pLongs = (jlong *) (pEnv)->GetDirectBufferAddress(longBuffer); \
@@ -109,8 +113,8 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   const jlong capacityLongs = (pEnv)->GetDirectBufferCapacity(longBuffer); \
   JPH_ASSERT(capacityLongs >= 0)
 /*
- * pre-processor macros to generate the body of a static createCopy() method
- * to implement a copy constructor:
+ * body of a static createCopy() method
+ * to implement a copy constructor for a type that isn't refcounted:
  */
 #define BODYOF_CREATE_COPY(className) \
   (JNIEnv *, jclass, jlong originalVa) { \
@@ -119,6 +123,10 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     TRACE_NEW(#className, pResult) \
     return reinterpret_cast<jlong> (pResult); \
 }
+/*
+ * body of a static createCopy() method
+ * to implement a copy constructor for a type that's refcounted:
+ */
 #define BODYOF_CREATE_COPY_TARGET(className) \
   (JNIEnv *, jclass, jlong originalVa) { \
     const className * const pOriginal = reinterpret_cast<className *> (originalVa); \
@@ -127,8 +135,8 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     return reinterpret_cast<jlong> (pResult); \
 }
 /*
- * pre-processor macros to generate the body of a static createDefault() method
- * to implement a no-arg constructor:
+ * body of a static createDefault() method
+ * to implement a no-arg constructor for a type that isn't refcounted:
  */
 #define BODYOF_CREATE_DEFAULT(className) \
   (JNIEnv *, jclass) { \
@@ -136,6 +144,10 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     TRACE_NEW(#className, pResult) \
     return reinterpret_cast<jlong> (pResult); \
 }
+/*
+ * body of a static createDefault() method
+ * to implement a no-arg constructor for a type that's refcounted:
+ */
 #define BODYOF_CREATE_DEFAULT_TARGET(className) \
   (JNIEnv *, jclass) { \
     className * const pResult = new className(); \
@@ -143,8 +155,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     return reinterpret_cast<jlong> (pResult); \
 }
 /*
- * pre-processor macro to generate the body of a static free() method
- * to implement a destructor:
+ * body of a static free() method to implement a destructor:
  */
 #define BODYOF_FREE(className) \
   (JNIEnv *, jclass, jlong va) { \
@@ -152,9 +163,10 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     TRACE_DELETE(#className, pObject) \
     delete pObject; \
 }
+
 /*
- * pre-processor macro to implement 5 methods associated with the
- * com.github.stephengold.template.Ref class:
+ * Implement 5 native methods required
+ * for a com.github.stephengold.template.Ref subclass:
  */
 #define IMPLEMENT_REF(className, copyName, createName, freeName, getPtrName, toRefCName) \
   JNIEXPORT jlong JNICALL copyName BODYOF_CREATE_COPY(Ref<className>) \
@@ -171,9 +183,10 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     TRACE_NEW("RefConst<" #className ">", pResult) \
     return reinterpret_cast<jlong> (pResult); \
   }
+
 /*
- * pre-processor macro to implement 4 methods associated with the
- * com.github.stephengold.template.Result class:
+ * Implement native 4 methods required
+ * for a com.github.stephengold.template.Result subclass:
  */
 #define IMPLEMENT_RESULT(className, freeName, getErrorName, hasErrorName, isValidName) \
   JNIEXPORT void JNICALL freeName(JNIEnv *, jclass, jlong resultVa) { \
@@ -203,7 +216,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
 
 #ifdef ANDROID
 
-// Note: On ART, the 1st argument to AttachCurrentThread() is JNIEnv **,
+// Note: On ART, the first argument to AttachCurrentThread() is JNIEnv **,
 // which doesn't comply with the Invocation API specification.
 
 #define ATTACH_CURRENT_THREAD(pVM, ppAttachEnv, attachedHere) \
