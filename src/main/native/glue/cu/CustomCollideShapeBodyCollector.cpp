@@ -55,23 +55,19 @@ public:
 
     void AddHit(const BodyID &inResult) override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         const jint resultId = inResult.GetIndexAndSequenceNumber();
         pAttachEnv->CallVoidMethod(mJavaObject, mAddMethodId, resultId);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 
     ~CustomCollideShapeBodyCollector() {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 };
 

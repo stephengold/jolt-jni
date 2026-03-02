@@ -62,36 +62,30 @@ public:
 
     void OnBodyActivated(const BodyID& inBodyID, uint64 inBodyUserData) override {
         JNIEnv *pAttachEnv;
-        const jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         const jint id = inBodyID.GetIndexAndSequenceNumber();
         const jlong userData = inBodyUserData;
         pAttachEnv->CallVoidMethod(mJavaObject, mActivatedMethodId, id, userData);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 
     void OnBodyDeactivated(const BodyID& inBodyID, uint64 inBodyUserData) override {
         JNIEnv *pAttachEnv;
-        const jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         const jint id = inBodyID.GetIndexAndSequenceNumber();
         const jlong userData = inBodyUserData;
         pAttachEnv->CallVoidMethod(mJavaObject, mDeactivatedMethodId, id, userData);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 
     ~CustomBodyActivationListener() {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 };
 

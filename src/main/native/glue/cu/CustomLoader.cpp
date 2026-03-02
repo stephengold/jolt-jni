@@ -65,9 +65,7 @@ public:
 
     bool loadShader(const char *inName, Array<uint8> &outData, String &outError) const override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         const jstring name = pAttachEnv->NewStringUTF(inName);
         JPH_ASSERT(name);
         EXCEPTION_CHECK(pAttachEnv)
@@ -86,19 +84,16 @@ public:
             }
         }
         outError.clear();
-
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         return success;
     }
 
     ~CustomLoader() {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 };
 

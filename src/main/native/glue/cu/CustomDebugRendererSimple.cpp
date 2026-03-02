@@ -68,9 +68,7 @@ public:
 
     void DrawLine(RVec3Arg inFrom, RVec3Arg inTo, ColorArg inColor) override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         const double x1 = inFrom.GetX();
         const double y1 = inFrom.GetY();
         const double z1 = inFrom.GetZ();
@@ -81,15 +79,13 @@ public:
         pAttachEnv->CallVoidMethod(
                 mJavaObject, mDrawLineId, x1, y1, z1, x2, y2, z2, color);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 
     void DrawText3D(RVec3Arg inPosition, const string_view &inString,
       ColorArg inColor, float inHeight) override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         const double xx = inPosition.GetX();
         const double yy = inPosition.GetY();
         const double zz = inPosition.GetZ();
@@ -106,15 +102,13 @@ public:
         pAttachEnv->CallVoidMethod(
                 mJavaObject, mDrawTextId, xx, yy, zz, message, color, inHeight);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 
     void DrawTriangle(RVec3Arg inV1, RVec3Arg inV2, RVec3Arg inV3,
       ColorArg inColor, ECastShadow inCastShadow) override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         const double x1 = inV1.GetX();
         const double y1 = inV1.GetY();
         const double z1 = inV1.GetZ();
@@ -129,17 +123,15 @@ public:
         pAttachEnv->CallVoidMethod(mJavaObject, mDrawTriangleId,
                 x1, y1, z1, x2, y2, z2, x3, y3, z3, color, shadow);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 
     ~CustomDebugRendererSimple() {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 };
 #endif

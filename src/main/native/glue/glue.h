@@ -202,13 +202,32 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   }
 
 #ifdef ANDROID
-// doesn't match the Invocation API spec
-#define ATTACH_CURRENT_THREAD(mpVM, ppAttachEnv) \
-    (mpVM)->AttachCurrentThread(ppAttachEnv, NULL)
+
+// Note: On ART, the 1st argument to AttachCurrentThread() is JNIEnv **,
+// which doesn't comply with the Invocation API specification.
+
+#define ATTACH_CURRENT_THREAD(pVM, ppAttachEnv, attachedHere) \
+    bool attachedHere = false; \
+    jint retCode = (pVM)->GetEnv((void **)(ppAttachEnv), JNI_VERSION_1_6); \
+    if (JNI_EDETACHED == retCode) { \
+        JavaVMAttachArgs jvmArgs; \
+        jvmArgs.version = JNI_VERSION_1_6; \
+        retCode = (pVM)->AttachCurrentThread(ppAttachEnv, &jvmArgs); \
+        attachedHere = true; \
+    } \
+    JPH_ASSERT(JNI_OK == retCode);
+#define DETACH_CURRENT_THREAD(pVM, ppAttachEnv, attachedHere) \
+    if (attachedHere) { \
+        (pVM)->DetachCurrentThread(); \
+    }
 
 #else
-#define ATTACH_CURRENT_THREAD(mpVM, ppAttachEnv) \
-    (mpVM)->AttachCurrentThread((void **)(ppAttachEnv), NULL)
+
+#define ATTACH_CURRENT_THREAD(pVM, ppAttachEnv, attachedHere) \
+    jint retCode = (pVM)->AttachCurrentThread((void **)(ppAttachEnv), NULL); \
+    JPH_ASSERT(JNI_OK == retCode);
+#define DETACH_CURRENT_THREAD(pVM, ppAttachEnv, attachedHere) \
+    (pVM)->DetachCurrentThread();
 
 #endif
 

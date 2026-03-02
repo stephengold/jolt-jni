@@ -61,40 +61,34 @@ public:
 
     void OnSoftBodyContactAdded(const Body& inSoftBody, const SoftBodyManifold& inManifold) override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         const jlong bodyVa = reinterpret_cast<jlong> (&inSoftBody);
         const jlong manifoldVa = reinterpret_cast<jlong> (&inManifold);
         pAttachEnv->CallVoidMethod(mJavaObject, mAddedMethodId, bodyVa, manifoldVa);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 
     SoftBodyValidateResult OnSoftBodyContactValidate(const Body& inSoftBody,
                 const Body& inOtherBody, SoftBodyContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         const jlong softBodyVa = reinterpret_cast<jlong> (&inSoftBody);
         const jlong otherBodyVa = reinterpret_cast<jlong> (&inOtherBody);
         const jlong settingsVa = reinterpret_cast<jlong> (&ioSettings);
         const jint jintResult = pAttachEnv->CallIntMethod(mJavaObject,
                 mValidateMethodId, softBodyVa, otherBodyVa, settingsVa);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         return (SoftBodyValidateResult) jintResult;
     }
 
     ~CustomSoftBodyContactListener() {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         pAttachEnv->DeleteGlobalRef(mJavaObject);
         EXCEPTION_CHECK(pAttachEnv)
-        mpVM->DetachCurrentThread();
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 };
 

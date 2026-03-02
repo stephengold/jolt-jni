@@ -100,9 +100,7 @@ public:
     void Update(const double overallPercent, const double stagePercent,
             const char* const stageName, const char* operationName) override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
-        JPH_ASSERT(JNI_OK == retCode);
-
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
         jfloat arg1 = overallPercent;
         jfloat arg2 = stagePercent;
         jfloat arg3 = 100.0;
@@ -118,6 +116,7 @@ public:
         pAttachEnv->CallVoidMethod(mJavaObject, mUpdateMethodId,
                 arg1, arg2, arg3, arg4, arg5);
         EXCEPTION_CHECK(pAttachEnv)
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
     }
 
     virtual ~Decomposer() {}

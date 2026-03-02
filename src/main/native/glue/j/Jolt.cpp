@@ -345,16 +345,8 @@ static void AndroidTrace(const char *inFormat, ...) {
     vsnprintf(buffer, sizeof(buffer), inFormat, list);
     va_end(list);
     //
-    bool attachedHere = false;
     JNIEnv *pAttachEnv;
-    jint retCode = gpVM->GetEnv((void**)&pAttachEnv, JNI_VERSION_1_6);
-    if (JNI_EDETACHED == retCode) { // Attach env to the JVM:
-        JavaVMAttachArgs jvmArgs;
-        jvmArgs.version = JNI_VERSION_1_6;
-        retCode = gpVM->AttachCurrentThread(reinterpret_cast<JNIEnv **>(&pAttachEnv), &jvmArgs);
-        attachedHere = true;
-    }
-    JPH_ASSERT(JNI_OK == retCode);
+    ATTACH_CURRENT_THREAD(gpVM, &pAttachEnv, attachedHere)
     // Create a Java string for the message:
     jstring javaString = pAttachEnv->NewStringUTF(buffer);
     JPH_ASSERT(javaString);
@@ -364,9 +356,7 @@ static void AndroidTrace(const char *inFormat, ...) {
             gLogClass, gPrintlnMethodId, gPriority, gTag, javaString);
     // Ignore the return value; don't check for exceptions.
     //
-    if (attachedHere) { // Detach env from the JVM:
-        gpVM->DetachCurrentThread();
-    }
+    DETACH_CURRENT_THREAD(gpVM, &pAttachEnv, attachedHere)
 }
 #endif
 
@@ -553,8 +543,7 @@ static void JavaTrace(const char *inFormat, ...) {
     va_end(list);
     // Attach to the JVM:
     JNIEnv *pAttachEnv;
-    const jint retCode = ATTACH_CURRENT_THREAD(gpVM, &pAttachEnv);
-    JPH_ASSERT(JNI_OK == retCode);
+    ATTACH_CURRENT_THREAD(gpVM, &pAttachEnv, attachedHere)
     // Create a Java string:
     jstring javaString = pAttachEnv->NewStringUTF(buffer);
     JPH_ASSERT(javaString);
@@ -565,8 +554,7 @@ static void JavaTrace(const char *inFormat, ...) {
     // Flush the PrintStream:
     pAttachEnv->CallVoidMethod(gTraceStream, gFlushMethodId);
     EXCEPTION_CHECK(pAttachEnv)
-    // Detach from the JVM:
-    gpVM->DetachCurrentThread();
+    DETACH_CURRENT_THREAD(gpVM, &pAttachEnv, attachedHere)
 }
 
 /*
