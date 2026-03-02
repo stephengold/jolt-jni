@@ -832,7 +832,7 @@ final public class TestUtils {
      * If explicit freeing is enabled, test the {@code close()} methods of the
      * specified physics objects.
      *
-     * @param objects the objects to test (not {@code null})
+     * @param objects the objects to test (none of them {@code null})
      */
     public static void testClose(ConstJoltPhysicsObject... objects) {
         if (explicitFreeing) {
