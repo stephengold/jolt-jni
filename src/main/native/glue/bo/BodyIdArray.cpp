@@ -53,7 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_createFr
     BodyID * const pArray = new BodyID[numIds];
     TRACE_NEW("BodyID[]", pArray)
     for (jlong i = 0; i < numIds; ++i) {
-        jint bodyId = pIds[i];
+        const jint bodyId = pIds[i];
         const BodyID id(bodyId);
         pArray[i] = id;
     }

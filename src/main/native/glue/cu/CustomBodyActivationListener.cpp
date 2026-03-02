@@ -62,7 +62,7 @@ public:
 
     void OnBodyActivated(const BodyID& inBodyID, uint64 inBodyUserData) override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
+        const jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(JNI_OK == retCode);
 
         const jint id = inBodyID.GetIndexAndSequenceNumber();
@@ -74,7 +74,7 @@ public:
 
     void OnBodyDeactivated(const BodyID& inBodyID, uint64 inBodyUserData) override {
         JNIEnv *pAttachEnv;
-        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
+        const jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(JNI_OK == retCode);
 
         const jint id = inBodyID.GetIndexAndSequenceNumber();
