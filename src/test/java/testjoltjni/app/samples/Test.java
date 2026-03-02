@@ -55,11 +55,11 @@ public void PrePhysicsUpdate(PreUpdateParams params){}
 public void RestoreState(StateRecorder inStream){}
 public void SaveState(StateRecorder inStream){}
 final protected	void SetBodyLabel(int inBodyID,String inLabel){}
-final void SetComputeSystem(ComputeSystem system, ComputeQueue queue){mComputeSystem=system;mComputeQueue=queue;}
-final void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer=renderer;}
-final void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
-final void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}
-final void SetTempAllocator(TempAllocator inTempAllocator){mTempAllocator=inTempAllocator;}
+final public void SetComputeSystem(ComputeSystem system, ComputeQueue queue){mComputeSystem=system;mComputeQueue=queue;}
+final public void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer=renderer;}
+final public void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
+final public void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}
+final public void SetTempAllocator(TempAllocator inTempAllocator){mTempAllocator=inTempAllocator;}
 final protected void Trace(String format,Object...args){cout.printf(format,args);cout.println();cout.flush();}
 
 final protected Body CreateFloor(){return CreateFloor(200);}
