@@ -79,9 +79,7 @@ public:
         bool success = (data != 0);
         outData.clear();
         if (success) {
-            jbyte * bytes = (jbyte *) pAttachEnv->GetDirectBufferAddress(data);
-            JPH_ASSERT(bytes);
-            jlong numBytes = pAttachEnv->GetDirectBufferCapacity(data);
+            DIRECT_BYTE_BUFFER(pAttachEnv, data, bytes, numBytes);
             JPH_ASSERT(numBytes >= 0);
             for (int i = 0; i < numBytes; ++i) {
                 outData.push_back(bytes[i]);

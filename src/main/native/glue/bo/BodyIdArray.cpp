@@ -49,10 +49,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_create
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_createFromBuffer
   (JNIEnv *pEnv, jclass, jobject intBuffer) {
-    const jint * const pIds = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
-    EXCEPTION_CHECK(pEnv);
-    const jlong numIds = pEnv->GetDirectBufferCapacity(intBuffer);
-    EXCEPTION_CHECK(pEnv);
+    const DIRECT_INT_BUFFER(pEnv, intBuffer, pIds, numIds);
     BodyID * const pArray = new BodyID[numIds];
     TRACE_NEW("BodyID[]", pArray)
     for (jlong i = 0; i < numIds; ++i) {

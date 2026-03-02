@@ -209,12 +209,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_Decomposer_deco
     const DIRECT_FLOAT_BUFFER(pEnv, locations, pPoints, numFloats);
     const int32_t numPoints = numFloats / 3;
 
-    const jint * const pIndices
-            = (jint *) pEnv->GetDirectBufferAddress(indices);
-    EXCEPTION_CHECK(pEnv)
-
-    const jlong numIndices = pEnv->GetDirectBufferCapacity(indices);
-    EXCEPTION_CHECK(pEnv)
+    const DIRECT_INT_BUFFER(pEnv, indices, pIndices, numIndices);
     const int32_t numTriangles = numIndices / 3;
 
     // on some platforms, jint != uint32_t

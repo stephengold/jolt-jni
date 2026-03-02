@@ -439,11 +439,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_putEdgeIndices
   (JNIEnv *pEnv, jclass, jlong settingsVa, jint bufferPosition,
   jobject storeIndices) {
-    jint * const pStoreInts
-            = (jint *) pEnv->GetDirectBufferAddress(storeIndices);
-    EXCEPTION_CHECK(pEnv)
-    const jlong capacityInts = pEnv->GetDirectBufferCapacity(storeIndices);
-    EXCEPTION_CHECK(pEnv)
+    DIRECT_INT_BUFFER(pEnv, storeIndices, pStoreInts, capacityInts);
     const SoftBodySharedSettings * const pSettings
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const Array<SoftBodySharedSettings::Edge>& edges
@@ -465,11 +461,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_putFaceIndices
   (JNIEnv *pEnv, jclass, jlong settingsVa, jint bufferPosition,
   jobject storeIndices) {
-    jint * const pStoreInts
-            = (jint *) pEnv->GetDirectBufferAddress(storeIndices);
-    EXCEPTION_CHECK(pEnv)
-    const jlong capacityInts = pEnv->GetDirectBufferCapacity(storeIndices);
-    EXCEPTION_CHECK(pEnv)
+    DIRECT_INT_BUFFER(pEnv, storeIndices, pStoreInts, capacityInts);
     const SoftBodySharedSettings * const pSettings
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const Array<SoftBodySharedSettings::Face>& faces = pSettings->mFaces;
@@ -491,11 +483,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_putRodIndices
   (JNIEnv *pEnv, jclass, jlong settingsVa, jint bufferPosition,
   jobject storeIndices) {
-    jint * const pStoreInts
-            = (jint *) pEnv->GetDirectBufferAddress(storeIndices);
-    EXCEPTION_CHECK(pEnv)
-    const jlong capacityInts = pEnv->GetDirectBufferCapacity(storeIndices);
-    EXCEPTION_CHECK(pEnv)
+    DIRECT_INT_BUFFER(pEnv, storeIndices, pStoreInts, capacityInts);
     const SoftBodySharedSettings * const pSettings
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const Array<SoftBodySharedSettings::RodStretchShear>& rods

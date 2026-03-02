@@ -402,10 +402,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_setScalp
     HairSettings * const pSettings
             = reinterpret_cast<HairSettings *> (settingsVa);
     pSettings->mScalpInverseBindPose.clear();
-    const jlong * const pLongs
-            = (jlong *) pEnv->GetDirectBufferAddress(longBuffer);
-    JPH_ASSERT(pLongs);
-    const jlong capacityLongs = pEnv->GetDirectBufferCapacity(longBuffer);
+    const DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs);
     JPH_ASSERT(capacityLongs >= 0);
     for (int i = 0; i < capacityLongs; ++i) {
         const jlong matrixVa = pLongs[i];
@@ -437,10 +434,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_setScalp
     HairSettings * const pSettings
             = reinterpret_cast<HairSettings *> (settingsVa);
     pSettings->mScalpSkinWeights.clear();
-    const jlong * const pLongs
-            = (jlong *) pEnv->GetDirectBufferAddress(longBuffer);
-    JPH_ASSERT(pLongs);
-    const jlong capacityLongs = pEnv->GetDirectBufferCapacity(longBuffer);
+    const DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs);
     JPH_ASSERT(capacityLongs >= 0);
     for (int i = 0; i < capacityLongs; ++i) {
         const jlong weightVa = pLongs[i];
@@ -460,10 +454,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_setScalp
     HairSettings * const pSettings
             = reinterpret_cast<HairSettings *> (settingsVa);
     pSettings->mScalpTriangles.clear();
-    const jlong * const pLongs
-            = (jlong *) pEnv->GetDirectBufferAddress(longBuffer);
-    JPH_ASSERT(pLongs);
-    const jlong capacityLongs = pEnv->GetDirectBufferCapacity(longBuffer);
+    const DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs);
     JPH_ASSERT(capacityLongs >= 0);
     for (int i = 0; i < capacityLongs; ++i) {
         const jlong triangleVa = pLongs[i];

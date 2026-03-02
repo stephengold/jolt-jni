@@ -55,9 +55,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_create
     const DIRECT_FLOAT_BUFFER(pEnv, vertexBuffer, pFloats, capacityFloats);
     const jlong numVertices = capacityFloats / 3;
     const Float3 * const vArray = (Float3 *) pFloats;
-    jint * const pIndices = (jint *) pEnv->GetDirectBufferAddress(indexBuffer);
-    JPH_ASSERT(pIndices);
-    const jlong numIndices = pEnv->GetDirectBufferCapacity(indexBuffer);
+    DIRECT_INT_BUFFER(pEnv, indexBuffer, pIndices, numIndices);
     JPH_ASSERT(numIndices >= 0);
     const jlong numTriangles = numIndices / 3;
     IndexedTriangleNoMaterial * const pTmpTriangles
