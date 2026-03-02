@@ -210,9 +210,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     bool attachedHere = false; \
     jint retCode = (pVM)->GetEnv((void **)(ppAttachEnv), JNI_VERSION_1_6); \
     if (JNI_EDETACHED == retCode) { \
-        JavaVMAttachArgs jvmArgs; \
-        jvmArgs.version = JNI_VERSION_1_6; \
-        retCode = (pVM)->AttachCurrentThread(ppAttachEnv, &jvmArgs); \
+        retCode = (pVM)->AttachCurrentThread(ppAttachEnv, NULL); \
         attachedHere = true; \
     } \
     JPH_ASSERT(JNI_OK == retCode);
