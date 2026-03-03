@@ -33,7 +33,7 @@ public class DebugRendererRecorder extends DebugRenderer {
     /**
      * protect the stream from garbage collection
      */
-    private StreamOut stream;
+    final private StreamOut stream;
     // *************************************************************************
     // constructors
 
