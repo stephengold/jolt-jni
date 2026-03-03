@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.8.0 released on TBD
+## Version 3.8.0 released on 3 March 2026
 
 + Bugfixes:
   + Android crashes due to detaching threads with non-empty Java stacks
@@ -12,6 +12,7 @@
 
 + Improved many runtime checks.
 + Updated the OSHI library to v6.10.0 .
+
 
 ## Version 3.7.0 released on 23 February 2026
 
