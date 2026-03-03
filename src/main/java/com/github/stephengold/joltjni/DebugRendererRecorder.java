@@ -40,7 +40,7 @@ public class DebugRendererRecorder extends DebugRenderer {
     /**
      * Instantiate a recorder that uses the specified stream for output.
      *
-     * @param stream the output stream to use (not null)
+     * @param stream the output stream to use (not {@code null})
      */
     public DebugRendererRecorder(StreamOut stream) {
         assert Jolt.implementsDebugRendering();

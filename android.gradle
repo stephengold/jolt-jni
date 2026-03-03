@@ -55,7 +55,7 @@ android {
         aarMetadata {
             minCompileSdk = 33
         }
-        minSdk = 33
+        minSdk = 33 // in order to use java.lang.ref.Cleaner
         ndk {
             if (!project.hasProperty('target')) {
                 abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
