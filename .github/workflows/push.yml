@@ -256,10 +256,10 @@ jobs:
         run: |
           ./gradlew classes unpackJoltSource unpackTestFramework unpackVhacdSource \
             --console=plain
-      - name: gradlew --build-file=android.gradle -Pflavor=Sp -Ptarget=Android_ARM8 -PuseVK=yes install
+      - name: gradlew --build-file=android.gradle -Pflavor=Sp -Ptarget=Android_ARM8 -PuseVK=yes install lint
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew --build-file=android.gradle -Pflavor=Sp -Ptarget=Android_ARM8 -PuseVK=yes install \
+          ./gradlew --build-file=android.gradle -Pflavor=Sp -Ptarget=Android_ARM8 -PuseVK=yes install lint \
             --console=plain
       - name: gradlew --build-file=android.gradle -Partifact=jolt-jni-Android -Pflavor=Sp -PuseVK=yes clean release
         if: startsWith(github.ref, 'refs/tags/')
