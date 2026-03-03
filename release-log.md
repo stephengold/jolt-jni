@@ -1,5 +1,18 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.8.0 released on TBD
+
++ Bugfixes:
+  + Android crashes due to detaching threads with non-empty Java stacks
+  + no implementation for `TransformedAaBox.free()`
+
++ Added Vulkan compute for Android platforms.
++ Added method `Jolt.installAndroidTraceCallback()`
++ Bumped the Android targetSdk and compileSdk levels to 35 and 36, respectively.
+
++ Improved many runtime checks.
++ Updated the OSHI library to v6.10.0 .
+
 ## Version 3.7.0 released on 23 February 2026
 
 + Bugfix:  missing `TRACE_NEW` in `BodyInterface_getTransformedShape`
@@ -106,7 +119,7 @@
   and `sWriteObject(StringStream, EStreamType, ConstJoltPhysicsObject)`.
 + Added a run-time check for illegal state in `Body.setMotionType()`.
 + Updated the Jolt-Physics source and assets to sg260209 (=49f60cb).
-+ Updated the OSHI library v6.9.3 .
++ Updated the OSHI library to v6.9.3 .
 
 
 ## Version 3.5.2 released on 7 January 2026
