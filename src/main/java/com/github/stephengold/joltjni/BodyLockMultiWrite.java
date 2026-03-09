@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,6 +33,10 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
     // fields
 
     /**
+     * the body IDs
+     */
+    final private BodyIdArray idArray;
+    /**
      * the interface to use
      */
     final private ConstBodyLockInterface bli;
@@ -49,8 +53,12 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
         assert bodyIds.length > 0 : bodyIds.length;
 
         this.bli = bli;
+        this.idArray = new BodyIdArray(bodyIds);
         long interfaceVa = bli.targetVa();
-        long lockVa = create(interfaceVa, bodyIds);
+        long idArrayVa = idArray.va();
+        int numBodies = bodyIds.length;
+        long lockVa = create(interfaceVa, idArrayVa, numBodies);
+
         Runnable freeingAction = () -> free(lockVa);
         setVirtualAddress(lockVa, freeingAction);
     }
@@ -128,7 +136,8 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
     // *************************************************************************
     // native private methods
 
-    native private static long create(long interfaceVa, int[] bodyIds);
+    native private static long create(
+            long interfaceVa, long idArrayVa, int numBodies);
 
     native private static void free(long lockVa);
 

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,27 +33,15 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_BodyLockMultiRead
  * Method:    create
- * Signature: (J[I)J
+ * Signature: (JJI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyLockMultiRead_create
-  (JNIEnv *pEnv, jclass, jlong interfaceVa, jintArray bodyIds) {
+  (JNIEnv *pEnv, jclass, jlong interfaceVa, jlong idArrayVa, jint numBodies) {
     const BodyLockInterface * const pInterface
             = reinterpret_cast<BodyLockInterface *> (interfaceVa);
-    const jsize numBodies = pEnv->GetArrayLength(bodyIds);
-    BodyID * const pTempArray = new BodyID[numBodies];
-    TRACE_NEW("BodyID[]", pTempArray)
-    jboolean isCopy;
-    jint * const pIds = pEnv->GetIntArrayElements(bodyIds, &isCopy);
-    for (jsize i = 0; i < numBodies; ++i) {
-        const jint bodyId = pIds[i];
-        const BodyID id(bodyId);
-        pTempArray[i] = id;
-    }
-    pEnv->ReleaseIntArrayElements(bodyIds, pIds, JNI_ABORT);
+    const BodyID * const pArray = reinterpret_cast<BodyID *> (idArrayVa);
     BodyLockMultiRead * const pResult
-            = new BodyLockMultiRead(*pInterface, pTempArray, numBodies);
-    TRACE_DELETE("BodyID[]", pTempArray)
-    delete[] pTempArray;
+            = new BodyLockMultiRead(*pInterface, pArray, numBodies);
     return reinterpret_cast<jlong> (pResult);
 }
 
