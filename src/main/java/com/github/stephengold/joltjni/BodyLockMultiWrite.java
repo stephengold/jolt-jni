@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyIdArray;
 import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
 
 /**
@@ -36,20 +37,32 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
      * Acquire body locks using the specified interface and body IDs.
      *
      * @param bli the lock interface to use (not {@code null}, alias created)
-     * @param bodyIds the IDs of the bodies to lock (not empty)
+     * @param bodyIds the IDs of the bodies to lock (not {@code null}, alias
+     * created)
      */
-    public BodyLockMultiWrite(ConstBodyLockInterface bli, int... bodyIds) {
+    public BodyLockMultiWrite(
+            ConstBodyLockInterface bli, ConstBodyIdArray bodyIds) {
         super(bli);
-        assert bodyIds.length > 0 : bodyIds.length;
+        assert bodyIds != null;
+        this.idArray = bodyIds;
 
-        this.idArray = new BodyIdArray(bodyIds);
         long interfaceVa = bli.targetVa();
         long idArrayVa = idArray.targetVa();
-        int numBodies = bodyIds.length;
+        int numBodies = bodyIds.length();
         long lockVa = create(interfaceVa, idArrayVa, numBodies);
 
         Runnable freeingAction = () -> free(lockVa);
         setVirtualAddress(lockVa, freeingAction);
+    }
+
+    /**
+     * Acquire body locks using the specified interface and body IDs.
+     *
+     * @param bli the lock interface to use (not {@code null}, alias created)
+     * @param bodyIds the IDs of the bodies to lock (not empty)
+     */
+    public BodyLockMultiWrite(ConstBodyLockInterface bli, int... bodyIds) {
+        this(bli, new BodyIdArray(bodyIds));
     }
     // *************************************************************************
     // new methods exposed
