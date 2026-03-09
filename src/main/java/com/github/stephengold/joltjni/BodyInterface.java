@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstBodyIdArray;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstTwoBodyConstraint;
@@ -429,7 +430,7 @@ public class BodyInterface extends NonCopyable {
      *
      * @param bodyIds the IDs of the bodies to destroy (not null)
      */
-    public void destroyBodies(BodyIdArray bodyIds) {
+    public void destroyBodies(ConstBodyIdArray bodyIds) {
         int numBodies = bodyIds.length();
         destroyBodies(bodyIds, numBodies);
     }
@@ -441,9 +442,9 @@ public class BodyInterface extends NonCopyable {
      * @param bodyIds the IDs of the bodies to destroy (not null)
      * @param numBodies the number of bodies to destroy (&ge;0)
      */
-    public void destroyBodies(BodyIdArray bodyIds, int numBodies) {
+    public void destroyBodies(ConstBodyIdArray bodyIds, int numBodies) {
         long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
+        long arrayVa = bodyIds.targetVa();
         destroyBodies(bodyInterfaceVa, arrayVa, numBodies);
     }
 

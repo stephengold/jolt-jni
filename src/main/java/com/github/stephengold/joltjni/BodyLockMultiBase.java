@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBody;
+import com.github.stephengold.joltjni.readonly.ConstBodyIdArray;
 
 /**
  * Lock multiple bodies.
@@ -61,7 +62,7 @@ abstract public class BodyLockMultiBase extends NonCopyable {
      *
      * @return the pre-existing object
      */
-    abstract public BodyIdArray getBodyIdArray();
+    abstract public ConstBodyIdArray getBodyIdArray();
 
     /**
      * Count the bodies that were locked.

@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyIdArray;
 import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
 
 /**
@@ -35,7 +36,7 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
     /**
      * the body IDs
      */
-    final private BodyIdArray idArray;
+    final private ConstBodyIdArray idArray;
     /**
      * the interface to use
      */
@@ -55,7 +56,7 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
         this.bli = bli;
         this.idArray = new BodyIdArray(bodyIds);
         long interfaceVa = bli.targetVa();
-        long idArrayVa = idArray.va();
+        long idArrayVa = idArray.targetVa();
         int numBodies = bodyIds.length;
         long lockVa = create(interfaceVa, idArrayVa, numBodies);
 
@@ -118,7 +119,7 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
      * @return the pre-existing object
      */
     @Override
-    public BodyIdArray getBodyIdArray() {
+    public ConstBodyIdArray getBodyIdArray() {
         return idArray;
     }
 
