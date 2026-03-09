@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -55,6 +55,13 @@ abstract public class BodyLockMultiBase extends NonCopyable {
      * {@code null} if not available
      */
     abstract public ConstBody getBody(int index);
+
+    /**
+     * Access the array of body IDs.
+     *
+     * @return the pre-existing object
+     */
+    abstract public BodyIdArray getBodyIdArray();
 
     /**
      * Count the bodies that were locked.

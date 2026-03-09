@@ -113,6 +113,16 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
     }
 
     /**
+     * Access the array of body IDs.
+     *
+     * @return the pre-existing object
+     */
+    @Override
+    public BodyIdArray getBodyIdArray() {
+        return idArray;
+    }
+
+    /**
      * Count the bodies that were locked.
      *
      * @return the number of bodies (&ge;0)
