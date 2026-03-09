@@ -73,6 +73,7 @@ public class BatchBodyInterface extends BodyInterface {
     public void areActive(ConstBodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
         assert storeStatus.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         areActive(bodyInterfaceVa, arrayVa, numBodies, storeStatus);
@@ -89,6 +90,7 @@ public class BatchBodyInterface extends BodyInterface {
     public void areAdded(ConstBodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
         assert storeStatus.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         areAdded(bodyInterfaceVa, arrayVa, numBodies, storeStatus);
@@ -105,6 +107,7 @@ public class BatchBodyInterface extends BodyInterface {
     public void areSensors(ConstBodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
         assert storeStatus.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         areSensors(bodyInterfaceVa, arrayVa, numBodies, storeStatus);
@@ -121,6 +124,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer storeVelocities) {
         int numBodies = bodyIds.length();
         assert storeVelocities.capacity() >= numBodies * 3;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getAngularVelocities(
@@ -138,6 +142,7 @@ public class BatchBodyInterface extends BodyInterface {
     public void getBodyTypes(ConstBodyIdArray bodyIds, ByteBuffer storeTypes) {
         int numBodies = bodyIds.length();
         assert storeTypes.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getBodyTypes(bodyInterfaceVa, arrayVa, numBodies, storeTypes);
@@ -155,6 +160,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, DoubleBuffer storePositions) {
         int numBodies = bodyIds.length();
         assert storePositions.capacity() >= numBodies * 3;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getCenterOfMassPositions(
@@ -190,10 +196,10 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer storeFrictions) {
         int numBodies = bodyIds.length();
         assert storeFrictions.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
-        getFrictions(
-                bodyInterfaceVa, arrayVa, numBodies, storeFrictions);
+        getFrictions(bodyInterfaceVa, arrayVa, numBodies, storeFrictions);
     }
 
     /**
@@ -207,10 +213,10 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer storeFactors) {
         int numBodies = bodyIds.length();
         assert storeFactors.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
-        getGravityFactors(
-                bodyInterfaceVa, arrayVa, numBodies, storeFactors);
+        getGravityFactors(bodyInterfaceVa, arrayVa, numBodies, storeFactors);
     }
 
     /**
@@ -227,8 +233,7 @@ public class BatchBodyInterface extends BodyInterface {
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         long matricesVa = storeMatrices.va();
-        getInverseInertias(
-                bodyInterfaceVa, arrayVa, numBodies, matricesVa);
+        getInverseInertias(bodyInterfaceVa, arrayVa, numBodies, matricesVa);
     }
 
     /**
@@ -242,6 +247,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer storeVelocities) {
         int numBodies = bodyIds.length();
         assert storeVelocities.capacity() >= numBodies * 3;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getLinearVelocities(
@@ -260,10 +266,10 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, ByteBuffer storeQualities) {
         int numBodies = bodyIds.length();
         assert storeQualities.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
-        getMotionQualities(
-                bodyInterfaceVa, arrayVa, numBodies, storeQualities);
+        getMotionQualities(bodyInterfaceVa, arrayVa, numBodies, storeQualities);
     }
 
     /**
@@ -278,6 +284,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, ByteBuffer storeTypes) {
         int numBodies = bodyIds.length();
         assert storeTypes.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getMotionTypes(bodyInterfaceVa, arrayVa, numBodies, storeTypes);
@@ -295,6 +302,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, IntBuffer storeLayers) {
         int numBodies = bodyIds.length();
         assert storeLayers.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getObjectLayers(bodyInterfaceVa, arrayVa, numBodies, storeLayers);
@@ -312,6 +320,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, DoubleBuffer storeLocations) {
         int numBodies = bodyIds.length();
         assert storeLocations.capacity() >= numBodies * 3;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getPositions(bodyInterfaceVa, arrayVa, numBodies, storeLocations);
@@ -329,10 +338,10 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer storeRestitutions) {
         int numBodies = bodyIds.length();
         assert storeRestitutions.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
-        getRestitutions(
-                bodyInterfaceVa, arrayVa, numBodies, storeRestitutions);
+        getRestitutions(bodyInterfaceVa, arrayVa, numBodies, storeRestitutions);
     }
 
     /**
@@ -346,6 +355,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer storeOrientations) {
         int numBodies = bodyIds.length();
         assert storeOrientations.capacity() >= numBodies * 4;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getRotations(bodyInterfaceVa, arrayVa, numBodies, storeOrientations);
@@ -380,8 +390,7 @@ public class BatchBodyInterface extends BodyInterface {
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         long shapesVa = storeShapes.va();
-        getTransformedShapes(
-                bodyInterfaceVa, arrayVa, numBodies, shapesVa);
+        getTransformedShapes(bodyInterfaceVa, arrayVa, numBodies, shapesVa);
     }
 
     /**
@@ -395,6 +404,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
         assert storeStatus.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getUseManifoldReductions(
@@ -412,6 +422,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, LongBuffer storeData) {
         int numBodies = bodyIds.length();
         assert storeData.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         getUserData(bodyInterfaceVa, arrayVa, numBodies, storeData);
@@ -428,10 +439,10 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer velocities) {
         int numBodies = bodyIds.length();
         assert velocities.capacity() >= numBodies * 3;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
-        setAngularVelocities(
-                bodyInterfaceVa, arrayVa, numBodies, velocities);
+        setAngularVelocities(bodyInterfaceVa, arrayVa, numBodies, velocities);
     }
 
     /**
@@ -444,6 +455,7 @@ public class BatchBodyInterface extends BodyInterface {
     public void setFrictions(ConstBodyIdArray bodyIds, FloatBuffer frictions) {
         int numBodies = bodyIds.length();
         assert frictions.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         setFrictions(bodyInterfaceVa, arrayVa, numBodies, frictions);
@@ -460,6 +472,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer factors) {
         int numBodies = bodyIds.length();
         assert factors.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         setGravityFactors(bodyInterfaceVa, arrayVa, numBodies, factors);
@@ -476,10 +489,10 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer velocities) {
         int numBodies = bodyIds.length();
         assert velocities.capacity() >= numBodies * 3;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
-        setLinearVelocities(
-                bodyInterfaceVa, arrayVa, numBodies, velocities);
+        setLinearVelocities(bodyInterfaceVa, arrayVa, numBodies, velocities);
     }
 
     /**
@@ -493,6 +506,7 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, IntBuffer layers) {
         int numBodies = bodyIds.length();
         assert layers.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         setObjectLayers(bodyInterfaceVa, arrayVa, numBodies, layers);
@@ -510,6 +524,7 @@ public class BatchBodyInterface extends BodyInterface {
             EActivation activation) {
         int numBodies = bodyIds.length();
         assert locations.capacity() >= numBodies * 3;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         int activationOrdinal = activation.ordinal();
@@ -528,10 +543,10 @@ public class BatchBodyInterface extends BodyInterface {
             ConstBodyIdArray bodyIds, FloatBuffer restitutions) {
         int numBodies = bodyIds.length();
         assert restitutions.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
-        setRestitutions(
-                bodyInterfaceVa, arrayVa, numBodies, restitutions);
+        setRestitutions(bodyInterfaceVa, arrayVa, numBodies, restitutions);
     }
 
     /**
@@ -544,6 +559,7 @@ public class BatchBodyInterface extends BodyInterface {
     public void setUserData(ConstBodyIdArray bodyIds, LongBuffer data) {
         int numBodies = bodyIds.length();
         assert data.capacity() >= numBodies;
+
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.targetVa();
         setUserData(bodyInterfaceVa, arrayVa, numBodies, data);
