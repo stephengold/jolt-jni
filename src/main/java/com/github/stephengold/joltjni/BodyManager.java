@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -186,7 +186,7 @@ public class BodyManager extends NonCopyable {
      * @param numBodyMutexes the desired number of mutexes to allocate, or 0 for
      * the default number
      * @param map the desired map from object layers to broad-phase layers (not
-     * null, alias created)
+     * {@code null}, alias created)
      */
     public void init(int maxBodies, int numBodyMutexes,
             ConstBroadPhaseLayerInterface map) {

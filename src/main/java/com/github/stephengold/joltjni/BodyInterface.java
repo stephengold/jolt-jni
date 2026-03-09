@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -65,10 +65,11 @@ public class BodyInterface extends NonCopyable {
      * Active all bodies within the specified bounds that satisfy the specified
      * filters.
      *
-     * @param box the bounds to use (not null, unaffected)
-     * @param bplFilter the broadphase layer filter to apply (not null,
+     * @param box the bounds to use (not {@code null}, unaffected)
+     * @param bplFilter the broadphase layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     public void activateBodiesInAaBox(ConstAaBox box,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
@@ -92,7 +93,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Activate all non-static bodies attached to the specified constraint.
      *
-     * @param constraint the constraint to activate (not null)
+     * @param constraint the constraint to activate (not {@code null})
      */
     public void activateConstraint(ConstTwoBodyConstraint constraint) {
         long bodyInterfaceVa = va();
@@ -104,7 +105,7 @@ public class BodyInterface extends NonCopyable {
      * Apply the specified angular impulse to the specified body.
      *
      * @param bodyId the ID of the body
-     * @param angularImpulse the impulse vector (not null, unaffected)
+     * @param angularImpulse the impulse vector (not {@code null}, unaffected)
      */
     public void addAngularImpulse(int bodyId, Vec3Arg angularImpulse) {
         long bodyInterfaceVa = va();
@@ -117,8 +118,8 @@ public class BodyInterface extends NonCopyable {
     /**
      * Abort adding bodies to the physics system.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * unmodified since the handle was created)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
     public void addBodiesAbort(BodyIdArray bodyIds, long addState) {
@@ -129,8 +130,8 @@ public class BodyInterface extends NonCopyable {
     /**
      * Abort adding bodies to the physics system.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * unmodified since the handle was created)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
@@ -144,10 +145,10 @@ public class BodyInterface extends NonCopyable {
     /**
      * Finish adding bodies to the physics system.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * unmodified since the handle was created)
      * @param addState the handle returned by {@code addBodiesPrepare()}
-     * @param activation whether to activate the bodies (not null)
+     * @param activation whether to activate the bodies (not {@code null})
      */
     public void addBodiesFinalize(
             BodyIdArray bodyIds, long addState, EActivation activation) {
@@ -158,11 +159,11 @@ public class BodyInterface extends NonCopyable {
     /**
      * Finish adding bodies to the physics system.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * unmodified since the handle was created)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
-     * @param activation whether to activate the bodies (not null)
+     * @param activation whether to activate the bodies (not {@code null})
      */
     public void addBodiesFinalize(BodyIdArray bodyIds, int numBodies,
             long addState, EActivation activation) {
@@ -176,8 +177,8 @@ public class BodyInterface extends NonCopyable {
     /**
      * Prepare to add a batch of bodies to the physics system.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, possibly
-     * shuffled)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * possibly shuffled)
      * @return a handle to be passed to {@code addBodiesFinalize()} or
      * {@code addBodiesAbort()}
      */
@@ -191,8 +192,8 @@ public class BodyInterface extends NonCopyable {
     /**
      * Prepare to add a batch of bodies to the physics system.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, possibly
-     * shuffled)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * possibly shuffled)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @return a handle to be passed to {@code addBodiesFinalize()} or
      * {@code addBodiesAbort()}
@@ -211,8 +212,8 @@ public class BodyInterface extends NonCopyable {
      * To add many bodies at once, use {@code addBodiesPrepare()} followed by
      * {@code addBodiesFinalize()}.
      *
-     * @param body the body to add (not null)
-     * @param activation whether to activate the body (not null)
+     * @param body the body to add (not {@code null})
+     * @param activation whether to activate the body (not {@code null})
      */
     public void addBody(ConstBody body, EActivation activation) {
         long bodyInterfaceVa = va();
@@ -226,7 +227,7 @@ public class BodyInterface extends NonCopyable {
      * Add the specified body to the physics system.
      *
      * @param bodyId the ID of the body to add
-     * @param activation whether to activate the body (not null)
+     * @param activation whether to activate the body (not {@code null})
      */
     public void addBody(int bodyId, EActivation activation) {
         long bodyInterfaceVa = va();
@@ -238,7 +239,7 @@ public class BodyInterface extends NonCopyable {
      * Apply the specified force to the specified body's center of mass.
      *
      * @param bodyId the ID of the body
-     * @param force the force vector (not null, unaffected)
+     * @param force the force vector (not {@code null}, unaffected)
      */
     public void addForce(int bodyId, Vec3Arg force) {
         long bodyInterfaceVa = va();
@@ -253,8 +254,8 @@ public class BodyInterface extends NonCopyable {
      * location.
      *
      * @param bodyId the ID of the body
-     * @param force the force vector (not null, unaffected)
-     * @param location where to apply the force (not null, unaffected)
+     * @param force the force vector (not {@code null}, unaffected)
+     * @param location where to apply the force (not {@code null}, unaffected)
      */
     public void addForce(int bodyId, Vec3Arg force, RVec3Arg location) {
         long bodyInterfaceVa = va();
@@ -271,7 +272,7 @@ public class BodyInterface extends NonCopyable {
      * Apply the specified impulse to the specified body's center of mass.
      *
      * @param bodyId the ID of the body
-     * @param impulse the impulse vector (not null, unaffected)
+     * @param impulse the impulse vector (not {@code null}, unaffected)
      */
     public void addImpulse(int bodyId, Vec3Arg impulse) {
         long bodyInterfaceVa = va();
@@ -286,8 +287,8 @@ public class BodyInterface extends NonCopyable {
      * location.
      *
      * @param bodyId the ID of the body
-     * @param impulse the impulse vector (not null, unaffected)
-     * @param location where to apply the impulse (not null, unaffected)
+     * @param impulse the impulse vector (not {@code null}, unaffected)
+     * @param location where to apply the impulse (not {@code null}, unaffected)
      */
     public void addImpulse(int bodyId, Vec3Arg impulse, RVec3Arg location) {
         long bodyInterfaceVa = va();
@@ -304,7 +305,7 @@ public class BodyInterface extends NonCopyable {
      * Apply the specified torque to the specified body.
      *
      * @param bodyId the ID of the body
-     * @param torque the torque vector (not null, unaffected)
+     * @param torque the torque vector (not {@code null}, unaffected)
      */
     public void addTorque(int bodyId, Vec3Arg torque) {
         long bodyInterfaceVa = va();
@@ -317,8 +318,8 @@ public class BodyInterface extends NonCopyable {
     /**
      * Create a rigid body and add it to the physics system.
      *
-     * @param settings the settings to use (not null, unaffected)
-     * @param activationMode whether to activate the body (not null)
+     * @param settings the settings to use (not {@code null}, unaffected)
+     * @param activationMode whether to activate the body (not {@code null})
      * @return the ID of the created body, or an invalid ID when out of bodies
      */
     public int createAndAddBody(
@@ -333,8 +334,8 @@ public class BodyInterface extends NonCopyable {
     /**
      * Create a soft body and add it to the physics system.
      *
-     * @param settings the settings to use (not null, unaffected)
-     * @param activationMode whether to activate the body (not null)
+     * @param settings the settings to use (not {@code null}, unaffected)
+     * @param activationMode whether to activate the body (not {@code null})
      * @return the ID of the created body, or an invalid ID when out of bodies
      */
     public int createAndAddSoftBody(ConstSoftBodyCreationSettings settings,
@@ -349,7 +350,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Create a rigid body using the specified settings.
      *
-     * @param settings the settings to use (not null, unaffected)
+     * @param settings the settings to use (not {@code null}, unaffected)
      * @return the new body
      */
     public Body createBody(ConstBodyCreationSettings settings) {
@@ -371,7 +372,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Create a two-body constraint using the specified settings.
      *
-     * @param settings the settings to use (not null, unaffected)
+     * @param settings the settings to use (not {@code null}, unaffected)
      * @param rigidBody1Id the ID of the first rigid body
      * @param rigidBody2Id the ID of the 2nd rigid body
      * @return the new constraint
@@ -398,7 +399,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Create a soft body using the specified settings.
      *
-     * @param settings the settings to use (not null, unaffected)
+     * @param settings the settings to use (not {@code null}, unaffected)
      * @return the new body
      */
     public Body createSoftBody(ConstSoftBodyCreationSettings settings) {
@@ -428,7 +429,8 @@ public class BodyInterface extends NonCopyable {
      * Destroy the specified bodies. Don't use this on bodies that have been
      * added but not removed yet!
      *
-     * @param bodyIds the IDs of the bodies to destroy (not null)
+     * @param bodyIds the IDs of the bodies to destroy (not {@code null},
+     * unaffected)
      */
     public void destroyBodies(ConstBodyIdArray bodyIds) {
         int numBodies = bodyIds.length();
@@ -439,7 +441,8 @@ public class BodyInterface extends NonCopyable {
      * Destroy the specified bodies. Don't use this on bodies that have been
      * added but not removed yet!
      *
-     * @param bodyIds the IDs of the bodies to destroy (not null)
+     * @param bodyIds the IDs of the bodies to destroy (not {@code null},
+     * unaffected)
      * @param numBodies the number of bodies to destroy (&ge;0)
      */
     public void destroyBodies(ConstBodyIdArray bodyIds, int numBodies) {
@@ -492,7 +495,7 @@ public class BodyInterface extends NonCopyable {
      * Return the type of the specified body.
      *
      * @param bodyId the ID of the body to query
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EBodyType getBodyType(int bodyId) {
         long bodyInterfaceVa = va();
@@ -603,7 +606,7 @@ public class BodyInterface extends NonCopyable {
      * Return the motion quality.
      *
      * @param bodyId the ID of the body to query
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EMotionQuality getMotionQuality(int bodyId) {
         long bodyInterfaceVa = va();
@@ -617,7 +620,7 @@ public class BodyInterface extends NonCopyable {
      * Return the motion type of the specified body.
      *
      * @param bodyId the ID of the body to query
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EMotionType getMotionType(int bodyId) {
         long bodyInterfaceVa = va();
@@ -673,8 +676,10 @@ public class BodyInterface extends NonCopyable {
      * Copy the location and orientation of the specified body.
      *
      * @param bodyId the ID of the body to locate
-     * @param storeLocation storage for the location (not null, modified)
-     * @param storeOrientation storage for the orientation (not null, modified)
+     * @param storeLocation storage for the location (not {@code null},
+     * modified)
+     * @param storeOrientation storage for the orientation (not {@code null},
+     * modified)
      */
     public void getPositionAndRotation(
             int bodyId, RVec3 storeLocation, Quat storeOrientation) {
@@ -835,10 +840,10 @@ public class BodyInterface extends NonCopyable {
      * Reposition the specified body, assuming it's kinematic.
      *
      * @param bodyId the ID of the body to reposition
-     * @param location the desired location (in system coordinates, not null,
-     * unaffected)
+     * @param location the desired location (in system coordinates, not
+     * {@code null}, unaffected)
      * @param orientation the desired orientation (relative to the system axes,
-     * not null, unaffected)
+     * not {@code null}, unaffected)
      * @param deltaTime time until the desired position is reached (in seconds,
      * &gt;0)
      */
@@ -860,9 +865,10 @@ public class BodyInterface extends NonCopyable {
      * Notify all systems that the shape of the specified body has changed.
      *
      * @param bodyId the ID of the affected body
-     * @param prevCom center of mass prior to the change (not null, unaffected)
+     * @param prevCom center of mass prior to the change (not {@code null},
+     * unaffected)
      * @param updateMassProperties {@code true} to recalculate mass and inertia
-     * @param activation whether to activate the body (not null)
+     * @param activation whether to activate the body (not {@code null})
      */
     public void notifyShapeChanged(int bodyId, Vec3Arg prevCom,
             boolean updateMassProperties, EActivation activation) {
@@ -877,7 +883,8 @@ public class BodyInterface extends NonCopyable {
      * Remove the specified bodies from the physics system, but don't destroy
      * them.
      *
-     * @param bodyIds the IDs of the bodies to remove (not null)
+     * @param bodyIds the IDs of the bodies to remove (not {@code null},
+     * possibly shuffled)
      */
     public void removeBodies(BodyIdArray bodyIds) {
         int numBodies = bodyIds.length();
@@ -888,7 +895,7 @@ public class BodyInterface extends NonCopyable {
      * Remove the specified bodies from the physics system, but don't destroy
      * them.
      *
-     * @param bodyIds the IDs of the bodies to remove (not null)
+     * @param bodyIds the IDs of the bodies to remove (not {@code null})
      * @param numBodies the number of bodies to remove (&ge;0)
      */
     public void removeBodies(BodyIdArray bodyIds, int numBodies) {
@@ -912,7 +919,7 @@ public class BodyInterface extends NonCopyable {
      *
      * @param bodyId the ID of the body to modify
      * @param omega the desired rates (radians per second in system coordiantes,
-     * not null, unaffected)
+     * not {@code null}, unaffected)
      */
     public void setAngularVelocity(int bodyId, Vec3Arg omega) {
         long bodyInterfaceVa = va();
@@ -960,8 +967,8 @@ public class BodyInterface extends NonCopyable {
      *
      * @param bodyId the ID of the body to modify
      * @param linearVelocity the desired linear velocity of the body's center of
-     * mass (not null, unaffected)
-     * @param angularVelocity the desired angular velocity (not null,
+     * mass (not {@code null}, unaffected)
+     * @param angularVelocity the desired angular velocity (not {@code null},
      * unaffected)
      */
     public void setLinearAndAngularVelocity(int bodyId,
@@ -998,7 +1005,7 @@ public class BodyInterface extends NonCopyable {
      *
      * @param bodyId the ID of the body to modify
      * @param velocity the desired velocity (meters per second in system
-     * coordinates, not null, unaffected)
+     * coordinates, not {@code null}, unaffected)
      */
     public void setLinearVelocity(int bodyId, Vec3Arg velocity) {
         float vx = velocity.getX();
@@ -1011,7 +1018,7 @@ public class BodyInterface extends NonCopyable {
      * Alter the motion quality of the specified body.
      *
      * @param bodyId the ID of the body to modify
-     * @param quality the desired level of quality (not null)
+     * @param quality the desired level of quality (not {@code null})
      */
     public void setMotionQuality(int bodyId, EMotionQuality quality) {
         long bodyInterfaceVa = va();
@@ -1023,8 +1030,8 @@ public class BodyInterface extends NonCopyable {
      * Alter the motion type of the specified body.
      *
      * @param bodyId the ID of the body to modify
-     * @param motionType the desired motion type (not null)
-     * @param activationMode whether to activate the body (not null)
+     * @param motionType the desired motion type (not {@code null})
+     * @param activationMode whether to activate the body (not {@code null})
      */
     public void setMotionType(int bodyId, EMotionType motionType,
             EActivation activationMode) {
@@ -1053,8 +1060,8 @@ public class BodyInterface extends NonCopyable {
      * Relocate the specified body.
      *
      * @param bodyId the ID of the body to relocate
-     * @param location the desired location (not null, unaffected)
-     * @param activationMode whether to activate the body (not null)
+     * @param location the desired location (not {@code null}, unaffected)
+     * @param activationMode whether to activate the body (not {@code null})
      */
     public void setPosition(
             int bodyId, RVec3Arg location, EActivation activationMode) {
@@ -1070,9 +1077,9 @@ public class BodyInterface extends NonCopyable {
      * Reposition the specified body.
      *
      * @param bodyId the ID of the body to modify
-     * @param location the desired location (not null, unaffected)
-     * @param orientation the desired orientation (not null, unaffected)
-     * @param activationMode whether to activate the body (not null)
+     * @param location the desired location (not {@code null}, unaffected)
+     * @param orientation the desired orientation (not {@code null}, unaffected)
+     * @param activationMode whether to activate the body (not {@code null})
      */
     public void setPositionAndRotation(int bodyId, RVec3Arg location,
             QuatArg orientation, EActivation activationMode) {
@@ -1105,10 +1112,10 @@ public class BodyInterface extends NonCopyable {
      * Replace the shape of the specified body.
      *
      * @param bodyId the ID of the body to reshape
-     * @param shape the desired shape to apply (not null)
+     * @param shape the desired shape to apply (not {@code null})
      * @param updateMassProperties if {@code true}, recalculate the body's mass
      * and inertia, otherwise don't recalculate
-     * @param activation whether to activate the body (not null)
+     * @param activation whether to activate the body (not {@code null})
      */
     public void setShape(int bodyId, ConstShape shape,
             boolean updateMassProperties, EActivation activation) {

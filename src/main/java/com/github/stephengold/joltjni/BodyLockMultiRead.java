@@ -36,7 +36,7 @@ public class BodyLockMultiRead extends BodyLockMultiBase {
     /**
      * Acquire body locks using the specified interface and body IDs.
      *
-     * @param bli the interface to use (not null, unaffected)
+     * @param bli the lock interface to use (not {@code null}, alias created)
      * @param bodyIds the IDs of the bodies to lock (not empty)
      */
     public BodyLockMultiRead(ConstBodyLockInterface bli, int... bodyIds) {

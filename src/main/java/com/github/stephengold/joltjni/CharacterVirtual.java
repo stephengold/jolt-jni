@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -63,11 +63,11 @@ public class CharacterVirtual
      *
      * @param settings the settings to use (not null, unaffected)
      * @param location the desired initial location (in system coordinates, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param orientation the desired initial orientation (in system
-     * coordinates, not null, unaffected)
+     * coordinates, not {@code null}, unaffected)
      * @param userData the desired user-data value
-     * @param system where to add the body (not null)
+     * @param system where to add the body (not {@code null})
      */
     public CharacterVirtual(
             ConstCharacterVirtualSettings settings, RVec3Arg location,
@@ -96,7 +96,7 @@ public class CharacterVirtual
      *
      * @param characterVa the virtual address of the native object to assign
      * (not zero)
-     * @param physicsSystem where to add the body (not null)
+     * @param physicsSystem where to add the body (not {@code null})
      */
     public CharacterVirtual(long characterVa, PhysicsSystem physicsSystem) {
         this.system = physicsSystem;
@@ -112,17 +112,17 @@ public class CharacterVirtual
      *
      * @param deltaTime the time step to simulate
      * @param gravity the gravity acceleration vector (in meters per second
-     * squared, not null, unaffected)
-     * @param settings settings to use (not null, unaffected)
+     * squared, not {@code null}, unaffected)
+     * @param settings settings to use (not {@code null}, unaffected)
      * @param bpFilter to test whether the character collides with a broad-phase
-     * layer (not null, unaffected)
+     * layer (not {@code null}, unaffected)
      * @param olFilter to test whether the character collides with an object
-     * layer (not null, unaffected)
+     * layer (not {@code null}, unaffected)
      * @param bodyFilter to test whether the character collides with a body (not
      * null, unaffected)
      * @param shapeFilter to test whether the character collides with a shape
-     * (not null, unaffected)
-     * @param allocator for temporary allocations (not null)
+     * (not {@code null}, unaffected)
+     * @param allocator for temporary allocations (not {@code null})
      */
     public void extendedUpdate(float deltaTime, Vec3Arg gravity,
             ExtendedUpdateSettings settings, BroadPhaseLayerFilter bpFilter,

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,8 +44,8 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Abort adding bodies to the phase.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * unmodified since the handle was created)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
     public void addBodiesAbort(BodyIdArray bodyIds, long addState) {
@@ -56,8 +56,8 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Abort adding bodies to the phase.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * unmodified since the handle was created)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
@@ -71,8 +71,8 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Finish adding bodies to the phase.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * unmodified since the handle was created)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
     public void addBodiesFinalize(BodyIdArray bodyIds, long addState) {
@@ -83,8 +83,8 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Finish adding bodies to the phase.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * unmodified since the handle was created)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
@@ -98,8 +98,8 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Prepare to add a batch of bodies to the phase.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, possibly
-     * shuffled)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * possibly shuffled)
      * @return a handle to be passed to {@code addBodiesFinalize()} or
      * {@code addBodiesAbort()}
      */
@@ -113,8 +113,8 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Prepare to add a batch of bodies to the phase.
      *
-     * @param bodyIds the IDs of the bodies to be added (not null, possibly
-     * shuffled)
+     * @param bodyIds the IDs of the bodies to be added (not {@code null},
+     * possibly shuffled)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @return a handle to be passed to {@code addBodiesFinalize()} or
      * {@code addBodiesAbort()}
@@ -130,9 +130,9 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Initialize the phase.
      *
-     * @param manager the manager to use (not null)
+     * @param manager the manager to use (not {@code null})
      * @param map the desired map from object layers to broad-phase layers (not
-     * null, alias created)
+     * {@code null}, alias created)
      */
     public void init(BodyManager manager, ConstBroadPhaseLayerInterface map) {
         long phaseVa = va();
@@ -152,7 +152,7 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Invoke whenever the bounding boxes of some bodies change.
      *
-     * @param bodyIds the IDs of the bodies to be notified (not null)
+     * @param bodyIds the IDs of the bodies to be notified (not {@code null})
      * @param numBodies the number of bodies to be notified (&ge;0)
      */
     public void notifyBodiesAabbChanged(BodyIdArray bodyIds, int numBodies) {
@@ -162,7 +162,7 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Invoke whenever the bounding boxes of some bodies change.
      *
-     * @param bodyIds the IDs of the bodies to be notified (not null)
+     * @param bodyIds the IDs of the bodies to be notified (not {@code null})
      * @param numBodies the number of bodies to be notified (&ge;0)
      * @param takeLock {@code true} to acquire a lock, otherwise {@code false}
      */
@@ -176,8 +176,8 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Remove multiple bodies from the phase.
      *
-     * @param bodyIds the IDs of the bodies to be removed (not null, possibly
-     * shuffled)
+     * @param bodyIds the IDs of the bodies to be removed (not {@code null},
+     * possibly shuffled)
      * @param numBodies the number of bodies to be removed (&ge;0)
      */
     public void removeBodies(BodyIdArray bodyIds, int numBodies) {

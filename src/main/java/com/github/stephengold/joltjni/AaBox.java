@@ -208,7 +208,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * Enlarge the box on all sides by the specified amounts.
      *
      * @param deltas the amount to increase the half extent on each axis (not
-     * null, unaffected)
+     * {@code null}, unaffected)
      */
     public void expandBy(Vec3Arg deltas) {
         long boxVa = va();

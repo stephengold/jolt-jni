@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,7 +71,8 @@ public class CharacterBaseSettings
     /**
      * Replace the shape. (native attribute: mShape)
      *
-     * @param shape the desired shape (not null, unaffected, default=null)
+     * @param shape the desired shape (not {@code null}, unaffected,
+     * default=null)
      */
     public void setShape(ConstShape shape) {
         long settingsVa = va();
@@ -82,7 +83,7 @@ public class CharacterBaseSettings
     /**
      * Alter the supporting volume. (native attribute: mSupportingVolume)
      *
-     * @param plane the desired plane of support (not null, unaffected,
+     * @param plane the desired plane of support (not {@code null}, unaffected,
      * default={(0,1,0),-1e10})
      */
     public void setSupportingVolume(ConstPlane plane) {
@@ -97,7 +98,7 @@ public class CharacterBaseSettings
     /**
      * Alter the character's "up" direction. (native attribute: mUp)
      *
-     * @param direction the desired direction (not null, unaffected,
+     * @param direction the desired direction (not {@code null}, unaffected,
      * default=(0,1,0))
      */
     public void setUp(Vec3Arg direction) {
