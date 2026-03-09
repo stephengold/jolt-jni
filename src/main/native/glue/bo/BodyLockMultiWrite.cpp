@@ -42,6 +42,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyLockMultiWrite_c
     const BodyID * const pArray = reinterpret_cast<BodyID *> (idArrayVa);
     BodyLockMultiWrite * const pResult
             = new BodyLockMultiWrite(*pInterface, pArray, numBodies);
+    TRACE_NEW("BodyLockMultiWrite", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
