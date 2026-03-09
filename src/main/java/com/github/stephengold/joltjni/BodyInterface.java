@@ -62,6 +62,30 @@ public class BodyInterface extends NonCopyable {
     // new methods exposed
 
     /**
+     * Activate the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies to activate (not {@code null},
+     * unaffected)
+     */
+    public void activateBodies(ConstBodyIdArray bodyIds) {
+        int numBodies = bodyIds.length();
+        activateBodies(bodyIds, numBodies);
+    }
+
+    /**
+     * Activate the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies to activate (not {@code null},
+     * unaffected)
+     * @param numBodies the number of bodies to activate (&ge;0)
+     */
+    public void activateBodies(ConstBodyIdArray bodyIds, int numBodies) {
+        long bodyInterfaceVa = va();
+        long idArrayVa = bodyIds.targetVa();
+        activateBodies(bodyInterfaceVa, idArrayVa, numBodies);
+    }
+
+    /**
      * Active all bodies within the specified bounds that satisfy the specified
      * filters.
      *
@@ -413,6 +437,28 @@ public class BodyInterface extends NonCopyable {
         Body result = new Body(system, bodyVa);
 
         return result;
+    }
+
+    /**
+     * Deactivate the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies to deactivate (not {@code null})
+     */
+    public void deactivateBodies(ConstBodyIdArray bodyIds) {
+        int numBodies = bodyIds.length();
+        deactivateBodies(bodyIds, numBodies);
+    }
+
+    /**
+     * Deactivate the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies to deactivate (not {@code null})
+     * @param numBodies the number of bodies to deactivate (&ge;0)
+     */
+    public void deactivateBodies(ConstBodyIdArray bodyIds, int numBodies) {
+        long bodyInterfaceVa = va();
+        long idArrayVa = bodyIds.targetVa();
+        deactivateBodies(bodyInterfaceVa, idArrayVa, numBodies);
     }
 
     /**
@@ -1139,6 +1185,9 @@ public class BodyInterface extends NonCopyable {
     // *************************************************************************
     // native private methods
 
+    native private static void activateBodies(
+            long bodyInterfaceVa, long idArrayVa, int numBodies);
+
     native private static void activateBodiesInAaBox(long bodyInterfaceVa,
             long boxVa, long bplFilterVa, long olFilterVa);
 
@@ -1187,6 +1236,9 @@ public class BodyInterface extends NonCopyable {
 
     native private static long createSoftBody(
             long bodyInterfaceVa, long settingsVa);
+
+    native private static void deactivateBodies(
+            long bodyInterfaceVa, long idArrayVa, int numBodies);
 
     native private static void deactivateBody(long bodyInterfaceVa, int bodyId);
 

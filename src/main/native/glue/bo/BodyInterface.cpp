@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,6 +33,20 @@ SOFTWARE.
 #include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    activateBodies
+ * Signature: (JJI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_activateBodies
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong idArrayVa, jint numBodies) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pIDs
+            = reinterpret_cast<BodyID *> (idArrayVa);
+    pInterface->ActivateBodies(pIDs, numBodies);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -277,6 +291,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_create
             = reinterpret_cast<SoftBodyCreationSettings *> (settingsVa);
     const Body * const pResult = pInterface->CreateSoftBody(*pSettings);
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    deactivateBodies
+ * Signature: (JJI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_deactivateBodies
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong idArrayVa, jint numBodies) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pIDs
+            = reinterpret_cast<BodyID *> (idArrayVa);
+    pInterface->DeactivateBodies(pIDs, numBodies);
 }
 
 /*
