@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyIdArray;
 import java.nio.IntBuffer;
 import java.util.List;
 
@@ -29,7 +30,7 @@ import java.util.List;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BodyIdArray extends JoltPhysicsObject {
+public class BodyIdArray extends JoltPhysicsObject implements ConstBodyIdArray {
     // *************************************************************************
     // fields
 
@@ -104,12 +105,30 @@ public class BodyIdArray extends JoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Store the specified ID at the specified index.
+     *
+     * @param elementIndex the index at which to store the ID (&ge;0,
+     * &lt;length)
+     * @param bodyId the ID to store
+     */
+    public void set(int elementIndex, int bodyId) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
+        long arrayVa = va();
+        setId(arrayVa, elementIndex, bodyId);
+    }
+    // *************************************************************************
+    // ConstBodyIdArray methods
+
+    /**
      * Return the ID at the specified index.
      *
      * @param elementIndex the index from which to copy the ID (&ge;0,
      * &lt;length)
      * @return the {@code BodyID} value
      */
+    @Override
     public int get(int elementIndex) {
         assert elementIndex >= 0 && elementIndex < length :
                 "Out of range:  index=" + elementIndex + " length=" + length;
@@ -125,23 +144,9 @@ public class BodyIdArray extends JoltPhysicsObject {
      *
      * @return the length (in IDs)
      */
+    @Override
     public int length() {
         return length;
-    }
-
-    /**
-     * Store the specified ID at the specified index.
-     *
-     * @param elementIndex the index at which to store the ID (&ge;0,
-     * &lt;length)
-     * @param bodyId the ID to store
-     */
-    public void set(int elementIndex, int bodyId) {
-        assert elementIndex >= 0 && elementIndex < length :
-                "Out of range:  index=" + elementIndex + " length=" + length;
-
-        long arrayVa = va();
-        setId(arrayVa, elementIndex, bodyId);
     }
     // *************************************************************************
     // native private methods
