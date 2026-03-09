@@ -80,10 +80,6 @@ final public class TestUtils {
      */
     final public static boolean explicitFreeing = true;
     /**
-     * {@code true} to log heap allocations in glue code
-     */
-    final public static boolean traceAllocations = false;
-    /**
      * customary number of object layers
      */
     final public static int numObjLayers = 2;
@@ -97,6 +93,13 @@ final public class TestUtils {
      * instead, and Sport-Jolt assigns 1)
      */
     final public static int objLayerNonMoving = 0;
+    // *************************************************************************
+    // fields
+
+    /**
+     * {@code true} to log heap allocations in glue code
+     */
+    public static boolean traceAllocations;
     // *************************************************************************
     // constructors
 
