@@ -490,6 +490,7 @@ public class BatchBodyInterface extends BodyInterface {
      * capacity&ge;numBodies, unaffected)
      */
     public void setObjectLayers(
+            ConstBodyIdArray bodyIds, IntBuffer layers) {
         int numBodies = bodyIds.length();
         assert layers.capacity() >= numBodies;
         long bodyInterfaceVa = va();

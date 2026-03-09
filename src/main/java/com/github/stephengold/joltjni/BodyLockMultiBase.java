@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstBodyIdArray;
+import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
 
 /**
  * Lock multiple bodies.
@@ -31,12 +32,27 @@ import com.github.stephengold.joltjni.readonly.ConstBodyIdArray;
  */
 abstract public class BodyLockMultiBase extends NonCopyable {
     // *************************************************************************
+    // fields
+
+    /**
+     * the body IDs
+     */
+    protected ConstBodyIdArray idArray;
+    /**
+     * the interface to use
+     */
+    final protected ConstBodyLockInterface bli;
+    // *************************************************************************
     // constructors
 
     /**
      * Instantiate a lock with no native object assigned.
+     *
+     * @param bli the lock interface to use (not {@code null}, alias created)
      */
-    BodyLockMultiBase() {
+    BodyLockMultiBase(ConstBodyLockInterface bli) {
+        assert bli != null;
+        this.bli = bli;
     }
     // *************************************************************************
     // new methods exposed
@@ -62,7 +78,9 @@ abstract public class BodyLockMultiBase extends NonCopyable {
      *
      * @return the pre-existing object
      */
-    abstract public ConstBodyIdArray getBodyIdArray();
+    public ConstBodyIdArray getBodyIdArray() {
+        return idArray;
+    }
 
     /**
      * Count the bodies that were locked.

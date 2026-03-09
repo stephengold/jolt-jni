@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBody;
-import com.github.stephengold.joltjni.readonly.ConstBodyIdArray;
 import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
 
 /**
@@ -31,17 +30,6 @@ import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
  * @author Stephen Gold sgold@sonic.net
  */
 public class BodyLockMultiRead extends BodyLockMultiBase {
-    // *************************************************************************
-    // fields
-
-    /**
-     * the body IDs
-     */
-    final private ConstBodyIdArray idArray;
-    /**
-     * the interface to use
-     */
-    final private ConstBodyLockInterface bli;
     // *************************************************************************
     // constructors
 
@@ -52,9 +40,9 @@ public class BodyLockMultiRead extends BodyLockMultiBase {
      * @param bodyIds the IDs of the bodies to lock (not empty)
      */
     public BodyLockMultiRead(ConstBodyLockInterface bli, int... bodyIds) {
+        super(bli);
         assert bodyIds.length > 0 : bodyIds.length;
 
-        this.bli = bli;
         this.idArray = new BodyIdArray(bodyIds);
         long interfaceVa = bli.targetVa();
         long idArrayVa = idArray.targetVa();
@@ -112,16 +100,6 @@ public class BodyLockMultiRead extends BodyLockMultiBase {
         }
 
         return result;
-    }
-
-    /**
-     * Access the array of body IDs.
-     *
-     * @return the pre-existing object
-     */
-    @Override
-    public ConstBodyIdArray getBodyIdArray() {
-        return idArray;
     }
 
     /**
