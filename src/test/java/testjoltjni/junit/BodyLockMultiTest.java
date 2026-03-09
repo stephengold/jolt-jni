@@ -76,20 +76,29 @@ public class BodyLockMultiTest {
         ConstBodyLockInterface lock = system.getBodyLockInterface();
         ConstBodyLockInterface noLock = system.getBodyLockInterfaceNoLock();
 
-        BodyLockMultiRead lockRead = new BodyLockMultiRead(lock, ids);
-        testLockMulti(lockRead);
+        {
+            BodyLockMultiRead lockRead = new BodyLockMultiRead(lock, ids);
+            testLockMulti(lockRead);
+            TestUtils.testClose(lockRead.getBodyIdArray(), lockRead);
+        }
+        {
+            BodyLockMultiRead noLockRead = new BodyLockMultiRead(noLock, ids);
+            testLockMulti(noLockRead);
+            TestUtils.testClose(noLockRead.getBodyIdArray(), noLockRead);
+        }
+        {
+            BodyLockMultiWrite lockWrite = new BodyLockMultiWrite(lock, ids);
+            testLockMulti(lockWrite);
+            TestUtils.testClose(lockWrite.getBodyIdArray(), lockWrite);
+        }
+        {
+            BodyLockMultiWrite noLockWrite
+                    = new BodyLockMultiWrite(noLock, ids);
+            testLockMulti(noLockWrite);
+            TestUtils.testClose(noLockWrite.getBodyIdArray(), noLockWrite);
+        }
 
-        BodyLockMultiRead noLockRead = new BodyLockMultiRead(noLock, ids);
-        testLockMulti(noLockRead);
-
-        BodyLockMultiWrite lockWrite = new BodyLockMultiWrite(lock, ids);
-        testLockMulti(lockWrite);
-
-        BodyLockMultiWrite noLockWrite = new BodyLockMultiWrite(noLock, ids);
-        testLockMulti(noLockWrite);
-
-        TestUtils.testClose(noLockWrite, lockWrite, noLockRead, lockRead,
-                noLock, lock, settings, shape);
+        TestUtils.testClose(noLock, lock, settings, shape);
         TestUtils.cleanupPhysicsSystem(system);
         TestUtils.cleanup();
     }
