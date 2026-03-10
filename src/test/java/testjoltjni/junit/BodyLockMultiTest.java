@@ -21,9 +21,10 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
+import com.github.stephengold.joltjni.Body;
 import com.github.stephengold.joltjni.BodyCreationSettings;
+import com.github.stephengold.joltjni.BodyIdArray;
 import com.github.stephengold.joltjni.BodyInterface;
-import com.github.stephengold.joltjni.BodyLockMultiBase;
 import com.github.stephengold.joltjni.BodyLockMultiRead;
 import com.github.stephengold.joltjni.BodyLockMultiWrite;
 import com.github.stephengold.joltjni.PhysicsSystem;
@@ -35,6 +36,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
+import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
 
@@ -46,6 +48,14 @@ import testjoltjni.TestUtils;
  */
 public class BodyLockMultiTest {
     // *************************************************************************
+    // fields
+
+    /**
+     * alternate which bodies are sensors on each invocation of
+     * {@code testLockMulti()}
+     */
+    private static boolean evenSensors;
+    // *************************************************************************
     // new methods exposed
 
     /**
@@ -56,11 +66,12 @@ public class BodyLockMultiTest {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
 
-        // Create 20 bodies and collect the IDs of 10 of them:
+        // Create 20 bodies and collect the even and odd IDs:
         int numIds = 10;
         int totalBodies = 2 * numIds;
         PhysicsSystem system = TestUtils.newPhysicsSystem(totalBodies);
-        int[] ids = new int[numIds];
+        int[] evens = new int[numIds];
+        int[] odds = new int[numIds];
         SphereShape shape = new SphereShape(3f);
         BodyInterface bi = system.getBodyInterface();
         ConstBodyCreationSettings settings
@@ -69,34 +80,17 @@ public class BodyLockMultiTest {
         for (int i = 0; i < totalBodies; ++i) {
             int bodyId = bi.createAndAddBody(settings, EActivation.Activate);
             if ((i % 2) == 0) {
-                ids[i / 2] = bodyId;
+                evens[i / 2] = bodyId;
+            } else {
+                odds[i / 2] = bodyId;
             }
         }
 
         ConstBodyLockInterface lock = system.getBodyLockInterface();
-        ConstBodyLockInterface noLock = system.getBodyLockInterfaceNoLock();
+        testLockMulti(lock, evens, odds);
 
-        {
-            BodyLockMultiRead lockRead = new BodyLockMultiRead(lock, ids);
-            testLockMulti(lockRead);
-            TestUtils.testClose(lockRead.getBodyIdArray(), lockRead);
-        }
-        {
-            BodyLockMultiRead noLockRead = new BodyLockMultiRead(noLock, ids);
-            testLockMulti(noLockRead);
-            TestUtils.testClose(noLockRead.getBodyIdArray(), noLockRead);
-        }
-        {
-            BodyLockMultiWrite lockWrite = new BodyLockMultiWrite(lock, ids);
-            testLockMulti(lockWrite);
-            TestUtils.testClose(lockWrite.getBodyIdArray(), lockWrite);
-        }
-        {
-            BodyLockMultiWrite noLockWrite
-                    = new BodyLockMultiWrite(noLock, ids);
-            testLockMulti(noLockWrite);
-            TestUtils.testClose(noLockWrite.getBodyIdArray(), noLockWrite);
-        }
+        ConstBodyLockInterface noLock = system.getBodyLockInterfaceNoLock();
+        testLockMulti(noLock, evens, odds);
 
         TestUtils.testClose(noLock, lock, settings, shape);
         TestUtils.cleanupPhysicsSystem(system);
@@ -106,17 +100,50 @@ public class BodyLockMultiTest {
     // private methods
 
     /**
-     * Access each body held by the specified object.
+     * Read and write the two groups of bodies using the specified locking
+     * interface.
      *
-     * @param lockMulti the object to test (not {@code null})
+     * @param bli the lock interface to use (not {@code null})
+     * @param evens the even body IDs (not {@code null}, unaffected)
+     * @param odds the odd body IDs (not {@code null}, unaffected)
      */
-    private void testLockMulti(BodyLockMultiBase lockMulti) {
-        int numIds = lockMulti.getNumBodies();
-        for (int index = 0; index < numIds; ++index) {
-            ConstBody body = lockMulti.getBody(index);
-            body.getAngularVelocity();
+    private void testLockMulti(
+            ConstBodyLockInterface bli, int[] evens, int[] odds) {
+        {
+            BodyLockMultiWrite multi = new BodyLockMultiWrite(bli, evens);
+            for (Body body : multi.getBodies()) {
+                body.setIsSensor(evenSensors);
+            }
+            multi.releaseLocks();
+            TestUtils.testClose(multi.getBodyIdArray(), multi);
         }
-
-        lockMulti.releaseLocks();
+        boolean oddSensors = !evenSensors;
+        {
+            BodyIdArray idArray = new BodyIdArray(odds);
+            BodyLockMultiWrite multi = new BodyLockMultiWrite(bli, idArray);
+            for (Body body : multi.getBodies()) {
+                body.setIsSensor(oddSensors);
+            }
+            multi.releaseLocks();
+            TestUtils.testClose(multi, idArray);
+        }
+        {
+            BodyIdArray idArray = new BodyIdArray(evens);
+            BodyLockMultiRead multi = new BodyLockMultiRead(bli, idArray);
+            for (ConstBody body : multi.getBodies()) {
+                Assert.assertEquals(evenSensors, body.isSensor());
+            }
+            multi.releaseLocks();
+            TestUtils.testClose(multi, idArray);
+        }
+        {
+            BodyLockMultiRead multi = new BodyLockMultiRead(bli, odds);
+            for (ConstBody body : multi.getBodies()) {
+                Assert.assertEquals(oddSensors, body.isSensor());
+            }
+            multi.releaseLocks();
+            TestUtils.testClose(multi.getBodyIdArray(), multi);
+        }
+        evenSensors = !evenSensors;
     }
 }
