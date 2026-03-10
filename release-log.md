@@ -1,5 +1,22 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.9.0 released on TBD
+
++ Bugfix:  use-after-free in `BodyLockMultiRead`
+  and `BodyLockMultiWrite` (issue #41)
+
++ Added interface `ConstBodyIdArray`.
+
++ Added constructors:
+  + `BodyLockMultiRead(ConstBodyLockInterface, ConstBodyIdArray)`
+  + `BodyLockMultiWrite(ConstBodyLockInterface, ConstBodyIdArray)`
+
++ Added methods:
+  + `BodyInterface.activateBodies()`
+  + `BodyInterface.deactivateBodies()`
+  + `BodyLockMultiBase.getBodyIdArray()`
+
+
 ## Version 3.8.0 released on 3 March 2026
 
 + Bugfixes:
