@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.9.0 released on TBD
+## Version 3.9.0 released on 9 March 2026
 
 + Bugfix:  use-after-free in `BodyLockMultiRead`
   and `BodyLockMultiWrite` (issue #41)
