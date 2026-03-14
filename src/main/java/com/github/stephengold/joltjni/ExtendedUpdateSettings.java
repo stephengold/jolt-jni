@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -131,13 +131,16 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
      *
      * @param offset the desired offset (not null, unaffected, zero=off,
      * default=(0, -0.5, 0))
+     * @return the modified settings, for chaining
      */
-    public void setStickToFloorStepDown(Vec3Arg offset) {
+    public ExtendedUpdateSettings setStickToFloorStepDown(Vec3Arg offset) {
         long settingsVa = va();
         float x = offset.getX();
         float y = offset.getY();
         float z = offset.getZ();
         setStickToFloorStepDown(settingsVa, x, y, z);
+
+        return this;
     }
 
     /**
@@ -146,10 +149,14 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
      * mWalkStairsCosAngleForwardContact)
      *
      * @param cosine the cosine of the maximum angle (default=cos(75 degrees))
+     * @return the modified settings, for chaining
      */
-    public void setWalkStairsCosAngleForwardContact(float cosine) {
+    public ExtendedUpdateSettings setWalkStairsCosAngleForwardContact(
+            float cosine) {
         long settingsVa = va();
         setWalkStairsCosAngleForwardContact(settingsVa, cosine);
+
+        return this;
     }
 
     /**
@@ -157,10 +164,13 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
      * mWalkStairsMinStepForward)
      *
      * @param distance the desired distance (default=0.02f)
+     * @return the modified settings, for chaining
      */
-    public void setWalkStairsMinStepForward(float distance) {
+    public ExtendedUpdateSettings setWalkStairsMinStepForward(float distance) {
         long settingsVa = va();
         setWalkStairsMinStepForward(settingsVa, distance);
+
+        return this;
     }
 
     /**
@@ -168,10 +178,13 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
      * mWalkStairsStepForwardTest)
      *
      * @param distance the desired distance (default=0.15f)
+     * @return the modified settings, for chaining
      */
-    public void setWalkStairsStepForwardTest(float distance) {
+    public ExtendedUpdateSettings setWalkStairsStepForwardTest(float distance) {
         long settingsVa = va();
         setWalkStairsStepForwardTest(settingsVa, distance);
+
+        return this;
     }
 
     /**
@@ -180,13 +193,16 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
      *
      * @param offset the desired offset (not null, unaffected, zero=off,
      * default=(0, 0.4, 0))
+     * @return the modified settings, for chaining
      */
-    public void setWalkStairsStepUp(Vec3Arg offset) {
+    public ExtendedUpdateSettings setWalkStairsStepUp(Vec3Arg offset) {
         long settingsVa = va();
         float x = offset.getX();
         float y = offset.getY();
         float z = offset.getZ();
         setWalkStairsStepUp(settingsVa, x, y, z);
+
+        return this;
     }
     // *************************************************************************
     // native private methods
