@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -105,7 +105,7 @@ public class ChbFace extends NonCopyable implements ConstChbFace {
      * Test whether the face is facing the specified point. The face is
      * unaffected.
      *
-     * @param point the location to test (not null, unaffected)
+     * @param point the location to test (not {@code null}, unaffected)
      * @return {@code true} if facing the test point, otherwise {@code false}
      */
     @Override

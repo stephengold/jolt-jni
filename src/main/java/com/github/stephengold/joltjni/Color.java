@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -165,7 +165,7 @@ final public class Color implements ConstColor {
     /**
      * Instantiate a copy of an existing color.
      *
-     * @param existing the color to copy (not null, unaffected)
+     * @param existing the color to copy (not {@code null}, unaffected)
      */
     public Color(ConstColor existing) {
         this.a = existing.getA();
@@ -232,7 +232,7 @@ final public class Color implements ConstColor {
     /**
      * Copy all components of the argument to the current object.
      *
-     * @param source the color to copy (not null, unaffected)
+     * @param source the color to copy (not {@code null}, unaffected)
      */
     public void set(ConstColor source) {
         this.r = source.getR();

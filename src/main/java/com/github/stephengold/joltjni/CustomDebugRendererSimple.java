@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +62,7 @@ public class CustomDebugRendererSimple extends DebugRendererSimple {
      * @param xx the X coordinate of the text
      * @param yy the Y coordinate of the text
      * @param zz the Z coordinate of the text
-     * @param text the text to display (not null)
+     * @param text the text to display (not {@code null})
      * @param colorInt the color of the text
      * @param height the height of the text
      */

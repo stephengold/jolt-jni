@@ -62,7 +62,7 @@ public class ExtendedUpdateSettings
      * Alter the StickToFloor inStepDown parameter. (native attribute:
      * mStickToFloorStepDown)
      *
-     * @param offset the desired offset (not null, unaffected, zero=off,
+     * @param offset the desired offset (not {@code null}, unaffected, zero=off,
      * default=(0, -0.5, 0))
      * @return the modified settings, for chaining
      */
@@ -124,7 +124,7 @@ public class ExtendedUpdateSettings
      * Alter the StickToFloor inStepUp parameter. (native attribute:
      * mWalkStairsStepUp)
      *
-     * @param offset the desired offset (not null, unaffected, zero=off,
+     * @param offset the desired offset (not {@code null}, unaffected, zero=off,
      * default=(0, 0.4, 0))
      * @return the modified settings, for chaining
      */

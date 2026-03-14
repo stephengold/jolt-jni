@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -195,7 +195,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * Return the motion type of the colliding object. The contact is
      * unaffected. (native attribute: mGetMotionTypeB)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EMotionType getMotionTypeB() {

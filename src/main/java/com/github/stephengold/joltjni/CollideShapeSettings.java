@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@ public class CollideShapeSettings extends CollideSettingsBase {
      * Return the treatment of back-facing triangles. The settings are
      * unaffected. (native attribute: mBackFaceMode)
      *
-     * @return the enum value (not null)
+     * @return the enum value (not {@code null})
      */
     public EBackFaceMode getBackFaceMode() {
         long settingsVa = va();
@@ -84,7 +84,7 @@ public class CollideShapeSettings extends CollideSettingsBase {
      * Alter the treatment of back-facing triangles. (native attribute:
      * mBackFaceMode)
      *
-     * @param mode the desired mode (not null, default=IgnoreBackFaces)
+     * @param mode the desired mode (not {@code null}, default=IgnoreBackFaces)
      */
     public void setBackFaceMode(EBackFaceMode mode) {
         long settingsVa = va();

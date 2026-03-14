@@ -92,7 +92,7 @@ public class BodyLockInterfaceLocking
     /**
      * Unlock the specified mutex, which was created to write a body.
      *
-     * @param mutex the mutex to unlock (not null)
+     * @param mutex the mutex to unlock (not {@code null})
      */
     @Override
     public void unlockWrite(SharedMutex mutex) {

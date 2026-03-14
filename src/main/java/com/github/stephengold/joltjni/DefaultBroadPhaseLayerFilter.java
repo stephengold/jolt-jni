@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ public class DefaultBroadPhaseLayerFilter extends BroadPhaseLayerFilter {
     /**
      * Instantiate a filter based on the specified pair filter.
      *
-     * @param pairFilter the pair filter to use (not null, unaffected)
+     * @param pairFilter the pair filter to use (not {@code null}, unaffected)
      * @param objectLayer the index of the object layer to use
      */
     DefaultBroadPhaseLayerFilter(
