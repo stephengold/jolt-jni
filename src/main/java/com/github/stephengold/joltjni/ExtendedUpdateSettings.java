@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstExtendedUpdateSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
@@ -30,7 +31,9 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ExtendedUpdateSettings extends JoltPhysicsObject {
+public class ExtendedUpdateSettings
+        extends JoltPhysicsObject
+        implements ConstExtendedUpdateSettings {
     // *************************************************************************
     // constructors
 
@@ -47,83 +50,13 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public ExtendedUpdateSettings(ExtendedUpdateSettings original) {
-        long originalVa = original.va();
+    public ExtendedUpdateSettings(ConstExtendedUpdateSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Copy the StickToFloor inStepDown parameter. The settings are unaffected.
-     * (native attribute: mStickToFloorStepDown)
-     *
-     * @return a new offset vector
-     */
-    public Vec3 getStickToFloorStepDown() {
-        long settingsVa = va();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getStickToFloorStepDown(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
-    }
-
-    /**
-     * Return the cosine of the maximum angle between the ground normal and the
-     * horizontal for adjusting the step-forward test. The settings are
-     * unaffected. (native attribute: mWalkStairsCosAngleForwardContact)
-     *
-     * @return the cosine of the maximum angle
-     */
-    public float getWalkStairsCosAngleForwardContact() {
-        long settingsVa = va();
-        float result = getWalkStairsCosAngleForwardContact(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the StickToFloor inStepForward parameter. The settings are
-     * unaffected. (native attribute: mWalkStairsMinStepForward)
-     *
-     * @return the distance
-     */
-    public float getWalkStairsMinStepForward() {
-        long settingsVa = va();
-        float result = getWalkStairsMinStepForward(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the StickToFloor inStepForwardTest parameter. The settings are
-     * unaffected. (native attribute: mWalkStairsStepForwardTest)
-     *
-     * @return the distance
-     */
-    public float getWalkStairsStepForwardTest() {
-        long settingsVa = va();
-        float result = getWalkStairsStepForwardTest(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Copy the StickToFloor inStepUp parameter. The settings are unaffected.
-     * (native attribute: mWalkStairsStepUp)
-     *
-     * @return a new offset vector
-     */
-    public Vec3 getWalkStairsStepUp() {
-        long settingsVa = va();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getWalkStairsStepUp(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
-    }
 
     /**
      * Alter the StickToFloor inStepDown parameter. (native attribute:
@@ -203,6 +136,83 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
         setWalkStairsStepUp(settingsVa, x, y, z);
 
         return this;
+    }
+    // *************************************************************************
+    // ConstExtendedUpdateSettings methods
+
+    /**
+     * Copy the StickToFloor inStepDown parameter. The settings are unaffected.
+     * (native attribute: mStickToFloorStepDown)
+     *
+     * @return a new offset vector
+     */
+    @Override
+    public Vec3 getStickToFloorStepDown() {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getStickToFloorStepDown(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Return the cosine of the maximum angle between the ground normal and the
+     * horizontal for adjusting the step-forward test. The settings are
+     * unaffected. (native attribute: mWalkStairsCosAngleForwardContact)
+     *
+     * @return the cosine of the maximum angle
+     */
+    @Override
+    public float getWalkStairsCosAngleForwardContact() {
+        long settingsVa = va();
+        float result = getWalkStairsCosAngleForwardContact(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the StickToFloor inStepForward parameter. The settings are
+     * unaffected. (native attribute: mWalkStairsMinStepForward)
+     *
+     * @return the distance
+     */
+    @Override
+    public float getWalkStairsMinStepForward() {
+        long settingsVa = va();
+        float result = getWalkStairsMinStepForward(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the StickToFloor inStepForwardTest parameter. The settings are
+     * unaffected. (native attribute: mWalkStairsStepForwardTest)
+     *
+     * @return the distance
+     */
+    @Override
+    public float getWalkStairsStepForwardTest() {
+        long settingsVa = va();
+        float result = getWalkStairsStepForwardTest(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the StickToFloor inStepUp parameter. The settings are unaffected.
+     * (native attribute: mWalkStairsStepUp)
+     *
+     * @return a new offset vector
+     */
+    @Override
+    public Vec3 getWalkStairsStepUp() {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWalkStairsStepUp(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

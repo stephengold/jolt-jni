@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtualSettings;
 import com.github.stephengold.joltjni.readonly.ConstContact;
+import com.github.stephengold.joltjni.readonly.ConstExtendedUpdateSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -125,14 +126,15 @@ public class CharacterVirtual
      * @param allocator for temporary allocations (not {@code null})
      */
     public void extendedUpdate(float deltaTime, Vec3Arg gravity,
-            ExtendedUpdateSettings settings, BroadPhaseLayerFilter bpFilter,
-            ObjectLayerFilter olFilter, BodyFilter bodyFilter,
-            ShapeFilter shapeFilter, TempAllocator allocator) {
+            ConstExtendedUpdateSettings settings,
+            BroadPhaseLayerFilter bpFilter, ObjectLayerFilter olFilter,
+            BodyFilter bodyFilter, ShapeFilter shapeFilter,
+            TempAllocator allocator) {
         long characterVa = va();
         float gravityX = gravity.getX();
         float gravityY = gravity.getY();
         float gravityZ = gravity.getZ();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         long bpFilterVa = bpFilter.va();
         long olFilterVa = olFilter.va();
         long bodyFilterVa = bodyFilter.va();

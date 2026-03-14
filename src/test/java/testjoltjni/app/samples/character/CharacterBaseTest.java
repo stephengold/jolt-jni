@@ -699,7 +699,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 			character.setLinearVelocity(velocity);
 
 			// Move character
-			ExtendedUpdateSettings update_settings = new ExtendedUpdateSettings();
+			ConstExtendedUpdateSettings update_settings = new ExtendedUpdateSettings();
 			character.extendedUpdate(inParams.mDeltaTime,
 				mPhysicsSystem.getGravity(),
 				update_settings,

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -217,7 +217,7 @@ public
 			ch.setLinearVelocity(new_velocity);
 
 			// Update the character position
-			ExtendedUpdateSettings update_settings=new ExtendedUpdateSettings();
+			ConstExtendedUpdateSettings update_settings=new ExtendedUpdateSettings();
 			ch.extendedUpdate(inDeltaTime,
 				inPhysicsSystem.getGravity(),
 				update_settings,
