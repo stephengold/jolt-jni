@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ public class AdditionalConstraint extends JoltPhysicsObject {
      *
      * @param bodyIndex1 the index of the first body in the list
      * @param bodyIndex2 the index of the 2nd body in the list
-     * @param settings the constraint settings to use (not null)
+     * @param settings the constraint settings to use (not {@code null})
      */
     public AdditionalConstraint(int bodyIndex1, int bodyIndex2,
             TwoBodyConstraintSettings settings) {

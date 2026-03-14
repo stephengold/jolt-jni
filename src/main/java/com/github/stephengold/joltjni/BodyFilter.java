@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ public class BodyFilter extends NonCopyable {
      * Test whether the specified body is a candidate for collisions. The filter
      * is unaffected.
      *
-     * @param bodyId the body to test (not null, unaffected)
+     * @param bodyId the body to test (not {@code null}, unaffected)
      * @return {@code true} if may collide, {@code false} if filtered out
      */
     public boolean shouldCollide(int bodyId) {

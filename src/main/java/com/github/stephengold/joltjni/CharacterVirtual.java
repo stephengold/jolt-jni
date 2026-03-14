@@ -120,7 +120,7 @@ public class CharacterVirtual
      * @param olFilter to test whether the character collides with an object
      * layer (not {@code null}, unaffected)
      * @param bodyFilter to test whether the character collides with a body (not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param shapeFilter to test whether the character collides with a shape
      * (not {@code null}, unaffected)
      * @param allocator for temporary allocations (not {@code null})
@@ -323,17 +323,18 @@ public class CharacterVirtual
     /**
      * Alter the character's shape.
      *
-     * @param shape the desired shape (not null)
+     * @param shape the desired shape (not {@code null})
      * @param maxPenetrationDepth the maximum acceptable penetration after the
      * alteration, or {@code Float.MAX_VALUE} to skip the check
      * @param broadPhaseLayerFilter the broadphase filter used to test for
-     * collisions (not null)
+     * collisions (not {@code null})
      * @param objectLayerFilter the object-layer filter used to test for
-     * collisions (not null)
-     * @param bodyFilter the body filter used to test for collisions (not null)
+     * collisions (not {@code null})
+     * @param bodyFilter the body filter used to test for collisions (not
+     * {@code null})
      * @param shapeFilter the shape filter used to test for collisions (not
-     * null)
-     * @param allocator the desired allocator (not null)
+     * {@code null})
+     * @param allocator the desired allocator (not {@code null})
      * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean setShape(ConstShape shape, float maxPenetrationDepth,
@@ -407,8 +408,8 @@ public class CharacterVirtual
      * Convert the specified velocity to one that won't climb steep slopes. The
      * character is unaffected.
      *
-     * @param desiredVelocity velocity vector (in system coordinates, not null,
-     * unaffected)
+     * @param desiredVelocity velocity vector (in system coordinates, not
+     * {@code null}, unaffected)
      * @return a new velocity vector (in system coordinates)
      */
     @Override
@@ -429,8 +430,8 @@ public class CharacterVirtual
      * Test whether the character has moved onto a steep slope. The character is
      * unaffected.
      *
-     * @param desiredVelocity velocity vector (in system coordinates, not null,
-     * unaffected)
+     * @param desiredVelocity velocity vector (in system coordinates, not
+     * {@code null}, unaffected)
      * @return {@code true} if too step to walk, otherwise {@code false}
      */
     @Override
@@ -682,9 +683,9 @@ public class CharacterVirtual
      * Copy the position of the character. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      */
     @Override
     public void getPositionAndRotation(

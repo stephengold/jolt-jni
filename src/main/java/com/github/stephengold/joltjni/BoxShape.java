@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -74,8 +74,8 @@ public class BoxShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified half extents.
      *
-     * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &gt;0, unaffected)
+     * @param halfExtents the desired half extents on each local axis (not
+     * {@code null}, all components &gt;0, unaffected)
      */
     public BoxShape(Vec3Arg halfExtents) {
         this(halfExtents, Jolt.cDefaultConvexRadius);
@@ -84,8 +84,8 @@ public class BoxShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified half extents and convex radius.
      *
-     * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;convexRadius, unaffected)
+     * @param halfExtents the desired half extents on each local axis (not
+     * {@code null}, all components &ge;convexRadius, unaffected)
      * @param convexRadius the desired convex radius (default=0.05)
      */
     public BoxShape(Vec3Arg halfExtents, float convexRadius) {
@@ -95,8 +95,8 @@ public class BoxShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified parameters.
      *
-     * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &gt;0, unaffected)
+     * @param halfExtents the desired half extents on each local axis (not
+     * {@code null}, all components &gt;0, unaffected)
      * @param convexRadius the desired convex radius (default=0.05)
      * @param material the desired material (default=null)
      */

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ public class BodyLockWrite extends NonCopyable {
     /**
      * Acquire a lock using the specified interface and body ID.
      *
-     * @param bli the interface to use (not null, unaffected)
+     * @param bli the interface to use (not {@code null}, unaffected)
      * @param bodyId the ID of the body to lock
      */
     public BodyLockWrite(ConstBodyLockInterface bli, int bodyId) {
