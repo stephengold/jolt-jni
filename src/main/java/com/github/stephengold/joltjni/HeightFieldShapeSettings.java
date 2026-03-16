@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -207,7 +207,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      * Return the number of bits per sample to use during compression. The
      * settings are unaffected. (native attribute: mBitsPerSample)
      *
-     * @return the number of bits (&ge;1, &le;8)
+     * @return the number of bits (&ge;1, &le;16)
      */
     public int getBitsPerSample() {
         long settingsVa = va();
@@ -318,7 +318,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      * Alter the number of bits per sample to use during compression. (native
      * attribute: mBitsPerSample)
      *
-     * @param numBits the number of bits (&ge;1, &le;8, default=8)
+     * @param numBits the number of bits (&ge;1, &le;16, default=8)
      */
     public void setBitsPerSample(int numBits) {
         long settingsVa = va();
