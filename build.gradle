@@ -468,6 +468,9 @@ tasks.register('runSmokeTestAll', JavaExec) {
     dependsOn('unpackHairStraight', 'unpackJoltAssets')
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
 }
+tasks.register('runTest', JavaExec) {
+    mainClass = 'testjoltjni.RunTest'
+}
 
 Boolean enableNativeAccess = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 
