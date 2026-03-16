@@ -419,6 +419,10 @@ tasks.register('debugRagdoll', JavaExec) {
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 
+tasks.register('generateSnapshot', JavaExec) {
+    mainClass = 'testjoltjni.app.samples.GenerateSnapshot'
+}
+
 tasks.register('runCharacterVirtual', JavaExec) {
     args '-s=CharacterVirtual'
     enableAssertions = false

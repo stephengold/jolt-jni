@@ -132,7 +132,7 @@ static int color;
 static Color next_color(){return Color.sGetDistinctColor(color++);}
 static RVec3 pos=new RVec3(0,cMaxHeight,0);
 static RVec3 next_pos(){plusEquals(pos,new RVec3(0,1,0));return pos;}
-static PhysicsSceneRef sCreateScene()
+public static PhysicsSceneRef sCreateScene()
 {
 
 	// Create scene
