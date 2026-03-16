@@ -391,7 +391,7 @@ tasks.withType(JavaCompile).configureEach { // Java compile-time options:
     options.release = 11
 }
 
-// Register test-execution tasks:
+// Register JVM-execution tasks:
 
 application {
     // default settings for the 'run' task:
