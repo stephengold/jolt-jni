@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -85,7 +85,7 @@ public void Initialize()
 
 	// Create vehicle body
 	RVec3 position=new RVec3(0, 2, 0);
-	ShapeRefC car_shape =new OffsetCenterOfMassShapeSettings(new Vec3(0, -half_vehicle_height, 0), new BoxShape(new Vec3(half_vehicle_width, half_vehicle_height, half_vehicle_length)).toRefC()).create().get();
+	ShapeRefC car_shape =new OffsetCenterOfMassShapeSettings(new Vec3(0, -half_vehicle_height, 0),new BoxShape(new Vec3(half_vehicle_width, half_vehicle_height, half_vehicle_length)).toRefC()).create().get();
 	BodyCreationSettings car_body_settings=new BodyCreationSettings(car_shape, position, Quat.sRotation(Vec3.sAxisZ(), sInitialRollAngle), EMotionType.Dynamic, Layers.MOVING);
 	car_body_settings.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
 	car_body_settings.getMassPropertiesOverride().setMass ( 1500.0f);
@@ -324,8 +324,8 @@ public void RestoreInputState(StateRecorder inStream)
 public void GetInitialCamera(CameraState ioState)
 {
 	// Position camera behind car
-	RVec3 cam_tgt = new RVec3(0, 0, 5);
-	ioState.mPos = new RVec3(0, 2.5f, -5);
+	RVec3 cam_tgt =new RVec3(0, 0, 5);
+	ioState.mPos =new RVec3(0, 2.5f, -5);
 	ioState.mForward = minus(cam_tgt , ioState.mPos).toVec3().normalized();
 }
 
@@ -341,7 +341,7 @@ void UpdateCameraPivot()
 		fwd = Vec3.sAxisZ();
 	Vec3 up = Vec3.sAxisY();
 	Vec3 right = up.cross(fwd);
-	mCameraPivot =new RMat44(new Vec4(right, 0), new Vec4(up, 0), new Vec4(fwd, 0), mCarBody.getPosition());
+	mCameraPivot =new RMat44(new Vec4(right, 0),new Vec4(up, 0),new Vec4(fwd, 0), mCarBody.getPosition());
 }
 /*TODO
 

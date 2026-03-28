@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +28,7 @@ import com.github.stephengold.joltjni.enumerate.SoftBodyValidateResult;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CustomSoftBodyContactListener
-        extends SoftBodyContactListener {
+public class CustomSoftBodyContactListener extends SoftBodyContactListener {
     // *************************************************************************
     // constructors
 

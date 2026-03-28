@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,7 +79,7 @@ final public class VehicleConstraintRef
     /**
      * Override the vehicle's gravity vector.
      *
-     * @param acceleration the desired acceleration vector (not null,
+     * @param acceleration the desired acceleration vector (not {@code null},
      * unaffected)
      */
     public void overrideGravity(Vec3Arg acceleration) {
@@ -306,7 +306,7 @@ final public class VehicleConstraintRef
     /**
      * Return the constraint's subtype. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EConstraintSubType getSubType() {
@@ -320,7 +320,7 @@ final public class VehicleConstraintRef
     /**
      * Return the constraint's type. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EConstraintType getType() {
@@ -350,10 +350,12 @@ final public class VehicleConstraintRef
     /**
      * Copy the basis vectors for the specified wheel.
      *
-     * @param wheel which wheel to query (not null)
-     * @param storeForward storage for the forward vector (not null, modified)
-     * @param storeUp storage for the up vector (not null, modified)
-     * @param storeRight storage for the right vector (not null, modified)
+     * @param wheel which wheel to query (not {@code null})
+     * @param storeForward storage for the forward vector (not {@code null},
+     * modified)
+     * @param storeUp storage for the up vector (not {@code null}, modified)
+     * @param storeRight storage for the right vector (not {@code null},
+     * modified)
      */
     @Override
     public void getWheelLocalBasis(
@@ -376,10 +378,10 @@ final public class VehicleConstraintRef
      * @param right the wheel's axis of rotation (a unit vector in the wheel's
      * model space)
      * @param up the "up" direction (a unit vector in the wheel's model space)
-     * @param storePosition storage for the translation component (not null,
-     * modified)
-     * @param storeRotation storage for the rotation component (not null,
-     * modified)
+     * @param storePosition storage for the translation component (not
+     * {@code null}, modified)
+     * @param storeRotation storage for the rotation component (not
+     * {@code null}, modified)
      */
     @Override
     public void getWheelPositionAndRotation(int wheelIndex, Vec3Arg right,
@@ -467,7 +469,7 @@ final public class VehicleConstraintRef
      * Save the state of the constraint, for possible replay. The constraint is
      * unaffected.
      *
-     * @param recorder the recorder to write to (not null)
+     * @param recorder the recorder to write to (not {@code null})
      */
     @Override
     public void saveState(StateRecorder recorder) {

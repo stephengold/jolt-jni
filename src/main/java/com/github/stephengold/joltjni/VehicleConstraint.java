@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -200,7 +200,8 @@ public class VehicleConstraint
     /**
      * Replace the collision tester.
      *
-     * @param tester the desired tester (not null, counted reference created)
+     * @param tester the desired tester (not {@code null}, counted reference
+     * created)
      */
     public void setVehicleCollisionTester(VehicleCollisionTester tester) {
         this.tester = tester;
