@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,14 @@ package com.github.stephengold.joltjni;
  * @author Stephen Gold sgold@sonic.net
  */
 public class WheeledVehicleController extends VehicleController {
+    // *************************************************************************
+    // fields
+
+    /**
+     * protect the maximum tire-impulse callback (if replaced) from garbage
+     * collection
+     */
+    private TireMaxImpulseCallback tmiCallback;
     // *************************************************************************
     // constructors
 
@@ -213,6 +221,18 @@ public class WheeledVehicleController extends VehicleController {
         long controllerVa = va();
         setRightInput(controllerVa, right);
     }
+
+    /**
+     * Replace the maximum tire-impulse callback.
+     *
+     * @param callback the desired callback (not {@code null})
+     */
+    public void setTireMaxImpulseCallback(TireMaxImpulseCallback callback) {
+        this.tmiCallback = callback;
+        long controllerVa = va();
+        long callbackVa = callback.va();
+        setTireMaxImpulseCallback(controllerVa, callbackVa);
+    }
     // *************************************************************************
     // native private methods
 
@@ -247,4 +267,7 @@ public class WheeledVehicleController extends VehicleController {
             long controllerVa, float pressure);
 
     native private static void setRightInput(long controllerVa, float right);
+
+    native private static void setTireMaxImpulseCallback(
+            long controllerVa, long callbackVa);
 }

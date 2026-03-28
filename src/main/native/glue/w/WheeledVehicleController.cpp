@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,7 @@ SOFTWARE.
 #include "Jolt/Physics/Vehicle/WheeledVehicleController.h"
 #include "auto/com_github_stephengold_joltjni_WheeledVehicleController.h"
 #include "glue/glue.h"
+#include "glue/Tmic.h"
 
 using namespace JPH;
 
@@ -209,4 +210,27 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControl
     WheeledVehicleController * const pController
             = reinterpret_cast<WheeledVehicleController *> (controllerVa);
     pController->SetRightInput(right);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    setTireMaxImpulseCallback
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_setTireMaxImpulseCallback
+  (JNIEnv *, jclass, jlong controllerVa, jlong callbackVa) {
+    WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    const Tmic * const pCallback = reinterpret_cast<Tmic *> (callbackVa);
+    pController->SetTireMaxImpulseCallback(
+            [pCallback](uint inWheelIndex, float &outLongitudinalImpulse,
+            float &outLateralImpulse, float inSuspensionImpulse,
+            float inLongitudinalFriction, float inLateralFriction,
+            float inLongitudinalSlip, float inLateralSlip, float inDeltaTime) {
+                pCallback->calculate(inWheelIndex, outLongitudinalImpulse,
+                        outLateralImpulse, inSuspensionImpulse, 
+                        inLongitudinalFriction, inLateralFriction,
+                        inLongitudinalSlip, inLateralSlip, inDeltaTime);
+            }
+    );
 }
