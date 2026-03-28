@@ -418,6 +418,11 @@ tasks.register('debugRagdoll', JavaExec) {
     dependsOn('unpackJoltAssets')
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
+tasks.register('debugSmokeTestAll', JavaExec) {
+    debug = true
+    dependsOn('unpackHairStraight', 'unpackJoltAssets')
+    mainClass = 'testjoltjni.app.samples.SmokeTestAll'
+}
 
 tasks.register('generateSnapshot', JavaExec) {
     mainClass = 'testjoltjni.app.samples.GenerateSnapshot'
