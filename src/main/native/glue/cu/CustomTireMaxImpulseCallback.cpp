@@ -1,0 +1,105 @@
+/*
+Copyright (c) 2026 Stephen Gold
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
+
+/*
+ * Author: Stephen Gold
+ */
+#include "Jolt/Jolt.h"
+#include "auto/com_github_stephengold_joltjni_CustomTireMaxImpulseCallback.h"
+#include "glue/glue.h"
+#include "glue/Tmic.h"
+
+using namespace JPH;
+
+class CustomTireMaxImpulseCallback : Tmic {
+    JavaVM *mpVM;
+    jmethodID mLateralMethodId, mLongitudinalMethodId;
+    jobject mJavaObject;
+
+public:
+    CustomTireMaxImpulseCallback(JNIEnv *pEnv, jobject javaObject) {
+        const jint retCode = pEnv->GetJavaVM(&mpVM);
+        JPH_ASSERT(JNI_OK == retCode);
+
+        mJavaObject = pEnv->NewGlobalRef(javaObject);
+        JPH_ASSERT(mJavaObject);
+
+        const jclass clss = pEnv->FindClass(
+                "com/github/stephengold/joltjni/CustomTireMaxImpulseCallback");
+        JPH_ASSERT(clss);
+        EXCEPTION_CHECK(pEnv)
+
+        mLateralMethodId = pEnv->GetMethodID(
+                clss, "maxLateralImpulse", "(IFFFFFF)F");
+        JPH_ASSERT(mLateralMethodId);
+        EXCEPTION_CHECK(pEnv)
+
+        mLongitudinalMethodId = pEnv->GetMethodID(
+                clss, "maxLongitudinalImpulse", "(IFFFFFF)F");
+        JPH_ASSERT(mLongitudinalMethodId);
+        EXCEPTION_CHECK(pEnv)
+    }
+
+    void calculate(uint inWheelIndex, float &outLongitudinalImpulse,
+            float &outLateralImpulse, float inSuspensionImpulse,
+            float inLongitudinalFriction, float inLateralFriction,
+            float inLongitudinalSlip, float inLateralSlip,
+            float inDeltaTime) const override {
+        JNIEnv *pAttachEnv;
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
+
+        outLateralImpulse = pAttachEnv->CallFloatMethod(
+                mJavaObject, mLateralMethodId, inWheelIndex,
+                inSuspensionImpulse, inLongitudinalFriction, inLateralFriction,
+                inLongitudinalSlip, inLateralSlip, inDeltaTime);
+        EXCEPTION_CHECK(pAttachEnv)
+
+        outLongitudinalImpulse = pAttachEnv->CallFloatMethod(
+                mJavaObject, mLongitudinalMethodId, inWheelIndex,
+                inSuspensionImpulse, inLongitudinalFriction, inLateralFriction,
+                inLongitudinalSlip, inLateralSlip, inDeltaTime);
+        EXCEPTION_CHECK(pAttachEnv)
+
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
+    }
+
+    ~CustomTireMaxImpulseCallback() {
+        JNIEnv *pAttachEnv;
+        ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
+        pAttachEnv->DeleteGlobalRef(mJavaObject);
+        EXCEPTION_CHECK(pAttachEnv)
+        DETACH_CURRENT_THREAD(mpVM, &pAttachEnv, attachedHere)
+    }
+};
+
+/*
+ * Class:     com_github_stephengold_joltjni_CustomTireMaxImpulseCallback
+ * Method:    create
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CustomTireMaxImpulseCallback_create
+  (JNIEnv *pEnv, jobject javaObject) {
+    CustomTireMaxImpulseCallback * const pResult
+            = new CustomTireMaxImpulseCallback(pEnv, javaObject);
+    TRACE_NEW("CustomTireMaxImpulseCallback", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}

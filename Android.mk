@@ -136,6 +136,7 @@ $(N)/glue/cu/CustomLoader.cpp \
 $(N)/glue/cu/CustomPhysicsStepListener.cpp \
 $(N)/glue/cu/CustomRayCastBodyCollector.cpp \
 $(N)/glue/cu/CustomSoftBodyContactListener.cpp \
+$(N)/glue/cu/CustomTireMaxImpulseCallback.cpp \
 $(N)/glue/d/DebugRenderer.cpp \
 $(N)/glue/d/DebugRendererRecorder.cpp \
 $(N)/glue/d/Decomposer.cpp \
