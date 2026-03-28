@@ -198,8 +198,17 @@ public void Initialize()
 
 	mVehicleConstraint = new VehicleConstraint(mCarBody, vehicle).toRef();
 
+	// The vehicle settings were tweaked with a buggy implementation of the longitudinal tire impulses, this meant that PhysicsSettings::mNumVelocitySteps times more impulse
+	// could be applied than intended. To keep the behavior of the vehicle the same we increase the max longitudinal impulse by the same factor. In a future version the vehicle
+	// will be retweaked.
+	((WheeledVehicleController )(mVehicleConstraint.getPtr()).getController()).setTireMaxImpulseCallback(new CustomTireMaxImpulseCallback(){@Override
+		public float maxLongitudinalImpulse(int i, float inSuspensionImpulse, float inLongitudinalFriction, float inLateralFriction, float longS, float latS, float dt)
+		{
+			return  10.0f * inLongitudinalFriction * inSuspensionImpulse;
+		}
+		});
 
-	mPhysicsSystem.addConstraint(mVehicleConstraint.getPtr());
+	mPhysicsSystem.addConstraint(mVehicleConstraint);
 	mPhysicsSystem.addStepListener(mVehicleConstraint.getPtr().getStepListener());
 
 	UpdateCameraPivot();
@@ -297,7 +306,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	// Draw our wheels (this needs to be done in the pre update since we draw the bodies too in the state before the step)
 	for (int w = 0; w < 4; ++w)
 	{
-		ConstWheelSettings settings = mVehicleConstraint.getPtr().getWheel(w).getSettings();
+		ConstWheelSettings settings = mVehicleConstraint.getWheel(w).getSettings();
 		RMat44 wheel_transform = mVehicleConstraint.getWheelWorldTransform(w, Vec3.sAxisY(), Vec3.sAxisX()); // The cylinder we draw is aligned with Y so we specify that as rotational axis
 		mDebugRenderer.drawCylinder(wheel_transform, 0.5f * settings.getWidth(), settings.getRadius(), Color.sGreen);
 	}
