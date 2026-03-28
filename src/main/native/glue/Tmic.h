@@ -31,8 +31,9 @@ public:
     virtual ~Tmic() = default;
 
     // Calculate 2 components of the maximum impulse for the specified wheel:
-    virtual void calculate(uint inWheelIndex, float &outLongitudinalImpulse,
-            float &outLateralImpulse, float inSuspensionImpulse,
+    virtual void calculate(JPH::uint inWheelIndex,
+            float &outLongitudinalImpulse, float &outLateralImpulse,
+            float inSuspensionImpulse,
             float inLongitudinalFriction, float inLateralFriction,
             float inLongitudinalSlip, float inLateralSlip,
             float inDeltaTime) const = 0;
