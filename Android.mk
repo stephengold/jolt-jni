@@ -347,6 +347,7 @@ $(N)/glue/t/TempAllocator.cpp \
 $(N)/glue/t/TempAllocatorImpl.cpp \
 $(N)/glue/t/TempAllocatorImplWithMallocFallback.cpp \
 $(N)/glue/t/TempAllocatorMalloc.cpp \
+$(N)/glue/t/TireMaxImpulseCallback.cpp \
 $(N)/glue/t/TwoBodyConstraint.cpp \
 $(N)/glue/t/TwoBodyConstraintSettings.cpp \
 $(N)/glue/u/UniformFloatDistribution.cpp \
