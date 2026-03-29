@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -91,7 +91,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Lod_getDistance
 #ifdef JPH_DEBUG_RENDERER
     const DebugRenderer::LOD * const pLOD
             = reinterpret_cast<DebugRenderer::LOD *> (lodVa);
-    float result = pLOD->mDistance;
+    const float result = pLOD->mDistance;
     return result;
 #else
     return 1;

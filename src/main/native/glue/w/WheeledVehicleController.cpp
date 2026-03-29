@@ -55,7 +55,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContr
   (JNIEnv *, jclass, jlong controllerVa) {
     const WheeledVehicleController * const pController
             = reinterpret_cast<WheeledVehicleController *> (controllerVa);
-    float result = pController->GetBrakeInput();
+    const float result = pController->GetBrakeInput();
     return result;
 }
 
@@ -96,7 +96,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContr
   (JNIEnv *, jclass, jlong controllerVa) {
     const WheeledVehicleController * const pController
             = reinterpret_cast<WheeledVehicleController *> (controllerVa);
-    float result = pController->GetForwardInput();
+    const float result = pController->GetForwardInput();
     return result;
 }
 
@@ -109,7 +109,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContr
   (JNIEnv *, jclass, jlong controllerVa) {
     const WheeledVehicleController * const pController
             = reinterpret_cast<WheeledVehicleController *> (controllerVa);
-    float result = pController->GetHandBrakeInput();
+    const float result = pController->GetHandBrakeInput();
     return result;
 }
 
@@ -122,7 +122,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContr
   (JNIEnv *, jclass, jlong controllerVa) {
     const WheeledVehicleController * const pController
             = reinterpret_cast<WheeledVehicleController *> (controllerVa);
-    float result = pController->GetRightInput();
+    const float result = pController->GetRightInput();
     return result;
 }
 
