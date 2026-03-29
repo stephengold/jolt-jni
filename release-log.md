@@ -1,12 +1,14 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.10.0 released on TBD
+## Version 3.10.0 released on 28 March 2026
 
 + Added the `ConstExtendedUpdateSettings` interface.
 + Add the abstract `TireMaxImpulseCallback` class and `Tmic` helper class.
 + Added the `CustomTireMaxImpulseCallback` class.
-+ Add the `setTireMaxImpulseCallback()` method to the `WheeledVehicleController` class.
-+ Added chaining to 10 public methods in `CompoundShapeSettings` and `ExtendedUpdateSettings`.
++ Add the `setTireMaxImpulseCallback()` method
+  to the `WheeledVehicleController` class. (issue #42)
++ Added chaining to 10 public methods in `CompoundShapeSettings`
+  and `ExtendedUpdateSettings`.
 + Updated the Jolt-Physics source and assets to sg260326 (=3548a30).
 
 
