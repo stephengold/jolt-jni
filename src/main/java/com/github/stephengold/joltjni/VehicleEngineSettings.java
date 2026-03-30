@@ -22,13 +22,16 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
+import com.github.stephengold.joltjni.readonly.ConstVehicleEngineSettings;
 
 /**
  * Settings used to configure the engine of a {@code WheeledVehicleController}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleEngineSettings extends JoltPhysicsObject {
+public class VehicleEngineSettings
+        extends JoltPhysicsObject
+        implements ConstVehicleEngineSettings {
     // *************************************************************************
     // constructors
 
@@ -56,92 +59,13 @@ public class VehicleEngineSettings extends JoltPhysicsObject {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public VehicleEngineSettings(VehicleEngineSettings original) {
-        long originalVa = original.va();
+    public VehicleEngineSettings(ConstVehicleEngineSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Return the angular damping factor. The settings are unaffected. (native
-     * attribute: mAngularDamping)
-     *
-     * @return the damping factor (per second)
-     */
-    public float getAngularDamping() {
-        long settingsVa = va();
-        float result = getAngularDamping(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the engine's rotational inertia. The settings are unaffected.
-     * (native attribute: mInertia)
-     *
-     * @return the inertia (in kilogram.meter^2)
-     */
-    public float getInertia() {
-        long settingsVa = va();
-        float result = getInertia(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum rotation rate. The settings are unaffected. (native
-     * attribute: mMaxRPM)
-     *
-     * @return the limit (in revolutions per minute)
-     */
-    public float getMaxRpm() {
-        long settingsVa = va();
-        float result = getMaxRpm(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum torque. The settings are unaffected. (native
-     * attribute: mMaxTorque)
-     *
-     * @return the limit (in Newton meters)
-     */
-    public float getMaxTorque() {
-        long settingsVa = va();
-        float result = getMaxTorque(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the minimum rotation rate to avoid stalling. The settings are
-     * unaffected. (native attribute: mMinRPM)
-     *
-     * @return the limit (in revolutions per minute)
-     */
-    public float getMinRpm() {
-        long settingsVa = va();
-        float result = getMinRpm(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Access the normalized torque as a function of normalized RPM. (native
-     * attribute: mNormalizedTorque)
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public LinearCurve getNormalizedTorque() {
-        long settingsVa = va();
-        long curveVa = getNormalizedTorque(settingsVa);
-        LinearCurve result = new LinearCurve(this, curveVa);
-
-        return result;
-    }
 
     /**
      * Alter the angular damping factor. (native attribute: mAngularDamping)
@@ -204,6 +128,93 @@ public class VehicleEngineSettings extends JoltPhysicsObject {
         long settingsVa = va();
         long curveVa = curve.targetVa();
         setNormalizedTorque(settingsVa, curveVa);
+    }
+    // *************************************************************************
+    // ConstVehicleEngineSettings methods
+
+    /**
+     * Return the angular damping factor. The settings are unaffected. (native
+     * attribute: mAngularDamping)
+     *
+     * @return the damping factor (per second)
+     */
+    @Override
+    public float getAngularDamping() {
+        long settingsVa = va();
+        float result = getAngularDamping(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the engine's rotational inertia. The settings are unaffected.
+     * (native attribute: mInertia)
+     *
+     * @return the inertia (in kilogram.meter^2)
+     */
+    @Override
+    public float getInertia() {
+        long settingsVa = va();
+        float result = getInertia(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum rotation rate. The settings are unaffected. (native
+     * attribute: mMaxRPM)
+     *
+     * @return the limit (in revolutions per minute)
+     */
+    @Override
+    public float getMaxRpm() {
+        long settingsVa = va();
+        float result = getMaxRpm(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum torque. The settings are unaffected. (native
+     * attribute: mMaxTorque)
+     *
+     * @return the limit (in Newton meters)
+     */
+    @Override
+    public float getMaxTorque() {
+        long settingsVa = va();
+        float result = getMaxTorque(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the minimum rotation rate to avoid stalling. The settings are
+     * unaffected. (native attribute: mMinRPM)
+     *
+     * @return the limit (in revolutions per minute)
+     */
+    @Override
+    public float getMinRpm() {
+        long settingsVa = va();
+        float result = getMinRpm(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Access the normalized torque as a function of normalized RPM. (native
+     * attribute: mNormalizedTorque)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public LinearCurve getNormalizedTorque() {
+        long settingsVa = va();
+        long curveVa = getNormalizedTorque(settingsVa);
+        LinearCurve result = new LinearCurve(this, curveVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods
