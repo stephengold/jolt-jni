@@ -107,6 +107,36 @@ public class WheelSettingsWv
     // ConstWheelSettingsWv methods
 
     /**
+     * Access the lateral friction as a function of the slip angle (in degrees).
+     * (native attribute: mLateralFriction)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public LinearCurve getLateralFriction() {
+        long settingsVa = va();
+        long curveVa = getLateralFriction(settingsVa);
+        LinearCurve result = new LinearCurve(this, curveVa);
+
+        return result;
+    }
+
+    /**
+     * Access the longitudinal friction as a function of slip ratio. (native
+     * attribute: mLongitudinalFriction)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public LinearCurve getLongitudinalFriction() {
+        long settingsVa = va();
+        long curveVa = getLongitudinalFriction(settingsVa);
+        LinearCurve result = new LinearCurve(this, curveVa);
+
+        return result;
+    }
+
+    /**
      * Return the maximum torque that the main brake can exert on the wheel. The
      * settings are unaffected. (native attribute: mMaxBrakeTorque)
      *
@@ -192,6 +222,10 @@ public class WheelSettingsWv
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
+
+    native static long getLateralFriction(long settingsVa);
+
+    native static long getLongitudinalFriction(long settingsVa);
 
     native static float getMaxBrakeTorque(long settingsVa);
 

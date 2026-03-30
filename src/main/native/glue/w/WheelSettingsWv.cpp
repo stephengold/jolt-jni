@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,6 +54,32 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_crea
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_createDefault
   BODYOF_CREATE_DEFAULT_TARGET(WheelSettingsWV)
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    getLateralFriction
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_getLateralFriction
+  (JNIEnv *, jclass, jlong settingsVa) {
+    WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    LinearCurve * const pResult = &pSettings->mLateralFriction;
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    getLongitudinalFriction
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_getLongitudinalFriction
+  (JNIEnv *, jclass, jlong settingsVa) {
+    WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    LinearCurve * const pResult = &pSettings->mLongitudinalFriction;
+    return reinterpret_cast<jlong> (pResult);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsWv

@@ -29,6 +29,20 @@ package com.github.stephengold.joltjni.readonly;
  */
 public interface ConstWheelSettingsWv extends ConstWheelSettings {
     /**
+     * Access the lateral friction as a function of the slip angle (in degrees).
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstLinearCurve getLateralFriction();
+
+    /**
+     * Access the longitudinal friction as a function of slip ratio.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstLinearCurve getLongitudinalFriction();
+
+    /**
      * Return the maximum torque that the main brake can exert on the wheel. The
      * settings are unaffected.
      *

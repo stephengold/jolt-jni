@@ -313,6 +313,36 @@ final public class WheelSettingsWvRef
     }
 
     /**
+     * Access the lateral friction as a function of the slip angle (in degrees).
+     * (native attribute: mLateralFriction)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public LinearCurve getLateralFriction() {
+        long settingsVa = targetVa();
+        long curveVa = WheelSettingsWv.getLateralFriction(settingsVa);
+        LinearCurve result = new LinearCurve(this, curveVa);
+
+        return result;
+    }
+
+    /**
+     * Access the longitudinal friction as a function of slip ratio. (native
+     * attribute: mLongitudinalFriction)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public LinearCurve getLongitudinalFriction() {
+        long settingsVa = targetVa();
+        long curveVa = WheelSettingsWv.getLongitudinalFriction(settingsVa);
+        LinearCurve result = new LinearCurve(this, curveVa);
+
+        return result;
+    }
+
+    /**
      * Return the maximum torque that the main brake can exert on the wheel. The
      * settings are unaffected. (native attribute: mMaxBrakeTorque)
      *
