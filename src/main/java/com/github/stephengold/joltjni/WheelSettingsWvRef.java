@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsWv;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
@@ -75,6 +76,30 @@ final public class WheelSettingsWvRef
         WheelSettings.setEnableSuspensionForcePoint(settingsVa, enable);
 
         return this;
+    }
+
+    /**
+     * Copy the specified curve to the lateral-friction curve. (native
+     * attribute: mLateralFriction)
+     *
+     * @param curve the curve to copy (not {@code null}, unaffected)
+     */
+    public void setLateralFriction(ConstLinearCurve curve) {
+        long settingsVa = targetVa();
+        long curveVa = curve.targetVa();
+        WheelSettingsWv.setLateralFriction(settingsVa, curveVa);
+    }
+
+    /**
+     * Copy the specified curve to the longitudinal-friction curve. (native
+     * attribute: mLongitudinalFriction)
+     *
+     * @param curve the curve to copy (not {@code null}, unaffected)
+     */
+    public void setLongitudinalFriction(ConstLinearCurve curve) {
+        long settingsVa = targetVa();
+        long curveVa = curve.targetVa();
+        WheelSettingsWv.setLongitudinalFriction(settingsVa, curveVa);
     }
 
     /**

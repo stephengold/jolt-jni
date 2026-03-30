@@ -147,6 +147,34 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_setEm
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    setLateralFriction
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_setLateralFriction
+  (JNIEnv *, jclass, jlong settingsVa, jlong curveVa) {
+    WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    const LinearCurve * const pCurve
+            = reinterpret_cast<LinearCurve *> (curveVa);
+    pSettings->mLateralFriction = *pCurve;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    setLongitudinalFriction
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_setLongitudinalFriction
+  (JNIEnv *, jclass, jlong settingsVa, jlong curveVa) {
+    WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    const LinearCurve * const pCurve
+            = reinterpret_cast<LinearCurve *> (curveVa);
+    pSettings->mLongitudinalFriction = *pCurve;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
  * Method:    setMaxBrakeTorque
  * Signature: (JF)V
  */

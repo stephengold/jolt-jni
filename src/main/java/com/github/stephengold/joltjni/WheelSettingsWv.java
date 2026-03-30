@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsWv;
 
 /**
@@ -70,6 +71,30 @@ public class WheelSettingsWv
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Copy the specified curve to the lateral-friction curve. (native
+     * attribute: mLateralFriction)
+     *
+     * @param curve the curve to copy (not {@code null}, unaffected)
+     */
+    public void setLateralFriction(ConstLinearCurve curve) {
+        long settingsVa = va();
+        long curveVa = curve.targetVa();
+        setLateralFriction(settingsVa, curveVa);
+    }
+
+    /**
+     * Copy the specified curve to the longitudinal-friction curve. (native
+     * attribute: mLongitudinalFriction)
+     *
+     * @param curve the curve to copy (not {@code null}, unaffected)
+     */
+    public void setLongitudinalFriction(ConstLinearCurve curve) {
+        long settingsVa = va();
+        long curveVa = curve.targetVa();
+        setLongitudinalFriction(settingsVa, curveVa);
+    }
 
     /**
      * Alter the maximum torque that the main brake can exert on the wheel.
@@ -236,6 +261,10 @@ public class WheelSettingsWv
     native private static int getRefCount(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
+
+    native static void setLateralFriction(long settingsVa, long curveVa);
+
+    native static void setLongitudinalFriction(long settingsVa, long curveVa);
 
     native static void setMaxBrakeTorque(long settingsVa, float torque);
 
