@@ -46,6 +46,7 @@ import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.LinearCurve;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.MotionProperties;
@@ -80,6 +81,7 @@ import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
+import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstMotionProperties;
 import com.github.stephengold.joltjni.readonly.ConstShape;
@@ -144,6 +146,7 @@ public class Test003 {
         doFilteredContactListener();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
+        doLinearCurve();
         doMassProperties();
         doMotionProperties();
         doParameters();
@@ -574,6 +577,19 @@ public class Test003 {
         Assert.assertEquals(4, jobSystem.getMaxConcurrency());
 
         TestUtils.testClose(jobSystem);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code LinearCurve} class.
+     */
+    private static void doLinearCurve() {
+        LinearCurve curve = new LinearCurve();
+
+        testLinearCurveDefaults(curve);
+        testLinearCurveSetters(curve);
+
+        TestUtils.testClose(curve);
         System.gc();
     }
 
@@ -1081,6 +1097,43 @@ public class Test003 {
         Assert.assertFalse(listener.getEnableValidate());
 
         TestUtils.testClose(olpFilter, bplFilter, bodyFilter);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code LinearCurve}.
+     *
+     * @param curve the curve to test (not {@code null}, unaffected)
+     */
+    private static void testLinearCurveDefaults(ConstLinearCurve curve) {
+        Assert.assertTrue(curve.hasAssignedNativeObject());
+        Assert.assertTrue(curve.ownsNativeObject());
+
+        Assert.assertEquals(0, curve.countPoints());
+        Assert.assertEquals(0f, curve.getMaxX(), 0f);
+        Assert.assertEquals(0f, curve.getMinX(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code LinearCurve}.
+     *
+     * @param curve the curve to test (not {@code null}, modified)
+     */
+    private static void testLinearCurveSetters(LinearCurve curve) {
+        curve.addPoint(1f, 5f);
+        curve.addPoint(0f, 10f);
+        curve.sort();
+
+        Assert.assertEquals(2, curve.countPoints());
+        Assert.assertEquals(1f, curve.getMaxX(), 0f);
+        Assert.assertEquals(0f, curve.getMinX(), 0f);
+        Assert.assertEquals(0f, curve.getPointX(0), 0f);
+        Assert.assertEquals(1f, curve.getPointX(1), 0f);
+        Assert.assertEquals(10f, curve.getPointY(0), 0f);
+        Assert.assertEquals(5f, curve.getPointY(1), 0f);
+        Assert.assertEquals(7.5f, curve.getValue(0.5f), 0f);
+
+        curve.clear();
+        testLinearCurveDefaults(curve);
     }
 
     /**
