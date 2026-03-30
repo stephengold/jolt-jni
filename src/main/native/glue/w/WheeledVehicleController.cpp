@@ -228,7 +228,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControl
             float inLongitudinalFriction, float inLateralFriction,
             float inLongitudinalSlip, float inLateralSlip, float inDeltaTime) {
                 pCallback->calculate(inWheelIndex, outLongitudinalImpulse,
-                        outLateralImpulse, inSuspensionImpulse, 
+                        outLateralImpulse, inSuspensionImpulse,
                         inLongitudinalFriction, inLateralFriction,
                         inLongitudinalSlip, inLateralSlip, inDeltaTime);
             }
