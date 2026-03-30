@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
+
 /**
  * Settings used to configure the engine of a {@code WheeledVehicleController}.
  *
@@ -128,6 +130,20 @@ public class VehicleEngineSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Access the normalized torque as a function of normalized RPM. (native
+     * attribute: mNormalizedTorque)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public LinearCurve getNormalizedTorque() {
+        long settingsVa = va();
+        long curveVa = getNormalizedTorque(settingsVa);
+        LinearCurve result = new LinearCurve(this, curveVa);
+
+        return result;
+    }
+
+    /**
      * Alter the angular damping factor. (native attribute: mAngularDamping)
      *
      * @param damping the desired damping factor (per second, default=0.2)
@@ -177,6 +193,18 @@ public class VehicleEngineSettings extends JoltPhysicsObject {
         long settingsVa = va();
         setMinRpm(settingsVa, rpm);
     }
+
+    /**
+     * Copy the specified curve to the normalized-torque curve. (native
+     * attribute: mNormalizedTorque)
+     *
+     * @param curve the curve to copy (not {@code null}, unaffected)
+     */
+    public void setNormalizedTorque(ConstLinearCurve curve) {
+        long settingsVa = va();
+        long curveVa = curve.targetVa();
+        setNormalizedTorque(settingsVa, curveVa);
+    }
     // *************************************************************************
     // native private methods
 
@@ -196,6 +224,8 @@ public class VehicleEngineSettings extends JoltPhysicsObject {
 
     native private static float getMinRpm(long settingsVa);
 
+    native private static long getNormalizedTorque(long settingsVa);
+
     native private static void setAngularDamping(
             long settingsVa, float damping);
 
@@ -206,4 +236,7 @@ public class VehicleEngineSettings extends JoltPhysicsObject {
     native private static void setMaxTorque(long settingsVa, float torque);
 
     native private static void setMinRpm(long settingsVa, float rpm);
+
+    native private static void setNormalizedTorque(
+            long settingsVa, long curveVa);
 }

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -121,6 +121,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
+ * Method:    getNormalizedTorque
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettings_getNormalizedTorque
+  (JNIEnv *, jclass, jlong settingsVa) {
+    VehicleEngineSettings * const pSettings
+            = reinterpret_cast<VehicleEngineSettings *> (settingsVa);
+    LinearCurve * const pResult = &pSettings->mNormalizedTorque;
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
  * Method:    setAngularDamping
  * Signature: (JF)V
  */
@@ -177,4 +190,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettings
     VehicleEngineSettings * const pSettings
             = reinterpret_cast<VehicleEngineSettings *> (settingsVa);
     pSettings->mMinRPM = rpm;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
+ * Method:    setNormalizedTorque
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettings_setNormalizedTorque
+  (JNIEnv *, jclass, jlong settingsVa, jlong curveVa) {
+    VehicleEngineSettings * const pSettings
+            = reinterpret_cast<VehicleEngineSettings *> (settingsVa);
+    const LinearCurve * const pCurve
+            = reinterpret_cast<LinearCurve *> (curveVa);
+    pSettings->mNormalizedTorque = *pCurve;
 }
