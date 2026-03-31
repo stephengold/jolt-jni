@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,8 @@ public class ContactListenerList extends ContactListener {
     /**
      * protect the sub-listeners from garbage collection
      */
-    private static List<ContactListener> sublisteners = new ArrayList<>(8);
+    final private static List<ContactListener> sublisteners
+            = new ArrayList<>(8);
     // *************************************************************************
     // constructors
 

@@ -36,7 +36,7 @@ public class StreamOutWrapper extends StreamOut {
     /**
      * protect the wrapped stream from garbage collection
      */
-    private JoltPhysicsObject stream;
+    final private JoltPhysicsObject stream;
     // *************************************************************************
     // constructors
 
