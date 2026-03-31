@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -134,9 +134,9 @@ public interface ConstCharacter extends ConstCharacterBase {
      * interface. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      */
     void getPositionAndRotation(RVec3 storeLocation, Quat storeOrientation);
 
@@ -144,9 +144,9 @@ public interface ConstCharacter extends ConstCharacterBase {
      * Copy the position of the associated body. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */

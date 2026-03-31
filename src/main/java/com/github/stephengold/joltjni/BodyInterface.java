@@ -964,7 +964,7 @@ public class BodyInterface extends NonCopyable {
      * Alter the angular velocity of the specified body.
      *
      * @param bodyId the ID of the body to modify
-     * @param omega the desired rates (radians per second in system coordiantes,
+     * @param omega the desired rates (radians per second in system coordinates,
      * not {@code null}, unaffected)
      */
     public void setAngularVelocity(int bodyId, Vec3Arg omega) {

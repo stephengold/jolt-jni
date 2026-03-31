@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,8 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * Test whether the current box contains the argument box. The current box
      * is unaffected.
      *
-     * @param other the other box to check against (not null, unaffected)
+     * @param other the other box to check against (not {@code null},
+     * unaffected)
      *
      * @return {@code true} if contained, otherwise {@code false}
      */
@@ -43,7 +44,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Test whether the box contains the specified point. The box is unaffected.
      *
-     * @param point the point to test (not null, unaffected)
+     * @param point the point to test (not {@code null}, unaffected)
      *
      * @return {@code true} if contained, otherwise {@code false}
      */
@@ -60,7 +61,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * Locate the closest point on or in the box for the specified location. The
      * box is unaffected.
      *
-     * @param location the starting location (not null, unaffected)
+     * @param location the starting location (not {@code null}, unaffected)
      * @return a new vector
      */
     Vec3 getClosestPoint(Vec3Arg location);
@@ -98,7 +99,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Get the squared distance between the box and the specified point.
      *
-     * @param point the point to measure from (not null, unaffected)
+     * @param point the point to measure from (not {@code null}, unaffected)
      *
      * @return the distance, or zero if {@code point} lies inside the box
      */
@@ -155,7 +156,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Return a scaled copy of the box. The current box is unaffected.
      *
-     * @param factors the scale factors to apply (not null, unaffected)
+     * @param factors the scale factors to apply (not {@code null}, unaffected)
      * @return a new object
      */
     AaBox scaled(Vec3Arg factors);
@@ -163,7 +164,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Return a transformed copy of the box. The current box is unaffected.
      *
-     * @param matrix the transformation to apply (not null, unaffected)
+     * @param matrix the transformation to apply (not {@code null}, unaffected)
      * @return a new object
      */
     AaBox transformed(Mat44Arg matrix);

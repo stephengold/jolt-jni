@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -75,7 +75,7 @@ public interface ConstSpringSettings extends ConstJoltPhysicsObject {
     /**
      * Return how the spring is specified. The settings are unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     ESpringMode getMode();
 
@@ -106,7 +106,7 @@ public interface ConstSpringSettings extends ConstJoltPhysicsObject {
      * Save the settings to the specified binary stream. The settings are
      * unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     void saveBinaryState(StreamOut stream);
 }

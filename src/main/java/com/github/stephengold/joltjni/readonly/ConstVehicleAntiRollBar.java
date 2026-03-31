@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,7 +54,7 @@ public interface ConstVehicleAntiRollBar extends ConstJoltPhysicsObject {
     /**
      * Save the bar to the specified binary stream. The settings are unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     void saveBinaryState(StreamOut stream);
 }

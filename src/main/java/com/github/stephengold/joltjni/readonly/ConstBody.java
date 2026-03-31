@@ -86,7 +86,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Return the body type (rigid or soft). The body is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     EBodyType getBodyType();
 
@@ -111,7 +111,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * with its origin). The body is unaffected.
      *
      * @param storeResult storage for the location in system coordinates (not
-     * null, modified)
+     * {@code null}, modified)
      */
     void getCenterOfMassPosition(DoubleBuffer storeResult);
 
@@ -120,7 +120,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * with its origin). The body is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      */
     void getCenterOfMassPosition(RVec3 storeLocation);
 
@@ -197,7 +197,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Return the body's motion type. The body is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     EMotionType getMotionType();
 
@@ -221,9 +221,9 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * Copy the position of the body. The body is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      */
     void getPositionAndRotation(RVec3 storeLocation, Quat storeOrientation);
 
@@ -293,7 +293,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * location. The body is unaffected.
      *
      * @param subShapeId the ID of the sub-shape to use
-     * @param location the location to use (not null, unaffected)
+     * @param location the location to use (not {@code null}, unaffected)
      * @return a new direction vector
      */
     Vec3 getWorldSpaceSurfaceNormal(int subShapeId, RVec3Arg location);

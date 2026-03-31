@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -76,14 +76,14 @@ public interface ConstConstraint extends ConstJoltPhysicsObject {
     /**
      * Return the constraint's subtype. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code {@code null}})
      */
     EConstraintSubType getSubType();
 
     /**
      * Return the constraint's type. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     EConstraintType getType();
 
@@ -98,7 +98,7 @@ public interface ConstConstraint extends ConstJoltPhysicsObject {
      * Save the state of the constraint, for possible replay. The constraint is
      * unaffected.
      *
-     * @param recorder the recorder to write to (not null)
+     * @param recorder the recorder to write to (not {@code null})
      */
     void saveState(StateRecorder recorder);
 }

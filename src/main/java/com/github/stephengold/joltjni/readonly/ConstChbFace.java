@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,7 +56,7 @@ public interface ConstChbFace extends ConstJoltPhysicsObject {
     /**
      * Test whether the face is facing the specified point.
      *
-     * @param point the location to test (not null, unaffected)
+     * @param point the location to test (not {@code null}, unaffected)
      * @return {@code true} if facing the test point, otherwise {@code false}
      */
     boolean isFacing(Vec3Arg point);

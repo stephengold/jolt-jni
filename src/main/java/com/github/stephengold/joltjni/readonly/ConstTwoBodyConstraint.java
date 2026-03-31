@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ public interface ConstTwoBodyConstraint extends ConstConstraint {
      * Copy the first body's pivot location. The constraint is unaffected.
      *
      * @param storeResult storage for the location in system coordinates (not
-     * null, modified)
+     * {@code null}, modified)
      */
     void getBody1PivotLocation(DoubleBuffer storeResult);
 
@@ -58,7 +58,7 @@ public interface ConstTwoBodyConstraint extends ConstConstraint {
      * Copy the 2nd body's pivot location. The constraint is unaffected.
      *
      * @param storeResult storage for the location in system coordinates (not
-     * null, modified)
+     * {@code null}, modified)
      */
     void getBody2PivotLocation(DoubleBuffer storeResult);
 

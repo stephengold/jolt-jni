@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -114,10 +114,12 @@ public interface ConstVehicleConstraint extends ConstConstraint {
      * Copy the basis vectors for the specified wheel. The constraint is
      * unaffected.
      *
-     * @param wheel which wheel to query (not null)
-     * @param storeForward storage for the forward vector (not null, modified)
-     * @param storeUp storage for the up vector (not null, modified)
-     * @param storeRight storage for the right vector (not null, modified)
+     * @param wheel which wheel to query (not {@code null})
+     * @param storeForward storage for the forward vector (not {@code null},
+     * modified)
+     * @param storeUp storage for the up vector (not {@code null}, modified)
+     * @param storeRight storage for the right vector (not {@code null},
+     * modified)
      */
     void getWheelLocalBasis(
             Wheel wheel, Vec3 storeForward, Vec3 storeUp, Vec3 storeRight);
@@ -130,10 +132,10 @@ public interface ConstVehicleConstraint extends ConstConstraint {
      * @param right the wheel's axis of rotation (a unit vector in the wheel's
      * model space)
      * @param up the "up" direction (a unit vector in the wheel's model space)
-     * @param storePosition storage for the translation component (not null,
-     * modified)
-     * @param storeRotation storage for the rotation component (not null,
-     * modified)
+     * @param storePosition storage for the translation component (not
+     * {@code null}, modified)
+     * @param storeRotation storage for the rotation component (not
+     * {@code null}, modified)
      */
     void getWheelPositionAndRotation(int wheelIndex, Vec3Arg right,
             Vec3Arg up, RVec3 storePosition, Quat storeRotation);

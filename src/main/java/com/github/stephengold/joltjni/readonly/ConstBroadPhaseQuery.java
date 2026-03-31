@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,17 +39,17 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a box along a line segment and collect the resulting hits.
      *
-     * @param boxCast the test box and route (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param boxCast the test box and route (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     void castAaBox(AaBoxCast boxCast, CastShapeBodyCollector collector);
 
     /**
      * Cast a box along a line segment and collect the resulting hits.
      *
-     * @param boxCast the test box and route (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param boxCast the test box and route (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void castAaBox(AaBoxCast boxCast, CastShapeBodyCollector collector,
@@ -58,11 +58,12 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a box along a line segment and collect the resulting hits.
      *
-     * @param boxCast the test box and route (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param boxCast the test box and route (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     void castAaBox(AaBoxCast boxCast, CastShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
@@ -70,17 +71,17 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the test ray (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param raycast the test ray (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     void castRay(RayCast raycast, RayCastBodyCollector collector);
 
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the test ray (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param raycast the test ray (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void castRay(RayCast raycast, RayCastBodyCollector collector,
@@ -89,11 +90,12 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the test ray (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param raycast the test ray (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     void castRay(RayCast raycast, RayCastBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
@@ -101,17 +103,17 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes overlap with the specified test box.
      *
-     * @param box the test box (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param box the test box (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     void collideAaBox(ConstAaBox box, CollideShapeBodyCollector collector);
 
     /**
      * Collect bodies whose bounding boxes overlap with the specified test box.
      *
-     * @param box the test box (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the test box (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void collideAaBox(ConstAaBox box, CollideShapeBodyCollector collector,
@@ -120,11 +122,12 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes overlap with the specified test box.
      *
-     * @param box the test box (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the test box (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     void collideAaBox(ConstAaBox box, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
@@ -132,8 +135,8 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified oriented box.
      *
-     * @param box the box to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param box the box to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     void collideOrientedBox(
             ConstOrientedBox box, CollideShapeBodyCollector collector);
@@ -141,9 +144,9 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified oriented box.
      *
-     * @param box the box to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the box to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void collideOrientedBox(
@@ -153,11 +156,12 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified oriented box.
      *
-     * @param box the box to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the box to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     void collideOrientedBox(
             ConstOrientedBox box, CollideShapeBodyCollector collector,
@@ -166,17 +170,17 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
      *
-     * @param point the location to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param point the location to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     void collidePoint(Vec3Arg point, CollideShapeBodyCollector collector);
 
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
      *
-     * @param point the location to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param point the location to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void collidePoint(Vec3Arg point, CollideShapeBodyCollector collector,
@@ -185,11 +189,12 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
      *
-     * @param point the location to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param point the location to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     void collidePoint(Vec3Arg point, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
@@ -197,9 +202,10 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
-     * @param center the center of the test sphere (not null, unaffected)
+     * @param center the center of the test sphere (not {@code null},
+     * unaffected)
      * @param radius the radius of the test sphere
-     * @param collector the hit collector to use (not null)
+     * @param collector the hit collector to use (not {@code null})
      */
     void collideSphere(
             Vec3Arg center, float radius, CollideShapeBodyCollector collector);
@@ -207,10 +213,11 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
-     * @param center the center of the test sphere (not null, unaffected)
+     * @param center the center of the test sphere (not {@code null},
+     * unaffected)
      * @param radius the radius of the test sphere
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void collideSphere(
@@ -220,12 +227,14 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
-     * @param center the center of the test sphere (not null, unaffected)
-     * @param radius the radius of the test sphere
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param center the center of the test sphere (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param radius the radius of the test sphere
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     void collideSphere(
             Vec3Arg center, float radius, CollideShapeBodyCollector collector,

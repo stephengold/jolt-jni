@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,8 +32,8 @@ public interface ConstGroupFilter extends ConstSerializableObject {
     /**
      * Test whether the specified groups can collide. The filter is unaffected.
      *
-     * @param group1 the first group (not null, unaffected)
-     * @param group2 the 2nd group (not null, unaffected)
+     * @param group1 the first group (not {@code null}, unaffected)
+     * @param group2 the 2nd group (not {@code null}, unaffected)
      * @return {@code true} if they can collide, otherwise {@code false}
      */
     boolean canCollide(ConstCollisionGroup group1, ConstCollisionGroup group2);
@@ -42,7 +42,7 @@ public interface ConstGroupFilter extends ConstSerializableObject {
      * Save the settings to the specified binary stream. The filter is
      * unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     void saveBinaryState(StreamOut stream);
 }

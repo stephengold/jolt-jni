@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -110,7 +110,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *
-     * @param m2 the 2nd matrix to test (not null, unaffected)
+     * @param m2 the 2nd matrix to test (not {@code null}, unaffected)
      * @return {@code true} if equal, {@code false} if unequal
      */
     boolean isEqual(Mat44Arg m2);
@@ -127,7 +127,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
-     * @param right the right factor (not null, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     Mat44 multiply(Mat44Arg right);
@@ -136,7 +136,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * Multiply the current 3x3 matrix by the specified 3x3 matrix. The current
      * matrix is unaffected.
      *
-     * @param right the right factor (not null, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     Mat44 multiply3x3(Mat44Arg right);
@@ -145,7 +145,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * Multiply the 3x3 matrix by the specified column vector. The matrix is
      * unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param vec3Arg the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     Vec3 multiply3x3(Vec3Arg vec3Arg);
@@ -154,7 +154,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * Multiply the transpose of the 3x3 matrix by the specified column vector.
      * The matrix is unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param vec3Arg the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     Vec3 multiply3x3Transposed(Vec3Arg vec3Arg);
@@ -164,7 +164,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param vec3Arg the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     Vec3 multiply3x4(Vec3Arg vec3Arg);
@@ -174,7 +174,8 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * component of the right factor implied to be one. Store the result in the
      * argument vector. The matrix is unaffected.
      *
-     * @param storeVec the right factor and storage for the result (not null)
+     * @param storeVec the right factor and storage for the result (not
+     * {@code null})
      */
     void multiply3x4InPlace(Vec3 storeVec);
 
@@ -182,7 +183,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param vec3 the left factor (not null, unaffected)
+     * @param vec3 the left factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     Mat44 postTranslated(Vec3Arg vec3);
@@ -191,7 +192,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * Write all 16 components to the specified buffer in column-major order and
      * advance the buffer's position by 16. The matrix is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     void putColumnMajor(FloatBuffer storeBuffer);
 }

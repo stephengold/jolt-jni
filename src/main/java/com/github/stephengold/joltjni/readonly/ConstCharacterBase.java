@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,7 +79,7 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Return the relationship between the character and its supporting surface.
      * The character is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     EGroundState getGroundState();
 
@@ -142,7 +142,7 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
-     * @param normal the surface normal to test (not null, unaffected)
+     * @param normal the surface normal to test (not {@code null}, unaffected)
      * @return {@code true} if too steep, otherwise {@code false}
      */
     boolean isSlopeTooSteep(Vec3Arg normal);
@@ -158,7 +158,7 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Save the character's state to the specified recorder. The character is
      * unaffected.
      *
-     * @param recorder the recorder to save to (not null)
+     * @param recorder the recorder to save to (not {@code null})
      */
     void saveState(StateRecorder recorder);
 }

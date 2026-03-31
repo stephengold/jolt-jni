@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,8 @@ public interface QuatArg {
      * Write all 4 components to the start of the specified buffer. The current
      * object is unaffected.
      *
-     * @param storeFloats the destination buffer (not null, capacity&ge;4)
+     * @param storeFloats the destination buffer (not {@code null},
+     * capacity&ge;4)
      */
     void copyTo(FloatBuffer storeFloats);
 
@@ -146,7 +147,7 @@ public interface QuatArg {
      * Write all 4 components to the specified buffer and advance the buffer's
      * position by 4. The quaternion is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     void put(FloatBuffer storeBuffer);
 

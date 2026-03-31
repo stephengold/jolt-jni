@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ public interface ConstSubShape extends ConstJoltPhysicsObject {
      * child. The sub-shape is unaffected.
      *
      * @param scale the scale of the child in the local space of this shape (not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @return a new transform matrix
      */
     Mat44 getLocalTransformNoScale(Vec3Arg scale);
@@ -68,7 +68,7 @@ public interface ConstSubShape extends ConstJoltPhysicsObject {
      * Test whether the specified scale is valid for the sub-shape. The
      * sub-shape is unaffected.
      *
-     * @param scale the scale factors to validate (not null, unaffected)
+     * @param scale the scale factors to validate (not {@code null}, unaffected)
      * @return {@code true} if valid, otherwise {@code false}
      */
     boolean isValidScale(Vec3Arg scale);
@@ -77,7 +77,7 @@ public interface ConstSubShape extends ConstJoltPhysicsObject {
      * Transform the specified scale to the local space of the child. The
      * sub-shape is unaffected.
      *
-     * @param scale the scale to transform (not null, unaffected)
+     * @param scale the scale to transform (not {@code null}, unaffected)
      * @return a new vector
      */
     Vec3 transformScale(Vec3Arg scale);

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,8 +35,10 @@ public interface ConstMassProperties extends ConstJoltPhysicsObject {
      * Decompose the inertia tensor into a diagonal matrix and a right-handed
      * rotation matrix. The properties are unaffected.
      *
-     * @param storeRotation storage for the rotation matrix (not null, modified)
-     * @param storeDiagonal storage for the diagonal matrix (not null, modified)
+     * @param storeRotation storage for the rotation matrix (not {@code null},
+     * modified)
+     * @param storeDiagonal storage for the diagonal matrix (not {@code null},
+     * modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     boolean decomposePrincipalMomentsOfInertia(

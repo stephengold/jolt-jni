@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ public interface ConstTransformedConvexObject extends ConstJoltPhysicsObject {
     /**
      * Calculate the support vector for the specified direction.
      *
-     * @param direction the direction to use (not null, unaffected)
+     * @param direction the direction to use (not {@code null}, unaffected)
      * @return a new location vector
      */
     Vec3 getSupport(Vec3Arg direction);

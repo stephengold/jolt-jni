@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -128,7 +128,7 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
      * Write the vertex indices of all edges to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *
-     * @param storeIndices the destination buffer (not null, modified)
+     * @param storeIndices the destination buffer (not {@code null}, modified)
      */
     void putEdgeIndices(IntBuffer storeIndices);
 
@@ -136,7 +136,7 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
      * Write the vertex indices of all faces to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *
-     * @param storeIndices the destination buffer (not null, modified)
+     * @param storeIndices the destination buffer (not {@code null}, modified)
      */
     void putFaceIndices(IntBuffer storeIndices);
 
@@ -144,7 +144,7 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
      * Write the vertex indices of all Cosserat rods to the specified buffer and
      * advance the buffer's position. The settings are unaffected.
      *
-     * @param storeIndices the destination buffer (not null, modified)
+     * @param storeIndices the destination buffer (not {@code null}, modified)
      */
     void putRodIndices(IntBuffer storeIndices);
 

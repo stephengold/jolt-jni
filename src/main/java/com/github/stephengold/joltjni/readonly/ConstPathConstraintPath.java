@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,8 +35,8 @@ public interface ConstPathConstraintPath extends ConstSerializableObject {
      * Return the path amount of the location on the path that's closest to the
      * specified location. The path is unaffected.
      *
-     * @param location the input location (in system coordinates, not null,
-     * unaffected)
+     * @param location the input location (in system coordinates, not
+     * {@code null}, unaffected)
      * @param fractionHint where to start searching
      * @return the path amount (&ge;0)
      */
@@ -75,7 +75,7 @@ public interface ConstPathConstraintPath extends ConstSerializableObject {
     /**
      * Save the path to the specified binary stream. The path is unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     void saveBinaryState(StreamOut stream);
 }

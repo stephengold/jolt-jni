@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -182,14 +182,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Return the motion quality. The settings are unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     EMotionQuality getMotionQuality();
 
     /**
      * Return the motion type. The settings are unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     EMotionType getMotionType();
 
@@ -220,7 +220,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * Return how the mass-properties override will be used. The settings are
      * unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     EOverrideMassProperties getOverrideMassProperties();
 
@@ -292,7 +292,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * Write the state of this object to the specified stream, excluding the
      * shape, materials, and group filter. The settings are unaffected.
      *
-     * @param stream where to write objects (not null)
+     * @param stream where to write objects (not {@code null})
      */
     void saveBinaryState(StreamOut stream);
 
@@ -300,10 +300,12 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * Write the state of this object to the specified stream. The settings are
      * unaffected.
      *
-     * @param stream where to write objects (not null)
-     * @param shapeMap track multiple uses of shapes (may be null)
-     * @param materialMap track multiple uses of physics materials (may be null)
-     * @param filterMap track multiple uses of group filters (may be null)
+     * @param stream where to write objects (not {@code null})
+     * @param shapeMap track multiple uses of shapes (may be {@code null})
+     * @param materialMap track multiple uses of physics materials (may be
+     * {@code null})
+     * @param filterMap track multiple uses of group filters (may be
+     * {@code null})
      */
     void saveWithChildren(StreamOut stream, ShapeToIdMap shapeMap,
             MaterialToIdMap materialMap, GroupFilterToIdMap filterMap);

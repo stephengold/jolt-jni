@@ -34,7 +34,8 @@ final public class Color implements ConstColor {
 
     /**
      * series of colors for {@code sGetDistinctColor()}, pre-generated using
-     * http://phrogz.net/css/distinct-colors.html
+     * <a href="https://phrogz.net/css/distinct-colors.html">the CMC l:c
+     * algorithm</a>
      */
     final private static ConstColor[] sColors = {
         new Color(255, 0, 0),

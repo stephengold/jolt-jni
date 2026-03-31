@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@ public interface ConstVertexAttributes extends ConstJoltPhysicsObject {
      * Return the type of the long-range attachment (LRA) constraint. The
      * attributes are unaffected.
      *
-     * @return the enum value (not null)
+     * @return the enum value (not {@code null})
      */
     ELraType getLraType();
 

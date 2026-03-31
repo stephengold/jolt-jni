@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,15 +35,16 @@ public interface RVec3Arg {
      * Write all 3 components to the start of the specified buffer. The vector
      * is unaffected.
      *
-     * @param storeDoubles the destination buffer (not null, capacity&ge;3)
+     * @param storeDoubles the destination buffer (not {@code null},
+     * capacity&ge;3)
      */
     void copyTo(DoubleBuffer storeDoubles);
 
     /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
-     * @param rightFactor the vector to cross with the current one (not null,
-     * unaffected)
+     * @param rightFactor the vector to cross with the current one (not
+     * {@code null}, unaffected)
      * @return a new product vector
      */
     RVec3 cross(RVec3Arg rightFactor);
@@ -51,7 +52,7 @@ public interface RVec3Arg {
     /**
      * Return the dot product with the argument. Both vectors are unaffected.
      *
-     * @param factor the vector to dot with the current one (not null,
+     * @param factor the vector to dot with the current one (not {@code null},
      * unaffected)
      * @return the dot product
      */

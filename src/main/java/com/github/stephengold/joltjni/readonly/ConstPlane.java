@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,8 @@ public interface ConstPlane {
      * Write all 4 components to the start of the specified buffer. The plane is
      * unaffected.
      *
-     * @param storeFloats the destination buffer (not null, capacity&ge;4)
+     * @param storeFloats the destination buffer (not {@code null},
+     * capacity&ge;4)
      */
     void copyTo(FloatBuffer storeFloats);
 
@@ -80,14 +81,14 @@ public interface ConstPlane {
      * Write all 4 components to the specified buffer and advance the buffer's
      * position by 4. The plane is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     void put(FloatBuffer storeBuffer);
 
     /**
      * Return the signed distance of the specified point.
      *
-     * @param point the point to measure (not null, unaffected)
+     * @param point the point to measure (not {@code null}, unaffected)
      * @return the signed distance
      */
     float signedDistance(Vec3Arg point);

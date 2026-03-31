@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,7 +47,7 @@ public interface ConstTriangle extends ConstJoltPhysicsObject {
      * Write the vertex locations to the specified buffer and advance the
      * buffer's position by 9. The triangle is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     void putVertices(FloatBuffer storeBuffer);
 }

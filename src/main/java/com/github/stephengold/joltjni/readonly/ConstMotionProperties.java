@@ -162,7 +162,7 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     /**
      * Return the motion quality. The properties are unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     EMotionQuality getMotionQuality();
 

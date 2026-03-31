@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,9 +47,9 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param raycast the desired ray (not null, unaffected)
-     * @param hitResult storage for information about the hit, if any (not null,
-     * may be modified)
+     * @param raycast the desired ray (not {@code null}, unaffected)
+     * @param hitResult storage for information about the hit, if any (not
+     * {@code null}, may be modified)
      * @return {@code true} if a hit was found, otherwise {@code false}
      */
     boolean castRay(RRayCast raycast, RayCastResult hitResult);
@@ -57,10 +57,10 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param raycast the desired ray (not null, unaffected)
-     * @param hitResult storage for information about the hit, if any (not null,
-     * may be modified)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param raycast the desired ray (not {@code null}, unaffected)
+     * @param hitResult storage for information about the hit, if any (not
+     * {@code null}, may be modified)
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      * @return {@code true} if a hit was found, otherwise {@code false}
      */
@@ -70,12 +70,13 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param raycast the desired ray (not null, unaffected)
-     * @param hitResult storage for information about the hit, if any (not null,
-     * may be modified)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param raycast the desired ray (not {@code null}, unaffected)
+     * @param hitResult storage for information about the hit, if any (not
+     * {@code null}, may be modified)
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      * @return {@code true} if a hit was found, otherwise {@code false}
      */
     boolean castRay(RRayCast raycast, RayCastResult hitResult,
@@ -84,13 +85,14 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param raycast the desired ray (not null, unaffected)
-     * @param hitResult storage for information about the hit, if any (not null,
-     * may be modified)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param raycast the desired ray (not {@code null}, unaffected)
+     * @param hitResult storage for information about the hit, if any (not
+     * {@code null}, may be modified)
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      * @return {@code true} if a hit was found, otherwise {@code false}
      */
     boolean castRay(RRayCast raycast, RayCastResult hitResult,
@@ -100,10 +102,10 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the desired ray (not null, unaffected)
-     * @param settings the raycast configuration options to use (not null,
-     * unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param raycast the desired ray (not {@code null}, unaffected)
+     * @param settings the raycast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     void castRay(RRayCast raycast, RayCastSettings settings,
             CastRayCollector collector);
@@ -111,11 +113,11 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the desired ray (not null, unaffected)
-     * @param settings the raycast configuration options to use (not null,
-     * unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param raycast the desired ray (not {@code null}, unaffected)
+     * @param settings the raycast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void castRay(RRayCast raycast, RayCastSettings settings,
@@ -124,13 +126,14 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the desired ray (not null, unaffected)
-     * @param settings the raycast configuration options to use (not null,
+     * @param raycast the desired ray (not {@code null}, unaffected)
+     * @param settings the raycast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param olFilter the object-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
     void castRay(RRayCast raycast, RayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
@@ -139,14 +142,15 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the desired ray (not null, unaffected)
-     * @param settings the raycast configuration options to use (not null,
+     * @param raycast the desired ray (not {@code null}, unaffected)
+     * @param settings the raycast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param olFilter the object-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      */
     void castRay(RRayCast raycast, RayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
@@ -155,15 +159,17 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the desired ray (not null, unaffected)
-     * @param settings the raycast configuration options to use (not null,
+     * @param raycast the desired ray (not {@code null}, unaffected)
+     * @param settings the raycast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param olFilter the object-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
+     * @param shapeFilter the shape filter to apply (not {@code null},
+     * unaffected)
      */
     void castRay(RRayCast raycast, RayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
@@ -173,12 +179,12 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a shape and collect the resulting hits.
      *
-     * @param shapeCast the desired shape cast (not null, unaffected)
-     * @param settings the shape-cast configuration options to use (not null,
-     * unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
+     * @param shapeCast the desired shape cast (not {@code null}, unaffected)
+     * @param settings the shape-cast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
      */
     void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector);
@@ -186,13 +192,13 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a shape and collect the resulting hits.
      *
-     * @param shapeCast the desired shape cast (not null, unaffected)
-     * @param settings the shape-cast configuration options to use (not null,
-     * unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param shapeCast the desired shape cast (not {@code null}, unaffected)
+     * @param settings the shape-cast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
@@ -202,15 +208,16 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a shape and collect the resulting hits.
      *
-     * @param shapeCast the desired shape cast (not null, unaffected)
-     * @param settings the shape-cast configuration options to use (not null,
+     * @param shapeCast the desired shape cast (not {@code null}, unaffected)
+     * @param settings the shape-cast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param olFilter the object-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
     void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
@@ -219,16 +226,17 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a shape and collect the resulting hits.
      *
-     * @param shapeCast the desired shape cast (not null, unaffected)
-     * @param settings the shape-cast configuration options to use (not null,
+     * @param shapeCast the desired shape cast (not {@code null}, unaffected)
+     * @param settings the shape-cast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param olFilter the object-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      */
     void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
@@ -238,17 +246,19 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a shape and collect the resulting hits.
      *
-     * @param shapeCast the desired shape cast (not null, unaffected)
-     * @param settings the shape-cast configuration options to use (not null,
+     * @param shapeCast the desired shape cast (not {@code null}, unaffected)
+     * @param settings the shape-cast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param olFilter the object-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
+     * @param shapeFilter the shape filter to apply (not {@code null},
+     * unaffected)
      */
     void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
@@ -258,8 +268,9 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect leaf shapes that lie within the specified bounds.
      *
-     * @param box the bounds (in system coordinates, not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param box the bounds (in system coordinates, not {@code null},
+     * unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     void collectTransformedShapes(
             ConstAaBox box, TransformedShapeCollector collector);
@@ -267,9 +278,10 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect leaf shapes that lie within the specified bounds.
      *
-     * @param box the bounds (in system coordinates, not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the bounds (in system coordinates, not {@code null},
+     * unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void collectTransformedShapes(
@@ -279,11 +291,13 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect leaf shapes that lie within the specified bounds.
      *
-     * @param box the bounds (in system coordinates, not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the bounds (in system coordinates, not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     void collectTransformedShapes(
             ConstAaBox box, TransformedShapeCollector collector,
@@ -292,12 +306,14 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect leaf shapes that lie within the specified bounds.
      *
-     * @param box the bounds (in system coordinates, not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the bounds (in system coordinates, not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      */
     void collectTransformedShapes(
             ConstAaBox box, TransformedShapeCollector collector,
@@ -307,13 +323,16 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect leaf shapes that lie within the specified bounds.
      *
-     * @param box the bounds (in system coordinates, not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the bounds (in system coordinates, not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
+     * @param shapeFilter the shape filter to apply (not {@code null},
+     * unaffected)
      */
     void collectTransformedShapes(
             ConstAaBox box, TransformedShapeCollector collector,
@@ -323,17 +342,19 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect collisions with the specified point.
      *
-     * @param point the location of the point to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param point the location of the point to test (not {@code null},
+     * unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     void collidePoint(RVec3Arg point, CollidePointCollector collector);
 
     /**
      * Collect collisions with the specified point.
      *
-     * @param point the location of the point to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param point the location of the point to test (not {@code null},
+     * unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void collidePoint(RVec3Arg point, CollidePointCollector collector,
@@ -342,11 +363,13 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect collisions with the specified point.
      *
-     * @param point the location of the point to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param point the location of the point to test (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     void collidePoint(RVec3Arg point, CollidePointCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
@@ -354,12 +377,14 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect collisions with the specified point.
      *
-     * @param point the location of the point to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param point the location of the point to test (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      */
     void collidePoint(RVec3Arg point, CollidePointCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
@@ -368,13 +393,16 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect collisions with the specified point.
      *
-     * @param point the location of the point to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param point the location of the point to test (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
+     * @param shapeFilter the shape filter to apply (not {@code null},
+     * unaffected)
      */
     void collidePoint(RVec3Arg point, CollidePointCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
@@ -383,14 +411,16 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect collisions with the specified shape.
      *
-     * @param shape the shape to test (not null, unaffected)
-     * @param shapeScale the scaling vector for the shape (not null, unaffected)
+     * @param shape the shape to test (not {@code null}, unaffected)
+     * @param shapeScale the scaling vector for the shape (not {@code null},
+     * unaffected)
      * @param comTransform the coordinate transform to apply to the shape's
-     * center of mass (not null, unaffected)
-     * @param settings the collision settings to use (not null, unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
+     * center of mass (not {@code null}, unaffected)
+     * @param settings the collision settings to use (not {@code null},
+     * unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,
@@ -399,15 +429,17 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect collisions with the specified shape.
      *
-     * @param shape the shape to test (not null, unaffected)
-     * @param shapeScale the scaling vector for the shape (not null, unaffected)
+     * @param shape the shape to test (not {@code null}, unaffected)
+     * @param shapeScale the scaling vector for the shape (not {@code null},
+     * unaffected)
      * @param comTransform the coordinate transform to apply to the shape's
-     * center of mass (not null, unaffected)
-     * @param settings the collision settings to use (not null, unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * center of mass (not {@code null}, unaffected)
+     * @param settings the collision settings to use (not {@code null},
+     * unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
@@ -418,17 +450,20 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect collisions with the specified shape.
      *
-     * @param shape the shape to test (not null, unaffected)
-     * @param shapeScale the scaling vector for the shape (not null, unaffected)
-     * @param comTransform the coordinate transform to apply to the shape's
-     * center of mass (not null, unaffected)
-     * @param settings the collision settings to use (not null, unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param shape the shape to test (not {@code null}, unaffected)
+     * @param shapeScale the scaling vector for the shape (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param comTransform the coordinate transform to apply to the shape's
+     * center of mass (not {@code null}, unaffected)
+     * @param settings the collision settings to use (not {@code null},
+     * unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,
@@ -438,18 +473,21 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect collisions with the specified shape.
      *
-     * @param shape the shape to test (not null, unaffected)
-     * @param shapeScale the scaling vector for the shape (not null, unaffected)
-     * @param comTransform the coordinate transform to apply to the shape's
-     * center of mass (not null, unaffected)
-     * @param settings the collision settings to use (not null, unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param shape the shape to test (not {@code null}, unaffected)
+     * @param shapeScale the scaling vector for the shape (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
+     * @param comTransform the coordinate transform to apply to the shape's
+     * center of mass (not {@code null}, unaffected)
+     * @param settings the collision settings to use (not {@code null},
+     * unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,
@@ -460,19 +498,23 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect collisions with the specified shape.
      *
-     * @param shape the shape to test (not null, unaffected)
-     * @param shapeScale the scaling vector for the shape (not null, unaffected)
-     * @param comTransform the coordinate transform to apply to the shape's
-     * center of mass (not null, unaffected)
-     * @param settings the collision settings to use (not null, unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param shape the shape to test (not {@code null}, unaffected)
+     * @param shapeScale the scaling vector for the shape (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @param bodyFilter the body filter to apply (not null, unaffected)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     * @param comTransform the coordinate transform to apply to the shape's
+     * center of mass (not {@code null}, unaffected)
+     * @param settings the collision settings to use (not {@code null},
+     * unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
+     * @param shapeFilter the shape filter to apply (not {@code null},
+     * unaffected)
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,

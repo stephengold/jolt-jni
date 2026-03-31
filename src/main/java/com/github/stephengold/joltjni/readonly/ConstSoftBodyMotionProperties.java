@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -95,8 +95,9 @@ public interface ConstSoftBodyMotionProperties extends ConstMotionProperties {
      * Write the locations of all pinned vertices to the specified buffer and
      * advance the buffer's position. The properties are unaffected.
      *
-     * @param comLocation the location of the body's center of mass (not null)
-     * @param storeFloats the destination buffer (not null, modified)
+     * @param comLocation the location of the body's center of mass (not
+     * {@code null})
+     * @param storeFloats the destination buffer (not {@code null}, modified)
      */
     void putPinLocations(RVec3Arg comLocation, FloatBuffer storeFloats);
 
@@ -104,8 +105,9 @@ public interface ConstSoftBodyMotionProperties extends ConstMotionProperties {
      * Write the locations of all vertices to the specified buffer and advance
      * the buffer's position. The properties are unaffected.
      *
-     * @param comLocation the location of the body's center of mass (not null)
-     * @param storeFloats the destination buffer (not null, modified)
+     * @param comLocation the location of the body's center of mass (not
+     * {@code null})
+     * @param storeFloats the destination buffer (not {@code null}, modified)
      */
     void putVertexLocations(
             RVec3Arg comLocation, FloatBuffer storeFloats);

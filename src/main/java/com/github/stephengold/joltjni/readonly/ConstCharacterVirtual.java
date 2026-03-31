@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,8 +40,8 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * Convert the specified velocity to one that won't climb steep slopes. The
      * character is unaffected.
      *
-     * @param desiredVelocity velocity vector (in system coordinates, not null,
-     * unaffected)
+     * @param desiredVelocity velocity vector (in system coordinates, not
+     * {@code null}, unaffected)
      * @return a new velocity vector (in system coordinates)
      */
     Vec3 cancelVelocityTowardsSteepSlopes(Vec3Arg desiredVelocity);
@@ -50,8 +50,8 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * Test whether the character has moved onto a steep slope. The character is
      * unaffected.
      *
-     * @param desiredVelocity velocity vector (in system coordinates, not null,
-     * unaffected)
+     * @param desiredVelocity velocity vector (in system coordinates, not
+     * {@code null}, unaffected)
      * @return {@code true} if too step to walk, otherwise {@code false}
      */
     boolean canWalkStairs(Vec3Arg desiredVelocity);
@@ -182,9 +182,9 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * Copy the position of the character. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      */
     void getPositionAndRotation(RVec3 storeLocation, Quat storeOrientation);
 
@@ -241,7 +241,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * specified character during the previous time step. The current character
      * is unaffected.
      *
-     * @param otherCharacter the character to test against (not null,
+     * @param otherCharacter the character to test against (not {@code null},
      * unaffected)
      * @return {@code true} if contact or collision, otherwise {@code false}
      */

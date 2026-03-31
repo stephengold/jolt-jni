@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,14 +43,15 @@ public interface Vec3Arg {
      * Write all 3 components to the start of the specified buffer. The vector
      * is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null, capacity&ge;3)
+     * @param storeBuffer the destination buffer (not {@code null},
+     * capacity&ge;3)
      */
     void copyTo(FloatBuffer storeBuffer);
 
     /**
      * Write all 3 components to the specified position in the specified buffer.
      *
-     * @param storeFloats the destination buffer (not null,
+     * @param storeFloats the destination buffer (not {@code null},
      * capacity&ge;startPos+3)
      * @param startPos the starting position in the buffer (&ge;0)
      */
@@ -59,8 +60,8 @@ public interface Vec3Arg {
     /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
-     * @param rightFactor the vector to cross with the current one (not null,
-     * unaffected)
+     * @param rightFactor the vector to cross with the current one (not
+     * {@code null}, unaffected)
      * @return a new product vector
      */
     Vec3 cross(Vec3Arg rightFactor);
@@ -68,7 +69,7 @@ public interface Vec3Arg {
     /**
      * Return the dot product with the argument. Both vectors are unaffected.
      *
-     * @param factor the vector to dot with the current one (not null,
+     * @param factor the vector to dot with the current one (not {@code null},
      * unaffected)
      * @return the dot product
      */
@@ -178,7 +179,7 @@ public interface Vec3Arg {
      * Test whether the specified vector lies within the specified squared
      * distance of this one. Both vectors are unaffected.
      *
-     * @param v2 the vector to compare with (not null, unaffected)
+     * @param v2 the vector to compare with (not {@code null}, unaffected)
      * @param maxDistSq the maximum allowed squared distance (&ge;0)
      * @return {@code true} if within the squared distance, otherwise
      * {@code false}
@@ -212,8 +213,8 @@ public interface Vec3Arg {
      * zero. Otherwise, generate a unit vector with the same direction as the
      * current vector. The current vector is unaffected.
      *
-     * @param zeroValue the value to return if the length is zero (not null,
-     * unaffected)
+     * @param zeroValue the value to return if the length is zero (not
+     * {@code null}, unaffected)
      * @return a new vector
      */
     Vec3 normalizedOr(Vec3Arg zeroValue);
@@ -222,7 +223,7 @@ public interface Vec3Arg {
      * Write all 3 components to the specified buffer and advance the buffer's
      * position by 3. The vector is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     void put(FloatBuffer storeBuffer);
 
@@ -250,7 +251,7 @@ public interface Vec3Arg {
     /**
      * Copy to a {@code Float3} object. The vector is unaffected.
      *
-     * @param target the destination (not null, modified)
+     * @param target the destination (not {@code null}, modified)
      */
     void storeFloat3(Float3 target);
 
