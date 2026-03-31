@@ -314,7 +314,7 @@ public class BodyBatchQueryTest {
         bi.getRotations(ids, quatBuf);
         for (int i = 0; i < n; ++i) {
             Quat q = bi.getRotation(ids.get(i));
-            Assert.assertEquals(q.getX(), quatBuf.get(i * 4 + 0), 1e-6f);
+            Assert.assertEquals(q.getX(), quatBuf.get(i * 4), 1e-6f);
             Assert.assertEquals(q.getY(), quatBuf.get(i * 4 + 1), 1e-6f);
             Assert.assertEquals(q.getZ(), quatBuf.get(i * 4 + 2), 1e-6f);
             Assert.assertEquals(q.getW(), quatBuf.get(i * 4 + 3), 1e-6f);
