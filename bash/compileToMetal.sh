@@ -6,7 +6,7 @@
 set -euo pipefail
 
 [[ ${VULKAN_SDK} ]]
-echo VULKAN_SDK = ${VULKAN_SDK}
+echo "VULKAN_SDK = ${VULKAN_SDK}"
 
 ./gradlew unpackJoltSource
 
@@ -23,7 +23,7 @@ do
     echo "  compiling ${NAME}.hlsl -> ${NAME}.spv"
     "${VULKAN_SDK}/bin/dxc" -E main -T cs_6_0 -I ${SRC} -WX -O3 -all_resources_bound \
             "${SRC}/${NAME}.hlsl" -spirv -fvk-use-dx-layout \
-            -fspv-entrypoint-name=${NAME} -Fo "${TMP}/${NAME}.spv"
+            "-fspv-entrypoint-name=${NAME}" -Fo "${TMP}/${NAME}.spv"
 
     echo "   compiling ${NAME}.spv -> ${NAME}.metal"
     "${VULKAN_SDK}/bin/spirv-cross" "${TMP}/${NAME}.spv" --msl --output "${TMP}/${NAME}.metal"

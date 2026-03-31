@@ -6,7 +6,7 @@
 set -euo pipefail
 
 [[ ${VULKAN_SDK} ]]
-echo VULKAN_SDK = ${VULKAN_SDK}
+echo "VULKAN_SDK = ${VULKAN_SDK}"
 
 ./gradlew unpackJoltSource
 
