@@ -160,10 +160,11 @@ abstract public class JoltPhysicsObject
      * @return the virtual address (not zero)
      */
     final public long va() {
-        long addr = virtualAddress.get(); // Read the atomic field once.
-        assert addr != 0L : "Attempted to use an object that has already been"
-                + " freed: " + this;
-        return addr;
+        long result = virtualAddress.get(); // Read the atomic field once.
+        assert result != 0L :
+                "Attempted to use an object that has already been freed: "
+                + this;
+        return result;
     }
     // *************************************************************************
     // new protected methods
