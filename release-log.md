@@ -162,7 +162,7 @@
 
 + Bugfixes:
   + race condition in `JoltPhysicsObject.startCleaner()`
-  + `Jolt.listClasses()` depends on the local chararacter set
+  + `Jolt.listClasses()` depends on the local character set
 + Altered the half-extent constraints for `BoxShape` and `BoxShapeSettings`.
 + Updated the Jolt-Physics source and assets to v5.5.0 (=23dadd0e).
 + Updated the OSHI library to v6.9.2 .
