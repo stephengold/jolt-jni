@@ -1170,7 +1170,7 @@ final public class Jolt {
 
     native private static float rayFiniteCylinder(float originX, float originY,
             float originZ, float directionX, float directionY, float directionZ,
-            float cylinderHalfheight, float cylinderRadius);
+            float cylinderHalfHeight, float cylinderRadius);
 
     native private static float rayInfiniteCylinder(
             float originX, float originY, float originZ, float directionX,

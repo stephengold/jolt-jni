@@ -222,7 +222,7 @@ public class LinearCurve extends JoltPhysicsObject implements ConstLinearCurve {
 
     native private static float getPointY(long curveVa, int pointIndex);
 
-    native private static float getValue(long curveVa, float y);
+    native private static float getValue(long curveVa, float x);
 
     native private static void restoreBinaryState(long curveVa, long streamVa);
 
