@@ -57,5 +57,5 @@ public enum ERenderStrandColor {
     /**
      * skin global pose
      */
-    SkinGlobalPose;
+    SkinGlobalPose
 }
