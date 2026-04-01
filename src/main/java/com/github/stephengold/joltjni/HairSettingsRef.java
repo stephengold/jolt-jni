@@ -68,11 +68,14 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
      * Append the specified material. (native member: mMaterial)
      *
      * @param material the material to add (not {@code null})
+     * @return the current reference, for chaining
      */
-    public void addMaterial(ConstHairMaterial material) {
+    public HairSettingsRef addMaterial(ConstHairMaterial material) {
         long settingsVa = targetVa();
         long materialVa = material.targetVa();
         HairSettings.addMaterial(settingsVa, materialVa);
+
+        return this;
     }
 
     /**
@@ -136,10 +139,13 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
      *
      * @param maxDistSqHairToScalp storage for the maximum squared distance of a
      * root vertex from the scalp (not {@code null}, length&gt;0)
+     * @return the current reference, for chaining
      */
-    public void init(float[] maxDistSqHairToScalp) {
+    public HairSettingsRef init(float[] maxDistSqHairToScalp) {
         long settingsVa = targetVa();
         maxDistSqHairToScalp[0] = HairSettings.init(settingsVa);
+
+        return this;
     }
 
     /**
@@ -147,11 +153,14 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
      * {@code init()}.
      *
      * @param system the compute system to use (not {@code null})
+     * @return the current reference, for chaining
      */
-    public void initCompute(ComputeSystem system) {
+    public HairSettingsRef initCompute(ComputeSystem system) {
         long settingsVa = targetVa();
         long systemVa = system.va();
         HairSettings.initCompute(settingsVa, systemVa);
+
+        return this;
     }
 
     /**

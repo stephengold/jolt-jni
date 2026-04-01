@@ -89,11 +89,14 @@ final public class HairSettings
      * Append the specified material. (native member: mMaterial)
      *
      * @param material the material to add (not {@code null})
+     * @return the modified settings, for chaining
      */
-    public void addMaterial(ConstHairMaterial material) {
+    public HairSettings addMaterial(ConstHairMaterial material) {
         long settingsVa = va();
         long materialVa = material.targetVa();
         addMaterial(settingsVa, materialVa);
+
+        return this;
     }
 
     /**
@@ -157,10 +160,13 @@ final public class HairSettings
      *
      * @param maxDistSqHairToScalp storage for the maximum squared distance of a
      * root vertex from the scalp (not {@code null}, length&gt;0)
+     * @return the modified settings, for chaining
      */
-    public void init(float[] maxDistSqHairToScalp) {
+    public HairSettings init(float[] maxDistSqHairToScalp) {
         long settingsVa = va();
         maxDistSqHairToScalp[0] = init(settingsVa);
+
+        return this;
     }
 
     /**
@@ -168,11 +174,14 @@ final public class HairSettings
      * {@code init()}.
      *
      * @param system the compute system to use (not {@code null})
+     * @return the modified settings, for chaining
      */
-    public void initCompute(ComputeSystem system) {
+    public HairSettings initCompute(ComputeSystem system) {
         long settingsVa = va();
         long systemVa = system.va();
         initCompute(settingsVa, systemVa);
+
+        return this;
     }
 
     /**
@@ -181,13 +190,16 @@ final public class HairSettings
      *
      * @param vertices the vertices to be used in strands (not {@code null})
      * @param strands the strands to use (not {@code null})
+     * @return the modified settings, for chaining
      */
-    public void initRenderAndSimulationStrands(
+    public HairSettings initRenderAndSimulationStrands(
             SVertexList vertices, SStrandList strands) {
         long settingsVa = va();
         long verticesVa = vertices.va();
         long strandsVa = strands.va();
         initRenderAndSimulationStrands(settingsVa, verticesVa, strandsVa);
+
+        return this;
     }
 
     /**

@@ -138,30 +138,40 @@ public class Hair extends NonCopyable {
      * Initialize the simulation.
      *
      * @param computeSystem the compute system to use (not {@code null})
+     * @return the modified simulation, for chaining
      */
-    public void init(ComputeSystem computeSystem) {
+    public Hair init(ComputeSystem computeSystem) {
         long hairVa = va();
         long systemVa = computeSystem.va();
         init(hairVa, systemVa);
+
+        return this;
     }
 
     /**
      * Lock the data buffers.
+     *
+     * @return the modified simulation, for chaining
      */
-    public void lockReadBackBuffers() {
+    public Hair lockReadBackBuffers() {
         long hairVa = va();
         lockReadBackBuffers(hairVa);
+
+        return this;
     }
 
     /**
      * Read back GPU state for debugging purposes.
      *
      * @param queue the queue to use (not {@code null})
+     * @return the modified simulation, for chaining
      */
-    public void readBackGpuState(ComputeQueue queue) {
+    public Hair readBackGpuState(ComputeQueue queue) {
         long hairVa = va();
         long queueVa = queue.va();
         readBackGpuState(hairVa, queueVa);
+
+        return this;
     }
 
     /**
@@ -169,13 +179,16 @@ public class Hair extends NonCopyable {
      *
      * @param location the desired location (in system coordinates, not
      * {@code null}, unaffected)
+     * @return the modified simulation, for chaining
      */
-    public void setPosition(RVec3Arg location) {
+    public Hair setPosition(RVec3Arg location) {
         long hairVa = va();
         double xx = location.xx();
         double yy = location.yy();
         double zz = location.zz();
         setPosition(hairVa, xx, yy, zz);
+
+        return this;
     }
 
     /**
@@ -183,22 +196,29 @@ public class Hair extends NonCopyable {
      *
      * @param orientation the desired orientation (relative to system
      * coordinates, not {@code null}, unaffected)
+     * @return the modified simulation, for chaining
      */
-    public void setRotation(QuatArg orientation) {
+    public Hair setRotation(QuatArg orientation) {
         long hairVa = va();
         float x = orientation.getX();
         float y = orientation.getY();
         float z = orientation.getZ();
         float w = orientation.getW();
         setRotation(hairVa, x, y, z, w);
+
+        return this;
     }
 
     /**
      * Unlock the data buffers.
+     *
+     * @return the modified simulation, for chaining
      */
-    public void unlockReadBackBuffers() {
+    public Hair unlockReadBackBuffers() {
         long hairVa = va();
         unlockReadBackBuffers(hairVa);
+
+        return this;
     }
 
     /**
@@ -214,8 +234,9 @@ public class Hair extends NonCopyable {
      * @param shaders the compute shaders to use (not {@code null})
      * @param computeSystem the compute system to use (not {@code null})
      * @param queue the compute queue to use (not {@code null})
+     * @return the modified simulation, for chaining
      */
-    public void update(float deltaTime, Mat44Arg jointToHair,
+    public Hair update(float deltaTime, Mat44Arg jointToHair,
             Mat44Array jointMatrices, ConstPhysicsSystem physicsSystem,
             HairShaders shaders, ComputeSystem computeSystem,
             ComputeQueue queue) {
@@ -229,6 +250,8 @@ public class Hair extends NonCopyable {
         long queueVa = queue.va();
         update(hairVa, deltaTime, jointToHairVa, jointMatricesVa,
                 physicsSystemVa, shadersVa, computeSystemVa, queueVa);
+
+        return this;
     }
     // *************************************************************************
     // native private methods

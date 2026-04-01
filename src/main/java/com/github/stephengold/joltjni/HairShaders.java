@@ -74,11 +74,14 @@ final public class HairShaders extends JoltPhysicsObject implements RefTarget {
      * first.
      *
      * @param computeSystem the compute system to use (not {@code null})
+     * @return the modified shaders, for chaining
      */
-    public void init(ComputeSystem computeSystem) {
+    public HairShaders init(ComputeSystem computeSystem) {
         long shadersVa = va();
         long systemVa = computeSystem.va();
         init(shadersVa, systemVa);
+
+        return this;
     }
     // *************************************************************************
     // RefTarget methods

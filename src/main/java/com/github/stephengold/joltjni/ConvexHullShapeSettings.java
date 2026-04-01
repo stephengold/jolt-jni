@@ -226,13 +226,16 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      *
      * @param point the coordinates of the point to add (not {@code null},
      * unaffected)
+     * @return the modified settings, for chaining
      */
-    public void addPoint(Vec3Arg point) {
+    public ConvexHullShapeSettings addPoint(Vec3Arg point) {
         long settingsVa = va();
         float x = point.getX();
         float y = point.getY();
         float z = point.getZ();
         addPoint(settingsVa, x, y, z);
+
+        return this;
     }
 
     /**
@@ -328,20 +331,26 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * attribute: mHullTolerance)
      *
      * @param tolerance the desired tolerance (&ge;0, default=0.001)
+     * @return the modified settings, for chaining
      */
-    public void setHullTolerance(float tolerance) {
+    public ConvexHullShapeSettings setHullTolerance(float tolerance) {
         long settingsVa = va();
         setHullTolerance(settingsVa, tolerance);
+
+        return this;
     }
 
     /**
      * Alter the convex radius. (native attribute: mMaxConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0, default=0)
+     * @return the modified settings, for chaining
      */
-    public void setMaxConvexRadius(float radius) {
+    public ConvexHullShapeSettings setMaxConvexRadius(float radius) {
         long settingsVa = va();
         setMaxConvexRadius(settingsVa, radius);
+
+        return this;
     }
 
     /**
@@ -349,10 +358,13 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * and the actual hull. (native attribute: mMaxErrorConvexRadius)
      *
      * @param maxError the desired maximum separation (&ge;0, default=0.05)
+     * @return the modified settings, for chaining
      */
-    public void setMaxErrorConvexRadius(float maxError) {
+    public ConvexHullShapeSettings setMaxErrorConvexRadius(float maxError) {
         long settingsVa = va();
         setMaxErrorConvexRadius(settingsVa, maxError);
+
+        return this;
     }
 
     /**
@@ -360,13 +372,16 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      *
      * @param index which point to replace (&ge;0)
      * @param point the desired coordinates (not {@code null}, unaffected)
+     * @return the modified settings, for chaining
      */
-    public void setPoint(int index, Vec3Arg point) {
+    public ConvexHullShapeSettings setPoint(int index, Vec3Arg point) {
         long settingsVa = va();
         float x = point.getX();
         float y = point.getY();
         float z = point.getZ();
         setPoint(settingsVa, index, x, y, z);
+
+        return this;
     }
 
     /**
@@ -375,8 +390,9 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      *
      * @param points the array of desired point locations (not {@code null},
      * unaffected)
+     * @return the modified settings, for chaining
      */
-    public void setPoints(Vec3Arg... points) {
+    public ConvexHullShapeSettings setPoints(Vec3Arg... points) {
         int numPoints = points.length;
         int numFloats = numAxes * numPoints;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
@@ -385,6 +401,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         }
         long settingsVa = va();
         setPoints(settingsVa, numPoints, buffer);
+
+        return this;
     }
     // *************************************************************************
     // native private methods
