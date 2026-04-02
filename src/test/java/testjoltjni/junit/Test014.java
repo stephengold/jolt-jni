@@ -25,8 +25,11 @@ import com.github.stephengold.joltjni.Body;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShape;
+import com.github.stephengold.joltjni.CustomTireMaxImpulseCallback;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.PhysicsSystem;
+import com.github.stephengold.joltjni.SimpleTireMaxImpulseCallback;
+import com.github.stephengold.joltjni.TireMaxImpulseCallback;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleCollisionTesterCastCylinder;
 import com.github.stephengold.joltjni.VehicleCollisionTesterCastSphere;
@@ -43,6 +46,7 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
+import java.nio.FloatBuffer;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -66,6 +70,8 @@ public class Test014 {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
 
+        doCustomTireMaxImpulseCallback();
+        doSimpleTireMaxImpulseCallback();
         doVehicleCollisionTesterCastCylinder();
         doVehicleCollisionTesterCastSphere();
         doVehicleCollisionTesterRay();
@@ -79,6 +85,85 @@ public class Test014 {
     }
     // *************************************************************************
     // Java private methods
+
+    /**
+     * Test the {@code CustomTireMaxImpulseCallback} class.
+     */
+    private static void doCustomTireMaxImpulseCallback() {
+        TireMaxImpulseCallback callback = new CustomTireMaxImpulseCallback() {
+            /**
+             * Calculate maximum lateral tire impulse.
+             *
+             * @param wi the index of the desired wheel (&ge;0)
+             * @param si the suspension impulse
+             * @param lof the longitudinal friction coefficient
+             * @param laf the lateral friction coefficient
+             * @param los the longitudinal slip component
+             * @param las the lateral slip component
+             * @param dt the duration of the simulation step (in seconds)
+             * @return the lateral component of the maximum impulse
+             */
+            @Override
+            public float maxLateralImpulse(int wi, float si, float lof,
+                    float laf, float los, float las, float dt) {
+                float result = wi + 2f * si + 3f * lof + 4f * laf + 5f * los
+                        + 6f * las + 7f * dt;
+                return result;
+            }
+
+            /**
+             * Calculate maximum longitudinal tire impulse.
+             *
+             * @param wi the index of the desired wheel (&ge;0)
+             * @param si the suspension impulse
+             * @param lof the longitudinal friction coefficient
+             * @param laf the lateral friction coefficient
+             * @param los the longitudinal slip component
+             * @param las the lateral slip component
+             * @param dt the duration of the simulation step (in seconds)
+             * @return the longitudinal component of the maximum impulse
+             */
+            @Override
+            public float maxLongitudinalImpulse(int wi, float si, float lof,
+                    float laf, float los, float las, float dt) {
+                float result = wi + 7f * si + 6f * lof + 5f * laf + 4f * los
+                        + 3f * las + 2f * dt;
+                return result;
+            }
+        };
+        FloatBuffer storeImpulses = Jolt.newDirectFloatBuffer(2);
+        callback.calculate(1, storeImpulses, 2f, 5f, 10f, 20f, 50f, 100f);
+        Assert.assertEquals(1_160f, storeImpulses.get(0), 0f);
+        Assert.assertEquals(525f, storeImpulses.get(1), 0f);
+
+        TestUtils.testClose(callback);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code SimpleTireMaxImpulseCallback} class.
+     */
+    private static void doSimpleTireMaxImpulseCallback() {
+        SimpleTireMaxImpulseCallback callback
+                = new SimpleTireMaxImpulseCallback(0.1f, 10f);
+        FloatBuffer storeImpulses = Jolt.newDirectFloatBuffer(2);
+        callback.calculate(1, storeImpulses, 2f, 5f, 10f, 20f, 50f, 100f);
+        Assert.assertEquals(2f, storeImpulses.get(0), 0f);
+        Assert.assertEquals(100f, storeImpulses.get(1), 0f);
+
+        // Test getters:
+        Assert.assertEquals(0.1f, callback.getLateralMultiplier(), 0f);
+        Assert.assertEquals(10f, callback.getLongitudinalMultiplier(), 0f);
+
+        // Test setters:
+        callback.setLateralMultiplier(2f);
+        callback.setLongitudinalMultiplier(20f);
+        Assert.assertEquals(2f, callback.getLateralMultiplier(), 0f);
+        Assert.assertEquals(20f, callback.getLongitudinalMultiplier(), 0f);
+
+        TestUtils.testClose(callback);
+        System.gc();
+    }
 
     /**
      * Test the {@code VehicleCollisionTesterCastCylinder} class.
