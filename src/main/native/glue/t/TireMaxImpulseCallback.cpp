@@ -32,6 +32,24 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_TireMaxImpulseCallback
+ * Method:    calculate
+ * Signature: (JILjava/nio/FloatBuffer;FFFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TireMaxImpulseCallback_calculate
+  (JNIEnv *pEnv, jclass, jlong callbackVa, jint wheelIndex,
+  jobject storeFloats, jfloat suspensionImpulse, jfloat longitudinalFriction,
+  jfloat lateralFriction, jfloat longitudinalSlip, jfloat lateralSlip,
+  jfloat deltaTime) {
+    Tmic * const pCallback = reinterpret_cast<Tmic *> (callbackVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 2);
+    pCallback->calculate(wheelIndex, pFloats[1], pFloats[0], suspensionImpulse,
+            longitudinalFriction, lateralFriction, longitudinalSlip,
+            lateralSlip, deltaTime);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TireMaxImpulseCallback
  * Method:    free
  * Signature: (J)V
  */

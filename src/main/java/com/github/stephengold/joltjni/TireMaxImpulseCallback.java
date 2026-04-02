@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.nio.FloatBuffer;
+
 /**
  * Calculate maximum tire impulses for a wheeled vehicle. (native type:
  * {@code WheeledVehicleController::TireMaxImpulseCallback})
@@ -35,6 +37,31 @@ abstract public class TireMaxImpulseCallback extends JoltPhysicsObject {
      * Instantiate a callback with no native object assigned.
      */
     TireMaxImpulseCallback() {
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Perform the calculations.
+     *
+     * @param wheelIndex the index of the desired wheel (&ge;0)
+     * @param suspensionImpulse the suspension impulse
+     * @param storeFloats storage for the results (not {@code null},
+     * capacity&ge;2, 0:lateral, 1:longitudinal)
+     * @param longitudinalFriction the longitudinal friction coefficient
+     * @param lateralFriction the lateral friction coefficient
+     * @param longitudinalSlip the longitudinal slip component
+     * @param lateralSlip the lateral slip component
+     * @param deltaTime the duration of the simulation step (in seconds)
+     */
+    public void calculate(int wheelIndex, FloatBuffer storeFloats,
+            float suspensionImpulse, float longitudinalFriction,
+            float lateralFriction, float longitudinalSlip, float lateralSlip,
+            float deltaTime) {
+        long callbackVa = va();
+        calculate(callbackVa, wheelIndex, storeFloats, suspensionImpulse,
+                longitudinalFriction, lateralFriction, longitudinalSlip,
+                lateralSlip, deltaTime);
     }
     // *************************************************************************
     // new protected methods
@@ -52,6 +79,11 @@ abstract public class TireMaxImpulseCallback extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void calculate(long callbackVa, int wheelIndex,
+            FloatBuffer storeFloats, float suspensionImpulse,
+            float longitudinalFriction, float lateralFriction,
+            float longitudinalSlip, float lateralSlip, float deltaTime);
 
     native private static void free(long callbackVa);
 }
