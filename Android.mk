@@ -289,6 +289,7 @@ $(N)/glue/s/ScaledShapeSettings.cpp \
 $(N)/glue/s/SerializableObject.cpp \
 $(N)/glue/s/SettingsResult.cpp \
 $(N)/glue/s/SimCollideBodyVsBody.cpp \
+$(N)/glue/s/SimpleTireMaxImpulseCallback.cpp \
 $(N)/glue/s/SimShapeFilter.cpp \
 $(N)/glue/s/SixDofConstraint.cpp \
 $(N)/glue/s/SixDofConstraintSettings.cpp \
