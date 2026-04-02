@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -74,7 +74,7 @@ public class Test008 {
     /**
      * Test (1,2,3,4), an arbitrary non-normalized quaternion.
      *
-     * @param q1234 the quaternion to test (not null, unaffected)
+     * @param q1234 the quaternion to test (not {@code null}, unaffected)
      */
     private static void test1234(QuatArg q1234) {
         TestUtils.assertEquals(1f, 2f, 3f, 4f, q1234, 0f);
@@ -138,7 +138,7 @@ public class Test008 {
     /**
      * Test an identity quaternion.
      *
-     * @param identity the quaternion to test (not null, unaffected)
+     * @param identity the quaternion to test (not {@code null}, unaffected)
      */
     private static void testIdentity(QuatArg identity) {
         TestUtils.assertEquals(0f, 0f, 0f, 1f, identity, 0f);
@@ -413,7 +413,7 @@ public class Test008 {
     /**
      * Test a quaternion that rotates 90 degrees around the +X axis.
      *
-     * @param x90 the quaternion to test (not null, unaffected)
+     * @param x90 the quaternion to test (not {@code null}, unaffected)
      */
     private static void testX90(QuatArg x90) {
         TestUtils.assertEquals(rootHalf, 0f, 0f, rootHalf, x90, 1e-6f);

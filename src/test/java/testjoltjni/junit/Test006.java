@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -395,7 +395,7 @@ public class Test006 {
     /**
      * Test the getters and defaults of the specified {@code BoxShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testBoxSsDefaults(ConstBoxShapeSettings settings) {
         testConvexSsDefaults(settings);
@@ -407,7 +407,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code BoxShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testBoxSsSetters(BoxShapeSettings settings) {
         testSsSetters(settings);
@@ -430,7 +430,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code CapsuleShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testCapsuleSsDefaults(CapsuleShapeSettings settings) {
         testConvexSsDefaults(settings);
@@ -442,7 +442,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code CapsuleShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testCapsuleSsSetters(CapsuleShapeSettings settings) {
         testSsSetters(settings);
@@ -464,7 +464,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code ConvexHullShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testConvexHullSsDefaults(
             ConvexHullShapeSettings settings) {
@@ -479,7 +479,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code ConvexHullShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testConvexHullSsSetters(
             ConvexHullShapeSettings settings) {
@@ -504,7 +504,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code ConvexShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testConvexSsDefaults(
             ConstConvexShapeSettings settings) {
@@ -518,7 +518,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code CylinderShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testCylinderSsDefaults(CylinderShapeSettings settings) {
         testConvexSsDefaults(settings);
@@ -531,7 +531,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code CylinderShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testCylinderSsSetters(CylinderShapeSettings settings) {
         testSsSetters(settings);
@@ -555,7 +555,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code HeightFieldShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testHeightFieldSsDefaults(
             HeightFieldShapeSettings settings) {
@@ -575,7 +575,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code HeightFieldShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testHeightFieldSsSetters(
             HeightFieldShapeSettings settings) {
@@ -603,7 +603,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code EmptyShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testEmptySsDefaults(EmptyShapeSettings settings) {
         testSsDefaults(settings);
@@ -612,7 +612,7 @@ public class Test006 {
     /**
      * Test the getters and defaults of the specified {@code MeshShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testMeshSsDefaults(MeshShapeSettings settings) {
         testSsDefaults(settings);
@@ -628,7 +628,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code MeshShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testMeshSsSetters(MeshShapeSettings settings) {
         testSsSetters(settings);
@@ -647,7 +647,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code MutableCompoundShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testMutableCompoundSsDefaults(
             MutableCompoundShapeSettings settings) {
@@ -658,7 +658,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code OffsetCenterOfMassShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testOffsetCenterOfMassSsDefaults(
             OffsetCenterOfMassShapeSettings settings) {
@@ -670,7 +670,7 @@ public class Test006 {
      * Test the setters of the specified
      * {@code OffsetCenterOfMassShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testOffsetCenterOfMassSsSetters(
             OffsetCenterOfMassShapeSettings settings) {
@@ -683,7 +683,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code PlaneShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testPlaneSsDefaults(PlaneShapeSettings settings) {
         testSsDefaults(settings);
@@ -699,7 +699,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code PlaneShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testPlaneSsSetters(PlaneShapeSettings settings) {
         testSsSetters(settings);
@@ -723,7 +723,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code RotatedTranslatedShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testRotatedTranslatedSsDefaults(
             RotatedTranslatedShapeSettings settings) {
@@ -736,7 +736,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code RotatedTranslatedShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testRotatedTranslatedSsSetters(
             RotatedTranslatedShapeSettings settings) {
@@ -754,7 +754,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code ScaledShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testScaledSsDefaults(ScaledShapeSettings settings) {
         testSsDefaults(settings);
@@ -764,7 +764,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code SphereShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testSphereSsDefaults(SphereShapeSettings settings) {
         testConvexSsDefaults(settings);
@@ -774,7 +774,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code SphereShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testSphereSsSetters(SphereShapeSettings settings) {
         testSsSetters(settings);
@@ -793,7 +793,7 @@ public class Test006 {
     /**
      * Test the getters and defaults of the specified {@code ShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testSsDefaults(ConstShapeSettings settings) {
         Assert.assertTrue(settings.hasAssignedNativeObject());
@@ -804,7 +804,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code SphereShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testSsSetters(ShapeSettings settings) {
         ShapeSettingsRef ref = settings.toRef();
@@ -820,7 +820,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code StaticCompoundShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testStaticCompoundSsDefaults(
             StaticCompoundShapeSettings settings) {
@@ -831,7 +831,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code TaperedCapsuleShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testTaperedCapsuleSsDefaults(
             TaperedCapsuleShapeSettings settings) {
@@ -845,7 +845,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code TaperedCapsuleShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testTaperedCapsuleSsSetters(
             TaperedCapsuleShapeSettings settings) {
@@ -871,7 +871,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code TaperedCylinderShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testTaperedCylinderSsDefaults(
             TaperedCylinderShapeSettings settings) {
@@ -886,7 +886,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code TaperedCylinderShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testTaperedCylinderSsSetters(
             TaperedCylinderShapeSettings settings) {
@@ -913,7 +913,7 @@ public class Test006 {
      * Test the getters and defaults of the specified
      * {@code TriangleShapeSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testTriangleSsDefaults(TriangleShapeSettings settings) {
         testConvexSsDefaults(settings);
@@ -928,7 +928,7 @@ public class Test006 {
     /**
      * Test the setters of the specified {@code TriangleShapeSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testTriangleSsSetters(TriangleShapeSettings settings) {
         testSsSetters(settings);

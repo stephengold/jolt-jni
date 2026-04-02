@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -251,7 +251,7 @@ public class Test014 {
      * Test the getters and defaults of the specified
      * {@code VehicleConstraintSettings}.
      *
-     * @param vcs the settings to test (not null, unaffected)
+     * @param vcs the settings to test (not {@code null}, unaffected)
      */
     private static void testVehicleConstraintSettingsDefaults(
             VehicleConstraintSettings vcs) {
@@ -272,7 +272,7 @@ public class Test014 {
     /**
      * Test the setters of the specified {@code VehicleConstraintSettings}.
      *
-     * @param vcs the settings to test (not null, modified)
+     * @param vcs the settings to test (not {@code null}, modified)
      */
     private static void testVehicleConstraintSettingsSetters(
             VehicleConstraintSettings vcs) {
@@ -313,7 +313,7 @@ public class Test014 {
     /**
      * Test the getters and defaults of the specified {@code WheelSettings}.
      *
-     * @param ws the settings to test (not null, unaffected)
+     * @param ws the settings to test (not {@code null}, unaffected)
      */
     private static void testWheelSettingsDefaults(ConstWheelSettings ws) {
         Assert.assertFalse(ws.getEnableSuspensionForcePoint());
@@ -334,7 +334,7 @@ public class Test014 {
     /**
      * Test the setters of the specified {@code WheelSettings}.
      *
-     * @param ws the settings to test (not null, modified)
+     * @param ws the settings to test (not {@code null}, modified)
      */
     private static void testWheelSettingsSetters(WheelSettings ws) {
         ws.setEnableSuspensionForcePoint(true);
@@ -366,7 +366,7 @@ public class Test014 {
     /**
      * Test the getters and defaults of the specified {@code WheelSettingsTv}.
      *
-     * @param wstv the settings to test (not null, unaffected)
+     * @param wstv the settings to test (not {@code null}, unaffected)
      */
     private static void testWheelSettingsTvDefaults(ConstWheelSettingsTv wstv) {
         testWheelSettingsDefaults(wstv);
@@ -378,7 +378,7 @@ public class Test014 {
     /**
      * Test the setters of the specified {@code WheelSettingsTv}.
      *
-     * @param wstv the settings to test (not null, modified)
+     * @param wstv the settings to test (not {@code null}, modified)
      */
     private static void testWheelSettingsTvSetters(WheelSettingsTv wstv) {
         testWheelSettingsSetters(wstv);
@@ -393,7 +393,7 @@ public class Test014 {
     /**
      * Test the getters and defaults of the specified {@code WheelSettingsWv}.
      *
-     * @param wswv the settings to test (not null, unaffected)
+     * @param wswv the settings to test (not {@code null}, unaffected)
      */
     private static void testWheelSettingsWvDefaults(WheelSettingsWv wswv) {
         testWheelSettingsDefaults(wswv);
@@ -407,7 +407,7 @@ public class Test014 {
     /**
      * Test the setters of the specified {@code WheelSettingsWv}.
      *
-     * @param wswv the settings to test (not null, modified)
+     * @param wswv the settings to test (not {@code null}, modified)
      */
     private static void testWheelSettingsWvSetters(WheelSettingsWv wswv) {
         testWheelSettingsSetters(wswv);
@@ -425,7 +425,7 @@ public class Test014 {
      * Test the getters and defaults of the specified
      * {@code WheeledVehicleControllerSettings}.
      *
-     * @param wvcs the settings to test (not null, unaffected)
+     * @param wvcs the settings to test (not {@code null}, unaffected)
      */
     private static void testWvControllerSettingsDefaults(
             WheeledVehicleControllerSettings wvcs) {
@@ -438,7 +438,7 @@ public class Test014 {
      * Test the setters of the specified
      * {@code WheeledVehicleControllerSettings}.
      *
-     * @param wvcs the settings to test (not null, modified)
+     * @param wvcs the settings to test (not {@code null}, modified)
      */
     private static void testWvControllerSettingsSetters(
             WheeledVehicleControllerSettings wvcs) {
