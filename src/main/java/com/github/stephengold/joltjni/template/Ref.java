@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ abstract public class Ref extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate a counted reference with no native object assigned.
+     * Instantiate a generic counted reference with no native object assigned.
      */
     protected Ref() {
     }

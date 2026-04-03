@@ -587,7 +587,7 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
      * Return the address of the native {@code HairSettings}. No objects are
      * affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address, or zero if the reference is empty
      */
     @Override
     public long targetVa() {
@@ -598,7 +598,7 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
     }
 
     /**
-     * Create another counted reference to the native {@code HairSettings}.
+     * Create another counted reference to the targeted settings.
      *
      * @return a new JVM object with a new native object assigned
      */

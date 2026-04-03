@@ -157,7 +157,7 @@ public class GroupFilter
     }
 
     /**
-     * Create a counted reference to the native {@code GroupFilter}.
+     * Create a counted reference to the current filter.
      *
      * @return a new JVM object with a new native object assigned
      */

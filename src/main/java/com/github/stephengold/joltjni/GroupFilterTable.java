@@ -104,7 +104,7 @@ public class GroupFilterTable extends GroupFilter {
     // GroupFilter methods
 
     /**
-     * Create a counted reference to the native {@code GroupFilterTable}.
+     * Create a counted reference to the current filter.
      *
      * @return a new JVM object with a new native object assigned
      */

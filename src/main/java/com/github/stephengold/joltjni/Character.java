@@ -530,7 +530,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     // CharacterBase methods
 
     /**
-     * Create a counted reference to the native {@code Character}.
+     * Create a counted reference to the current character.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -707,7 +707,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * interface. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
      * coordinates, not {@code null}, modified)
      */
@@ -827,7 +827,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Create a counted reference to the native {@code Character}.
+     * Create a read-only counted reference to the current character.
      *
      * @return a new JVM object with a new native object assigned
      */

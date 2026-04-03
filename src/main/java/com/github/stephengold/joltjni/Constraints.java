@@ -78,7 +78,7 @@ public class Constraints extends Array<ConstraintRef> {
      * Copy the reference at the specified index.
      *
      * @param elementIndex the index from which to get the reference (&ge;0)
-     * @return a new reference to the same constraint
+     * @return a new counted reference to the same constraint
      */
     @Override
     public ConstraintRef get(int elementIndex) {

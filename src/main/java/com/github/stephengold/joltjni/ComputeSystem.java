@@ -165,7 +165,7 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the native {@code ComputeSystem}.
+     * Create a counted reference to the current system.
      *
      * @return a new JVM object with a new native object assigned
      */

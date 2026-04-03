@@ -910,7 +910,7 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Create another counted reference to the native {@code CharacterVirtual}.
+     * Create a read-only counted reference to the targeted character.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -942,7 +942,7 @@ final public class CharacterVirtualRef
      * Return the address of the native {@code CharacterVirtual}. No objects are
      * affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address, or zero if the reference is empty
      */
     @Override
     public long targetVa() {
@@ -953,7 +953,7 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Create another counted reference to the native {@code CharacterVirtual}.
+     * Create another counted reference to the targeted character.
      *
      * @return a new JVM object with a new native object assigned
      */

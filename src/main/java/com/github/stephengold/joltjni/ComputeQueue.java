@@ -81,7 +81,7 @@ public class ComputeQueue extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the native {@code ComputeQueue}.
+     * Create a counted reference to the current queue.
      *
      * @return a new JVM object with a new native object assigned
      */

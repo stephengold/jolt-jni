@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,8 +32,8 @@ import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
 /**
- * A counted reference to a {@code Character}. (native type:
- * {@code Ref<Character>})
+ * A counted reference to a {@code com.github.stephengold.joltjni.Character}.
+ * (native type: {@code Ref<Character>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -793,7 +793,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Create another counted reference to the native {@code Character}.
+     * Create a read-only counted reference to the targeted character.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -827,7 +827,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Return the address of the native {@code Character}. No objects are
      * affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address, or zero if the reference is empty
      */
     @Override
     public long targetVa() {
@@ -838,7 +838,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Create another counted reference to the native {@code Character}.
+     * Create another counted reference to the targeted character.
      *
      * @return a new JVM object with a new native object assigned
      */

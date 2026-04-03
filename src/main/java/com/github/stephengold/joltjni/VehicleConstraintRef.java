@@ -497,7 +497,7 @@ final public class VehicleConstraintRef
      * Return the address of the native {@code VehicleConstraint}. No objects
      * are affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address, or zero if the reference is empty
      */
     @Override
     public long targetVa() {
@@ -508,7 +508,7 @@ final public class VehicleConstraintRef
     }
 
     /**
-     * Create another counted reference to the native {@code VehicleConstraint}.
+     * Create another counted reference to the targeted constraint.
      *
      * @return a new JVM object with a new native object assigned
      */

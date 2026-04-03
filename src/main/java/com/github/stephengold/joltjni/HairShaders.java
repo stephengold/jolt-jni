@@ -110,7 +110,7 @@ final public class HairShaders extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the native {@code HairShaders}.
+     * Create a counted reference to the current shaders.
      *
      * @return a new JVM object with a new native object assigned
      */

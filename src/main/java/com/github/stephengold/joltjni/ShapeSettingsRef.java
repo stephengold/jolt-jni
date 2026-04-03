@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -101,7 +101,7 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
     }
 
     /**
-     * Create a counted reference to the native {@code ShapeSettings}.
+     * Create a read-only counted reference to the targeted settings.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -133,7 +133,7 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
      * Return the address of the native {@code ShapeSettings}. No objects are
      * affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address, or zero if the reference is empty
      */
     @Override
     public long targetVa() {
@@ -144,7 +144,7 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
     }
 
     /**
-     * Create another counted reference to the native {@code ShapeSettings}.
+     * Create another counted reference to the targeted settings.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -87,7 +87,7 @@ final public class ComputeSystemRef extends Ref {
      * Return the address of the native {@code ComputeSystem}. No objects are
      * affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address, or zero if the reference is empty
      */
     @Override
     public long targetVa() {
@@ -98,7 +98,7 @@ final public class ComputeSystemRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the native {@code ComputeSystem}.
+     * Create another counted reference to the targeted system.
      *
      * @return a new JVM object with a new native object assigned
      */

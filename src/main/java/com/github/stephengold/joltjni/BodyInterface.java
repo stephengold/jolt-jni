@@ -786,7 +786,7 @@ public class BodyInterface extends NonCopyable {
      * Access the body's shape.
      *
      * @param bodyId the ID of the body
-     * @return a new reference
+     * @return a new counted reference
      */
     public ShapeRefC getShape(int bodyId) {
         long bodyInterfaceVa = va();

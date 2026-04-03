@@ -224,7 +224,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the native {@code PhysicsScene}.
+     * Create a counted reference to the current scene.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -189,7 +189,7 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the native {@code Geometry}.
+     * Create a counted reference to the current geometry.
      *
      * @return a new JVM object with a new native object assigned
      */

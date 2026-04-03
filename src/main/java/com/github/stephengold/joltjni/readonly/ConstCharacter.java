@@ -207,7 +207,7 @@ public interface ConstCharacter extends ConstCharacterBase {
     RMat44 getWorldTransform(boolean lockBodies);
 
     /**
-     * Create a counted reference to the native {@code Character}.
+     * Create a read-only counted reference to the current character.
      *
      * @return a new JVM object with a new native object assigned
      */

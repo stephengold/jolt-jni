@@ -219,7 +219,7 @@ public class PathConstraintPath
     }
 
     /**
-     * Create a counted reference to the native {@code PathConstraintPath}.
+     * Create a counted reference to the current path.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -463,7 +463,7 @@ public class VehicleConstraint
     // Constraint methods
 
     /**
-     * Create a counted reference to the native {@code VehicleConstraint}.
+     * Create a counted reference to the current constraint.
      *
      * @return a new JVM object with a new native object assigned
      */

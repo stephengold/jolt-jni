@@ -73,7 +73,7 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
      * Copy the reference at the specified index.
      *
      * @param elementIndex the index from which to get the reference (&ge;0)
-     * @return a new reference to the same material
+     * @return a new counted reference to the same material
      */
     @Override
     public PhysicsMaterialRef get(int elementIndex) {

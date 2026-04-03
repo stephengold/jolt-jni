@@ -84,7 +84,7 @@ final public class ShapeList extends Array<ShapeRefC> {
      * Access the shape at the specified index.
      *
      * @param elementIndex the index from which to get the shape (&ge;0)
-     * @return a new reference
+     * @return a new counted reference to the same shape
      */
     @Override
     public ShapeRefC get(int elementIndex) {

@@ -248,7 +248,7 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     ShapeResult scaleShape(Vec3Arg scaleFactors);
 
     /**
-     * Create a counted reference to the native {@code Shape}.
+     * Create a read-only counted reference to the current shape.
      *
      * @return a new JVM object with a new native object assigned
      */

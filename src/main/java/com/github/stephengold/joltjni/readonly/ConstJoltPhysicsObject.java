@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -55,7 +55,7 @@ public interface ConstJoltPhysicsObject
      * Return the address of the target object (if this is a counted reference)
      * or else the address of the native object. No objects are affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address
      */
     long targetVa();
 }

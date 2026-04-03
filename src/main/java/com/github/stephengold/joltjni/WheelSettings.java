@@ -511,7 +511,7 @@ abstract public class WheelSettings
     abstract public void setEmbedded();
 
     /**
-     * Create a counted reference to the native {@code WheelSettings}.
+     * Create a counted reference to the current settings.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -86,6 +86,7 @@ final public class SmokeTestAll {
      * @param arguments array of command-line arguments (not {@code null})
      */
     public static void main(String... arguments) {
+        //TestUtils.traceAllocations = true;
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
 

@@ -48,12 +48,11 @@ public class CharacterVirtual
      */
     private CharacterContactListener contactListener;
     /**
-     * protect the char-vs-char collision interface (if any) from garbage
-     * collection
+     * protect the collision interface (if any) from garbage collection
      */
     private CharacterVsCharacterCollision cvcInterface;
     /**
-     * where to add the body (not null)
+     * where to add the character's body (not {@code null})
      */
     final private PhysicsSystem system;
     // *************************************************************************
@@ -62,7 +61,7 @@ public class CharacterVirtual
     /**
      * Instantiate a character with a new native object assigned.
      *
-     * @param settings the settings to use (not null, unaffected)
+     * @param settings the settings to use (not {@code null}, unaffected)
      * @param location the desired initial location (in system coordinates, not
      * {@code null}, unaffected)
      * @param orientation the desired initial orientation (in system
@@ -389,7 +388,7 @@ public class CharacterVirtual
     // CharacterBase methods
 
     /**
-     * Create a counted reference to the native {@code CharacterVirtual}.
+     * Create a counted reference to the current character.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -810,7 +809,7 @@ public class CharacterVirtual
     }
 
     /**
-     * Create a counted reference to the native {@code CharacterVirtual}.
+     * Create a read-only counted reference to the current character.
      *
      * @return a new JVM object with a new native object assigned
      */

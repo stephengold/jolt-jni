@@ -631,7 +631,7 @@ final public class HairSettings
     }
 
     /**
-     * Create a counted reference to the native {@code HairSettings}.
+     * Create a counted reference to the current settings.
      *
      * @return a new JVM object with a new native object assigned
      */

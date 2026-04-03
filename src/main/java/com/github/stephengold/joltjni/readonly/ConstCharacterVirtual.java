@@ -248,7 +248,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     boolean hasCollidedWith(ConstCharacterVirtual otherCharacter);
 
     /**
-     * Create a counted reference to the native {@code CharacterVirtual}.
+     * Create a read-only counted reference to the current character.
      *
      * @return a new JVM object with a new native object assigned
      */

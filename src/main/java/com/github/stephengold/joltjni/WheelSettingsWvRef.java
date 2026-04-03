@@ -638,7 +638,7 @@ final public class WheelSettingsWvRef
      * Return the address of the native {@code WheelSettingsWV}. No objects are
      * affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address, or zero if the reference is empty
      */
     @Override
     public long targetVa() {
@@ -649,7 +649,7 @@ final public class WheelSettingsWvRef
     }
 
     /**
-     * Create another counted reference to the native {@code WheelSettingsWV}.
+     * Create another counted reference to the targeted settings.
      *
      * @return a new JVM object with a new native object assigned
      */

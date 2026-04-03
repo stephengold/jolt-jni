@@ -318,7 +318,7 @@ final public class RagdollRef extends Ref {
      * Return the address of the native {@code Ragdoll}. No objects are
      * affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address, or zero if the reference is empty
      */
     @Override
     public long targetVa() {
@@ -329,7 +329,7 @@ final public class RagdollRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the native {@code Ragdoll}.
+     * Create another counted reference to the targeted ragdoll.
      *
      * @return a new JVM object with a new native object assigned
      */

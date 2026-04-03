@@ -313,7 +313,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the native {@code Ragdoll}.
+     * Create a counted reference to the current ragdoll.
      *
      * @return a new JVM object with a new native object assigned
      */

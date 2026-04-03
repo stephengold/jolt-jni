@@ -55,7 +55,7 @@ public interface ConstPhysicsMaterial extends ConstSerializableObject {
     void saveBinaryState(StreamOut stream);
 
     /**
-     * Create a counted reference to the native {@code PhysicsMaterial}.
+     * Create a read-only counted reference to the current material.
      *
      * @return a new JVM object with a new native object assigned
      */

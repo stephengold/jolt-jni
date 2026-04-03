@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -638,7 +638,7 @@ final public class CharacterVirtualSettingsRef
      * Return the address of the native {@code CharacterVirtualSettings}. No
      * objects are affected.
      *
-     * @return a virtual address (not zero)
+     * @return the virtual address, or zero if the reference is empty
      */
     @Override
     public long targetVa() {
@@ -649,8 +649,7 @@ final public class CharacterVirtualSettingsRef
     }
 
     /**
-     * Create another counted reference to the native
-     * {@code CharacterVirtualSettings}.
+     * Create another counted reference to the targeted settings.
      *
      * @return a new JVM object with a new native object assigned
      */
