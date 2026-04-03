@@ -86,10 +86,10 @@ public class ComputeQueue extends NonCopyable implements RefTarget {
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public ConstraintRef toRef() {
+    public ComputeQueueRef toRef() {
         long queueVa = va();
         long refVa = toRef(queueVa);
-        ConstraintRef result = new ConstraintRef(refVa, true);
+        ComputeQueueRef result = new ComputeQueueRef(refVa, true);
 
         return result;
     }
