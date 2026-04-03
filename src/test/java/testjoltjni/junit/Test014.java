@@ -214,8 +214,7 @@ public class Test014 {
         vcs.setController(wvcs);
 
         BoxShape shape = new BoxShape(2f);
-        BodyCreationSettings bcs = new BodyCreationSettings()
-                .setShape(shape);
+        BodyCreationSettings bcs = new BodyCreationSettings().setShape(shape);
         PhysicsSystem physicsSystem = TestUtils.newPhysicsSystem(2);
         BodyInterface bi = physicsSystem.getBodyInterface();
         Body body = bi.createBody(bcs);

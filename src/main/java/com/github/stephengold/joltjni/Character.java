@@ -484,8 +484,8 @@ public class Character extends CharacterBase implements ConstCharacter {
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
-    public void setRotation(QuatArg orientation, EActivation activation,
-            boolean lockBodies) {
+    public void setRotation(
+            QuatArg orientation, EActivation activation, boolean lockBodies) {
         long characterVa = va();
         float qx = orientation.getX();
         float qy = orientation.getY();
