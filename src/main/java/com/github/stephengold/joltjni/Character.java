@@ -58,6 +58,8 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public Character(ConstCharacterSettings settings, RVec3Arg location,
             QuatArg orientation, long userData, PhysicsSystem system) {
+        assert system != null;
+
         this.system = system;
         long settingsVa = settings.targetVa();
         double locX = location.xx();
@@ -83,6 +85,8 @@ public class Character extends CharacterBase implements ConstCharacter {
      * @param physicsSystem where to add the body (not {@code null})
      */
     Character(long characterVa, PhysicsSystem physicsSystem) {
+        assert physicsSystem != null;
+
         this.system = physicsSystem;
         long refVa = toRef(characterVa);
         setVirtualAddress(characterVa,
