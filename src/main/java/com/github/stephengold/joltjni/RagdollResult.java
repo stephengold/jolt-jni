@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -53,6 +53,7 @@ final public class RagdollResult extends Result<RagdollSettingsRef> {
      *
      * @return a new JVM object with a new native object assigned
      */
+    @Override
     public RagdollSettingsRef get() {
         long resultVa = va();
         long settingsRefVa = get(resultVa);
