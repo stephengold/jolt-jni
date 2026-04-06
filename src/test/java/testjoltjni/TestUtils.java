@@ -357,7 +357,8 @@ final public class TestUtils {
         Jolt.destroyFactory();
 
         if (TestUtils.explicitFreeing) {
-            Assert.assertEquals(Jolt.countDeletes(), Jolt.countNews());
+            // Test for leakage of native objects:
+            Assert.assertEquals(Jolt.countNews(), Jolt.countDeletes());
         }
 
         System.gc();
