@@ -69,7 +69,7 @@ public class BodyBatchQueryTest {
         TestUtils.initializeNativeLibrary();
 
         final int numBodies = 5;
-        PhysicsSystem physicsSystem = TestUtils.newPhysicsSystem(100);
+        PhysicsSystem physicsSystem = TestUtils.newPhysicsSystem(numBodies);
         BatchBodyInterface bodyInterface = physicsSystem.getBodyInterface();
         BodyIdArray ids = new BodyIdArray(numBodies);
 
