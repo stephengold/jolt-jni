@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,10 @@ import com.github.stephengold.joltjni.template.Result;
 
 /**
  * Either an error or a {@code PhysicsMaterialRefC}. (native type:
- * {@code Result<Ref<PhysicsMaterial>>})
+ * {@code Result<RefConst<PhysicsMaterial>>})
+ * <p>
+ * Note: Jolt Physics defines
+ * {@code PhysicsMaterialResult = Result<Ref<PhysicsMaterial>>}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -46,10 +49,10 @@ final public class PhysicsMaterialResult extends Result<PhysicsMaterialRefC> {
         setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
-    // Result<PhysicsMaterialRef> methods
+    // Result<PhysicsMaterialRefC> methods
 
     /**
-     * Return the {@code PhysicsMaterialRef}.
+     * Return the {@code PhysicsMaterialRefC}.
      *
      * @return a new JVM object with a new native reference assigned
      */

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -67,8 +67,9 @@ public class BodyRemovalTest {
      * A helper method to create a simple dynamic sphere and add it to the
      * world.
      *
-     * @param bodyInterface the interface to use (not null)
-     * @param position the initial position of the body (not null, unaffected)
+     * @param bodyInterface the interface to use (not {@code null})
+     * @param position the initial position of the body (not {@code null},
+     * unaffected)
      * @return the ID of the newly created body
      */
     private static int createAndAddBody(
@@ -90,7 +91,7 @@ public class BodyRemovalTest {
      * Test the batch-remove and batch-destroy functionality of the specified
      * {@code BodyInterface}.
      *
-     * @param bodyInterface the interface to test (not null)
+     * @param bodyInterface the interface to test (not {@code null})
      */
     private static void testRemoveAndDestroyBodies(
             BodyInterface bodyInterface) {

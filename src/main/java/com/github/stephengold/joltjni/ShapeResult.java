@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,8 @@ import com.github.stephengold.joltjni.template.Result;
 /**
  * Either an error or a {@code ShapeRefC}. (native type:
  * {@code Result<RefConst<Shape>>})
+ * <p>
+ * Note: Jolt Physics defines {@code ShapeResult = Result<Ref<Shape>>}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

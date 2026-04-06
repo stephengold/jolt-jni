@@ -282,7 +282,7 @@ public class SoftBodySharedSettings
      *
      * @param gridSize the desired number of points on each axis (&ge;1)
      * @param gridSpacing the distance between adjacent points
-     * @return a counted reference to new settings
+     * @return a new counted reference to new settings
      */
     public static SoftBodySharedSettingsRef sCreateCube(
             int gridSize, float gridSpacing) {

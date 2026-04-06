@@ -59,7 +59,7 @@ public class CharacterVirtual
     // constructors
 
     /**
-     * Instantiate a character with a new native object assigned.
+     * Instantiate a character with the specified properties.
      *
      * @param settings the settings to use (not {@code null}, unaffected)
      * @param location the desired initial location (in system coordinates, not

@@ -60,8 +60,8 @@ public class BodyBatchQueryTest {
     // new methods exposed
 
     /**
-     * Test all batch getter, setter, and status methods
-     * in {@code BodyInterface}.
+     * Test all batch getter, setter, and status methods in
+     * {@code BodyInterface}.
      */
     @Test
     public void testBodyBatchQueries() {
@@ -121,9 +121,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch position getters.
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to query (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to query (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyDoubleGetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -138,9 +138,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch float getters (friction, gravity factor, restitution).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to query (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to query (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyFloatGetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -168,9 +168,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch integer getters (layer, type).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to query (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to query (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyIntGetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -191,9 +191,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch long getters (user data, shape, and transformed shape).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to query (not null)
-     * @param n   the number of bodies (&ge;0)
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to query (not {@code null})
+     * @param n the number of bodies (&ge;0)
      */
     private void verifyLongGetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -234,9 +234,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch matrix getters (COM transform and inverse inertia).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to query (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to query (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyMatrixGetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -266,9 +266,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch status getters (active, added, sensor).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to query (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to query (not nul{@code null}l)
+     * @param n the number of bodies
      */
     private void verifyStatusBatch(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -296,9 +296,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch float component getters (velocity, rotation).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to query (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to query (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyVec3QuatGetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -324,9 +324,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch double setters (position).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to modify (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to modify (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyDoubleSetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -348,9 +348,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch float setters (friction, gravity factor, restitution).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to modify (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to modify (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyFloatSetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -387,9 +387,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch integer setters (object layer).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to modify (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to modify (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyIntSetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -407,9 +407,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch long setters (user data).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to modify (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to modify (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyLongSetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
@@ -426,9 +426,9 @@ public class BodyBatchQueryTest {
     /**
      * Verify batch Vec3 setters (angular velocity, linear velocity).
      *
-     * @param bi  the interface to use (not null)
-     * @param ids IDs of bodies to modify (not null)
-     * @param n   the number of bodies
+     * @param bi the interface to use (not {@code null})
+     * @param ids IDs of bodies to modify (not {@code null})
+     * @param n the number of bodies
      */
     private void verifyVec3Setters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {

@@ -36,7 +36,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     // fields
 
     /**
-     * where to add the bodies and constraints (not {@code null})
+     * where to add bodies and constraints (not {@code null})
      */
     final private PhysicsSystem system;
     // *************************************************************************

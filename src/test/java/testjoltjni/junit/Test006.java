@@ -802,7 +802,7 @@ public class Test006 {
     }
 
     /**
-     * Test the setters of the specified {@code SphereShapeSettings}.
+     * Test the setters of the specified {@code ShapeSettings}.
      *
      * @param settings the settings to test (not {@code null}, modified)
      */
