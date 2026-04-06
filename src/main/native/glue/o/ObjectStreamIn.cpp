@@ -58,9 +58,9 @@ using namespace JPH;
 #define BODYOF_SREAD_FROM_STREAM_NONREF(T) \
   (JNIEnv *pEnv, jclass, jlong streamVa, jlongArray storeVa) { \
     std::stringstream * const pStream = reinterpret_cast<std::stringstream *> (streamVa); \
-    T * pSettings = new T(); \
-    TRACE_NEW(#T, pSettings) \
+    T * pSettings; \
     const bool result = ObjectStreamIn::sReadObject(*pStream, pSettings); \
+    TRACE_NEW(#T, pSettings) \
     jboolean isCopy; \
     jlong * const pStoreVa = pEnv->GetLongArrayElements(storeVa, &isCopy); \
     pStoreVa[0] = reinterpret_cast<jlong> (pSettings); \
