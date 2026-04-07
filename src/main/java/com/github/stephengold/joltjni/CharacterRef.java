@@ -844,7 +844,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Create another counted reference to the targeted character.
+     * Create an additional counted reference to the targeted character.
      *
      * @return a new JVM object with a new native object assigned
      */

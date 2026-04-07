@@ -41,7 +41,7 @@ final public class PhysicsMaterialRefC extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate an empty reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)

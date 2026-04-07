@@ -84,7 +84,7 @@ final public class ShapeRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted shape.
+     * Create an additional counted reference to the targeted shape.
      *
      * @return a new JVM object with a new native object assigned
      */

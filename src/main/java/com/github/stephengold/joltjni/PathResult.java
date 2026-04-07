@@ -49,7 +49,7 @@ final public class PathResult extends Result<PathConstraintPathRef> {
     // Result<PathConstraintPathRef> methods
 
     /**
-     * Return the {@code PathConstraintPathRef}.
+     * Return a counted reference to the resulting path.
      *
      * @return a new JVM object with a new native reference assigned
      */

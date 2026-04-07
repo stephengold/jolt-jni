@@ -113,7 +113,7 @@ final public class ComputeSystemRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted system.
+     * Create an additional counted reference to the targeted system.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -50,7 +50,7 @@ final public class CharacterRefC
     // constructors
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified character.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
@@ -639,7 +639,8 @@ final public class CharacterRefC
     }
 
     /**
-     * Create another read-only counted reference to the targeted character.
+     * Create an additional read-only counted reference to the targeted
+     * character.
      *
      * @return a new JVM object with a new native object assigned
      */

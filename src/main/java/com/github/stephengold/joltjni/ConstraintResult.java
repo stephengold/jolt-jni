@@ -49,7 +49,7 @@ final public class ConstraintResult extends Result<ConstraintSettingsRef> {
     // Result<ConstraintSettingsRef> methods
 
     /**
-     * Return a counted reference to the settings object.
+     * Return a counted reference to the resulting settings.
      *
      * @return a new JVM object with a new native reference assigned
      */

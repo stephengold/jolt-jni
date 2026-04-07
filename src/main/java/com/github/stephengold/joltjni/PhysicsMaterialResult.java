@@ -52,7 +52,7 @@ final public class PhysicsMaterialResult extends Result<PhysicsMaterialRefC> {
     // Result<PhysicsMaterialRefC> methods
 
     /**
-     * Return the {@code PhysicsMaterialRefC}.
+     * Return a counted reference to the resulting material.
      *
      * @return a new JVM object with a new native reference assigned
      */

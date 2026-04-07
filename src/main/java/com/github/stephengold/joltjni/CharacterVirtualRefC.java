@@ -761,7 +761,8 @@ final public class CharacterVirtualRefC
     }
 
     /**
-     * Create another read-only counted reference to the targeted character.
+     * Create an additional read-only counted reference to the targeted
+     * character.
      *
      * @return a new JVM object with a new native object assigned
      */

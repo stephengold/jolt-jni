@@ -85,7 +85,7 @@ final public class SkeletonMapperRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted mapper.
+     * Create an additional counted reference to the targeted mapper.
      *
      * @return a new JVM object with a new native object assigned
      */

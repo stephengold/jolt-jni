@@ -98,7 +98,7 @@ final public class VehicleControllerSettingsRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted settings.
+     * Create an additional counted reference to the targeted settings.
      *
      * @return a new JVM object with a new native object assigned
      */

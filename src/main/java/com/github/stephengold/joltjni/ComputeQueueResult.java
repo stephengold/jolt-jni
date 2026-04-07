@@ -49,7 +49,7 @@ final public class ComputeQueueResult extends Result<ComputeQueueRef> {
     // Result<ComputeQueueRef> methods
 
     /**
-     * Return a counted reference to the queue.
+     * Return a counted reference to the resulting queue.
      *
      * @return a new JVM object with a new native reference assigned
      */

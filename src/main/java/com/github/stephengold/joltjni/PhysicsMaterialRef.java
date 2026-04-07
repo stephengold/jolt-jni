@@ -42,7 +42,7 @@ final public class PhysicsMaterialRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate an empty reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
@@ -128,7 +128,7 @@ final public class PhysicsMaterialRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted material.
+     * Create an additional counted reference to the targeted material.
      *
      * @return a new JVM object with a new native object assigned
      */

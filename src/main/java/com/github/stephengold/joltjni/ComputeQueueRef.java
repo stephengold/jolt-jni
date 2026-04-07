@@ -99,7 +99,7 @@ final public class ComputeQueueRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted queue.
+     * Create an additional counted reference to the targeted queue.
      *
      * @return a new JVM object with a new native object assigned
      */

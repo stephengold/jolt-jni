@@ -114,7 +114,6 @@ public class BodyBatchQueryTest {
         TestUtils.cleanupPhysicsSystem(physicsSystem);
         TestUtils.cleanup();
     }
-
     // *************************************************************************
     // private methods
 

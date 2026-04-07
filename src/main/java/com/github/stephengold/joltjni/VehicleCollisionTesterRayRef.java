@@ -86,7 +86,7 @@ final public class VehicleCollisionTesterRayRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted tester.
+     * Create a additional counted reference to the targeted tester.
      *
      * @return a new JVM object with a new native object assigned
      */

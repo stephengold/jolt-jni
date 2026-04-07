@@ -49,7 +49,7 @@ final public class ComputeSystemResult extends Result<ComputeSystemRef> {
     // Result<ComputeSystemRef> methods
 
     /**
-     * Return a counted reference to the system.
+     * Return a counted reference to the resulting system.
      *
      * @return a new JVM object with a new native reference assigned
      */

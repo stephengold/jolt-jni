@@ -57,7 +57,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate an empty reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
@@ -511,7 +511,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
-     * Create another read-only counted reference to the targeted shape.
+     * Create an additional read-only counted reference to the targeted shape.
      *
      * @return a new JVM object with a new native object assigned
      */

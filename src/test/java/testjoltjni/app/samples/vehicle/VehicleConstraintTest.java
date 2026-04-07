@@ -306,7 +306,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	// Draw our wheels (this needs to be done in the pre update since we draw the bodies too in the state before the step)
 	for (int w = 0; w < 4; ++w)
 	{
-		ConstWheelSettings settings = mVehicleConstraint.getWheel(w).getSettings();
+		ConstWheelSettings  settings = mVehicleConstraint.getWheel(w).getSettings();
 		RMat44 wheel_transform = mVehicleConstraint.getWheelWorldTransform(w, Vec3.sAxisY(), Vec3.sAxisX()); // The cylinder we draw is aligned with Y so we specify that as rotational axis
 		mDebugRenderer.drawCylinder(wheel_transform, 0.5f * settings.getWidth(), settings.getRadius(), Color.sGreen);
 	}

@@ -42,7 +42,7 @@ final public class GroupFilterTableRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a reference to the specified filter.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
@@ -125,7 +125,7 @@ final public class GroupFilterTableRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted filter.
+     * Create an additional counted reference to the targeted filter.
      *
      * @return a new JVM object with a new native object assigned
      */

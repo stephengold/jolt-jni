@@ -42,7 +42,7 @@ final public class PathConstraintPathRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified path.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
@@ -86,7 +86,7 @@ final public class PathConstraintPathRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted path.
+     * Create an additional counted reference to the targeted path.
      *
      * @return a new JVM object with a new native object assigned
      */

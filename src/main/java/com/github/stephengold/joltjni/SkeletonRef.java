@@ -190,7 +190,7 @@ final public class SkeletonRef extends Ref implements ConstSkeleton {
     }
 
     /**
-     * Create another counted reference to the targeted skeleton.
+     * Create an additional counted reference to the targeted skeleton.
      *
      * @return a new JVM object with a new native object assigned
      */

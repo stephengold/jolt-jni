@@ -181,10 +181,10 @@ final public class TwoBodyConstraintRef
     }
 
     /**
-     * Convert the constraint to a {@code ConstraintSettings} object. The
-     * constraint is unaffected.
+     * Generate settings to reconstruct the constraint. The constraint is
+     * unaffected.
      *
-     * @return a new reference to a new settings object
+     * @return a new counted reference to a new settings object
      */
     @Override
     public ConstraintSettingsRef getConstraintSettings() {
@@ -326,7 +326,7 @@ final public class TwoBodyConstraintRef
     }
 
     /**
-     * Create another counted reference to the targeted constraint.
+     * Create an additional counted reference to the targeted constraint.
      *
      * @return a new JVM object with a new native object assigned
      */

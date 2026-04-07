@@ -234,7 +234,7 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
     }
 
     /**
-     * Create another counted reference to the targeted constraint.
+     * Create an additional counted reference to the targeted constraint.
      *
      * @return a new JVM object with a new native object assigned
      */

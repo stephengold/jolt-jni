@@ -49,7 +49,7 @@ final public class SettingsResult extends Result<SoftBodySharedSettingsRef> {
     // Result<SoftBodySharedSettingsRef> methods
 
     /**
-     * Return the {@code SoftBodySharedSettingsRef}.
+     * Return a counted reference to the resulting settings.
      *
      * @return a new JVM object with a new native reference assigned
      */

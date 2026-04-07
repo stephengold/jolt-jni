@@ -49,7 +49,7 @@ final public class CharacterSettingsRef
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified settings.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
@@ -351,7 +351,7 @@ final public class CharacterSettingsRef
     }
 
     /**
-     * Create another counted reference to the targeted settings.
+     * Create an additional counted reference to the targeted settings.
      *
      * @return a new JVM object with a new native object assigned
      */

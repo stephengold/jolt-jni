@@ -42,7 +42,7 @@ final public class HairShadersRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified shaders.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
@@ -101,7 +101,7 @@ final public class HairShadersRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted shaders.
+     * Create an additional counted reference to the targeted shaders.
      *
      * @return a new JVM object with a new native object assigned
      */

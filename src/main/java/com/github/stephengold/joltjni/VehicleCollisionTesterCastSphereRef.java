@@ -88,7 +88,7 @@ final public class VehicleCollisionTesterCastSphereRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the targeted tester.
+     * Create an additional counted reference to the targeted tester.
      *
      * @return a new JVM object with a new native object assigned
      */
