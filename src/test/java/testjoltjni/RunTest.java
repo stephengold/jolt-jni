@@ -21,7 +21,26 @@ SOFTWARE.
  */
 package testjoltjni;
 
+import testjoltjni.junit.BodyBatchQueryTest;
 import testjoltjni.junit.BodyLockMultiTest;
+import testjoltjni.junit.BodyRemovalTest;
+import testjoltjni.junit.DualCleanupRaceConditionTest;
+import testjoltjni.junit.Test001;
+import testjoltjni.junit.Test002;
+import testjoltjni.junit.Test003;
+import testjoltjni.junit.Test004;
+import testjoltjni.junit.Test005;
+import testjoltjni.junit.Test006;
+import testjoltjni.junit.Test007;
+import testjoltjni.junit.Test008;
+import testjoltjni.junit.Test009;
+import testjoltjni.junit.Test010;
+import testjoltjni.junit.Test011;
+import testjoltjni.junit.Test012;
+import testjoltjni.junit.Test013;
+import testjoltjni.junit.Test014;
+import testjoltjni.junit.Test015;
+import testjoltjni.junit.Test016;
 
 /**
  * Run specific automated tests while logging heap allocations in the glue code,
@@ -49,6 +68,32 @@ final public class RunTest {
      */
     public static void main(String[] arguments) {
         TestUtils.traceAllocations = true;
+
+        new BodyBatchQueryTest().testBodyBatchQueries();
         new BodyLockMultiTest().testBodyLockMulti();
+        new BodyRemovalTest().testBodyRemoval();
+        try {
+            new DualCleanupRaceConditionTest().testConcurrentCloseAndCleaner();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+            System.exit(1);
+        }
+
+        new Test001().test001();
+        new Test002().test002();
+        new Test003().test003();
+        new Test004().test004();
+        new Test005().test005();
+        new Test006().test006();
+        new Test007().test007();
+        new Test008().test008();
+        new Test009().test009();
+        new Test010().test010();
+        new Test011().test011();
+        new Test012().test012();
+        new Test013().test013();
+        new Test014().test014();
+        new Test015().test015();
+        new Test016().test016();
     }
 }
