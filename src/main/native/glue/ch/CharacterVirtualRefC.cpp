@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,11 +31,11 @@ SOFTWARE.
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_CharacterRefC
+ * Class:     com_github_stephengold_joltjni_CharacterVirtualRefC
  * Method:    copy
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterRefC_copy
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualRefC_copy
   (JNIEnv *, jclass, jlong refVa) {
     RefConst<CharacterVirtual> * const pRef
             = reinterpret_cast<RefConst<CharacterVirtual> *> (refVa);
