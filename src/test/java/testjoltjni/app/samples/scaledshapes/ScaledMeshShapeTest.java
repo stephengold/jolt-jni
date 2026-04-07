@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
-import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.MiscUtil.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics scaled mesh-shape test.
  * <p>

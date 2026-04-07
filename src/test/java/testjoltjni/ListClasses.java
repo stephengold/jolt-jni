@@ -21,7 +21,7 @@ SOFTWARE.
  */
 package testjoltjni;
 
-import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.MiscUtil;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -84,7 +84,7 @@ final public class ListClasses {
      */
     private static void addPublicClassNames(
             Set<String> nameSet, String packageName) {
-        Set<Class<?>> coreClasses = Jolt.listClasses(packageName);
+        Set<Class<?>> coreClasses = MiscUtil.listClasses(packageName);
         for (Class<?> coreClass : coreClasses) {
             String simpleName = coreClass.getSimpleName();
             if (simpleName.isBlank()) {

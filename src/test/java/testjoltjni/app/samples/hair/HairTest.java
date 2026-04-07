@@ -368,7 +368,7 @@ if(Jolt.implementsDebugRendering()){
 				mDebugRenderer.drawLine(x0, x1, color);
 				x0 = x1;
 			}
-			color =new Color((int)(Jolt.hashCombine(0, color.getUInt32())) | 0xff000000);
+			color =new Color((int)(MiscUtil.hashCombine(0, color.getUInt32())) | 0xff000000);
 		}
 		Jolt.profileEnd();
 	}

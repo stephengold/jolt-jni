@@ -26,24 +26,14 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/ConfigurationString.h"
 #include "Jolt/Core/Factory.h"
-#include "Jolt/Core/HashCombine.h"
 #include "Jolt/Core/Profiler.h"
 #include "Jolt/Core/TempAllocator.h"
-#include "Jolt/Geometry/RayAABox.h"
-#include "Jolt/Geometry/RayCapsule.h"
-#include "Jolt/Geometry/RayCylinder.h"
-#include "Jolt/Geometry/RaySphere.h"
-#include "Jolt/Geometry/RayTriangle.h"
 #include "Jolt/Math/Swizzle.h"
 #include "Jolt/Physics/Body/Body.h"
 #include "Jolt/Physics/Body/BodyID.h"
-#include "Jolt/Physics/Character/CharacterID.h"
-#include "Jolt/Physics/Collision/ContactListener.h"
-#include "Jolt/Physics/Collision/EstimateCollisionResponse.h"
 #include "Jolt/Physics/DeterminismLog.h"
 #include "Jolt/Physics/PhysicsSettings.h"
 #include "Jolt/RegisterTypes.h"
-#include "TestFramework/External/Perlin.h"
 
 #include "auto/com_github_stephengold_joltjni_Jolt.h"
 #include "glue/glue.h"
@@ -163,42 +153,6 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_getConfigurat
     const jstring result = pEnv->NewStringUTF(pString);
     JPH_ASSERT(result);
     EXCEPTION_CHECK(pEnv)
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    hashBytes
- * Signature: (JI)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__JI
-  (JNIEnv *, jclass, jlong dataVa, jint inSize) {
-    const void * const pData = reinterpret_cast<void *> (dataVa);
-    const uint64 result = HashBytes(pData, inSize);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    hashCombine
- * Signature: (JI)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombine__JI
-  (JNIEnv *, jclass, jlong oldHash, jint iValue) {
-    uint64 result = oldHash;
-    HashCombine(result, (uint32)iValue);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    hashCombine
- * Signature: (JJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombine__JJ
-  (JNIEnv *, jclass, jlong oldHash, jlong lValue) {
-    uint64 result = oldHash;
-    HashCombine(result, (uint64)lValue);
     return result;
 }
 
@@ -584,17 +538,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    perlinNoise3
- * Signature: (FFFIII)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_perlinNoise3
-  (JNIEnv *, jclass, jfloat x, jfloat y, jfloat z, jint xWrap, jint yWrap, jint zWrap) {
-    const float result = PerlinNoise3(x, y, z, xWrap, yWrap, zWrap);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    profileDump
  * Signature: (Ljava/lang/String;)V
  */
@@ -732,16 +675,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocati
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    sSetNextCharacterId
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_sSetNextCharacterId
-  (JNIEnv *, jclass, jint nextValue) {
-    CharacterID::sSetNextCharacterID(nextValue);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    supportsObjectStream
  * Signature: ()Z
  */
@@ -804,191 +737,5 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_versionString
     const jstring result = pEnv->NewStringUTF(STRING(JOLT_JNI_VERSION_STRING));
     JPH_ASSERT(result);
     EXCEPTION_CHECK(pEnv)
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    estimateCollisionResponse
- * Signature: (JJJJFFFI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_estimateCollisionResponse
-  (JNIEnv *, jclass, jlong body1Va, jlong body2Va, jlong manifoldVa,
-  jlong resultVa, jfloat combinedFriction, jfloat combinedRestitution,
-  jfloat minVelocity, jint numIterations) {
-    const Body * const pBody1 = reinterpret_cast<Body *> (body1Va);
-    const Body * const pBody2 = reinterpret_cast<Body *> (body2Va);
-    const ContactManifold * const pManifold
-            = reinterpret_cast<ContactManifold *> (manifoldVa);
-    CollisionEstimationResult * const pResult
-            = reinterpret_cast<CollisionEstimationResult *> (resultVa);
-    EstimateCollisionResponse(*pBody1, *pBody2, *pManifold, *pResult,
-            combinedFriction, combinedRestitution, minVelocity, numIterations);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    hashBytes
- * Signature: (DDDJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__DDDJ
-  (JNIEnv *, jclass, jdouble xx, jdouble yy, jdouble zz, jlong oldHash) {
-    const RVec3 vector(xx, yy, zz);
-    const uint64 result = HashBytes(&vector, sizeof(RVec3), oldHash);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    hashBytes
- * Signature: (FFFFJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__FFFFJ
-  (JNIEnv *, jclass, jfloat qx, jfloat qy, jfloat qz, jfloat qw, jlong oldHash) {
-    const Quat quat(qx, qy, qz, qw);
-    const uint64 result = HashBytes(&quat, sizeof(Quat), oldHash);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    hashCombineRVec3
- * Signature: (JDDD)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombineRVec3
-  (JNIEnv *, jclass, jlong oldHash, jdouble xx, jdouble yy, jdouble zz) {
-    uint64 result = oldHash;
-    const RVec3 rvec(xx, yy, zz);
-    HashCombine(result, rvec);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    hashCombineVec3
- * Signature: (JFFF)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombineVec3
-  (JNIEnv *, jclass, jlong oldHash, jfloat x, jfloat y, jfloat z) {
-    uint64 result = oldHash;
-    const Vec3 vec(x, y, z);
-    HashCombine(result, vec);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    rayAaBox
- * Signature: (FFFJFFFFFF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayAaBox
-  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
-  jlong invDirVa, jfloat minX, jfloat minY, jfloat minZ, jfloat maxX,
-  jfloat maxY, jfloat maxZ) {
-    const Vec3 origin(originZ, originY, originZ);
-    const RayInvDirection * const pInvDir
-            = reinterpret_cast<RayInvDirection *> (invDirVa);
-    const Vec3 min(minZ, minY, minZ);
-    const Vec3 max(maxZ, maxY, maxZ);
-    const float result = RayAABox(origin, *pInvDir, min, max);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    rayAaBoxHits
- * Signature: (FFFFFFFFFFFF)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_rayAaBoxHits
-  (JNIEnv *, jclass, jfloat startX, jfloat startY, jfloat startZ,
-  jfloat offsetX, jfloat offsetY, jfloat offsetZ, jfloat minX, jfloat minY,
-  jfloat minZ, jfloat maxX, jfloat maxY, jfloat maxZ) {
-    const Vec3 start(startX, startY, startZ);
-    const Vec3 offset(offsetX, offsetY, offsetZ);
-    const Vec3 min(minX, minY, minZ);
-    const Vec3 max(maxX, maxY, maxZ);
-    const bool result = RayAABoxHits(start, offset, min, max);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    rayCapsule
- * Signature: (FFFFFFFF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayCapsule
-  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
-  jfloat directionX, jfloat directionY, jfloat directionZ,
-  jfloat capsuleHalfHeight, jfloat capsuleRadius) {
-    const Vec3 origin(originX, originY, originZ);
-    const Vec3 direction(directionX, directionY, directionZ);
-    const float result
-            = RayCapsule(origin, direction, capsuleHalfHeight, capsuleRadius);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    rayFiniteCylinder
- * Signature: (FFFFFFFF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayFiniteCylinder
-  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
-  jfloat directionX, jfloat directionY, jfloat directionZ,
-  jfloat cylinderHalfHeight, jfloat cylinderRadius) {
-    const Vec3 origin(originX, originY, originZ);
-    const Vec3 direction(directionX, directionY, directionZ);
-    const float result = RayCylinder(
-            origin, direction, cylinderHalfHeight, cylinderRadius);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    rayInfiniteCylinder
- * Signature: (FFFFFFF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayInfiniteCylinder
-  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
-  jfloat directionX, jfloat directionY, jfloat directionZ,
-  jfloat cylinderRadius) {
-    const Vec3 origin(originX, originY, originZ);
-    const Vec3 direction(directionX, directionY, directionZ);
-    const float result = RayCylinder(origin, direction, cylinderRadius);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    raySphere
- * Signature: (FFFFFFFFFF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_raySphere
-  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
-  jfloat directionX, jfloat directionY, jfloat directionZ, jfloat centerX,
-  jfloat centerY, jfloat centerZ, jfloat sphereRadius) {
-    const Vec3 origin(originX, originY, originZ);
-    const Vec3 direction(directionX, directionY, directionZ);
-    const Vec3 center(centerX, centerY, centerZ);
-    const float result = RaySphere(origin, direction, center, sphereRadius);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    rayTriangle
- * Signature: (FFFFFFFFFFFFFFF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayTriangle
-  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
-  jfloat directionX, jfloat directionY, jfloat directionZ,
-  jfloat v0x, jfloat v0y, jfloat v0z, jfloat v1x, jfloat v1y, jfloat v1z,
-  jfloat v2x, jfloat v2y, jfloat v2z) {
-    const Vec3 origin(originX, originY, originZ);
-    const Vec3 direction(directionX, directionY, directionZ);
-    const Vec3 v0(v0x, v0y, v0z);
-    const Vec3 v1(v1x, v1y, v1z);
-    const Vec3 v2(v2x, v2y, v2z);
-    const float result = RayTriangle(origin, direction, v0, v1, v2);
     return result;
 }

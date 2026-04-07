@@ -21,7 +21,7 @@ SOFTWARE.
  */
 package testjoltjni;
 
-import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.MiscUtil;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -187,7 +187,7 @@ final public class PrintTable {
         Set<String> refClasses = new TreeSet<>();
         {
             String corePackage = "com.github.stephengold.joltjni";
-            Set<Class<?>> coreClasses = Jolt.listClasses(corePackage);
+            Set<Class<?>> coreClasses = MiscUtil.listClasses(corePackage);
             for (Class<?> coreClass : coreClasses) {
                 String simpleName = coreClass.getSimpleName();
                 if (simpleName.isBlank()) {
@@ -212,7 +212,8 @@ final public class PrintTable {
         Set<String> readOnlyNames = new TreeSet<>();
         {
             String readOnlyPackage = "com.github.stephengold.joltjni.readonly";
-            Set<Class<?>> readOnlyClasses = Jolt.listClasses(readOnlyPackage);
+            Set<Class<?>> readOnlyClasses
+                    = MiscUtil.listClasses(readOnlyPackage);
             for (Class<?> readOnlyClass : readOnlyClasses) {
                 String simpleName = readOnlyClass.getSimpleName();
                 readOnlyNames.add(simpleName);

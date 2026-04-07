@@ -27,6 +27,7 @@ import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.CameraState;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.JphMath.*;
+import static com.github.stephengold.joltjni.MiscUtil.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;

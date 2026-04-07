@@ -28,6 +28,7 @@ import java.io.*;
 import java.util.*;
 import testjoltjni.TestUtils;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.MiscUtil.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 
 /**

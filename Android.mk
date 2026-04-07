@@ -199,6 +199,7 @@ $(N)/glue/m/Mat44.cpp \
 $(N)/glue/m/MaterialToIdMap.cpp \
 $(N)/glue/m/MeshShape.cpp \
 $(N)/glue/m/MeshShapeSettings.cpp \
+$(N)/glue/m/MiscUtil.cpp \
 $(N)/glue/m/MotionProperties.cpp \
 $(N)/glue/m/MotorcycleController.cpp \
 $(N)/glue/m/MotorcycleControllerSettings.cpp \
