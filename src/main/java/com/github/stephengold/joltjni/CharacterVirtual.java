@@ -72,8 +72,6 @@ public class CharacterVirtual
     public CharacterVirtual(
             ConstCharacterVirtualSettings settings, RVec3Arg location,
             QuatArg orientation, long userData, PhysicsSystem system) {
-        assert system != null;
-
         this.system = system;
         long settingsVa = settings.targetVa();
         double locX = location.xx();

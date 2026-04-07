@@ -505,6 +505,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     public long targetVa() {
         long refVa = va();
         long result = getPtr(refVa);
+        assert result == (ptr == null ? 0L : getPtr().targetVa());
 
         return result;
     }

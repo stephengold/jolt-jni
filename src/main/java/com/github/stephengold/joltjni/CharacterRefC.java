@@ -633,6 +633,7 @@ final public class CharacterRefC
     public long targetVa() {
         long refVa = va();
         long result = getPtr(refVa);
+        assert result == (ptr == null ? 0L : getPtr().targetVa());
 
         return result;
     }

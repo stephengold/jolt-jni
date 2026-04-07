@@ -755,6 +755,7 @@ final public class CharacterVirtualRefC
     public long targetVa() {
         long refVa = va();
         long result = getPtr(refVa);
+        assert result == (ptr == null ? 0L : ptr.targetVa());
 
         return result;
     }

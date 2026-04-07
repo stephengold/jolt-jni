@@ -228,6 +228,7 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
     public long targetVa() {
         long refVa = va();
         long result = getPtr(refVa);
+        assert result == (ptr == null ? 0L : getPtr().va());
 
         return result;
     }

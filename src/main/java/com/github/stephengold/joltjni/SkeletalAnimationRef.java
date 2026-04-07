@@ -121,6 +121,7 @@ final public class SkeletalAnimationRef extends Ref {
     public long targetVa() {
         long refVa = va();
         long result = getPtr(refVa);
+        assert result == (ptr == null ? 0L : getPtr().va());
 
         return result;
     }
