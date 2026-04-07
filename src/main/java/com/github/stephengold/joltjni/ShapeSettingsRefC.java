@@ -100,6 +100,4 @@ final public class ShapeSettingsRefC extends JoltPhysicsObject {
     native private static long copy(long refVa);
 
     native private static void free(long refVa);
-
-    native private static long getPtr(long refVa);
 }

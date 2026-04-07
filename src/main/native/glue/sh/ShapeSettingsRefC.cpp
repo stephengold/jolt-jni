@@ -60,16 +60,3 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettingsRefC_co
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeSettingsRefC_free
     BODYOF_FREE(RefConst<ShapeSettings>)
-
-/*
- * Class:     com_github_stephengold_joltjni_ShapeSettingsRefC
- * Method:    getPtr
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettingsRefC_getPtr
-  (JNIEnv *, jclass, jlong refVa) {
-    RefConst<ShapeSettings> * const pRef
-            = reinterpret_cast<RefConst<ShapeSettings> *> (refVa);
-    const ShapeSettings * const pResult = pRef->GetPtr();
-    return reinterpret_cast<jlong> (pResult);
-}

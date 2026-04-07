@@ -114,21 +114,6 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Instantiate a compute system from its virtual address.
-     *
-     * @param systemVa the virtual address of the native object, or zero
-     * @return a new JVM object, or {@code null} if the argument was zero
-     */
-    static ComputeSystem newSystem(long systemVa) {
-        ComputeSystem result = null;
-        if (systemVa != 0L) {
-            result = new ComputeSystem(systemVa);
-        }
-
-        return result;
-    }
-
-    /**
      * Replace the system's shader loader. (native member: mShaderLoader)
      *
      * @param loader the loader to use (not {@code null})
