@@ -46,11 +46,13 @@ final public class GroupFilterTableRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param filter the filter to target (not {@code null})
      */
-    GroupFilterTableRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    GroupFilterTableRef(long refVa, GroupFilterTable filter) {
+        assert filter != null;
+
+        this.ptr = filter;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -78,18 +80,32 @@ final public class GroupFilterTableRef extends Ref {
         GroupFilterTable.enableCollision(filterVa, subGroup1, subGroup2);
     }
     // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = new GroupFilterTable(targetVa);
+        }
+    }
+    // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code GroupFilterTable}.
+     * Access the targeted filter, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public GroupFilterTable getPtr() {
-        long filterVa = targetVa();
-        GroupFilterTable result = new GroupFilterTable(filterVa);
-
+        GroupFilterTable result = (GroupFilterTable) ptr;
         return result;
     }
 
@@ -114,9 +130,15 @@ final public class GroupFilterTableRef extends Ref {
      */
     @Override
     public GroupFilterTableRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        GroupFilterTableRef result = new GroupFilterTableRef(copyVa, true);
+        GroupFilterTableRef result;
+        if (ptr == null) {
+            result = new GroupFilterTableRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            GroupFilterTable filter = (GroupFilterTable) ptr;
+            result = new GroupFilterTableRef(copyVa, filter);
+        }
 
         return result;
     }

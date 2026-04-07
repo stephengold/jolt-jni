@@ -59,8 +59,16 @@ final public class PhysicsMaterialResult extends Result<PhysicsMaterialRefC> {
     @Override
     public PhysicsMaterialRefC get() {
         long resultVa = va();
-        long refVa = get(resultVa);
-        PhysicsMaterialRefC result = new PhysicsMaterialRefC(refVa, true);
+        long refVa = get(resultVa); // returns a new ref
+        long targetVa = PhysicsMaterialRefC.getPtr(refVa);
+
+        PhysicsMaterialRefC result;
+        if (targetVa == 0L) {
+            result = new PhysicsMaterialRefC(refVa);
+        } else {
+            PhysicsMaterial target = new PhysicsMaterial(targetVa);
+            result = new PhysicsMaterialRefC(refVa, target);
+        }
 
         return result;
     }

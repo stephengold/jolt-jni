@@ -41,30 +41,31 @@ final public class ShapeRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified shape.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param shape the shape to target (not {@code null})
      */
-    ShapeRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    ShapeRef(long refVa, Shape shape) {
+        assert shape != null;
+
+        this.ptr = shape;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code Shape}.
+     * Access the targeted shape, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public Shape getPtr() {
-        long shapeVa = targetVa();
-        Shape result = Shape.newShape(shapeVa);
-
+        Shape result = (Shape) ptr;
         return result;
     }
 
@@ -90,7 +91,8 @@ final public class ShapeRef extends Ref {
     public ShapeRef toRef() {
         long refVa = va();
         long copyVa = copy(refVa);
-        ShapeRef result = new ShapeRef(copyVa, true);
+        Shape target = (Shape) ptr;
+        ShapeRef result = new ShapeRef(copyVa, target);
 
         return result;
     }
@@ -103,5 +105,5 @@ final public class ShapeRef extends Ref {
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

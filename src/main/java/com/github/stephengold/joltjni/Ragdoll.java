@@ -172,6 +172,15 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
+     * Access the system to which the ragdoll's bodies and constraints belong.
+     *
+     * @return the pre-existing object (not {@code null})
+     */
+    public PhysicsSystem getPhysicsSystem() {
+        return system;
+    }
+
+    /**
      * Copy the low-level pose using a locking body interface.
      *
      * @param storeRootOffset storage for the root offset (not {@code null},
@@ -321,7 +330,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     public RagdollRef toRef() {
         long ragdollVa = va();
         long refVa = toRef(ragdollVa);
-        RagdollRef result = new RagdollRef(refVa, system);
+        RagdollRef result = new RagdollRef(refVa, this);
 
         return result;
     }

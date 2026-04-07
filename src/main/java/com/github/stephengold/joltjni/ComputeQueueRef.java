@@ -42,30 +42,44 @@ final public class ComputeQueueRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate an empty reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    ComputeQueueRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    ComputeQueueRef(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified queue.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param queue the queue to target (not {@code null})
+     */
+    ComputeQueueRef(long refVa, ComputeQueue queue) {
+        assert queue != null;
+
+        this.ptr = queue;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code ComputeQueue}.
+     * Access the targeted queue, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public ComputeQueue getPtr() {
-        long queueVa = targetVa();
-        ComputeQueue result = new ComputeQueue(queueVa);
-
+        ComputeQueue result = (ComputeQueue) ptr;
         return result;
     }
 
@@ -90,9 +104,15 @@ final public class ComputeQueueRef extends Ref {
      */
     @Override
     public ComputeQueueRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        ComputeQueueRef result = new ComputeQueueRef(copyVa, true);
+        ComputeQueueRef result;
+        if (ptr == null) {
+            result = new ComputeQueueRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            ComputeQueue target = (ComputeQueue) ptr;
+            result = new ComputeQueueRef(copyVa, target);
+        }
 
         return result;
     }
@@ -105,5 +125,5 @@ final public class ComputeQueueRef extends Ref {
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

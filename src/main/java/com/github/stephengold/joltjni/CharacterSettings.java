@@ -193,7 +193,7 @@ public class CharacterSettings
     public CharacterSettingsRef toRef() {
         long settingsVa = va();
         long refVa = toRef(settingsVa);
-        CharacterSettingsRef result = new CharacterSettingsRef(refVa, true);
+        CharacterSettingsRef result = new CharacterSettingsRef(refVa, this);
 
         return result;
     }

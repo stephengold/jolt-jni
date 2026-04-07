@@ -303,7 +303,7 @@ public class VehicleConstraintSettings
         long settingsVa = va();
         long refVa = toRef(settingsVa);
         VehicleConstraintSettingsRef result
-                = new VehicleConstraintSettingsRef(refVa, true);
+                = new VehicleConstraintSettingsRef(refVa, this);
 
         return result;
     }

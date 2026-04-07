@@ -400,7 +400,7 @@ public class CharacterVirtual
     public CharacterVirtualRef toRef() {
         long characterVa = va();
         long refVa = toRef(characterVa);
-        CharacterVirtualRef result = new CharacterVirtualRef(refVa, system);
+        CharacterVirtualRef result = new CharacterVirtualRef(refVa, this);
 
         return result;
     }
@@ -668,6 +668,16 @@ public class CharacterVirtual
     }
 
     /**
+     * Access the system to which the character's body belongs.
+     *
+     * @return the pre-existing object (not {@code null})
+     */
+    @Override
+    public PhysicsSystem getPhysicsSystem() {
+        return system;
+    }
+
+    /**
      * Copy the location of the character. The character is unaffected.
      *
      * @return a new location vector (in system coordinates)
@@ -821,7 +831,7 @@ public class CharacterVirtual
     public CharacterVirtualRefC toRefC() {
         long characterVa = va();
         long refVa = toRefC(characterVa);
-        CharacterVirtualRefC result = new CharacterVirtualRefC(refVa, system);
+        CharacterVirtualRefC result = new CharacterVirtualRefC(refVa, this);
 
         return result;
     }

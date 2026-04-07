@@ -216,7 +216,7 @@ public class Skeleton
     public SkeletonRef toRef() {
         long skeletonVa = va();
         long refVa = toRef(skeletonVa);
-        SkeletonRef result = new SkeletonRef(refVa, true);
+        SkeletonRef result = new SkeletonRef(refVa, this);
 
         return result;
     }

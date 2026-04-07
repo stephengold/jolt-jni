@@ -42,15 +42,18 @@ final public class TwoBodyConstraintSettingsRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified settings.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param settings the settings to target (not {@code null})
      */
-    TwoBodyConstraintSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    TwoBodyConstraintSettingsRef(
+            long refVa, TwoBodyConstraintSettings settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -79,20 +82,28 @@ final public class TwoBodyConstraintSettingsRef extends Ref {
         return result;
     }
     // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        this.ptr = TwoBodyConstraintSettings.newConstraintSettings(targetVa);
+    }
+    // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code TwoBodyConstraintSettings}.
+     * Access the targeted settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public TwoBodyConstraintSettings getPtr() {
-        long settingsVa = targetVa();
-        TwoBodyConstraintSettings result
-                = (TwoBodyConstraintSettings) ConstraintSettings
-                        .newConstraintSettings(settingsVa);
-
+        TwoBodyConstraintSettings result = (TwoBodyConstraintSettings) ptr;
         return result;
     }
 
@@ -117,10 +128,16 @@ final public class TwoBodyConstraintSettingsRef extends Ref {
      */
     @Override
     public TwoBodyConstraintSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        TwoBodyConstraintSettingsRef result
-                = new TwoBodyConstraintSettingsRef(copyVa, true);
+        TwoBodyConstraintSettingsRef result;
+        if (ptr == null) {
+            result = new TwoBodyConstraintSettingsRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            TwoBodyConstraintSettings settings
+                    = (TwoBodyConstraintSettings) ptr;
+            result = new TwoBodyConstraintSettingsRef(copyVa, settings);
+        }
 
         return result;
     }

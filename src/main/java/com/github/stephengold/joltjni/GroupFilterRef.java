@@ -46,41 +46,53 @@ final public class GroupFilterRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    GroupFilterRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    GroupFilterRef(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a reference to the specified target.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param target the target JVM object (not {@code null})
+     */
+    GroupFilterRef(long refVa, GroupFilter target) {
+        assert target != null;
+
+        this.ptr = target;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Temporarily access the referenced filter, assuming it is a
-     * {@code GroupFilterTable}.
+     * Access the target filter, assuming it is a {@code GroupFilterTable}.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     public GroupFilterTable getPtrAsTable() {
-        long materialVa = targetVa();
-        GroupFilterTable result = new GroupFilterTable(materialVa);
-
+        GroupFilterTable result = (GroupFilterTable) ptr;
         return result;
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code GroupFilter}.
+     * Access the targeted filter, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public GroupFilter getPtr() {
-        long filterVa = targetVa();
-        GroupFilter result = GroupFilter.newFilter(filterVa);
-
+        GroupFilter result = (GroupFilter) ptr;
         return result;
     }
 
@@ -105,9 +117,15 @@ final public class GroupFilterRef extends Ref {
      */
     @Override
     public Ref toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        GroupFilterRef result = new GroupFilterRef(copyVa, true);
+        GroupFilterRef result;
+        if (ptr == null) {
+            result = new GroupFilterRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            GroupFilter filter = (GroupFilter) ptr;
+            result = new GroupFilterRef(copyVa, filter);
+        }
 
         return result;
     }
@@ -120,5 +138,5 @@ final public class GroupFilterRef extends Ref {
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

@@ -58,8 +58,16 @@ final public class ShapeResult extends Result<ShapeRefC> {
     @Override
     public ShapeRefC get() {
         long resultVa = va();
-        long shapeRefVa = get(resultVa);
-        ShapeRefC result = new ShapeRefC(shapeRefVa, true);
+        long refVa = get(resultVa); // returns a new ref
+        long targetVa = ShapeRefC.getPtr(refVa);
+
+        ShapeRefC result;
+        if (targetVa == 0L) {
+            result = new ShapeRefC(refVa);
+        } else {
+            Shape target = Shape.newShape(targetVa);
+            result = new ShapeRefC(refVa, target);
+        }
 
         return result;
     }

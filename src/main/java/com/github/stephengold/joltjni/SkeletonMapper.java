@@ -160,7 +160,7 @@ public class SkeletonMapper extends JoltPhysicsObject implements RefTarget {
     public SkeletonMapperRef toRef() {
         long mapperVa = va();
         long copyVa = toRef(mapperVa);
-        SkeletonMapperRef result = new SkeletonMapperRef(copyVa, true);
+        SkeletonMapperRef result = new SkeletonMapperRef(copyVa, this);
 
         return result;
     }

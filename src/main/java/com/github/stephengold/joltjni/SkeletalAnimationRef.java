@@ -41,15 +41,17 @@ final public class SkeletalAnimationRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified animation.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param animation the animation to target (not {@code null})
      */
-    SkeletalAnimationRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    SkeletalAnimationRef(long refVa, SkeletalAnimation animation) {
+        assert animation != null;
+
+        this.ptr = animation;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -80,18 +82,32 @@ final public class SkeletalAnimationRef extends Ref {
         SkeletalAnimation.sample(animationVa, time, poseVa);
     }
     // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = new SkeletalAnimation(targetVa);
+        }
+    }
+    // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code SkeletalAnimation}.
+     * Access the targeted animation, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public SkeletalAnimation getPtr() {
-        long animationVa = targetVa();
-        SkeletalAnimation result = new SkeletalAnimation(animationVa);
-
+        SkeletalAnimation result = (SkeletalAnimation) ptr;
         return result;
     }
 
@@ -116,9 +132,15 @@ final public class SkeletalAnimationRef extends Ref {
      */
     @Override
     public SkeletalAnimationRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        SkeletalAnimationRef result = new SkeletalAnimationRef(copyVa, true);
+        SkeletalAnimationRef result;
+        if (ptr == null) {
+            result = new SkeletalAnimationRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            SkeletalAnimation animation = (SkeletalAnimation) ptr;
+            result = new SkeletalAnimationRef(copyVa, animation);
+        }
 
         return result;
     }

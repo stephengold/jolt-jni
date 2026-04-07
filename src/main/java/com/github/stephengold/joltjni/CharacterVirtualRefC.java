@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EGroundState;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstContact;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsSystem;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.DoubleBuffer;
@@ -43,21 +44,22 @@ final public class CharacterVirtualRefC
     // fields
 
     /**
-     * where to add the body (may be {@code null})
+     * cache the target to avoid duplication
      */
-    final private PhysicsSystem system;
+    private ConstCharacterVirtual ptr;
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a reference to the specified character.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param physicsSystem where to add the body
+     * @param character the character to target (not {@code null})
      */
-    CharacterVirtualRefC(long refVa, PhysicsSystem physicsSystem) {
-        this.system = physicsSystem;
+    CharacterVirtualRefC(long refVa, ConstCharacterVirtual character) {
+        this.ptr = character;
+        ConstPhysicsSystem physicsSystem = character.getPhysicsSystem();
         /*
          * Passing physicsSystem to the Runnable ensures that the underlying
          * system won't get cleaned before the character.
@@ -69,17 +71,13 @@ final public class CharacterVirtualRefC
     // new methods exposed
 
     /**
-     * Temporarily access the referenced {@code ConstCharacter}.
+     * Access the targeted character, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     public ConstCharacterVirtual getPtr() {
-        long refVa = va();
-        long characterVa = getPtr(refVa);
-        ConstCharacterVirtual result
-                = new CharacterVirtual(characterVa, system);
-
-        return result;
+        return ptr;
     }
     // *************************************************************************
     // ConstCharacterVirtual methods
@@ -475,6 +473,17 @@ final public class CharacterVirtualRefC
     }
 
     /**
+     * Access the physics system to which the character's body belongs.
+     *
+     * @return the pre-existing instance
+     */
+    @Override
+    public ConstPhysicsSystem getPhysicsSystem() {
+        ConstPhysicsSystem result = ptr.getPhysicsSystem();
+        return result;
+    }
+
+    /**
      * Return how quickly penetration is resolved. The character is unaffected.
      *
      * @return the resolution fraction (0=never resolved, 1=all in one update)
@@ -759,7 +768,7 @@ final public class CharacterVirtualRefC
     public CharacterVirtualRefC toRefC() {
         long refVa = va();
         long copyVa = copy(refVa);
-        CharacterVirtualRefC result = new CharacterVirtualRefC(copyVa, system);
+        CharacterVirtualRefC result = new CharacterVirtualRefC(copyVa, ptr);
 
         return result;
     }
@@ -768,7 +777,8 @@ final public class CharacterVirtualRefC
 
     native private static long copy(long refVa);
 
-    native private static void freeWithSystem(long refVa, PhysicsSystem unused);
+    native private static void freeWithSystem(
+            long refVa, ConstPhysicsSystem unused);
 
     native private static long getPtr(long refVa);
 }

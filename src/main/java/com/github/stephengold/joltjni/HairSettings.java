@@ -639,7 +639,7 @@ final public class HairSettings
     public HairSettingsRef toRef() {
         long settingsVa = va();
         long refVa = toRef(settingsVa);
-        HairSettingsRef result = new HairSettingsRef(refVa, true);
+        HairSettingsRef result = new HairSettingsRef(refVa, this);
 
         return result;
     }

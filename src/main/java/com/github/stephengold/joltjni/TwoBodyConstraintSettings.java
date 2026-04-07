@@ -70,7 +70,7 @@ abstract public class TwoBodyConstraintSettings extends ConstraintSettings {
         long settingsVa = va();
         long refVa = toRef(settingsVa);
         TwoBodyConstraintSettingsRef result
-                = new TwoBodyConstraintSettingsRef(refVa, true);
+                = new TwoBodyConstraintSettingsRef(refVa, this);
 
         return result;
     }

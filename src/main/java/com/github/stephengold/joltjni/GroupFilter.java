@@ -165,7 +165,7 @@ public class GroupFilter
     public Ref toRef() {
         long filterVa = va();
         long copyVa = toRef(filterVa);
-        Ref result = new GroupFilterRef(copyVa, true);
+        Ref result = new GroupFilterRef(copyVa, this);
 
         return result;
     }

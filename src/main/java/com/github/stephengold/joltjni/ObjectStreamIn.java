@@ -55,22 +55,40 @@ final public class ObjectStreamIn {
         boolean result;
         if (storeRef instanceof ConstraintSettingsRef) {
             result = sReadConstraintSettings(fileName, refVa);
+            ((ConstraintSettingsRef) storeRef).updatePtr();
+
         } else if (storeRef instanceof GroupFilterTableRef) {
             result = sReadGroupFilterTable(fileName, refVa);
+            ((GroupFilterTableRef) storeRef).updatePtr();
+
         } else if (storeRef instanceof HairSettingsRef) {
             result = sReadHairSettings(fileName, refVa);
+            ((HairSettingsRef) storeRef).updatePtr();
+
         } else if (storeRef instanceof PhysicsMaterialRef) {
             result = sReadPhysicsMaterial(fileName, refVa);
+            ((PhysicsMaterialRef) storeRef).updatePtr();
+
         } else if (storeRef instanceof PhysicsSceneRef) {
             result = sReadPhysicsScene(fileName, refVa);
+            ((PhysicsSceneRef) storeRef).updatePtr();
+
         } else if (storeRef instanceof RagdollSettingsRef) {
             result = sReadRagdollSettings(fileName, refVa);
+            ((RagdollSettingsRef) storeRef).updatePtr();
+
         } else if (storeRef instanceof SkeletalAnimationRef) {
             result = sReadSkeletalAnimation(fileName, refVa);
+            ((SkeletalAnimationRef) storeRef).updatePtr();
+
         } else if (storeRef instanceof SkeletonRef) {
             result = sReadSkeleton(fileName, refVa);
+            ((SkeletonRef) storeRef).updatePtr();
+
         } else if (storeRef instanceof VehicleControllerSettingsRef) {
             result = sReadVehicleControllerSettings(fileName, refVa);
+            ((VehicleControllerSettingsRef) storeRef).updatePtr();
+
         } else {
             throw new IllegalArgumentException(
                     storeRef.getClass().getSimpleName());
@@ -112,6 +130,7 @@ final public class ObjectStreamIn {
         long settingsRefVa = settingsRef.va();
         boolean result
                 = sReadConstraintSettingsFromStream(streamVa, settingsRefVa);
+        settingsRef.updatePtr();
 
         return result;
     }
@@ -129,6 +148,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = filterRef.va();
         boolean result = sReadGroupFilterTableFromStream(streamVa, refVa);
+        filterRef.updatePtr();
 
         return result;
     }
@@ -146,6 +166,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = settingsRef.va();
         boolean result = sReadHairSettingsFromStream(streamVa, refVa);
+        settingsRef.updatePtr();
 
         return result;
     }
@@ -163,6 +184,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = materialRef.va();
         boolean result = sReadPhysicsMaterialFromStream(streamVa, refVa);
+        materialRef.updatePtr();
 
         return result;
     }
@@ -180,6 +202,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = sceneRef.va();
         boolean result = sReadPhysicsSceneFromStream(streamVa, refVa);
+        sceneRef.updatePtr();
 
         return result;
     }
@@ -197,6 +220,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = settingsRef.va();
         boolean result = sReadRagdollSettingsFromStream(streamVa, refVa);
+        settingsRef.updatePtr();
 
         return result;
     }
@@ -214,6 +238,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = settingsRef.va();
         boolean result = sReadShapeSettingsFromStream(streamVa, refVa);
+        settingsRef.updatePtr();
 
         return result;
     }
@@ -250,6 +275,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = settingsRef.va();
         boolean result = sReadSbssFromStream(streamVa, refVa);
+        settingsRef.updatePtr();
 
         return result;
     }
@@ -267,6 +293,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = settingsRef.va();
         boolean result = sReadConstraintSettingsFromStream(streamVa, refVa);
+        settingsRef.updatePtr();
 
         return result;
     }
@@ -284,6 +311,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = settingsRef.va();
         boolean result = sReadConstraintSettingsFromStream(streamVa, refVa);
+        settingsRef.updatePtr();
 
         return result;
     }
@@ -301,6 +329,7 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = settingsRef.va();
         boolean result = sReadControllerSettingsFromStream(streamVa, refVa);
+        settingsRef.updatePtr();
 
         return result;
     }

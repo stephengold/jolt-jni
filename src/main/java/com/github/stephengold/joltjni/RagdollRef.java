@@ -32,33 +32,26 @@ import com.github.stephengold.joltjni.template.Ref;
  */
 final public class RagdollRef extends Ref {
     // *************************************************************************
-    // fields
-
-    /**
-     * where to add the bodies and constraints (may be {@code null})
-     */
-    final private PhysicsSystem system;
-    // *************************************************************************
     // constructors
 
     /**
      * Instantiate an empty reference.
      */
     public RagdollRef() {
-        this.system = null;
         long refVa = createDefault();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified ragdoll.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param physicsSystem where to add the bodies and constraints
+     * @param ragdoll the ragdoll to target (not {@code null})
      */
-    RagdollRef(long refVa, PhysicsSystem physicsSystem) {
-        this.system = physicsSystem;
+    RagdollRef(long refVa, Ragdoll ragdoll) {
+        this.ptr = ragdoll;
+        PhysicsSystem physicsSystem = ragdoll.getPhysicsSystem();
         Runnable freeingAction = () -> freeWithSystem(refVa, physicsSystem);
         /*
          * Passing physicsSystem to the Runnable ensures that the underlying
@@ -302,15 +295,14 @@ final public class RagdollRef extends Ref {
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code Ragdoll}.
+     * Access the targeted ragdoll, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public Ragdoll getPtr() {
-        long ragdollVa = targetVa();
-        Ragdoll result = new Ragdoll(ragdollVa, system);
-
+        Ragdoll result = (Ragdoll) ptr;
         return result;
     }
 
@@ -335,9 +327,15 @@ final public class RagdollRef extends Ref {
      */
     @Override
     public RagdollRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        RagdollRef result = new RagdollRef(copyVa, system);
+        RagdollRef result;
+        if (ptr == null) {
+            result = new RagdollRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            Ragdoll ragdoll = (Ragdoll) ptr;
+            result = new RagdollRef(copyVa, ragdoll);
+        }
 
         return result;
     }

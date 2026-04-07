@@ -254,7 +254,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     public RagdollSettingsRef toRef() {
         long settingsVa = va();
         long refVa = toRef(settingsVa);
-        RagdollSettingsRef result = new RagdollSettingsRef(refVa, true);
+        RagdollSettingsRef result = new RagdollSettingsRef(refVa, this);
 
         return result;
     }

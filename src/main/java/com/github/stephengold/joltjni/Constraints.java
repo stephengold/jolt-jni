@@ -83,8 +83,16 @@ public class Constraints extends Array<ConstraintRef> {
     @Override
     public ConstraintRef get(int elementIndex) {
         long arrayVa = va();
-        long refVa = get(arrayVa, elementIndex);
-        ConstraintRef result = new ConstraintRef(refVa, true);
+        long refVa = get(arrayVa, elementIndex); // returns a new ref
+        long targetVa = ConstraintRef.getPtr(refVa);
+
+        ConstraintRef result;
+        if (targetVa == 0L) {
+            result = new ConstraintRef(refVa);
+        } else {
+            Constraint target = Constraint.newConstraint(targetVa);
+            result = new ConstraintRef(refVa, target);
+        }
 
         return result;
     }

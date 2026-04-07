@@ -56,8 +56,16 @@ final public class RagdollResult extends Result<RagdollSettingsRef> {
     @Override
     public RagdollSettingsRef get() {
         long resultVa = va();
-        long settingsRefVa = get(resultVa);
-        RagdollSettingsRef result = new RagdollSettingsRef(settingsRefVa, true);
+        long refVa = get(resultVa); // returns a new ref
+        long targetVa = RagdollSettingsRef.getPtr(refVa);
+
+        RagdollSettingsRef result;
+        if (targetVa == 0L) {
+            result = new RagdollSettingsRef(refVa);
+        } else {
+            RagdollSettings target = new RagdollSettings(targetVa);
+            result = new RagdollSettingsRef(refVa, target);
+        }
 
         return result;
     }

@@ -30,6 +30,13 @@ import com.github.stephengold.joltjni.JoltPhysicsObject;
  */
 abstract public class Ref extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * cache the target to reduce duplication
+     */
+    protected RefTarget ptr;
+    // *************************************************************************
     // constructors
 
     /**
@@ -41,9 +48,10 @@ abstract public class Ref extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Temporarily access the referenced {@code RefTarget}.
+     * Access the target, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     abstract public RefTarget getPtr();
 

@@ -46,26 +46,27 @@ final public class GeometryRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param geometry the geometry to target (not {@code null})
      */
-    GeometryRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    GeometryRef(long refVa, Geometry geometry) {
+        assert geometry != null;
+
+        this.ptr = geometry;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code Geometry}.
+     * Access the target geometry, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public Geometry getPtr() {
-        long geometryVa = targetVa();
-        Geometry result = new Geometry(geometryVa);
-
+        Geometry result = (Geometry) ptr;
         return result;
     }
 
@@ -90,9 +91,15 @@ final public class GeometryRef extends Ref {
      */
     @Override
     public GeometryRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        GeometryRef result = new GeometryRef(copyVa, true);
+        GeometryRef result;
+        if (ptr == null) {
+            result = new GeometryRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            Geometry geometry = (Geometry) ptr;
+            result = new GeometryRef(copyVa, geometry);
+        }
 
         return result;
     }

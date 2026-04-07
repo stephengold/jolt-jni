@@ -132,6 +132,14 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     void getShape(ShapeRefC storeRef);
 
     /**
+     * Access the physics system to which the character's body belongs, if any.
+     * The character is unaffected.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    ConstPhysicsSystem getPhysicsSystem();
+
+    /**
      * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector

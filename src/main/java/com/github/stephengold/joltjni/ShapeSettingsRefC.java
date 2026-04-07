@@ -31,34 +31,48 @@ import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
  */
 final public class ShapeSettingsRefC extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * cache the targeted settings to reduce duplication
+     */
+    private ConstShapeSettings ptr;
+    // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate an empty reference.
+     */
+    public ShapeSettingsRefC() {
+        long refVa = createDefault();
+        setVirtualAddress(refVa, () -> free(refVa));
+    }
+
+    /**
+     * Instantiate a reference to the specified target.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param target the target JVM object (not {@code null})
      */
-    ShapeSettingsRefC(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    ShapeSettingsRefC(long refVa, ConstShapeSettings target) {
+        assert target != null;
+
+        this.ptr = target;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Temporarily access the referenced {@code ConstShapeSettings}.
+     * Access the targeted settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     public ConstShapeSettings getPtr() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
-        ConstShapeSettings result = ShapeSettings.newShapeSettings(settingsVa);
-
-        return result;
+        return ptr;
     }
 
     /**
@@ -69,12 +83,19 @@ final public class ShapeSettingsRefC extends JoltPhysicsObject {
     public ShapeSettingsRefC toRefC() {
         long refVa = va();
         long copyVa = copy(refVa);
-        ShapeSettingsRefC result = new ShapeSettingsRefC(copyVa, true);
+        ShapeSettingsRefC result;
+        if (ptr == null) {
+            result = new ShapeSettingsRefC();
+        } else {
+            result = new ShapeSettingsRefC(copyVa, ptr);
+        }
 
         return result;
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createDefault();
 
     native private static long copy(long refVa);
 

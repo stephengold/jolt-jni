@@ -50,15 +50,17 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified settings.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param settings the settings to target (not {@code null})
      */
-    HairSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    HairSettingsRef(long refVa, HairSettings settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -331,6 +333,21 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
         return this;
     }
     // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = new HairSettings(targetVa);
+        }
+    }
+    // *************************************************************************
     // ConstHairSettings methods
 
     /**
@@ -571,15 +588,14 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code HairSettings}.
+     * Access the targeted settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public HairSettings getPtr() {
-        long settingsVa = targetVa();
-        HairSettings result = new HairSettings(settingsVa);
-
+        HairSettings result = (HairSettings) ptr;
         return result;
     }
 
@@ -604,9 +620,15 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
      */
     @Override
     public HairSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        HairSettingsRef result = new HairSettingsRef(copyVa, true);
+        HairSettingsRef result;
+        if (ptr == null) {
+            result = new HairSettingsRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            HairSettings settings = (HairSettings) ptr;
+            result = new HairSettingsRef(copyVa, settings);
+        }
 
         return result;
     }

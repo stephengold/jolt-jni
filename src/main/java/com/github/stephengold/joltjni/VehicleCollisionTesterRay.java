@@ -94,7 +94,7 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
         long testerVa = va();
         long refVa = VehicleCollisionTester.toRef(testerVa);
         VehicleCollisionTesterRayRef result
-                = new VehicleCollisionTesterRayRef(refVa, true);
+                = new VehicleCollisionTesterRayRef(refVa, this);
 
         return result;
     }

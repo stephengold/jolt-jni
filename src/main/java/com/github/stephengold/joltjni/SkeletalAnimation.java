@@ -33,7 +33,7 @@ public class SkeletalAnimation extends JoltPhysicsObject implements RefTarget {
     // constructors
 
     /**
-     * Temporarily access the specified animation.
+     * Instantiate with the specified native object assigned.
      *
      * @param animationVa the virtual address of the native object to assign
      * (not zero)
@@ -105,7 +105,7 @@ public class SkeletalAnimation extends JoltPhysicsObject implements RefTarget {
     public SkeletalAnimationRef toRef() {
         long animationVa = va();
         long refVa = toRef(animationVa);
-        SkeletalAnimationRef result = new SkeletalAnimationRef(refVa, true);
+        SkeletalAnimationRef result = new SkeletalAnimationRef(refVa, this);
 
         return result;
     }

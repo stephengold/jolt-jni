@@ -791,7 +791,9 @@ public class BodyInterface extends NonCopyable {
     public ShapeRefC getShape(int bodyId) {
         long bodyInterfaceVa = va();
         long shapeRefVa = getShape(bodyInterfaceVa, bodyId);
-        ShapeRefC result = new ShapeRefC(shapeRefVa, true);
+        long targetVa = ShapeRef.getPtr(shapeRefVa);
+        Shape shape = Shape.newShape(targetVa);
+        ShapeRefC result = new ShapeRefC(shapeRefVa, shape);
 
         return result;
     }

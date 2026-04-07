@@ -42,32 +42,33 @@ final public class VehicleCollisionTesterCastSphereRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified tester.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param target the tester to target (not {@code null})
      */
-    VehicleCollisionTesterCastSphereRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    VehicleCollisionTesterCastSphereRef(
+            long refVa, VehicleCollisionTesterCastSphere target) {
+        assert target != null;
+
+        this.ptr = target;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced
-     * {@code VehicleCollisionTesterCastSphere}.
+     * Access the targeted tester, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public VehicleCollisionTesterCastSphere getPtr() {
-        long testerVa = targetVa();
         VehicleCollisionTesterCastSphere result
-                = new VehicleCollisionTesterCastSphere(testerVa);
-
+                = (VehicleCollisionTesterCastSphere) ptr;
         return result;
     }
 
@@ -92,10 +93,16 @@ final public class VehicleCollisionTesterCastSphereRef extends Ref {
      */
     @Override
     public VehicleCollisionTesterCastSphereRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        VehicleCollisionTesterCastSphereRef result
-                = new VehicleCollisionTesterCastSphereRef(copyVa, true);
+        VehicleCollisionTesterCastSphereRef result;
+        if (ptr == null) {
+            result = new VehicleCollisionTesterCastSphereRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            VehicleCollisionTesterCastSphere tester
+                    = (VehicleCollisionTesterCastSphere) ptr;
+            result = new VehicleCollisionTesterCastSphereRef(copyVa, tester);
+        }
 
         return result;
     }

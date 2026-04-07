@@ -50,15 +50,17 @@ final public class CharacterVirtualSettingsRef
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified settings.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param settings the settings to target (not {@code null})
      */
-    CharacterVirtualSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    CharacterVirtualSettingsRef(long refVa, CharacterVirtualSettings settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -621,16 +623,14 @@ final public class CharacterVirtualSettingsRef
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code CharacterVirtualSettings}.
+     * Access the target settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public CharacterVirtualSettings getPtr() {
-        long settingsVa = targetVa();
-        CharacterVirtualSettings result
-                = new CharacterVirtualSettings(settingsVa);
-
+        CharacterVirtualSettings result = (CharacterVirtualSettings) ptr;
         return result;
     }
 
@@ -655,10 +655,15 @@ final public class CharacterVirtualSettingsRef
      */
     @Override
     public CharacterVirtualSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        CharacterVirtualSettingsRef result
-                = new CharacterVirtualSettingsRef(copyVa, true);
+        CharacterVirtualSettingsRef result;
+        if (ptr == null) {
+            result = new CharacterVirtualSettingsRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            CharacterVirtualSettings target = (CharacterVirtualSettings) ptr;
+            result = new CharacterVirtualSettingsRef(copyVa, target);
+        }
 
         return result;
     }

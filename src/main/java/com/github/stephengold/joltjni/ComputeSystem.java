@@ -38,7 +38,7 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
      * @param systemVa the virtual address of the native object to assign (not
      * zero)
      */
-    private ComputeSystem(long systemVa) {
+    ComputeSystem(long systemVa) {
         long refVa = toRef(systemVa);
         Runnable freeingAction = () -> ComputeSystemRef.free(refVa);
         setVirtualAddress(systemVa, freeingAction);
@@ -173,7 +173,7 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
     public ComputeSystemRef toRef() {
         long systemVa = va();
         long refVa = toRef(systemVa);
-        ComputeSystemRef result = new ComputeSystemRef(refVa, true);
+        ComputeSystemRef result = new ComputeSystemRef(refVa, this);
 
         return result;
     }

@@ -48,7 +48,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualRefC
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualRefC
  * Method:    freeWithSystem
- * Signature: (JLcom/github/stephengold/joltjni/PhysicsSystem;)V
+ * Signature: (JLcom/github/stephengold/joltjni/readonly/ConstPhysicsSystem;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualRefC_freeWithSystem
   (JNIEnv *, jclass, jlong refVa, jobject) {

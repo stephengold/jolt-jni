@@ -254,7 +254,7 @@ abstract public class ShapeSettings
     public ShapeSettingsRefC toRefC() {
         long settingsVa = va();
         long refVa = toRefC(settingsVa);
-        ShapeSettingsRefC result = new ShapeSettingsRefC(refVa, true);
+        ShapeSettingsRefC result = new ShapeSettingsRefC(refVa, this);
 
         return result;
     }
@@ -293,7 +293,7 @@ abstract public class ShapeSettings
     public ShapeSettingsRef toRef() {
         long settingsVa = va();
         long refVa = toRef(settingsVa);
-        ShapeSettingsRef result = new ShapeSettingsRef(refVa, true);
+        ShapeSettingsRef result = new ShapeSettingsRef(refVa, this);
 
         return result;
     }

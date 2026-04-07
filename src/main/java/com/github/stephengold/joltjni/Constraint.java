@@ -218,8 +218,11 @@ abstract public class Constraint extends NonCopyable
     public ConstraintSettingsRef getConstraintSettings() {
         long constraintVa = va();
         long settingsRefVa = getConstraintSettings(constraintVa);
+        long settingsVa = ConstraintSettingsRef.getPtr(settingsRefVa);
+        ConstraintSettings settings
+                = ConstraintSettings.newConstraintSettings(settingsVa);
         ConstraintSettingsRef result
-                = new ConstraintSettingsRef(settingsRefVa, true);
+                = new ConstraintSettingsRef(settingsRefVa, settings);
 
         return result;
     }
@@ -355,7 +358,7 @@ abstract public class Constraint extends NonCopyable
     public Ref toRef() {
         long constraintVa = va();
         long refVa = toRef(constraintVa);
-        ConstraintRef result = new ConstraintRef(refVa, true);
+        ConstraintRef result = new ConstraintRef(refVa, this);
 
         return result;
     }

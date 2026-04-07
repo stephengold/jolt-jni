@@ -850,7 +850,7 @@ public class Test012 {
         ShapeRefC resultShape = sr.get();
         ConstShape bcsShape = bcs.getShape();
         Assert.assertEquals(resultShape.targetVa(), bcsShape.targetVa());
-        TestUtils.testClose(bcsShape, resultShape);
+        TestUtils.testClose(bcsShape, resultShape, resultShape.getPtr());
 
         { // serialize and then deserialize binary state:
             String serialData = serializeCooked(bcs);
@@ -939,11 +939,11 @@ public class Test012 {
 
         { // serialize and then deserialize raw settings using object streams:
             String serialData = serializeRaw(settings);
-            ConstHairSettings settingsCopy = drHairSettings(serialData);
+            HairSettingsRef settingsCopy = drHairSettings(serialData);
 
             Assert.assertNotEquals(settings.va(), settingsCopy.targetVa());
             Equivalent.hairSettings(settings, settingsCopy);
-            TestUtils.testClose(settingsCopy);
+            TestUtils.testClose(settingsCopy, settingsCopy.getPtr());
         }
 
         { // copy constructor:
@@ -977,7 +977,7 @@ public class Test012 {
         { // serialize and then deserialize using object streams:
             String serialData = serializeRaw(material);
             PhysicsMaterialRef refCopy = drPhysicsMaterial(serialData);
-            PhysicsMaterialSimple materialCopy = refCopy.getPtrAsSimple();
+            PhysicsMaterial materialCopy = refCopy.getPtr();
 
             Assert.assertNotEquals(material.va(), materialCopy.va());
             Equivalent.physicsMaterial(material, materialCopy);
@@ -1236,7 +1236,7 @@ public class Test012 {
 
             Assert.assertNotEquals(sbss.va(), sbssCopy.targetVa());
             Equivalent.softBodySharedSettings(sbss, sbssCopy);
-            TestUtils.testClose(sbssCopy);
+            TestUtils.testClose(sbssCopy, sbssCopy.getPtr());
         }
 
         { // serialize and then deserialize using object streams:
@@ -1246,7 +1246,7 @@ public class Test012 {
 
             Assert.assertNotEquals(sbss.va(), sbssCopy.targetVa());
             Equivalent.softBodySharedSettings(sbss, sbssCopy);
-            TestUtils.testClose(sbssCopy);
+            TestUtils.testClose(sbssCopy, sbssCopy.getPtr());
         }
 
         { // copy constructor:

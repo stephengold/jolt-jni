@@ -42,30 +42,44 @@ final public class ComputeSystemRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate an empty reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    ComputeSystemRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    ComputeSystemRef(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified system.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param system the system to target (not {@code null})
+     */
+    ComputeSystemRef(long refVa, ComputeSystem system) {
+        assert system != null;
+
+        this.ptr = system;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code ComputeSystem}.
+     * Access the target system, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public ComputeSystem getPtr() {
-        long systemVa = targetVa();
-        ComputeSystem result = ComputeSystem.newSystem(systemVa);
-
+        ComputeSystem result = (ComputeSystem) ptr;
         return result;
     }
 
@@ -104,9 +118,15 @@ final public class ComputeSystemRef extends Ref {
      */
     @Override
     public ComputeSystemRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        ComputeSystemRef result = new ComputeSystemRef(copyVa, true);
+        ComputeSystemRef result;
+        if (ptr == null) {
+            result = new ComputeSystemRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            ComputeSystem target = (ComputeSystem) ptr;
+            result = new ComputeSystemRef(copyVa, target);
+        }
 
         return result;
     }
@@ -119,5 +139,5 @@ final public class ComputeSystemRef extends Ref {
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

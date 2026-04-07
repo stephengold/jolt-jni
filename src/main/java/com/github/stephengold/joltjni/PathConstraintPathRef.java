@@ -46,26 +46,27 @@ final public class PathConstraintPathRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param path the path to target (not {@code null})
      */
-    PathConstraintPathRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    PathConstraintPathRef(long refVa, PathConstraintPath path) {
+        assert path != null;
+
+        this.ptr = path;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code PathConstraintPath}.
+     * Access the targeted path, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public PathConstraintPath getPtr() {
-        long pathVa = targetVa();
-        PathConstraintPath result = PathConstraintPath.newPath(pathVa);
-
+        PathConstraintPath result = (PathConstraintPath) ptr;
         return result;
     }
 
@@ -90,20 +91,26 @@ final public class PathConstraintPathRef extends Ref {
      */
     @Override
     public PathConstraintPathRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        PathConstraintPathRef result = new PathConstraintPathRef(copyVa, true);
+        PathConstraintPathRef result;
+        if (ptr == null) {
+            result = new PathConstraintPathRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            PathConstraintPath path = (PathConstraintPath) ptr;
+            result = new PathConstraintPathRef(copyVa, path);
+        }
 
         return result;
     }
     // *************************************************************************
     // native methods
 
-    native private static long copy(long refVa);
+    native static long copy(long refVa);
 
     native private static long createDefault();
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,7 +47,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterRefC_copy
 /*
  * Class:     com_github_stephengold_joltjni_CharacterRefC
  * Method:    freeWithSystem
- * Signature: (JLcom/github/stephengold/joltjni/PhysicsSystem;)V
+ * Signature: (JLcom/github/stephengold/joltjni/readonly/ConstPhysicsSystem;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterRefC_freeWithSystem
   (JNIEnv *, jclass, jlong refVa, jobject) {

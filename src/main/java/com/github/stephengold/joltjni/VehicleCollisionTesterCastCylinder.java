@@ -75,7 +75,7 @@ public class VehicleCollisionTesterCastCylinder extends VehicleCollisionTester {
         long testerVa = va();
         long refVa = VehicleCollisionTester.toRef(testerVa);
         VehicleCollisionTesterCastCylinderRef result
-                = new VehicleCollisionTesterCastCylinderRef(refVa, true);
+                = new VehicleCollisionTesterCastCylinderRef(refVa, this);
 
         return result;
     }

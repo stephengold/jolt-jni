@@ -47,15 +47,18 @@ final public class VehicleConstraintSettingsRef
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified settings.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param settings the settings to target (not {@code null})
      */
-    VehicleConstraintSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    VehicleConstraintSettingsRef(
+            long refVa, VehicleConstraintSettings settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -139,6 +142,21 @@ final public class VehicleConstraintSettingsRef
         float dy = up.getY();
         float dz = up.getZ();
         VehicleConstraintSettings.setUp(settingsVa, dx, dy, dz);
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = new VehicleConstraintSettings(targetVa);
+        }
     }
     // *************************************************************************
     // ConstVehicleConstraintsSettings methods
@@ -410,17 +428,14 @@ final public class VehicleConstraintSettingsRef
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code VehicleConstraintSettings}.
+     * Access the targeted settings, if any
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public VehicleConstraintSettings getPtr() {
-        long settingsVa = targetVa();
-        VehicleConstraintSettings result
-                = (VehicleConstraintSettings) ConstraintSettings
-                        .newConstraintSettings(settingsVa);
-
+        VehicleConstraintSettings result = (VehicleConstraintSettings) ptr;
         return result;
     }
 
@@ -445,10 +460,16 @@ final public class VehicleConstraintSettingsRef
      */
     @Override
     public VehicleConstraintSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        VehicleConstraintSettingsRef result
-                = new VehicleConstraintSettingsRef(copyVa, true);
+        VehicleConstraintSettingsRef result;
+        if (ptr == null) {
+            result = new VehicleConstraintSettingsRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            VehicleConstraintSettings settings
+                    = (VehicleConstraintSettings) ptr;
+            result = new VehicleConstraintSettingsRef(copyVa, settings);
+        }
 
         return result;
     }

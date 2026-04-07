@@ -44,33 +44,26 @@ final public class CharacterVirtualRef
         extends Ref
         implements ConstCharacterVirtual {
     // *************************************************************************
-    // fields
-
-    /**
-     * where to add the body (may be {@code null})
-     */
-    final private PhysicsSystem system;
-    // *************************************************************************
     // constructors
 
     /**
      * Instantiate an empty reference.
      */
     public CharacterVirtualRef() {
-        this.system = null;
         long refVa = createDefault();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a reference to the specified target.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param physicsSystem where to add the body
+     * @param target the target JVM object (not {@code null})
      */
-    CharacterVirtualRef(long refVa, PhysicsSystem physicsSystem) {
-        this.system = physicsSystem;
+    CharacterVirtualRef(long refVa, CharacterVirtual target) {
+        this.ptr = target;
+        PhysicsSystem physicsSystem = target.getPhysicsSystem();
         /*
          * Passing physicsSystem to the Runnable ensures that the underlying
          * system won't get cleaned before the character.
@@ -648,6 +641,19 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Access the physics system to which the character's body belongs.
+     *
+     * @return the pre-existing instance
+     */
+    @Override
+    public PhysicsSystem getPhysicsSystem() {
+        CharacterVirtual target = (CharacterVirtual) ptr;
+        PhysicsSystem result = target.getPhysicsSystem();
+
+        return result;
+    }
+
+    /**
      * Return how quickly penetration is resolved. The character is unaffected.
      *
      * @return the resolution fraction (0=never resolved, 1=all in one update)
@@ -918,7 +924,9 @@ final public class CharacterVirtualRef
     public CharacterVirtualRefC toRefC() {
         long refVa = va();
         long copyVa = toRefC(refVa);
-        CharacterVirtualRefC result = new CharacterVirtualRefC(copyVa, system);
+        CharacterVirtual character = (CharacterVirtual) ptr;
+        CharacterVirtualRefC result
+                = new CharacterVirtualRefC(copyVa, character);
 
         return result;
     }
@@ -926,15 +934,14 @@ final public class CharacterVirtualRef
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code CharacterVirtual}.
+     * Access the target character, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public CharacterVirtual getPtr() {
-        long settingsVa = targetVa();
-        CharacterVirtual result = new CharacterVirtual(settingsVa, system);
-
+        CharacterVirtual result = (CharacterVirtual) ptr;
         return result;
     }
 
@@ -953,15 +960,21 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Create another counted reference to the targeted character.
+     * Create an additional counted reference to the targeted character.
      *
      * @return a new JVM object with a new native object assigned
      */
     @Override
     public CharacterVirtualRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        CharacterVirtualRef result = new CharacterVirtualRef(copyVa, system);
+        CharacterVirtualRef result;
+        if (ptr == null) {
+            result = new CharacterVirtualRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            CharacterVirtual character = (CharacterVirtual) ptr;
+            result = new CharacterVirtualRef(copyVa, character);
+        }
 
         return result;
     }

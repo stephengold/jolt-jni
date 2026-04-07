@@ -173,7 +173,7 @@ public class VehicleControllerSettings
         long settingsVa = va();
         long refVa = toRef(settingsVa);
         VehicleControllerSettingsRef result
-                = new VehicleControllerSettingsRef(refVa, true);
+                = new VehicleControllerSettingsRef(refVa, this);
 
         return result;
     }

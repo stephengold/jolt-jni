@@ -813,7 +813,7 @@ public class Test006 {
         ShapeSettings s2 = ref.getPtr();
         Assert.assertEquals(settings, s2);
 
-        TestUtils.testClose(s2, ref);
+        TestUtils.testClose(ref);
     }
 
     /**

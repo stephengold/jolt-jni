@@ -42,32 +42,33 @@ final public class VehicleCollisionTesterCastCylinderRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified tester.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param tester the tester to be targeted (not {@code null})
      */
-    VehicleCollisionTesterCastCylinderRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    VehicleCollisionTesterCastCylinderRef(
+            long refVa, VehicleCollisionTesterCastCylinder tester) {
+        assert tester != null;
+
+        this.ptr = tester;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced
-     * {@code VehicleCollisionTesterCastCylinder}.
+     * Access the targeted tester, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public VehicleCollisionTesterCastCylinder getPtr() {
-        long testerVa = targetVa();
         VehicleCollisionTesterCastCylinder result
-                = new VehicleCollisionTesterCastCylinder(testerVa);
-
+                = (VehicleCollisionTesterCastCylinder) ptr;
         return result;
     }
 
@@ -92,10 +93,16 @@ final public class VehicleCollisionTesterCastCylinderRef extends Ref {
      */
     @Override
     public VehicleCollisionTesterCastCylinderRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        VehicleCollisionTesterCastCylinderRef result
-                = new VehicleCollisionTesterCastCylinderRef(copyVa, true);
+        VehicleCollisionTesterCastCylinderRef result;
+        if (ptr == null) {
+            result = new VehicleCollisionTesterCastCylinderRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            VehicleCollisionTesterCastCylinder tester
+                    = (VehicleCollisionTesterCastCylinder) ptr;
+            result = new VehicleCollisionTesterCastCylinderRef(copyVa, tester);
+        }
 
         return result;
     }

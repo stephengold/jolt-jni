@@ -42,31 +42,31 @@ final public class VehicleCollisionTesterRayRef extends Ref {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a reference to the specified target.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param target the tester to target (not {@code null})
      */
-    VehicleCollisionTesterRayRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    VehicleCollisionTesterRayRef(long refVa, VehicleCollisionTesterRay target) {
+        assert target != null;
+
+        this.ptr = target;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code VehicleCollisionTesterRay}.
+     * Access the targeted tester, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public VehicleCollisionTesterRay getPtr() {
-        long testerVa = targetVa();
-        VehicleCollisionTesterRay result
-                = new VehicleCollisionTesterRay(testerVa);
-
+        VehicleCollisionTesterRay result = (VehicleCollisionTesterRay) ptr;
         return result;
     }
 
@@ -91,10 +91,15 @@ final public class VehicleCollisionTesterRayRef extends Ref {
      */
     @Override
     public VehicleCollisionTesterRayRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        VehicleCollisionTesterRayRef result
-                = new VehicleCollisionTesterRayRef(copyVa, true);
+        VehicleCollisionTesterRayRef result;
+        if (ptr == null) {
+            result = new VehicleCollisionTesterRayRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            VehicleCollisionTesterRay target = (VehicleCollisionTesterRay) ptr;
+            result = new VehicleCollisionTesterRayRef(copyVa, target);
+        }
 
         return result;
     }

@@ -56,9 +56,17 @@ final public class SettingsResult extends Result<SoftBodySharedSettingsRef> {
     @Override
     public SoftBodySharedSettingsRef get() {
         long resultVa = va();
-        long shapeRefVa = get(resultVa);
-        SoftBodySharedSettingsRef result
-                = new SoftBodySharedSettingsRef(shapeRefVa, true);
+        long refVa = get(resultVa); // returns a new ref
+        long targetVa = SoftBodySharedSettingsRef.getPtr(refVa);
+
+        SoftBodySharedSettingsRef result;
+        if (targetVa == 0L) {
+            result = new SoftBodySharedSettingsRef(refVa);
+        } else {
+            SoftBodySharedSettings target
+                    = new SoftBodySharedSettings(targetVa);
+            result = new SoftBodySharedSettingsRef(refVa, target);
+        }
 
         return result;
     }

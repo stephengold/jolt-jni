@@ -471,7 +471,7 @@ public class VehicleConstraint
     public VehicleConstraintRef toRef() {
         long constraintVa = va();
         long refVa = toRef(constraintVa);
-        VehicleConstraintRef result = new VehicleConstraintRef(refVa, true);
+        VehicleConstraintRef result = new VehicleConstraintRef(refVa, this);
 
         return result;
     }

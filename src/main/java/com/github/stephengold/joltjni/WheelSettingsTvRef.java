@@ -47,15 +47,17 @@ final public class WheelSettingsTvRef
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified settings.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param settings the settings to target (not {@code null})
      */
-    WheelSettingsTvRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    WheelSettingsTvRef(long refVa, WheelSettingsTv settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -539,15 +541,14 @@ final public class WheelSettingsTvRef
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code WheelSettingsTv}.
+     * Access the targeted settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public WheelSettingsTv getPtr() {
-        long settingsVa = targetVa();
-        WheelSettingsTv result = new WheelSettingsTv(settingsVa);
-
+        WheelSettingsTv result = (WheelSettingsTv) ptr;
         return result;
     }
 
@@ -572,9 +573,15 @@ final public class WheelSettingsTvRef
      */
     @Override
     public WheelSettingsTvRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        WheelSettingsTvRef result = new WheelSettingsTvRef(copyVa, true);
+        WheelSettingsTvRef result;
+        if (ptr == null) {
+            result = new WheelSettingsTvRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            WheelSettingsTv settings = (WheelSettingsTv) ptr;
+            result = new WheelSettingsTvRef(copyVa, settings);
+        }
 
         return result;
     }

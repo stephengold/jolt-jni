@@ -47,11 +47,26 @@ final public class PhysicsSceneRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    PhysicsSceneRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    PhysicsSceneRef(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified scene.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param scene the scene to target (not {@code null})
+     */
+    PhysicsSceneRef(long refVa, PhysicsScene scene) {
+        assert scene != null;
+
+        this.ptr = scene;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -182,18 +197,32 @@ final public class PhysicsSceneRef extends Ref {
                 sceneVa, streamVa, saveShapes, saveGroupFilter);
     }
     // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = new PhysicsScene(targetVa);
+        }
+    }
+    // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code PhysicsScene}.
+     * Access the target scene, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public PhysicsScene getPtr() {
-        long sceneVa = targetVa();
-        PhysicsScene result = new PhysicsScene(sceneVa);
-
+        PhysicsScene result = (PhysicsScene) ptr;
         return result;
     }
 
@@ -218,9 +247,15 @@ final public class PhysicsSceneRef extends Ref {
      */
     @Override
     public PhysicsSceneRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        PhysicsSceneRef result = new PhysicsSceneRef(copyVa, true);
+        PhysicsSceneRef result;
+        if (ptr == null) {
+            result = new PhysicsSceneRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            PhysicsScene scene = (PhysicsScene) ptr;
+            result = new PhysicsSceneRef(copyVa, scene);
+        }
 
         return result;
     }
@@ -233,5 +268,5 @@ final public class PhysicsSceneRef extends Ref {
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

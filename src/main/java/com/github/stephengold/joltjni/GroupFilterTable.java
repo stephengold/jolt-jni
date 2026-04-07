@@ -112,7 +112,7 @@ public class GroupFilterTable extends GroupFilter {
     public GroupFilterTableRef toRef() {
         long filterVa = va();
         long refVa = GroupFilter.toRef(filterVa);
-        GroupFilterTableRef result = new GroupFilterTableRef(refVa, true);
+        GroupFilterTableRef result = new GroupFilterTableRef(refVa, this);
 
         return result;
     }

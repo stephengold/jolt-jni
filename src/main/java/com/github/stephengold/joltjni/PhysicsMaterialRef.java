@@ -46,41 +46,69 @@ final public class PhysicsMaterialRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    PhysicsMaterialRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    PhysicsMaterialRef(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified material.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param material the material to target (not {@code null})
+     */
+    PhysicsMaterialRef(long refVa, PhysicsMaterial material) {
+        assert material != null;
+
+        this.ptr = material;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Temporarily access the referenced material, assuming it is a
+     * Access the target material, assuming it is a
      * {@code PhysicsMaterialSimple}.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     public PhysicsMaterialSimple getPtrAsSimple() {
-        long materialVa = targetVa();
-        PhysicsMaterialSimple result = new PhysicsMaterialSimple(materialVa);
-
+        PhysicsMaterialSimple result = (PhysicsMaterialSimple) ptr;
         return result;
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = new PhysicsMaterial(targetVa);
+        }
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code PhysicsMaterial}.
+     * Access the targeted material, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public PhysicsMaterial getPtr() {
-        long materialVa = targetVa();
-        PhysicsMaterial result = new PhysicsMaterial(materialVa);
-
+        PhysicsMaterial result = (PhysicsMaterial) ptr;
         return result;
     }
 
@@ -105,9 +133,15 @@ final public class PhysicsMaterialRef extends Ref {
      */
     @Override
     public PhysicsMaterialRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        PhysicsMaterialRef result = new PhysicsMaterialRef(copyVa, true);
+        PhysicsMaterialRef result;
+        if (ptr == null) {
+            result = new PhysicsMaterialRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            PhysicsMaterial target = (PhysicsMaterial) ptr;
+            result = new PhysicsMaterialRef(copyVa, target);
+        }
 
         return result;
     }
@@ -120,5 +154,5 @@ final public class PhysicsMaterialRef extends Ref {
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

@@ -46,27 +46,51 @@ final public class ConstraintSettingsRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    ConstraintSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    ConstraintSettingsRef(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified settings.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param settings the settings to target (not {@code null})
+     */
+    ConstraintSettingsRef(long refVa, ConstraintSettings settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        this.ptr = ConstraintSettings.newConstraintSettings(targetVa);
     }
     // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code ConstraintSettings}.
+     * Access the target settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public ConstraintSettings getPtr() {
-        long settingsVa = targetVa();
-        ConstraintSettings result
-                = ConstraintSettings.newConstraintSettings(settingsVa);
-
+        ConstraintSettings result = (ConstraintSettings) ptr;
         return result;
     }
 
@@ -91,9 +115,15 @@ final public class ConstraintSettingsRef extends Ref {
      */
     @Override
     public ConstraintSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        ConstraintSettingsRef result = new ConstraintSettingsRef(copyVa, true);
+        ConstraintSettingsRef result;
+        if (ptr == null) {
+            result = new ConstraintSettingsRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            ConstraintSettings settings = (ConstraintSettings) ptr;
+            result = new ConstraintSettingsRef(copyVa, settings);
+        }
 
         return result;
     }
@@ -106,5 +136,5 @@ final public class ConstraintSettingsRef extends Ref {
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

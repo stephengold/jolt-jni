@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
 import com.github.stephengold.joltjni.readonly.ConstCharacter;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsSystem;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.DoubleBuffer;
@@ -42,9 +43,9 @@ final public class CharacterRefC
     // fields
 
     /**
-     * where to add the body (may be {@code null})
+     * cache the target to avoid duplication
      */
-    final private PhysicsSystem system;
+    private ConstCharacter ptr;
     // *************************************************************************
     // constructors
 
@@ -53,10 +54,11 @@ final public class CharacterRefC
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param physicsSystem where to add the body
+     * @param character the character to target (not {@code null})
      */
-    CharacterRefC(long refVa, PhysicsSystem physicsSystem) {
-        this.system = physicsSystem;
+    CharacterRefC(long refVa, ConstCharacter character) {
+        this.ptr = character;
+        ConstPhysicsSystem physicsSystem = character.getPhysicsSystem();
         /*
          * Passing physicsSystem to the Runnable ensures that the underlying
          * system won't get cleaned before the character.
@@ -68,17 +70,13 @@ final public class CharacterRefC
     // new methods exposed
 
     /**
-     * Temporarily access the referenced {@code ConstCharacter}.
+     * Access the targeted character, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     public ConstCharacter getPtr() {
-        long refVa = va();
-        long characterVa = getPtr(refVa);
-        ConstCharacter result = new com.github.stephengold.joltjni.Character(
-                characterVa, system);
-
-        return result;
+        return ptr;
     }
     // *************************************************************************
     // ConstCharacter methods
@@ -353,6 +351,17 @@ final public class CharacterRefC
                 characterVa, storeFloats, lockBodies);
         Vec3 result = new Vec3(storeFloats);
 
+        return result;
+    }
+
+    /**
+     * Access the physics system to which the character's body belongs.
+     *
+     * @return the pre-existing instance
+     */
+    @Override
+    public ConstPhysicsSystem getPhysicsSystem() {
+        ConstPhysicsSystem result = ptr.getPhysicsSystem();
         return result;
     }
 
@@ -637,7 +646,7 @@ final public class CharacterRefC
     public CharacterRefC toRefC() {
         long refVa = va();
         long copyVa = copy(refVa);
-        CharacterRefC result = new CharacterRefC(copyVa, system);
+        CharacterRefC result = new CharacterRefC(copyVa, ptr);
 
         return result;
     }
@@ -646,7 +655,8 @@ final public class CharacterRefC
 
     native private static long copy(long refVa);
 
-    native private static void freeWithSystem(long refVa, PhysicsSystem unused);
+    native private static void freeWithSystem(
+            long refVa, ConstPhysicsSystem unused);
 
     native private static long getPtr(long refVa);
 }

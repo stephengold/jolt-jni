@@ -106,6 +106,10 @@ public class Test002 {
             Assert.assertEquals(EPhysicsUpdateError.None, errors);
         }
 
+        for (int i = 0; i < dynamicShapes.length; ++i) {
+            ConstShape shape = dynamicShapes[i].getPtr();
+            TestUtils.testClose(shape);
+        }
         TestUtils.testClose(dynamicShapes);
         TestUtils.testClose(meshBodySettings, jobSystem, tempAllocator);
 

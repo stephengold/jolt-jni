@@ -212,7 +212,8 @@ public class BodyBatchQueryTest {
             ShapeRefC singularRef = bi.getShape(ids.get(i));
             ShapeRefC arrayRef = batchShapes.get(i);
             Assert.assertEquals(singularRef.targetVa(), arrayRef.targetVa());
-            TestUtils.testClose(singularRef, arrayRef);
+            TestUtils.testClose(singularRef, singularRef.getPtr(),
+                    arrayRef, arrayRef.getPtr());
         }
         TestUtils.testClose(batchShapes);
 

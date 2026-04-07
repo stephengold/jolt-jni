@@ -287,8 +287,10 @@ public class SoftBodySharedSettings
     public static SoftBodySharedSettingsRef sCreateCube(
             int gridSize, float gridSpacing) {
         long refVa = sCreateCubeNative(gridSize, gridSpacing);
+        long targetVa = SoftBodySharedSettingsRef.getPtr(refVa);
+        SoftBodySharedSettings target = new SoftBodySharedSettings(targetVa);
         SoftBodySharedSettingsRef result
-                = new SoftBodySharedSettingsRef(refVa, true);
+                = new SoftBodySharedSettingsRef(refVa, target);
 
         return result;
     }
@@ -632,7 +634,7 @@ public class SoftBodySharedSettings
         long settingsVa = va();
         long refVa = toRef(settingsVa);
         SoftBodySharedSettingsRef result
-                = new SoftBodySharedSettingsRef(refVa, true);
+                = new SoftBodySharedSettingsRef(refVa, this);
 
         return result;
     }

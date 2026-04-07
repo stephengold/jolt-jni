@@ -237,7 +237,7 @@ public class WheelSettingsWv
     public WheelSettingsWvRef toRef() {
         long settingsVa = va();
         long refVa = toRef(settingsVa);
-        WheelSettingsWvRef result = new WheelSettingsWvRef(refVa, true);
+        WheelSettingsWvRef result = new WheelSettingsWvRef(refVa, this);
 
         return result;
     }

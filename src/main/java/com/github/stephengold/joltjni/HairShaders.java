@@ -118,7 +118,7 @@ final public class HairShaders extends JoltPhysicsObject implements RefTarget {
     public HairShadersRef toRef() {
         long shadersVa = va();
         long refVa = toRef(shadersVa);
-        HairShadersRef result = new HairShadersRef(refVa, true);
+        HairShadersRef result = new HairShadersRef(refVa, this);
 
         return result;
     }

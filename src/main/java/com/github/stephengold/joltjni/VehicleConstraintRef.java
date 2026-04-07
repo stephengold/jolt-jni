@@ -50,15 +50,17 @@ final public class VehicleConstraintRef
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified constraint.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param constraint the constraint to target (not {@code null})
      */
-    VehicleConstraintRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    VehicleConstraintRef(long refVa, VehicleConstraint constraint) {
+        assert constraint != null;
+
+        this.ptr = constraint;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -165,8 +167,11 @@ final public class VehicleConstraintRef
     public ConstraintSettingsRef getConstraintSettings() {
         long constraintVa = targetVa();
         long settingsRefVa = Constraint.getConstraintSettings(constraintVa);
+        long settingsVa = ConstraintSettingsRef.getPtr(settingsRefVa);
+        ConstraintSettings settings
+                = ConstraintSettings.newConstraintSettings(settingsVa);
         ConstraintSettingsRef result
-                = new ConstraintSettingsRef(settingsRefVa, true);
+                = new ConstraintSettingsRef(settingsRefVa, settings);
 
         return result;
     }
@@ -481,15 +486,14 @@ final public class VehicleConstraintRef
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code VehicleConstraint}.
+     * Access the targeted constraint, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public VehicleConstraint getPtr() {
-        long constraintVa = targetVa();
-        VehicleConstraint result = new VehicleConstraint(constraintVa);
-
+        VehicleConstraint result = (VehicleConstraint) ptr;
         return result;
     }
 
@@ -514,9 +518,15 @@ final public class VehicleConstraintRef
      */
     @Override
     public VehicleConstraintRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        VehicleConstraintRef result = new VehicleConstraintRef(copyVa, true);
+        VehicleConstraintRef result;
+        if (ptr == null) {
+            result = new VehicleConstraintRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            VehicleConstraint constraint = (VehicleConstraint) ptr;
+            result = new VehicleConstraintRef(copyVa, constraint);
+        }
 
         return result;
     }

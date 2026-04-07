@@ -43,16 +43,33 @@ final public class SkeletonRef extends Ref implements ConstSkeleton {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified skeleton.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param skeleton the skeleton to target (not {@code null})
      */
-    SkeletonRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    SkeletonRef(long refVa, Skeleton skeleton) {
+        assert skeleton != null;
+
+        this.ptr = skeleton;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = new Skeleton(targetVa);
+        }
     }
     // *************************************************************************
     // ConstSkeleton methods
@@ -146,15 +163,14 @@ final public class SkeletonRef extends Ref implements ConstSkeleton {
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code Skeleton}.
+     * Access the targeted skeleton, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public Skeleton getPtr() {
-        long skeletonVa = targetVa();
-        Skeleton result = new Skeleton(skeletonVa);
-
+        Skeleton result = (Skeleton) ptr;
         return result;
     }
 
@@ -179,9 +195,15 @@ final public class SkeletonRef extends Ref implements ConstSkeleton {
      */
     @Override
     public SkeletonRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        SkeletonRef result = new SkeletonRef(copyVa, true);
+        SkeletonRef result;
+        if (ptr == null) {
+            result = new SkeletonRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            Skeleton skeleton = (Skeleton) ptr;
+            result = new SkeletonRef(copyVa, skeleton);
+        }
 
         return result;
     }

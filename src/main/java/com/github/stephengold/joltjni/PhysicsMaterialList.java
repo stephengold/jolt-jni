@@ -78,8 +78,16 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
     @Override
     public PhysicsMaterialRef get(int elementIndex) {
         long listVa = va();
-        long refVa = get(listVa, elementIndex);
-        PhysicsMaterialRef result = new PhysicsMaterialRef(refVa, true);
+        long refVa = get(listVa, elementIndex); // returns a new ref
+        long targetVa = PhysicsMaterialRef.getPtr(refVa);
+
+        PhysicsMaterialRef result;
+        if (targetVa == 0L) {
+            result = new PhysicsMaterialRef(refVa);
+        } else {
+            PhysicsMaterial target = new PhysicsMaterial(targetVa);
+            result = new PhysicsMaterialRef(refVa, target);
+        }
 
         return result;
     }

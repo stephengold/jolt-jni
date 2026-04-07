@@ -89,7 +89,7 @@ public class ComputeQueue extends NonCopyable implements RefTarget {
     public ComputeQueueRef toRef() {
         long queueVa = va();
         long refVa = toRef(queueVa);
-        ComputeQueueRef result = new ComputeQueueRef(refVa, true);
+        ComputeQueueRef result = new ComputeQueueRef(refVa, this);
 
         return result;
     }

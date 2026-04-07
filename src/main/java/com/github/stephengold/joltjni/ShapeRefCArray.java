@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstShape;
+
 /**
  * A fixed-length array of counted references to shapes. (native type:
  * {@code ShapeRefC[]})
@@ -54,18 +56,27 @@ public class ShapeRefCArray extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Access the reference at the specified index.
+     * Copy the reference at the specified index.
      *
      * @param elementIndex the index (&ge;0, &lt;length)
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new JVM object with a new native object assigned
      */
     public ShapeRefC get(int elementIndex) {
         assert elementIndex >= 0 && elementIndex < length :
                 "Out of range:  index=" + elementIndex + " length=" + length;
 
         long arrayVa = va();
-        long refVa = getRef(arrayVa, elementIndex);
-        ShapeRefC result = new ShapeRefC(this, refVa);
+        long refVa = getRef(arrayVa, elementIndex); // the pre-existing ref
+        long targetVa = ShapeRefC.getPtr(refVa);
+
+        ShapeRefC result;
+        if (targetVa == 0L) {
+            result = new ShapeRefC();
+        } else {
+            long copyVa = ShapeRefC.copy(refVa);
+            ConstShape target = Shape.newShape(targetVa);
+            result = new ShapeRefC(copyVa, target);
+        }
 
         return result;
     }

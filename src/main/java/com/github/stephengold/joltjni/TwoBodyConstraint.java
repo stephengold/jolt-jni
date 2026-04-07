@@ -52,7 +52,7 @@ abstract public class TwoBodyConstraint
     public TwoBodyConstraintRef toRef() {
         long constraintVa = va();
         long refVa = toRef(constraintVa);
-        TwoBodyConstraintRef result = new TwoBodyConstraintRef(refVa, true);
+        TwoBodyConstraintRef result = new TwoBodyConstraintRef(refVa, this);
 
         return result;
     }

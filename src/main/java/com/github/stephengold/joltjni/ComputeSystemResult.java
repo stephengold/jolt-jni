@@ -56,8 +56,16 @@ final public class ComputeSystemResult extends Result<ComputeSystemRef> {
     @Override
     public ComputeSystemRef get() {
         long resultVa = va();
-        long systemRefVa = get(resultVa);
-        ComputeSystemRef result = new ComputeSystemRef(systemRefVa, true);
+        long refVa = get(resultVa); // returns a new ref
+        long targetVa = ComputeSystemRef.getPtr(refVa);
+
+        ComputeSystemRef result;
+        if (targetVa == 0L) {
+            result = new ComputeSystemRef(refVa);
+        } else {
+            ComputeSystem target = new ComputeSystem(targetVa);
+            result = new ComputeSystemRef(refVa, target);
+        }
 
         return result;
     }

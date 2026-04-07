@@ -56,15 +56,30 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate an empty reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    SoftBodySharedSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    SoftBodySharedSettingsRef(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified settings.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param settings the settings to target (not {@code null})
+     */
+    SoftBodySharedSettingsRef(long refVa, SoftBodySharedSettings settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -261,6 +276,21 @@ final public class SoftBodySharedSettingsRef
         long settingsVa = targetVa();
         long materialVa = (material == null) ? 0L : material.va();
         SoftBodySharedSettings.setMaterialsSingle(settingsVa, materialVa);
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = new SoftBodySharedSettings(targetVa);
+        }
     }
     // *************************************************************************
     // ConstSoftBodySharedSettings methods
@@ -544,15 +574,14 @@ final public class SoftBodySharedSettingsRef
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code SoftBodySharedSettings}.
+     * Access the targeted settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public SoftBodySharedSettings getPtr() {
-        long settingsVa = targetVa();
-        SoftBodySharedSettings result = new SoftBodySharedSettings(settingsVa);
-
+        SoftBodySharedSettings result = (SoftBodySharedSettings) ptr;
         return result;
     }
 
@@ -577,10 +606,15 @@ final public class SoftBodySharedSettingsRef
      */
     @Override
     public SoftBodySharedSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        SoftBodySharedSettingsRef result
-                = new SoftBodySharedSettingsRef(copyVa, true);
+        SoftBodySharedSettingsRef result;
+        if (ptr == null) {
+            result = new SoftBodySharedSettingsRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            SoftBodySharedSettings settings = (SoftBodySharedSettings) ptr;
+            result = new SoftBodySharedSettingsRef(copyVa, settings);
+        }
 
         return result;
     }
@@ -593,5 +627,5 @@ final public class SoftBodySharedSettingsRef
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

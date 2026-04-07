@@ -46,11 +46,26 @@ final public class RagdollSettingsRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    RagdollSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    RagdollSettingsRef(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified settings.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param settings the settings to target (not {@code null})
+     */
+    RagdollSettingsRef(long refVa, RagdollSettings settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -212,18 +227,32 @@ final public class RagdollSettingsRef extends Ref {
         return result;
     }
     // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = new RagdollSettings(targetVa);
+        }
+    }
+    // *************************************************************************
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code RagdollSettings}.
+     * Access the targeted settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public RagdollSettings getPtr() {
-        long settingsVa = targetVa();
-        RagdollSettings result = new RagdollSettings(settingsVa);
-
+        RagdollSettings result = (RagdollSettings) ptr;
         return result;
     }
 
@@ -248,9 +277,15 @@ final public class RagdollSettingsRef extends Ref {
      */
     @Override
     public RagdollSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        RagdollSettingsRef result = new RagdollSettingsRef(copyVa, true);
+        RagdollSettingsRef result;
+        if (ptr == null) {
+            result = new RagdollSettingsRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            RagdollSettings settings = (RagdollSettings) ptr;
+            result = new RagdollSettingsRef(copyVa, settings);
+        }
 
         return result;
     }
@@ -263,5 +298,5 @@ final public class RagdollSettingsRef extends Ref {
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

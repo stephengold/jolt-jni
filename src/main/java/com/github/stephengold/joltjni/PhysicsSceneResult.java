@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,8 +56,16 @@ final public class PhysicsSceneResult extends Result<PhysicsSceneRef> {
     @Override
     public PhysicsSceneRef get() {
         long resultVa = va();
-        long sceneRefVa = get(resultVa);
-        PhysicsSceneRef result = new PhysicsSceneRef(sceneRefVa, true);
+        long refVa = get(resultVa);  // returns a new ref
+        long targetVa = PhysicsSceneRef.getPtr(refVa);
+
+        PhysicsSceneRef result;
+        if (targetVa == 0L) {
+            result = new PhysicsSceneRef(refVa);
+        } else {
+            PhysicsScene target = new PhysicsScene(targetVa);
+            result = new PhysicsSceneRef(refVa, target);
+        }
 
         return result;
     }

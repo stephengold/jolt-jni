@@ -49,15 +49,17 @@ final public class TwoBodyConstraintRef
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified constraint.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param constraint the constraint to target (not {@code null})
      */
-    TwoBodyConstraintRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    TwoBodyConstraintRef(long refVa, TwoBodyConstraint constraint) {
+        assert constraint != null;
+
+        this.ptr = constraint;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -188,8 +190,11 @@ final public class TwoBodyConstraintRef
     public ConstraintSettingsRef getConstraintSettings() {
         long constraintVa = targetVa();
         long settingsRefVa = Constraint.getConstraintSettings(constraintVa);
+        long targetVa = ConstraintSettingsRef.getPtr(settingsRefVa);
+        ConstraintSettings target
+                = ConstraintSettings.newConstraintSettings(targetVa);
         ConstraintSettingsRef result
-                = new ConstraintSettingsRef(settingsRefVa, true);
+                = new ConstraintSettingsRef(settingsRefVa, target);
 
         return result;
     }
@@ -294,16 +299,14 @@ final public class TwoBodyConstraintRef
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code TwoBodyConstraint}.
+     * Access the targeted constraint, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public TwoBodyConstraint getPtr() {
-        long constraintVa = targetVa();
-        TwoBodyConstraint result
-                = (TwoBodyConstraint) Constraint.newConstraint(constraintVa);
-
+        TwoBodyConstraint result = (TwoBodyConstraint) ptr;
         return result;
     }
 
@@ -328,9 +331,15 @@ final public class TwoBodyConstraintRef
      */
     @Override
     public TwoBodyConstraintRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        TwoBodyConstraintRef result = new TwoBodyConstraintRef(copyVa, true);
+        TwoBodyConstraintRef result;
+        if (ptr == null) {
+            result = new TwoBodyConstraintRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            TwoBodyConstraint constraint = (TwoBodyConstraint) ptr;
+            result = new TwoBodyConstraintRef(copyVa, constraint);
+        }
 
         return result;
     }

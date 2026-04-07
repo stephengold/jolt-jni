@@ -547,7 +547,7 @@ abstract public class Shape
     public ShapeRefC toRefC() {
         long shapeVa = va();
         long refVa = toRefC(shapeVa);
-        ShapeRefC result = new ShapeRefC(refVa, true);
+        ShapeRefC result = new ShapeRefC(refVa, this);
 
         return result;
     }
@@ -585,8 +585,8 @@ abstract public class Shape
     @Override
     public ShapeRef toRef() {
         long shapeVa = va();
-        long copyVa = toRef(shapeVa);
-        ShapeRef result = new ShapeRef(copyVa, true);
+        long refVa = toRef(shapeVa);
+        ShapeRef result = new ShapeRef(refVa, this);
 
         return result;
     }

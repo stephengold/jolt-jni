@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -320,7 +320,8 @@ public class Test001 {
 
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
-        TestUtils.testClose(floorBodySettings, floorShapeRef, floorShapeResult,
+        TestUtils.testClose(floorBodySettings, floorShapeRef.getPtr(),
+                floorShapeRef, floorShapeResult,
                 physicsSystem, objVsObjFilter, objVsBpFilter, mapObj2Bp);
 
         TestUtils.cleanup();

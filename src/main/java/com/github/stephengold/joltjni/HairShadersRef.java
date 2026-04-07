@@ -46,11 +46,13 @@ final public class HairShadersRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param shaders the the shaders to target (not {@code null})
      */
-    HairShadersRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    HairShadersRef(long refVa, HairShaders shaders) {
+        assert shaders != null;
+
+        this.ptr = shaders;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -72,15 +74,14 @@ final public class HairShadersRef extends Ref {
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code HairShaders}.
+     * Access the targeted shaders, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public HairShaders getPtr() {
-        long shadersRef = targetVa();
-        HairShaders result = new HairShaders(shadersRef);
-
+        HairShaders result = (HairShaders) ptr;
         return result;
     }
 
@@ -105,9 +106,15 @@ final public class HairShadersRef extends Ref {
      */
     @Override
     public HairShadersRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        HairShadersRef result = new HairShadersRef(copyVa, true);
+        HairShadersRef result;
+        if (ptr == null) {
+            result = new HairShadersRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            HairShaders shaders = (HairShaders) ptr;
+            result = new HairShadersRef(copyVa, shaders);
+        }
 
         return result;
     }

@@ -39,33 +39,27 @@ import java.nio.FloatBuffer;
  */
 final public class CharacterRef extends Ref implements ConstCharacter {
     // *************************************************************************
-    // fields
-
-    /**
-     * where to add the body (may be {@code null})
-     */
-    final private PhysicsSystem system;
-    // *************************************************************************
     // constructors
 
     /**
      * Instantiate an empty reference.
      */
     public CharacterRef() {
-        this.system = null;
         long refVa = createDefault();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a reference to the specified character.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param physicsSystem where to add the body
+     * @param character the character to target (not {@code null})
      */
-    CharacterRef(long refVa, PhysicsSystem physicsSystem) {
-        this.system = physicsSystem;
+    CharacterRef(
+            long refVa, com.github.stephengold.joltjni.Character character) {
+        this.ptr = character;
+        PhysicsSystem physicsSystem = character.getPhysicsSystem();
         /*
          * Passing physicsSystem to the Runnable ensures that the underlying
          * system won't get cleaned before the character.
@@ -535,6 +529,18 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
+     * Access the physics system to which the character's body belongs.
+     *
+     * @return the pre-existing instance
+     */
+    @Override
+    public PhysicsSystem getPhysicsSystem() {
+        com.github.stephengold.joltjni.Character target = getPtr();
+        PhysicsSystem result = target.getPhysicsSystem();
+        return result;
+    }
+
+    /**
      * Copy the location of the character using the locking body interface. The
      * character is unaffected.
      *
@@ -801,7 +807,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public CharacterRefC toRefC() {
         long refVa = va();
         long copyVa = toRefC(refVa);
-        CharacterRefC result = new CharacterRefC(copyVa, system);
+        com.github.stephengold.joltjni.Character target = getPtr();
+        CharacterRefC result = new CharacterRefC(copyVa, target);
 
         return result;
     }
@@ -809,17 +816,15 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code Character}.
+     * Access the target character, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public com.github.stephengold.joltjni.Character getPtr() {
-        long characterVa = targetVa();
         com.github.stephengold.joltjni.Character result
-                = new com.github.stephengold.joltjni.Character(
-                        characterVa, system);
-
+                = (com.github.stephengold.joltjni.Character) ptr;
         return result;
     }
 
@@ -844,9 +849,16 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      */
     @Override
     public CharacterRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        CharacterRef result = new CharacterRef(copyVa, system);
+        CharacterRef result;
+        if (ptr == null) {
+            result = new CharacterRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            com.github.stephengold.joltjni.Character target
+                    = (com.github.stephengold.joltjni.Character) ptr;
+            result = new CharacterRef(copyVa, target);
+        }
 
         return result;
     }

@@ -487,7 +487,7 @@ public class CharacterVirtualSettings
         long settingsVa = va();
         long refVa = toRef(settingsVa);
         CharacterVirtualSettingsRef result
-                = new CharacterVirtualSettingsRef(refVa, true);
+                = new CharacterVirtualSettingsRef(refVa, this);
 
         return result;
     }

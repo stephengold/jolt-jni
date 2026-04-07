@@ -53,11 +53,13 @@ final public class CharacterSettingsRef
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param settings the settings to target (not {@code null})
      */
-    CharacterSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    CharacterSettingsRef(long refVa, CharacterSettings settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -322,15 +324,14 @@ final public class CharacterSettingsRef
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code CharacterSettings}.
+     * Access the target settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public CharacterSettings getPtr() {
-        long settingsVa = targetVa();
-        CharacterSettings result = new CharacterSettings(settingsVa);
-
+        CharacterSettings result = (CharacterSettings) ptr;
         return result;
     }
 
@@ -355,9 +356,15 @@ final public class CharacterSettingsRef
      */
     @Override
     public CharacterSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        CharacterSettingsRef result = new CharacterSettingsRef(copyVa, true);
+        CharacterSettingsRef result;
+        if (ptr == null) {
+            result = new CharacterSettingsRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            CharacterSettings settings = (CharacterSettings) ptr;
+            result = new CharacterSettingsRef(copyVa, settings);
+        }
 
         return result;
     }

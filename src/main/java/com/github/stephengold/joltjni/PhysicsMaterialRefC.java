@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,13 @@ import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
  */
 final public class PhysicsMaterialRefC extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * cache the target to reduce duplication
+     */
+    private ConstPhysicsMaterial ptr;
+    // *************************************************************************
     // constructors
 
     /**
@@ -38,32 +45,44 @@ final public class PhysicsMaterialRefC extends JoltPhysicsObject {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    PhysicsMaterialRefC(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    PhysicsMaterialRefC(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified material.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param material the material to target (not {@code null})
+     */
+    PhysicsMaterialRefC(long refVa, ConstPhysicsMaterial material) {
+        assert material != null;
+
+        this.ptr = material;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Temporarily access the referenced {@code ConstPhysicsMaterial}.
+     * Access the targeted material, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     public ConstPhysicsMaterial getPtr() {
-        long refVa = va();
-        long materialVa = getPtr(refVa);
-        ConstPhysicsMaterial result = new PhysicsMaterial(materialVa);
-
-        return result;
+        return ptr;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

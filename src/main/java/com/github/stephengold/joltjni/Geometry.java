@@ -197,7 +197,7 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
     public GeometryRef toRef() {
         long geometryVa = va();
         long refVa = toRef(geometryVa);
-        GeometryRef result = new GeometryRef(refVa, true);
+        GeometryRef result = new GeometryRef(refVa, this);
 
         return result;
     }

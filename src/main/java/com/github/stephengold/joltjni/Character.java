@@ -542,7 +542,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     public CharacterRef toRef() {
         long characterVa = va();
         long refVa = toRef(characterVa);
-        CharacterRef result = new CharacterRef(refVa, system);
+        CharacterRef result = new CharacterRef(refVa, this);
 
         return result;
     }
@@ -675,6 +675,16 @@ public class Character extends CharacterBase implements ConstCharacter {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Access the system to which the character's body belongs.
+     *
+     * @return the pre-existing object (not {@code null})
+     */
+    @Override
+    public PhysicsSystem getPhysicsSystem() {
+        return system;
     }
 
     /**
@@ -839,7 +849,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     public CharacterRefC toRefC() {
         long characterVa = va();
         long refVa = toRefC(characterVa);
-        CharacterRefC result = new CharacterRefC(refVa, system);
+        CharacterRefC result = new CharacterRefC(refVa, this);
 
         return result;
     }

@@ -39,6 +39,13 @@ import java.nio.FloatBuffer;
  */
 final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     // *************************************************************************
+    // fields
+
+    /**
+     * cache the target to reduce duplication
+     */
+    private ConstShape ptr;
+    // *************************************************************************
     // constructors
 
     /**
@@ -54,11 +61,26 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    ShapeRefC(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    ShapeRefC(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified shape.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param shape the shape to target (not {@code null})
+     */
+    ShapeRefC(long refVa, ConstShape shape) {
+        assert shape != null;
+
+        this.ptr = shape;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
 
@@ -76,15 +98,13 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     // new methods exposed
 
     /**
-     * Temporarily access the referenced {@code ConstShape}.
+     * Access the target shape, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     public ConstShape getPtr() {
-        long shapeVa = targetVa();
-        ConstShape result = Shape.newShape(shapeVa);
-
-        return result;
+        return ptr;
     }
     // *************************************************************************
     // ConstShape methods
@@ -496,20 +516,25 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      */
     @Override
     public ShapeRefC toRefC() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        ShapeRefC result = new ShapeRefC(copyVa, true);
+        ShapeRefC result;
+        if (ptr == null) {
+            result = new ShapeRefC();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            result = new ShapeRefC(copyVa, ptr);
+        }
 
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
-    native private static long copy(long refVa);
+    native static long copy(long refVa);
 
     native private static long createDefault();
 
     native private static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }

@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.template.Array;
 
 /**
@@ -81,16 +82,24 @@ final public class ShapeList extends Array<ShapeRefC> {
     }
 
     /**
-     * Access the shape at the specified index.
+     * Copy the reference at the specified index.
      *
-     * @param elementIndex the index from which to get the shape (&ge;0)
+     * @param elementIndex the index from which to get the reference (&ge;0)
      * @return a new counted reference to the same shape
      */
     @Override
     public ShapeRefC get(int elementIndex) {
         long listVa = va();
-        long shapeVa = getShapeRefC(listVa, elementIndex);
-        ShapeRefC result = new ShapeRefC(shapeVa, true);
+        long refVa = getShapeRefC(listVa, elementIndex); // returns a new ref
+        long targetVa = ShapeRefC.getPtr(refVa);
+
+        ShapeRefC result;
+        if (targetVa == 0L) {
+            result = new ShapeRefC(refVa);
+        } else {
+            ConstShape target = Shape.newShape(targetVa);
+            result = new ShapeRefC(refVa, target);
+        }
 
         return result;
     }

@@ -43,16 +43,33 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate a counted reference to the specified settings.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param settings the settings to target (not {@code null})
      */
-    ShapeSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    ShapeSettingsRef(long refVa, ShapeSettings settings) {
+        assert settings != null;
+
+        this.ptr = settings;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        if (targetVa == 0L) {
+            this.ptr = null;
+        } else {
+            this.ptr = ShapeSettings.newShapeSettings(targetVa);
+        }
     }
     // *************************************************************************
     // ConstShapeSettings methods
@@ -109,7 +126,8 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
     public ShapeSettingsRefC toRefC() {
         long refVa = va();
         long copyVa = toRefC(refVa);
-        ShapeSettingsRefC result = new ShapeSettingsRefC(copyVa, true);
+        ConstShapeSettings target = (ConstShapeSettings) ptr;
+        ShapeSettingsRefC result = new ShapeSettingsRefC(copyVa, target);
 
         return result;
     }
@@ -117,15 +135,14 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code ShapeSettings}.
+     * Access the targeted settings, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public ShapeSettings getPtr() {
-        long settingsVa = targetVa();
-        ShapeSettings result = ShapeSettings.newShapeSettings(settingsVa);
-
+        ShapeSettings result = (ShapeSettings) ptr;
         return result;
     }
 
@@ -150,9 +167,15 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
      */
     @Override
     public ShapeSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        ShapeSettingsRef result = new ShapeSettingsRef(copyVa, true);
+        ShapeSettingsRef result;
+        if (ptr == null) {
+            result = new ShapeSettingsRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            ShapeSettings settings = (ShapeSettings) ptr;
+            result = new ShapeSettingsRef(copyVa, settings);
+        }
 
         return result;
     }

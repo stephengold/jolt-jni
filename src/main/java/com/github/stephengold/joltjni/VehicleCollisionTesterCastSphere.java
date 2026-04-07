@@ -98,7 +98,7 @@ public class VehicleCollisionTesterCastSphere extends VehicleCollisionTester {
         long testerVa = va();
         long refVa = VehicleCollisionTester.toRef(testerVa);
         VehicleCollisionTesterCastSphereRef result
-                = new VehicleCollisionTesterCastSphereRef(refVa, true);
+                = new VehicleCollisionTesterCastSphereRef(refVa, this);
 
         return result;
     }

@@ -131,7 +131,7 @@ public class VehicleCollisionTester
         long testerVa = va();
         long refVa = toRef(testerVa);
         VehicleCollisionTesterRef result
-                = new VehicleCollisionTesterRef(refVa, true);
+                = new VehicleCollisionTesterRef(refVa, this);
 
         return result;
     }

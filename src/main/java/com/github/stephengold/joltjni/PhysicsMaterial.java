@@ -147,7 +147,7 @@ public class PhysicsMaterial
     public PhysicsMaterialRefC toRefC() {
         long materialVa = va();
         long refVa = toRefC(materialVa);
-        PhysicsMaterialRefC result = new PhysicsMaterialRefC(refVa, true);
+        PhysicsMaterialRefC result = new PhysicsMaterialRefC(refVa, this);
 
         return result;
     }
@@ -185,8 +185,8 @@ public class PhysicsMaterial
     @Override
     public PhysicsMaterialRef toRef() {
         long materialVa = va();
-        long copyVa = toRef(materialVa);
-        PhysicsMaterialRef result = new PhysicsMaterialRef(copyVa, true);
+        long refVa = toRef(materialVa);
+        PhysicsMaterialRef result = new PhysicsMaterialRef(refVa, this);
 
         return result;
     }

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,8 +56,16 @@ final public class GroupFilterResult extends Result<GroupFilterRef> {
     @Override
     public GroupFilterRef get() {
         long resultVa = va();
-        long filterRefVa = get(resultVa);
-        GroupFilterRef result = new GroupFilterRef(filterRefVa, true);
+        long refVa = get(resultVa); // returns a new ref
+        long targetVa = GroupFilterRef.getPtr(refVa);
+
+        GroupFilterRef result;
+        if (targetVa == 0L) {
+            result = new GroupFilterRef(refVa);
+        } else {
+            GroupFilter target = GroupFilter.newFilter(targetVa);
+            result = new GroupFilterRef(refVa, target);
+        }
 
         return result;
     }

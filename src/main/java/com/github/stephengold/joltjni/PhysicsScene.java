@@ -232,7 +232,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     public PhysicsSceneRef toRef() {
         long sceneVa = va();
         long refVa = toRef(sceneVa);
-        PhysicsSceneRef result = new PhysicsSceneRef(refVa, true);
+        PhysicsSceneRef result = new PhysicsSceneRef(refVa, this);
 
         return result;
     }

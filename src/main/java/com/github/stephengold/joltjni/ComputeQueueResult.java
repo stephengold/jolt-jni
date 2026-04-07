@@ -56,8 +56,16 @@ final public class ComputeQueueResult extends Result<ComputeQueueRef> {
     @Override
     public ComputeQueueRef get() {
         long resultVa = va();
-        long queueRefVa = get(resultVa);
-        ComputeQueueRef result = new ComputeQueueRef(queueRefVa, true);
+        long refVa = get(resultVa); // returns a new ref
+        long targetVa = ComputeQueueRef.getPtr(refVa);
+
+        ComputeQueueRef result;
+        if (targetVa == 0L) {
+            result = new ComputeQueueRef(refVa);
+        } else {
+            ComputeQueue target = new ComputeQueue(targetVa);
+            result = new ComputeQueueRef(refVa, target);
+        }
 
         return result;
     }

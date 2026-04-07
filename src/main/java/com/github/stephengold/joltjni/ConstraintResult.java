@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,8 +56,17 @@ final public class ConstraintResult extends Result<ConstraintSettingsRef> {
     @Override
     public ConstraintSettingsRef get() {
         long resultVa = va();
-        long refVa = get(resultVa);
-        ConstraintSettingsRef result = new ConstraintSettingsRef(refVa, true);
+        long refVa = get(resultVa); // returns a new ref
+        long targetVa = ConstraintSettingsRef.getPtr(refVa);
+
+        ConstraintSettingsRef result;
+        if (targetVa == 0L) {
+            result = new ConstraintSettingsRef(refVa);
+        } else {
+            ConstraintSettings target
+                    = ConstraintSettings.newConstraintSettings(targetVa);
+            result = new ConstraintSettingsRef(refVa, target);
+        }
 
         return result;
     }

@@ -227,7 +227,7 @@ public class PathConstraintPath
     public PathConstraintPathRef toRef() {
         long pathVa = va();
         long copyVa = toRef(pathVa);
-        PathConstraintPathRef result = new PathConstraintPathRef(copyVa, true);
+        PathConstraintPathRef result = new PathConstraintPathRef(copyVa, this);
 
         return result;
     }

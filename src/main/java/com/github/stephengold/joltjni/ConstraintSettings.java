@@ -331,7 +331,7 @@ abstract public class ConstraintSettings
     public Ref toRef() {
         long settingsVa = va();
         long refVa = toRef(settingsVa);
-        ConstraintSettingsRef result = new ConstraintSettingsRef(refVa, true);
+        ConstraintSettingsRef result = new ConstraintSettingsRef(refVa, this);
 
         return result;
     }

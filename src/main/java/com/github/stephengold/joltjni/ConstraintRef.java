@@ -45,15 +45,30 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
     }
 
     /**
-     * Instantiate a reference with the specified native object assigned.
+     * Instantiate an empty reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    ConstraintRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    ConstraintRef(long refVa) {
+        assert getPtr(refVa) == 0L;
+
+        Runnable freeingAction = () -> free(refVa);
+        setVirtualAddress(refVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a counted reference to the specified constraint.
+     *
+     * @param refVa the virtual address of the native object to assign (not
+     * zero)
+     * @param constraint the constraint to target (not {@code null})
+     */
+    ConstraintRef(long refVa, Constraint constraint) {
+        assert constraint != null;
+
+        this.ptr = constraint;
+        Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -83,8 +98,11 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
     public ConstraintSettingsRef getConstraintSettings() {
         long constraintVa = targetVa();
         long settingsRefVa = Constraint.getConstraintSettings(constraintVa);
+        long settingsVa = ConstraintSettingsRef.getPtr(settingsRefVa);
+        ConstraintSettings settings
+                = ConstraintSettings.newConstraintSettings(settingsVa);
         ConstraintSettingsRef result
-                = new ConstraintSettingsRef(settingsRefVa, true);
+                = new ConstraintSettingsRef(settingsRefVa, settings);
 
         return result;
     }
@@ -189,15 +207,14 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code Constraint}.
+     * Access the target constraint, if any.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object, or {@code null} if the reference is
+     * empty
      */
     @Override
     public Constraint getPtr() {
-        long constraintVa = targetVa();
-        Constraint result = Constraint.newConstraint(constraintVa);
-
+        Constraint result = (Constraint) ptr;
         return result;
     }
 
@@ -222,9 +239,15 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
      */
     @Override
     public ConstraintRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        ConstraintRef result = new ConstraintRef(copyVa, true);
+        ConstraintRef result;
+        if (ptr == null) {
+            result = new ConstraintRef();
+        } else {
+            long refVa = va();
+            long copyVa = copy(refVa);
+            Constraint constraint = (Constraint) ptr;
+            result = new ConstraintRef(copyVa, constraint);
+        }
 
         return result;
     }
@@ -237,5 +260,5 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
 
     native static void free(long refVa);
 
-    native private static long getPtr(long refVa);
+    native static long getPtr(long refVa);
 }
