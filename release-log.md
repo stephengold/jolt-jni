@@ -1,5 +1,58 @@
 # Release log for the Jolt-JNI project
 
+## Version 4.0.0 released on TBD
+
++ API changes:
+  + Moved 32 public utility methods out of the `Jolt` class.
+    The `JPH_PI` numeric constant and 11 math functions were moved to the new
+    `JphMath` class.  Meanwhile, 21 seldom-used utility methods were moved
+    to the new `MiscUtil` class.
+  + Altered the counted-reference classes (those derived from `Ref`). Each
+    reference now caches its target object, and all `getPtr()` methods now
+    return either a pre-existing object or `null`. The motivation was to avoid
+    creating duplicate JVM objects that refer to the same native object,
+    which can lead to non-intuitive behavior. This change especially impacts
+    applications that invoke `close()` on physics objects.
+  + Altered `ShapeRefCArray.get()` to return a copy of the array element
+    instead of an alias.
+  + Altered the semantics of `VehicleConstraint.getController()` and
+    `VehicleConstraintRef.getController()` to return a pre-existing object.
+    Again, the motivation was to avoid creating duplicate JVM objects
+    that refer to the same native object
+  + Altered the `BcsResult` and `SbcsResult` classes to more closely match
+    the underlying native types (`BCSResult` and `SBCSResult`).  This change
+    affected the return types of both `get()` methods.
+  + Converted 3 concrete classes to abstract ones:  `CharacterBaseSettings`,
+    `ContactListener`, and `SoftBodyContactListener`.
+  + Renamed the `StreamInWrapper.readBytes()` method to `readFloat3Array().
+  + Corrected the return type of the `ComputeQueue.toRef()` method.
+
++ Bugfixes:
+  + missing support for empty counted references in many places
+  + unsatisfied link `CharacterVirtualRefC.copy()`
+  + memory leak in `ObjectStreamIn`
+
++ Added classes and interfaces:
+  + `ConstLinearCurve`
+  + `ConstVehicleEngineSettings`
+  + `LinearCurve`
+  + `SimpleTireMaxImpulseCallback`
+
++ Added methods:
+  + `ConstCharacterBase.getPhysicsSystem()`
+  + `ConstWheelSettingsWv.getLateralFriction()`
+  + `ConstWheelSettingsWv.getLongitudinalFriction()`
+  + `TireMaxImpulseCallback.calculate()`
+  + `WheelSettingsWv.setLateralFriction()`
+  + `WheelSettingsWv.setLongitudinalFriction()`
+  + `WheelSettingsWvRef.setLateralFriction()`
+  + `WheelSettingsWvRef.setLongitudinalFriction()`
+  + `VehicleEngineSettings.getNormalizedTorque()`
+  + `VehicleEngineSettings.setNormalizedTorque()`
+
++ Added chaining to 21 public methods.
+
+
 ## Version 3.10.0 released on 28 March 2026
 
 + Added the `ConstExtendedUpdateSettings` interface.
