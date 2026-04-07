@@ -190,8 +190,7 @@ public class Test002 {
             capsuleShape.toRefC(),
             chssResult.get()
         };
-        TestUtils.testClose(
-                chssResult, chss, capsuleShape, sphereShape, boxShape);
+        TestUtils.testClose(chssResult, chss);
     }
 
     /**

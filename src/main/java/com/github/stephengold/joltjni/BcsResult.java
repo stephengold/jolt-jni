@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.template.Result;
 
 /**
@@ -30,7 +29,7 @@ import com.github.stephengold.joltjni.template.Result;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class BcsResult extends Result<ConstBodyCreationSettings> {
+final public class BcsResult extends Result<BodyCreationSettings> {
     // *************************************************************************
     // constructors
 
@@ -47,7 +46,7 @@ final public class BcsResult extends Result<ConstBodyCreationSettings> {
         setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
-    // Result<ConstBodyCreationSettings> methods
+    // Result<BodyCreationSettings> methods
 
     /**
      * Return the settings object.
@@ -55,10 +54,10 @@ final public class BcsResult extends Result<ConstBodyCreationSettings> {
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public ConstBodyCreationSettings get() {
+    public BodyCreationSettings get() {
         long resultVa = va();
         long settingsVa = get(resultVa);
-        ConstBodyCreationSettings result
+        BodyCreationSettings result
                 = new BodyCreationSettings(settingsVa, true);
 
         return result;

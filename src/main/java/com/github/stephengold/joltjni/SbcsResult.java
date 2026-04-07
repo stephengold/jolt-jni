@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.template.Result;
 
 /**
@@ -30,7 +29,7 @@ import com.github.stephengold.joltjni.template.Result;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class SbcsResult extends Result<ConstSoftBodyCreationSettings> {
+final public class SbcsResult extends Result<SoftBodyCreationSettings> {
     // *************************************************************************
     // constructors
 
@@ -47,7 +46,7 @@ final public class SbcsResult extends Result<ConstSoftBodyCreationSettings> {
         setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
-    // Result<ConstSoftBodyCreationSettings> methods
+    // Result<SoftBodyCreationSettings> methods
 
     /**
      * Return the settings object.
@@ -55,10 +54,10 @@ final public class SbcsResult extends Result<ConstSoftBodyCreationSettings> {
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public ConstSoftBodyCreationSettings get() {
+    public SoftBodyCreationSettings get() {
         long resultVa = va();
         long settingsVa = get(resultVa);
-        ConstSoftBodyCreationSettings result
+        SoftBodyCreationSettings result
                 = new SoftBodyCreationSettings(settingsVa, true);
 
         return result;
