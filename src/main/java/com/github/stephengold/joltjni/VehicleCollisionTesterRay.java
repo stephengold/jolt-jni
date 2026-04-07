@@ -71,16 +71,6 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
         long testerVa = createTester(objectLayer, ux, uy, uz, maxSlopeAngle);
         setVirtualAddressAsCoOwner(testerVa);
     }
-
-    /**
-     * Instantiate a tester with the specified native object assigned.
-     *
-     * @param testerVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    VehicleCollisionTesterRay(long testerVa) {
-        setVirtualAddressAsCoOwner(testerVa);
-    }
     // *************************************************************************
     // VehicleCollisionTester methods
 

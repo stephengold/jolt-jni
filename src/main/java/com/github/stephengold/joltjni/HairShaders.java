@@ -53,18 +53,6 @@ final public class HairShaders extends JoltPhysicsObject implements RefTarget {
         Runnable freeingAction = () -> HairShadersRef.free(refVa);
         setVirtualAddress(copyVa, freeingAction);
     }
-
-    /**
-     * Instantiate shaders with the specified native object assigned.
-     *
-     * @param shadersVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    HairShaders(long shadersVa) {
-        long refVa = toRef(shadersVa);
-        Runnable freeingAction = () -> HairShadersRef.free(refVa);
-        setVirtualAddress(shadersVa, freeingAction);
-    }
     // *************************************************************************
     // new methods exposed
 

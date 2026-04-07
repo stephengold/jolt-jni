@@ -52,16 +52,6 @@ public class VehicleCollisionTesterCastCylinder extends VehicleCollisionTester {
         long testerVa = createTester(objectLayer, convexRadiusFraction);
         setVirtualAddressAsCoOwner(testerVa);
     }
-
-    /**
-     * Instantiate a tester with the specified native object assigned.
-     *
-     * @param testerVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    VehicleCollisionTesterCastCylinder(long testerVa) {
-        setVirtualAddressAsCoOwner(testerVa);
-    }
     // *************************************************************************
     // VehicleCollisionTester methods
 

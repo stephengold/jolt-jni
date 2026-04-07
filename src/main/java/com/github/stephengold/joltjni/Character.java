@@ -74,22 +74,6 @@ public class Character extends CharacterBase implements ConstCharacter {
         setVirtualAddress(characterVa,
                 () -> CharacterRef.freeWithSystem(refVa, system));
     }
-
-    /**
-     * Instantiate a character with the specified native object assigned.
-     *
-     * @param characterVa the virtual address of the native object to assign
-     * (not zero)
-     * @param physicsSystem where to add the body (not {@code null})
-     */
-    Character(long characterVa, PhysicsSystem physicsSystem) {
-        assert physicsSystem != null;
-
-        this.system = physicsSystem;
-        long refVa = toRef(characterVa);
-        setVirtualAddress(characterVa,
-                () -> CharacterRef.freeWithSystem(refVa, physicsSystem));
-    }
     // *************************************************************************
     // new methods exposed
 

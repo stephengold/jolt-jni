@@ -83,17 +83,6 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
         Runnable freeingAction = () -> free(refVa);
         setVirtualAddress(refVa, freeingAction);
     }
-
-    /**
-     * Instantiate with the specified container and native object.
-     *
-     * @param container the containing object, or {@code null} if none
-     * @param refVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    ShapeRefC(JoltPhysicsObject container, long refVa) {
-        super(container, refVa);
-    }
     // *************************************************************************
     // new methods exposed
 

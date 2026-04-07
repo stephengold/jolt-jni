@@ -55,17 +55,6 @@ final public class DrawSettings
         Runnable freeingAction = () -> free(copyVa);
         setVirtualAddress(copyVa, freeingAction);
     }
-
-    /**
-     * Instantiate settings with the specified native object assigned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    DrawSettings(long settingsVa) {
-        Runnable freeingAction = () -> free(settingsVa);
-        setVirtualAddress(settingsVa, freeingAction);
-    }
     // *************************************************************************
     // new methods exposed
 

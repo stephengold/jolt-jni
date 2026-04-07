@@ -41,16 +41,6 @@ public class VehicleCollisionTester
      */
     VehicleCollisionTester() {
     }
-
-    /**
-     * Instantiate a tester with the specified native object assigned.
-     *
-     * @param testerVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    VehicleCollisionTester(long testerVa) {
-        setVirtualAddressAsCoOwner(testerVa);
-    }
     // *************************************************************************
     // new methods exposed
 

@@ -63,18 +63,6 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
         Runnable freeingAction = () -> GeometryRef.free(refVa);
         setVirtualAddress(geometryVa, freeingAction);
     }
-
-    /**
-     * Instantiate a geometry with the specified native object assigned.
-     *
-     * @param geometryVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    Geometry(long geometryVa) {
-        long refVa = toRef(geometryVa);
-        Runnable freeingAction = () -> GeometryRef.free(refVa);
-        setVirtualAddress(geometryVa, freeingAction);
-    }
     // *************************************************************************
     // new methods exposed
 

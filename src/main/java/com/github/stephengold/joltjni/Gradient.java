@@ -106,19 +106,6 @@ public class Gradient extends JoltPhysicsObject implements ConstGradient {
         Runnable freeingAction = () -> free(gradientVa);
         setVirtualAddress(gradientVa, freeingAction);
     }
-
-    /**
-     * Instantiate a gradient with the specified native object assigned.
-     *
-     * @param gradientVa the virtual address of the native object to assign (not
-     * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
-     */
-    Gradient(long gradientVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(gradientVa) : null;
-        setVirtualAddress(gradientVa, freeingAction);
-    }
     // *************************************************************************
     // new methods exposed
 

@@ -48,16 +48,6 @@ abstract public class Shape
      */
     Shape() {
     }
-
-    /**
-     * Temporarily access the specified shape.
-     *
-     * @param shapeVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    Shape(long shapeVa) {
-        setVirtualAddressAsCoOwner(shapeVa);
-    }
     // *************************************************************************
     // new methods exposed
 
