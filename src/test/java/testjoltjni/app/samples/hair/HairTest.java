@@ -101,7 +101,7 @@ public void Initialize()
 	num_vertices=stream.readInt();
 	Float3[] vertices=new Float3[num_vertices];
         for(int i=0;i<num_vertices;++i){vertices[i]=new Float3();}
-	stream.readBytes(vertices   );
+	stream.readFloat3Array(vertices   );
 
 	// Indices
 	int num_indices;

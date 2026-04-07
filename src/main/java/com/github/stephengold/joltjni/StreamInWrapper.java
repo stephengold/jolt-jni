@@ -126,21 +126,6 @@ final public class StreamInWrapper extends StreamIn {
     }
 
     /**
-     * Read groups of 3 floats from the stream. TODO rename
-     *
-     * @param storeFloats storage for the values that will be read (not
-     * {@code null}, modified)
-     */
-    public void readBytes(Float3[] storeFloats) {
-        long streamVa = va();
-        FloatBuffer data = Temporaries.floatBuffer1.get();
-        for (Float3 f3 : storeFloats) {
-            readFloat3(streamVa, data);
-            f3.set(data);
-        }
-    }
-
-    /**
      * Read 3 floats from the stream.
      *
      * @param storeFloats storage for the values that will be read (not
@@ -151,6 +136,21 @@ final public class StreamInWrapper extends StreamIn {
         FloatBuffer buffer = Temporaries.floatBuffer1.get();
         readFloat3(streamVa, buffer);
         storeFloats.set(buffer);
+    }
+
+    /**
+     * Read groups of 3 floats from the stream.
+     *
+     * @param storeFloats storage for the values that will be read (not
+     * {@code null}, modified)
+     */
+    public void readFloat3Array(Float3[] storeFloats) {
+        long streamVa = va();
+        FloatBuffer data = Temporaries.floatBuffer1.get();
+        for (Float3 f3 : storeFloats) {
+            readFloat3(streamVa, data);
+            f3.set(data);
+        }
     }
 
     /**
