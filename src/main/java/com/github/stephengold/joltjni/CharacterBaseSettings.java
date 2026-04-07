@@ -28,11 +28,12 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
- * Settings used to create a {@code CharacterBase}. TODO make abstract
+ * Settings used to create a {@code com.github.stephengold.joltjni.Character} or
+ * {@code CharacterVirtual}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CharacterBaseSettings
+abstract public class CharacterBaseSettings
         extends JoltPhysicsObject
         implements ConstCharacterBaseSettings {
     // *************************************************************************
