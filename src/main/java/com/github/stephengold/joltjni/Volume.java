@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -83,6 +83,7 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
      *
      * @return the compliance value
      */
+    @Override
     public float getCompliance() {
         long volumeVa = va();
         float result = getCompliance(volumeVa);
@@ -96,6 +97,7 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
      *
      * @return 6 times the rest volume of the tetrahedron (in cubic meters)
      */
+    @Override
     public float getSixRestVolume() {
         long volumeVa = va();
         float result = getSixRestVolume(volumeVa);
@@ -110,6 +112,7 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
      * @param indexInVolume which corner of the volume (0 or 1 or 2 or 3)
      * @return the mesh index of the vertex (&ge;0)
      */
+    @Override
     public int getVertex(int indexInVolume) {
         long volumeVa = va();
         int result = getVertex(volumeVa, indexInVolume);
