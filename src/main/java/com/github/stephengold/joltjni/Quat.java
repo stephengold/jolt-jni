@@ -220,12 +220,12 @@ final public class Quat implements QuatArg {
         float halfY = 0.5f * y;
         float halfZ = 0.5f * z;
 
-        float cx = Jolt.cos(halfX);
-        float cy = Jolt.cos(halfY);
-        float cz = Jolt.cos(halfZ);
-        float sx = Jolt.sin(halfX);
-        float sy = Jolt.sin(halfY);
-        float sz = Jolt.sin(halfZ);
+        float cx = JphMath.cos(halfX);
+        float cy = JphMath.cos(halfY);
+        float cz = JphMath.cos(halfZ);
+        float sx = JphMath.sin(halfX);
+        float sy = JphMath.sin(halfY);
+        float sz = JphMath.sin(halfZ);
 
         Quat result = new Quat(
                 cz * sx * cy - sz * cx * sy,
@@ -305,13 +305,13 @@ final public class Quat implements QuatArg {
         float r1 = (float) Math.sqrt(1f - x0);
         float r2 = (float) Math.sqrt(x0);
 
-        float px = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
-        float py = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
+        float px = 2f * JphMath.JPH_PI * distro.nextFloat(engine);
+        float py = 2f * JphMath.JPH_PI * distro.nextFloat(engine);
 
-        float x = r1 * Jolt.sin(px);
-        float y = r1 * Jolt.cos(px);
-        float z = r2 * Jolt.sin(py);
-        float w = r2 * Jolt.cos(py);
+        float x = r1 * JphMath.sin(px);
+        float y = r1 * JphMath.cos(px);
+        float z = r2 * JphMath.sin(py);
+        float w = r2 * JphMath.cos(py);
         Quat result = new Quat(x, y, z, w);
 
         return result;
@@ -328,8 +328,8 @@ final public class Quat implements QuatArg {
     public static Quat sRotation(Vec3Arg axis, float angle) {
         assert axis.isNormalized();
 
-        float qw = Jolt.cos(0.5f * angle);
-        float s = Jolt.sin(0.5f * angle);
+        float qw = JphMath.cos(0.5f * angle);
+        float s = JphMath.sin(0.5f * angle);
         float qx = axis.getX() * s;
         float qy = axis.getY() * s;
         float qz = axis.getZ() * s;

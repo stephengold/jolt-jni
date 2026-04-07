@@ -22,7 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.hair;
 import com.github.stephengold.joltjni.*;
 import testjoltjni.app.samples.*;
-import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.JphMath.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics hair gravity-preload test.

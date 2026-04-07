@@ -58,10 +58,6 @@ final public class Jolt {
      */
     final public static float cDefaultConvexRadius = 0.05f;
     /**
-     * single-precision value of Pi
-     */
-    final public static float JPH_PI = (float) Math.PI;
-    /**
      * empty sub-shape ID
      * <p>
      * value should match Jolt/Physics/Collision/Shape/SubShapeID.h
@@ -113,49 +109,12 @@ final public class Jolt {
     // new methods exposed
 
     /**
-     * Return the inverse cosine of the specified single-precision ratio. (see
-     * Jolt/Math/Trigonometry.h)
-     *
-     * @param ratio the input cosine ratio (&ge;-1, &le;1)
-     * @return the angle (in radians)
-     */
-    native public static float aCos(float ratio);
-
-    /**
-     * Return the inverse tangent of the specified single-precision ratio. (see
-     * Jolt/Math/Trigonometry.h)
-     *
-     * @param ratio the input tangent ratio
-     * @return the angle (in radians)
-     */
-    native public static float aTan(float ratio);
-
-    /**
-     * Return the angle of the specified single-precision right triangle. (see
-     * Jolt/Math/Trigonometry.h)
-     *
-     * @param opposite the signed length of the opposite side
-     * @param adjacent the signed length of the adjacent side
-     * @return the angle (in radians)
-     */
-    native public static float aTan2(float opposite, float adjacent);
-
-    /**
      * Return the Jolt-JNI build-type string that's hard-coded in the native
      * library.
      *
      * @return either "Debug" or "Release"
      */
     native public static String buildType();
-
-    /**
-     * Return the cosine of the specified single-precision angle. (see
-     * Jolt/Math/Trigonometry.h)
-     *
-     * @param angle the input angle (in radians)
-     * @return the cosine ratio
-     */
-    native public static float cos(float angle);
 
     /**
      * Return the cumulative number of {@code delete} operations in glue code,
@@ -172,17 +131,6 @@ final public class Jolt {
      * @return the count (&ge;0)
      */
     native public static int countNews();
-
-    /**
-     * Convert the specified angle from degrees to radians.
-     *
-     * @param degrees the angle to convert (in degrees)
-     * @return the converted angle (in radians)
-     */
-    public static float degreesToRadians(float degrees) {
-        float result = degrees * (JPH_PI / 180f);
-        return result;
-    }
 
     /**
      * Destroy the factory used for collision dispatch and object-stream
@@ -769,17 +717,6 @@ final public class Jolt {
     native public static void profileStart(String name);
 
     /**
-     * Convert the specified angle from radians to degrees.
-     *
-     * @param radians the angle to convert (in radians)
-     * @return the converted angle (in degrees)
-     */
-    public static float radiansToDegrees(float radians) {
-        float result = radians * (180f / JPH_PI);
-        return result;
-    }
-
-    /**
      * Intersect the specified axis-aligned box with the specified ray. (see
      * Jolt/Geometry/RayAABox.h)
      *
@@ -1039,49 +976,6 @@ final public class Jolt {
     native public static void setTraceAllocations(boolean setting);
 
     /**
-     * Return the (binary) sign of the specified single-precision value. (see
-     * Jolt/Math/Math.h)
-     *
-     * @param input the input value
-     * @return -1 if the input is negative, otherwise +1
-     */
-    public static float sign(float input) {
-        float result = (input < 0) ? -1f : 1f;
-        return result;
-    }
-
-    /**
-     * Return the sine of the specified single-precision angle. (see
-     * Jolt/Math/Trigonometry.h)
-     *
-     * @param angle the input angle (in radians)
-     * @return the sine ratio
-     */
-    native public static float sin(float angle);
-
-    /**
-     * Return the square of the specified single-precision value.
-     *
-     * @param value the input value
-     * @return the square
-     */
-    public static float square(float value) {
-        float result = value * value;
-        return result;
-    }
-
-    /**
-     * Return the square of the specified integer value.
-     *
-     * @param value the input value
-     * @return the square
-     */
-    public static int square(int value) {
-        int result = value * value;
-        return result;
-    }
-
-    /**
      * Set the next available character ID to 1. (see
      * Jolt/Physics/Character/CharacterID.h)
      */
@@ -1104,15 +998,6 @@ final public class Jolt {
      * @return {@code true} if supported, otherwise {@code false}
      */
     native public static boolean supportsObjectStream();
-
-    /**
-     * Return the tangent ratio of the specified single-precision angle. (see
-     * Jolt/Math/Trigonometry.h)
-     *
-     * @param angle the input angle (in radians)
-     * @return the tangent ratio
-     */
-    native public static float tan(float angle);
 
     /**
      * Execute a test written in native code. Intended for testing only.

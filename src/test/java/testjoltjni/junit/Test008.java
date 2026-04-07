@@ -21,7 +21,7 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
-import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.JphMath;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
@@ -46,7 +46,7 @@ public class Test008 {
     /**
      * Pi/2
      */
-    final private static float halfPi = 0.5f * Jolt.JPH_PI;
+    final private static float halfPi = 0.5f * JphMath.JPH_PI;
     /**
      * square root of 1/2
      */

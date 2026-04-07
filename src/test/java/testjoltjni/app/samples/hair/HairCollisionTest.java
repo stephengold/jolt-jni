@@ -23,7 +23,7 @@ package testjoltjni.app.samples.hair;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import testjoltjni.app.samples.*;
-import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.JphMath.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics hair-collision test.
  * <p>

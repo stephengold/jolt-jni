@@ -189,6 +189,7 @@ $(N)/glue/j/JobSystemThreadPool.cpp \
 $(N)/glue/j/Joint.cpp \
 $(N)/glue/j/JointState.cpp \
 $(N)/glue/j/Jolt.cpp \
+$(N)/glue/j/JphMath.cpp \
 $(N)/glue/l/LinearCurve.cpp \
 $(N)/glue/l/Loader.cpp \
 $(N)/glue/l/Lod.cpp \

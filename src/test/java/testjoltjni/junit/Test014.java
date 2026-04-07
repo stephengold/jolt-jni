@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.CustomTireMaxImpulseCallback;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.JphMath;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.SimpleTireMaxImpulseCallback;
 import com.github.stephengold.joltjni.TireMaxImpulseCallback;
@@ -236,7 +237,7 @@ public class Test014 {
         TestUtils.assertEquals(0f, 0f, 0f, vc.getGravityOverride(), 0f);
         TestUtils.assertEquals(0f, 0f, 1f, vc.getLocalForward(), 0f);
         TestUtils.assertEquals(0f, 1f, 0f, vc.getLocalUp(), 0f);
-        Assert.assertEquals(Jolt.JPH_PI, vc.getMaxPitchRollAngle(), 0f);
+        Assert.assertEquals(JphMath.JPH_PI, vc.getMaxPitchRollAngle(), 0f);
 
         Assert.assertEquals(1, vc.getNumStepsBetweenCollisionTestActive());
         Assert.assertEquals(1, vc.getNumStepsBetweenCollisionTestInactive());
@@ -345,7 +346,7 @@ public class Test014 {
         Assert.assertEquals(1f, vcs.getDrawConstraintSize(), 0f);
         Assert.assertTrue(vcs.getEnabled());
         TestUtils.assertEquals(0f, 0f, 1f, vcs.getForward(), 0f);
-        Assert.assertEquals(Jolt.JPH_PI, vcs.getMaxPitchRollAngle(), 0f);
+        Assert.assertEquals(JphMath.JPH_PI, vcs.getMaxPitchRollAngle(), 0f);
         Assert.assertEquals(0, vcs.getNumAntiRollBars());
         Assert.assertEquals(0, vcs.getNumPositionStepsOverride());
         Assert.assertEquals(0, vcs.getNumVelocityStepsOverride());
@@ -485,7 +486,7 @@ public class Test014 {
         Assert.assertEquals(1_500f, wswv.getMaxBrakeTorque(), 0f);
         Assert.assertEquals(4_000f, wswv.getMaxHandBrakeTorque(), 0f);
         Assert.assertEquals(
-                Jolt.degreesToRadians(70f), wswv.getMaxSteerAngle(), 1e-7f);
+                JphMath.degreesToRadians(70f), wswv.getMaxSteerAngle(), 1e-7f);
     }
 
     /**

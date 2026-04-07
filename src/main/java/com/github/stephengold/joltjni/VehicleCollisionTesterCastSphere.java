@@ -53,7 +53,7 @@ public class VehicleCollisionTesterCastSphere extends VehicleCollisionTester {
      */
     public VehicleCollisionTesterCastSphere(
             int objectLayer, float radius, Vec3Arg up) {
-        this(objectLayer, radius, up, Jolt.degreesToRadians(80f));
+        this(objectLayer, radius, up, JphMath.degreesToRadians(80f));
     }
 
     /**

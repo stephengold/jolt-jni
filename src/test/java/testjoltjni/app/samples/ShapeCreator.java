@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.operator.Op;
-import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.JphMath.*;
 /**
  * A line-for-line Java translation of the {@code ShapeCreator} namespace.
  * <p>

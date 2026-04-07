@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.BodyIdVector;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
 import com.github.stephengold.joltjni.CombineFunction;
-import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.JphMath;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
 import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
@@ -148,13 +148,13 @@ public class Test004 {
 
         Assert.assertTrue(settings.getAllowSleeping());
         Assert.assertEquals(0.2f, settings.getBaumgarte(), 0f);
-        Assert.assertEquals(Jolt.cos(Jolt.JPH_PI / 180f),
+        Assert.assertEquals(JphMath.cos(JphMath.JPH_PI / 180f),
                 settings.getBodyPairCacheCosMaxDeltaRotationDiv2(), 1e-7f);
         Assert.assertEquals(1e-6f,
                 settings.getBodyPairCacheMaxDeltaPositionSq(), 1e-12f);
         Assert.assertTrue(settings.getCheckActiveEdges());
         Assert.assertTrue(settings.getConstraintWarmStart());
-        Assert.assertEquals(Jolt.cos(Jolt.JPH_PI / 36f),
+        Assert.assertEquals(JphMath.cos(JphMath.JPH_PI / 36f),
                 settings.getContactNormalCosMaxDeltaRotation(), 1e-8f);
         Assert.assertEquals(1e-4f,
                 settings.getContactPointPreserveLambdaMaxDistSq(), 0f);

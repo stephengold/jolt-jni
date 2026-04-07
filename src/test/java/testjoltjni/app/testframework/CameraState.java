@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,6 +38,6 @@ public class CameraState
 	public RVec3							mPos = RVec3.sZero();								///< Camera position
 	public Vec3							mForward = new Vec3(0, 0, -1);							///< Camera forward vector
 	public Vec3							mUp = new Vec3(0, 1, 0);							///< Camera up vector
-	public float							mFOVY = Jolt.degreesToRadians(70.0f);						///< Field of view in radians in up direction
+	public float							mFOVY = JphMath.degreesToRadians(70.0f);						///< Field of view in radians in up direction
 };
 

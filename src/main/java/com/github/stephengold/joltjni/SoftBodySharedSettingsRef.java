@@ -234,7 +234,7 @@ final public class SoftBodySharedSettingsRef
     public void createConstraints(
             ConstVertexAttributes[] vertexAttributes, EBendType bendType) {
         createConstraints(
-                vertexAttributes, bendType, Jolt.degreesToRadians(8f));
+                vertexAttributes, bendType, JphMath.degreesToRadians(8f));
     }
 
     /**

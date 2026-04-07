@@ -534,8 +534,8 @@ final public class Vec3 implements Vec3Arg {
             distro = new UniformFloatDistribution(0f, 1f);
         }
 
-        float theta = Jolt.JPH_PI * distro.nextFloat(engine);
-        float phi = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
+        float theta = JphMath.JPH_PI * distro.nextFloat(engine);
+        float phi = 2f * JphMath.JPH_PI * distro.nextFloat(engine);
         Vec3 result = sUnitSpherical(theta, phi);
 
         return result;
@@ -609,10 +609,10 @@ final public class Vec3 implements Vec3Arg {
      * @return a new unit vector
      */
     public static Vec3 sUnitSpherical(float theta, float phi) {
-        float sinTheta = Jolt.sin(theta);
-        float vx = sinTheta * Jolt.cos(phi);
-        float vy = sinTheta * Jolt.sin(phi);
-        float vz = Jolt.cos(theta);
+        float sinTheta = JphMath.sin(theta);
+        float vx = sinTheta * JphMath.cos(phi);
+        float vy = sinTheta * JphMath.sin(phi);
+        float vz = JphMath.cos(theta);
         Vec3 result = new Vec3(vx, vy, vz);
 
         return result;

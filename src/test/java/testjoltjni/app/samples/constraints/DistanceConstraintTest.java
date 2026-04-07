@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ public void Initialize()
 	for (int variation = 0; variation < 2; ++variation)
 	{
 		// Bodies attached through distance constraints
-		Quat rotation = Quat.sRotation(Vec3.sAxisZ(), 0.5f * Jolt.JPH_PI);
+		Quat rotation = Quat.sRotation(Vec3.sAxisZ(), 0.5f * JphMath.JPH_PI);
 		RVec3 position=new RVec3(0, 75, 10.0f * variation);
 		Body top = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 1), position, rotation, EMotionType.Static, Layers.NON_MOVING));
 		mBodyInterface.addBody(top.getId(), EActivation.DontActivate);

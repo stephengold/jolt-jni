@@ -27,6 +27,7 @@ import java.util.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.JphMath.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 

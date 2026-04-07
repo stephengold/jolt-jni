@@ -51,7 +51,7 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
      * unaffected, default=(0,1,0))
      */
     public VehicleCollisionTesterRay(int objectLayer, Vec3Arg up) {
-        this(objectLayer, up, Jolt.degreesToRadians(80.0f));
+        this(objectLayer, up, JphMath.degreesToRadians(80.0f));
     }
 
     /**
