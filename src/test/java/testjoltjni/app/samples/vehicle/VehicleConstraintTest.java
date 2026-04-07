@@ -201,12 +201,8 @@ public void Initialize()
 	// The vehicle settings were tweaked with a buggy implementation of the longitudinal tire impulses, this meant that PhysicsSettings::mNumVelocitySteps times more impulse
 	// could be applied than intended. To keep the behavior of the vehicle the same we increase the max longitudinal impulse by the same factor. In a future version the vehicle
 	// will be retweaked.
-	((WheeledVehicleController )(mVehicleConstraint.getPtr()).getController()).setTireMaxImpulseCallback(new CustomTireMaxImpulseCallback(){@Override
-		public float maxLongitudinalImpulse(int i, float inSuspensionImpulse, float inLongitudinalFriction, float inLateralFriction, float longS, float latS, float dt)
-		{
-			return  10.0f * inLongitudinalFriction * inSuspensionImpulse;
-		}
-		});
+	((WheeledVehicleController )mVehicleConstraint.getController()).setTireMaxImpulseCallback(
+		new SimpleTireMaxImpulseCallback(1f, 10.0f));
 
 	mPhysicsSystem.addConstraint(mVehicleConstraint);
 	mPhysicsSystem.addStepListener(mVehicleConstraint.getPtr().getStepListener());

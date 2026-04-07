@@ -67,6 +67,18 @@ final public class VehicleConstraintRef
     // new methods exposed
 
     /**
+     * Access the controller for this constraint.
+     *
+     * @return the pre-existing object
+     */
+    public VehicleController getController() {
+        VehicleConstraint target = (VehicleConstraint) ptr;
+        VehicleController result = target.getController();
+
+        return result;
+    }
+
+    /**
      * Override the vehicle's gravity vector.
      *
      * @param ax the X component of the desired acceleration vector

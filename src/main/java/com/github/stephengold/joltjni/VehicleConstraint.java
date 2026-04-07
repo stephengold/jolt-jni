@@ -46,6 +46,10 @@ public class VehicleConstraint
      * cached reference to collision tester (to preserve subtype information)
      */
     private VehicleCollisionTester tester;
+    /**
+     * cached reference to the controller (to reduce duplication)
+     */
+    final private VehicleController controller;
     // *************************************************************************
     // constructors
 
@@ -66,6 +70,9 @@ public class VehicleConstraint
         long bodyVa = body.va();
         long constraintVa = createConstraint(bodyVa, settingsVa);
         setVirtualAddressAsCoOwner(constraintVa);
+
+        long controllerVa = getController(constraintVa);
+        this.controller = VehicleController.newController(this, controllerVa);
     }
 
     /**
@@ -78,6 +85,9 @@ public class VehicleConstraint
         setVirtualAddressAsCoOwner(constraintVa);
         long bodyVa = getVehicleBody(constraintVa);
         this.body = new Body(bodyVa);
+
+        long controllerVa = getController(constraintVa);
+        this.controller = VehicleController.newController(this, controllerVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -85,15 +95,10 @@ public class VehicleConstraint
     /**
      * Access the controller for this constraint.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing object
      */
     public VehicleController getController() {
-        long constraintVa = va();
-        long controllerVa = getController(constraintVa);
-        VehicleController result
-                = VehicleController.newController(this, controllerVa);
-
-        return result;
+        return controller;
     }
 
     /**
