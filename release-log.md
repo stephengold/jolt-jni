@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 4.0.0 released on TBD
+## Version 4.0.0 released on 7 April 2026
 
 + API changes:
   + Moved 32 public utility methods out of the `Jolt` class.
@@ -24,7 +24,7 @@
     affected the return types of both `get()` methods.
   + Converted 3 concrete classes to abstract ones:  `CharacterBaseSettings`,
     `ContactListener`, and `SoftBodyContactListener`.
-  + Renamed the `StreamInWrapper.readBytes()` method to `readFloat3Array().
+  + Renamed the `StreamInWrapper.readBytes()` method to `readFloat3Array()`.
   + Corrected the return type of the `ComputeQueue.toRef()` method.
 
 + Bugfixes:
