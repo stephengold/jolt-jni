@@ -759,6 +759,7 @@ final public class CharacterVirtualRef
         long characterVa = targetVa();
         long refVa = storeRef.va();
         CharacterBase.getShapeUpdate(characterVa, refVa);
+        storeRef.updatePtr();
     }
 
     /**

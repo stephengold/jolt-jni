@@ -927,6 +927,7 @@ public class Body extends NonCopyable implements ConstBody {
         long bodyVa = va();
         long refVa = storeRef.va();
         getShapeUpdate(bodyVa, refVa);
+        storeRef.updatePtr();
     }
 
     /**

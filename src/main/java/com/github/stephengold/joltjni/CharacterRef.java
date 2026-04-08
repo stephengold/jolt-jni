@@ -677,6 +677,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         long characterVa = targetVa();
         long refVa = storeRef.va();
         CharacterBase.getShapeUpdate(characterVa, refVa);
+        storeRef.updatePtr();
     }
 
     /**

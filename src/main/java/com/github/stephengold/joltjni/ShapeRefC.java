@@ -96,6 +96,17 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
         return ptr;
     }
     // *************************************************************************
+    // new protected methods
+
+    /**
+     * Update the cached target.
+     */
+    void updatePtr() {
+        long refVa = va();
+        long targetVa = getPtr(refVa);
+        this.ptr = Shape.newShape(targetVa);
+    }
+    // *************************************************************************
     // ConstShape methods
 
     /**
