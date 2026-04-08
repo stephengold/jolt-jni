@@ -1,5 +1,9 @@
 # Release log for the Jolt-JNI project
 
+## Version 4.0.1 released on TBD
+
+Bugfix:  `storeRef` not updated after `getShapeUpdate()` calls
+
 ## Version 4.0.0 released on 7 April 2026
 
 + API changes:
