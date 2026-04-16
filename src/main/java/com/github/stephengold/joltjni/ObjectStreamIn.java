@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.std.StringStream;
 import com.github.stephengold.joltjni.template.Ref;
+import java.nio.LongBuffer;
 
 /**
  * Utility class for reading Jolt Physics objects from files or streams.
@@ -108,9 +109,9 @@ final public class ObjectStreamIn {
     public static boolean sReadObject(
             StringStream stream, BodyCreationSettings[] storeBcs) {
         long streamVa = stream.va();
-        long[] storeVa = {0L};
+        LongBuffer storeVa = Temporaries.longBuffer1.get();
         boolean result = sReadBcsFromStream(streamVa, storeVa);
-        long bodySettingsVa = storeVa[0];
+        long bodySettingsVa = storeVa.get(0);
         storeBcs[0] = new BodyCreationSettings(bodySettingsVa, true);
 
         return result;
@@ -254,9 +255,9 @@ final public class ObjectStreamIn {
     public static boolean sReadObject(
             StringStream stream, SoftBodyCreationSettings[] storeSbcs) {
         long streamVa = stream.va();
-        long[] storeVa = {0L};
+        LongBuffer storeVa = Temporaries.longBuffer1.get();
         boolean result = sReadSbcsFromStream(streamVa, storeVa);
-        long bodySettingsVa = storeVa[0];
+        long bodySettingsVa = storeVa.get(0);
         storeSbcs[0] = new SoftBodyCreationSettings(bodySettingsVa, true);
 
         return result;
@@ -337,7 +338,7 @@ final public class ObjectStreamIn {
     // native private methods
 
     native private static boolean sReadBcsFromStream(
-            long streamVa, long[] storeVa);
+            long streamVa, LongBuffer storeVa);
 
     native private static boolean sReadConstraintSettings(
             String fileName, long refVa);
@@ -379,7 +380,7 @@ final public class ObjectStreamIn {
             long streamVa, long refVa);
 
     native private static boolean sReadSbcsFromStream(
-            long streamVa, long[] storeVa);
+            long streamVa, LongBuffer storeVa);
 
     native private static boolean sReadSbssFromStream(
             long streamVa, long refVa);

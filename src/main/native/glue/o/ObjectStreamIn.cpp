@@ -56,15 +56,14 @@ using namespace JPH;
  * sRead{T}FromStream() method for a non-RefTarget type T:
  */
 #define BODYOF_SREAD_FROM_STREAM_NONREF(T) \
-  (JNIEnv *pEnv, jclass, jlong streamVa, jlongArray storeVa) { \
+  (JNIEnv *pEnv, jclass, jlong streamVa, jobject storeVa) { \
     std::stringstream * const pStream = reinterpret_cast<std::stringstream *> (streamVa); \
     T * pSettings; \
     const bool result = ObjectStreamIn::sReadObject(*pStream, pSettings); \
     TRACE_NEW(#T, pSettings) \
-    jboolean isCopy; \
-    jlong * const pStoreVa = pEnv->GetLongArrayElements(storeVa, &isCopy); \
+    DIRECT_LONG_BUFFER(pEnv, storeVa, pStoreVa, capacity); \
+    JPH_ASSERT(capacity >= 1); \
     pStoreVa[0] = reinterpret_cast<jlong> (pSettings); \
-    pEnv->ReleaseLongArrayElements(storeVa, pStoreVa, 0); \
     return result; \
 }
 /*
@@ -82,7 +81,7 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
  * Method:    sReadBcsFromStream
- * Signature: (J[J)Z
+ * Signature: (JLjava/nio/LongBuffer;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadBcsFromStream
   BODYOF_SREAD_FROM_STREAM_NONREF(BodyCreationSettings)
@@ -194,7 +193,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
  * Method:    sReadSbcsFromStream
- * Signature: (J[J)Z
+ * Signature: (JLjava/nio/LongBuffer;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadSbcsFromStream
   BODYOF_SREAD_FROM_STREAM_NONREF(SoftBodyCreationSettings)
