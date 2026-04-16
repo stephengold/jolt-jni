@@ -70,10 +70,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_cr
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullBuilder
  * Method:    determineMaxError
- * Signature: (J[J[F[I[F)V
+ * Signature: (JLjava/nio/LongBuffer;[F[I[F)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_determineMaxError
-  (JNIEnv *pEnv, jclass, jlong builderVa, jlongArray storeFaceVa,
+  (JNIEnv *pEnv, jclass, jlong builderVa, jobject storeFaceVa,
   jfloatArray storeMaxError, jintArray storeMaxErrorPositionIndex,
   jfloatArray storeCoplanarDistance) {
     const ConvexHullBuilder * const pBuilder
@@ -84,10 +84,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_det
     float coplanarDistance;
     pBuilder->DetermineMaxError(
             pFace, maxError, maxErrorPositionIndex, coplanarDistance);
-    jboolean isCopy;
-    jlong * const pFaceVa = pEnv->GetLongArrayElements(storeFaceVa, &isCopy);
+    DIRECT_LONG_BUFFER(pEnv, storeFaceVa, pFaceVa, capacity);
+    JPH_ASSERT(capacity >= 1);
     pFaceVa[0] = reinterpret_cast<jlong> (pFace);
-    pEnv->ReleaseLongArrayElements(storeFaceVa, pFaceVa, 0);
+    jboolean isCopy;
     jfloat * const pMaxError
             = pEnv->GetFloatArrayElements(storeMaxError, &isCopy);
     pMaxError[0] = maxError;
@@ -115,22 +115,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_fre
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullBuilder
  * Method:    getCenterOfMassAndVolume
- * Signature: (J[F)V
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_getCenterOfMassAndVolume
-  (JNIEnv *pEnv, jclass, jlong builderVa, jfloatArray storeFloats) {
+  (JNIEnv *pEnv, jclass, jlong builderVa, jobject storeFloats) {
     const ConvexHullBuilder * const pBuilder
             = reinterpret_cast<ConvexHullBuilder *> (builderVa);
     Vec3 com;
     float volume;
     pBuilder->GetCenterOfMassAndVolume(com, volume);
-    jboolean isCopy;
-    jfloat * const pFloats = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    DIRECT_LONG_BUFFER(pEnv, storeFloats, pFloats, capacity);
+    JPH_ASSERT(capacity >= 4);
     pFloats[0] = com.GetX();
     pFloats[1] = com.GetY();
     pFloats[2] = com.GetZ();
     pFloats[3] = volume;
-    pEnv->ReleaseFloatArrayElements(storeFloats, pFloats, 0);
 }
 
 /*

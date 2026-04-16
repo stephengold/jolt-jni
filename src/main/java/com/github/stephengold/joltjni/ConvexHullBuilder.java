@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EResult;
 import com.github.stephengold.joltjni.readonly.ConstChbFace;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
+import java.nio.LongBuffer;
 import java.util.Collection;
 
 /**
@@ -72,13 +73,14 @@ public class ConvexHullBuilder extends NonCopyable {
             float[] storeMaxError, int[] storePositionIndex,
             float[] storeCoplanarDistance) {
         long builderVa = va();
-        long[] storeFaceVa = new long[1];
+        LongBuffer storeFaceVa = Temporaries.longBuffer1.get();
         determineMaxError(builderVa, storeFaceVa, storeMaxError,
                 storePositionIndex, storeCoplanarDistance);
-        if (storeFaceVa[0] == 0L) {
+        long faceVa = storeFaceVa.get(0);
+        if (faceVa == 0L) {
             storeFaceWithMaxError[0] = null;
         } else {
-            ChbFace face = new ChbFace(this, storeFaceVa[0]);
+            ChbFace face = new ChbFace(this, faceVa);
             storeFaceWithMaxError[0] = face;
         }
     }
@@ -93,10 +95,10 @@ public class ConvexHullBuilder extends NonCopyable {
      */
     public void getCenterOfMassAndVolume(Vec3 storeCom, float[] storeVolume) {
         long builderVa = va();
-        float[] storeFloats = new float[4];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getCenterOfMassAndVolume(builderVa, storeFloats);
         storeCom.set(storeFloats);
-        storeVolume[0] = storeFloats[3];
+        storeVolume[0] = storeFloats.get(3);
     }
 
     /**
@@ -145,13 +147,13 @@ public class ConvexHullBuilder extends NonCopyable {
     native private static long create(FloatBuffer pointBuffer);
 
     native private static void determineMaxError(
-            long builderVa, long[] storeFaceVa, float[] storeMaxError,
+            long builderVa, LongBuffer storeFaceVa, float[] storeMaxError,
             int[] storePositionIndex, float[] storeCoplanarDistance);
 
     native private static void free(long builderVa);
 
     native private static void getCenterOfMassAndVolume(
-            long builderVa, float[] storeFloats);
+            long builderVa, FloatBuffer storeFloats);
 
     native private static void getFaces(long builderVa, long[] storeVas);
 
