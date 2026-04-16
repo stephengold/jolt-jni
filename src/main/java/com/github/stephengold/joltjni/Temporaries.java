@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
+import java.nio.LongBuffer;
 
 /**
  * Thread-local temporary storage for internal use of the Jolt-JNI library.
@@ -43,6 +44,11 @@ final class Temporaries {
      */
     final static ThreadLocal<FloatBuffer> floatBuffer1
             = ThreadLocal.withInitial(() -> Jolt.newDirectFloatBuffer(12));
+    /**
+     * a reusable, direct LongBuffer, lazily created for each thread
+     */
+    final static ThreadLocal<LongBuffer> longBuffer1
+            = ThreadLocal.withInitial(() -> Jolt.newDirectLongBuffer(1));
     // *************************************************************************
     // constructors
 
