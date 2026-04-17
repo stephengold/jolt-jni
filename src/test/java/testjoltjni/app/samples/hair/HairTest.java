@@ -100,28 +100,24 @@ public void Initialize()
 	int num_vertices;
 	num_vertices=stream.readInt();
 	Float3[] vertices=new Float3[num_vertices];
-        for(int i=0;i<num_vertices;++i){vertices[i]=new Float3();}
 	stream.readFloat3Array(vertices   );
 
 	// Indices
 	int num_indices;
 	num_indices=stream.readInt();
 	IndexedTriangleNoMaterial[] indices=new IndexedTriangleNoMaterial[num_indices];
-        for(int i=0;i<num_indices;++i){indices[i]=new IndexedTriangleNoMaterial();}
 	stream.readIndexedTriangles(indices   );
 
 	// Inverse Bind Matrices
 	int num_joints;
 	num_joints=stream.readInt();
 	Mat44[] inv_bind_pose=new Mat44[num_joints];
-        for(int i=0;i<num_joints;++i){inv_bind_pose[i]=new Mat44();}
 	stream.readMatrices(inv_bind_pose   );
 
 	// Skin Weights
 	int num_skin_weights_per_vertex;
 	num_skin_weights_per_vertex=stream.readInt();
 	HairSkinWeight[] skin_weights=new HairSkinWeight[num_skin_weights_per_vertex * num_vertices];
-        for(int i=0;i<skin_weights.length;++i){skin_weights[i]=new HairSkinWeight();}
 	stream.readHairSkinWeights(skin_weights   );
 
 	// Animation
