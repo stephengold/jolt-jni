@@ -147,8 +147,13 @@ final public class StreamInWrapper extends StreamIn {
     public void readFloat3Array(Float3[] storeFloats) {
         long streamVa = va();
         FloatBuffer data = Temporaries.floatBuffer1.get();
-        for (Float3 f3 : storeFloats) {
+        for (int i = 0; i < storeFloats.length; ++i) {
             readFloat3(streamVa, data);
+            Float3 f3 = storeFloats[i];
+            if (f3 == null) { // avoid an immediate NPE
+                f3 = new Float3();
+                storeFloats[i] = f3;
+            }
             f3.set(data);
         }
     }
@@ -161,7 +166,12 @@ final public class StreamInWrapper extends StreamIn {
      */
     public void readHairSkinWeights(HairSkinWeight[] storeResult) {
         long streamVa = va();
-        for (HairSkinWeight weight : storeResult) {
+        for (int i = 0; i < storeResult.length; ++i) {
+            HairSkinWeight weight = storeResult[i];
+            if (weight == null) { // avoid an immediate NPE
+                weight = new HairSkinWeight();
+                storeResult[i] = weight;
+            }
             long storeWeightVa = weight.va();
             readHairSkinWeight(streamVa, storeWeightVa);
         }
@@ -175,7 +185,12 @@ final public class StreamInWrapper extends StreamIn {
      */
     public void readIndexedTriangles(IndexedTriangleNoMaterial[] storeResult) {
         long streamVa = va();
-        for (IndexedTriangleNoMaterial triangle : storeResult) {
+        for (int i = 0; i < storeResult.length; ++i) {
+            IndexedTriangleNoMaterial triangle = storeResult[i];
+            if (triangle == null) { // avoid an immediate NPE
+                triangle = new IndexedTriangleNoMaterial();
+                storeResult[i] = triangle;
+            }
             long storeTriangleVa = triangle.va();
             readTriangle(streamVa, storeTriangleVa);
         }
@@ -202,7 +217,12 @@ final public class StreamInWrapper extends StreamIn {
      */
     public void readMatrices(Mat44[] storeResult) {
         long streamVa = va();
-        for (Mat44 matrix : storeResult) {
+        for (int i = 0; i < storeResult.length; ++i) {
+            Mat44 matrix = storeResult[i];
+            if (matrix == null) { // avoid an immediate NPE
+                matrix = new Mat44();
+                storeResult[i] = matrix;
+            }
             long storeMatrixVa = matrix.va();
             readMat44(streamVa, storeMatrixVa);
         }
@@ -216,7 +236,12 @@ final public class StreamInWrapper extends StreamIn {
      */
     public void readSkinWeights(SkinWeight[] storeResult) {
         long streamVa = va();
-        for (SkinWeight skinWeight : storeResult) {
+        for (int i = 0; i < storeResult.length; ++i) {
+            SkinWeight skinWeight = storeResult[i];
+            if (skinWeight == null) { // avoid an immediate NPE
+                skinWeight = new SkinWeight();
+                storeResult[i] = skinWeight;
+            }
             long storeWeightVa = skinWeight.va();
             readSkinWeight(streamVa, storeWeightVa);
         }
