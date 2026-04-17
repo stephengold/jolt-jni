@@ -43,7 +43,7 @@ public class CharacterVirtualSettings
      * Instantiate default settings.
      */
     public CharacterVirtualSettings() {
-        long settingsVa = createCharacterVirtualSettings();
+        long settingsVa = createDefault();
         long refVa = toRef(settingsVa);
         Runnable freeingAction = () -> CharacterVirtualSettingsRef.free(refVa);
         setVirtualAddress(settingsVa, freeingAction);
@@ -494,9 +494,9 @@ public class CharacterVirtualSettings
     // *************************************************************************
     // native methods
 
-    native private static long createCharacterVirtualSettings();
-
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native static int getBackFaceMode(long settingsVa);
 

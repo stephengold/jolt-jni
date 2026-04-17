@@ -39,7 +39,7 @@ public class CharacterSettings
      * Instantiate default settings.
      */
     public CharacterSettings() {
-        long settingsVa = createCharacterSettings();
+        long settingsVa = createDefault();
         long refVa = toRef(settingsVa);
         Runnable freeingAction = () -> CharacterSettingsRef.free(refVa);
         setVirtualAddress(settingsVa, freeingAction);
@@ -200,9 +200,9 @@ public class CharacterSettings
     // *************************************************************************
     // native methods
 
-    native private static long createCharacterSettings();
-
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native static float getFriction(long settingsVa);
 
