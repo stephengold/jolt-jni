@@ -35,12 +35,12 @@ final class Temporaries {
     // fields
 
     /**
-     * a reusable, direct DoubleBuffer
+     * a reusable, direct DoubleBuffer, lazily created for each thread
      */
     final static ThreadLocal<DoubleBuffer> doubleBuffer1
             = ThreadLocal.withInitial(() -> Jolt.newDirectDoubleBuffer(3));
     /**
-     * a reusable, direct FloatBuffer
+     * a reusable, direct FloatBuffer, lazily created for each thread
      */
     final static ThreadLocal<FloatBuffer> floatBuffer1
             = ThreadLocal.withInitial(() -> Jolt.newDirectFloatBuffer(12));
