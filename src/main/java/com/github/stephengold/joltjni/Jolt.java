@@ -60,6 +60,12 @@ final public class Jolt {
      */
     final public static int cInvalidBodyId = 0xFFFF_FFFF;
     /**
+     * invalid character ID
+     * <p>
+     * value should match Jolt/Physics/Character/CharacterID.h
+     */
+    final public static int cInvalidCharacterId = 0xFFFF_FFFF;
+    /**
      * standard 2nd argument to the {@code JobSystemThreadPool} constructor
      * <p>
      * value should match Jolt/Physics/PhysicsSettings.h
