@@ -38,6 +38,7 @@ import com.github.stephengold.joltjni.CharacterVirtualRef;
 import com.github.stephengold.joltjni.CharacterVirtualRefC;
 import com.github.stephengold.joltjni.CharacterVirtualSettings;
 import com.github.stephengold.joltjni.CollisionGroup;
+import com.github.stephengold.joltjni.ContactKey;
 import com.github.stephengold.joltjni.ContactListenerList;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.FilteredContactListener;
@@ -79,6 +80,7 @@ import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstCharacter;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
+import com.github.stephengold.joltjni.readonly.ConstContactKey;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
@@ -142,6 +144,7 @@ public class Test003 {
         doCharacterVirtual();
         doCollisionGroup();
         doContactListenerList();
+        doContactKey();
         doContactSettings();
         doFilteredContactListener();
         doJobSystemSingleThreaded();
@@ -515,6 +518,20 @@ public class Test003 {
         testContactListenerListDefaults(list);
 
         TestUtils.testClose(list);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code ContactKey} class.
+     */
+    private static void doContactKey() {
+        ContactKey key = new ContactKey();
+        testContactKeyDefaults(key);
+
+        ContactKey copy = new ContactKey(key);
+        testContactKeyDefaults(copy);
+
+        TestUtils.testClose(copy, key);
         System.gc();
     }
 
@@ -969,6 +986,21 @@ public class Test003 {
         Assert.assertEquals(102, group.getSubGroupId());
 
         TestUtils.testClose(actualFilter, filter);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code ContactKey}.
+     *
+     * @param key the key to test (not {@code null}, unaffected)
+     */
+    private static void testContactKeyDefaults(ConstContactKey key) {
+        Assert.assertTrue(key.hasAssignedNativeObject());
+        Assert.assertTrue(key.ownsNativeObject());
+
+        Assert.assertEquals(Jolt.cInvalidBodyId, key.getBodyB());
+        Assert.assertEquals(-1, key.getCharacterIdB());
+        Assert.assertEquals(Jolt.cEmptySubShapeId, key.getSubShapeIdB());
+        Assert.assertTrue(key.isEqual(key));
     }
 
     /**
