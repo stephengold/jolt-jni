@@ -721,10 +721,8 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	for (CharacterVirtualRef character : new CharacterVirtualRef[]{ mAnimatedCharacterVirtual, mAnimatedCharacterVirtualWithInnerBody })
 		if (character != nullptr)
 		{
-		if (implementsDebugRendering())
-			character.getShape().draw(mDebugRenderer, character.getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sOrange, false, true);
-		else
-			mDebugRenderer.drawCapsule(character.getCenterOfMassTransform(), 0.5f * cCharacterHeightStanding, cCharacterRadiusStanding + character.getCharacterPadding(), Color.sOrange, ECastShadow.Off, EDrawMode.Wireframe);
+			// Draw the character
+			DrawPaddedCharacter(character.getShape(), character.getCharacterPadding(), character.getCenterOfMassTransform());
 
 			// Update velocity and apply gravity
 			Vec3 velocity;
@@ -881,4 +879,37 @@ void DrawCharacterState(ConstCharacterBase inCharacter, RMat44Arg inCharacterTra
 	horizontal_velocity.setY(0);
 	mDebugRenderer.drawText3D(inCharacterTransform.getTranslation(), String.format("State: %s\nMat: %s\nHorizontal Vel: %.1f m/s\nVertical Vel: %.1f m/s", ground_state, ground_material.getDebugName(), (double)horizontal_velocity.length(), (double)inCharacterVelocity.getY()), Color.sWhite, 0.25f);
 }
-}
+
+void DrawPaddedCharacter(ConstShape inShape, float inPadding, RMat44Arg inCenterOfMass)
+{
+	if (inShape.getSubType() == EShapeSubType.Capsule)
+	{
+		 CapsuleShape capsule = ( CapsuleShape )(inShape);
+		mDebugRenderer.drawCapsule(inCenterOfMass, capsule.getHalfHeightOfCylinder(), capsule.getRadius() + inPadding, Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
+	}
+	else if (inShape.getSubType() == EShapeSubType.Cylinder)
+	{
+		// Not correct as the edges should be rounded
+		 CylinderShape cylinder = ( CylinderShape )(inShape);
+		mDebugRenderer.drawCylinder(inCenterOfMass, cylinder.getHalfHeight() + inPadding, cylinder.getRadius() + inPadding, Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
+	}
+	else if (inShape.getSubType() == EShapeSubType.Box)
+	{
+		// Not correct as the edges should be rounded
+		 BoxShape box = ( BoxShape )(inShape);
+		AaBox bounds = box.getLocalBounds();
+		bounds.expandBy(Vec3.sReplicate(inPadding));
+		mDebugRenderer.drawWireBox(inCenterOfMass, bounds, Color.sGrey);
+	}
+	else if (inShape.getSubType() == EShapeSubType.RotatedTranslated)
+	{
+		 RotatedTranslatedShape rt = ( RotatedTranslatedShape )(inShape);
+		DrawPaddedCharacter(rt.getInnerShape(), inPadding, inCenterOfMass);
+	}
+	else if (inShape.getType() == EShapeType.Compound)
+	{
+		 CompoundShape compound = ( CompoundShape )(inShape);
+		for (ConstSubShape  sub_shape : compound.getSubShapes())
+			DrawPaddedCharacter(sub_shape.getShape(), inPadding, star(inCenterOfMass , sub_shape.getLocalTransformNoScale(Vec3.sOne())));
+	}
+}}

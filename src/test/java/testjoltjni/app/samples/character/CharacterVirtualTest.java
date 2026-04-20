@@ -102,14 +102,7 @@ if(implementsDebugRendering()){
 	mCharacter.getShape().draw(mDebugRenderer, com, Vec3.sReplicate(1.0f), Color.sGreen, false, true);
 } // JPH_DEBUG_RENDERER
 
-	// Draw shape including padding (only implemented for capsules right now)
-	if (((RotatedTranslatedShape)mCharacter.getShape()).getInnerShape().getSubType() == EShapeSubType.Capsule)
-	{
-		if (mCharacter.getShape() == mStandingShape.getPtr())
-			mDebugRenderer.drawCapsule(com, 0.5f * cCharacterHeightStanding, cCharacterRadiusStanding + mCharacter.getCharacterPadding(), Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
-		else
-			mDebugRenderer.drawCapsule(com, 0.5f * cCharacterHeightCrouching, cCharacterRadiusCrouching + mCharacter.getCharacterPadding(), Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
-	}
+	DrawPaddedCharacter(mCharacter.getShape(), mCharacter.getCharacterPadding(), com);
 
 	// Remember old position
 	RVec3 old_position = mCharacter.getPosition();
