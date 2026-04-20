@@ -803,7 +803,7 @@ public class Test003 {
      * Test the getters and defaults of the specified
      * {@code BodyCreationSettings}.
      *
-     * @param bcs the settings to test (not null, unaffected)
+     * @param bcs the settings to test (not {@code null}, unaffected)
      */
     private static void testBcsDefaults(ConstBodyCreationSettings bcs) {
         Assert.assertTrue(bcs.hasAssignedNativeObject());
@@ -851,7 +851,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code BodyCreationSettings}.
      *
-     * @param bcs the settings to test (not null, modified)
+     * @param bcs the settings to test (not {@code null}, modified)
      */
     private static void testBcsSetters(BodyCreationSettings bcs) {
         bcs.setAllowDynamicOrKinematic(true);
@@ -926,7 +926,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code Character}.
      *
-     * @param character the character to test (not null, unaffected)
+     * @param character the character to test (not {@code null}, unaffected)
      */
     private static void testCharacterDefaults(ConstCharacter character) {
         character.getCenterOfMassPosition();
@@ -941,7 +941,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code CharacterVirtual}.
      *
-     * @param character the character to test (not null, unaffected)
+     * @param character the character to test (not {@code null}, unaffected)
      */
     private static void testCharacterVirtualDefaults(
             ConstCharacterVirtual character) {
@@ -960,7 +960,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code CollisionGroup}.
      *
-     * @param group the group to test (not null, unaffected)
+     * @param group the group to test (not {@code null}, unaffected)
      */
     private static void testCollisionGroupDefaults(ConstCollisionGroup group) {
         Assert.assertNull(group.getGroupFilter());
@@ -972,7 +972,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code CollisionGroup}.
      *
-     * @param group the group to test (not null)
+     * @param group the group to test (not {@code null})
      */
     private static void testCollisionGroupSetters(CollisionGroup group) {
         GroupFilterTable filter = new GroupFilterTable();
@@ -1007,7 +1007,7 @@ public class Test003 {
      * Test the getters and defaults of the specified
      * {@code ContactListenerList}.
      *
-     * @param list the list to test (not null, unaffected)
+     * @param list the list to test (not {@code null}, unaffected)
      */
     private static void testContactListenerListDefaults(
             ContactListenerList list) {
@@ -1021,7 +1021,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code ContactSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testContactSettingsDefaults(
             ConstContactSettings settings) {
@@ -1041,7 +1041,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code ContactSettings}.
      *
-     * @param settings the settings to test (not null)
+     * @param settings the settings to test (not {@code null})
      */
     private static void testContactSettingsSetters(ContactSettings settings) {
         settings.setCombinedFriction(11f);
@@ -1071,7 +1071,7 @@ public class Test003 {
      * Test the getters and defaults of the specified
      * {@code FilteredContactListener}.
      *
-     * @param listener the listener to test (not null, unaffected)
+     * @param listener the listener to test (not {@code null}, unaffected)
      */
     private static void testFilteredContactListenerDefaults(
             FilteredContactListener listener) {
@@ -1093,7 +1093,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code FilteredContactListener}.
      *
-     * @param listener the listener to test (not null, modified)
+     * @param listener the listener to test (not {@code null}, modified)
      */
     private static void testFilteredContactListenerSetters(
             FilteredContactListener listener) {
@@ -1171,7 +1171,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code MotionProperties}.
      *
-     * @param props the properties to test (not null, unaffected)
+     * @param props the properties to test (not {@code null}, unaffected)
      */
     private static void testMotionDefaults(ConstMotionProperties props) {
         Assert.assertTrue(props.hasAssignedNativeObject());
@@ -1198,7 +1198,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code MotionProperties}.
      *
-     * @param props the properties to test (not null, modified)
+     * @param props the properties to test (not {@code null}, modified)
      */
     private static void testMotionSetters(MotionProperties props) {
         props.setAngularDamping(0.01f);
@@ -1234,7 +1234,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code MassProperties}.
      *
-     * @param props the properties to test (not null, unaffected)
+     * @param props the properties to test (not {@code null}, unaffected)
      */
     private static void testMpDefaults(ConstMassProperties props) {
         Assert.assertTrue(props.hasAssignedNativeObject());
@@ -1249,7 +1249,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code MassProperties}.
      *
-     * @param props the properties to test (not null, modified)
+     * @param props the properties to test (not {@code null}, modified)
      */
     private static void testMpSetters(MassProperties props) {
         props.setMass(2f);
@@ -1266,7 +1266,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code Parameters}.
      *
-     * @param params the parameters to test (not null, unaffected)
+     * @param params the parameters to test (not {@code null}, unaffected)
      */
     private static void testParametersDefaults(Parameters params) {
         Assert.assertTrue(params.hasAssignedNativeObject());
@@ -1289,7 +1289,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code Parameters}.
      *
-     * @param params the parameters to test (not null, modified)
+     * @param params the parameters to test (not {@code null}, modified)
      */
     private static void testParametersSetters(Parameters params) {
         params.setAsyncAcd(false);
@@ -1322,7 +1322,7 @@ public class Test003 {
      * Test the getters and defaults of the specified
      * {@code SoftBodyCreationSettings}.
      *
-     * @param sbcs the settings to test (not null, unaffected)
+     * @param sbcs the settings to test (not {@code null}, unaffected)
      */
     private static void testSbcsDefaults(ConstSoftBodyCreationSettings sbcs) {
         Assert.assertTrue(sbcs.hasAssignedNativeObject());
@@ -1347,7 +1347,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code SoftBodyCreationSettings}.
      *
-     * @param sbcs the settings to test (not null, modified)
+     * @param sbcs the settings to test (not {@code null}, modified)
      */
     private static void testSbcsSetters(SoftBodyCreationSettings sbcs) {
         sbcs.setAllowSleeping(false);
@@ -1397,7 +1397,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code SkinWeight}.
      *
-     * @param weight the weight to test (not null, unaffected)
+     * @param weight the weight to test (not {@code null}, unaffected)
      */
     private static void testSkinWeightDefaults(SkinWeight weight) {
         Assert.assertTrue(weight.hasAssignedNativeObject());
@@ -1411,7 +1411,7 @@ public class Test003 {
      * Test the getters and defaults of the specified
      * {@code SoftBodyMotionProperties}.
      *
-     * @param properties the properties to test (not null, unaffected)
+     * @param properties the properties to test (not {@code null}, unaffected)
      */
     private static void testSoftBodyMotionPropertiesDefaults(
             ConstSoftBodyMotionProperties properties) {
@@ -1427,7 +1427,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code SoftBodyMotionProperties}.
      *
-     * @param properties the properties to test (not null, modified)
+     * @param properties the properties to test (not {@code null}, modified)
      */
     private static void testSoftBodyMotionPropertiesSetters(
             SoftBodyMotionProperties properties) {
@@ -1444,7 +1444,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code Sphere}.
      *
-     * @param ss the object to test (not null, unaffected)
+     * @param ss the object to test (not {@code null}, unaffected)
      */
     private static void testSphereDefaults(ConstSphere ss) {
         TestUtils.assertEquals(0f, 0f, 0f, ss.getCenter(), 0f);
@@ -1454,7 +1454,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code SpringSettings}.
      *
-     * @param ss the settings to test (not null, unaffected)
+     * @param ss the settings to test (not {@code null}, unaffected)
      */
     private static void testSpringSettingsDefaults(ConstSpringSettings ss) {
         Assert.assertNull(ss.getConstraint());
@@ -1469,7 +1469,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code SpringSettings}.
      *
-     * @param ss the settings to test (not null, modified)
+     * @param ss the settings to test (not {@code null}, modified)
      */
     private static void testSpringSettingsSetters(SpringSettings ss) {
         ss.setFrequency(2f);
@@ -1489,7 +1489,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code Vertex}.
      *
-     * @param vertex the vertex to test (not null, unaffected)
+     * @param vertex the vertex to test (not {@code null}, unaffected)
      */
     private static void testVertexDefaults(ConstVertex vertex) {
         Assert.assertEquals(1f, vertex.getInvMass(), 0f);
@@ -1500,7 +1500,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code Vertex}.
      *
-     * @param vertex the vertex to test (not null, modified)
+     * @param vertex the vertex to test (not {@code null}, modified)
      */
     private static void testVertexSetters(Vertex vertex) {
         vertex.setInvMass(3f);
