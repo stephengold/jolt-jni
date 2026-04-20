@@ -168,6 +168,30 @@ public void Initialize()
 		mInnerStandingShape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new BoxShape(star(cInnerShapeFraction , new Vec3(cCharacterRadiusStanding, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, cCharacterRadiusStanding)))).create().get();
 		mInnerCrouchingShape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, 0), Quat.sIdentity(), new BoxShape(star(cInnerShapeFraction , new Vec3(cCharacterRadiusCrouching, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, cCharacterRadiusCrouching)))).create().get();
 		break;
+
+	case Compound:
+		{
+			StaticCompoundShapeSettings standing_compound=new StaticCompoundShapeSettings();
+			standing_compound.addShape(new Vec3(-0.3f, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new CapsuleShape(0.5f * cCharacterHeightStanding, cCharacterRadiusStanding));
+			standing_compound.addShape(new Vec3(0.3f, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new BoxShape(new Vec3(cCharacterRadiusStanding, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, cCharacterRadiusStanding)));
+			mStandingShape = standing_compound.create().get();
+
+			StaticCompoundShapeSettings crouching_compound=new StaticCompoundShapeSettings();
+			crouching_compound.addShape(new Vec3(-0.3f, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, 0), Quat.sIdentity(), new CapsuleShape(0.5f * cCharacterHeightCrouching, cCharacterRadiusCrouching));
+			crouching_compound.addShape(new Vec3(0.3f, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, 0), Quat.sIdentity(), new BoxShape(new Vec3(cCharacterRadiusCrouching, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, cCharacterRadiusCrouching)));
+			mCrouchingShape = crouching_compound.create().get();
+
+			StaticCompoundShapeSettings inner_standing_compound=new StaticCompoundShapeSettings();
+			inner_standing_compound.addShape(new Vec3(-0.3f, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new CapsuleShape(0.5f * cInnerShapeFraction * cCharacterHeightStanding, cInnerShapeFraction * cCharacterRadiusStanding));
+			inner_standing_compound.addShape(new Vec3(0.3f, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new BoxShape(star(cInnerShapeFraction ,new Vec3(cCharacterRadiusStanding, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, cCharacterRadiusStanding))));
+			mInnerStandingShape = inner_standing_compound.create().get();
+
+			StaticCompoundShapeSettings inner_crouching_compound=new StaticCompoundShapeSettings();
+			inner_crouching_compound.addShape(new Vec3(-0.3f, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, 0), Quat.sIdentity(), new CapsuleShape(0.5f * cInnerShapeFraction * cCharacterHeightCrouching, cInnerShapeFraction * cCharacterRadiusCrouching));
+			inner_crouching_compound.addShape(new Vec3(0.3f, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, 0), Quat.sIdentity(), new BoxShape(star(cInnerShapeFraction ,new Vec3(cCharacterRadiusCrouching, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, cCharacterRadiusCrouching))));
+			mInnerCrouchingShape = inner_crouching_compound.create().get();
+		}
+		break;
 	}
 
 	if (strcmp(sSceneName, "PerlinMesh") == 0)
@@ -762,7 +786,7 @@ void CharacterBaseTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 	inUI->CreateTextButton(inSubMenu, "Configuration Settings", [this, inUI]() {
 		UIElement *configuration_settings = inUI->CreateMenu();
 
-		inUI->CreateComboBox(configuration_settings, "Shape Type", { "Capsule", "Cylinder", "Box" }, (int)sShapeType, [](int inItem) { sShapeType = (EType)inItem; });
+		inUI->CreateComboBox(configuration_settings, "Shape Type", { "Capsule", "Cylinder", "Box", "Compound" }, (int)sShapeType, [](int inItem) { sShapeType = (EType)inItem; });
 		AddConfigurationSettings(inUI, configuration_settings);
 		inUI->CreateTextButton(configuration_settings, "Accept Changes", [this]() { RestartTest(); });
 		inUI->ShowMenu(configuration_settings);
