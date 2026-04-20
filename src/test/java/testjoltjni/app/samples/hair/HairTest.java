@@ -56,8 +56,8 @@ Gradient sGridVelocityFactor=new Gradient(0.05f,0.01f);
 Gradient sHairRadius=new Gradient(0.001f,0.001f);
 Gradient sSkinGlobalPose=new Gradient(1f,0f,0f,0.1f);
 Gradient sWorldTransformInfluence=new Gradient(0f,1f);
-class Groom{Groom(){};
-    Groom(String n,BiFunction<Mat44Arg,Vec3Arg,Vec3>t,boolean a){mName=n;mVertexTransform=t;mAttachToHull=a;};
+class Groom{Groom(){}
+    Groom(String n,BiFunction<Mat44Arg,Vec3Arg,Vec3>t,boolean a){mName=n;mVertexTransform=t;mAttachToHull=a;}
     String mName;BiFunction<Mat44Arg,Vec3Arg,Vec3>mVertexTransform;boolean mAttachToHull;};
 BiFunction<Mat44Arg,Vec3Arg,Vec3> tenth_of_inch_to_m = (Mat44Arg inInvNeckTransform, Vec3Arg inVertex) -> {
     return star(inInvNeckTransform,star(2.54f/1000f,inVertex.swizzle(SWIZZLE_Y,SWIZZLE_Z,SWIZZLE_X)));};
