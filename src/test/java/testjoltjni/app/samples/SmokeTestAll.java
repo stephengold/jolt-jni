@@ -53,7 +53,7 @@ final public class SmokeTestAll {
      * default number of physics steps to simulate during each invocation of
      * {@code smokeTest()}
      */
-    final private static int defaultNumSteps = 1;
+    final private static int defaultNumSteps = 66;
     // *************************************************************************
     // fields
 
