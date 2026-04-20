@@ -119,6 +119,7 @@ public
 
 	public void			StartTest(PhysicsSystem inPhysicsSystem, EMotionQuality inMotionQuality)
 	{
+		mPhysicsSystem=inPhysicsSystem;
 		// Construct bodies
 		BodyInterface bi = inPhysicsSystem.getBodyInterface();
 		for (BodyCreationSettings bcs : mWorld)
