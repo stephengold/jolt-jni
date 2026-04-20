@@ -26,18 +26,12 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 
 /**
- * Read-only access to a {@code Contact}. (native type: const Contact)
+ * Read-only access to a {@code Contact}. (native type:
+ * {@code const CharacterVirtual::Contact})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstContact extends ConstJoltPhysicsObject {
-    /**
-     * Return the ID of the colliding body. The contact is unaffected.
-     *
-     * @return the {@code BodyID} value
-     */
-    int getBodyB();
-
+public interface ConstContact extends ConstContactKey {
     /**
      * Test whether the velocity of the contact point can push the character.
      * The contact is unaffected.
@@ -114,13 +108,6 @@ public interface ConstContact extends ConstJoltPhysicsObject {
      * @return a new vector (in system coordinates)
      */
     RVec3 getPosition();
-
-    /**
-     * Return the sub-shape ID of the colliding body. The contact is unaffected.
-     *
-     * @return a {@code SubShapeID} value (typically negative)
-     */
-    int getSubShapeIdB();
 
     /**
      * Copy the surface normal of the contact. The contact is unaffected.

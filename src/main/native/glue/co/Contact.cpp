@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,19 +37,6 @@ using namespace JPH;
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_free
   BODYOF_FREE(CharacterVirtual::Contact)
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getBodyB
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getBodyB
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const BodyID result = pContact->mBodyB;
-    return result.GetIndexAndSequenceNumber();
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_Contact
@@ -191,19 +178,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getPosition
     pDoubles[0] = result.GetX();
     pDoubles[1] = result.GetY();
     pDoubles[2] = result.GetZ();
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getSubShapeIdB
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getSubShapeIdB
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const SubShapeID result = pContact->mSubShapeIDB;
-    return result.GetValue();
 }
 
 /*

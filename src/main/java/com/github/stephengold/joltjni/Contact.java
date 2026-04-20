@@ -33,7 +33,7 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Contact extends JoltPhysicsObject implements ConstContact {
+public class Contact extends ContactKey implements ConstContact {
     // *************************************************************************
     // constructors
 
@@ -46,25 +46,12 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * {@code false} &rarr; it isn't the owner
      */
     Contact(long contactVa, boolean owner) {
+        super(false);
         Runnable freeingAction = owner ? () -> free(contactVa) : null;
         setVirtualAddress(contactVa, freeingAction);
     }
     // *************************************************************************
     // ConstContact methods
-
-    /**
-     * Return the ID of the colliding body. The contact is unaffected. (native
-     * attribute: mBodyB)
-     *
-     * @return the {@code BodyID} value
-     */
-    @Override
-    public int getBodyB() {
-        long contactVa = va();
-        int result = getBodyB(contactVa);
-
-        return result;
-    }
 
     /**
      * Test whether the velocity of the contact point can push the character.
@@ -223,20 +210,6 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Return the sub-shape ID of the colliding body. The contact is unaffected.
-     * (native attribute: mSubShapeIDB)
-     *
-     * @return a {@code SubShapeID} value (typically negative)
-     */
-    @Override
-    public int getSubShapeIdB() {
-        long contactVa = va();
-        int result = getSubShapeIdB(contactVa);
-
-        return result;
-    }
-
-    /**
      * Copy the surface normal of the contact. The contact is unaffected.
      * (native attribute: mSurfaceNormal)
      *
@@ -284,8 +257,6 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     native private static void free(long contactVa);
 
-    native private static int getBodyB(long contactVa);
-
     native private static boolean getCanPushCharacter(long contactVa);
 
     native private static long getCharacterB(long contactVa);
@@ -308,8 +279,6 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     native private static void getPosition(
             long contactVa, DoubleBuffer storeDoubles);
-
-    native private static int getSubShapeIdB(long contactVa);
 
     native private static void getSurfaceNormal(
             long contactVa, FloatBuffer storeFloats);
