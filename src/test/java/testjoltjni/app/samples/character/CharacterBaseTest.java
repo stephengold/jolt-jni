@@ -82,6 +82,7 @@ private String sScenes[] =
 	"PerlinHeightField",
 	"ObstacleCourse",
 	"InitiallyIntersecting",
+	"InitiallyIntersecting2",
 	"Terrain1",
 	"Terrain2",
 };
@@ -193,6 +194,17 @@ public void Initialize()
 					settings.setPosition (new RVec3(-0.5f + 0.1f * x, 0.1f + 0.1f * y, -0.5f + 0.1f * z));
 					mBodyInterface.createAndAddBody(settings, EActivation.DontActivate);
 				}
+	}
+	else if (strcmp(sSceneName, "InitiallyIntersecting2") == 0)
+	{
+		CreateFloor();
+
+		// Create two very steep sloped floors that are initially intersecting with the character
+		ShapeRefC box = new BoxShape(new Vec3(1, 0.1f, 1)).toRefC();
+		BodyCreationSettings settings=new BodyCreationSettings(box,new RVec3(0, 0, 0), Quat.sRotation(Vec3.sAxisZ(), degreesToRadians(75.0f)), EMotionType.Static, Layers.NON_MOVING);
+		mBodyInterface.createAndAddBody(settings, EActivation.DontActivate);
+		settings.setRotation ( Quat.sRotation(Vec3.sAxisZ(), degreesToRadians(-75.0f)));
+		mBodyInterface.createAndAddBody(settings, EActivation.DontActivate);
 	}
 	else if (strcmp(sSceneName, "ObstacleCourse") == 0)
 	{
