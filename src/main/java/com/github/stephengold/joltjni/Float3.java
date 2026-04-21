@@ -147,6 +147,20 @@ final public class Float3 implements ConstFloat3 {
     // ConstFloat3 methods
 
     /**
+     * Write all 3 components to the start of the specified buffer. The vector
+     * is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not {@code null},
+     * capacity&ge;3)
+     */
+    @Override
+    public void copyTo(FloatBuffer storeBuffer) {
+        storeBuffer.put(0, x);
+        storeBuffer.put(1, y);
+        storeBuffer.put(2, z);
+    }
+
+    /**
      * Return the specified component. The vector is unaffected.
      *
      * @param index 0, 1, or 2

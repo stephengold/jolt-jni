@@ -30,6 +30,15 @@ import java.nio.FloatBuffer;
  */
 public interface ConstFloat3 {
     /**
+     * Write all 3 components to the start of the specified buffer. The vector
+     * is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not {@code null},
+     * capacity&ge;3)
+     */
+    void copyTo(FloatBuffer storeBuffer);
+
+    /**
      * Return the specified component. The vector is unaffected.
      *
      * @param index 0, 1, or 2
