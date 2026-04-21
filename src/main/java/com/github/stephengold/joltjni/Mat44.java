@@ -710,6 +710,25 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
+     * @param float3 the right factor (not {@code null}, unaffected)
+     * @return a new vector
+     */
+    @Override
+    public Vec3 multiply3x4(ConstFloat3 float3) {
+        long matrixVa = va();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        float3.copyTo(floatBuffer);
+        multiply3x4(matrixVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
+
+        return result;
+    }
+
+    /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. The matrix is
+     * unaffected.
+     *
      * @param vec3Arg the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
