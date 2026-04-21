@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -67,8 +67,8 @@ public class SoftBodyMotionProperties
      * system.
      *
      * @param deltaTime the total time to advance (in seconds)
-     * @param softBody the body to update (not null)
-     * @param system the system that contains the body (not null)
+     * @param softBody the body to update (not {@code null})
+     * @param system the system that contains the body (not {@code null})
      */
     public void customUpdate(
             float deltaTime, Body softBody, PhysicsSystem system) {
@@ -112,14 +112,14 @@ public class SoftBodyMotionProperties
     /**
      * Skin vertices to the specified joints.
      *
-     * @param comTransform the body's center-of-mass transform (not null,
-     * unaffected)
+     * @param comTransform the body's center-of-mass transform (not
+     * {@code null}, unaffected)
      * @param jointMatrices the joint matrices (relative to the center-of-mass
-     * transform, not null, length&ge;numJoints, unaffected)
+     * transform, not {@code null}, length&ge;numJoints, unaffected)
      * @param numJoints the number of joints (&ge;0)
      * @param hardSkinAll {@code true} to reposition all vertices to their
      * skinned locations
-     * @param allocator for temporary allocations (not null)
+     * @param allocator for temporary allocations (not {@code null})
      */
     public void skinVertices(
             RMat44Arg comTransform, Mat44Arg[] jointMatrices, int numJoints,
@@ -269,8 +269,9 @@ public class SoftBodyMotionProperties
      * Write the locations of all pinned vertices to the specified buffer and
      * advance the buffer's position. The properties are unaffected.
      *
-     * @param comLocation the location of the body's center of mass (not null)
-     * @param storeFloats the destination buffer (not null, modified)
+     * @param comLocation the location of the body's center of mass (not
+     * {@code null})
+     * @param storeFloats the destination buffer (not {@code null}, modified)
      */
     @Override
     public void putPinLocations(RVec3Arg comLocation, FloatBuffer storeFloats) {
@@ -288,8 +289,9 @@ public class SoftBodyMotionProperties
      * Write the locations of all vertices to the specified buffer and advance
      * the buffer's position. The properties are unaffected.
      *
-     * @param comLocation the location of the body's center of mass (not null)
-     * @param storeFloats the destination buffer (not null, modified)
+     * @param comLocation the location of the body's center of mass (not
+     * {@code null})
+     * @param storeFloats the destination buffer (not {@code null}, modified)
      */
     @Override
     public void putVertexLocations(

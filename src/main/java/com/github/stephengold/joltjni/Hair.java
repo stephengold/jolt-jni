@@ -91,7 +91,7 @@ public class Hair extends NonCopyable {
     }
 
     /**
-     * Copy the render positions of all strands.
+     * Copy the locations of all render vertices.
      *
      * @return a new direct buffer
      */
