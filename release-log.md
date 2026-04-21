@@ -1,8 +1,29 @@
 # Release log for the Jolt-JNI project
 
+## Version 4.1.0 released on TBD
+
++ Bugfix:  injudicious uses of `int` in glue code
++ Added class `ContactKey` and interface `ConstContactKey`.
++ Added methods:
+  + `ConstFloat3.copyTo()`
+  + `ConstHairSettings.putEdgeIndices()`
+  + `ConvexHullShapeSettings.transformPoints()`
+  + `Hair.putRenderPositionsWorld()`
+  + `Mat44Arg.multiply3x4(ConstFloat3)`
+  + `Op.star(Mat44, ConstFloat3)`
+  + `SVertex(Vec3Arg, float)`
+  + `Vec3.swizzleInPlace()`
++ Added constant `Jolt.cInvalidCharacterId`.
++ Permitted passing arrays with null elements to 5 `StreamInWrapper` methods.
+
++ Updated the Jolt-Physics source and assets to sg260420 (=dd4df01).
++ Updated the OSHI library to v6.11.1 .
+
+
 ## Version 4.0.1 released on 8 April 2026
 
 Bugfix:  `storeRef` not updated after `getShapeUpdate(ShapeRefC)` calls
+
 
 ## Version 4.0.0 released on 7 April 2026
 
