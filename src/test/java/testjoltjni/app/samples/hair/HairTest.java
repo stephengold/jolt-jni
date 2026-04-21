@@ -218,12 +218,13 @@ public void Initialize()
 	SStrandList hair_strands=new SStrandList();
 	Mat44Arg neck_transform = mFaceAnimation[0].get(mHeadJointIdx);
 	Mat44 inv_neck_transform = neck_transform.inversed();
+        int nsIndex=0; // index into num_segments[]
 	for (int strand = 0; strand < num_strands; ++strand)
 	{
 		// Transform relative to neck
-		Vec3[] out_points=new Vec3[num_segments[0]+1];
-		for (int point = 0; point < num_segments[0] + 1; ++point)
-			out_points[point]=sSelectedGroom.mVertexTransform.apply(inv_neck_transform,new Vec3(points[point]));
+		Vec3[] out_points=new Vec3[num_segments[nsIndex]+1];
+		for (int point = 0; point < num_segments[nsIndex] + 1; ++point)
+			out_points[point]=sSelectedGroom.mVertexTransform.apply(inv_neck_transform,new Vec3(points[nextPoint+point]));
 
 		// Attach the first vertex to the skull collision
 		if (sSelectedGroom.mAttachToHull)
@@ -236,7 +237,7 @@ public void Initialize()
 			if (mPhysicsSystem.getNarrowPhaseQuery().castRay(ray, hit))
 			{
 				Vec3 delta = plus(origin , minus(star(hit.getFraction() , direction) , out_points[0]));
-				for (int point=0;point<num_segments[0]+1;++point)
+				for (int point=0;point<num_segments[nsIndex]+1;++point)
 					plusEquals(out_points[point] , delta);
 			}
 		}
@@ -252,8 +253,8 @@ public void Initialize()
 		}
 		hair_strands.pushBack(new SStrand(first_point, hair_vertices.size(), 0));
 
-		nextPoint += num_segments[0] + 1;
-		num_segments[0] += num_segments_delta;
+		nextPoint += num_segments[nsIndex] + 1;
+		nsIndex += num_segments_delta;
 	}
 
 	// Resample if requested
