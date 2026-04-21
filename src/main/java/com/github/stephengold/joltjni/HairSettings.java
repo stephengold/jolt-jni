@@ -29,6 +29,7 @@ import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.RefTarget;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 
 /**
@@ -593,6 +594,18 @@ final public class HairSettings
     }
 
     /**
+     * Write the vertex indices of all render-strand edges to the specified
+     * buffer and advance the buffer's position. The settings are unaffected.
+     *
+     * @param storeIndices the destination buffer (not {@code null}, modified)
+     */
+    @Override
+    public void putEdgeIndices(IntBuffer storeIndices) {
+        long settingsVa = va();
+        putEdgeIndices(settingsVa, storeIndices);
+    }
+
+    /**
      * Write the state of this object to the specified stream, excluding the
      * compute buffers. The settings are unaffected.
      *
@@ -692,6 +705,8 @@ final public class HairSettings
 
     native static void initRenderAndSimulationStrands(
             long settingsVa, long verticesVa, long strandsVa);
+
+    native static void putEdgeIndices(long settingsVa, IntBuffer storeIndices);
 
     native static void restoreBinaryState(long settingsVa, long streamVa);
 

@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.Vec3;
+import java.nio.IntBuffer;
 
 /**
  * Read-only access to a {@code HairSettings} object. (native type: const
@@ -145,6 +146,14 @@ public interface ConstHairSettings extends ConstJoltPhysicsObject {
      * @return a new JVM object with the pre-existing native object assigned
      */
     ConstAaBox getSimulationBounds();
+
+    /**
+     * Write the vertex indices of all render-strand edges to the specified
+     * buffer and advance the buffer's position. The settings are unaffected.
+     *
+     * @param storeIndices the destination buffer (not {@code null}, modified)
+     */
+    void putEdgeIndices(IntBuffer storeIndices);
 
     /**
      * Write the state of this object to the specified stream, excluding the

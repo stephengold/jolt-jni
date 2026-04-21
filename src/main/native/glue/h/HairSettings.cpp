@@ -331,6 +331,26 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_initRend
 
 /*
  * Class:     com_github_stephengold_joltjni_HairSettings
+ * Method:    putEdgeIndices
+ * Signature: (JLjava/nio/IntBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_putEdgeIndices
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeIndices) {
+    const HairSettings * const pSettings
+            = reinterpret_cast<HairSettings *> (settingsVa);
+    DIRECT_INT_BUFFER(pEnv, storeIndices, pInts, capacityInts);
+    jlong intsCopied = 0;
+    for (const HairSettings::RStrand &strand : pSettings->mRenderStrands) {
+	for (uint32 v = strand.mStartVtx; v < strand.mEndVtx - 1; ++v) {
+            JPH_ASSERT(intsCopied + 1 < capacityInts);
+            pInts[intsCopied++] = v;
+            pInts[intsCopied++] = v + 1;
+        }
+    }
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HairSettings
  * Method:    restoreBinaryState
  * Signature: (JJ)V
  */
