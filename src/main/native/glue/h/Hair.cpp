@@ -105,6 +105,26 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Hair_getRenderPositio
 
 /*
  * Class:     com_github_stephengold_joltjni_Hair
+ * Method:    getRenderPositionsWorld
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Hair_getRenderPositionsWorld
+  (JNIEnv *pEnv, jclass, jlong hairVa, jobject storeFloats) {
+    const Hair * const pHair = reinterpret_cast<Hair *> (hairVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    const Float3 * positions = pHair->GetRenderPositions();
+    const RMat44 com = pHair->GetWorldTransform();
+    const jlong numVectors = capacityFloats/3;
+    for (jlong i = 0; i < numVectors; ++i) {
+        RVec3 transformed = com * Vec3(positions[i]);
+        pFloats[3*i] = transformed.GetX();
+        pFloats[3*i+1] = transformed.GetY();
+        pFloats[3*i+2] = transformed.GetZ();
+    }
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Hair
  * Method:    getScalpVertices
  * Signature: (JLjava/nio/FloatBuffer;)V
  */

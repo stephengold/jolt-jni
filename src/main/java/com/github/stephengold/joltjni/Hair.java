@@ -175,6 +175,17 @@ public class Hair extends NonCopyable {
     }
 
     /**
+     * Copy the (system) locations of all render vertices to the specified
+     * buffer.
+     *
+     * @param storeFloats the destination buffer (not {@code null}, modified)
+     */
+    public void putRenderPositionsWorld(FloatBuffer storeFloats) {
+        long hairVa = va();
+        getRenderPositionsWorld(hairVa, storeFloats);
+    }
+
+    /**
      * Relocate the hair.
      *
      * @param location the desired location (in system coordinates, not
@@ -267,6 +278,9 @@ public class Hair extends NonCopyable {
     native private static long getHairSettings(long hairVa);
 
     native private static void getRenderPositions(
+            long hairVa, FloatBuffer storeFloats);
+
+    native private static void getRenderPositionsWorld(
             long hairVa, FloatBuffer storeFloats);
 
     native private static void getScalpVertices(
