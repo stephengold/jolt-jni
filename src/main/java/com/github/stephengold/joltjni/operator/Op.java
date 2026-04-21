@@ -528,6 +528,20 @@ final public class Op {
      * @param right the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
+    public static Vec3 star(Mat44Arg left, ConstFloat3 right) {
+        Vec3 result = left.multiply3x4(right);
+        return result;
+    }
+
+    /**
+     * Return the specified matrix multiplied by the specified column vector,
+     * with the 4th component of the right factor implied to be one. (native
+     * operator: binary {@code *})
+     *
+     * @param left the left factor (not {@code null}, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
+     * @return a new vector
+     */
     public static Vec3 star(Mat44Arg left, Vec3Arg right) {
         Vec3 result = left.multiply3x4(right);
         return result;
