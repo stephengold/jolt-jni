@@ -619,6 +619,25 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Copy the specified components.
+     *
+     * @param xi index of the component to copy to the first (X) component of
+     * the result (0, 1, or 2)
+     * @param yi index of the component to copy to the 2nd (Y) component of the
+     * result (0, 1, or 2)
+     * @param zi index of the component to copy to the 3rd (Z) component of the
+     * result (0, 1, or 2)
+     */
+    public void swizzleInPlace(int xi, int yi, int zi) {
+        float newX = get(xi);
+        float newY = get(yi);
+        float newZ = get(zi);
+        this.x = newX;
+        this.y = newY;
+        this.z = newZ;
+    }
+
+    /**
      * Create a vector with all components zero.
      *
      * @return a new vector
