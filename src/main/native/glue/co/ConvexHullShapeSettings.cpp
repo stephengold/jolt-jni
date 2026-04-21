@@ -225,3 +225,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
         pSettings->mPoints.push_back(vec);
     }
 }
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    transformPoints
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_transformPoints
+  (JNIEnv *, jclass, jlong settingsVa, jlong matrixVa) {
+    ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    for (Vec3 &vec : pSettings->mPoints) {
+        vec = (*pMatrix) * vec;
+    }
+}

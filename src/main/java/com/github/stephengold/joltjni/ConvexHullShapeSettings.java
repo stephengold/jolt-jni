@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.Collection;
@@ -404,6 +405,20 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
         return this;
     }
+
+    /**
+     * Apply the specified linear transform to all points.
+     *
+     * @param matrix the tranform to apply (not {@code null}, unaffected)
+     * @return the modified settings, for chaining
+     */
+    public ConvexHullShapeSettings transformPoints(Mat44Arg matrix) {
+        long settingsVa = va();
+        long matrixVa = matrix.targetVa();
+        transformPoints(settingsVa, matrixVa);
+
+        return this;
+    }
     // *************************************************************************
     // native private methods
 
@@ -442,4 +457,6 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     native private static void setPoints(
             long settingsVa, int numPoints, FloatBuffer buffer);
+
+    native private static void transformPoints(long settingsVa, long matrixVa);
 }
