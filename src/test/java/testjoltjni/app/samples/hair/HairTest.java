@@ -74,7 +74,7 @@ int sDrawSimulationStrandCount=Std.INT_MAX;
 int sMaxStrands=Jolt.buildType().equals("Debug")?500:25000;
 int sNumSolverIterationsPerSecond=HairSettings.cDefaultIterationsPerSecond;
 int sOverrideVerticesPerStrand=32;
-class AttachedBody{AttachedBody(int j,int b){mJointIdx=j;mBodyID=b;};int mJointIdx;int mBodyID;};
+class AttachedBody{AttachedBody(int j,int b){mJointIdx=j;mBodyID=b;}int mJointIdx;int mBodyID;};
 List<AttachedBody>mAttachedBodies=new ArrayList<>();
 Mat44Array[] mFaceAnimation;
 

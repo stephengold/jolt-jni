@@ -103,7 +103,7 @@ public void Initialize()
 	for ( RVec3 p : static_positions)
 		mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(Vec3.sReplicate(0.5f)), p, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.Activate);
 
-RagdollSettingsRef ragdoll_settings;
+	RagdollSettingsRef ragdoll_settings;
 if (Jolt.supportsObjectStream()){
 	// Load ragdoll
 	ragdoll_settings = RagdollLoader.sLoad("Assets/Human.tof", EMotionType.Dynamic).toRef();
