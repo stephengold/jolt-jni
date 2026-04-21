@@ -404,7 +404,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_setScalp
     pSettings->mScalpInverseBindPose.clear();
     const DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs);
     JPH_ASSERT(capacityLongs >= 0);
-    for (int i = 0; i < capacityLongs; ++i) {
+    for (jlong i = 0; i < capacityLongs; ++i) {
         const jlong matrixVa = pLongs[i];
         const Mat44 * const pMatrix
                 = reinterpret_cast<Mat44 *> (matrixVa);
@@ -436,7 +436,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_setScalp
     pSettings->mScalpSkinWeights.clear();
     const DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs);
     JPH_ASSERT(capacityLongs >= 0);
-    for (int i = 0; i < capacityLongs; ++i) {
+    for (jlong i = 0; i < capacityLongs; ++i) {
         const jlong weightVa = pLongs[i];
         const HairSettings::SkinWeight * const pWeight
                 = reinterpret_cast<HairSettings::SkinWeight *> (weightVa);
@@ -456,7 +456,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_setScalp
     pSettings->mScalpTriangles.clear();
     const DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs);
     JPH_ASSERT(capacityLongs >= 0);
-    for (int i = 0; i < capacityLongs; ++i) {
+    for (jlong i = 0; i < capacityLongs; ++i) {
         const jlong triangleVa = pLongs[i];
         const IndexedTriangleNoMaterial * const pTriangle
                 = reinterpret_cast<IndexedTriangleNoMaterial *> (triangleVa);
@@ -475,8 +475,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_setScalp
             = reinterpret_cast<HairSettings *> (settingsVa);
     pSettings->mScalpVertices.clear();
     const DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
-    const int numVertices = capacityFloats/3;
-    for (int i = 0; i < numVertices; ++i) {
+    const jlong numVertices = capacityFloats/3;
+    for (jlong i = 0; i < numVertices; ++i) {
         const float x = pFloats[3*i];
         const float y = pFloats[3*i + 1];
         const float z = pFloats[3*i + 2];

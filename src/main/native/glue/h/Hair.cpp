@@ -95,8 +95,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Hair_getRenderPositio
     const Hair * const pHair = reinterpret_cast<Hair *> (hairVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     const Float3 * pResult = pHair->GetRenderPositions();
-    int numVectors = capacityFloats/3;
-    for (int i = 0; i < numVectors; ++i) {
+    const jlong numVectors = capacityFloats/3;
+    for (jlong i = 0; i < numVectors; ++i) {
         pFloats[3*i] = pResult[i].x;
         pFloats[3*i+1] = pResult[i].y;
         pFloats[3*i+2] = pResult[i].z;
@@ -113,8 +113,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Hair_getScalpVertices
     const Hair * const pHair = reinterpret_cast<Hair *> (hairVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     const Float3 * pResult = pHair->GetScalpVertices();
-    int numVectors = capacityFloats/3;
-    for (int i = 0; i < numVectors; ++i) {
+    const jlong numVectors = capacityFloats/3;
+    for (jlong i = 0; i < numVectors; ++i) {
         pFloats[3*i] = pResult[i].x;
         pFloats[3*i+1] = pResult[i].y;
         pFloats[3*i+2] = pResult[i].z;

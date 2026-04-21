@@ -79,7 +79,7 @@ public:
         if (success) {
             DIRECT_BYTE_BUFFER(pAttachEnv, data, bytes, numBytes);
             JPH_ASSERT(numBytes >= 0);
-            for (int i = 0; i < numBytes; ++i) {
+            for (jlong i = 0; i < numBytes; ++i) {
                 outData.push_back(bytes[i]);
             }
         }
