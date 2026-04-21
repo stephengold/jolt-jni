@@ -60,6 +60,21 @@ public class SVertex extends JoltPhysicsObject implements ConstSVertex {
     }
 
     /**
+     * Instantiate a vertex with the specified location and inverse mass.
+     *
+     * @param location the desired coordinates (not {@code null}, unaffected,
+     * default=(0,0,0))
+     * @param inverseMass the inverse of the desired mass (default=1)
+     */
+    public SVertex(Vec3Arg location, float inverseMass) {
+        float x = location.getX();
+        float y = location.getY();
+        float z = location.getZ();
+        long vertexVa = create(x, y, z, inverseMass);
+        setVirtualAddress(vertexVa, () -> free(vertexVa));
+    }
+
+    /**
      * Instantiate a vertex with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
