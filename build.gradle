@@ -315,7 +315,7 @@ model {
                     if (project.hasProperty('useVK')) {
                         cppCompiler.args '-I', "$vulkanSdk/include"
                         cppCompiler.define 'JPH_USE_VK'
-                        linker.args '-L', "$vulkanSdk/lib", '-lvulkan'
+                        //linker.args '-L', "$vulkanSdk/lib", '-lvulkan'
                     }
                 }
 

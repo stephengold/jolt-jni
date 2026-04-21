@@ -499,7 +499,7 @@ final public class TestUtils {
      * </ol>
      */
     public static void loadNativeLibrary() {
-        loadVulkanLibrary();
+        //loadVulkanLibrary();
 
         boolean success = loadNativeLibrary("Debug", "Sp");
         if (success) {
@@ -640,7 +640,7 @@ final public class TestUtils {
      * </ol>
      */
     public static void loadNativeLibraryRelease() {
-        loadVulkanLibrary();
+        //loadVulkanLibrary();
 
         boolean success = loadNativeLibrary("Release", "Sp");
         if (success) {

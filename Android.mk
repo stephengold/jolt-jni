@@ -17,7 +17,6 @@ LOCAL_CFLAGS := \
 -std=c++17
 
 LOCAL_CPP_EXTENSION := .cpp
-LOCAL_LDLIBS := -lvulkan
 LOCAL_MODULE := joltjni
 
 LOCAL_SRC_FILES := \
