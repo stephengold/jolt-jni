@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 4.1.0 released on TBD
+## Version 4.1.0 released on 21 April 2026
 
 + Bugfix:  injudicious uses of `int` in glue code
 + Added class `ContactKey` and interface `ConstContactKey`.
