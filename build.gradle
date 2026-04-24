@@ -260,7 +260,6 @@ model {
                     if (project.hasProperty('useVK')) {
                         cppCompiler.args "/I$vulkanSdk/Include"
                         cppCompiler.define 'JPH_USE_VK'
-                        linker.args "$vulkanSdk/Lib/vulkan-1.lib"
                     }
 
                 } else { // toolChain in Clang or Gcc
@@ -315,7 +314,6 @@ model {
                     if (project.hasProperty('useVK')) {
                         cppCompiler.args '-I', "$vulkanSdk/include"
                         cppCompiler.define 'JPH_USE_VK'
-                        //linker.args '-L', "$vulkanSdk/lib", '-lvulkan'
                     }
                 }
 
