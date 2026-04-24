@@ -65,6 +65,18 @@ final public class WheelSettingsWvRef
     // new methods exposed
 
     /**
+     * Return the angular damping coefficient. (native attribute:
+     * mAngularDamping)
+     *
+     * @param damping the desired coefficient (in units of per second, &ge;0,
+     * default=0.2)
+     */
+    public void setAngularDamping(float damping) {
+        long settingsVa = targetVa();
+        WheelSettingsWv.setAngularDamping(settingsVa, damping);
+    }
+
+    /**
      * Alter where to apply tire forces. (native attribute:
      * mEnableSuspensionForcePoint)
      *
@@ -78,6 +90,18 @@ final public class WheelSettingsWvRef
         WheelSettings.setEnableSuspensionForcePoint(settingsVa, enable);
 
         return this;
+    }
+
+    /**
+     * Alter the moment of inertia around the wheel's rolling axis. (native
+     * attribute: mInertia)
+     *
+     * @param moment the desired moment of inertia (in kilogram.meters squared,
+     * default=0.9)
+     */
+    public void setInertia(float moment) {
+        long settingsVa = targetVa();
+        WheelSettingsWv.setInertia(settingsVa, moment);
     }
 
     /**
@@ -324,6 +348,20 @@ final public class WheelSettingsWvRef
     // ConstWheelSettingsWv methods
 
     /**
+     * Return the angular damping coefficient. The settings are unaffected.
+     * (native attribute: mAngularDamping)
+     *
+     * @return the coefficient (in units of per second, &ge;0)
+     */
+    @Override
+    public float getAngularDamping() {
+        long settingsVa = targetVa();
+        float result = WheelSettingsWv.getAngularDamping(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Determine where to apply tire forces. The settings are unaffected.
      * (native attribute: mEnableSuspensionForcePoint)
      *
@@ -335,6 +373,20 @@ final public class WheelSettingsWvRef
         long settingsVa = targetVa();
         boolean result
                 = WheelSettings.getEnableSuspensionForcePoint(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the moment of inertia around the wheel's rolling axis. The
+     * settings are unaffected. (native attribute: mInertia)
+     *
+     * @return the moment of inertia (in kilogram.meters squared, &ge;0)
+     */
+    @Override
+    public float getInertia() {
+        long settingsVa = targetVa();
+        float result = WheelSettingsWv.getInertia(settingsVa);
 
         return result;
     }

@@ -29,6 +29,21 @@ package com.github.stephengold.joltjni.readonly;
  */
 public interface ConstWheelSettingsWv extends ConstWheelSettings {
     /**
+     * Return the angular damping coefficient. The settings are unaffected.
+     *
+     * @return the coefficient (in units of per second, &ge;0)
+     */
+    float getAngularDamping();
+
+    /**
+     * Return the moment of inertia around the wheel's rolling axis. The
+     * settings are unaffected.
+     *
+     * @return the moment of inertia (in kilogram.meters squared, &ge;0)
+     */
+    float getInertia();
+
+    /**
      * Access the lateral friction as a function of the slip angle (in degrees).
      *
      * @return a new JVM object with the pre-existing native object assigned

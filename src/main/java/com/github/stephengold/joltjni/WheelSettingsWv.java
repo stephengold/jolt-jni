@@ -73,6 +73,30 @@ public class WheelSettingsWv
     // new methods exposed
 
     /**
+     * Return the angular damping coefficient. (native attribute:
+     * mAngularDamping)
+     *
+     * @param damping the desired coefficient (in units of per second, &ge;0,
+     * default=0.2)
+     */
+    public void setAngularDamping(float damping) {
+        long settingsVa = va();
+        setAngularDamping(settingsVa, damping);
+    }
+
+    /**
+     * Alter the moment of inertia around the wheel's rolling axis. (native
+     * attribute: mInertia)
+     *
+     * @param moment the desired moment of inertia (in kilogram.meters squared,
+     * default=0.9)
+     */
+    public void setInertia(float moment) {
+        long settingsVa = va();
+        setInertia(settingsVa, moment);
+    }
+
+    /**
      * Copy the specified curve to the lateral-friction curve. (native
      * attribute: mLateralFriction)
      *
@@ -130,6 +154,34 @@ public class WheelSettingsWv
     }
     // *************************************************************************
     // ConstWheelSettingsWv methods
+
+    /**
+     * Return the angular damping coefficient. The settings are unaffected.
+     * (native attribute: mAngularDamping)
+     *
+     * @return the coefficient (in units of per second, &ge;0)
+     */
+    @Override
+    public float getAngularDamping() {
+        long settingsVa = va();
+        float result = getAngularDamping(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the moment of inertia around the wheel's rolling axis. The
+     * settings are unaffected. (native attribute: mInertia)
+     *
+     * @return the moment of inertia (in kilogram.meters squared, &ge;0)
+     */
+    @Override
+    public float getInertia() {
+        long settingsVa = va();
+        float result = getInertia(settingsVa);
+
+        return result;
+    }
 
     /**
      * Access the lateral friction as a function of the slip angle (in degrees).
@@ -248,6 +300,10 @@ public class WheelSettingsWv
 
     native private static long createDefault();
 
+    native static float getAngularDamping(long settingsVa);
+
+    native static float getInertia(long settingsVa);
+
     native static long getLateralFriction(long settingsVa);
 
     native static long getLongitudinalFriction(long settingsVa);
@@ -259,6 +315,10 @@ public class WheelSettingsWv
     native static float getMaxSteerAngle(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
+
+    native static void setAngularDamping(long settingsVa, float damping);
+
+    native static void setInertia(long settingsVa, float moment);
 
     native private static void setEmbedded(long settingsVa);
 

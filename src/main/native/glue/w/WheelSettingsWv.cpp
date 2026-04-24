@@ -57,6 +57,32 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_crea
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    getAngularDamping
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_getAngularDamping
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    const float result = pSettings->mAngularDamping;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    getInertia
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_getInertia
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    const float result = pSettings->mInertia;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
  * Method:    getLateralFriction
  * Signature: (J)J
  */
@@ -131,6 +157,30 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_getRe
             = reinterpret_cast<WheelSettingsWV *> (settingsVa);
     const uint32 result = pSettings->GetRefCount();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    setAngularDamping
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_setAngularDamping
+  (JNIEnv *, jclass, jlong settingsVa, jfloat damping) {
+    WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    pSettings->mAngularDamping = damping;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    setInertia
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_setInertia
+  (JNIEnv *, jclass, jlong settingsVa, jfloat inertia) {
+    WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    pSettings->mInertia = inertia;
 }
 
 /*
