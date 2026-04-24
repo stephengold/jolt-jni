@@ -47,6 +47,7 @@ import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
 import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
+import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsWv;
@@ -345,7 +346,7 @@ public class Test014 {
      * @param vcs the settings to test (not {@code null}, unaffected)
      */
     private static void testVehicleConstraintSettingsDefaults(
-            VehicleConstraintSettings vcs) {
+            ConstVehicleConstraintSettings vcs) {
         Assert.assertEquals(0, vcs.getConstraintPriority());
         Assert.assertNull(vcs.getController());
         Assert.assertEquals(0, vcs.getControllerType());
