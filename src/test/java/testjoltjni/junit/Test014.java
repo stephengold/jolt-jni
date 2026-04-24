@@ -41,12 +41,15 @@ import com.github.stephengold.joltjni.VehicleControllerSettings;
 import com.github.stephengold.joltjni.WheelSettings;
 import com.github.stephengold.joltjni.WheelSettingsTv;
 import com.github.stephengold.joltjni.WheelSettingsWv;
+import com.github.stephengold.joltjni.WheelSettingsWvRef;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
+import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
+import com.github.stephengold.joltjni.readonly.ConstWheelSettingsWv;
 import java.nio.FloatBuffer;
 import org.junit.Assert;
 import org.junit.Test;
@@ -309,12 +312,15 @@ public class Test014 {
      * Test the {@code WheelSettingsWv} class.
      */
     private static void doWheelSettingsWv() {
+        WheelSettingsWvRef ref = new WheelSettingsWv().toRef();
+        testWheelSettingsWvDefaults(ref);
+
         WheelSettingsWv wswv = new WheelSettingsWv();
 
         testWheelSettingsWvDefaults(wswv);
         testWheelSettingsWvSetters(wswv);
 
-        TestUtils.testClose(wswv);
+        TestUtils.testClose(wswv, ref.getPtr(), ref);
         System.gc();
     }
 
@@ -480,8 +486,33 @@ public class Test014 {
      *
      * @param wswv the settings to test (not {@code null}, unaffected)
      */
-    private static void testWheelSettingsWvDefaults(WheelSettingsWv wswv) {
+    private static void testWheelSettingsWvDefaults(ConstWheelSettingsWv wswv) {
         testWheelSettingsDefaults(wswv);
+
+        Assert.assertEquals(0.2f, wswv.getAngularDamping(), 0f);
+        Assert.assertEquals(0.9f, wswv.getInertia(), 0f);
+
+        ConstLinearCurve lat = wswv.getLateralFriction();
+        Assert.assertEquals(3, lat.countPoints());
+        Assert.assertEquals(0f, lat.getMinX(), 0f);
+        Assert.assertEquals(0f, lat.getPointX(0), 0f);
+        Assert.assertEquals(3f, lat.getPointX(1), 0f);
+        Assert.assertEquals(20f, lat.getPointX(2), 0f);
+        Assert.assertEquals(20f, lat.getMaxX(), 0f);
+        Assert.assertEquals(0f, lat.getPointY(0), 0f);
+        Assert.assertEquals(1.2f, lat.getPointY(1), 0f);
+        Assert.assertEquals(1f, lat.getPointY(2), 0f);
+
+        ConstLinearCurve lon = wswv.getLongitudinalFriction();
+        Assert.assertEquals(3, lon.countPoints());
+        Assert.assertEquals(0f, lon.getMinX(), 0f);
+        Assert.assertEquals(0f, lon.getPointX(0), 0f);
+        Assert.assertEquals(0.06f, lon.getPointX(1), 0f);
+        Assert.assertEquals(0.2f, lon.getPointX(2), 0f);
+        Assert.assertEquals(0.2f, lon.getMaxX(), 0f);
+        Assert.assertEquals(0f, lon.getPointY(0), 0f);
+        Assert.assertEquals(1.2f, lon.getPointY(1), 0f);
+        Assert.assertEquals(1f, lon.getPointY(2), 0f);
 
         Assert.assertEquals(1_500f, wswv.getMaxBrakeTorque(), 0f);
         Assert.assertEquals(4_000f, wswv.getMaxHandBrakeTorque(), 0f);
@@ -497,10 +528,14 @@ public class Test014 {
     private static void testWheelSettingsWvSetters(WheelSettingsWv wswv) {
         testWheelSettingsSetters(wswv);
 
+        wswv.setAngularDamping(0.3f);
+        wswv.setInertia(0.55f);
         wswv.setMaxBrakeTorque(333f);
         wswv.setMaxHandBrakeTorque(456f);
         wswv.setMaxSteerAngle(0.1f);
 
+        Assert.assertEquals(0.3f, wswv.getAngularDamping(), 0f);
+        Assert.assertEquals(0.55f, wswv.getInertia(), 0f);
         Assert.assertEquals(333f, wswv.getMaxBrakeTorque(), 0f);
         Assert.assertEquals(456f, wswv.getMaxHandBrakeTorque(), 0f);
         Assert.assertEquals(0.1f, wswv.getMaxSteerAngle(), 0f);
