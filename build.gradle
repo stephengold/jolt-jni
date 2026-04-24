@@ -399,83 +399,101 @@ application {
 tasks.register('debugConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
     debug = true
+    description = 'Debugs the ConvexVsMesh scene.'
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('debugHelloWorld', JavaExec) {
     debug = true
+    description = 'Debugs the HelloWorld app.'
     mainClass = 'testjoltjni.app.helloworld.HelloWorld'
 }
 tasks.register('debugPyramid', JavaExec) {
     args '-s=Pyramid'
     debug = true
+    description = 'Debugs the Pyramid scene.'
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('debugRagdoll', JavaExec) {
     args '-s=Ragdoll', '-r', '-rs'
     debug = true
     dependsOn('unpackJoltAssets')
+    description = 'Debugs the Ragdoll scene.'
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('debugRunTest', JavaExec) {
     debug = true
+    description = 'Debugs the automated tests.'
     mainClass = 'testjoltjni.RunTest'
 }
 tasks.register('debugSmokeTestAll', JavaExec) {
     debug = true
     dependsOn('unpackHairStraight', 'unpackJoltAssets')
+    description = 'Debugs a "smoke test" of each of the Samples tests.'
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
 }
 
 tasks.register('generateSnapshot', JavaExec) {
+    description = 'Generates a snapshot file read by LoadSnapshotTest'
     mainClass = 'testjoltjni.app.samples.GenerateSnapshot'
 }
 
 tasks.register('runCharacterVirtual', JavaExec) {
     args '-s=CharacterVirtual'
+    description = 'Measures performance on the CharacterVirtual scene.'
     enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
+    description = 'Measures performance on the ConvexVsMesh scene.'
     enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runHelloWorld', JavaExec) {
+    description = 'Runs the HelloWorld app.'
     mainClass = 'testjoltjni.app.helloworld.HelloWorld'
 }
 tasks.register('runLargeMesh', JavaExec) {
     args '-s=LargeMesh'
+    description = 'Measures performance on the LargeMesh scene.'
     enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runListClasses', JavaExec) {
+    description = 'Enumerates the public classes in Jolt JNI.'
     mainClass = 'testjoltjni.ListClasses'
 }
 tasks.register('runPrintTable', JavaExec) {
+    description = 'Prints a table of corresponding types to "lexicon.adoc".'
     mainClass = 'testjoltjni.PrintTable'
 }
 tasks.register('runPyramid', JavaExec) {
     args '-s=Pyramid'
+    description = 'Measures performance on the Pyramid scene.'
     enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runRagdoll', JavaExec) {
     args '-s=Ragdoll'
     dependsOn('unpackJoltAssets')
+    description = 'Measures performance on the Ragdoll scene.'
     enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runRagdollSinglePile', JavaExec) {
     args '-s=RagdollSinglePile'
     dependsOn('unpackJoltAssets')
+    description = 'Measures performance on the RagdollSinglePile scene.'
     enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runSmokeTestAll', JavaExec) {
     dependsOn('unpackHairStraight', 'unpackJoltAssets')
+    description = 'Performs a "smoke test" of each of the Samples tests.'
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
 }
 tasks.register('runTest', JavaExec) {
+    description = 'Runs the automated tests and logs heap allocations.'
     mainClass = 'testjoltjni.RunTest'
 }
 
