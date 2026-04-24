@@ -66,7 +66,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Return the angular damping constant. The settings are unaffected.
      *
-     * @return the constant (in units of per second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0)
      */
     float getAngularDamping();
 
@@ -138,7 +138,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Return the linear damping constant. The settings are unaffected.
      *
-     * @return the constant (in units of per second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0)
      */
     float getLinearDamping();
 

@@ -333,7 +333,7 @@ public class MotionProperties
     /**
      * Return the angular damping coefficient. The properties are unaffected.
      *
-     * @return the coefficient value (in units of per second, &ge;0, &le;1)
+     * @return the coefficient value (in units of per second, &ge;0)
      */
     @Override
     public float getAngularDamping() {
@@ -457,7 +457,7 @@ public class MotionProperties
     /**
      * Return the linear damping coefficient. The properties are unaffected.
      *
-     * @return the coefficient value (in units of per second, &ge;0, &le;1)
+     * @return the coefficient value (in units of per second, &ge;0)
      */
     @Override
     public float getLinearDamping() {

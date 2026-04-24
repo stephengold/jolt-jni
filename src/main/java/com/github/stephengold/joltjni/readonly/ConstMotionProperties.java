@@ -66,7 +66,7 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     /**
      * Return the angular damping coefficient. The properties are unaffected.
      *
-     * @return the coefficient value (in units of per second, &ge;0, &le;1)
+     * @return the coefficient value (in units of per second, &ge;0)
      */
     float getAngularDamping();
 
@@ -125,7 +125,7 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     /**
      * Return the linear damping coefficient. The properties are unaffected.
      *
-     * @return the coefficient value (in units of per second, &ge;0, &le;1)
+     * @return the coefficient value (in units of per second, &ge;0)
      */
     float getLinearDamping();
 

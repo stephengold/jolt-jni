@@ -259,7 +259,7 @@ public class BodyCreationSettings
     /**
      * Alter the angular damping constant. (native member: mAngularDamping)
      *
-     * @param damping the desired value (in units of per second, &ge;0, &le;1,
+     * @param damping the desired value (in units of per second, &ge;0,
      * default=0.05)
      * @return the modified settings, for chaining
      */
@@ -423,7 +423,7 @@ public class BodyCreationSettings
     /**
      * Alter the linear damping constant. (native member: mLinearDamping)
      *
-     * @param damping the desired value (in units of per second, &ge;0, &le;1,
+     * @param damping the desired value (in units of per second, &ge;0,
      * default=0.05)
      * @return the modified settings, for chaining
      */
@@ -803,7 +803,7 @@ public class BodyCreationSettings
      * Return the angular damping constant. The settings are unaffected. (native
      * member: mAngularDamping)
      *
-     * @return the constant (in units of per second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0)
      */
     @Override
     public float getAngularDamping() {
@@ -946,7 +946,7 @@ public class BodyCreationSettings
      * Return the linear damping constant. The settings are unaffected. (native
      * member: mLinearDamping)
      *
-     * @return the constant (in units of per second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0)
      */
     @Override
     public float getLinearDamping() {

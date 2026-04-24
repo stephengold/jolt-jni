@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -204,7 +204,7 @@ public class SoftBodyCreationSettings
     /**
      * Alter the linear damping constant. (native member: mLinearDamping)
      *
-     * @param damping the desired value (in units of 1 per second, &ge;0, &le;1,
+     * @param damping the desired value (in units of per second, &ge;0,
      * default=0.1)
      * @return the modified settings, for chaining
      */
@@ -508,7 +508,7 @@ public class SoftBodyCreationSettings
      * Return the linear damping constant. The settings are unaffected. (native
      * member: mLinearDamping)
      *
-     * @return the constant (in units of per second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0)
      */
     @Override
     public float getLinearDamping() {
