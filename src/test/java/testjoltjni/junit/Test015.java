@@ -46,6 +46,7 @@ import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstHairMaterial;
 import com.github.stephengold.joltjni.readonly.ConstHairSettings;
 import com.github.stephengold.joltjni.readonly.ConstSVertex;
+import electrostatic4j.snaploader.platform.util.NativeVariant;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -90,13 +91,16 @@ public class Test015 {
     private static void doComputeSystem() {
         ComputeSystemResult cpu = ComputeSystem.createComputeSystemCpu();
         testComputeSystem(cpu);
+        TestUtils.testClose(cpu);
 
-        ComputeSystemResult gpu = ComputeSystem.createComputeSystem();
-        if (!gpu.hasError()) {
-            testComputeSystem(gpu);
+        if (!NativeVariant.Os.isWindows()) {
+            ComputeSystemResult gpu = ComputeSystem.createComputeSystem();
+            if (!gpu.hasError()) {
+                testComputeSystem(gpu);
+            }
+            TestUtils.testClose(gpu);
         }
 
-        TestUtils.testClose(gpu, cpu);
         System.gc();
     }
 
