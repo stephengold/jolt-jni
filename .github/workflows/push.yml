@@ -38,7 +38,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v6
       - uses: humbletim/setup-vulkan-sdk@v1.2.1
         with:
-          vulkan-components: Vulkan-Headers, Vulkan-Loader
+          vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.341.1
           vulkan-use-cache: true
       - name: gradlew -Ptarget=Linux64 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
@@ -75,7 +75,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v6
       - uses: humbletim/setup-vulkan-sdk@v1.2.1
         with:
-          vulkan-components: Vulkan-Headers, Vulkan-Loader
+          vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.341.1
           vulkan-use-cache: true
       - name: gradlew -Ptarget=Linux64_fma -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
@@ -186,7 +186,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v6
       - uses: humbletim/setup-vulkan-sdk@v1.2.1
         with:
-          vulkan-components: Vulkan-Headers, Vulkan-Loader
+          vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.341.1
           vulkan-use-cache: true
       - name: gradlew -Ptarget=Windows64 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
@@ -227,7 +227,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v6
       - uses: humbletim/setup-vulkan-sdk@v1.2.1
         with:
-          vulkan-components: Vulkan-Headers, Vulkan-Loader
+          vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.341.1
           vulkan-use-cache: true
       - name: gradlew -Ptarget=Windows64_avx2 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
