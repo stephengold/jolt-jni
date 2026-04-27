@@ -41,7 +41,8 @@ import testjoltjni.app.samples.vehicle.*;
 import testjoltjni.app.samples.water.*;
 
 /**
- * Console app to perform a "smoke test" on each of the Samples tests.
+ * Console app to perform a "smoke test" on each of the JoltPhysics "Samples"
+ * tests.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -66,7 +67,7 @@ final public class SmokeTestAll {
      */
     private static ComputeSystem computeSystem;
     /**
-     * renderer shared by all test objects
+     * physics debug renderer shared by all test objects
      */
     private static DebugRenderer renderer;
     /**
@@ -74,7 +75,7 @@ final public class SmokeTestAll {
      */
     private static int numTests;
     /**
-     * allocator shared by all test objects
+     * allocator shared by all physics test objects
      */
     private static TempAllocator tempAllocator;
     // *************************************************************************
