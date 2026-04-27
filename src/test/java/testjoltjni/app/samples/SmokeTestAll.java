@@ -96,7 +96,7 @@ final public class SmokeTestAll {
         System.out.print(Jolt.implementsComputeCpu() ? " CPU" : "");
         System.out.print(Jolt.implementsComputeDx12() ? " DX12" : "");
         System.out.print(Jolt.implementsComputeMtl() ? " Metal" : "");
-        System.out.print(Jolt.implementsComputeVk() ? " VK" : "");
+        System.out.print(Jolt.implementsComputeVk() ? " Vulkan" : "");
         System.out.println();
 
         createSharedObjects();
