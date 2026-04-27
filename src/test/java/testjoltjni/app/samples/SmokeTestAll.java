@@ -137,6 +137,7 @@ final public class SmokeTestAll {
         systemName = systemName.replace("ComputeSystem", "");
         systemName = systemName.replace("Impl", "");
         systemName = systemName.replace("MTL", "Metal");
+        systemName = systemName.replace("VK", "Vulkan");
         System.out.printf("  using a %s compute system%n%n", systemName);
 
         switch (systemName) {
@@ -151,7 +152,7 @@ final public class SmokeTestAll {
                 computeSystem.setShaderLoader(mtlLoader);
                 break;
 
-            case "VK":
+            case "Vulkan":
                 // Assign a loader for Vulkan compute shaders:
                 Loader vkLoader = makeLoader("/vk/com/github/stephengold");
                 computeSystem.setShaderLoader(vkLoader);
