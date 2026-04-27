@@ -110,11 +110,6 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v6
-      - uses: humbletim/setup-vulkan-sdk@v1.2.1
-        with:
-          vulkan-components: Vulkan-Headers, Vulkan-Loader
-          vulkan-query-version: 1.4.341.1
-          vulkan-use-cache: true
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '26.4.1'
@@ -152,11 +147,6 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v6
-      - uses: humbletim/setup-vulkan-sdk@v1.2.1
-        with:
-          vulkan-components: Vulkan-Headers, Vulkan-Loader
-          vulkan-query-version: 1.4.341.1
-          vulkan-use-cache: true
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '26.4.1'
