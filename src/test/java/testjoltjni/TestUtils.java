@@ -447,7 +447,7 @@ final public class TestUtils {
         } catch (IOException exception) {
             throw new RuntimeException("failed to read file " + q);
         }
-        ByteBuffer result = Jolt.newDirectByteBuffer(totalBytes);
+        final ByteBuffer result = Jolt.newDirectByteBuffer(totalBytes);
 
         // Read the file again to fill the buffer with data:
         inputStream = null;
