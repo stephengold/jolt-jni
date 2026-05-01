@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Enumerate ways to specify a spring in a constraint.
+ * Enumerate ways to specify a spring in a physics constraint.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -37,5 +37,9 @@ public enum ESpringMode {
     /**
      * stiffness and damping are specified
      */
-    StiffnessAndDamping
+    StiffnessAndDamping,
+    /**
+     * mass-normalized stiffness and damping are specified
+     */
+    MassNormalizedStiffnessAndDamping
 }
