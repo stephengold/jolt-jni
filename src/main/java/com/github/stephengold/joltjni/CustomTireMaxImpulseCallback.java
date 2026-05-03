@@ -50,8 +50,8 @@ public class CustomTireMaxImpulseCallback extends TireMaxImpulseCallback {
      * @param suspensionImpulse the suspension impulse
      * @param longitudinalFriction the longitudinal friction coefficient
      * @param lateralFriction the lateral friction coefficient
-     * @param longitudinalSlip the longitudinal slip component
-     * @param lateralSlip the lateral slip component
+     * @param longitudinalSlip the longitudinal slip velocity
+     * @param lateralSlip the lateral slip angle (in radians)
      * @param deltaTime the duration of the simulation step (in seconds)
      * @return the lateral component of the maximum impulse
      */
@@ -72,8 +72,8 @@ public class CustomTireMaxImpulseCallback extends TireMaxImpulseCallback {
      * @param suspensionImpulse the suspension impulse
      * @param longitudinalFriction the longitudinal friction coefficient
      * @param lateralFriction the lateral friction coefficient
-     * @param longitudinalSlip the longitudinal slip component
-     * @param lateralSlip the lateral slip component
+     * @param longitudinalSlip the longitudinal slip velocity
+     * @param lateralSlip the lateral slip angle (in radians)
      * @param deltaTime the duration of the simulation step (in seconds)
      * @return the longitudinal component of the maximum impulse
      */

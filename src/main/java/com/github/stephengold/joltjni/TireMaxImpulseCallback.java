@@ -50,8 +50,8 @@ abstract public class TireMaxImpulseCallback extends JoltPhysicsObject {
      * capacity&ge;2, 0:lateral, 1:longitudinal)
      * @param longitudinalFriction the longitudinal friction coefficient
      * @param lateralFriction the lateral friction coefficient
-     * @param longitudinalSlip the longitudinal slip component
-     * @param lateralSlip the lateral slip component
+     * @param longitudinalSlip the longitudinal slip velocity
+     * @param lateralSlip the lateral slip angle (in radians)
      * @param deltaTime the duration of the simulation step (in seconds)
      */
     public void calculate(int wheelIndex, FloatBuffer storeFloats,
