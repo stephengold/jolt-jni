@@ -1,14 +1,14 @@
 # Release log for the Jolt-JNI project
 
-## Version 4.2.0 released on TBD
+## Version 4.2.0 released on 3 May 2026
 
 + Added methods:
-  + ConstWheelSettingsWv.getAngularDamping()
-  + ConstWheelSettingsWv.getInertia()
-  + WheelSettingsWv.setAngularDamping()
-  + WheelSettingsWv.setInertia()
-  + WheelSettingsWvRef.setAngularDamping()
-  + WheelSettingsWvRef.setInertia()
+  + `ConstWheelSettingsWv.getAngularDamping()`
+  + `ConstWheelSettingsWv.getInertia()`
+  + `WheelSettingsWv.setAngularDamping()`
+  + `WheelSettingsWv.setInertia()`
+  + `WheelSettingsWvRef.setAngularDamping()`
+  + `WheelSettingsWvRef.setInertia()`
 
 + Began including Metal compute servers in macOS natives.
 + Began building macOS natives using Xcode v26.4.1 .
