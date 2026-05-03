@@ -1,5 +1,20 @@
 # Release log for the Jolt-JNI project
 
+## Version 4.2.0 released on TBD
+
++ Added methods:
+  + ConstWheelSettingsWv.getAngularDamping()
+  + ConstWheelSettingsWv.getInertia()
+  + WheelSettingsWv.setAngularDamping()
+  + WheelSettingsWv.setInertia()
+  + WheelSettingsWvRef.setAngularDamping()
+  + WheelSettingsWvRef.setInertia()
+
++ Began including Metal compute servers in macOS natives.
++ Began building macOS natives using Xcode v26.4.1 .
++ Updated the Jolt-Physics source and assets to sg260430 (=04587a3).
++ Updated the OSHI library to v7.0.0 .
+
 ## Version 4.1.0 released on 21 April 2026
 
 + Bugfix:  injudicious uses of `int` in glue code
