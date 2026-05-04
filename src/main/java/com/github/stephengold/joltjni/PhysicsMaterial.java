@@ -42,11 +42,13 @@ public class PhysicsMaterial
 
     /**
      * Instantiate a material with the specified native object assigned.
+     * <p>
+     * For use in custom contact listeners.
      *
      * @param materialVa the virtual address of the native object to assign (not
      * zero)
      */
-    PhysicsMaterial(long materialVa) {
+    public PhysicsMaterial(long materialVa) {
         setVirtualAddressAsCoOwner(materialVa);
     }
     // *************************************************************************
