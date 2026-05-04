@@ -40,6 +40,13 @@ public interface Vec3Arg {
     Vec3 abs();
 
     /**
+     * Copy all 3 components to the specified array. The vector is unaffected.
+     *
+     * @param storeArray the destination array (not {@code null}, length&ge;3)
+     */
+    void copyTo(float[] storeArray);
+
+    /**
      * Write all 3 components to the start of the specified buffer. The vector
      * is unaffected.
      *
