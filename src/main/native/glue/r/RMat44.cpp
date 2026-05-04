@@ -542,7 +542,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_setElement
             pMatrix->SetTranslation(copy);
         }
     } else {
-        pMatrix->GetColumn4(column)[row] = value;
+        Vec4 copy = pMatrix->GetColumn4(column);
+        copy[row] = value;
+        pMatrix->SetColumn4(column, copy);
     }
 }
 

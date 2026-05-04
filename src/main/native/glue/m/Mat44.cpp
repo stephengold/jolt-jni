@@ -555,7 +555,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_setDiagonal3
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_setElement
   (JNIEnv *, jclass, jlong matrixVa, jint row, jint column, jfloat value) {
     Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    pMatrix->GetColumn4(column)[row] = value;
+    (*pMatrix)(row, column) = value;
 }
 
 /*
