@@ -1082,7 +1082,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Copy the components to an array. The vector is unaffected.
+     * Copy all 3 components to a new array. The vector is unaffected.
      *
      * @return a new array with length=3
      */
@@ -1097,7 +1097,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Copy the components to a direct buffer. The vector is unaffected.
+     * Copy all 3 components to a new direct buffer. The vector is unaffected.
      *
      * @return a new direct buffer with capacity=3
      */
@@ -1110,7 +1110,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Copy the components to a new location vector. The current vector is
+     * Copy all 3 components to a new location vector. The current vector is
      * unaffected.
      *
      * @return a new vector

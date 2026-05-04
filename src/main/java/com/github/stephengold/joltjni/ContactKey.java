@@ -134,8 +134,8 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
     }
 
     /**
-     * Test for equivalence with another key. The key is unaffected. (native
-     * operator: binary {@code ==})
+     * Test for content equivalence with another key. The key is unaffected.
+     * (native operator: binary {@code ==})
      *
      * @param other the key to compare with (not {@code null}, unaffected)
      * @return {@code true} if equivalent, otherwise {@code false}
@@ -150,8 +150,8 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
     }
 
     /**
-     * Test for equivalence with another key. The key is unaffected.(native
-     * operator: binary {@code !=})
+     * Test for content equivalence with another key. The key is
+     * unaffected.(native operator: binary {@code !=})
      *
      * @param other the key to compare with (not {@code null}, unaffected)
      * @return {@code false} if equivalent, otherwise {@code true}

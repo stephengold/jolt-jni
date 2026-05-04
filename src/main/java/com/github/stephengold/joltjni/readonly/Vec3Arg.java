@@ -277,21 +277,21 @@ public interface Vec3Arg {
     Vec3 swizzle(int xi, int yi, int zi);
 
     /**
-     * Copy the components to an array. The vector is unaffected.
+     * Copy all 3 components to a new array. The vector is unaffected.
      *
      * @return a new array with length=3
      */
     float[] toArray();
 
     /**
-     * Copy the components to a direct buffer. The vector is unaffected.
+     * Copy all 3 components to a new direct buffer. The vector is unaffected.
      *
      * @return a new direct buffer with capacity=3
      */
     FloatBuffer toBuffer();
 
     /**
-     * Copy the components to a new location vector. The current vector is
+     * Copy all 3 components to a new location vector. The current vector is
      * unaffected.
      *
      * @return a new vector
