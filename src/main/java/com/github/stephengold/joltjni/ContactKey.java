@@ -75,6 +75,19 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
      */
     ContactKey(boolean dummy) {
     }
+
+    /**
+     * Instantiate with the specified native object assigned.
+     *
+     * @param keyVa the virtual address of the native object to assign (not
+     * zero)
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
+     */
+    ContactKey(long keyVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(keyVa) : null;
+        setVirtualAddress(keyVa, freeingAction);
+    }
     // *************************************************************************
     // new methods exposed
 
