@@ -278,7 +278,7 @@ void OnAdjustBodyVelocity( ConstCharacterVirtual inCharacter, ConstBody inBody2,
 		plusEquals(ioLinearVelocity ,new Vec3(0, 0, 2));
 }
 
-void OnContactAdded( ConstCharacterVirtual inCharacter, int inBodyID2, int inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+void OnContactCommon( ConstCharacterVirtual inCharacter, int  inBodyID2, int  inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
 {
 	// Draw a box around the character when it enters the sensor
 	if (inBodyID2 == mSensorBody)
@@ -303,7 +303,51 @@ void OnContactAdded( ConstCharacterVirtual inCharacter, int inBodyID2, int inSub
 		mAllowSliding = true;
 }
 
-void OnCharacterContactAdded( ConstCharacterVirtual inCharacter, ConstCharacterVirtual inOtherCharacter, int inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+void OnContactAdded( ConstCharacterVirtual inCharacter, int  inBodyID2, int  inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+{
+	OnContactCommon(inCharacter, inBodyID2, inSubShapeID2, inContactPosition, inContactNormal, ioSettings);
+
+	if (inCharacter.getId() == mCharacter.getId())
+	{
+//	#ifdef CHARACTER_TRACE_CONTACTS
+		Trace("Contact added with body %08x, sub shape %08x", inBodyID2, inSubShapeID2);
+//	#endif
+		ContactKey c=new ContactKey('b',inBodyID2, inSubShapeID2);
+		if (mActiveContacts.find(  c) != -1)
+			FatalError("Got an add contact that should have been a persisted contact");
+		mActiveContacts.pushBack(c);
+	}
+}
+
+void OnContactPersisted( ConstCharacterVirtual inCharacter,  int inBodyID2,  int inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+{
+	OnContactCommon(inCharacter, inBodyID2, inSubShapeID2, inContactPosition, inContactNormal, ioSettings);
+
+	if (inCharacter.getId() == mCharacter.getId())
+	{
+	//#ifdef CHARACTER_TRACE_CONTACTS
+		Trace("Contact persisted with body %08x, sub shape %08x", inBodyID2, inSubShapeID2);
+	//#endif
+		if (mActiveContacts.find( new ContactKey('b',inBodyID2, inSubShapeID2)) == -1)
+			FatalError("Got a persisted contact that should have been an add contact");
+	}
+}
+
+void OnContactRemoved( ConstCharacterVirtual inCharacter,  int inBodyID2,  int inSubShapeID2)
+{
+	if (inCharacter.getId() == mCharacter.getId())
+	{
+	//#ifdef CHARACTER_TRACE_CONTACTS
+		Trace("Contact removed with body %08x, sub shape %08x", inBodyID2, inSubShapeID2);
+	//#endif
+		int it = mActiveContacts.find( new ContactKey('b',inBodyID2, inSubShapeID2));
+		if (it == -1)
+			FatalError("Got a remove contact that has not been added");
+		mActiveContacts.erase(it);
+	}
+}
+
+void OnCharacterContactCommon(ConstCharacterVirtual  inCharacter, ConstCharacterVirtual  inOtherCharacter,  int inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
 {
 	// Characters can only be pushed in their own update
 	if (sPlayerCanPushOtherCharacters)
@@ -318,7 +362,51 @@ void OnCharacterContactAdded( ConstCharacterVirtual inCharacter, ConstCharacterV
 		mAllowSliding = true;
 }
 
-void OnContactSolve( ConstCharacterVirtual inCharacter, int inBodyID2, int inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, Vec3Arg inContactVelocity, ConstPhysicsMaterial inContactMaterial, Vec3Arg inCharacterVelocity, Vec3 ioNewCharacterVelocity)
+void OnCharacterContactAdded( ConstCharacterVirtual inCharacter, ConstCharacterVirtual inOtherCharacter, int inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+{
+	OnCharacterContactCommon(inCharacter, inOtherCharacter, inSubShapeID2, inContactPosition, inContactNormal, ioSettings);
+
+	if (inCharacter.getId() == mCharacter.getId())
+	{
+	//#ifdef CHARACTER_TRACE_CONTACTS
+		Trace("Contact added with character %08x, sub shape %08x", inOtherCharacter.getId(), inSubShapeID2);
+	//#endif
+		ContactKey c=new ContactKey('c', inOtherCharacter.getId(), inSubShapeID2);
+		if (mActiveContacts.find( c) != -1)
+			FatalError("Got an add contact that should have been a persisted contact");
+		mActiveContacts.pushBack(c);
+	}
+}
+
+void OnCharacterContactPersisted(ConstCharacterVirtual inCharacter, ConstCharacterVirtual inOtherCharacter,  int inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+{
+	OnCharacterContactCommon(inCharacter, inOtherCharacter, inSubShapeID2, inContactPosition, inContactNormal, ioSettings);
+
+	if (inCharacter.getId() == mCharacter.getId())
+	{
+	//#ifdef CHARACTER_TRACE_CONTACTS
+		Trace("Contact persisted with character %08x, sub shape %08x", inOtherCharacter.getId(), inSubShapeID2);
+	//#endif
+		if (mActiveContacts.find(new ContactKey('c',inOtherCharacter.getId(), inSubShapeID2)) == -1)
+			FatalError("Got a persisted contact that should have been an add contact");
+	}
+}
+
+void OnCharacterContactRemoved(ConstCharacterVirtual inCharacter,  int inOtherCharacterID,  int inSubShapeID2)
+{
+	if (inCharacter.getId() == mCharacter.getId())
+	{
+	//#ifdef CHARACTER_TRACE_CONTACTS
+		Trace("Contact removed with character %08x, sub shape %08x", inOtherCharacterID, inSubShapeID2);
+	//#endif
+		int it = mActiveContacts.find( new ContactKey('c',inOtherCharacterID, inSubShapeID2));
+		if (it == -1)
+			FatalError("Got a remove contact that has not been added");
+		mActiveContacts.erase(it);
+	}
+}
+
+void OnContactSolve(ConstCharacterVirtual  inCharacter,  int inBodyID2,  int inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, Vec3Arg inContactVelocity, ConstPhysicsMaterial inContactMaterial, Vec3Arg inCharacterVelocity, Vec3 ioNewCharacterVelocity)
 {
 	// Ignore callbacks for other characters than the player
 	if (inCharacter.getId() != mCharacter.getId())
