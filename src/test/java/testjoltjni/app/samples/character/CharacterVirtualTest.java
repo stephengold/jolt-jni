@@ -203,6 +203,21 @@ if(implementsDebugRendering()){
 		new ShapeFilter(){ },
 		mTempAllocator);
 
+//#ifdef JPH_ENABLE_ASSERTS
+	// Validate that our contact list is in sync with that of the character
+	// Note that compound shapes could be non convex so we may detect more contacts than have been reported by the character
+	// as the character only reports contacts as it is sliding through the world. If 2 sub shapes hit at the same time then
+	// most likely only one will be reported as it stops the character and prevents the 2nd one from being seen.
+	int num_contacts = 0;
+	for (ConstContact c : mCharacter.getActiveContacts())
+		if (c.getHadCollision())
+		{
+			assert mActiveContacts.find(c) != -1;
+			num_contacts++;
+		}
+	assert(sShapeType == EType.Compound? num_contacts >= mActiveContacts.size() : num_contacts == mActiveContacts.size());
+//#endif
+
 	// Calculate effective velocity
 	RVec3 new_position = mCharacter.getPosition();
 	Vec3 velocity = slash(minus(new_position , old_position) , inParams.mDeltaTime).toVec3();
