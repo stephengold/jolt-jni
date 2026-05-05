@@ -43,15 +43,11 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
     }
 
     /**
-     * Instantiate a copy of the specified key.
+     * Instantiate a key with no native object assigned.
      *
-     * @param original the settings to copy (not {@code null}, unaffected)
+     * @param dummy unused argument to distinguish from the zero-arg constructor
      */
-    public ContactKey(ContactKey original) {
-        long originalVa = original.va();
-        long copyVa = createCopy(originalVa);
-        Runnable freeingAction = () -> free(copyVa);
-        setVirtualAddress(copyVa, freeingAction);
+    ContactKey(boolean dummy) {
     }
 
     /**
@@ -69,11 +65,15 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
     }
 
     /**
-     * Instantiate a key with no native object assigned.
+     * Instantiate a copy of the specified key.
      *
-     * @param dummy unused argument to distinguish from the zero-arg constructor
+     * @param original the settings to copy (not {@code null}, unaffected)
      */
-    ContactKey(boolean dummy) {
+    public ContactKey(ContactKey original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        Runnable freeingAction = () -> free(copyVa);
+        setVirtualAddress(copyVa, freeingAction);
     }
 
     /**
