@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_capacity
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_createCopy
-  (JNIEnv *, jclass, jlong);
+  BODYOF_CREATE_COPY(BodyIDVector)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector
