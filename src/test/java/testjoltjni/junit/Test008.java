@@ -28,7 +28,9 @@ import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.operator.Op;
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import org.junit.Assert;
 import org.junit.Test;
@@ -161,7 +163,7 @@ public class Test008 {
      */
     private static void testMat44() {
         // Create an uninitialized matrix:
-        Mat44 uninitialized = new Mat44();
+        final Mat44Arg uninitialized = new Mat44();
 
         // Test an identity matrix:
         Mat44 identity = Mat44.sIdentity();
@@ -209,6 +211,14 @@ public class Test008 {
         TestUtils.assertEquals(
                 0f, 0f, 0f, 0f,
                 0f, 0f, 0f, 0f,
+                0f, 0f, 0f, 0f,
+                0f, 0f, 0f, 0f,
+                zero, 0f);
+
+        zero.setElement(1, 2, 4f);
+        TestUtils.assertEquals(
+                0f, 0f, 0f, 0f,
+                0f, 0f, 4f, 0f,
                 0f, 0f, 0f, 0f,
                 0f, 0f, 0f, 0f,
                 zero, 0f);
@@ -357,7 +367,7 @@ public class Test008 {
      */
     private static void testRMat44() {
         // Create an uninitialized matrix:
-        RMat44 uninitialized = new RMat44();
+        final RMat44Arg uninitialized = new RMat44();
 
         // Test an identity matrix:
         RMat44 identity = RMat44.sIdentity();
@@ -383,6 +393,30 @@ public class Test008 {
         TestUtils.assertEquals(
                 0f, 0f, 1f, 1f,
                 1f, 0f, 0f, 2f,
+                0f, 1f, 0f, 3f,
+                0f, 0f, 0f, 1f,
+                rotTrans, 0f);
+
+        rotTrans.setElement(1, 2, 4.);
+        TestUtils.assertEquals(
+                0f, 0f, 1f, 1f,
+                1f, 0f, 4f, 2f,
+                0f, 1f, 0f, 3f,
+                0f, 0f, 0f, 1f,
+                rotTrans, 0f);
+
+        rotTrans.setElement(1, 3, 5.);
+        TestUtils.assertEquals(
+                0f, 0f, 1f, 1f,
+                1f, 0f, 4f, 5f,
+                0f, 1f, 0f, 3f,
+                0f, 0f, 0f, 1f,
+                rotTrans, 0f);
+
+        rotTrans.setElement(3, 3, 6.);
+        TestUtils.assertEquals(
+                0f, 0f, 1f, 1f,
+                1f, 0f, 4f, 5f,
                 0f, 1f, 0f, 3f,
                 0f, 0f, 0f, 1f,
                 rotTrans, 0f);
