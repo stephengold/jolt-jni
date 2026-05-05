@@ -51,6 +51,7 @@ static boolean sCreateInnerBody = false;
 static boolean sPlayerCanPushOtherCharacters = true;
 static boolean sOtherCharactersCanPushPlayer = true;
 CharacterVirtualRef mCharacter=new CharacterVirtualRef();
+ContactSet mActiveContacts = new ContactSet();
 Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mAllowSliding = false;
 RVec3 GetCharacterPosition(){return mCharacter.getPosition();}
@@ -249,6 +250,7 @@ public void SaveState(StateRecorder inStream)
 
 	inStream.write(mAllowSliding);
 	inStream.write(mDesiredVelocity);
+	inStream.write(mActiveContacts);
 }
 
 public void RestoreState(StateRecorder inStream)
@@ -266,6 +268,7 @@ public void RestoreState(StateRecorder inStream)
 
 	mAllowSliding=inStream.readBoolean(mAllowSliding);
 	inStream.readVec3(mDesiredVelocity);
+	inStream.read(mActiveContacts);
 }
 
 void OnAdjustBodyVelocity( ConstCharacterVirtual inCharacter, ConstBody inBody2, Vec3 ioLinearVelocity, Vec3 ioAngularVelocity)
