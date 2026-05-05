@@ -294,7 +294,7 @@ void OnContactAdded( ConstCharacterVirtual inCharacter, int inBodyID2, int inSub
 	}
 
 	// If we encounter an object that can push the player, enable sliding
-	if (inCharacter == mCharacter.getPtr()
+	if (inCharacter.getId() == mCharacter.getId()
 		&& ioSettings.getCanPushCharacter()
 		&& mPhysicsSystem.getBodyInterface().getMotionType(inBodyID2) != EMotionType.Static)
 		mAllowSliding = true;
@@ -304,21 +304,21 @@ void OnCharacterContactAdded( ConstCharacterVirtual inCharacter, ConstCharacterV
 {
 	// Characters can only be pushed in their own update
 	if (sPlayerCanPushOtherCharacters)
-		ioSettings.setCanPushCharacter ( sOtherCharactersCanPushPlayer || inOtherCharacter == mCharacter.getPtr());
+		ioSettings.setCanPushCharacter ( sOtherCharactersCanPushPlayer || inCharacter.getId() == mCharacter.getId());
 	else if (sOtherCharactersCanPushPlayer)
 		ioSettings.setCanPushCharacter ( inCharacter == mCharacter.getPtr());
 	else
 		ioSettings.setCanPushCharacter ( false);
 
 	// If the player can be pushed by the other virtual character, we allow sliding
-	if (inCharacter == mCharacter.getPtr() && ioSettings.getCanPushCharacter())
+	if (inCharacter.getId() == mCharacter.getId() && ioSettings.getCanPushCharacter())
 		mAllowSliding = true;
 }
 
 void OnContactSolve( ConstCharacterVirtual inCharacter, int inBodyID2, int inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, Vec3Arg inContactVelocity, ConstPhysicsMaterial inContactMaterial, Vec3Arg inCharacterVelocity, Vec3 ioNewCharacterVelocity)
 {
 	// Ignore callbacks for other characters than the player
-	if (inCharacter != mCharacter.getPtr())
+	if (inCharacter.getId() != mCharacter.getId())
 		return;
 
 	// Don't allow the player to slide down static not-too-steep surfaces when not actively moving and when not on a moving platform
