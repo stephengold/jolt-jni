@@ -112,6 +112,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addTorque
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    applyBodyCreationSettings
+ * Signature: (JJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_applyBodyCreationSettings
+  (JNIEnv *, jclass, jlong bodyVa, jlong bcsVa, jlong bpliVa) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const BodyCreationSettings * const pBCS
+            = reinterpret_cast<BodyCreationSettings *> (bcsVa);
+    const BroadPhaseLayerInterface * const pBPLI
+            = reinterpret_cast<BroadPhaseLayerInterface *> (bpliVa);
+    pBody->ApplyBodyCreationSettings(*pBCS, *pBPLI);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    applyBuoyancyImpulse
  * Signature: (JDDDFFFFFFFFFFFFF)Z
  */

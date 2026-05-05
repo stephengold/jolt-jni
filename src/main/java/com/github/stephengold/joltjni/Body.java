@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBody;
+import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -179,6 +181,22 @@ public class Body extends NonCopyable implements ConstBody {
         float y = torque.getY();
         float z = torque.getZ();
         addTorque(bodyVa, x, y, z);
+    }
+
+    /**
+     * Overwrite the state of the current body with the specified creation
+     * settings. Not allowed when the body is in the physics system. Cannot add
+     * MotionProperties if the body was created without one.
+     *
+     * @param bcs the settings to apply (not {@code null}, unaffected)
+     * @param bpli the layer interface to use (not {@code null}, unaffected)
+     */
+    public void applyBodyCreationSettings(ConstBodyCreationSettings bcs,
+            ConstBroadPhaseLayerInterface bpli) {
+        long bodyVa = va();
+        long bcsVa = bcs.targetVa();
+        long bpliVa = bpli.targetVa();
+        applyBodyCreationSettings(bodyVa, bcsVa, bpliVa);
     }
 
     /**
@@ -1150,6 +1168,9 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static void addTorque(
             long bodyVa, float x, float y, float z);
+
+    native private static void applyBodyCreationSettings(
+            long bodyVa, long bcsVa, long bpliVa);
 
     native private static boolean applyBuoyancyImpulse(long bodyVa,
             double surfaceX, double surfaceY, double surfaceZ, float nx,
