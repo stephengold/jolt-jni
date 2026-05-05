@@ -126,6 +126,15 @@ final public class JphMath {
     native public static float sin(float angle);
 
     /**
+     * Return the square root of the specified single-precision value but don't
+     * set {@code errno}. (see Jolt/Math/Math.h)
+     *
+     * @param value the input value
+     * @return the square root
+     */
+    native public static float sqrt(float value);
+
+    /**
      * Return the square of the specified single-precision value.
      *
      * @param value the input value

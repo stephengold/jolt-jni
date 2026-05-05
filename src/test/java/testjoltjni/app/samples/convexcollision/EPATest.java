@@ -22,10 +22,10 @@ SOFTWARE.
 package testjoltjni.app.samples.convexcollision;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.readonly.*;
+import com.github.stephengold.joltjni.std.Std;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.JphMath.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
-import static com.github.stephengold.joltjni.std.Std.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 
 
@@ -60,7 +60,7 @@ boolean CollideBoxSphere(Mat44Arg inMatrix, ConstAaBox inBox, Sphere inSphere)
 	// Run the EPA algorithm
 	EpaPenetrationDepth epa=new EpaPenetrationDepth();
 	Vec3 v1 = Vec3.sAxisX(), pa1=new Vec3(), pb1=new Vec3();
-	boolean intersect1 = epa.getPenetrationDepth(transformed_box, transformed_box, 0.0f, transformed_sphere, transformed_sphere, 0.0f, 1.0e-2f, FLT_EPSILON, v1, pa1, pb1);
+	boolean intersect1 = epa.getPenetrationDepth(transformed_box, transformed_box, 0.0f, transformed_sphere, transformed_sphere, 0.0f, 1.0e-2f, Std.FLT_EPSILON, v1, pa1, pb1);
 
 	// Draw iterative solution
 	if (intersect1)

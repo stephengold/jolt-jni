@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.shapes;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.std.Std;
 import java.nio.FloatBuffer;
 import java.util.function.BiFunction;
 import testjoltjni.app.samples.*;
@@ -29,7 +30,6 @@ import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.JphMath.*;
 import static com.github.stephengold.joltjni.MiscUtil.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
-import static com.github.stephengold.joltjni.std.Std.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics deformed
  * heightfield-shape test.
@@ -98,7 +98,7 @@ Vec3 GetPathCenter(float inTime)
 	final float cAngularSpeed = 2.0f;
 	final float cDisplacementSpeed = 10.0f;
 
-	float fall_off = exp(-cFallOff * inTime);
+	float fall_off = Std.exp(-cFallOff * inTime);
 	float angle = cAngularSpeed * inTime;
 	return new Vec3(cRadiusX * cos(angle) * fall_off + 64.0f, 0, cOffset + cDisplacementSpeed * inTime + cRadiusY * sin(angle) * fall_off);
 }

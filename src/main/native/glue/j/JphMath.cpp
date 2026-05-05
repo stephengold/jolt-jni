@@ -85,6 +85,17 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JphMath_sin
 
 /*
  * Class:     com_github_stephengold_joltjni_JphMath
+ * Method:    sqrt
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JphMath_sqrt
+  (JNIEnv *, jclass, jfloat value) {
+    const float result = Sqrt(value);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_JphMath
  * Method:    tan
  * Signature: (F)F
  */
