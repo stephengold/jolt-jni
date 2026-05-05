@@ -685,14 +685,14 @@ final public class Vec3 implements Vec3Arg {
      * Write all 3 components to the start of the specified buffer. The vector
      * is unaffected.
      *
-     * @param storeFloats the destination buffer (not {@code null},
+     * @param storeBuffer the destination buffer (not {@code null},
      * capacity&ge;3)
      */
     @Override
-    public void copyTo(FloatBuffer storeFloats) {
-        storeFloats.put(0, x);
-        storeFloats.put(1, y);
-        storeFloats.put(2, z);
+    public void copyTo(FloatBuffer storeBuffer) {
+        storeBuffer.put(0, x);
+        storeBuffer.put(1, y);
+        storeBuffer.put(2, z);
     }
 
     /**
