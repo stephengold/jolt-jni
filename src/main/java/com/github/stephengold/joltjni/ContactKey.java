@@ -174,6 +174,22 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
         saveState(keyVa, recorderVa);
     }
     // *************************************************************************
+    // Object methods
+
+    /**
+     * Return a string representation of the properties object, which is
+     * unaffected.
+     *
+     * @return the string representation (not null, not empty)
+     */
+    @Override
+    public String toString() {
+        String result = String.format(
+                "ContactKey(body=%08x character=%08x subShape=%08x",
+                getBodyB(), getCharacterIdB(), getSubShapeIdB());
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createCopy(long originalVa);
