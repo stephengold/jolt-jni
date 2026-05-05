@@ -204,10 +204,10 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 	if (inSwitchStance)
 	{
 		boolean is_standing = mCharacter.getShape() == mStandingShape.getPtr();
-		ConstShape shape = is_standing? mCrouchingShape : mStandingShape;
+		ConstShape  shape = is_standing? mCrouchingShape : mStandingShape;
 		if (mCharacter.setShape(shape, 1.5f * mPhysicsSystem.getPhysicsSettings().getPenetrationSlop(), mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING), mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING), new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator))
 		{
-			ConstShape inner_shape = is_standing? mInnerCrouchingShape : mInnerStandingShape;
+			ConstShape  inner_shape = is_standing? mInnerCrouchingShape : mInnerStandingShape;
 			mCharacter.setInnerBodyShape(inner_shape);
 		}
 	}
@@ -259,9 +259,9 @@ public void RestoreState(StateRecorder inStream)
 
 	boolean is_standing = mCharacter.getShape() == mStandingShape.getPtr(); // Initialize variable for validation mode
 	is_standing=inStream.readBoolean(is_standing);
-	ConstShape shape = is_standing? mStandingShape : mCrouchingShape;
+	ConstShape  shape = is_standing? mStandingShape : mCrouchingShape;
 	mCharacter.setShape(shape, FLT_MAX, new BroadPhaseLayerFilter(){ }, new ObjectLayerFilter(){ }, new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator);
-	ConstShape inner_shape = is_standing? mInnerStandingShape : mInnerCrouchingShape;
+	ConstShape  inner_shape = is_standing? mInnerStandingShape : mInnerCrouchingShape;
 	mCharacter.setInnerBodyShape(inner_shape);
 
 	mAllowSliding=inStream.readBoolean(mAllowSliding);
