@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -222,6 +222,23 @@ final public class MassProperties
 
         return result;
     }
+
+    /**
+     * Test whether this object is equal to the argument. Both objects are
+     * unaffected. (native operator: binary {@code ==})
+     *
+     * @param other the properties to compare with (not {@code null},
+     * unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    @Override
+    public boolean isEqual(ConstMassProperties other) {
+        long thisVa = va();
+        long otherVa = other.targetVa();
+        boolean result = isEqual(thisVa, otherVa);
+
+        return result;
+    }
     // *************************************************************************
     // Object methods
 
@@ -252,6 +269,8 @@ final public class MassProperties
     native private static long getInertia(long propertiesVa);
 
     native private static float getMass(long propertiesVa);
+
+    native private static boolean isEqual(long thisVa, long otherVa);
 
     native private static void rotate(long propertiesVa, long matrixVa);
 

@@ -584,6 +584,7 @@ final class Equivalent {
 
         Assert.assertEquals(expected.getMass(), actual.getMass(), 0f);
         mat44(expected.getInertia(), actual.getInertia(), 0f);
+        Assert.assertTrue(expected.isEqual(actual));
     }
 
     /**

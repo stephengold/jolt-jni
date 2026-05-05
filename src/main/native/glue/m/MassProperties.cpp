@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -101,6 +101,21 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MassProperties_getM
     const MassProperties * const pProperties
             = reinterpret_cast<MassProperties *> (propertiesVa);
     const float result = pProperties->mMass;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MassProperties
+ * Method:    isEqual
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_MassProperties_isEqual
+  (JNIEnv *, jclass, jlong thisVa, jlong otherVa) {
+    const MassProperties * const pThis
+            = reinterpret_cast<MassProperties *> (thisVa);
+    const MassProperties * const pOther
+            = reinterpret_cast<MassProperties *> (otherVa);
+    const bool result = (*pThis) == (*pOther);
     return result;
 }
 
