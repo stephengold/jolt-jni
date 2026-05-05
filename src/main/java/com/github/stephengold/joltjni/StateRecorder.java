@@ -82,6 +82,17 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Read a contact set.
+     *
+     * @param storeResult storage for the result (not {@code null}, modified)
+     */
+    public void read(ContactSet storeResult) {
+        long recorderVa = va();
+        long setVa = storeResult.va();
+        readContactSet(recorderVa, setVa);
+    }
+
+    /**
      * Read a single-precision floating-point value.
      *
      * @param f the value for validation
@@ -190,6 +201,17 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Write the specified contact set.
+     *
+     * @param set the set to write (not {@code null}, unaffected)
+     */
+    public void write(ContactSet set) {
+        long recorderVa = va();
+        long setVa = set.va();
+        writeContactSet(recorderVa, setVa);
+    }
+
+    /**
      * Write the specified single-precision floating-point value.
      *
      * @param f the value to write
@@ -280,6 +302,8 @@ public class StateRecorder extends NonCopyable {
 
     native private static boolean readBoolean(long recorderVa, boolean b);
 
+    native private static void readContactSet(long recorderVa, long setVa);
+
     native private static float readFloat(long recorderVa, float f);
 
     native private static int readInt(long recorderVa, int i);
@@ -300,6 +324,8 @@ public class StateRecorder extends NonCopyable {
             long recorderVa, long vectorVa);
 
     native private static void writeBoolean(long recorderVa, boolean b);
+
+    native private static void writeContactSet(long recorderVa, long setVa);
 
     native private static void writeFloat(long recorderVa, float f);
 

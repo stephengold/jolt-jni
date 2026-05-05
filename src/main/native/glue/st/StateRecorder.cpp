@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Body/BodyManager.h"
+#include "Jolt/Physics/Character/CharacterVirtual.h"
 #include "Jolt/Physics/StateRecorder.h"
 
 #include "auto/com_github_stephengold_joltjni_StateRecorder.h"
@@ -78,6 +79,20 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_StateRecorder_rea
     bool result = b;
     pRecorder->Read(result);
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    readContactSet
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readContactSet
+  (JNIEnv *, jclass, jlong recorderVa, jlong setVa) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    Array<CharacterVirtual::ContactKey> * const pSet
+            = reinterpret_cast<Array<CharacterVirtual::ContactKey> *> (setVa);
+    pRecorder->Read(*pSet);
 }
 
 /*
@@ -214,6 +229,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeBo
             = reinterpret_cast<StateRecorder *> (recorderVa);
     const bool bb = b;
     pRecorder->Write(bb);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    writeContactSet
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeContactSet
+  (JNIEnv *, jclass, jlong recorderVa, jlong setVa) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    const Array<CharacterVirtual::ContactKey> * const pSet
+            = reinterpret_cast<Array<CharacterVirtual::ContactKey> *> (setVa);
+    pRecorder->Write(*pSet);
 }
 
 /*
