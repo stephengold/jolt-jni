@@ -314,14 +314,13 @@ public class CustomCharacterContactListener
      * system coordinates, length&ge;3)
      */
     @Override
-    public void onContactSolve(long characterVa, int bodyId2,
-            int subShapeId2, double contactLocationX,
-            double contactLocationY, double contactLocationZ,
-            float contactNormalX, float contactNormalY, float contactNormalZ,
-            float contactVelocityX, float contactVelocityY,
-            float contactVelocityZ, long materialVa, float characterVelocityX,
-            float characterVelocityY, float characterVelocityZ,
-            float[] newCharacterVelocity) {
+    public void onContactSolve(long characterVa, int bodyId2, int subShapeId2,
+            double contactLocationX, double contactLocationY,
+            double contactLocationZ, float contactNormalX, float contactNormalY,
+            float contactNormalZ, float contactVelocityX,
+            float contactVelocityY, float contactVelocityZ,
+            long materialVa, float characterVelocityX, float characterVelocityY,
+            float characterVelocityZ, float[] newCharacterVelocity) {
     }
 
     /**

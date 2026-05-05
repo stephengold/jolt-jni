@@ -239,6 +239,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     /**
      * Alter the specified element in double precision.
+     * <p>
+     * Attempting to alter the element in row 3, column 3 has no effect.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
      * @param column the zero-origin index of the column (&ge;0, &lt;4)
