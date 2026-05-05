@@ -262,6 +262,7 @@ final class Equivalent {
 
         Assert.assertEquals(expected.getGroupId(), actual.getGroupId());
         Assert.assertEquals(expected.getSubGroupId(), actual.getSubGroupId());
+        Assert.assertTrue(expected.isEqual(actual));
     }
 
     /**

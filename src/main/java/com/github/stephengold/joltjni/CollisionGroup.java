@@ -170,6 +170,23 @@ public class CollisionGroup
 
         return result;
     }
+
+    /**
+     * Test whether this object is equal to the argument. Both objects are
+     * unaffected. (native operator: binary {@code ==})
+     *
+     * @param other the properties to compare with (not {@code null},
+     * unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    @Override
+    public boolean isEqual(ConstCollisionGroup other) {
+        long thisVa = va();
+        long otherVa = other.targetVa();
+        boolean result = isEqual(thisVa, otherVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -185,6 +202,8 @@ public class CollisionGroup
     native private static int getGroupId(long groupVa);
 
     native private static int getSubGroupId(long groupVa);
+
+    native private static boolean isEqual(long groupVa, long otherVa);
 
     native private static void setGroupFilter(long groupVa, long filterVa);
 

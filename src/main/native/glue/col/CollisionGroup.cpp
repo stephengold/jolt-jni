@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -99,6 +99,21 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_getSub
     const CollisionGroup * const pGroup
             = reinterpret_cast<CollisionGroup *> (groupVa);
     const CollisionGroup::SubGroupID result = pGroup->GetSubGroupID();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CollisionGroup
+ * Method:    isEqual
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_isEqual
+  (JNIEnv *, jclass, jlong thisVa, jlong otherVa) {
+    const CollisionGroup * const pThis
+            = reinterpret_cast<CollisionGroup *> (thisVa);
+    const CollisionGroup * const pOther
+            = reinterpret_cast<CollisionGroup *> (otherVa);
+    const bool result = (*pThis) == (*pOther);
     return result;
 }
 
