@@ -56,6 +56,86 @@ Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mAllowSliding = false;
 RVec3 GetCharacterPosition(){return mCharacter.getPosition();}
 
+CharacterContactListener contactListener=new CustomCharacterContactListener() {
+    public void onAdjustBodyVelocity(long characterVa, long body2Va, float[] velocities) {
+        ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
+        ConstBody body2 = new Body(body2Va);
+        Vec3 ioLinearVelocities = new Vec3(velocities);
+        Vec3 ioAngularVelocities = new Vec3(velocities[3], velocities[4], velocities[5]);
+        CharacterVirtualTest.this.OnAdjustBodyVelocity(
+                inCharacter, body2, ioLinearVelocities, ioAngularVelocities);
+        ioLinearVelocities.copyTo(velocities);
+        velocities[3] = ioAngularVelocities.getX();
+        velocities[4] = ioAngularVelocities.getY();
+        velocities[5] = ioAngularVelocities.getZ();
+    }
+    public void onCharacterContactAdded(long characterVa, long otherCharacterVa, int subShapeId2, double contactLocationX,
+            double contactLocationY, double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ,
+            long settingsVa) {
+        ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
+        ConstCharacterVirtual inOtherCharacter = new CharacterVirtual(otherCharacterVa, mPhysicsSystem);
+        RVec3Arg inContactPosition = new RVec3(contactLocationX, contactLocationY, contactLocationZ);
+        Vec3Arg inContactNormal = new Vec3(contactNormalX, contactNormalY, contactNormalZ);
+        CharacterContactSettings ioSettings = new CharacterContactSettings(settingsVa);
+        CharacterVirtualTest.this.OnCharacterContactAdded(
+                inCharacter, inOtherCharacter, subShapeId2, inContactPosition, inContactNormal, ioSettings);
+    }
+    public void onCharacterContactPersisted(long characterVa, long otherCharacterVa, int subShapeId2, double contactLocationX,
+            double contactLocationY, double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ,
+            long settingsVa) {
+        ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
+        ConstCharacterVirtual inOtherCharacter = new CharacterVirtual(otherCharacterVa, mPhysicsSystem);
+        RVec3Arg inContactPosition = new RVec3(contactLocationX, contactLocationY, contactLocationZ);
+        Vec3Arg inContactNormal = new Vec3(contactNormalX, contactNormalY, contactNormalZ);
+        CharacterContactSettings ioSettings = new CharacterContactSettings(settingsVa);
+        CharacterVirtualTest.this.OnCharacterContactPersisted(
+                inCharacter, inOtherCharacter, subShapeId2, inContactPosition, inContactNormal, ioSettings);
+    }
+    public void onCharacterContactRemoved(long characterVa, int otherCharacterId, int subShapeId2) {
+        ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
+        CharacterVirtualTest.this.OnCharacterContactRemoved(inCharacter, otherCharacterId, subShapeId2);
+    }
+    public void onContactAdded(long characterVa, int bodyId2, int subShapeId2, double contactLocationX, double contactLocationY,
+	    double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
+        ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
+	RVec3Arg inContactPosition = new RVec3(contactLocationX, contactLocationY, contactLocationZ);
+	Vec3Arg inContactNormal = new Vec3(contactNormalX, contactNormalY, contactNormalZ);
+        CharacterContactSettings ioSettings = new CharacterContactSettings(settingsVa);
+	CharacterVirtualTest.this.OnContactAdded(
+                inCharacter, bodyId2, subShapeId2, inContactPosition, inContactNormal, ioSettings);
+    }
+    public void onContactPersisted(long characterVa, int bodyId2, int subShapeId2, double contactLocationX,
+            double contactLocationY, double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ,
+            long settingsVa) {
+        ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
+	RVec3Arg inContactPosition = new RVec3(contactLocationX, contactLocationY, contactLocationZ);
+	Vec3Arg inContactNormal = new Vec3(contactNormalX, contactNormalY, contactNormalZ);
+        CharacterContactSettings ioSettings = new CharacterContactSettings(settingsVa);
+        CharacterVirtualTest.this.OnContactPersisted(
+                inCharacter, bodyId2, subShapeId2, inContactPosition, inContactNormal, ioSettings);
+    }
+    public void onContactRemoved(long characterVa, int bodyId2, int subShapeId2) {
+        ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
+        CharacterVirtualTest.this.OnContactRemoved(inCharacter, bodyId2, subShapeId2);
+    }
+    public void onContactSolve(long characterVa, int bodyId2, int subShapeId2, double contactLocationX, double contactLocationY,
+	    double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, float contactVelocityX,
+	    float contactVelocityY, float contactVelocityZ, long materialVa, float characterVelocityX, float characterVelocityY,
+	    float characterVelocityZ, float[] newCharacterVelocity) {
+        ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
+	RVec3Arg inContactPosition = new RVec3(contactLocationX, contactLocationY, contactLocationZ);
+	Vec3Arg inContactNormal = new Vec3(contactNormalX, contactNormalY, contactNormalZ);
+	Vec3Arg inContactVelocity = new Vec3(contactVelocityX, contactVelocityY, contactVelocityZ);
+        ConstPhysicsMaterial inContactMaterial = new PhysicsMaterial(materialVa);
+	Vec3Arg inCharacterVelocity = new Vec3(characterVelocityX, characterVelocityY, characterVelocityZ);
+        Vec3 newVel = new Vec3();
+        CharacterVirtualTest.this.OnContactSolve(
+                inCharacter, bodyId2, subShapeId2, inContactPosition, inContactNormal,
+                 inContactVelocity, inContactMaterial, inCharacterVelocity, newVel);
+        newVel.copyTo(newCharacterVelocity);
+	}
+};
+
 public void Initialize()
 {
 	super.Initialize();
@@ -79,13 +159,7 @@ public void Initialize()
 
 	// Install contact listener for all characters
 	for (CharacterVirtual character : mCharacterVsCharacterCollision.getCharacters())
-		character.setListener(new CustomCharacterContactListener() {
-		    public void onContactAdded(long characterVa, int bodyId2, int subShapeId2, double contactLocationX, double contactLocationY,
-			   double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
-			RVec3Arg inContactPosition=new RVec3(contactLocationX,contactLocationY,contactLocationZ);
-			Vec3Arg inContactNormal=new Vec3(contactNormalX,contactNormalY,contactNormalZ);
-			CharacterVirtualTest.this.OnContactAdded(new CharacterVirtual(characterVa, mPhysicsSystem), bodyId2, subShapeId2, inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
-		    }});
+		character.setListener(contactListener);
 
 	// Draw labels on ramp blocks
 	for (int i = 0; i < mRampBlocks.size(); ++i)
