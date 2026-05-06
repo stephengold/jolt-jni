@@ -23,7 +23,6 @@ package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.Jolt;
-import com.github.stephengold.joltjni.MotorSettings;
 import com.github.stephengold.joltjni.ObjectStreamOut;
 import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.RMat44;
@@ -49,6 +48,7 @@ import com.github.stephengold.joltjni.readonly.ConstHairSettings;
 import com.github.stephengold.joltjni.readonly.ConstIndexedTriangleNoMaterial;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
+import com.github.stephengold.joltjni.readonly.ConstMotorSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstRStrand;
 import com.github.stephengold.joltjni.readonly.ConstSStrand;
@@ -612,7 +612,8 @@ final class Equivalent {
      * unaffected)
      * @param actual the actual motor settings (not {@code null}, unaffected)
      */
-    static void motorSettings(MotorSettings expected, MotorSettings actual) {
+    static void motorSettings(
+            ConstMotorSettings expected, ConstMotorSettings actual) {
         joltPhysicsObject(expected, actual);
 
         Assert.assertEquals(
