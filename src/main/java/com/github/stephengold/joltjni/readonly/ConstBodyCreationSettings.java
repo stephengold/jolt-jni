@@ -289,6 +289,15 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     boolean hasMassProperties();
 
     /**
+     * Test whether this object is equal to the argument. Both objects are
+     * unaffected.
+     *
+     * @param other the settings to compare with (not {@code null}, unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    boolean isEqual(ConstBodyCreationSettings other);
+
+    /**
      * Write the state of this object to the specified stream, excluding the
      * shape, materials, and group filter. The settings are unaffected.
      *

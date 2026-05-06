@@ -1254,6 +1254,21 @@ public class BodyCreationSettings
     }
 
     /**
+     * Test whether this object is equal to the argument. Both objects are
+     * unaffected. (native operator: binary {@code ==})
+     *
+     * @param other the settings to compare with (not {@code null}, unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    @Override
+    public boolean isEqual(ConstBodyCreationSettings other) {
+        long thisVa = va();
+        long otherVa = other.targetVa();
+        boolean result = isEqual(thisVa, otherVa);
+        return result;
+    }
+
+    /**
      * Write the state of this object to the specified stream, excluding the
      * shape, materials, and group filter. The settings are unaffected.
      *
@@ -1392,6 +1407,8 @@ public class BodyCreationSettings
     native private static long getUserData(long bodySettingsVa);
 
     native private static boolean hasMassProperties(long bodySettingsVa);
+
+    native private static boolean isEqual(long thisVa, long otherVa);
 
     native private static void restoreBinaryState(
             long bodySettingsVa, long streamVa);

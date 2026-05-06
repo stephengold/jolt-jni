@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -551,6 +551,21 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetti
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     const bool result = pSettings->HasMassProperties();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    isEqual
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_isEqual
+  (JNIEnv *, jclass, jlong thisVa, jlong otherVa) {
+    const BodyCreationSettings * const pThis
+            = reinterpret_cast<BodyCreationSettings *> (thisVa);
+    const BodyCreationSettings * const pOther
+            = reinterpret_cast<BodyCreationSettings *> (otherVa);
+    const bool result = (*pThis) == (*pOther);
     return result;
 }
 
