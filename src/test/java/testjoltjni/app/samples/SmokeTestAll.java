@@ -25,7 +25,6 @@ import com.beust.jcommander.JCommander;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import com.github.stephengold.joltjni.std.OfStream;
-import java.nio.ByteBuffer;
 import testjoltjni.TestUtils;
 import testjoltjni.app.samples.broadphase.*;
 import testjoltjni.app.samples.character.*;
@@ -156,13 +155,15 @@ final public class SmokeTestAll {
 
             case "Metal":
                 // Assign a loader for Metal compute shaders:
-                Loader mtlLoader = makeLoader("/mtl/com/github/stephengold");
+                Loader mtlLoader = CustomLoader.newLoader(
+                        "/mtl/com/github/stephengold");
                 computeSystem.setShaderLoader(mtlLoader);
                 break;
 
             case "Vulkan":
                 // Assign a loader for Vulkan compute shaders:
-                Loader vkLoader = makeLoader("/vk/com/github/stephengold");
+                Loader vkLoader = CustomLoader.newLoader(
+                        "/vk/com/github/stephengold");
                 computeSystem.setShaderLoader(vkLoader);
                 break;
 
@@ -175,25 +176,6 @@ final public class SmokeTestAll {
         assert !queueResult.hasError();
         ComputeQueueRef queueRef = queueResult.get();
         queue = queueRef.getPtr();
-    }
-
-    /**
-     * Create a custom loader that loads from the specified resource directory.
-     *
-     * @param resourcePath the path to the resource directory (not {@code null})
-     * @return a new loader
-     */
-    private static Loader makeLoader(String resourcePath) {
-        Loader result = new CustomLoader() {
-            @Override
-            public ByteBuffer loadShader(String shaderName) {
-                String path = resourcePath + "/" + shaderName;
-                ByteBuffer result = Jolt.loadResourceAsBytes(path);
-                return result;
-            }
-        };
-
-        return result;
     }
 
     /**

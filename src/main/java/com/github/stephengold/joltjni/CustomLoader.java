@@ -52,6 +52,25 @@ public class CustomLoader extends Loader {
     public ByteBuffer loadShader(String shaderName) {
         return null;
     }
+
+    /**
+     * Create a custom loader that loads from the specified resource directory.
+     *
+     * @param resourcePath the path to the resource directory (not {@code null})
+     * @return a new loader
+     */
+    public static CustomLoader newLoader(String resourcePath) {
+        CustomLoader result = new CustomLoader() {
+            @Override
+            public ByteBuffer loadShader(String shaderName) {
+                String path = resourcePath + "/" + shaderName;
+                ByteBuffer result = Jolt.loadResourceAsBytes(path);
+                return result;
+            }
+        };
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
