@@ -147,6 +147,21 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_applyBuoyanc
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    applySoftBodyCreationSettings
+ * Signature: (JJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_applySoftBodyCreationSettings
+  (JNIEnv *, jclass, jlong bodyVa, jlong sbcsVa, jlong bpliVa) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const SoftBodyCreationSettings * const pSBCS
+            = reinterpret_cast<SoftBodyCreationSettings *> (sbcsVa);
+    const BroadPhaseLayerInterface * const pBPLI
+            = reinterpret_cast<BroadPhaseLayerInterface *> (bpliVa);
+    pBody->ApplySoftBodyCreationSettings(*pSBCS, *pBPLI);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    canBeKinematicOrDynamic
  * Signature: (J)Z
  */

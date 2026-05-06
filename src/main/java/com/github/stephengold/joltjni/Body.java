@@ -29,6 +29,7 @@ import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -240,6 +241,22 @@ public class Body extends NonCopyable implements ConstBody {
                 vx, vy, vz, gravityX, gravityY, gravityZ, deltaTime);
 
         return result;
+    }
+
+    /**
+     * Overwrite the state of the current soft body with the specified creation
+     * settings. Not allowed when the body is in the physics system.
+     *
+     * @param sbcs the settings to apply (not {@code null}, unaffected)
+     * @param bpli the layer interface to use (not {@code null}, unaffected)
+     */
+    public void applySoftBodyCreationSettings(
+            ConstSoftBodyCreationSettings sbcs,
+            ConstBroadPhaseLayerInterface bpli) {
+        long bodyVa = va();
+        long sbcsVa = sbcs.targetVa();
+        long bpliVa = bpli.targetVa();
+        applySoftBodyCreationSettings(bodyVa, sbcsVa, bpliVa);
     }
 
     /**
@@ -1177,6 +1194,9 @@ public class Body extends NonCopyable implements ConstBody {
             float ny, float nz, float buoyancy, float linearDrag,
             float angularDrag, float vx, float vy, float vz, float gravityX,
             float gravityY, float gravityZ, float deltaTime);
+
+    native private static void applySoftBodyCreationSettings(
+            long bodyVa, long sbcsVa, long bpliVa);
 
     native private static boolean canBeKinematicOrDynamic(long bodyVa);
 
