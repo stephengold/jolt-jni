@@ -369,6 +369,7 @@ model {
 }
 
 dependencies {
+    testImplementation(libs.jcommander)  // to parse command-line arguments
     testImplementation(libs.jsnaploader) // to identify the OS and CPU
     testImplementation(libs.junit4)      // framework for automated testing
     testRuntimeOnly(libs.log4j.impl)
@@ -488,6 +489,7 @@ tasks.register('runRagdollSinglePile', JavaExec) {
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runSmokeTestAll', JavaExec) {
+    args '-n', '99'
     dependsOn('unpackHairStraight', 'unpackJoltAssets')
     description = 'Performs a "smoke test" of each of the Samples tests.'
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
