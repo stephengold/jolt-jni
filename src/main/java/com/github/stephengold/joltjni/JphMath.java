@@ -83,7 +83,8 @@ final public class JphMath {
     native public static float cos(float angle);
 
     /**
-     * Convert the specified angle from degrees to radians.
+     * Convert the specified angle from degrees to radians. (see
+     * Jolt/Math/Math.h)
      *
      * @param degrees the angle to convert (in degrees)
      * @return the converted angle (in radians)
@@ -94,7 +95,8 @@ final public class JphMath {
     }
 
     /**
-     * Convert the specified angle from radians to degrees.
+     * Convert the specified angle from radians to degrees. (see
+     * Jolt/Math/Math.h)
      *
      * @param radians the angle to convert (in radians)
      * @return the converted angle (in degrees)
@@ -146,7 +148,7 @@ final public class JphMath {
     }
 
     /**
-     * Return the square of the specified integer value.
+     * Return the square of the specified integer value. (see Jolt/Math/Math.h)
      *
      * @param value the input value
      * @return the square

@@ -846,7 +846,7 @@ public void RestoreInputState(StateRecorder inStream)
 	mSwitchStance=inStream.readBoolean(mSwitchStance);
 }
 
-void DrawCharacterState(ConstCharacterBase inCharacter, RMat44Arg inCharacterTransform, Vec3Arg inCharacterVelocity)
+void DrawCharacterState(ConstCharacterBase  inCharacter, RMat44Arg inCharacterTransform, Vec3Arg inCharacterVelocity)
 {
 	// Draw current location
 	// Drawing prior to update since the physics system state is also that prior to the simulation step (so that all detected collisions etc. make sense)
@@ -862,7 +862,7 @@ void DrawCharacterState(ConstCharacterBase inCharacter, RMat44Arg inCharacterTra
 
 		// Draw ground position
 		mDebugRenderer.drawMarker(ground_position, Color.sRed, 0.1f);
-		mDebugRenderer.drawArrow(ground_position, plus(ground_position, star(2.0f , ground_normal)), Color.sGreen, 0.1f);
+		mDebugRenderer.drawArrow(ground_position, plus(ground_position , star(2.0f , ground_normal)), Color.sGreen, 0.1f);
 
 		// Draw ground velocity
 		if (!ground_velocity.isNearZero())

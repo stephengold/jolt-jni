@@ -26,8 +26,7 @@ import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * The mass and inertial tensor of a {@code Body}. Used only during
- * construction.
+ * The mass and inertia tensor of a {@code Body}. Used only during construction.
  *
  * @author Stephen Gold sgold@sonic.net
  */

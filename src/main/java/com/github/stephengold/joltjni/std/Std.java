@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -152,8 +152,9 @@ final public class Std {
     }
 
     /**
-     * Return the square root of the specified single-precision value. There's
-     * evidence this is slower than {@link java.lang.Math#sqrt(double)}.
+     * Return the square root of the specified single-precision value and set
+     * {@code errno}. There's evidence this is slower than
+     * {@link java.lang.Math#sqrt(double)}.
      *
      * @param value the input value
      * @return the square root
