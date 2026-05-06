@@ -45,7 +45,7 @@ float mTime;
 final int StaticAttractor=0,StaticSensor=1,KinematicSensor=2,SensorDetectingStatic=3,NumSensors=4;
 int mKinematicBodyID;
 int[] mSensorID = new int[NumSensors];
-List<BodyAndCount>mBodiesInSensor=List.of(new BodyAndCount(),new BodyAndCount(),new BodyAndCount(),new BodyAndCount());
+List<List<BodyAndCount>>mBodiesInSensor=List.of(new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
 Mutex mMutex=new Mutex();
 RagdollRef mRagdoll=new RagdollRef();
 
@@ -155,8 +155,8 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	// Draw if body is in sensor
 	ConstColor sensor_color[] = { Color.sRed, Color.sGreen, Color.sBlue, Color.sPurple };
 	for (int sensor = 0; sensor < NumSensors; ++sensor)
+		for ( BodyAndCount body_and_count : mBodiesInSensor.get(sensor))
 		{
-			BodyAndCount body_and_count = mBodiesInSensor.get(sensor);
 			AaBox bounds = mBodyInterface.getTransformedShape(body_and_count.mBodyID).getWorldSpaceBounds();
 			bounds.expandBy(Vec3.sReplicate(0.01f * sensor));
 			mDebugRenderer.drawWireBox(bounds, sensor_color[sensor]);
@@ -169,15 +169,16 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	float centrifugal_force = 10.0f;
 	Vec3 gravity = mPhysicsSystem.getGravity();
 
-	for (int oneTime=0; oneTime == 0;++oneTime)
+	for ( BodyAndCount body_and_count : mBodiesInSensor.get(StaticAttractor))
 	{
-		BodyAndCount body_and_count = mBodiesInSensor.get(StaticAttractor);
 		BodyLockWrite body_lock=new BodyLockWrite(mPhysicsSystem.getBodyLockInterface(), body_and_count.mBodyID);
 		if (body_lock.succeeded())
 		{
 			Body body = body_lock.getBody();
-			if (body.isKinematic())
+			if (body.isKinematic()) {
+				body_lock.releaseLock();
 				continue;
+                        }
 
 			// Calculate centrifugal acceleration
 			Vec3 acceleration =new Vec3(minus(center , body.getPosition()));
@@ -220,8 +221,8 @@ public void OnContactAdded(ConstBody  inBody1, ConstBody  inBody2, ConstContactM
 
 		// Add to list and make sure that the list remains sorted for determinism (contacts can be added from multiple threads)
 		BodyAndCount body_and_count=new BodyAndCount( body_id, 1 );
-		List<BodyAndCount> bodies_in_sensor = new ArrayList<BodyAndCount>();bodies_in_sensor.add(mBodiesInSensor.get(sensor));
-		BodyAndCount b = null;for(BodyAndCount bb:mBodiesInSensor){ if(bb.mBodyID==body_id) b=bb;}
+		List<BodyAndCount> bodies_in_sensor = mBodiesInSensor.get(sensor);
+		BodyAndCount b = null;for(BodyAndCount bb:bodies_in_sensor) if(bb.mBodyID==body_id)b=bb;
 		if (b != null && b.mBodyID == body_id)
 		{
 			// This is the right body, increment reference
@@ -253,8 +254,8 @@ public void OnContactRemoved( ConstSubShapeIdPair inSubShapePair)
 
 		// Remove from list
 		BodyAndCount body_and_count=new BodyAndCount( body_id, 1 );
-		List<BodyAndCount> bodies_in_sensor = List.of(mBodiesInSensor.get(sensor));
-                BodyAndCount b = null;for(BodyAndCount bb:mBodiesInSensor){ if(bb.mBodyID==body_id) b=bb;}
+		List<BodyAndCount> bodies_in_sensor = mBodiesInSensor.get(sensor);
+                BodyAndCount b = null;for(BodyAndCount bb:bodies_in_sensor) if(bb.mBodyID==body_id)b=bb;
 		if (b != null && b.mBodyID == body_id)
 		{
 			// This is the right body, increment reference
