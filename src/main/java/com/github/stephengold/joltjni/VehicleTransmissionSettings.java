@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.ETransmissionMode;
+import com.github.stephengold.joltjni.readonly.ConstVehicleTransmissionSettings;
 
 /**
  * Settings used to configure the transmission (gearbox) of a
@@ -29,7 +30,9 @@ import com.github.stephengold.joltjni.enumerate.ETransmissionMode;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleTransmissionSettings extends JoltPhysicsObject {
+public class VehicleTransmissionSettings
+        extends JoltPhysicsObject
+        implements ConstVehicleTransmissionSettings {
     // *************************************************************************
     // constructors
 
@@ -58,133 +61,14 @@ public class VehicleTransmissionSettings extends JoltPhysicsObject {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public VehicleTransmissionSettings(VehicleTransmissionSettings original) {
-        long originalVa = original.va();
+    public VehicleTransmissionSettings(
+            ConstVehicleTransmissionSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Return how long it takes to release the clutch in {@code Auto} mode. The
-     * settings are unaffected. (native attribute: mClutchReleaseTime)
-     *
-     * @return the latency (in seconds)
-     */
-    public float getClutchReleaseTime() {
-        long settingsVa = va();
-        float result = getClutchReleaseTime(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the total torque applied by the clutch when fully engaged. The
-     * settings are unaffected. (native attribute: mClutchStrength)
-     *
-     * @return the strength
-     */
-    public float getClutchStrength() {
-        long settingsVa = va();
-        float result = getClutchStrength(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the number of engine rotations per gearbox rotation for each
-     * forward gear. The first element is for 1st gear. The settings are
-     * unaffected. (native attribute: mGearRatios)
-     *
-     * @return a new array
-     */
-    public float[] getGearRatios() {
-        long settingsVa = va();
-        float[] result = getGearRatios(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the type of transmission. The settings are unaffected. (native
-     * attribute: mMode)
-     *
-     * @return an enum value (not null)
-     */
-    public ETransmissionMode getMode() {
-        long settingsVa = va();
-        int ordinal = getMode(settingsVa);
-        ETransmissionMode result = ETransmissionMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the number of engine rotations per gearbox rotation for each
-     * reverse gear. The settings are unaffected. (native attribute:
-     * mReverseGearRatios)
-     *
-     * @return a new array
-     */
-    public float[] getReverseGearRatios() {
-        long settingsVa = va();
-        float[] result = getReverseGearRatios(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum engine RPMs for downshifting in {@code Auto} mode. The
-     * settings are unaffected. (native attribute: mShiftDownRPM)
-     *
-     * @return the threshold rate (in revolutions per minute)
-     */
-    public float getShiftDownRpm() {
-        long settingsVa = va();
-        float result = getShiftDownRpm(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the minimum engine RPMs for upshifting in {@code Auto} mode. The
-     * settings are unaffected. (native attribute: mShiftUpRPM)
-     *
-     * @return the threshold rate (in revolutions per minute)
-     */
-    public float getShiftUpRpm() {
-        long settingsVa = va();
-        float result = getShiftUpRpm(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the minimum time between shifts in {@code Auto} mode. The settings
-     * are unaffected. (native attribute: mSwitchLatency)
-     *
-     * @return the latency (in seconds)
-     */
-    public float getSwitchLatency() {
-        long settingsVa = va();
-        float result = getSwitchLatency(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return how long it takes to shift gears in {@code Auto} mode. The
-     * settings are unaffected. (native attribute: mSwitchTime)
-     *
-     * @return the latency (in seconds)
-     */
-    public float getSwitchTime() {
-        long settingsVa = va();
-        float result = getSwitchTime(settingsVa);
-
-        return result;
-    }
 
     /**
      * Alter how long it takes to release the clutch in {@code Auto} mode.
@@ -284,6 +168,137 @@ public class VehicleTransmissionSettings extends JoltPhysicsObject {
     public void setSwitchTime(float latency) {
         long settingsVa = va();
         setSwitchTime(settingsVa, latency);
+    }
+    // *************************************************************************
+    // ConstVechicleTransmissionSettings methods
+
+    /**
+     * Return how long it takes to release the clutch in {@code Auto} mode. The
+     * settings are unaffected. (native attribute: mClutchReleaseTime)
+     *
+     * @return the latency (in seconds)
+     */
+    @Override
+    public float getClutchReleaseTime() {
+        long settingsVa = va();
+        float result = getClutchReleaseTime(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the total torque applied by the clutch when fully engaged. The
+     * settings are unaffected. (native attribute: mClutchStrength)
+     *
+     * @return the strength
+     */
+    @Override
+    public float getClutchStrength() {
+        long settingsVa = va();
+        float result = getClutchStrength(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the number of engine rotations per gearbox rotation for each
+     * forward gear. The first element is for 1st gear. The settings are
+     * unaffected. (native attribute: mGearRatios)
+     *
+     * @return a new array
+     */
+    @Override
+    public float[] getGearRatios() {
+        long settingsVa = va();
+        float[] result = getGearRatios(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the type of transmission. The settings are unaffected. (native
+     * attribute: mMode)
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public ETransmissionMode getMode() {
+        long settingsVa = va();
+        int ordinal = getMode(settingsVa);
+        ETransmissionMode result = ETransmissionMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the number of engine rotations per gearbox rotation for each
+     * reverse gear. The settings are unaffected. (native attribute:
+     * mReverseGearRatios)
+     *
+     * @return a new array
+     */
+    @Override
+    public float[] getReverseGearRatios() {
+        long settingsVa = va();
+        float[] result = getReverseGearRatios(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum engine RPMs for downshifting in {@code Auto} mode. The
+     * settings are unaffected. (native attribute: mShiftDownRPM)
+     *
+     * @return the threshold rate (in revolutions per minute)
+     */
+    @Override
+    public float getShiftDownRpm() {
+        long settingsVa = va();
+        float result = getShiftDownRpm(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the minimum engine RPMs for upshifting in {@code Auto} mode. The
+     * settings are unaffected. (native attribute: mShiftUpRPM)
+     *
+     * @return the threshold rate (in revolutions per minute)
+     */
+    @Override
+    public float getShiftUpRpm() {
+        long settingsVa = va();
+        float result = getShiftUpRpm(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the minimum time between shifts in {@code Auto} mode. The settings
+     * are unaffected. (native attribute: mSwitchLatency)
+     *
+     * @return the latency (in seconds)
+     */
+    @Override
+    public float getSwitchLatency() {
+        long settingsVa = va();
+        float result = getSwitchLatency(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return how long it takes to shift gears in {@code Auto} mode. The
+     * settings are unaffected. (native attribute: mSwitchTime)
+     *
+     * @return the latency (in seconds)
+     */
+    @Override
+    public float getSwitchTime() {
+        long settingsVa = va();
+        float result = getSwitchTime(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods
