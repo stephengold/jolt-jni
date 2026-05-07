@@ -293,7 +293,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     @Override
     public RVec3 getCenterOfMassPosition(boolean lockBodies) {
         long characterVa = targetVa();
-        double[] storeDoubles = new double[3];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         com.github.stephengold.joltjni.Character.getCenterOfMassPosition(
                 characterVa, storeDoubles, lockBodies);
         RVec3 result = new RVec3(storeDoubles);
@@ -520,7 +520,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     @Override
     public Vec3 getLinearVelocity(boolean lockBodies) {
         long characterVa = targetVa();
-        float[] storeFloats = new float[3];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         com.github.stephengold.joltjni.Character.getLinearVelocity(
                 characterVa, storeFloats, lockBodies);
         Vec3 result = new Vec3(storeFloats);
@@ -562,7 +562,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     @Override
     public RVec3 getPosition(boolean lockBodies) {
         long characterVa = targetVa();
-        double[] storeDoubles = new double[3];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         com.github.stephengold.joltjni.Character.getPosition(
                 characterVa, storeDoubles, lockBodies);
         RVec3 result = new RVec3(storeDoubles);
@@ -599,8 +599,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public void getPositionAndRotation(
             RVec3 storeLocation, Quat storeOrientation, boolean lockBodies) {
         long characterVa = targetVa();
-        double[] storeDoubles = new double[3];
-        float[] storeFloats = new float[4];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         com.github.stephengold.joltjni.Character.getPositionAndRotation(
                 characterVa, storeDoubles, storeFloats, lockBodies);
         storeLocation.set(storeDoubles);
@@ -643,7 +643,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     @Override
     public Quat getRotation(boolean lockBodies) {
         long characterVa = targetVa();
-        float[] storeFloats = new float[4];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         com.github.stephengold.joltjni.Character.getRotation(
                 characterVa, storeFloats, lockBodies);
         Quat result = new Quat(storeFloats);

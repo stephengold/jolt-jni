@@ -28,6 +28,8 @@ import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * A character implemented using a kinematic rigid body.
@@ -568,7 +570,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     @Override
     public RVec3 getCenterOfMassPosition(boolean lockBodies) {
         long characterVa = va();
-        double[] storeDoubles = new double[3];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getCenterOfMassPosition(characterVa, storeDoubles, lockBodies);
         RVec3 result = new RVec3(storeDoubles);
 
@@ -652,7 +654,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     @Override
     public Vec3 getLinearVelocity(boolean lockBodies) {
         long characterVa = va();
-        float[] storeFloats = new float[3];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(characterVa, storeFloats, lockBodies);
         Vec3 result = new Vec3(storeFloats);
 
@@ -691,7 +693,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     @Override
     public RVec3 getPosition(boolean lockBodies) {
         long characterVa = va();
-        double[] storeDoubles = new double[3];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition(characterVa, storeDoubles, lockBodies);
         RVec3 result = new RVec3(storeDoubles);
 
@@ -727,8 +729,8 @@ public class Character extends CharacterBase implements ConstCharacter {
     public void getPositionAndRotation(
             RVec3 storeLocation, Quat storeOrientation, boolean lockBodies) {
         long characterVa = va();
-        double[] storeDoubles = new double[3];
-        float[] storeFloats = new float[4];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPositionAndRotation(
                 characterVa, storeDoubles, storeFloats, lockBodies);
         storeLocation.set(storeDoubles);
@@ -757,7 +759,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     @Override
     public Quat getRotation(boolean lockBodies) {
         long characterVa = va();
-        float[] storeFloats = new float[4];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotation(characterVa, storeFloats, lockBodies);
         Quat result = new Quat(storeFloats);
 
@@ -856,7 +858,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     native static int getBodyId(long characterVa);
 
     native static void getCenterOfMassPosition(
-            long characterVa, double[] storeDoubles, boolean lockBodies);
+            long characterVa, DoubleBuffer storeDoubles, boolean lockBodies);
 
     native static long getCharacterSettings(
             long characterVa, boolean lockBodies);
@@ -864,16 +866,17 @@ public class Character extends CharacterBase implements ConstCharacter {
     native static int getLayer(long characterVa);
 
     native static void getLinearVelocity(
-            long characterVa, float[] storeFloats, boolean lockBodies);
+            long characterVa, FloatBuffer storeFloats, boolean lockBodies);
 
     native static void getPosition(
-            long characterVa, double[] storeDoubles, boolean lockBodies);
+            long characterVa, DoubleBuffer storeDoubles, boolean lockBodies);
 
-    native static void getPositionAndRotation(long characterVa,
-            double[] storeDoubles, float[] storeFloats, boolean lockBodies);
+    native static void getPositionAndRotation(
+            long characterVa, DoubleBuffer storeDoubles,
+            FloatBuffer storeFloats, boolean lockBodies);
 
     native static void getRotation(
-            long characterVa, float[] toreFloats, boolean lockBodies);
+            long characterVa, FloatBuffer storeFloats, boolean lockBodies);
 
     native static long getTransformedShape(
             long characterVa, boolean lockBodies);

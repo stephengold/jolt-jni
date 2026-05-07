@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -132,20 +132,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Character_getBodyId
 /*
  * Class:     com_github_stephengold_joltjni_Character
  * Method:    getCenterOfMassPosition
- * Signature: (J[DZ)V
+ * Signature: (JLjava/nio/DoubleBuffer;Z)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getCenterOfMassPosition
-  (JNIEnv *pEnv, jclass, jlong characterVa, jdoubleArray storeDoubles, jboolean lockBodies) {
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeDoubles, jboolean lockBodies) {
     const Character * const pCharacter
             = reinterpret_cast<Character *> (characterVa);
     const RVec3 location = pCharacter->GetCenterOfMassPosition(lockBodies);
-    jboolean isCopy;
-    jdouble * const pStoreDoubles
-            = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pStoreDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
     pStoreDoubles[0] = location.GetX();
     pStoreDoubles[1] = location.GetY();
     pStoreDoubles[2] = location.GetZ();
-    pEnv->ReleaseDoubleArrayElements(storeDoubles, pStoreDoubles, 0);
 }
 
 /*
@@ -179,88 +177,79 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Character_getLayer
 /*
  * Class:     com_github_stephengold_joltjni_Character
  * Method:    getLinearVelocity
- * Signature: (J[FZ)V
+ * Signature: (JLjava/nio/FloatBuffer;Z)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getLinearVelocity
-  (JNIEnv *pEnv, jclass, jlong characterVa, jfloatArray storeFloats, jboolean lockBodies) {
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeFloats, jboolean lockBodies) {
     const Character * const pCharacter
             = reinterpret_cast<Character *> (characterVa);
     const Vec3 velocity = pCharacter->GetLinearVelocity(lockBodies);
-    jboolean isCopy;
-    jfloat * const pStoreFloats
-            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStoreFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     pStoreFloats[0] = velocity.GetX();
     pStoreFloats[1] = velocity.GetY();
     pStoreFloats[2] = velocity.GetZ();
-    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_Character
  * Method:    getPosition
- * Signature: (J[DZ)V
+ * Signature: (JLjava/nio/DoubleBuffer;Z)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getPosition
-  (JNIEnv *pEnv, jclass, jlong characterVa, jdoubleArray storeDoubles, jboolean lockBodies) {
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeDoubles, jboolean lockBodies) {
     const Character * const pCharacter
             = reinterpret_cast<Character *> (characterVa);
     const RVec3 location = pCharacter->GetPosition(lockBodies);
-    jboolean isCopy;
-    jdouble * const pStoreDoubles
-            = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pStoreDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
     pStoreDoubles[0] = location.GetX();
     pStoreDoubles[1] = location.GetY();
     pStoreDoubles[2] = location.GetZ();
-    pEnv->ReleaseDoubleArrayElements(storeDoubles, pStoreDoubles, 0);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_Character
  * Method:    getPositionAndRotation
- * Signature: (J[D[FZ)V
+ * Signature: (JLjava/nio/DoubleBuffer;Ljava/nio/FloatBuffer;Z)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getPositionAndRotation
-  (JNIEnv *pEnv, jclass, jlong characterVa, jdoubleArray storeDoubles,
-  jfloatArray storeFloats, jboolean lockBodies) {
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeDoubles,
+  jobject storeFloats, jboolean lockBodies) {
     const Character * const pCharacter
             = reinterpret_cast<Character *> (characterVa);
     RVec3 location;
     Quat orientation;
     pCharacter->GetPositionAndRotation(location, orientation, lockBodies);
-    jboolean isCopy;
-    jdouble * const pStoreDoubles
-            = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pStoreDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
     pStoreDoubles[0] = location.GetX();
     pStoreDoubles[1] = location.GetY();
     pStoreDoubles[2] = location.GetZ();
-    pEnv->ReleaseDoubleArrayElements(storeDoubles, pStoreDoubles, 0);
-    jfloat * const pStoreFloats
-            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStoreFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
     pStoreFloats[0] = orientation.GetX();
     pStoreFloats[1] = orientation.GetY();
     pStoreFloats[2] = orientation.GetZ();
     pStoreFloats[3] = orientation.GetW();
-    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_Character
  * Method:    getRotation
- * Signature: (J[FZ)V
+ * Signature: (JLjava/nio/FloatBuffer;Z)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getRotation
-  (JNIEnv *pEnv, jclass, jlong characterVa, jfloatArray storeFloats, jboolean lockBodies) {
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeFloats, jboolean lockBodies) {
     const Character * const pCharacter
             = reinterpret_cast<Character *> (characterVa);
     const Quat orientation = pCharacter->GetRotation(lockBodies);
-    jboolean isCopy;
-    jfloat * const pStoreFloats
-            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStoreFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
     pStoreFloats[0] = orientation.GetX();
     pStoreFloats[1] = orientation.GetY();
     pStoreFloats[2] = orientation.GetZ();
     pStoreFloats[3] = orientation.GetW();
-    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
 }
 
 /*
