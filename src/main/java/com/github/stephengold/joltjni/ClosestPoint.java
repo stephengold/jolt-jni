@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Utilities to locate the closest point on a line segment, triangle or
@@ -120,7 +121,7 @@ final public class ClosestPoint {
         float bx = b.getX();
         float by = b.getY();
         float bz = b.getZ();
-        float[] storePoint = new float[3];
+        FloatBuffer storePoint = Temporaries.floatBuffer1.get();
         getClosestPointOnLine(ax, ay, az, bx, by, bz, storeSet, storePoint);
         Vec3 result = new Vec3(storePoint);
 
@@ -157,7 +158,7 @@ final public class ClosestPoint {
         float dx = d.getX();
         float dy = d.getY();
         float dz = d.getZ();
-        float[] storePoint = new float[3];
+        FloatBuffer storePoint = Temporaries.floatBuffer1.get();
         getClosestPointOnTetrahedron(ax, ay, az, bx, by, bz, cx, cy, cz,
                 dx, dy, dz, storeSet, storePoint);
         Vec3 result = new Vec3(storePoint);
@@ -189,7 +190,7 @@ final public class ClosestPoint {
         float cx = c.getX();
         float cy = c.getY();
         float cz = c.getZ();
-        float[] storePoint = new float[3];
+        FloatBuffer storePoint = Temporaries.floatBuffer1.get();
         getClosestPointOnTriangle(
                 ax, ay, az, bx, by, bz, cx, cy, cz, storeSet, storePoint);
         Vec3 result = new Vec3(storePoint);
@@ -208,14 +209,14 @@ final public class ClosestPoint {
 
     native private static void getClosestPointOnLine(
             float ax, float ay, float az, float bx, float by, float bz,
-            int[] storeSet, float[] storePoint);
+            int[] storeSet, FloatBuffer storePoint);
 
     native private static void getClosestPointOnTetrahedron(
             float ax, float ay, float az, float bx, float by, float bz,
             float cx, float cy, float cz, float dx, float dy, float dz,
-            int[] storeSet, float[] storePoint);
+            int[] storeSet, FloatBuffer storePoint);
 
-    native private static void getClosestPointOnTriangle(
-            float ax, float ay, float az, float bx, float by, float bz,
-            float cx, float cy, float cz, int[] storeSet, float[] storePoint);
+    native private static void getClosestPointOnTriangle(float ax, float ay,
+            float az, float bx, float by, float bz, float cx, float cy,
+            float cz, int[] storeSet, FloatBuffer storePoint);
 }

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,17 +26,18 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Geometry/ClosestPoint.h"
 #include "auto/com_github_stephengold_joltjni_ClosestPoint.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ClosestPoint
  * Method:    getClosestPointOnLine
- * Signature: (FFFFFF[I[F)V
+ * Signature: (FFFFFF[ILjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClosestPointOnLine
   (JNIEnv *pEnv, jclass, jfloat ax, jfloat ay, jfloat az, jfloat bx, jfloat by,
-  jfloat bz, jintArray storeSet, jfloatArray storePoint) {
+  jfloat bz, jintArray storeSet, jobject storePoint) {
     const Vec3 a(ax, ay, az);
     const Vec3 b(bx, by, bz);
     uint32 outSet;
@@ -45,22 +46,22 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClose
     jint * const pSet = pEnv->GetIntArrayElements(storeSet, &isCopy);
     pSet[0] = outSet;
     pEnv->ReleaseIntArrayElements(storeSet, pSet, 0);
-    jfloat * const pPoint = pEnv->GetFloatArrayElements(storePoint, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, storePoint, pPoint, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     pPoint[0] = result.GetX();
     pPoint[1] = result.GetY();
     pPoint[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(storePoint, pPoint, 0);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_ClosestPoint
  * Method:    getClosestPointOnTetrahedron
- * Signature: (FFFFFFFFFFFF[I[F)V
+ * Signature: (FFFFFFFFFFFF[ILjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClosestPointOnTetrahedron
   (JNIEnv *pEnv, jclass, jfloat ax, jfloat ay, jfloat az, jfloat bx, jfloat by,
   jfloat bz, jfloat cx, jfloat cy, jfloat cz, jfloat dx, jfloat dy, jfloat dz,
-  jintArray storeSet, jfloatArray storePoint) {
+  jintArray storeSet, jobject storePoint) {
     const Vec3 a(ax, ay, az);
     const Vec3 b(bx, by, bz);
     const Vec3 c(cx, cy, cz);
@@ -71,22 +72,22 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClose
     jint * const pSet = pEnv->GetIntArrayElements(storeSet, &isCopy);
     pSet[0] = outSet;
     pEnv->ReleaseIntArrayElements(storeSet, pSet, 0);
-    jfloat * const pPoint = pEnv->GetFloatArrayElements(storePoint, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, storePoint, pPoint, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     pPoint[0] = result.GetX();
     pPoint[1] = result.GetY();
     pPoint[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(storePoint, pPoint, 0);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_ClosestPoint
  * Method:    getClosestPointOnTriangle
- * Signature: (FFFFFFFFF[I[F)V
+ * Signature: (FFFFFFFFF[ILjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClosestPointOnTriangle
   (JNIEnv *pEnv, jclass, jfloat ax, jfloat ay, jfloat az, jfloat bx, jfloat by,
   jfloat bz, jfloat cx, jfloat cy, jfloat cz, jintArray storeSet,
-  jfloatArray storePoint) {
+  jobject storePoint) {
     const Vec3 a(ax, ay, az);
     const Vec3 b(bx, by, bz);
     const Vec3 c(cx, cy, cz);
@@ -96,11 +97,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClose
     jint * const pSet = pEnv->GetIntArrayElements(storeSet, &isCopy);
     pSet[0] = outSet;
     pEnv->ReleaseIntArrayElements(storeSet, pSet, 0);
-    jfloat * const pPoint = pEnv->GetFloatArrayElements(storePoint, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, storePoint, pPoint, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     pPoint[0] = result.GetX();
     pPoint[1] = result.GetY();
     pPoint[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(storePoint, pPoint, 0);
 }
 
 /*
