@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstSkeleton;
+import com.github.stephengold.joltjni.readonly.ConstSkeletonPose;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 
@@ -30,7 +31,9 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class SkeletonPose extends JoltPhysicsObject {
+public class SkeletonPose
+        extends JoltPhysicsObject
+        implements ConstSkeletonPose {
     // *************************************************************************
     // constructors
 
@@ -47,8 +50,8 @@ public class SkeletonPose extends JoltPhysicsObject {
      *
      * @param original the pose to clone (not null, unaffected)
      */
-    public SkeletonPose(SkeletonPose original) {
-        long originalVa = original.va();
+    public SkeletonPose(ConstSkeletonPose original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
@@ -72,11 +75,52 @@ public class SkeletonPose extends JoltPhysicsObject {
     }
 
     /**
-     * Calculate the joint matrices in local space.
+     * Access the joint matrices.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Mat44Array getJointMatrices() {
+        long poseVa = va();
+        long resultVa = getJointMatrices(poseVa);
+        int numJoints = getJointCount(poseVa);
+        Mat44Array result = new Mat44Array(this, resultVa, numJoints);
+
+        return result;
+    }
+
+    /**
+     * Alter the root offset.
+     *
+     * @param offset the desired offset (not {@code null}, unaffected)
+     */
+    public void setRootOffset(RVec3Arg offset) {
+        long poseVa = va();
+        double xx = offset.xx();
+        double yy = offset.yy();
+        double zz = offset.zz();
+        setRootOffset(poseVa, xx, yy, zz);
+    }
+
+    /**
+     * Replace the skeleton.
+     *
+     * @param skeleton the desired skeleton (not {@code null})
+     */
+    public void setSkeleton(ConstSkeleton skeleton) {
+        long poseVa = va();
+        long skeletonVa = skeleton.targetVa();
+        setSkeleton(poseVa, skeletonVa);
+    }
+    // *************************************************************************
+    // ConstSkeletonPose methods
+
+    /**
+     * Calculate the joint matrices in local space. The pose is unaffected.
      *
      * @param storeMatrices storage for the matrices (not {@code null},
      * modified)
      */
+    @Override
     public void calculateLocalSpaceJointMatrices(Mat44Array storeMatrices) {
         long poseVa = va();
         long storeMatsVa = storeMatrices.va();
@@ -90,6 +134,7 @@ public class SkeletonPose extends JoltPhysicsObject {
      * @param settings the desired settings (not {@code null}, unaffected)
      * @param renderer the renderer to use (not {@code null})
      */
+    @Override
     public void draw(
             SkeletonPoseDrawSettings settings, DebugRenderer renderer) {
         draw(settings, renderer, RMat44.sIdentity());
@@ -104,6 +149,7 @@ public class SkeletonPose extends JoltPhysicsObject {
      * @param transform the transform to apply (not {@code null}, unaffected,
      * default=Identity)
      */
+    @Override
     public void draw(SkeletonPoseDrawSettings settings, DebugRenderer renderer,
             RMat44Arg transform) {
         long poseVa = va();
@@ -119,6 +165,7 @@ public class SkeletonPose extends JoltPhysicsObject {
      * @param jointIndex the index of the joint to access
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public JointState getJoint(int jointIndex) {
         long poseVa = va();
         long stateVa = getJoint(poseVa, jointIndex);
@@ -132,6 +179,7 @@ public class SkeletonPose extends JoltPhysicsObject {
      *
      * @return the count (&ge;0)
      */
+    @Override
     public int getJointCount() {
         long poseVa = va();
         int result = getJointCount(poseVa);
@@ -146,6 +194,7 @@ public class SkeletonPose extends JoltPhysicsObject {
      * @param jointIndex which joint (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public Mat44 getJointMatrix(int jointIndex) {
         long poseVa = va();
         long resultVa = getJointMatrix(poseVa, jointIndex);
@@ -155,24 +204,11 @@ public class SkeletonPose extends JoltPhysicsObject {
     }
 
     /**
-     * Access the joint matrices.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public Mat44Array getJointMatrices() {
-        long poseVa = va();
-        long resultVa = getJointMatrices(poseVa);
-        int numJoints = getJointCount(poseVa);
-        Mat44Array result = new Mat44Array(this, resultVa, numJoints);
-
-        return result;
-    }
-
-    /**
-     * Copy the root offset.
+     * Copy the root offset. The pose is unaffected.
      *
      * @return a new vector
      */
+    @Override
     public RVec3 getRootOffset() {
         long poseVa = va();
         double[] storeDoubles = new double[3];
@@ -187,36 +223,13 @@ public class SkeletonPose extends JoltPhysicsObject {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public ConstSkeleton getSkeleton() {
         long poseVa = va();
         long resultVa = getSkeleton(poseVa);
         ConstSkeleton result = new Skeleton(resultVa);
 
         return result;
-    }
-
-    /**
-     * Alter the root offset.
-     *
-     * @param offset the desired offset (not null, unaffected)
-     */
-    public void setRootOffset(RVec3Arg offset) {
-        long poseVa = va();
-        double xx = offset.xx();
-        double yy = offset.yy();
-        double zz = offset.zz();
-        setRootOffset(poseVa, xx, yy, zz);
-    }
-
-    /**
-     * Replace the skeleton.
-     *
-     * @param skeleton the desired skeleton (not null)
-     */
-    public void setSkeleton(ConstSkeleton skeleton) {
-        long poseVa = va();
-        long skeletonVa = skeleton.targetVa();
-        setSkeleton(poseVa, skeletonVa);
     }
     // *************************************************************************
     // native private methods
