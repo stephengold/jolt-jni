@@ -55,11 +55,11 @@ final public class CharacterVirtualRefC
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param character the character to target (not {@code null})
+     * @param target the character to target (not {@code null})
      */
-    CharacterVirtualRefC(long refVa, ConstCharacterVirtual character) {
-        this.ptr = character;
-        ConstPhysicsSystem physicsSystem = character.getPhysicsSystem();
+    CharacterVirtualRefC(long refVa, ConstCharacterVirtual target) {
+        this.ptr = target;
+        ConstPhysicsSystem physicsSystem = target.getPhysicsSystem();
         /*
          * Passing physicsSystem to the Runnable ensures that the underlying
          * system won't get cleaned before the character.
