@@ -32,6 +32,48 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ClosestPoint
+ * Method:    getBaryCentricCoordinates2
+ * Signature: (FFFFFF[F)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getBaryCentricCoordinates2
+  (JNIEnv *pEnv, jclass, jfloat ax, jfloat ay, jfloat az, jfloat bx, jfloat by,
+  jfloat bz, jfloatArray storeUv) {
+    const Vec3 a(ax, ay, az);
+    const Vec3 b(bx, by, bz);
+    float u, v;
+    const bool result = ClosestPoint::GetBaryCentricCoordinates(a, b, u, v);
+    jboolean isCopy;
+    jfloat * const pUv = pEnv->GetFloatArrayElements(storeUv, &isCopy);
+    pUv[0] = u;
+    pUv[1] = v;
+    pEnv->ReleaseFloatArrayElements(storeUv, pUv, 0);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ClosestPoint
+ * Method:    getBaryCentricCoordinates3
+ * Signature: (FFFFFFFFF[F)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getBaryCentricCoordinates3
+  (JNIEnv *pEnv, jclass, jfloat ax, jfloat ay, jfloat az, jfloat bx, jfloat by,
+  jfloat bz, jfloat cx, jfloat cy, jfloat cz, jfloatArray storeUvw) {
+    const Vec3 a(ax, ay, az);
+    const Vec3 b(bx, by, bz);
+    const Vec3 c(cx, cy, cz);
+    float u, v, w;
+    const bool result = ClosestPoint::GetBaryCentricCoordinates(a, b, c, u, v, w);
+    jboolean isCopy;
+    jfloat * const pUvw = pEnv->GetFloatArrayElements(storeUvw, &isCopy);
+    pUvw[0] = u;
+    pUvw[1] = v;
+    pUvw[2] = w;
+    pEnv->ReleaseFloatArrayElements(storeUvw, pUvw, 0);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ClosestPoint
  * Method:    getClosestPointOnLine
  * Signature: (FFFFFF[ILjava/nio/FloatBuffer;)V
  */
@@ -102,46 +144,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClose
     pPoint[0] = result.GetX();
     pPoint[1] = result.GetY();
     pPoint[2] = result.GetZ();
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ClosestPoint
- * Method:    getBaryCentricCoordinates2
- * Signature: (FFFFFF[F)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getBaryCentricCoordinates2
-  (JNIEnv *pEnv, jclass, jfloat ax, jfloat ay, jfloat az, jfloat bx, jfloat by,
-  jfloat bz, jfloatArray storeUv) {
-    const Vec3 a(ax, ay, az);
-    const Vec3 b(bx, by, bz);
-    float u, v;
-    const bool result = ClosestPoint::GetBaryCentricCoordinates(a, b, u, v);
-    jboolean isCopy;
-    jfloat * const pUv = pEnv->GetFloatArrayElements(storeUv, &isCopy);
-    pUv[0] = u;
-    pUv[1] = v;
-    pEnv->ReleaseFloatArrayElements(storeUv, pUv, 0);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ClosestPoint
- * Method:    getBaryCentricCoordinates3
- * Signature: (FFFFFFFFF[F)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getBaryCentricCoordinates3
-  (JNIEnv *pEnv, jclass, jfloat ax, jfloat ay, jfloat az, jfloat bx, jfloat by,
-  jfloat bz, jfloat cx, jfloat cy, jfloat cz, jfloatArray storeUvw) {
-    const Vec3 a(ax, ay, az);
-    const Vec3 b(bx, by, bz);
-    const Vec3 c(cx, cy, cz);
-    float u, v, w;
-    const bool result = ClosestPoint::GetBaryCentricCoordinates(a, b, c, u, v, w);
-    jboolean isCopy;
-    jfloat * const pUvw = pEnv->GetFloatArrayElements(storeUvw, &isCopy);
-    pUvw[0] = u;
-    pUvw[1] = v;
-    pUvw[2] = w;
-    pEnv->ReleaseFloatArrayElements(storeUvw, pUvw, 0);
-    return result;
 }
