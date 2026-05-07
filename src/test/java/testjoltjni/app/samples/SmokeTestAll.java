@@ -168,7 +168,7 @@ final public class SmokeTestAll {
                 break;
 
             default:
-                throw new RuntimeException("typeName = " + systemName);
+                throw new RuntimeException("systemName = " + systemName);
         }
 
         // All tests share a single ComputeQueue:
