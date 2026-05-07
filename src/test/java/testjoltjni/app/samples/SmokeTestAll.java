@@ -208,7 +208,8 @@ final public class SmokeTestAll {
      * @param test the Test object to use (not {@code null})
      */
     private static void smokeTest(Test test) {
-        smokeTest(test, globalParameters.numSteps());
+        int numSteps = globalParameters.numSteps();
+        smokeTest(test, numSteps);
     }
 
     /**
