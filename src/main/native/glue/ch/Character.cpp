@@ -149,10 +149,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getCenterOf
 /*
  * Class:     com_github_stephengold_joltjni_Character
  * Method:    getCharacterSettings
- * Signature: (J)J
+ * Signature: (JZ)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Character_getCharacterSettings
-  (JNIEnv *, jclass, jlong characterVa) {
+  (JNIEnv *, jclass, jlong characterVa, jboolean lockBodies) {
     const Character * const pCharacter
             = reinterpret_cast<Character *> (characterVa);
     CharacterSettings * const pResult = new CharacterSettings();
