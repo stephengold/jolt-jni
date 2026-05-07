@@ -365,6 +365,9 @@ public class Ragdoll extends NonCopyable implements RefTarget {
 
     native static void driveToPoseUsingMotors(long ragdollVa, long poseVa);
 
+    native static void driveToPoseUsingMotorsPv(
+            long ragdollVa, long prevPoseVa, long poseVa, float deltaTime);
+
     native static int getBodyCount(long ragdollVa);
 
     native static void getBodyIds(long ragdollVa, int[] storeIds);
