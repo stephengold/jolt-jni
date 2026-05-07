@@ -152,6 +152,20 @@ final public class RagdollSettingsRef extends Ref {
     }
 
     /**
+     * Return the index of the constraint upstream from the specified body.
+     *
+     * @param bodyIndex index of the body in the ragdoll (&ge;0)
+     * @return the constraint index
+     */
+    public int getConstraintIndexForBodyIndex(int bodyIndex) {
+        long settingsVa = targetVa();
+        int result = RagdollSettings.getConstraintIndexForBodyIndex(
+                settingsVa, bodyIndex);
+
+        return result;
+    }
+
+    /**
      * Access the skeleton. (native attribute: mSkeleton)
      *
      * @return a new JVM object with the pre-existing native object assigned

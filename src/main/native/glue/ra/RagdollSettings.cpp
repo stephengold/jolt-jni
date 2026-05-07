@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -119,6 +119,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_disab
     RagdollSettings * const pSettings
             = reinterpret_cast<RagdollSettings *> (settingsVa);
     pSettings->DisableParentChildCollisions();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    getConstraintIndexForBodyIndex
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_getConstraintIndexForBodyIndex
+  (JNIEnv *, jclass, jlong settingsVa, jint bodyIndex) {
+    RagdollSettings * const pSettings
+            = reinterpret_cast<RagdollSettings *> (settingsVa);
+    int result = pSettings->GetConstraintIndexForBodyIndex(bodyIndex);
+    return result;
 }
 
 /*
