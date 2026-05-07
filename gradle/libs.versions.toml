@@ -11,7 +11,7 @@ jcommander = "org.jcommander:jcommander:1.85"
 jsnaploader = "io.github.electrostat-lab:snaploader:1.1.1-stable"
 junit4 = "junit:junit:4.13.2"
 log4j-impl = "org.apache.logging.log4j:log4j-slf4j2-impl:2.25.4"
-oshi-core = "com.github.oshi:oshi-core:7.0.1"
+oshi-core = "com.github.oshi:oshi-core:7.1.0"
 
 [bundles]
 
