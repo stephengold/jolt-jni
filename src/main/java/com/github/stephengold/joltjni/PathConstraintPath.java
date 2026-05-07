@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstPathConstraintPath;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * The path for a path constraint.
@@ -160,12 +161,12 @@ public class PathConstraintPath
     public void getPointOnPath(float amount, Vec3 storeLocation,
             Vec3 storeTangent, Vec3 storeNormal, Vec3 storeBinormal) {
         long pathVa = va();
-        float[] storeFloats = new float[12];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPointOnPath(pathVa, amount, storeFloats);
         storeLocation.set(storeFloats);
-        storeTangent.set(storeFloats[3], storeFloats[4], storeFloats[5]);
-        storeNormal.set(storeFloats[6], storeFloats[7], storeFloats[8]);
-        storeBinormal.set(storeFloats[9], storeFloats[10], storeFloats[11]);
+        storeTangent.set(storeFloats, 3);
+        storeNormal.set(storeFloats, 6);
+        storeBinormal.set(storeFloats, 9);
     }
 
     /**
@@ -240,7 +241,7 @@ public class PathConstraintPath
     native private static float getPathMaxFraction(long pathVa);
 
     native private static void getPointOnPath(
-            long pathVa, float amount, float[] storeFloats);
+            long pathVa, float amount, FloatBuffer storeFloats);
 
     native private static int getRefCount(long pathVa);
 

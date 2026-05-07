@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -69,17 +69,16 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PathConstraintPath_
 /*
  * Class:     com_github_stephengold_joltjni_PathConstraintPath
  * Method:    getPointOnPath
- * Signature: (JF[F)V
+ * Signature: (JFLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PathConstraintPath_getPointOnPath
-  (JNIEnv *pEnv, jclass, jlong pathVa, jfloat amount, jfloatArray storeFloats) {
+  (JNIEnv *pEnv, jclass, jlong pathVa, jfloat amount, jobject storeFloats) {
     const PathConstraintPath * const pPath
             = reinterpret_cast<PathConstraintPath *> (pathVa);
     Vec3 location, tangent, normal, binormal;
     pPath->GetPointOnPath(amount, location, tangent, normal, binormal);
-    jboolean isCopy;
-    jfloat * const pStoreFloats
-            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStoreFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 12);
     pStoreFloats[0] = location.GetX();
     pStoreFloats[1] = location.GetY();
     pStoreFloats[2] = location.GetZ();
@@ -92,7 +91,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PathConstraintPath_ge
     pStoreFloats[9] = binormal.GetX();
     pStoreFloats[10] = binormal.GetY();
     pStoreFloats[11] = binormal.GetZ();
-    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
 }
 
 /*
