@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.readonly.ConstSkeletonPose;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.RefTarget;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Runtime information to simulate a ragdoll composed of bodies connected by
@@ -223,7 +225,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     public void getPose(RVec3 storeRootOffset, Mat44Array storeJointMatrices,
             boolean lockBodies) {
         long ragdollVa = va();
-        double[] storeDoubles = new double[3];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         long storeMatsVa = storeJointMatrices.va();
         getPose(ragdollVa, storeDoubles, storeMatsVa, lockBodies);
         storeRootOffset.set(storeDoubles);
@@ -277,8 +279,8 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     public void getRootTransform(
             RVec3 storeLocation, Quat storeOrientation, boolean lockBodies) {
         long ragdollVa = va();
-        double[] storeDoubles = new double[3];
-        float[] storeFloats = new float[4];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRootTransform(ragdollVa, storeDoubles, storeFloats, lockBodies);
         storeLocation.set(storeDoubles);
         storeOrientation.set(storeFloats);
@@ -374,7 +376,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
 
     native static int getConstraintCount(long ragdollVa);
 
-    native static void getPose(long ragdollVa, double[] storeDoubles,
+    native static void getPose(long ragdollVa, DoubleBuffer storeDoubles,
             long storeMatsVa, boolean lockBodies);
 
     native static void getPoseToObject(
@@ -382,8 +384,9 @@ public class Ragdoll extends NonCopyable implements RefTarget {
 
     native private static int getRefCount(long ragdollVa);
 
-    native static void getRootTransform(long ragdollVa, double[] storeDoubles,
-            float[] storeFloats, boolean lockBodies);
+    native static void getRootTransform(
+            long ragdollVa, DoubleBuffer storeDoubles, FloatBuffer storeFloats,
+            boolean lockBodies);
 
     native static void removeFromPhysicsSystem(long ragdollVa);
 

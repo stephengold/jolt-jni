@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.readonly.ConstSkeletonPose;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * A counted reference to a {@code Ragdoll}.
@@ -219,7 +221,7 @@ final public class RagdollRef extends Ref {
     public void getPose(RVec3 storeRootOffset, Mat44Array storeJointMatrices,
             boolean lockBodies) {
         long ragdollVa = targetVa();
-        double[] storeDoubles = new double[3];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         long storeMatsVa = storeJointMatrices.va();
         Ragdoll.getPose(ragdollVa, storeDoubles, storeMatsVa, lockBodies);
         storeRootOffset.set(storeDoubles);
@@ -273,8 +275,8 @@ final public class RagdollRef extends Ref {
     public void getRootTransform(
             RVec3 storeLocation, Quat storeOrientation, boolean lockBodies) {
         long ragdollVa = targetVa();
-        double[] storeDoubles = new double[3];
-        float[] storeFloats = new float[4];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         Ragdoll.getRootTransform(
                 ragdollVa, storeDoubles, storeFloats, lockBodies);
         storeLocation.set(storeDoubles);
