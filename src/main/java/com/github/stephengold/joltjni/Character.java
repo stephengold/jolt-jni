@@ -660,7 +660,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Access the system to which the character's body belongs.
+     * Access the physics system to which the character's body belongs.
      *
      * @return the pre-existing object (not {@code null})
      */
@@ -717,7 +717,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Copy the position of the associated body. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
      * coordinates, not {@code null}, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,

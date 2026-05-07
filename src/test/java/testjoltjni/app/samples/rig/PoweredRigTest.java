@@ -70,7 +70,7 @@ public void Initialize()
 	mRagdoll.addToPhysicsSystem(EActivation.Activate);
 
 	// Load animation
-	String filename = (String)("Assets/Human/") + sAnimationName + ".tof";
+	String filename = (String)("Assets/Human/") + sAnimationName + ".tof" ;
 	if (!ObjectStreamIn.sReadObject(filename, mAnimation))
 		FatalError("Could not open animation");
 
@@ -83,7 +83,7 @@ public void Initialize()
 	mRagdoll.setPose(mPose);
 }
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Update time
 	mTime += inParams.mDeltaTime;
@@ -95,13 +95,12 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	RVec3 root_offset=new RVec3();
 	JointState joint = mPose.getJoint(0);
 	joint.setTranslation ( Vec3.sZero()); // All the translation goes into the root offset
-        Quat root_rotation=new Quat();
-	mRagdoll.getRootTransform(root_offset, root_rotation);joint.setRotation(root_rotation);
+        Quat root_rotation=new Quat();mRagdoll.getRootTransform(root_offset, root_rotation);joint.setRotation(root_rotation);
 	mPose.setRootOffset(root_offset);
 	mPose.calculateJointMatrices();
-if(implementsDebugRendering())
+if (implementsDebugRendering())
 	mPose.draw(inParams.mPoseDrawSettings, mDebugRenderer);
-// JPH_DEBUG_RENDERER
+ // JPH_DEBUG_RENDERER
 
 	mRagdoll.driveToPoseUsingMotors(mPose);
 }

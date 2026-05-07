@@ -357,7 +357,7 @@ final public class CharacterRefC
     /**
      * Access the physics system to which the character's body belongs.
      *
-     * @return the pre-existing instance
+     * @return the pre-existing object (not {@code null})
      */
     @Override
     public ConstPhysicsSystem getPhysicsSystem() {
@@ -518,7 +518,7 @@ final public class CharacterRefC
     }
 
     /**
-     * Return a TransformedShape that represents the volume occupied by the
+     * Generate a TransformedShape that represents the volume occupied by the
      * character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,

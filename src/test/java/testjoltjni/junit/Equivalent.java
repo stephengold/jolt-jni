@@ -341,8 +341,8 @@ final class Equivalent {
      */
     static void float3(
             ConstFloat3 expected, ConstFloat3 actual, float tolerance) {
-        TestUtils.assertEquals(expected.x(), expected.y(),
-                expected.z(), actual, tolerance);
+        TestUtils.assertEquals(
+                expected.x(), expected.y(), expected.z(), actual, tolerance);
     }
 
     /**

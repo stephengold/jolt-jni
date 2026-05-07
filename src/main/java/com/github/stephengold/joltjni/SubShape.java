@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -53,7 +53,7 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     /**
      * Alter the center-of-mass location. (native function: SetPositionCOM)
      *
-     * @param location the desired location (not null, unaffected)
+     * @param location the desired location (not {@code null}, unaffected)
      */
     public void setPositionCom(Vec3Arg location) {
         long subshapeVa = va();
@@ -66,7 +66,7 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     /**
      * Alter the rotation.
      *
-     * @param rotation the desired rotation (not null, unaffected)
+     * @param rotation the desired rotation (not {@code null}, unaffected)
      */
     public void setRotation(QuatArg rotation) {
         long subshapeVa = va();
@@ -80,9 +80,10 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     /**
      * Alter the coordinate transform.
      *
-     * @param offset the desired translation (not null, unaffected)
-     * @param rotation the desired rotation (not null, unaffected)
-     * @param centerOfMass the desired center of mass (not null, unaffected)
+     * @param offset the desired translation (not {@code null}, unaffected)
+     * @param rotation the desired rotation (not {@code null}, unaffected)
+     * @param centerOfMass the desired center of mass (not {@code null},
+     * unaffected)
      */
     public void setTransform(
             Vec3Arg offset, QuatArg rotation, Vec3Arg centerOfMass) {
@@ -171,7 +172,7 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
      * Test whether the specified scale is valid for the sub-shape. The
      * sub-shape is unaffected.
      *
-     * @param scale the scale factors to validate (not null, unaffected)
+     * @param scale the scale factors to validate (not {@code null}, unaffected)
      * @return {@code true} if valid, otherwise {@code false}
      */
     @Override
@@ -189,7 +190,7 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
      * Transform the specified scale to the local space of the child. The
      * sub-shape is unaffected.
      *
-     * @param scale the scale to transform (not null, unaffected)
+     * @param scale the scale to transform (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override

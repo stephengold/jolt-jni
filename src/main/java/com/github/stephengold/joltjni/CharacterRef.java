@@ -50,7 +50,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Instantiate a reference to the specified character.
+     * Instantiate a counted reference to the specified character.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
@@ -108,7 +108,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Needs to be invoked after every physics update.
      *
      * @param maxSeparation the max distance between the floor and the character
-     * for standing
+     * for standing (in meters)
      */
     public void postSimulation(float maxSeparation) {
         postSimulation(maxSeparation, true);
@@ -118,7 +118,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Needs to be invoked after every physics update.
      *
      * @param maxSeparation the max distance between the floor and the character
-     * for standing
+     * for standing (in meters)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
