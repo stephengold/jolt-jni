@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Add convex radius to a support function. (native type:
@@ -58,7 +59,7 @@ public class AddConvexRadiusSupport extends JoltPhysicsObject {
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
-        float[] storeFloats = new float[3];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSupport(addVa, dx, dy, dz, storeFloats);
         Vec3 result = new Vec3(storeFloats);
 
@@ -72,5 +73,5 @@ public class AddConvexRadiusSupport extends JoltPhysicsObject {
     native private static void free(long addVa);
 
     native private static void getSupport(
-            long addVa, float dx, float dy, float dz, float[] storeFloats);
+            long addVa, float dx, float dy, float dz, FloatBuffer storeFloats);
 }

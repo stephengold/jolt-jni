@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -58,20 +58,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AddConvexRadiusSuppor
 /*
  * Class:     com_github_stephengold_joltjni_AddConvexRadiusSupport
  * Method:    getSupport
- * Signature: (JFFF[F)V
+ * Signature: (JFFFLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AddConvexRadiusSupport_getSupport
   (JNIEnv *pEnv, jclass, jlong addVa, jfloat dx, jfloat dy, jfloat dz,
-  jfloatArray storeFloats) {
+  jobject storeFloats) {
     const AddConvexRadius<ConvexShape::Support> * const pAdd
             = reinterpret_cast<AddConvexRadius<ConvexShape::Support> *> (addVa);
     const Vec3 direction(dx, dy, dz);
     const Vec3 result = pAdd->GetSupport(direction);
-    jboolean isCopy;
-    jfloat * const pStoreFloats
-            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStoreFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     pStoreFloats[0] = result.GetX();
     pStoreFloats[1] = result.GetY();
     pStoreFloats[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
 }
