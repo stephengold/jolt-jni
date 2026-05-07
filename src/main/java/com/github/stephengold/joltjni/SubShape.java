@@ -199,7 +199,7 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
         float sx = scale.getX();
         float sy = scale.getY();
         float sz = scale.getZ();
-        float[] storeFloats = new float[3];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         transformScale(subshapeVa, sx, sy, sz, storeFloats);
         Vec3 result = new Vec3(storeFloats);
 
@@ -232,6 +232,6 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
             float oz, float qx, float qy, float qz, float qw, float cx,
             float cy, float cz);
 
-    native private static void transformScale(
-            long subshapeVa, float sx, float sy, float sz, float[] storeFloats);
+    native private static void transformScale(long subshapeVa, float sx,
+            float sy, float sz, FloatBuffer storeFloats);
 }

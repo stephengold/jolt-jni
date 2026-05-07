@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -154,20 +154,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SubShape_setTransform
 /*
  * Class:     com_github_stephengold_joltjni_SubShape
  * Method:    transformScale
- * Signature: (JFFF[F)V
+ * Signature: (JFFFLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SubShape_transformScale
   (JNIEnv *pEnv, jclass, jlong subShapeVa, jfloat sx, jfloat sy, jfloat sz,
-  jfloatArray storeFloats) {
+  jobject storeFloats) {
     CompoundShape::SubShape * const pSubShape
             = reinterpret_cast<CompoundShape::SubShape *> (subShapeVa);
     const Vec3 scale(sx, sy, sz);
     Vec3 result = pSubShape->TransformScale(scale);
-    jboolean isCopy;
-    jfloat * const pStoreFloats
-            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStoreFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     pStoreFloats[0] = result.GetX();
     pStoreFloats[1] = result.GetY();
     pStoreFloats[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
 }
