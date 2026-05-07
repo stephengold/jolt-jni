@@ -112,7 +112,7 @@ abstract public class Constraint extends NonCopyable
      * and its center of mass has shifted by {@code deltaCom}.
      *
      * @param bodyId the ID of the body that changed
-     * @param deltaCom the offset of the shift (not null, unaffected)
+     * @param deltaCom the offset of the shift (not {@code null}, unaffected)
      */
     public void notifyShapeChanged(int bodyId, Vec3Arg deltaCom) {
         long constraintVa = va();
@@ -125,7 +125,7 @@ abstract public class Constraint extends NonCopyable
     /**
      * Restore the state of the constraint prior to replay.
      *
-     * @param recorder to read state from (not null)
+     * @param recorder to read state from (not {@code null})
      */
     public void restoreState(StateRecorder recorder) {
         long constraintVa = va();
@@ -273,7 +273,7 @@ abstract public class Constraint extends NonCopyable
     /**
      * Return the constraint's subtype. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EConstraintSubType getSubType() {
@@ -287,7 +287,7 @@ abstract public class Constraint extends NonCopyable
     /**
      * Return the constraint's type. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EConstraintType getType() {
@@ -315,7 +315,7 @@ abstract public class Constraint extends NonCopyable
      * Save the state of the constraint, for possible replay. The constraint is
      * unaffected.
      *
-     * @param recorder the recorder to write to (not null)
+     * @param recorder the recorder to write to (not {@code null})
      */
     @Override
     public void saveState(StateRecorder recorder) {

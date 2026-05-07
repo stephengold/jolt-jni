@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -115,7 +115,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      * Return which space the other properties are specified in. The settings
      * are unaffected. (native attribute: mSpace)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EConstraintSpace getSpace() {
         long settingsVa = va();
@@ -169,7 +169,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
      */
@@ -186,7 +186,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
      */
@@ -204,7 +204,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      * Alter which space the other properties are specified in. (native
      * attribute: mSpace)
      *
-     * @param space enum value (not null, default=WorldSpace)
+     * @param space enum value (not {@code null}, default=WorldSpace)
      */
     public void setSpace(EConstraintSpace space) {
         long settingsVa = va();
@@ -215,8 +215,8 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the twist axis of body 1. (native attribute: mTwistAxis1)
      *
-     * @param direction the desired axis direction (not null, unaffected,
-     * default=(1,0,0))
+     * @param direction the desired axis direction (not {@code null},
+     * unaffected, default=(1,0,0))
      * @return the argument, for chaining
      */
     public Vec3Arg setTwistAxis1(Vec3Arg direction) {
@@ -232,8 +232,8 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
      *
-     * @param direction the desired axis direction (not null, unaffected,
-     * default=(1,0,0))
+     * @param direction the desired axis direction (not {@code null},
+     * unaffected, default=(1,0,0))
      * @return the argument, for chaining
      */
     public Vec3Arg setTwistAxis2(Vec3Arg direction) {

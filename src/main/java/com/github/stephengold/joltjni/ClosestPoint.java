@@ -46,11 +46,11 @@ final public class ClosestPoint {
      * Calculate the barycentric coordinates of the point on the specified
      * (infinite) line that's closest to the origin.
      *
-     * @param a the location of a reference point on the line (not null,
+     * @param a the location of a reference point on the line (not {@code null},
      * unaffected)
-     * @param b the location of another reference point on the line (not null,
+     * @param b the location of another reference point on the line (not {@code null},
      * unaffected)
-     * @param storeUv storage for the coordinates (not null, length&ge;2,
+     * @param storeUv storage for the coordinates (not {@code null}, length&ge;2,
      * modified)
      * @return {@code true} if successful, {@code false} if the points do not
      * define a line
@@ -73,13 +73,13 @@ final public class ClosestPoint {
      * Calculate the barycentric coordinates of the point on the specified plane
      * that's closest to the origin.
      *
-     * @param a the location of a reference point on the plane (not null,
+     * @param a the location of a reference point on the plane (not {@code null},
      * unaffected)
-     * @param b the location of another reference point on the plane (not null,
+     * @param b the location of another reference point on the plane (not {@code null},
      * unaffected)
-     * @param c the location of a 3rd reference point on the plane (not null,
+     * @param c the location of a 3rd reference point on the plane (not {@code null},
      * unaffected)
-     * @param storeUvw storage for the coordinates (not null, length&ge;3,
+     * @param storeUvw storage for the coordinates (not {@code null}, length&ge;3,
      * modified)
      * @return {@code true} if successful, {@code false} if the points do not
      * define a plane
@@ -105,11 +105,11 @@ final public class ClosestPoint {
      * Locate the point on the specified line segment that's closest to the
      * origin.
      *
-     * @param a the location of the first end-point of the segment (not null,
+     * @param a the location of the first end-point of the segment (not {@code null},
      * unaffected)
-     * @param b the location of the 2nd end-point of the segment (not null,
+     * @param b the location of the 2nd end-point of the segment (not {@code null},
      * unaffected)
-     * @param storeSet storage for the closest feature(s) (not null,
+     * @param storeSet storage for the closest feature(s) (not {@code null},
      * length&ge;1, modified)
      * @return a new location vector
      */
@@ -132,15 +132,15 @@ final public class ClosestPoint {
      * Locate the point on the specified tetrahedron that's closest to the
      * origin.
      *
-     * @param a the location of the first vertex of the tetrahedron (not null,
+     * @param a the location of the first vertex of the tetrahedron (not {@code null},
      * unaffected)
-     * @param b the location of the 2nd vertex of the tetrahedron (not null,
+     * @param b the location of the 2nd vertex of the tetrahedron (not {@code null},
      * unaffected)
-     * @param c the location of the 3rd vertex of the tetrahedron (not null,
+     * @param c the location of the 3rd vertex of the tetrahedron (not {@code null},
      * unaffected)
-     * @param d the location of the 4th vertex of the tetrahedron (not null,
+     * @param d the location of the 4th vertex of the tetrahedron (not {@code null},
      * unaffected)
-     * @param storeSet storage for the closest feature(s) (not null,
+     * @param storeSet storage for the closest feature(s) (not {@code null},
      * length&ge;1, modified)
      * @return a new location vector
      */
@@ -169,13 +169,13 @@ final public class ClosestPoint {
     /**
      * Locate the point on the specified triangle that's closest to the origin.
      *
-     * @param a the location of the first vertex of the triangle (not null,
+     * @param a the location of the first vertex of the triangle (not {@code null},
      * unaffected)
-     * @param b the location of the 2nd vertex of the triangle (not null,
+     * @param b the location of the 2nd vertex of the triangle (not {@code null},
      * unaffected)
-     * @param c the location of the 3rd vertex of the triangle (not null,
+     * @param c the location of the 3rd vertex of the triangle (not {@code null},
      * unaffected)
-     * @param storeSet storage for the closest feature(s) (not null,
+     * @param storeSet storage for the closest feature(s) (not {@code null},
      * length&ge;1, modified)
      * @return a new location vector
      */

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ public class CollideSettingsBase extends JoltPhysicsObject {
      * Return how edge collisions should be handled. The settings are
      * unaffected. (native attribute: mActiveEdgeMode)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EActiveEdgeMode getActiveEdgeMode() {
         long settingsVa = va();
@@ -76,7 +76,7 @@ public class CollideSettingsBase extends JoltPhysicsObject {
      * Return how face information should be handled. The settings are
      * unaffected. (native attribute: mCollectFacesMode)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public ECollectFacesMode getCollectFacesMode() {
         long settingsVa = va();
@@ -90,7 +90,7 @@ public class CollideSettingsBase extends JoltPhysicsObject {
      * Return the collision tolerance for the GJK algorithm. The settings are
      * unaffected. (native attribute: mCollisionTolerance)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public float getCollisionTolerance() {
         long settingsVa = va();
@@ -116,7 +116,7 @@ public class CollideSettingsBase extends JoltPhysicsObject {
      * Alter how edge collisions should be handled. (native attribute:
      * mActiveEdgeMode)
      *
-     * @param mode the desired mode (not null, default=CollideOnlyWithActive)
+     * @param mode the desired mode (not {@code null}, default=CollideOnlyWithActive)
      */
     public void setActiveEdgeMode(EActiveEdgeMode mode) {
         long settingsVa = va();
@@ -128,7 +128,7 @@ public class CollideSettingsBase extends JoltPhysicsObject {
      * Alter the movement direction for inactive edges. (native attribute:
      * mActiveEdgeMovementDirection)
      *
-     * @param direction the desired direction (not null, unaffected,
+     * @param direction the desired direction (not {@code null}, unaffected,
      * default=(0,0,0))
      */
     public void setActiveEdgeMovementDirection(Vec3Arg direction) {
@@ -143,7 +143,7 @@ public class CollideSettingsBase extends JoltPhysicsObject {
      * Alter how face information should be handled. (native attribute:
      * mCollectFacesMode)
      *
-     * @param mode the desired mode (not null, default=NoFaces)
+     * @param mode the desired mode (not {@code null}, default=NoFaces)
      */
     public void setCollectFacesMode(ECollectFacesMode mode) {
         long settingsVa = va();

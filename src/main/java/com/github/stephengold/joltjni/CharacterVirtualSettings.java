@@ -80,7 +80,8 @@ public class CharacterVirtualSettings
      * Alter whether the character will move through back facing triangles.
      * (native attribute: mBackFaceMode)
      *
-     * @param mode the desired mode (not null, default=CollideWithBackFaces)
+     * @param mode the desired mode (not {@code null},
+     * default=CollideWithBackFaces)
      */
     public void setBackFaceMode(EBackFaceMode mode) {
         long settingsVa = va();
@@ -238,7 +239,7 @@ public class CharacterVirtualSettings
      * Alter the local offset applied to the shape. (native attribute:
      * mShapeOffset)
      *
-     * @param offset the desired offset (in local coordinates, not null,
+     * @param offset the desired offset (in local coordinates, not {@code null},
      * unaffected, default=(0,0,0))
      */
     public void setShapeOffset(Vec3Arg offset) {
@@ -255,7 +256,7 @@ public class CharacterVirtualSettings
      * Determine whether the character will move through back-facing triangles.
      * The settings are unaffected. (native attribute: mBackFaceMode)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EBackFaceMode getBackFaceMode() {

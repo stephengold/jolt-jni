@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,12 +46,12 @@ final public class CollisionDispatch {
      * Collide the specified shapes and pass collisions to the specified
      * collector.
      *
-     * @param shape1 the first colliding shape (not null, unaffected)
-     * @param shape2 the 2nd colliding shape (not null, unaffected)
-     * @param scale1 the scale to be applied to {@code shape1} (not null,
-     * unaffected)
-     * @param scale2 the scale to be applied to {@code shape2} (not null,
-     * unaffected)
+     * @param shape1 the first colliding shape (not {@code null}, unaffected)
+     * @param shape2 the 2nd colliding shape (not {@code null}, unaffected)
+     * @param scale1 the scale to be applied to {@code shape1} (not
+     * {@code null}, unaffected)
+     * @param scale2 the scale to be applied to {@code shape2} (not
+     * {@code null}, unaffected)
      * @param comTransform1 from the center-of-mass of {@code shape1} to system
      * coordinates (not null, unaffected)
      * @param comTransform2 from the center-of-mass of {@code shape2} to system

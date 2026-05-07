@@ -193,7 +193,7 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
      * Return a string representation of the properties object, which is
      * unaffected.
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

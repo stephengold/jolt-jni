@@ -167,7 +167,7 @@ public class CharacterVirtual
     /**
      * Replace the char-vs-char collision interface.
      *
-     * @param cvcInterface the desired interface (not null)
+     * @param cvcInterface the desired interface (not {@code null})
      */
     public void setCharacterVsCharacterCollision(
             CharacterVsCharacterCollision cvcInterface) {
@@ -203,7 +203,7 @@ public class CharacterVirtual
      * Alter the shape of the inner body. Invoke this after a successful
      * invocation of {@code setShape()}.
      *
-     * @param shape the desired shape (not null, unaffected, default=?)
+     * @param shape the desired shape (not {@code null}, unaffected, default=?)
      */
     public void setInnerBodyShape(ConstShape shape) {
         long characterVa = va();
@@ -807,7 +807,7 @@ public class CharacterVirtual
      * specified character during the previous time step. The current character
      * is unaffected.
      *
-     * @param otherCharacter the character to test against (not null,
+     * @param otherCharacter the character to test against (not {@code null},
      * unaffected)
      * @return {@code true} if contact or collision, otherwise {@code false}
      */
