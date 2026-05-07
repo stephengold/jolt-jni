@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EActivation;
+import com.github.stephengold.joltjni.readonly.ConstSkeletonPose;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
 
@@ -107,7 +108,7 @@ final public class RagdollRef extends Ref {
      * @param pose the desired pose
      * @param time the time interval for achieving the pose (in seconds)
      */
-    public void driveToPoseUsingKinematics(SkeletonPose pose, float time) {
+    public void driveToPoseUsingKinematics(ConstSkeletonPose pose, float time) {
         driveToPoseUsingKinematics(pose, time, true);
     }
 
@@ -119,9 +120,9 @@ final public class RagdollRef extends Ref {
      * @param lockBodies (default=true)
      */
     public void driveToPoseUsingKinematics(
-            SkeletonPose pose, float time, boolean lockBodies) {
+            ConstSkeletonPose pose, float time, boolean lockBodies) {
         long ragdollVa = targetVa();
-        long poseVa = pose.va();
+        long poseVa = pose.targetVa();
         Ragdoll.driveToPoseUsingKinematics(ragdollVa, poseVa, time, lockBodies);
     }
 
@@ -130,9 +131,9 @@ final public class RagdollRef extends Ref {
      *
      * @param pose the desired pose (not {@code null}, unaffected)
      */
-    public void driveToPoseUsingMotors(SkeletonPose pose) {
+    public void driveToPoseUsingMotors(ConstSkeletonPose pose) {
         long ragdollVa = targetVa();
-        long poseVa = pose.va();
+        long poseVa = pose.targetVa();
         Ragdoll.driveToPoseUsingMotors(ragdollVa, poseVa);
     }
 
@@ -275,7 +276,7 @@ final public class RagdollRef extends Ref {
      *
      * @param pose the desired pose (not {@code null}, unaffected)
      */
-    public void setPose(SkeletonPose pose) {
+    public void setPose(ConstSkeletonPose pose) {
         setPose(pose, true);
     }
 
@@ -286,9 +287,9 @@ final public class RagdollRef extends Ref {
      * @param lockBodies true&rarr;use the locking body interface,
      * false&rarr;use the non-locking body interface
      */
-    public void setPose(SkeletonPose pose, boolean lockBodies) {
+    public void setPose(ConstSkeletonPose pose, boolean lockBodies) {
         long ragdollVa = targetVa();
-        long poseVa = pose.va();
+        long poseVa = pose.targetVa();
         Ragdoll.setPose(ragdollVa, poseVa, lockBodies);
     }
     // *************************************************************************
