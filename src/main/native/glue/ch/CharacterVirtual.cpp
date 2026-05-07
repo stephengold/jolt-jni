@@ -52,21 +52,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualRef_f
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    cancelVelocityTowardsSteepSlopes
- * Signature: (JFFF[F)V
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_cancelVelocityTowardsSteepSlopes
-  (JNIEnv *pEnv, jclass, jlong characterVa, jfloat vx, jfloat vy, jfloat vz, jfloatArray storeVelocity) {
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeVelocity) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const Vec3 desiredV(vx, vy, vz);
+    DIRECT_FLOAT_BUFFER(pEnv, storeVelocity, pVelocity, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 desiredV(pVelocity[0], pVelocity[1], pVelocity[2]);
     const Vec3 outV = pCharacter->CancelVelocityTowardsSteepSlopes(desiredV);
-    jboolean isCopy;
-    jfloat * const pStoreVelocity
-            = pEnv->GetFloatArrayElements(storeVelocity, &isCopy);
-    pStoreVelocity[0] = outV.GetX();
-    pStoreVelocity[1] = outV.GetY();
-    pStoreVelocity[2] = outV.GetZ();
-    pEnv->ReleaseFloatArrayElements(storeVelocity, pStoreVelocity, 0);
+    pVelocity[0] = outV.GetX();
+    pVelocity[1] = outV.GetY();
+    pVelocity[2] = outV.GetZ();
 }
 
 /*

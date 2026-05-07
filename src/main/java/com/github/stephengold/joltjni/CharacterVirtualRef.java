@@ -261,12 +261,10 @@ final public class CharacterVirtualRef
     @Override
     public Vec3 cancelVelocityTowardsSteepSlopes(Vec3Arg desiredVelocity) {
         long characterVa = targetVa();
-        float vx = desiredVelocity.getX();
-        float vy = desiredVelocity.getY();
-        float vz = desiredVelocity.getZ();
-        float[] storeVelocity = new float[3];
+        FloatBuffer storeVelocity = Temporaries.floatBuffer1.get();
+        desiredVelocity.copyTo(storeVelocity);
         CharacterVirtual.cancelVelocityTowardsSteepSlopes(
-                characterVa, vx, vy, vz, storeVelocity);
+                characterVa, storeVelocity);
         Vec3 result = new Vec3(storeVelocity);
 
         return result;

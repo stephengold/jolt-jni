@@ -416,12 +416,9 @@ public class CharacterVirtual
     @Override
     public Vec3 cancelVelocityTowardsSteepSlopes(Vec3Arg desiredVelocity) {
         long characterVa = va();
-        float vx = desiredVelocity.getX();
-        float vy = desiredVelocity.getY();
-        float vz = desiredVelocity.getZ();
-        float[] storeVelocity = new float[3];
-        cancelVelocityTowardsSteepSlopes(
-                characterVa, vx, vy, vz, storeVelocity);
+        FloatBuffer storeVelocity = Temporaries.floatBuffer1.get();
+        desiredVelocity.copyTo(storeVelocity);
+        cancelVelocityTowardsSteepSlopes(characterVa, storeVelocity);
         Vec3 result = new Vec3(storeVelocity);
 
         return result;
@@ -837,8 +834,7 @@ public class CharacterVirtual
     // native methods
 
     native static void cancelVelocityTowardsSteepSlopes(
-            long characterVa, float vx, float vy, float vz,
-            float[] storeVelocity);
+            long characterVa, FloatBuffer storeVelocity);
 
     native static boolean canWalkStairs(
             long characterVa, float vx, float vy, float vz);
