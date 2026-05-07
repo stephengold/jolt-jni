@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstSkeleton;
 import com.github.stephengold.joltjni.readonly.ConstSkeletonPose;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import java.nio.DoubleBuffer;
 
 /**
  * A skeleton with joint transforms specifying a pose.
@@ -211,7 +212,7 @@ public class SkeletonPose
     @Override
     public RVec3 getRootOffset() {
         long poseVa = va();
-        double[] storeDoubles = new double[3];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getRootOffset(poseVa, storeDoubles);
         RVec3 result = new RVec3(storeDoubles);
 
@@ -259,7 +260,7 @@ public class SkeletonPose
     native private static long getJointMatrix(long poseVa, int jointIndex);
 
     native private static void getRootOffset(
-            long poseVa, double[] storeDoubles);
+            long poseVa, DoubleBuffer storeDoubles);
 
     native private static long getSkeleton(long poseVa);
 

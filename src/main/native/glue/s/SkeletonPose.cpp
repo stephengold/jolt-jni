@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -161,20 +161,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getJoin
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonPose
  * Method:    getRootOffset
- * Signature: (J[D)V
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getRootOffset
-  (JNIEnv *pEnv, jclass, jlong poseVa, jdoubleArray storeDoubles) {
+  (JNIEnv *pEnv, jclass, jlong poseVa, jobject storeDoubles) {
     const SkeletonPose * const pPose
             = reinterpret_cast<SkeletonPose *> (poseVa);
     const RVec3 offset = pPose->GetRootOffset();
-    jboolean isCopy;
-    jdouble * const pStoreDoubles
-            = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pStoreDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
     pStoreDoubles[0] = offset.GetX();
     pStoreDoubles[1] = offset.GetY();
     pStoreDoubles[2] = offset.GetZ();
-    pEnv->ReleaseDoubleArrayElements(storeDoubles, pStoreDoubles, 0);
 }
 
 /*
