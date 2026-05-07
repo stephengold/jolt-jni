@@ -134,6 +134,23 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
+     * Drive the ragdoll to the specified pose using motors. Drives to both
+     * target position and target velocity.
+     *
+     * @param prevPose the previous desired pose, used to calculate the target
+     * velocity of each motor (not {@code null}, unaffected)
+     * @param pose the desired pose (not {@code null}, unaffected)
+     * @param deltaTime the time interval between poses (in seconds)
+     */
+    public void driveToPoseUsingMotors(ConstSkeletonPose prevPose,
+            ConstSkeletonPose pose, float deltaTime) {
+        long ragdollVa = va();
+        long prevPoseVa = prevPose.targetVa();
+        long poseVa = pose.targetVa();
+        driveToPoseUsingMotorsPv(ragdollVa, prevPoseVa, poseVa, deltaTime);
+    }
+
+    /**
      * Count how many bodies are in the ragdoll, which is unaffected
      *
      * @return the count (&ge;0)

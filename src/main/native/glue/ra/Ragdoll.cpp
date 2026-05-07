@@ -103,6 +103,22 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_driveToPoseUs
 
 /*
  * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    driveToPoseUsingMotorsPv
+ * Signature: (JJJF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_driveToPoseUsingMotorsPv
+  (JNIEnv *, jclass, jlong ragdollVa, jlong prevPoseVa, jlong poseVa,
+  float deltaTime) {
+    Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    const SkeletonPose * const pPrevPose
+            = reinterpret_cast<SkeletonPose *> (prevPoseVa);
+    const SkeletonPose * const pPose
+            = reinterpret_cast<SkeletonPose *> (poseVa);
+    pRagdoll->DriveToPoseUsingMotors(*pPrevPose, *pPose, deltaTime);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
  * Method:    getBodyCount
  * Signature: (J)I
  */
