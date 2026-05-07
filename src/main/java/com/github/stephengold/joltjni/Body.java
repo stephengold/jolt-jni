@@ -185,7 +185,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Overwrite the state of the current body with the specified creation
+     * Overwrite the state of the current rigid body with the specified creation
      * settings. Not allowed when the body is in the physics system. Cannot add
      * MotionProperties if the body was created without one.
      *

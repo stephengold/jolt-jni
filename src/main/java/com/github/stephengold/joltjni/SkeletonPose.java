@@ -74,7 +74,8 @@ public class SkeletonPose extends JoltPhysicsObject {
     /**
      * Calculate the joint matrices in local space.
      *
-     * @param storeMatrices storage for the matrices (not null, modified)
+     * @param storeMatrices storage for the matrices (not {@code null},
+     * modified)
      */
     public void calculateLocalSpaceJointMatrices(Mat44Array storeMatrices) {
         long poseVa = va();
@@ -86,8 +87,8 @@ public class SkeletonPose extends JoltPhysicsObject {
      * Draw the current pose using the specified settings and renderer. The pose
      * is unaffected.
      *
-     * @param settings the desired settings (not null, unaffected)
-     * @param renderer the renderer to use (not null)
+     * @param settings the desired settings (not {@code null}, unaffected)
+     * @param renderer the renderer to use (not {@code null})
      */
     public void draw(
             SkeletonPoseDrawSettings settings, DebugRenderer renderer) {
@@ -98,9 +99,9 @@ public class SkeletonPose extends JoltPhysicsObject {
      * Draw the current pose using the specified settings and renderer. The pose
      * is unaffected.
      *
-     * @param settings the desired settings (not null, unaffected)
-     * @param renderer the renderer to use (not null)
-     * @param transform the transform to apply (not null, unaffected,
+     * @param settings the desired settings (not {@code null}, unaffected)
+     * @param renderer the renderer to use (not {@code null})
+     * @param transform the transform to apply (not {@code null}, unaffected,
      * default=Identity)
      */
     public void draw(SkeletonPoseDrawSettings settings, DebugRenderer renderer,
@@ -113,7 +114,7 @@ public class SkeletonPose extends JoltPhysicsObject {
     }
 
     /**
-     * Access the transforms of the specified joint.
+     * Access the transforms of the specified joint. The pose is unaffected.
      *
      * @param jointIndex the index of the joint to access
      * @return a new JVM object with the pre-existing native object assigned
@@ -127,7 +128,7 @@ public class SkeletonPose extends JoltPhysicsObject {
     }
 
     /**
-     * Count how many joints are in the pose.
+     * Count how many joints are in the pose. The pose is unaffected.
      *
      * @return the count (&ge;0)
      */
@@ -139,7 +140,8 @@ public class SkeletonPose extends JoltPhysicsObject {
     }
 
     /**
-     * Access the transform matrix for the specified joint.
+     * Access the transform matrix for the specified joint. The pose is
+     * unaffected.
      *
      * @param jointIndex which joint (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
@@ -181,7 +183,7 @@ public class SkeletonPose extends JoltPhysicsObject {
     }
 
     /**
-     * Access the skeleton that underlies this pose.
+     * Access the skeleton that underlies this pose. The pose is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
