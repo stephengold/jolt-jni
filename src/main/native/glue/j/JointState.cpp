@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -63,6 +63,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JointState_getTransla
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_JointState
+ * Method:    set
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JointState_set
+  (JNIEnv *, jclass, jlong targetVa, jlong sourceVa) {
+    SkeletonPose::JointState * const pTarget
+            = reinterpret_cast<SkeletonPose::JointState *> (targetVa);
+    const SkeletonPose::JointState * const pSource
+            = reinterpret_cast<SkeletonPose::JointState *> (sourceVa);
+    (*pTarget) = (*pSource);
 }
 
 /*

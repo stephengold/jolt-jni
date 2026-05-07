@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstJointState;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -47,6 +48,17 @@ public class JointState extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Copy both components from the argument.
+     *
+     * @param source the state to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstJointState source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        set(targetVa, sourceVa);
+    }
 
     /**
      * Copy the rotation. The state is unaffected. (native attribute: mRotation)
@@ -111,6 +123,8 @@ public class JointState extends JoltPhysicsObject {
 
     native private static void getTranslation(
             long stateVa, FloatBuffer storeFloats);
+
+    native private static void set(long targetVa, long sourceVa);
 
     native private static void setRotation(
             long stateVa, float qx, float qy, float qz, float qw);
