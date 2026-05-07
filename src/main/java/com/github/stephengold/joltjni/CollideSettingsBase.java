@@ -116,7 +116,8 @@ public class CollideSettingsBase extends JoltPhysicsObject {
      * Alter how edge collisions should be handled. (native attribute:
      * mActiveEdgeMode)
      *
-     * @param mode the desired mode (not {@code null}, default=CollideOnlyWithActive)
+     * @param mode the desired mode (not {@code null},
+     * default=CollideOnlyWithActive)
      */
     public void setActiveEdgeMode(EActiveEdgeMode mode) {
         long settingsVa = va();
