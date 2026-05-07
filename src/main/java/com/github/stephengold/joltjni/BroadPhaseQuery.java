@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,8 +71,8 @@ public class BroadPhaseQuery
     /**
      * Cast a box along a line segment and collect the resulting hits.
      *
-     * @param boxCast the test box and route (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param boxCast the test box and route (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     @Override
     public void castAaBox(
@@ -83,9 +83,9 @@ public class BroadPhaseQuery
     /**
      * Cast a box along a line segment and collect the resulting hits.
      *
-     * @param boxCast the test box and route (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param boxCast the test box and route (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     @Override
@@ -98,11 +98,12 @@ public class BroadPhaseQuery
     /**
      * Cast a box along a line segment and collect the resulting hits.
      *
-     * @param boxCast the test box and route (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param boxCast the test box and route (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void castAaBox(
@@ -119,8 +120,8 @@ public class BroadPhaseQuery
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the test ray (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param raycast the test ray (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     @Override
     public void castRay(RayCast raycast, RayCastBodyCollector collector) {
@@ -130,9 +131,9 @@ public class BroadPhaseQuery
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the test ray (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param raycast the test ray (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     @Override
@@ -144,11 +145,12 @@ public class BroadPhaseQuery
     /**
      * Cast a ray and collect the resulting hits.
      *
-     * @param raycast the test ray (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param raycast the test ray (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void castRay(RayCast raycast, RayCastBodyCollector collector,
@@ -164,8 +166,8 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes overlap with the specified test box.
      *
-     * @param box the test box (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param box the test box (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     @Override
     public void collideAaBox(
@@ -176,9 +178,9 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes overlap with the specified test box.
      *
-     * @param box the test box (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the test box (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     @Override
@@ -191,11 +193,12 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes overlap with the specified test box.
      *
-     * @param box the test box (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the test box (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void collideAaBox(
@@ -212,8 +215,8 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified oriented box.
      *
-     * @param box the box to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param box the box to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     @Override
     public void collideOrientedBox(
@@ -224,9 +227,9 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified oriented box.
      *
-     * @param box the box to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the box to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     @Override
@@ -239,11 +242,12 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified oriented box.
      *
-     * @param box the box to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param box the box to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void collideOrientedBox(
@@ -261,8 +265,8 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
      *
-     * @param point the location to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
+     * @param point the location to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
      */
     @Override
     public void collidePoint(
@@ -273,9 +277,9 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
      *
-     * @param point the location to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param point the location to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     @Override
@@ -287,11 +291,12 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
      *
-     * @param point the location to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param point the location to test (not {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void collidePoint(Vec3Arg point, CollideShapeBodyCollector collector,
@@ -310,9 +315,10 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
-     * @param center the center of the test sphere (not null, unaffected)
+     * @param center the center of the test sphere (not {@code null},
+     * unaffected)
      * @param radius the radius of the test sphere
-     * @param collector the hit collector to use (not null)
+     * @param collector the hit collector to use (not {@code null})
      */
     @Override
     public void collideSphere(
@@ -323,10 +329,11 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
-     * @param center the center of the test sphere (not null, unaffected)
+     * @param center the center of the test sphere (not {@code null},
+     * unaffected)
      * @param radius the radius of the test sphere
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
     @Override
@@ -340,12 +347,14 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
-     * @param center the center of the test sphere (not null, unaffected)
-     * @param radius the radius of the test sphere
-     * @param collector the hit collector to use (not null)
-     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * @param center the center of the test sphere (not {@code null},
      * unaffected)
-     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param radius the radius of the test sphere
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void collideSphere(

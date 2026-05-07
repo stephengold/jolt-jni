@@ -57,7 +57,8 @@ public class BodyManager extends NonCopyable {
     /**
      * Activate the specified bodies.
      *
-     * @param idArray the IDs of the bodies to activate (not null, unaffected)
+     * @param idArray the IDs of the bodies to activate (not {@code null},
+     * unaffected)
      */
     public void activateBodies(int... idArray) {
         long managerVa = va();
@@ -67,7 +68,7 @@ public class BodyManager extends NonCopyable {
     /**
      * Add a body, assigning the next available ID.
      *
-     * @param body (not null, modified)
+     * @param body (not {@code null}, modified)
      * @return {@code true} if successful, {@code false} if no ID is available
      */
     public boolean addBody(Body body) {
@@ -81,7 +82,7 @@ public class BodyManager extends NonCopyable {
     /**
      * Create a body using the specified settings, but do not add it.
      *
-     * @param settings the settings to use (not null, unaffected)
+     * @param settings the settings to use (not {@code null}, unaffected)
      * @return a new body, not added to any manager
      */
     public Body allocateBody(ConstBodyCreationSettings settings) {
@@ -96,7 +97,8 @@ public class BodyManager extends NonCopyable {
     /**
      * Deactivate the specified bodies.
      *
-     * @param idArray the IDs of the bodies to deactivate (not null, unaffected)
+     * @param idArray the IDs of the bodies to deactivate (not {@code null},
+     * unaffected)
      */
     public void deactivateBodies(int... idArray) {
         long managerVa = va();
@@ -106,7 +108,8 @@ public class BodyManager extends NonCopyable {
     /**
      * Remove the specified bodies from the manager.
      *
-     * @param idArray the IDs of the bodies to destroy (not null, unaffected)
+     * @param idArray the IDs of the bodies to destroy (not {@code null},
+     * unaffected)
      */
     public void destroyBodies(int... idArray) {
         long managerVa = va();
@@ -116,9 +119,11 @@ public class BodyManager extends NonCopyable {
     /**
      * Draw the state of the bodies.
      *
-     * @param drawSettings the draw settings to use (not null, unaffected)
-     * @param physicsSettings the physics settings to use (not null, unaffected)
-     * @param renderer the renderer to use (not null)
+     * @param drawSettings the draw settings to use (not {@code null},
+     * unaffected)
+     * @param physicsSettings the physics settings to use (not {@code null},
+     * unaffected)
+     * @param renderer the renderer to use (not {@code null})
      */
     public void draw(BodyManagerDrawSettings drawSettings,
             ConstPhysicsSettings physicsSettings, DebugRenderer renderer) {

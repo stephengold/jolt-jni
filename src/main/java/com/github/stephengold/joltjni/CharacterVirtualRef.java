@@ -55,11 +55,11 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Instantiate a reference to the specified target.
+     * Instantiate a reference to the specified character.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param target the target JVM object (not {@code null})
+     * @param target the character to target (not {@code null})
      */
     CharacterVirtualRef(long refVa, CharacterVirtual target) {
         this.ptr = target;
