@@ -434,7 +434,7 @@ tasks.register('debugSmokeTestAll', JavaExec) {
 }
 
 tasks.register('generateSnapshot', JavaExec) {
-    description = 'Generates a snapshot file read by LoadSnapshotTest'
+    description = 'Generates a snapshot file read by LoadSnapshotTest.'
     mainClass = 'testjoltjni.app.samples.GenerateSnapshot'
 }
 
