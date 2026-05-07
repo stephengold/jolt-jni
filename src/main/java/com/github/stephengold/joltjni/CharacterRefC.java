@@ -45,7 +45,7 @@ final public class CharacterRefC
     /**
      * cache the target to avoid duplication
      */
-    private ConstCharacter ptr;
+    final private ConstCharacter ptr;
     // *************************************************************************
     // constructors
 
