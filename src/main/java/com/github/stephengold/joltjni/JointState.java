@@ -32,7 +32,7 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class JointState extends JoltPhysicsObject {
+public class JointState extends JoltPhysicsObject implements ConstJointState {
     // *************************************************************************
     // constructors
 
@@ -61,10 +61,42 @@ public class JointState extends JoltPhysicsObject {
     }
 
     /**
+     * Alter the rotation component. (native attribute: mRotation)
+     *
+     * @param rotation the desired rotation (not {@code null}, unaffected,
+     * default=(0,0,0,1))
+     */
+    public void setRotation(QuatArg rotation) {
+        long stateVa = va();
+        float qw = rotation.getW();
+        float qx = rotation.getX();
+        float qy = rotation.getY();
+        float qz = rotation.getZ();
+        setRotation(stateVa, qx, qy, qz, qw);
+    }
+
+    /**
+     * Alter the translation offset component. (native attribute: mTranslation)
+     *
+     * @param offset the desired offset (not {@code null}, unaffected,
+     * default=(0,0,0))
+     */
+    public void setTranslation(Vec3Arg offset) {
+        long stateVa = va();
+        float x = offset.getX();
+        float y = offset.getY();
+        float z = offset.getZ();
+        setTranslation(stateVa, x, y, z);
+    }
+    // *************************************************************************
+    // ConstJointState methods
+
+    /**
      * Copy the rotation. The state is unaffected. (native attribute: mRotation)
      *
      * @return a new rotation quaternion
      */
+    @Override
     public Quat getRotation() {
         long stateVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
@@ -80,6 +112,7 @@ public class JointState extends JoltPhysicsObject {
      *
      * @return a new offset vector
      */
+    @Override
     public Vec3 getTranslation() {
         long stateVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
@@ -87,33 +120,6 @@ public class JointState extends JoltPhysicsObject {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
-    }
-
-    /**
-     * Alter the rotation. (native attribute: mRotation)
-     *
-     * @param rotation the desired rotation (not null, unaffected)
-     */
-    public void setRotation(QuatArg rotation) {
-        long stateVa = va();
-        float qw = rotation.getW();
-        float qx = rotation.getX();
-        float qy = rotation.getY();
-        float qz = rotation.getZ();
-        setRotation(stateVa, qx, qy, qz, qw);
-    }
-
-    /**
-     * Alter the translation offset. (native attribute: mTranslation)
-     *
-     * @param offset the desired offset (not null, unaffected)
-     */
-    public void setTranslation(Vec3Arg offset) {
-        long stateVa = va();
-        float x = offset.getX();
-        float y = offset.getY();
-        float z = offset.getZ();
-        setTranslation(stateVa, x, y, z);
     }
     // *************************************************************************
     // native private methods
