@@ -191,7 +191,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
      */
     public void saveBinaryState(
             StreamOut stream, boolean saveShapes, boolean saveGroupFilter) {
-        long settingsVa = targetVa();
+        long settingsVa = va();
         long streamVa = stream.va();
         saveBinaryState(settingsVa, streamVa, saveShapes, saveGroupFilter);
     }

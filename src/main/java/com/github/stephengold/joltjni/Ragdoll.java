@@ -248,7 +248,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      * false&rarr;use the non-locking body interface
      */
     public void getPose(SkeletonPose storePose, boolean lockBodies) {
-        long ragdollVa = targetVa();
+        long ragdollVa = va();
         long poseVa = storePose.va();
         getPoseToObject(ragdollVa, poseVa, lockBodies);
     }
