@@ -181,7 +181,7 @@ public class VehicleTransmissionSettings
         setSwitchTime(settingsVa, latency);
     }
     // *************************************************************************
-    // ConstVechicleTransmissionSettings methods
+    // ConstVehicleTransmissionSettings methods
 
     /**
      * Return how long it takes to release the clutch in {@code Auto} mode. The

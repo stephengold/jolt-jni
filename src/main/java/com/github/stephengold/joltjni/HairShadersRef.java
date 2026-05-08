@@ -46,7 +46,7 @@ final public class HairShadersRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param shaders the the shaders to target (not {@code null})
+     * @param shaders the shaders to target (not {@code null})
      */
     HairShadersRef(long refVa, HairShaders shaders) {
         assert shaders != null;

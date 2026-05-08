@@ -47,7 +47,7 @@ public interface ConstMassProperties extends ConstJoltPhysicsObject {
     /**
      * Copy the inertia tensor. The properties are unaffected.
      *
-     * @return a new matrix (in kilogram.meters squared)
+     * @return a new matrix (in kilogram.meters^2)
      */
     Mat44 getInertia();
 

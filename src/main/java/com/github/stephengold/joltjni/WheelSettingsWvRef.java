@@ -96,7 +96,7 @@ final public class WheelSettingsWvRef
      * Alter the moment of inertia around the wheel's rolling axis. (native
      * attribute: mInertia)
      *
-     * @param moment the desired moment of inertia (in kilogram.meters squared,
+     * @param moment the desired moment of inertia (in kilogram.meters^2,
      * default=0.9)
      */
     public void setInertia(float moment) {
@@ -381,7 +381,7 @@ final public class WheelSettingsWvRef
      * Return the moment of inertia around the wheel's rolling axis. The
      * settings are unaffected. (native attribute: mInertia)
      *
-     * @return the moment of inertia (in kilogram.meters squared, &ge;0)
+     * @return the moment of inertia (in kilogram.meters^2, &ge;0)
      */
     @Override
     public float getInertia() {

@@ -409,7 +409,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Apply the specified linear transform to all points.
      *
-     * @param matrix the tranform to apply (not {@code null}, unaffected)
+     * @param matrix the transform to apply (not {@code null}, unaffected)
      * @return the modified settings, for chaining
      */
     public ConvexHullShapeSettings transformPoints(Mat44Arg matrix) {

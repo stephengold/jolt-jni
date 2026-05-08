@@ -39,7 +39,7 @@ public interface ConstWheelSettingsWv extends ConstWheelSettings {
      * Return the moment of inertia around the wheel's rolling axis. The
      * settings are unaffected.
      *
-     * @return the moment of inertia (in kilogram.meters squared, &ge;0)
+     * @return the moment of inertia (in kilogram.meters^2, &ge;0)
      */
     float getInertia();
 

@@ -1286,9 +1286,11 @@ public class BodyCreationSettings
      * unaffected.
      *
      * @param stream where to write objects (not {@code null})
-     * @param shapeMap track multiple uses of shapes (may be null)
-     * @param materialMap track multiple uses of physics materials (may be null)
-     * @param filterMap track multiple uses of group filters (may be null)
+     * @param shapeMap track multiple uses of shapes (may be {@code null})
+     * @param materialMap track multiple uses of physics materials (may be
+     * {@code null})
+     * @param filterMap track multiple uses of group filters (may be
+     * {@code null})
      */
     @Override
     public void saveWithChildren(StreamOut stream, ShapeToIdMap shapeMap,

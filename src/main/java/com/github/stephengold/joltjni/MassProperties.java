@@ -84,7 +84,7 @@ final public class MassProperties
     /**
      * Rotate the inertia by the specified 3x3 matrix.
      *
-     * @param rotation the rotation to apply (not null, unaffected)
+     * @param rotation the rotation to apply (not {@code null}, unaffected)
      */
     public void rotate(Mat44Arg rotation) {
         long propertiesVa = va();
@@ -96,7 +96,7 @@ final public class MassProperties
      * Scale the mass and inertia by the specified factors. Note that factors
      * can be &lt;0 to flip the shape.
      *
-     * @param scaleFactors the desired scaling (not null unaffected)
+     * @param scaleFactors the desired scaling (not {@code null}, unaffected)
      */
     public void scale(Vec3Arg scaleFactors) {
         long propertiesVa = va();
@@ -119,7 +119,8 @@ final public class MassProperties
     /**
      * Alter the inertia tensor. (native attribute: mInertia)
      *
-     * @param inertia the desired value (not null, unaffected, default=zero)
+     * @param inertia the desired value (not {@code null}, unaffected,
+     * default=zero)
      * @return the modified properties, for chaining
      */
     public MassProperties setInertia(Mat44Arg inertia) {
@@ -147,7 +148,7 @@ final public class MassProperties
      * Alter the mass and inertia to that of a box with the specified dimensions
      * and uniform density.
      *
-     * @param boxSize the edge lengths of the box (not null, unaffected)
+     * @param boxSize the edge lengths of the box (not {@code null}, unaffected)
      * @param density the density to use
      */
     public void setMassAndInertiaOfSolidBox(Vec3Arg boxSize, float density) {
@@ -161,7 +162,7 @@ final public class MassProperties
     /**
      * Translate the inertia by the specified offset.
      *
-     * @param offset the amount of translation (not null, unaffected)
+     * @param offset the amount of translation (not {@code null}, unaffected)
      */
     public void translate(Vec3Arg offset) {
         long propertiesVa = va();
@@ -177,8 +178,10 @@ final public class MassProperties
      * Decompose the inertia tensor into a diagonal matrix and a right-handed
      * rotation matrix. The properties are unaffected.
      *
-     * @param storeRotation storage for the rotation matrix (not null, modified)
-     * @param storeDiagonal storage for the diagonal matrix (not null, modified)
+     * @param storeRotation storage for the rotation matrix (not {@code null},
+     * modified)
+     * @param storeDiagonal storage for the diagonal matrix (not {@code null},
+     * modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     @Override
@@ -198,7 +201,7 @@ final public class MassProperties
      * Copy the inertia tensor. The properties are unaffected. (native
      * attribute: mInertia)
      *
-     * @return a new matrix (in kilogram.meters squared)
+     * @return a new matrix (in kilogram.meters^2)
      */
     @Override
     public Mat44 getInertia() {
@@ -245,7 +248,7 @@ final public class MassProperties
      * Return a string representation of the properties object, which is
      * unaffected.
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

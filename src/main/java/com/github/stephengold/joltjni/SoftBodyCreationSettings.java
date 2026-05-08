@@ -707,7 +707,7 @@ public class SoftBodyCreationSettings
      * shared settings, materials, and group filter. The settings are
      * unaffected.
      *
-     * @param stream where to write objects (not null)
+     * @param stream where to write objects (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {
@@ -720,10 +720,13 @@ public class SoftBodyCreationSettings
      * Write the state of this object to the specified stream. The settings are
      * unaffected.
      *
-     * @param stream where to write objects (not null)
-     * @param sbssMap track multiple uses of shared settings (may be null)
-     * @param materialMap track multiple uses of physics materials (may be null)
-     * @param filterMap track multiple uses of group filters (may be null)
+     * @param stream where to write objects (not {@code null})
+     * @param sbssMap track multiple uses of shared settings (may be
+     * {@code null})
+     * @param materialMap track multiple uses of physics materials (may be
+     * {@code null})
+     * @param filterMap track multiple uses of group filters (may be
+     * {@code null})
      */
     @Override
     public void saveWithChildren(

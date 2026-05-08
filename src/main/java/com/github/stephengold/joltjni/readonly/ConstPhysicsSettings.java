@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -88,7 +88,7 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
      * Return the maximum translation of a contact point for warm starting. The
      * settings are unaffected.
      *
-     * @return the square of the threshold distance (in meters squared, &ge;0)
+     * @return the square of the threshold distance (in meters^2, &ge;0)
      */
     float getContactPointPreserveLambdaMaxDistSq();
 

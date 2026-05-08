@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -167,7 +167,7 @@ public class PhysicsSettings
      * (native member: mContactPointPreserveLambdaMaxDistSq)
      *
      * @param squaredDistance the square of the desired threshold distance (in
-     * meters squared, &ge;0, default=1e-4)
+     * meters^2, &ge;0, default=1e-4)
      */
     public void setContactPointPreserveLambdaMaxDistSq(float squaredDistance) {
         assert squaredDistance >= 0f : squaredDistance;
@@ -519,7 +519,7 @@ public class PhysicsSettings
      * settings are unaffected. (native member:
      * mContactPointPreserveLambdaMaxDistSq)
      *
-     * @return the square of the threshold distance (in meters squared, &ge;0)
+     * @return the square of the threshold distance (in meters^2, &ge;0)
      */
     @Override
     public float getContactPointPreserveLambdaMaxDistSq() {
