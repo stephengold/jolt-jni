@@ -137,12 +137,12 @@ final public class Vec3 implements Vec3Arg {
      * Instantiate from the specified position in the specified buffer.
      *
      * @param buffer the desired component values (not {@code null}, unaffected)
-     * @param startPos the starting position in the buffer (&ge;0)
+     * @param startPosition the starting position in the buffer (&ge;0)
      */
-    public Vec3(FloatBuffer buffer, int startPos) {
-        this.x = buffer.get(startPos);
-        this.y = buffer.get(startPos + 1);
-        this.z = buffer.get(startPos + 2);
+    public Vec3(FloatBuffer buffer, int startPosition) {
+        this.x = buffer.get(startPosition);
+        this.y = buffer.get(startPosition + 1);
+        this.z = buffer.get(startPosition + 2);
     }
 
     /**
@@ -359,12 +359,12 @@ final public class Vec3 implements Vec3Arg {
      * Set all 3 components from the specified position in the specified buffer.
      *
      * @param buffer the desired component values (not {@code null}, unaffected)
-     * @param startPos the starting position in the buffer (&ge;0)
+     * @param startPosition the starting position in the buffer (&ge;0)
      */
-    public void set(FloatBuffer buffer, int startPos) {
-        this.x = buffer.get(startPos);
-        this.y = buffer.get(startPos + 1);
-        this.z = buffer.get(startPos + 2);
+    public void set(FloatBuffer buffer, int startPosition) {
+        this.x = buffer.get(startPosition);
+        this.y = buffer.get(startPosition + 1);
+        this.z = buffer.get(startPosition + 2);
     }
 
     /**
@@ -699,14 +699,14 @@ final public class Vec3 implements Vec3Arg {
      * Write all 3 components to the specified position in the specified buffer.
      *
      * @param storeFloats the destination buffer (not {@code null},
-     * capacity&ge;startPos+3)
-     * @param startPos the starting position in the buffer (&ge;0)
+     * capacity&ge;startPosition+3)
+     * @param startPosition the starting position in the buffer (&ge;0)
      */
     @Override
-    public void copyTo(FloatBuffer storeFloats, int startPos) {
-        storeFloats.put(startPos, x);
-        storeFloats.put(startPos + 1, y);
-        storeFloats.put(startPos + 2, z);
+    public void copyTo(FloatBuffer storeFloats, int startPosition) {
+        storeFloats.put(startPosition, x);
+        storeFloats.put(startPosition + 1, y);
+        storeFloats.put(startPosition + 2, z);
     }
 
     /**

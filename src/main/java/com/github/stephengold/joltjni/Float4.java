@@ -106,13 +106,13 @@ final public class Float4 implements ConstFloat4 {
      * Instantiate from the specified position in the specified buffer.
      *
      * @param buffer the desired component values (not {@code null}, unaffected)
-     * @param startPos the starting position in the buffer (&ge;0)
+     * @param startPosition the starting position in the buffer (&ge;0)
      */
-    public Float4(FloatBuffer buffer, int startPos) {
-        this.x = buffer.get(startPos);
-        this.y = buffer.get(startPos + 1);
-        this.z = buffer.get(startPos + 2);
-        this.w = buffer.get(startPos + 3);
+    public Float4(FloatBuffer buffer, int startPosition) {
+        this.x = buffer.get(startPosition);
+        this.y = buffer.get(startPosition + 1);
+        this.z = buffer.get(startPosition + 2);
+        this.w = buffer.get(startPosition + 3);
     }
     // *************************************************************************
     // new methods exposed
