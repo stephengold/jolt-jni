@@ -47,6 +47,16 @@ public interface Vec3Arg {
     void copyTo(float[] storeArray);
 
     /**
+     * Copy all 3 components to the specified position in the specified array.
+     * The vector is unaffected.
+     *
+     * @param storeArray the destination array (not {@code null},
+     * length&ge;startPosition+3)
+     * @param startPosition the starting position in the array (&ge;0)
+     */
+    void copyTo(float[] storeArray, int startPosition);
+
+    /**
      * Write all 3 components to the start of the specified buffer. The vector
      * is unaffected.
      *

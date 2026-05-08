@@ -682,6 +682,21 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Copy all 3 components to the specified position in the specified array.
+     * The vector is unaffected.
+     *
+     * @param storeArray the destination array (not {@code null},
+     * length&ge;startPosition+3)
+     * @param startPosition the starting position in the array (&ge;0)
+     */
+    @Override
+    public void copyTo(float[] storeArray, int startPosition) {
+        storeArray[startPosition] = x;
+        storeArray[startPosition + 1] = y;
+        storeArray[startPosition + 2] = z;
+    }
+
+    /**
      * Write all 3 components to the start of the specified buffer. The vector
      * is unaffected.
      *
