@@ -46,7 +46,7 @@ final public class CharacterVirtualRefC
     /**
      * cache the target to avoid duplication
      */
-    private ConstCharacterVirtual ptr;
+    final private ConstCharacterVirtual ptr;
     // *************************************************************************
     // constructors
 
