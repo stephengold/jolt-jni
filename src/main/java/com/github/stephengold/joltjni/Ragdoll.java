@@ -180,6 +180,21 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
+     * Access the specified constraint.
+     *
+     * @param constraintIndex which constraint to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public TwoBodyConstraint getConstraint(int constraintIndex) {
+        long ragdollVa = va();
+        long constraintVa = getConstraint(ragdollVa, constraintIndex);
+        Constraint constraint = Constraint.newConstraint(constraintVa);
+        TwoBodyConstraint result = (TwoBodyConstraint) constraint;
+
+        return result;
+    }
+
+    /**
      * Count how many constraints are in the ragdoll, which is unaffected.
      *
      * @return the count (&ge;0)
@@ -373,6 +388,8 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     native static int getBodyCount(long ragdollVa);
 
     native static void getBodyIds(long ragdollVa, int[] storeIds);
+
+    native static long getConstraint(long ragdollVa, int constraintIndex);
 
     native static int getConstraintCount(long ragdollVa);
 

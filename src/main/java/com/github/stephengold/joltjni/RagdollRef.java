@@ -185,6 +185,21 @@ final public class RagdollRef extends Ref {
     }
 
     /**
+     * Access the specified constraint.
+     *
+     * @param constraintIndex which constraint to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public TwoBodyConstraint getConstraint(int constraintIndex) {
+        long ragdollVa = targetVa();
+        long constraintVa = Ragdoll.getConstraint(ragdollVa, constraintIndex);
+        Constraint constraint = Constraint.newConstraint(constraintVa);
+        TwoBodyConstraint result = (TwoBodyConstraint) constraint;
+
+        return result;
+    }
+
+    /**
      * Count how many constraints are in the ragdoll, which is unaffected.
      *
      * @return the count (&ge;0)

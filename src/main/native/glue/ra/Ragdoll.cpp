@@ -151,6 +151,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getBodyIds
 
 /*
  * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    getConstraint
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getConstraint
+  (JNIEnv *, jclass, jlong ragdollVa, jint constraintIndex) {
+    Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    TwoBodyConstraint * const pResult
+            = pRagdoll->GetConstraint(constraintIndex);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
  * Method:    getConstraintCount
  * Signature: (J)I
  */
