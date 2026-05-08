@@ -324,9 +324,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     public static Mat44 sRotationTranslation(QuatArg rotation, Vec3Arg offset) {
         FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
         rotation.copyTo(floatBuffer);
-        floatBuffer.put(4, offset.getX());
-        floatBuffer.put(5, offset.getY());
-        floatBuffer.put(6, offset.getZ());
+        offset.copyTo(floatBuffer, 4);
         long matrixVa = createRotationTranslation(floatBuffer);
         Mat44 result = new Mat44(matrixVa, true);
 

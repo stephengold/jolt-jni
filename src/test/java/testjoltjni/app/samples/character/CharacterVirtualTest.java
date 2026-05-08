@@ -65,9 +65,7 @@ CharacterContactListener contactListener=new CustomCharacterContactListener() {
         CharacterVirtualTest.this.OnAdjustBodyVelocity(
                 inCharacter, body2, ioLinearVelocities, ioAngularVelocities);
         ioLinearVelocities.copyTo(velocities);
-        velocities[3] = ioAngularVelocities.getX();
-        velocities[4] = ioAngularVelocities.getY();
-        velocities[5] = ioAngularVelocities.getZ();
+        ioAngularVelocities.copyTo(velocities, 3);
     }
     public void onCharacterContactAdded(long characterVa, long otherCharacterVa, int subShapeId2, double contactLocationX,
             double contactLocationY, double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ,

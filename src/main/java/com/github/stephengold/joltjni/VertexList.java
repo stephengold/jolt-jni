@@ -127,7 +127,10 @@ final public class VertexList implements ConstVertexList {
      * @param location the data to store (not {@code null}, unaffected)
      */
     public void set(int vertexIndex, ConstFloat3 location) {
-        set(vertexIndex, location.x(), location.y(), location.z());
+        float x = location.x();
+        float y = location.y();
+        float z = location.z();
+        set(vertexIndex, x, y, z);
     }
 
     /**
@@ -137,7 +140,10 @@ final public class VertexList implements ConstVertexList {
      * @param location the data to store (not {@code null}, unaffected)
      */
     public void set(int vertexIndex, Vec3Arg location) {
-        set(vertexIndex, location.getX(), location.getY(), location.getZ());
+        float x = location.getX();
+        float y = location.getY();
+        float z = location.getZ();
+        set(vertexIndex, x, y, z);
     }
     // *************************************************************************
     // ConstVertexList methods
@@ -176,11 +182,7 @@ final public class VertexList implements ConstVertexList {
      */
     @Override
     public Float3 get(int listIndex) {
-        float x = buffer.get(numAxes * listIndex);
-        float y = buffer.get(numAxes * listIndex + 1);
-        float z = buffer.get(numAxes * listIndex + 2);
-        Float3 result = new Float3(x, y, z);
-
+        Float3 result = new Float3(buffer, numAxes * listIndex);
         return result;
     }
 

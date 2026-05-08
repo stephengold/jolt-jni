@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -111,8 +111,7 @@ public class Test013 {
                     Vec3.sLess(Vec3.sAxisZ(), Vec3.sZero()));
 
             TestUtils.assertEquals(2.65f, 5.5f, 6.0f, support, 0f);
-            TestUtils.assertEquals(manual.getX(), manual.getY(), manual.getZ(),
-                    support, 0f);
+            Equivalent.vec3(manual, support, 0f);
             TestUtils.testClose(box);
         }
         { // overlaps method:

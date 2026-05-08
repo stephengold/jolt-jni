@@ -921,10 +921,12 @@ public class BodyInterface extends NonCopyable {
     public void notifyShapeChanged(int bodyId, Vec3Arg prevCom,
             boolean updateMassProperties, EActivation activation) {
         long bodyInterfaceVa = va();
+        float x = prevCom.getX();
+        float y = prevCom.getY();
+        float z = prevCom.getZ();
         int activationOrdinal = activation.ordinal();
-        notifyShapeChanged(bodyInterfaceVa, bodyId, prevCom.getX(),
-                prevCom.getY(), prevCom.getZ(), updateMassProperties,
-                activationOrdinal);
+        notifyShapeChanged(bodyInterfaceVa, bodyId, x, y, z,
+                updateMassProperties, activationOrdinal);
     }
 
     /**
@@ -971,8 +973,10 @@ public class BodyInterface extends NonCopyable {
      */
     public void setAngularVelocity(int bodyId, Vec3Arg omega) {
         long bodyInterfaceVa = va();
-        setAngularVelocity(bodyInterfaceVa, bodyId,
-                omega.getX(), omega.getY(), omega.getZ());
+        float wx = omega.getX();
+        float wy = omega.getY();
+        float wz = omega.getZ();
+        setAngularVelocity(bodyInterfaceVa, bodyId, wx, wy, wz);
     }
 
     /**
