@@ -1,10 +1,11 @@
 # Release log for the Jolt-JNI project
 
-## Version 4.3.0 released on TBD
+## Version 4.3.0 released on 8 May 2026
 
 + Bugfixes:
-  + unsatisfied link in `BodyIdVector.createCopy()`
-  + unsatisfied link in `Character.getCharacterSettings()`
+  + unsatisfied link during `BodyIdVector.createCopy()`
+  + unsatisfied link during `Character.getCharacterSettings()`
+  + assertion failure during `Contact.getCharacterB()`
   + `Mat44.setElement()` and `RMat44.setElement()` are ineffective (PR #46)
 
 + Added classes and interfaces:
