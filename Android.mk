@@ -87,13 +87,6 @@ $(N)/glue/ch/CharacterVsCharacterCollision.cpp \
 $(N)/glue/ch/CharacterVsCharacterCollisionSimple.cpp \
 $(N)/glue/ch/ChbEdge.cpp \
 $(N)/glue/ch/ChbFace.cpp \
-$(N)/glue/co/CombineFunction.cpp \
-$(N)/glue/co/CompoundShape.cpp \
-$(N)/glue/co/CompoundShapeSettings.cpp \
-$(N)/glue/co/ComputeQueue.cpp \
-$(N)/glue/co/ComputeQueueResult.cpp \
-$(N)/glue/co/ComputeSystem.cpp \
-$(N)/glue/co/ComputeSystemResult.cpp \
 $(N)/glue/co/ConeConstraint.cpp \
 $(N)/glue/co/ConeConstraintSettings.cpp \
 $(N)/glue/co/Constraint.cpp \
@@ -123,6 +116,13 @@ $(N)/glue/col/CollideShapeSettings.cpp \
 $(N)/glue/col/CollisionDispatch.cpp \
 $(N)/glue/col/CollisionEstimationResult.cpp \
 $(N)/glue/col/CollisionGroup.cpp \
+$(N)/glue/com/CombineFunction.cpp \
+$(N)/glue/com/CompoundShape.cpp \
+$(N)/glue/com/CompoundShapeSettings.cpp \
+$(N)/glue/com/ComputeQueue.cpp \
+$(N)/glue/com/ComputeQueueResult.cpp \
+$(N)/glue/com/ComputeSystem.cpp \
+$(N)/glue/com/ComputeSystemResult.cpp \
 $(N)/glue/cu/CustomBodyActivationListener.cpp \
 $(N)/glue/cu/CustomCastRayCollector.cpp \
 $(N)/glue/cu/CustomCastShapeBodyCollector.cpp \
