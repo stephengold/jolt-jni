@@ -1,5 +1,47 @@
 # Release log for the Jolt-JNI project
 
+## Version 4.3.0 released on TBD
+
++ Bugfixes:
+  + unsatisfied link in `BodyIdVector.createCopy()`
+  + unsatisfied link in `Character.getCharacterSettings()`
+  + `Mat44.setElement()` and `RMat44.setElement()` are ineffective (PR #46)
+
++ Added classes and interfaces:
+  + `ConstJointState`
+  + `ConstSkeletonPose`
+  + `ConstVehicleTransmissionSettings`
+  + `ContactSet`
+
++ Added methods:
+  + `Body.applyBodyCreationSettings()`
+  + `Body.applySoftBodyCreationSettings()`
+  + `ConstBodyCreationSettings.isEqual()`
+  + `ConstCollisionGroup.isEqual()`
+  + `ConstMathProperties.isEqual()`
+  + `ContactKey.toString()`
+  + `CustomLoader.newLoader()`
+  + `JointState.set()`
+  + `JphMath.sqrt()`
+  + `Ragdoll.driveToPoseUsingMotors()`
+  + `Ragdoll.getConstraint()`
+  + `RagdollRef.driveToPoseUsingMotors()`
+  + `RagdollRef.getConstraint()`
+  + `RagdollSettings.getConstraintIndexForBodyIndex()`
+  + `RagdollSettingsRef.getConstraintIndexForBodyIndex()`
+  + `StateRecorder.read(ContactSet)`
+  + `StateRecorder.write(ContactSet)`
+  + `Vec3Arg.copyTo()` [2 additional signatures]
+  + `VehicleEngineSettings.restoreBinaryState()`
+  + `VehicleEngineSettings.saveBinaryState()`
+  + `VehicleTransmissionSettings.restoreBinaryState()`
+  + `VehicleTransmissionSettings.saveBinaryState()`
+
++ Publicized a `PhysicsMaterial` constructor.
++ Updated the Jolt-Physics source and assets to sg260504 (=4b2f349).
++ Updated the OSHI library to v7.1.0 .
+
+
 ## Version 4.2.0 released on 3 May 2026
 
 + Added methods:
