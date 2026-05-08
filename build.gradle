@@ -434,7 +434,7 @@ tasks.register('debugSmokeTestAll', JavaExec) {
 }
 tasks.register('debugTest000', JavaExec) {
     debug = true
-    description = 'Runs the native code in Jolt.test000().'
+    description = 'Debugs the native code in Jolt.test000().'
     mainClass = 'testjoltjni.TestUtils'
 }
 
