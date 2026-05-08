@@ -455,7 +455,7 @@ public class CharacterVirtual
         ConstContact[] result = new ConstContact[numContacts];
         for (int i = 0; i < numContacts; ++i) {
             long contactVa = getActiveContact(characterVa, i);
-            result[i] = new Contact(contactVa, true);
+            result[i] = new Contact(contactVa, true, system);
         }
 
         return result;

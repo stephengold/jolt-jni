@@ -35,6 +35,13 @@ import java.nio.FloatBuffer;
  */
 public class Contact extends ContactKey implements ConstContact {
     // *************************************************************************
+    // fields
+
+    /**
+     * where the contact is occurring (not {@code null})
+     */
+    final private PhysicsSystem system;
+    // *************************************************************************
     // constructors
 
     /**
@@ -44,9 +51,13 @@ public class Contact extends ContactKey implements ConstContact {
      * zero)
      * @param owner {@code true} &rarr; make the JVM object the owner,
      * {@code false} &rarr; it isn't the owner
+     * @param system the physics system in which the contact is occurring (not
+     * {@code null})
      */
-    Contact(long contactVa, boolean owner) {
+    Contact(long contactVa, boolean owner, PhysicsSystem system) {
         super(false);
+        assert system != null;
+        this.system = system;
         Runnable freeingAction = owner ? () -> free(contactVa) : null;
         setVirtualAddress(contactVa, freeingAction);
     }
@@ -82,7 +93,7 @@ public class Contact extends ContactKey implements ConstContact {
         if (characterVa == 0L) {
             result = null;
         } else {
-            result = new CharacterVirtual(characterVa, null);
+            result = new CharacterVirtual(characterVa, system);
         }
 
         return result;

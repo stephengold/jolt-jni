@@ -300,9 +300,10 @@ final public class CharacterVirtualRef
         long characterVa = targetVa();
         int numContacts = CharacterVirtual.countActiveContacts(characterVa);
         ConstContact[] result = new ConstContact[numContacts];
+        PhysicsSystem system = getPhysicsSystem();
         for (int i = 0; i < numContacts; ++i) {
             long contactVa = CharacterVirtual.getActiveContact(characterVa, i);
-            result[i] = new Contact(contactVa, true);
+            result[i] = new Contact(contactVa, true, system);
         }
 
         return result;
