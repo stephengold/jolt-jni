@@ -347,7 +347,7 @@ final public class Vec3 implements Vec3Arg {
      * Set all 3 components from the specified buffer.
      *
      * @param buffer the desired component values (not {@code null},
-     * length&ge;3, unaffected)
+     * capacity&ge;3, unaffected)
      */
     public void set(FloatBuffer buffer) {
         this.x = buffer.get(0);
@@ -358,7 +358,8 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Set all 3 components from the specified position in the specified buffer.
      *
-     * @param buffer the desired component values (not {@code null}, unaffected)
+     * @param buffer the desired component values (not {@code null},
+     * capacity&ge;startPosition+3, unaffected)
      * @param startPosition the starting position in the buffer (&ge;0)
      */
     public void set(FloatBuffer buffer, int startPosition) {
@@ -712,6 +713,7 @@ final public class Vec3 implements Vec3Arg {
 
     /**
      * Write all 3 components to the specified position in the specified buffer.
+     * The vector is unaffected.
      *
      * @param storeFloats the destination buffer (not {@code null},
      * capacity&ge;startPosition+3)

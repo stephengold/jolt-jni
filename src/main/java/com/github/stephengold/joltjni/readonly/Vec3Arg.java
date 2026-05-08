@@ -67,6 +67,7 @@ public interface Vec3Arg {
 
     /**
      * Write all 3 components to the specified position in the specified buffer.
+     * The vector is unaffected.
      *
      * @param storeFloats the destination buffer (not {@code null},
      * capacity&ge;startPosition+3)
