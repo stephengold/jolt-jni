@@ -476,8 +476,8 @@ final public class CharacterVirtualRefC
      * @return the pre-existing instance
      */
     @Override
-    public ConstPhysicsSystem getPhysicsSystem() {
-        ConstPhysicsSystem result = ptr.getPhysicsSystem();
+    public PhysicsSystem getPhysicsSystem() {
+        PhysicsSystem result = ptr.getPhysicsSystem();
         return result;
     }
 

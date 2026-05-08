@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.StateRecorder;
@@ -137,7 +138,7 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      *
      * @return the pre-existing instance, or {@code null} if none
      */
-    ConstPhysicsSystem getPhysicsSystem();
+    PhysicsSystem getPhysicsSystem();
 
     /**
      * Copy the character's "up" direction. The character is unaffected.

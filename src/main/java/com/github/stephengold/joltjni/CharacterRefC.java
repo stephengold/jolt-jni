@@ -360,8 +360,8 @@ final public class CharacterRefC
      * @return the pre-existing object (not {@code null})
      */
     @Override
-    public ConstPhysicsSystem getPhysicsSystem() {
-        ConstPhysicsSystem result = ptr.getPhysicsSystem();
+    public PhysicsSystem getPhysicsSystem() {
+        PhysicsSystem result = ptr.getPhysicsSystem();
         return result;
     }
 
