@@ -279,6 +279,13 @@ $(N)/glue/sh/ShapeSettingsRefC.cpp \
 $(N)/glue/sh/ShapeToIdMap.cpp \
 $(N)/glue/sh/SharedMutexBase.cpp \
 $(N)/glue/sh/SharedSettingsToIdMap.cpp \
+$(N)/glue/sk/SkeletalAnimation.cpp \
+$(N)/glue/sk/Skeleton.cpp \
+$(N)/glue/sk/SkeletonMapper.cpp \
+$(N)/glue/sk/SkeletonPose.cpp \
+$(N)/glue/sk/SkeletonPoseDrawSettings.cpp \
+$(N)/glue/sk/Skinned.cpp \
+$(N)/glue/sk/SkinWeight.cpp \
 $(N)/glue/so/SoftBodyContactListener.cpp \
 $(N)/glue/so/SoftBodyContactSettings.cpp \
 $(N)/glue/so/SoftBodyCreationSettings.cpp \
@@ -296,13 +303,6 @@ $(N)/glue/s/SimpleTireMaxImpulseCallback.cpp \
 $(N)/glue/s/SimShapeFilter.cpp \
 $(N)/glue/s/SixDofConstraint.cpp \
 $(N)/glue/s/SixDofConstraintSettings.cpp \
-$(N)/glue/s/SkeletalAnimation.cpp \
-$(N)/glue/s/Skeleton.cpp \
-$(N)/glue/s/SkeletonMapper.cpp \
-$(N)/glue/s/SkeletonPose.cpp \
-$(N)/glue/s/SkeletonPoseDrawSettings.cpp \
-$(N)/glue/s/Skinned.cpp \
-$(N)/glue/s/SkinWeight.cpp \
 $(N)/glue/s/SliderConstraint.cpp \
 $(N)/glue/s/SliderConstraintSettings.cpp \
 $(N)/glue/s/SpecifiedBroadPhaseLayerFilter.cpp \
