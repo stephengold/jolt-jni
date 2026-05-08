@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.StreamOut;
+
 /**
  * Read-only access to a {@code VehicleEngineSettings} object. (native type:
  * {@code const VehicleEngineSettings})
@@ -70,4 +72,12 @@ public interface ConstVehicleEngineSettings extends ConstJoltPhysicsObject {
      * @return a new JVM object with the pre-existing native object assigned
      */
     ConstLinearCurve getNormalizedTorque();
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not {@code null})
+     */
+    void saveBinaryState(StreamOut stream);
 }

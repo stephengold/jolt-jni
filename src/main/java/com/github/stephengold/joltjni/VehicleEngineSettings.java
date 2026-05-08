@@ -68,6 +68,17 @@ public class VehicleEngineSettings
     // new methods exposed
 
     /**
+     * Load the settings from the specified binary stream.
+     *
+     * @param stream the stream to read from (not {@code null})
+     */
+    public void restoreBinaryState(StreamIn stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        restoreBinaryState(settingsVa, streamVa);
+    }
+
+    /**
      * Alter the angular damping factor. (native attribute: mAngularDamping)
      *
      * @param damping the desired damping factor (per second, default=0.2)
@@ -216,6 +227,19 @@ public class VehicleEngineSettings
 
         return result;
     }
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not {@code null})
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(settingsVa, streamVa);
+    }
     // *************************************************************************
     // native private methods
 
@@ -236,6 +260,11 @@ public class VehicleEngineSettings
     native private static float getMinRpm(long settingsVa);
 
     native private static long getNormalizedTorque(long settingsVa);
+
+    native private static void restoreBinaryState(
+            long settingsVa, long streamVa);
+
+    native private static void saveBinaryState(long settingsVa, long streamVa);
 
     native private static void setAngularDamping(
             long settingsVa, float damping);

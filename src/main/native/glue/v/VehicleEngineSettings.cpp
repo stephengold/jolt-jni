@@ -134,6 +134,32 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
+ * Method:    restoreBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettings_restoreBinaryState
+  (JNIEnv *, jclass, jlong settingsVa, jlong streamVa) {
+    VehicleEngineSettings * const pSettings
+            = reinterpret_cast<VehicleEngineSettings *> (settingsVa);
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    pSettings->RestoreBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
+ * Method:    saveBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettings_saveBinaryState
+  (JNIEnv *, jclass, jlong settingsVa, jlong streamVa) {
+    const VehicleEngineSettings * const pSettings
+            = reinterpret_cast<VehicleEngineSettings *> (settingsVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pSettings->SaveBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
  * Method:    setAngularDamping
  * Signature: (JF)V
  */
