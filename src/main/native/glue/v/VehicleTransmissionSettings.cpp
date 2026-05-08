@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -184,6 +184,32 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleTransmission
             = reinterpret_cast<VehicleTransmissionSettings *> (settingsVa);
     const float result = pSettings->mSwitchTime;
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTransmissionSettings
+ * Method:    restoreBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTransmissionSettings_restoreBinaryState
+  (JNIEnv *, jclass, jlong settingsVa, jlong streamVa) {
+    VehicleTransmissionSettings * const pSettings
+            = reinterpret_cast<VehicleTransmissionSettings *> (settingsVa);
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    pSettings->RestoreBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTransmissionSettings
+ * Method:    saveBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTransmissionSettings_saveBinaryState
+  (JNIEnv *, jclass, jlong settingsVa, jlong streamVa) {
+    const VehicleTransmissionSettings * const pSettings
+            = reinterpret_cast<VehicleTransmissionSettings *> (settingsVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pSettings->SaveBinaryState(*pStream);
 }
 
 /*

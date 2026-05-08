@@ -71,6 +71,17 @@ public class VehicleTransmissionSettings
     // new methods exposed
 
     /**
+     * Load the settings from the specified binary stream.
+     *
+     * @param stream the stream to read from (not {@code null})
+     */
+    public void restoreBinaryState(StreamIn stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        restoreBinaryState(settingsVa, streamVa);
+    }
+
+    /**
      * Alter how long it takes to release the clutch in {@code Auto} mode.
      * (native attribute: mClutchReleaseTime)
      *
@@ -300,6 +311,19 @@ public class VehicleTransmissionSettings
 
         return result;
     }
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not {@code null})
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(settingsVa, streamVa);
+    }
     // *************************************************************************
     // native private methods
 
@@ -326,6 +350,11 @@ public class VehicleTransmissionSettings
     native private static float getSwitchLatency(long settingsVa);
 
     native private static float getSwitchTime(long settingsVa);
+
+    native private static void restoreBinaryState(
+            long settingsVa, long streamVa);
+
+    native private static void saveBinaryState(long settingsVa, long streamVa);
 
     native private static void setClutchStrength(
             long settingsVa, float strength);

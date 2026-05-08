@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.enumerate.ETransmissionMode;
 
 /**
@@ -102,4 +103,12 @@ public interface ConstVehicleTransmissionSettings
      * @return the latency (in seconds)
      */
     float getSwitchTime();
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not {@code null})
+     */
+    void saveBinaryState(StreamOut stream);
 }
