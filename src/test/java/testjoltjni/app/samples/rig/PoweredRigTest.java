@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics powered-rig test.
  * <p>
@@ -34,9 +35,11 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class PoweredRigTest extends Test{
 float mTime;
+int sMotorMode;
 RagdollRef mRagdoll=new RagdollRef();
 RagdollSettingsRef mRagdollSettings=new RagdollSettingsRef();
 SkeletalAnimationRef mAnimation=new SkeletalAnimationRef();
+SkeletonPose mPrevPose=new SkeletonPose();
 SkeletonPose mPose=new SkeletonPose();
 
 final String sAnimations[] =
@@ -76,6 +79,7 @@ public void Initialize()
 
 	// Initialize pose
 	mPose.setSkeleton(mRagdollSettings.getSkeleton());
+	mPrevPose.setSkeleton(mRagdollSettings.getSkeleton());
 
 	// Position ragdoll
 	mAnimation.sample(0.0f, mPose);
@@ -85,6 +89,8 @@ public void Initialize()
 
 public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
+	float prev_time = mTime;
+
 	// Update time
 	mTime += inParams.mDeltaTime;
 
@@ -102,7 +108,34 @@ if (implementsDebugRendering())
 	mPose.draw(inParams.mPoseDrawSettings, mDebugRenderer);
  // JPH_DEBUG_RENDERER
 
-	mRagdoll.driveToPoseUsingMotors(mPose);
+	// Sample previous pose (you can also store this, but since we can scrub back in time we need to resample)
+	mAnimation.sample(prev_time, mPrevPose);
+	mPrevPose.getJoint(0).set(joint);
+	mPrevPose.setRootOffset(root_offset);
+	mPrevPose.calculateJointMatrices();
+
+	// Measure max error to previous target pose (we drove to that last frame so that's what we should have reached now)
+	double avg_error = 0.0, max_error = 0.0;
+	for (int j = 0; j < mPose.getSkeleton().getJointCount(); ++j)
+	{
+		int constraint_index = mRagdollSettings.getConstraintIndexForBodyIndex(j);
+		if (constraint_index < 0)
+			continue;
+		TwoBodyConstraint constraint = mRagdoll.getConstraint(constraint_index);
+
+		RMat44 target = star(RMat44.sTranslation(root_offset) , mPrevPose.getJointMatrix(j));
+		RMat44 actual = star(constraint.getBody2().getCenterOfMassTransform() , constraint.getConstraintToBody2Matrix());
+		double error = (double)(minus(target.getTranslation() , actual.getTranslation())).length();
+		max_error = Math.max(max_error, error);
+		avg_error += error;
+	}
+	avg_error /= mPose.getSkeleton().getJointCount();
+	mDebugRenderer.drawText3D(root_offset, String.format("AvgErr: %.3g, MaxErr: %.3g", avg_error, max_error), Color.sWhite, 0.1f);
+
+	if (sMotorMode == 0)
+		mRagdoll.driveToPoseUsingMotors(mPose);
+	else
+		mRagdoll.driveToPoseUsingMotors(mPrevPose, mPose, inParams.mDeltaTime);
 }
 /*TODO
 
