@@ -432,6 +432,11 @@ tasks.register('debugSmokeTestAll', JavaExec) {
     description = 'Debugs a "smoke test" of each of the Samples tests.'
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
 }
+tasks.register('debugTest000', JavaExec) {
+    debug = true
+    description = 'Runs the native code in Jolt.test000().'
+    mainClass = 'testjoltjni.TestUtils'
+}
 
 tasks.register('generateSnapshot', JavaExec) {
     description = 'Generates a snapshot file read by LoadSnapshotTest.'
@@ -497,6 +502,10 @@ tasks.register('runSmokeTestAll', JavaExec) {
 tasks.register('runTest', JavaExec) {
     description = 'Runs the automated tests and logs heap allocations.'
     mainClass = 'testjoltjni.RunTest'
+}
+tasks.register('runTest000', JavaExec) {
+    description = 'Runs the native code in Jolt.test000().'
+    mainClass = 'testjoltjni.TestUtils'
 }
 
 Boolean enableNativeAccess = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
