@@ -176,7 +176,7 @@ jobs:
 
   Java21-Windows64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: windows-2022
+    runs-on: windows-2025-vs2026
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -217,7 +217,7 @@ jobs:
 
   Java21-Windows64_avx2:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: windows-2022
+    runs-on: windows-2025-vs2026
     steps:
       - uses: actions/setup-java@v5
         with:
