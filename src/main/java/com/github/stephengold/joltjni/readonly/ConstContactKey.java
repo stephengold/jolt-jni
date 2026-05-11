@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.StateRecorder;
 
 /**
- * Read-only access to a {@code ContactKey}. (native type: {@code const
+ * Read-only access to a {@code CharacterContactKey}. (native type: {@code const
  * CharacterContactKey})
  *
  * @author Stephen Gold sgold@sonic.net

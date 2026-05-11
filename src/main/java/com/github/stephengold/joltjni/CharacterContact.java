@@ -34,7 +34,7 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public class CharacterContact
-        extends ContactKey
+        extends CharacterContactKey
         implements ConstCharacterContact {
     // *************************************************************************
     // fields

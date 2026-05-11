@@ -29,14 +29,16 @@ import com.github.stephengold.joltjni.readonly.ConstContactKey;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
+public class CharacterContactKey
+        extends JoltPhysicsObject
+        implements ConstContactKey {
     // *************************************************************************
     // constructors
 
     /**
      * Instantiate a default key.
      */
-    public ContactKey() {
+    public CharacterContactKey() {
         long keyVa = createDefault();
         Runnable freeingAction = () -> free(keyVa);
         setVirtualAddress(keyVa, freeingAction);
@@ -47,7 +49,7 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
      *
      * @param dummy unused argument to distinguish from the zero-arg constructor
      */
-    ContactKey(boolean dummy) {
+    CharacterContactKey(boolean dummy) {
     }
 
     /**
@@ -58,7 +60,8 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
      * other colliding object
      * @param subShapeId the {@code SubShapeID} of the shape that is in contact
      */
-    public ContactKey(char idType, int bodyOrCharacterId, int subShapeId) {
+    public CharacterContactKey(
+            char idType, int bodyOrCharacterId, int subShapeId) {
         long keyVa = createKey(idType, bodyOrCharacterId, subShapeId);
         Runnable freeingAction = () -> free(keyVa);
         setVirtualAddress(keyVa, freeingAction);
@@ -69,7 +72,7 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public ContactKey(ContactKey original) {
+    public CharacterContactKey(CharacterContactKey original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
         Runnable freeingAction = () -> free(copyVa);
@@ -84,7 +87,7 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
      * @param owner {@code true} &rarr; make the JVM object the owner,
      * {@code false} &rarr; it isn't the owner
      */
-    ContactKey(long keyVa, boolean owner) {
+    CharacterContactKey(long keyVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(keyVa) : null;
         setVirtualAddress(keyVa, freeingAction);
     }
@@ -198,7 +201,7 @@ public class ContactKey extends JoltPhysicsObject implements ConstContactKey {
     @Override
     public String toString() {
         String result = String.format(
-                "ContactKey(body=%08x character=%08x subShape=%08x",
+                "CharacterContactKey(body=%08x character=%08x subShape=%08x",
                 getBodyB(), getCharacterIdB(), getSubShapeIdB());
         return result;
     }

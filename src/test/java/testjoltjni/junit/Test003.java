@@ -30,6 +30,7 @@ import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.BroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.CapsuleShape;
+import com.github.stephengold.joltjni.CharacterContactKey;
 import com.github.stephengold.joltjni.CharacterRef;
 import com.github.stephengold.joltjni.CharacterRefC;
 import com.github.stephengold.joltjni.CharacterSettings;
@@ -38,7 +39,6 @@ import com.github.stephengold.joltjni.CharacterVirtualRef;
 import com.github.stephengold.joltjni.CharacterVirtualRefC;
 import com.github.stephengold.joltjni.CharacterVirtualSettings;
 import com.github.stephengold.joltjni.CollisionGroup;
-import com.github.stephengold.joltjni.ContactKey;
 import com.github.stephengold.joltjni.ContactListenerList;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.FilteredContactListener;
@@ -522,13 +522,13 @@ public class Test003 {
     }
 
     /**
-     * Test the {@code ContactKey} class.
+     * Test the {@code CharacterContactKey} class.
      */
     private static void doContactKey() {
-        ContactKey key = new ContactKey();
+        CharacterContactKey key = new CharacterContactKey();
         testContactKeyDefaults(key);
 
-        ContactKey copy = new ContactKey(key);
+        CharacterContactKey copy = new CharacterContactKey(key);
         testContactKeyDefaults(copy);
 
         TestUtils.testClose(copy, key);
@@ -989,7 +989,8 @@ public class Test003 {
     }
 
     /**
-     * Test the getters and defaults of the specified {@code ContactKey}.
+     * Test the getters and defaults of the specified
+     * {@code CharacterContactKey}.
      *
      * @param key the key to test (not {@code null}, unaffected)
      */

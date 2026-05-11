@@ -25,33 +25,33 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Character/CharacterVirtual.h"
-#include "auto/com_github_stephengold_joltjni_ContactKey.h"
+#include "auto/com_github_stephengold_joltjni_CharacterContactKey.h"
 #include "glue/glue.h"
 
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    createCopy
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactKey_createCopy
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_createCopy
   BODYOF_CREATE_COPY(CharacterContactKey)
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactKey_createDefault
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_createDefault
   BODYOF_CREATE_DEFAULT(CharacterContactKey)
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    createKey
  * Signature: (CII)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactKey_createKey
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_createKey
   (JNIEnv *, jclass, jchar idType, jint bodyOrCharacterId, jint subShapeId) {
     SubShapeID ssid;
     ssid.SetValue(subShapeId);
@@ -70,19 +70,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactKey_createKey
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactKey_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_free
   BODYOF_FREE(CharacterContactKey)
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    getBodyB
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getBodyB
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_getBodyB
   (JNIEnv *, jclass, jlong keyVa) {
     const CharacterContactKey * const pKey
             = reinterpret_cast<CharacterContactKey *> (keyVa);
@@ -91,11 +91,11 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getBodyB
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    getCharacterIdB
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getCharacterIdB
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_getCharacterIdB
   (JNIEnv *, jclass, jlong keyVa) {
     const CharacterContactKey * const pKey
             = reinterpret_cast<CharacterContactKey *> (keyVa);
@@ -104,11 +104,11 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getCharact
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    getSubShapeIdB
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getSubShapeIdB
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_getSubShapeIdB
   (JNIEnv *, jclass, jlong keyVa) {
     const CharacterContactKey * const pKey
             = reinterpret_cast<CharacterContactKey *> (keyVa);
@@ -117,11 +117,11 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getSubShap
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    isEqual
  * Signature: (JJ)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ContactKey_isEqual
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_isEqual
   (JNIEnv *, jclass, jlong keyVa, jlong otherVa) {
     const CharacterContactKey * const pKey1
             = reinterpret_cast<CharacterContactKey *> (keyVa);
@@ -132,11 +132,11 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ContactKey_isEqua
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    restoreState
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactKey_restoreState
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_restoreState
   (JNIEnv *, jclass, jlong keyVa, jlong recorderVa) {
     CharacterContactKey * const pKey
             = reinterpret_cast<CharacterContactKey *> (keyVa);
@@ -146,11 +146,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactKey_restoreSta
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_ContactKey
+ * Class:     com_github_stephengold_joltjni_CharacterContactKey
  * Method:    saveState
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactKey_saveState
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_saveState
   (JNIEnv *, jclass, jlong keyVa, jlong recorderVa) {
     const CharacterContactKey * const pKey
             = reinterpret_cast<CharacterContactKey *> (keyVa);

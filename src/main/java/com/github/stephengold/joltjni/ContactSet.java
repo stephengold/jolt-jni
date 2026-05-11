@@ -122,10 +122,10 @@ public class ContactSet extends JoltPhysicsObject {
      * @param elementIndex the index from which to copy the key (&ge;0)
      * @return a new object
      */
-    public ContactKey get(int elementIndex) {
+    public CharacterContactKey get(int elementIndex) {
         long setVa = va();
         long keyVa = getElement(setVa, elementIndex);
-        ContactKey result = new ContactKey(keyVa, true);
+        CharacterContactKey result = new CharacterContactKey(keyVa, true);
 
         return result;
     }
@@ -180,11 +180,11 @@ public class ContactSet extends JoltPhysicsObject {
      *
      * @return a new Java list
      */
-    public List<ContactKey> toList() {
+    public List<CharacterContactKey> toList() {
         int numKeys = size();
-        List<ContactKey> result = new ArrayList<>(numKeys);
+        List<CharacterContactKey> result = new ArrayList<>(numKeys);
         for (int i = 0; i < numKeys; ++i) {
-            ContactKey key = get(i);
+            CharacterContactKey key = get(i);
             result.add(key);
         }
 
