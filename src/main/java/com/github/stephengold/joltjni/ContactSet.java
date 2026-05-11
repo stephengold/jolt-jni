@@ -21,7 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstContactKey;
+import com.github.stephengold.joltjni.readonly.ConstCharacterContactKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +108,7 @@ public class ContactSet extends JoltPhysicsObject {
      * @param key the key to search for (not {@code null}, unaffected)
      * @return the index of the first matching key, or -1 if not found
      */
-    public int find(ConstContactKey key) {
+    public int find(ConstCharacterContactKey key) {
         long setVa = va();
         long keyVa = key.targetVa();
         int result = find(setVa, keyVa);
@@ -135,7 +135,7 @@ public class ContactSet extends JoltPhysicsObject {
      *
      * @param key the key to append (not {@code null}, unaffected)
      */
-    public void pushBack(ConstContactKey key) {
+    public void pushBack(ConstCharacterContactKey key) {
         int numKeys = size();
         resize(numKeys + 1);
         set(numKeys, key);
@@ -157,7 +157,7 @@ public class ContactSet extends JoltPhysicsObject {
      * @param elementIndex the index at which to store the key (&ge;0)
      * @param key the key to store (not {@code null}, unaffected)
      */
-    public void set(int elementIndex, ConstContactKey key) {
+    public void set(int elementIndex, ConstCharacterContactKey key) {
         long setVa = va();
         long keyVa = key.targetVa();
         setElement(setVa, elementIndex, keyVa);

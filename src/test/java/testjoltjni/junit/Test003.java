@@ -78,9 +78,9 @@ import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstCharacter;
+import com.github.stephengold.joltjni.readonly.ConstCharacterContactKey;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
-import com.github.stephengold.joltjni.readonly.ConstContactKey;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
@@ -994,7 +994,7 @@ public class Test003 {
      *
      * @param key the key to test (not {@code null}, unaffected)
      */
-    private static void testContactKeyDefaults(ConstContactKey key) {
+    private static void testContactKeyDefaults(ConstCharacterContactKey key) {
         Assert.assertTrue(key.hasAssignedNativeObject());
         Assert.assertTrue(key.ownsNativeObject());
 

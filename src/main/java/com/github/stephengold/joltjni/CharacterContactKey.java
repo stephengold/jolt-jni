@@ -21,7 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstContactKey;
+import com.github.stephengold.joltjni.readonly.ConstCharacterContactKey;
 
 /**
  * Identify a contact between a virtual character and a body or another virtual
@@ -31,7 +31,7 @@ import com.github.stephengold.joltjni.readonly.ConstContactKey;
  */
 public class CharacterContactKey
         extends JoltPhysicsObject
-        implements ConstContactKey {
+        implements ConstCharacterContactKey {
     // *************************************************************************
     // constructors
 
@@ -105,7 +105,7 @@ public class CharacterContactKey
         restoreState(keyVa, recorderVa);
     }
     // *************************************************************************
-    // ConstContactKey methods
+    // ConstCharacterContactKey methods
 
     /**
      * Return the ID of the colliding body. The key is unaffected. (native
@@ -157,7 +157,7 @@ public class CharacterContactKey
      * @return {@code true} if equivalent, otherwise {@code false}
      */
     @Override
-    public boolean isEqual(ConstContactKey other) {
+    public boolean isEqual(ConstCharacterContactKey other) {
         long keyVa = va();
         long otherVa = other.targetVa();
         boolean result = isEqual(keyVa, otherVa);
@@ -173,7 +173,7 @@ public class CharacterContactKey
      * @return {@code false} if equivalent, otherwise {@code true}
      */
     @Override
-    public boolean isNotEqual(ConstContactKey other) {
+    public boolean isNotEqual(ConstCharacterContactKey other) {
         boolean result = !isEqual(other);
         return result;
     }

@@ -29,7 +29,7 @@ import com.github.stephengold.joltjni.StateRecorder;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstContactKey extends ConstJoltPhysicsObject {
+public interface ConstCharacterContactKey extends ConstJoltPhysicsObject {
     /**
      * Return the ID of the colliding body. The key is unaffected.
      *
@@ -57,7 +57,7 @@ public interface ConstContactKey extends ConstJoltPhysicsObject {
      * @param other the key to compare with (not {@code null})
      * @return {@code true} if equivalent, otherwise {@code false}
      */
-    boolean isEqual(ConstContactKey other);
+    boolean isEqual(ConstCharacterContactKey other);
 
     /**
      * Test for equivalence with another key. Both keys are unaffected.
@@ -65,7 +65,7 @@ public interface ConstContactKey extends ConstJoltPhysicsObject {
      * @param other the key to compare with (not {@code null})
      * @return {@code false} if equivalent, otherwise {@code true}
      */
-    boolean isNotEqual(ConstContactKey other);
+    boolean isNotEqual(ConstCharacterContactKey other);
 
     /**
      * Save the key to the specified recorder. The key is unaffected.
