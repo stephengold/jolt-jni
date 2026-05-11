@@ -81,6 +81,14 @@ public interface ConstCharacterContact extends ConstCharacterContactKey {
     boolean getHadCollision();
 
     /**
+     * Test whether the contact came from a back-facing triangle or collision
+     * shape. The contact is unaffected.
+     *
+     * @return {@code true} if back-facing, otherwise {@code false}
+     */
+    boolean getIsBackFacingContact();
+
+    /**
      * Test whether the colliding object is a sensor. The contact is unaffected.
      *
      * @return {@code true} for a sensor, otherwise {@code false}

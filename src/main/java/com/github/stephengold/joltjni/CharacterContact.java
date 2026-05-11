@@ -165,6 +165,21 @@ public class CharacterContact
     }
 
     /**
+     * Test whether the contact came from a back-facing triangle or collision
+     * shape. The contact is unaffected. (native attribute:
+     * mIsBackFacingContact)
+     *
+     * @return {@code true} if back-facing, otherwise {@code false}
+     */
+    @Override
+    public boolean getIsBackFacingContact() {
+        long contactVa = va();
+        boolean result = getIsBackFacingContact(contactVa);
+
+        return result;
+    }
+
+    /**
      * Test whether the colliding object is a sensor. The contact is unaffected.
      * (native attribute: mIsSensorB)
      *
@@ -285,6 +300,8 @@ public class CharacterContact
     native private static float getFraction(long contactVa);
 
     native private static boolean getHadCollision(long contactVa);
+
+    native private static boolean getIsBackFacingContact(long contactVa);
 
     native private static boolean getIsSensorB(long contactVa);
 

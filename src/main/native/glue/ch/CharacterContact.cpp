@@ -122,6 +122,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterContact_
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterContact
+ * Method:    getIsBackFacingContact
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getIsBackFacingContact
+  (JNIEnv *, jclass, jlong contactVa) {
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
+    const bool result = pContact->mIsBackFacingContact;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getIsSensorB
  * Signature: (J)Z
  */
