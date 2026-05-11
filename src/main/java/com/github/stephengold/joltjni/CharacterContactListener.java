@@ -50,7 +50,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior (not
      * zero)
@@ -64,7 +65,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior (not
      * zero)
@@ -137,7 +139,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     boolean onCharacterContactValidate(long characterVa, long contactVa);
@@ -148,7 +151,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior (not
      * zero)
@@ -161,7 +165,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior (not
      * zero)
@@ -230,7 +235,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     boolean onContactValidate(long characterVa, long contactVa);

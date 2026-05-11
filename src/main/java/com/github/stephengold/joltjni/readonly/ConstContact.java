@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 
 /**
- * Read-only access to a {@code Contact}. (native type:
+ * Read-only access to a {@code CharacterContact}. (native type:
  * {@code const CharacterContact}) TODO rename ConstCharacterContact
  *
  * @author Stephen Gold sgold@sonic.net

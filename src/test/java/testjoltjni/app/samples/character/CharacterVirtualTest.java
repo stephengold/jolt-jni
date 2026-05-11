@@ -69,7 +69,7 @@ CharacterContactListener contactListener=new CustomCharacterContactListener() {
     }
     public void onCharacterContactAdded(long characterVa, long contactVa, long settingsVa) {
         ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
-        ConstContact inContact = new Contact(contactVa, false, mPhysicsSystem);
+        ConstContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
         ConstCharacterVirtual inOtherCharacter = inContact.getCharacterB();
         int subShapeId2 = inContact.getSubShapeIdB();
         RVec3Arg inContactPosition = inContact.getPosition();
@@ -80,7 +80,7 @@ CharacterContactListener contactListener=new CustomCharacterContactListener() {
     }
     public void onCharacterContactPersisted(long characterVa, long contactVa, long settingsVa) {
         ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
-        ConstContact inContact = new Contact(contactVa, false, mPhysicsSystem);
+        ConstContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
         ConstCharacterVirtual inOtherCharacter = inContact.getCharacterB();
         int subShapeId2 = inContact.getSubShapeIdB();
         RVec3Arg inContactPosition = inContact.getPosition();
@@ -95,7 +95,7 @@ CharacterContactListener contactListener=new CustomCharacterContactListener() {
     }
     public void onContactAdded(long characterVa, long contactVa, long settingsVa) {
         ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
-        ConstContact inContact = new Contact(contactVa, false, mPhysicsSystem);
+        ConstContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
         int bodyId2 = inContact.getBodyB();
         int subShapeId2 = inContact.getSubShapeIdB();
         RVec3Arg inContactPosition = inContact.getPosition();
@@ -106,7 +106,7 @@ CharacterContactListener contactListener=new CustomCharacterContactListener() {
     }
     public void onContactPersisted(long characterVa, long contactVa, long settingsVa) {
         ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
-        ConstContact inContact = new Contact(contactVa, false, mPhysicsSystem);
+        ConstContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
         int bodyId2 = inContact.getBodyB();
         int subShapeId2 = inContact.getSubShapeIdB();
         RVec3Arg inContactPosition = inContact.getPosition();

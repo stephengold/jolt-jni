@@ -76,6 +76,7 @@ $(N)/glue/c/CylinderShape.cpp \
 $(N)/glue/c/CylinderShapeSettings.cpp \
 $(N)/glue/ch/CharacterBase.cpp \
 $(N)/glue/ch/CharacterBaseSettings.cpp \
+$(N)/glue/ch/CharacterContact.cpp \
 $(N)/glue/ch/CharacterContactSettings.cpp \
 $(N)/glue/ch/Character.cpp \
 $(N)/glue/ch/CharacterRefC.cpp \
@@ -93,7 +94,6 @@ $(N)/glue/co/Constraint.cpp \
 $(N)/glue/co/ConstraintResult.cpp \
 $(N)/glue/co/Constraints.cpp \
 $(N)/glue/co/ConstraintSettings.cpp \
-$(N)/glue/co/Contact.cpp \
 $(N)/glue/co/ContactKey.cpp \
 $(N)/glue/co/ContactListener.cpp \
 $(N)/glue/co/ContactListenerList.cpp \

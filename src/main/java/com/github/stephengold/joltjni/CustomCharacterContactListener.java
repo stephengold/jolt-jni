@@ -62,7 +62,8 @@ public class CustomCharacterContactListener
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior (not
      * zero)
@@ -78,7 +79,8 @@ public class CustomCharacterContactListener
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior (not
      * zero)
@@ -157,7 +159,8 @@ public class CustomCharacterContactListener
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     @Override
@@ -172,7 +175,8 @@ public class CustomCharacterContactListener
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior (not
      * zero)
@@ -188,7 +192,8 @@ public class CustomCharacterContactListener
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior (not
      * zero)
@@ -265,7 +270,8 @@ public class CustomCharacterContactListener
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param contactVa the virtual address of the {@code Contact} (not zero)
+     * @param contactVa the virtual address of the {@code CharacterContact} (not
+     * zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     @Override

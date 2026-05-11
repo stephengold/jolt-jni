@@ -135,7 +135,7 @@ final public class CharacterVirtualRefC
         PhysicsSystem system = getPhysicsSystem();
         for (int i = 0; i < numContacts; ++i) {
             long contactVa = CharacterVirtual.getActiveContact(characterVa, i);
-            result[i] = new Contact(contactVa, true, system);
+            result[i] = new CharacterContact(contactVa, true, system);
         }
 
         return result;

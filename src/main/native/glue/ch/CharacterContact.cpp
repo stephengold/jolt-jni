@@ -25,25 +25,25 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Character/CharacterVirtual.h"
-#include "auto/com_github_stephengold_joltjni_Contact.h"
+#include "auto/com_github_stephengold_joltjni_CharacterContact.h"
 #include "glue/glue.h"
 
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterContact_free
   BODYOF_FREE(CharacterContact)
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getCanPushCharacter
  * Signature: (J)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getCanPushCharacter
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getCanPushCharacter
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -52,11 +52,11 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getCanPus
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getCharacterB
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getCharacterB
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getCharacterB
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -65,11 +65,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getCharacter
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getContactNormal
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getContactNormal
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getContactNormal
   (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeFloats) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -82,11 +82,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getContactNor
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getDistance
  * Signature: (J)F
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getDistance
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getDistance
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -95,11 +95,11 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getDistance
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getFraction
  * Signature: (J)F
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getFraction
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getFraction
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -108,11 +108,11 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getFraction
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getHadCollision
  * Signature: (J)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getHadCollision
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getHadCollision
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -121,11 +121,11 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getHadCol
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getIsSensorB
  * Signature: (J)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getIsSensorB
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getIsSensorB
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -134,11 +134,11 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getIsSens
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getLinearVelocity
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getLinearVelocity
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getLinearVelocity
   (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeFloats) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -151,11 +151,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getLinearVelo
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getMotionTypeB
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getMotionTypeB
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getMotionTypeB
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -164,11 +164,11 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getMotionType
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getPosition
  * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getPosition
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getPosition
   (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeDoubles) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -181,11 +181,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getPosition
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getSurfaceNormal
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getSurfaceNormal
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getSurfaceNormal
   (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeFloats) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -198,11 +198,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getSurfaceNor
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getUserData
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getUserData
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getUserData
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
@@ -211,11 +211,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getUserData
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Contact
+ * Class:     com_github_stephengold_joltjni_CharacterContact
  * Method:    getWasDiscarded
  * Signature: (J)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getWasDiscarded
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterContact_getWasDiscarded
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterContact * const pContact
             = reinterpret_cast<CharacterContact *> (contactVa);
