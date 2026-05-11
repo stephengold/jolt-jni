@@ -69,7 +69,7 @@ CharacterContactListener contactListener=new CustomCharacterContactListener() {
     }
     public void onCharacterContactAdded(long characterVa, long contactVa, long settingsVa) {
         ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
-        ConstContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
+        ConstCharacterContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
         ConstCharacterVirtual inOtherCharacter = inContact.getCharacterB();
         int subShapeId2 = inContact.getSubShapeIdB();
         RVec3Arg inContactPosition = inContact.getPosition();
@@ -80,7 +80,7 @@ CharacterContactListener contactListener=new CustomCharacterContactListener() {
     }
     public void onCharacterContactPersisted(long characterVa, long contactVa, long settingsVa) {
         ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
-        ConstContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
+        ConstCharacterContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
         ConstCharacterVirtual inOtherCharacter = inContact.getCharacterB();
         int subShapeId2 = inContact.getSubShapeIdB();
         RVec3Arg inContactPosition = inContact.getPosition();
@@ -95,7 +95,7 @@ CharacterContactListener contactListener=new CustomCharacterContactListener() {
     }
     public void onContactAdded(long characterVa, long contactVa, long settingsVa) {
         ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
-        ConstContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
+        ConstCharacterContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
         int bodyId2 = inContact.getBodyB();
         int subShapeId2 = inContact.getSubShapeIdB();
         RVec3Arg inContactPosition = inContact.getPosition();
@@ -106,7 +106,7 @@ CharacterContactListener contactListener=new CustomCharacterContactListener() {
     }
     public void onContactPersisted(long characterVa, long contactVa, long settingsVa) {
         ConstCharacterVirtual inCharacter = new CharacterVirtual(characterVa, mPhysicsSystem);
-        ConstContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
+        ConstCharacterContact inContact = new CharacterContact(contactVa, false, mPhysicsSystem);
         int bodyId2 = inContact.getBodyB();
         int subShapeId2 = inContact.getSubShapeIdB();
         RVec3Arg inContactPosition = inContact.getPosition();
@@ -210,7 +210,7 @@ if(implementsDebugRendering()){
 	// as the character only reports contacts as it is sliding through the world. If 2 sub shapes hit at the same time then
 	// most likely only one will be reported as it stops the character and prevents the 2nd one from being seen.
 	int num_contacts = 0;
-	for (ConstContact c : mCharacter.getActiveContacts())
+	for (ConstCharacterContact c : mCharacter.getActiveContacts())
 		if (c.getHadCollision())
 		{
 			assert mActiveContacts.find(c) != -1;

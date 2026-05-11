@@ -61,7 +61,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      *
      * @return a new array of new objects
      */
-    ConstContact[] getActiveContacts();
+    ConstCharacterContact[] getActiveContacts();
 
     /**
      * Calculate the location of the character's center of mass. The character

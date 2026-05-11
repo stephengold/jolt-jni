@@ -21,9 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstCharacterContact;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtualSettings;
-import com.github.stephengold.joltjni.readonly.ConstContact;
 import com.github.stephengold.joltjni.readonly.ConstExtendedUpdateSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -449,10 +449,10 @@ public class CharacterVirtual
      * @return a new array of new objects
      */
     @Override
-    public ConstContact[] getActiveContacts() {
+    public ConstCharacterContact[] getActiveContacts() {
         long characterVa = va();
         int numContacts = countActiveContacts(characterVa);
-        ConstContact[] result = new ConstContact[numContacts];
+        ConstCharacterContact[] result = new ConstCharacterContact[numContacts];
         for (int i = 0; i < numContacts; ++i) {
             long contactVa = getActiveContact(characterVa, i);
             result[i] = new CharacterContact(contactVa, true, system);

@@ -31,7 +31,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstContact extends ConstContactKey {
+public interface ConstCharacterContact extends ConstContactKey {
     /**
      * Test whether the velocity of the contact point can push the character.
      * The contact is unaffected.

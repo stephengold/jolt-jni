@@ -22,8 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EMotionType;
+import com.github.stephengold.joltjni.readonly.ConstCharacterContact;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
-import com.github.stephengold.joltjni.readonly.ConstContact;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
@@ -33,7 +33,9 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CharacterContact extends ContactKey implements ConstContact {
+public class CharacterContact
+        extends ContactKey
+        implements ConstCharacterContact {
     // *************************************************************************
     // fields
 
@@ -65,7 +67,7 @@ public class CharacterContact extends ContactKey implements ConstContact {
         setVirtualAddress(contactVa, freeingAction);
     }
     // *************************************************************************
-    // ConstContact methods
+    // ConstCharacterContact methods
 
     /**
      * Test whether the velocity of the contact point can push the character.

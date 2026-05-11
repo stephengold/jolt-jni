@@ -22,8 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EGroundState;
+import com.github.stephengold.joltjni.readonly.ConstCharacterContact;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
-import com.github.stephengold.joltjni.readonly.ConstContact;
 import com.github.stephengold.joltjni.readonly.ConstExtendedUpdateSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
@@ -296,10 +296,10 @@ final public class CharacterVirtualRef
      * @return a new array of new objects
      */
     @Override
-    public ConstContact[] getActiveContacts() {
+    public ConstCharacterContact[] getActiveContacts() {
         long characterVa = targetVa();
         int numContacts = CharacterVirtual.countActiveContacts(characterVa);
-        ConstContact[] result = new ConstContact[numContacts];
+        ConstCharacterContact[] result = new ConstCharacterContact[numContacts];
         PhysicsSystem system = getPhysicsSystem();
         for (int i = 0; i < numContacts; ++i) {
             long contactVa = CharacterVirtual.getActiveContact(characterVa, i);
