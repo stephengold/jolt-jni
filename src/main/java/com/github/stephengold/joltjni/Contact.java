@@ -29,7 +29,7 @@ import java.nio.FloatBuffer;
 
 /**
  * Describe a contact between a {@code Character} and a body or another
- * character. (native type: {@code CharacterVirtual::Contact})
+ * character. (native type: {@code CharacterContact})
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -53,8 +53,10 @@ public class Contact extends ContactKey implements ConstContact {
      * {@code false} &rarr; it isn't the owner
      * @param system the physics system in which the contact is occurring (not
      * {@code null})
+     * <p>
+     * For use in custom contact listeners.
      */
-    Contact(long contactVa, boolean owner, PhysicsSystem system) {
+    public Contact(long contactVa, boolean owner, PhysicsSystem system) {
         super(false);
         assert system != null;
         this.system = system;

@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactKey_createCopy
-  BODYOF_CREATE_COPY(CharacterVirtual::ContactKey)
+  BODYOF_CREATE_COPY(CharacterContactKey)
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactKey
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactKey_createCop
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactKey_createDefault
-  BODYOF_CREATE_DEFAULT(CharacterVirtual::ContactKey)
+  BODYOF_CREATE_DEFAULT(CharacterContactKey)
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactKey
@@ -55,17 +55,17 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactKey_createKey
   (JNIEnv *, jclass, jchar idType, jint bodyOrCharacterId, jint subShapeId) {
     SubShapeID ssid;
     ssid.SetValue(subShapeId);
-    CharacterVirtual::ContactKey *pResult;
+    CharacterContactKey *pResult;
     if ('b' == idType) {
         const BodyID bid(bodyOrCharacterId);
-        pResult = new CharacterVirtual::ContactKey(bid, ssid);
+        pResult = new CharacterContactKey(bid, ssid);
     } else if ('c' == idType) {
         const CharacterID cid(bodyOrCharacterId);
-        pResult = new CharacterVirtual::ContactKey(cid, ssid);
+        pResult = new CharacterContactKey(cid, ssid);
     } else {
         JPH_ASSERT(false);
     }
-    TRACE_NEW("CharacterVirtual::ContactKey", pResult)
+    TRACE_NEW("CharacterContactKey", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -75,7 +75,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactKey_createKey
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactKey_free
-  BODYOF_FREE(CharacterVirtual::ContactKey)
+  BODYOF_FREE(CharacterContactKey)
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactKey
@@ -84,8 +84,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactKey_free
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getBodyB
   (JNIEnv *, jclass, jlong keyVa) {
-    const CharacterVirtual::ContactKey * const pKey
-            = reinterpret_cast<CharacterVirtual::ContactKey *> (keyVa);
+    const CharacterContactKey * const pKey
+            = reinterpret_cast<CharacterContactKey *> (keyVa);
     const BodyID result = pKey->mBodyB;
     return result.GetIndexAndSequenceNumber();
 }
@@ -97,8 +97,8 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getBodyB
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getCharacterIdB
   (JNIEnv *, jclass, jlong keyVa) {
-    const CharacterVirtual::ContactKey * const pKey
-            = reinterpret_cast<CharacterVirtual::ContactKey *> (keyVa);
+    const CharacterContactKey * const pKey
+            = reinterpret_cast<CharacterContactKey *> (keyVa);
     const CharacterID result = pKey->mCharacterIDB;
     return result.GetValue();
 }
@@ -110,8 +110,8 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getCharact
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getSubShapeIdB
   (JNIEnv *, jclass, jlong keyVa) {
-    const CharacterVirtual::ContactKey * const pKey
-            = reinterpret_cast<CharacterVirtual::ContactKey *> (keyVa);
+    const CharacterContactKey * const pKey
+            = reinterpret_cast<CharacterContactKey *> (keyVa);
     const SubShapeID result = pKey->mSubShapeIDB;
     return result.GetValue();
 }
@@ -123,10 +123,10 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactKey_getSubShap
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ContactKey_isEqual
   (JNIEnv *, jclass, jlong keyVa, jlong otherVa) {
-    const CharacterVirtual::ContactKey * const pKey1
-            = reinterpret_cast<CharacterVirtual::ContactKey *> (keyVa);
-    const CharacterVirtual::ContactKey * const pKey2
-            = reinterpret_cast<CharacterVirtual::ContactKey *> (otherVa);
+    const CharacterContactKey * const pKey1
+            = reinterpret_cast<CharacterContactKey *> (keyVa);
+    const CharacterContactKey * const pKey2
+            = reinterpret_cast<CharacterContactKey *> (otherVa);
     const bool result = (*pKey1) == (*pKey2);
     return result;
 }
@@ -138,8 +138,8 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ContactKey_isEqua
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactKey_restoreState
   (JNIEnv *, jclass, jlong keyVa, jlong recorderVa) {
-    CharacterVirtual::ContactKey * const pKey
-            = reinterpret_cast<CharacterVirtual::ContactKey *> (keyVa);
+    CharacterContactKey * const pKey
+            = reinterpret_cast<CharacterContactKey *> (keyVa);
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
     pKey->RestoreState(*pRecorder);
@@ -152,8 +152,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactKey_restoreSta
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactKey_saveState
   (JNIEnv *, jclass, jlong keyVa, jlong recorderVa) {
-    const CharacterVirtual::ContactKey * const pKey
-            = reinterpret_cast<CharacterVirtual::ContactKey *> (keyVa);
+    const CharacterContactKey * const pKey
+            = reinterpret_cast<CharacterContactKey *> (keyVa);
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
     pKey->SaveState(*pRecorder);

@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * A variable-length array of contact keys. (native type:
- * {@code Array<CharacterVirtual::ContactKey>})
+ * {@code Array<CharacterContactKey>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

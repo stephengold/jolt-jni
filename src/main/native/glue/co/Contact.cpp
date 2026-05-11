@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_free
-  BODYOF_FREE(CharacterVirtual::Contact)
+  BODYOF_FREE(CharacterContact)
 
 /*
  * Class:     com_github_stephengold_joltjni_Contact
@@ -45,8 +45,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_free
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getCanPushCharacter
   (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     const bool result = pContact->mCanPushCharacter;
     return result;
 }
@@ -58,8 +58,8 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getCanPus
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getCharacterB
   (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     const CharacterVirtual * const pResult = pContact->mCharacterB;
     return reinterpret_cast<jlong> (pResult);
 }
@@ -71,8 +71,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getCharacter
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getContactNormal
   (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeFloats) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3& result = pContact->mContactNormal;
@@ -88,8 +88,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getContactNor
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getDistance
   (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     const float result = pContact->mDistance;
     return result;
 }
@@ -101,8 +101,8 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getDistance
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getFraction
   (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     const float result = pContact->mFraction;
     return result;
 }
@@ -114,8 +114,8 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getFraction
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getHadCollision
   (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     const bool result = pContact->mHadCollision;
     return result;
 }
@@ -127,8 +127,8 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getHadCol
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getIsSensorB
   (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     const bool result = pContact->mIsSensorB;
     return result;
 }
@@ -140,8 +140,8 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getIsSens
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getLinearVelocity
   (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeFloats) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3& result = pContact->mLinearVelocity;
@@ -157,8 +157,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getLinearVelo
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getMotionTypeB
   (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     const EMotionType result = pContact->mMotionTypeB;
     return (jint) result;
 }
@@ -170,8 +170,8 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getMotionType
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getPosition
   (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeDoubles) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
     JPH_ASSERT(capacityDoubles >= 3);
     const RVec3& result = pContact->mPosition;
@@ -187,8 +187,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getPosition
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getSurfaceNormal
   (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeFloats) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3& result = pContact->mSurfaceNormal;
@@ -204,8 +204,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getSurfaceNor
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getUserData
   (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     const uint64 result = pContact->mUserData;
     return result;
 }
@@ -217,8 +217,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getUserData
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getWasDiscarded
   (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    const CharacterContact * const pContact
+            = reinterpret_cast<CharacterContact *> (contactVa);
     const bool result = pContact->mWasDiscarded;
     return result;
 }

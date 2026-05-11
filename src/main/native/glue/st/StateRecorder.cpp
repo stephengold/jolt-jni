@@ -90,8 +90,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readCon
   (JNIEnv *, jclass, jlong recorderVa, jlong setVa) {
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
-    Array<CharacterVirtual::ContactKey> * const pSet
-            = reinterpret_cast<Array<CharacterVirtual::ContactKey> *> (setVa);
+    Array<CharacterContactKey> * const pSet
+            = reinterpret_cast<Array<CharacterContactKey> *> (setVa);
     pRecorder->Read(*pSet);
 }
 
@@ -240,8 +240,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeCo
   (JNIEnv *, jclass, jlong recorderVa, jlong setVa) {
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
-    const Array<CharacterVirtual::ContactKey> * const pSet
-            = reinterpret_cast<Array<CharacterVirtual::ContactKey> *> (setVa);
+    const Array<CharacterContactKey> * const pSet
+            = reinterpret_cast<Array<CharacterContactKey> *> (setVa);
     pRecorder->Write(*pSet);
 }
 

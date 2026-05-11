@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -155,9 +155,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_get
             = reinterpret_cast<CharacterVirtual *> (characterVa);
     const CharacterVirtual::ContactList& contacts
             = pCharacter->GetActiveContacts();
-    const CharacterVirtual::Contact * const pResult
-            = new CharacterVirtual::Contact(contacts[index]);
-    TRACE_NEW("CharacterVirtual::Contact", pResult);
+    const CharacterContact * const pResult
+            = new CharacterContact(contacts[index]);
+    TRACE_NEW("CharacterContact", pResult);
     return reinterpret_cast<jlong> (pResult);
 }
 

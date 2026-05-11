@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.StateRecorder;
 
 /**
  * Read-only access to a {@code ContactKey}. (native type: {@code const
- * CharacterVirtual::ContactKey})
+ * CharacterContactKey})
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -27,7 +27,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 
 /**
  * Read-only access to a {@code Contact}. (native type:
- * {@code const CharacterVirtual::Contact})
+ * {@code const CharacterContact}) TODO rename ConstCharacterContact
  *
  * @author Stephen Gold sgold@sonic.net
  */

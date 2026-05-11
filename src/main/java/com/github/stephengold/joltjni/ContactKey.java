@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstContactKey;
 
 /**
  * Identify a contact between a virtual character and a body or another virtual
- * character. (native type: {@code CharacterVirtual::ContactKey})
+ * character. (native type: {@code CharacterContactKey})
  *
  * @author Stephen Gold sgold@sonic.net
  */

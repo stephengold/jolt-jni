@@ -30,7 +30,7 @@ SOFTWARE.
 #include "glue/glue.h"
 
 using namespace JPH;
-using ContactSet = Array<CharacterVirtual::ContactKey>;
+using ContactSet = Array<CharacterContactKey>;
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactSet
@@ -80,8 +80,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactSet_erase
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactSet_find
   (JNIEnv *, jclass, jlong setVa, jlong keyVa) {
     const ContactSet * const pSet = reinterpret_cast<ContactSet *> (setVa);
-    const CharacterVirtual::ContactKey * const pKey
-            = reinterpret_cast<CharacterVirtual::ContactKey *> (keyVa);
+    const CharacterContactKey * const pKey
+            = reinterpret_cast<CharacterContactKey *> (keyVa);
     ContactSet::const_iterator origin = pSet->begin();
     ContactSet::const_iterator end = pSet->end();
     ContactSet::const_iterator found = std::find(origin, end, *pKey);
@@ -105,10 +105,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactSet_free
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactSet_getElement
   (JNIEnv *, jclass, jlong setVa, jint elementIndex) {
     ContactSet * const pSet = reinterpret_cast<ContactSet *> (setVa);
-    const CharacterVirtual::ContactKey & key = pSet->at(elementIndex);
-    const CharacterVirtual::ContactKey * const pResult
-            = new CharacterVirtual::ContactKey(key);
-    TRACE_NEW("CharacterVirtual::ContactKey", pResult)
+    const CharacterContactKey & key = pSet->at(elementIndex);
+    const CharacterContactKey * const pResult
+            = new CharacterContactKey(key);
+    TRACE_NEW("CharacterContactKey", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -131,8 +131,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactSet_resize
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactSet_setElement
   (JNIEnv *, jclass, jlong setVa, jint elementIndex, jlong keyVa) {
     ContactSet * const pSet = reinterpret_cast<ContactSet *> (setVa);
-    const CharacterVirtual::ContactKey * const pKey
-            = reinterpret_cast<CharacterVirtual::ContactKey *> (keyVa);
+    const CharacterContactKey * const pKey
+            = reinterpret_cast<CharacterContactKey *> (keyVa);
     pSet->at(elementIndex) = *pKey;
 }
 

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,29 +50,13 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param otherCharacterVa the virtual address of the other
-     * {@code CharacterVirtual} (not zero)
-     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
-     * @param contactLocationX the X component of the contact location (in
-     * system coordinates)
-     * @param contactLocationY the Y component of the contact location (in
-     * system coordinates)
-     * @param contactLocationZ the Z component of the contact location (in
-     * system coordinates)
-     * @param contactNormalX the X component of the contact normal (in system
-     * coordinates)
-     * @param contactNormalY the Y component of the contact normal (in system
-     * coordinates)
-     * @param contactNormalZ the Z component of the contact normal (in system
-     * coordinates)
+     * @param contactVa the virtual address of the {@code Contact} (not zero)
      * @param settingsVa the virtual address of the
-     * {@code CharacterContactSettings} for storing the desired behavior
+     * {@code CharacterContactSettings} for storing the desired behavior (not
+     * zero)
      */
-    void onCharacterContactAdded(long characterVa, long otherCharacterVa,
-            int subShapeId2, double contactLocationX,
-            double contactLocationY, double contactLocationZ,
-            float contactNormalX, float contactNormalY, float contactNormalZ,
-            long settingsVa);
+    void onCharacterContactAdded(
+            long characterVa, long contactVa, long settingsVa);
 
     /**
      * Callback invoked (by native code) whenever a contact between 2 characters
@@ -80,29 +64,13 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param otherCharacterVa the virtual address of the other
-     * {@code CharacterVirtual} (not zero)
-     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
-     * @param contactLocationX the X component of the contact location (in
-     * system coordinates)
-     * @param contactLocationY the Y component of the contact location (in
-     * system coordinates)
-     * @param contactLocationZ the Z component of the contact location (in
-     * system coordinates)
-     * @param contactNormalX the X component of the contact normal (in system
-     * coordinates)
-     * @param contactNormalY the Y component of the contact normal (in system
-     * coordinates)
-     * @param contactNormalZ the Z component of the contact normal (in system
-     * coordinates)
+     * @param contactVa the virtual address of the {@code Contact} (not zero)
      * @param settingsVa the virtual address of the
-     * {@code CharacterContactSettings} for storing the desired behavior
+     * {@code CharacterContactSettings} for storing the desired behavior (not
+     * zero)
      */
-    void onCharacterContactPersisted(long characterVa, long otherCharacterVa,
-            int subShapeId2, double contactLocationX,
-            double contactLocationY, double contactLocationZ,
-            float contactNormalX, float contactNormalY, float contactNormalZ,
-            long settingsVa);
+    void onCharacterContactPersisted(
+            long characterVa, long contactVa, long settingsVa);
 
     /**
      * Callback invoked (by native code) whenever a contact between 2 characters
@@ -169,13 +137,10 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param otherCharacterVa the virtual address of the other
-     * {@code CharacterVirtual} (not zero)
-     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
+     * @param contactVa the virtual address of the {@code Contact} (not zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
-    boolean onCharacterContactValidate(
-            long characterVa, long otherCharacterVa, int subShapeId2);
+    boolean onCharacterContactValidate(long characterVa, long contactVa);
 
     /**
      * Callback invoked (by native code) whenever a character collides with a
@@ -183,27 +148,12 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param bodyId2 the ID of the body being solved
-     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
-     * @param contactLocationX the X component of the contact location (in
-     * system coordinates)
-     * @param contactLocationY the Y component of the contact location (in
-     * system coordinates)
-     * @param contactLocationZ the Z component of the contact location (in
-     * system coordinates)
-     * @param contactNormalX the X component of the contact normal (in system
-     * coordinates)
-     * @param contactNormalY the Y component of the contact normal (in system
-     * coordinates)
-     * @param contactNormalZ the Z component of the contact normal (in system
-     * coordinates)
+     * @param contactVa the virtual address of the {@code Contact} (not zero)
      * @param settingsVa the virtual address of the
-     * {@code CharacterContactSettings} for storing the desired behavior
+     * {@code CharacterContactSettings} for storing the desired behavior (not
+     * zero)
      */
-    void onContactAdded(long characterVa, int bodyId2, int subShapeId2,
-            double contactLocationX, double contactLocationY,
-            double contactLocationZ, float contactNormalX, float contactNormalY,
-            float contactNormalZ, long settingsVa);
+    void onContactAdded(long characterVa, long contactVa, long settingsVa);
 
     /**
      * Callback invoked (by native code) whenever a contact between a character
@@ -211,28 +161,12 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param bodyId2 the ID of the body being solved
-     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
-     * @param contactLocationX the X component of the contact location (in
-     * system coordinates)
-     * @param contactLocationY the Y component of the contact location (in
-     * system coordinates)
-     * @param contactLocationZ the Z component of the contact location (in
-     * system coordinates)
-     * @param contactNormalX the X component of the contact normal (in system
-     * coordinates)
-     * @param contactNormalY the Y component of the contact normal (in system
-     * coordinates)
-     * @param contactNormalZ the Z component of the contact normal (in system
-     * coordinates)
+     * @param contactVa the virtual address of the {@code Contact} (not zero)
      * @param settingsVa the virtual address of the
-     * {@code CharacterContactSettings} for storing the desired behavior
+     * {@code CharacterContactSettings} for storing the desired behavior (not
+     * zero)
      */
-    void onContactPersisted(long characterVa, int bodyId2,
-            int subShapeId2, double contactLocationX,
-            double contactLocationY, double contactLocationZ,
-            float contactNormalX, float contactNormalY, float contactNormalZ,
-            long settingsVa);
+    void onContactPersisted(long characterVa, long contactVa, long settingsVa);
 
     /**
      * Callback invoked (by native code) whenever a contact between a character
@@ -296,10 +230,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
-     * @param bodyId2 the ID of the body being solved
-     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
-     * (not zero)
+     * @param contactVa the virtual address of the {@code Contact} (not zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
-    boolean onContactValidate(long characterVa, int bodyId2, int subShapeId2);
+    boolean onContactValidate(long characterVa, long contactVa);
 }
