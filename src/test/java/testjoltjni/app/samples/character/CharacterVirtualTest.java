@@ -204,7 +204,7 @@ if(implementsDebugRendering()){
 	// as the character only reports contacts as it is sliding through the world. If 2 sub shapes hit at the same time then
 	// most likely only one will be reported as it stops the character and prevents the 2nd one from being seen.
 	int num_contacts = 0;
-	for (ConstCharacterContact c : mCharacter.getActiveContacts())
+	for (ConstCharacterContact  c : mCharacter.getActiveContacts())
 		if (c.getHadCollision())
 		{
 			assert mActiveContacts.find(c) != -1;
@@ -301,9 +301,9 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 
 void CharacterVirtualTest::AddCharacterMovementSettings(DebugUI* inUI, UIElement* inSubMenu)
 {
-	inUI->CreateCheckBox(inSubMenu, "Enable Character Inertia", sEnableCharacterInertia, [](UICheckBox.EState inState) { sEnableCharacterInertia = inState == UICheckBox.STATE_CHECKED; });
-	inUI->CreateCheckBox(inSubMenu, "Player Can Push Other Virtual Characters", sPlayerCanPushOtherCharacters, [](UICheckBox.EState inState) { sPlayerCanPushOtherCharacters = inState == UICheckBox.STATE_CHECKED; });
-	inUI->CreateCheckBox(inSubMenu, "Other Virtual Characters Can Push Player", sOtherCharactersCanPushPlayer, [](UICheckBox.EState inState) { sOtherCharactersCanPushPlayer = inState == UICheckBox.STATE_CHECKED; });
+	inUI->CreateCheckBox(inSubMenu, "Enable Character Inertia", sEnableCharacterInertia, [](UICheckBox::EState inState) { sEnableCharacterInertia = inState == UICheckBox::STATE_CHECKED; });
+	inUI->CreateCheckBox(inSubMenu, "Player Can Push Other Virtual Characters", sPlayerCanPushOtherCharacters, [](UICheckBox::EState inState) { sPlayerCanPushOtherCharacters = inState == UICheckBox::STATE_CHECKED; });
+	inUI->CreateCheckBox(inSubMenu, "Other Virtual Characters Can Push Player", sOtherCharactersCanPushPlayer, [](UICheckBox::EState inState) { sOtherCharactersCanPushPlayer = inState == UICheckBox::STATE_CHECKED; });
 }
 
 void CharacterVirtualTest::AddConfigurationSettings(DebugUI *inUI, UIElement *inSubMenu)
