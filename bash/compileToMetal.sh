@@ -29,8 +29,8 @@ do
     "${VULKAN_SDK}/bin/spirv-cross" "${TMP}/${NAME}.spv" --msl --output "${TMP}/${NAME}.metal"
 
     echo "    compiling ${NAME}.metal -> ${NAME}.air"
-    xcrun -sdk macosx26.2 metal -c "${TMP}/${NAME}.metal" -o "${TMP}/${NAME}.air"
+    xcrun -sdk macosx26.5 metal -c "${TMP}/${NAME}.metal" -o "${TMP}/${NAME}.air"
 done
 
 echo " linking *.air -> Jolt.metallib"
-xcrun -sdk macosx26.2 metallib -o ${DEST}/Jolt.metallib ${TMP}/*.air
+xcrun -sdk macosx26.5 metallib -o ${DEST}/Jolt.metallib ${TMP}/*.air
