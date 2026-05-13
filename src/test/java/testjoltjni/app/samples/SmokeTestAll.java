@@ -256,7 +256,7 @@ final public class SmokeTestAll {
                 System.out.flush();
             }
             PreUpdateParams params = new PreUpdateParams();
-            params.mDeltaTime = 0.02f;
+            params.mDeltaTime = 1f / 60;
             test.PrePhysicsUpdate(params);
 
             if (globalParameters.verboseLogging()) {
