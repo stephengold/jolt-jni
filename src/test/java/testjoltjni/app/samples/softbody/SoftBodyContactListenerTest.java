@@ -171,7 +171,7 @@ void OnSoftBodyContactAdded(ConstBody  inSoftBody,  ConstSoftBodyManifold inMani
 {
 	// Draw contacts
 	RMat44 com = inSoftBody.getCenterOfMassTransform();
-	for (ConstSoftBodyVertex vertex : inManifold.getVertices())
+	for (ConstSoftBodyVertex  vertex : inManifold.getVertices())
 		if (inManifold.hasContact(vertex))
 		{
 			RVec3 position = star(com , inManifold.getLocalContactPoint(vertex));
@@ -179,5 +179,18 @@ void OnSoftBodyContactAdded(ConstBody  inSoftBody,  ConstSoftBodyManifold inMani
 			mDebugRenderer.drawMarker(position, Color.sRed, 0.1f);
 			mDebugRenderer.drawArrow(position, plus(position , normal), Color.sGreen, 0.1f);
 		}
+
+	// Draw the sensors that are in contact with the soft body
+	for (int i = 0; i < inManifold.getNumSensorContacts(); ++i)
+	{
+		int sensor_id = inManifold.getSensorContactBodyId(i);
+		BodyLockRead lock=new BodyLockRead(mPhysicsSystem.getBodyLockInterfaceNoLock(), sensor_id); // Can't lock in a callback
+		if (lock.succeededAndIsInBroadPhase())
+		{
+			ConstAaBox bounds = lock.getBody().getWorldSpaceBounds();
+			DebugRenderer.sInstance().drawWireBox(bounds, Color.sGreen);
+		}
+                lock.releaseLock();
+	}
 }
 }
