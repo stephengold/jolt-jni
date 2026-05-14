@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.softbody;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.JphMath.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
@@ -36,6 +37,11 @@ public class SoftBodyVsFastMovingTest extends Test{
 
 public void Initialize()
 {
+	// Install contact listener for soft bodies
+	mPhysicsSystem.setSoftBodyContactListener(new CustomSoftBodyContactListener(){
+            public void onSoftBodyContactAdded(long bodyVa,long manifoldVa){SoftBodyVsFastMovingTest.this.OnSoftBodyContactAdded(new Body(mPhysicsSystem,bodyVa),new SoftBodyManifold(manifoldVa));}
+        });
+
 	// Floor
 	CreateFloor();
 
@@ -56,5 +62,19 @@ public void Initialize()
 	// Create another body with a higher ID than the cloth
 	bcs.setPosition (new RVec3(2, 20, 0));
 	mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
+}
+
+void OnSoftBodyContactAdded(ConstBody  inSoftBody, ConstSoftBodyManifold  inManifold)
+{
+	// Draw contacts
+	RMat44 com = inSoftBody.getCenterOfMassTransform();
+	for (ConstSoftBodyVertex  vertex : inManifold.getVertices())
+		if (inManifold.hasContact(vertex))
+		{
+			RVec3 position = star(com , inManifold.getLocalContactPoint(vertex));
+			Vec3 normal = inManifold.getContactNormal(vertex);
+			mDebugRenderer.drawMarker(position, Color.sRed, 0.1f);
+			mDebugRenderer.drawArrow(position, plus(position , normal), Color.sGreen, 0.1f);
+		}
 }
 }
