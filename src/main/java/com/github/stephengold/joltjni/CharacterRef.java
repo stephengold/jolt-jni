@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
 import com.github.stephengold.joltjni.readonly.ConstCharacter;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
@@ -251,6 +252,20 @@ final public class CharacterRef extends Ref implements ConstCharacter {
                 characterVa, shapeVa, maxPenetrationDepth, lockBodies);
 
         return result;
+    }
+
+    /**
+     * Alter the supporting volume.
+     *
+     * @param plane the desired plane of support (not {@code null})
+     */
+    public void setSupportingVolume(ConstPlane plane) {
+        long characterVa = targetVa();
+        float nx = plane.getNormalX();
+        float ny = plane.getNormalY();
+        float nz = plane.getNormalZ();
+        float c = plane.getConstant();
+        CharacterBase.setSupportingVolume(characterVa, nx, ny, nz, c);
     }
     // *************************************************************************
     // ConstCharacter methods

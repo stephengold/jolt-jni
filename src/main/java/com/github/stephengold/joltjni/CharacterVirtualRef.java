@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.readonly.ConstCharacterContact;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstExtendedUpdateSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -224,6 +225,20 @@ final public class CharacterVirtualRef
         long characterVa = targetVa();
         long shapeVa = shape.targetVa();
         CharacterVirtual.setInnerBodyShape(characterVa, shapeVa);
+    }
+
+    /**
+     * Alter the supporting volume.
+     *
+     * @param plane the desired plane of support (not {@code null})
+     */
+    public void setSupportingVolume(ConstPlane plane) {
+        long characterVa = targetVa();
+        float nx = plane.getNormalX();
+        float ny = plane.getNormalY();
+        float nz = plane.getNormalZ();
+        float c = plane.getConstant();
+        CharacterBase.setSupportingVolume(characterVa, nx, ny, nz, c);
     }
 
     /**

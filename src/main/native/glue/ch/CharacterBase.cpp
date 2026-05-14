@@ -315,6 +315,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_setMaxS
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
+ * Method:    setSupportingVolume
+ * Signature: (JFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_setSupportingVolume
+  (JNIEnv *, jclass, jlong characterVa, jfloat nx, jfloat ny, jfloat nz,
+  jfloat c) {
+    CharacterBase * const pCharacter
+            = reinterpret_cast<CharacterBase *> (characterVa);
+    const Vec3 normal(nx, ny, nz);
+    const Plane plane(normal, c);
+    pCharacter->SetSupportingVolume(plane);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterBase
  * Method:    setUp
  * Signature: (JFFF)V
  */

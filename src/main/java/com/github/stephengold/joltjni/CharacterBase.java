@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
 import com.github.stephengold.joltjni.readonly.ConstCharacterBase;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.RefTarget;
@@ -68,6 +69,20 @@ abstract public class CharacterBase
     public void setMaxSlopeAngle(float angle) {
         long characterVa = va();
         setMaxSlopeAngle(characterVa, angle);
+    }
+
+    /**
+     * Alter the supporting volume.
+     *
+     * @param plane the desired plane of support (not {@code null})
+     */
+    public void setSupportingVolume(ConstPlane plane) {
+        long characterVa = va();
+        float nx = plane.getNormalX();
+        float ny = plane.getNormalY();
+        float nz = plane.getNormalZ();
+        float c = plane.getConstant();
+        setSupportingVolume(characterVa, nx, ny, nz, c);
     }
 
     /**
@@ -400,6 +415,9 @@ abstract public class CharacterBase
     native private static void setEmbedded(long characterVa);
 
     native private static void setMaxSlopeAngle(long characterVa, float angle);
+
+    native static void setSupportingVolume(
+            long characterVa, float nx, float ny, float nz, float c);
 
     native static void setUp(long characterVa, float x, float y, float z);
 }
