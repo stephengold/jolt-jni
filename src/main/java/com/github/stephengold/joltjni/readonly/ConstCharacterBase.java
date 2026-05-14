@@ -110,6 +110,14 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     Vec3 getGroundVelocity();
 
     /**
+     * Access the physics system to which the character's body belongs, if any.
+     * The character is unaffected.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    PhysicsSystem getPhysicsSystem();
+
+    /**
      * Count the active references to the native character. The character is
      * unaffected.
      *
@@ -139,14 +147,6 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * @return a new object
      */
     Plane getSupportingVolume();
-
-    /**
-     * Access the physics system to which the character's body belongs, if any.
-     * The character is unaffected.
-     *
-     * @return the pre-existing instance, or {@code null} if none
-     */
-    PhysicsSystem getPhysicsSystem();
 
     /**
      * Copy the character's "up" direction. The character is unaffected.

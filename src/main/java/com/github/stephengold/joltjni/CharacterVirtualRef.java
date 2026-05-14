@@ -124,6 +124,18 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Alter the shape of the inner body. Invoke this after a successful
+     * invocation of {@code setShape()}.
+     *
+     * @param shape the desired shape (not {@code null}, unaffected, default=?)
+     */
+    public void setInnerBodyShape(ConstShape shape) {
+        long characterVa = targetVa();
+        long shapeVa = shape.targetVa();
+        CharacterVirtual.setInnerBodyShape(characterVa, shapeVa);
+    }
+
+    /**
      * Alter the character's linear velocity.
      *
      * @param vx the X component of the desired velocity (in meters per second,
@@ -213,18 +225,6 @@ final public class CharacterVirtualRef
                 olFilterVa, bodyFilterVa, shapeFilterVa, allocatorVa);
 
         return result;
-    }
-
-    /**
-     * Alter the shape of the inner body. Invoke this after a successful
-     * invocation of {@code setShape()}.
-     *
-     * @param shape the desired shape (not {@code null}, unaffected, default=?)
-     */
-    public void setInnerBodyShape(ConstShape shape) {
-        long characterVa = targetVa();
-        long shapeVa = shape.targetVa();
-        CharacterVirtual.setInnerBodyShape(characterVa, shapeVa);
     }
 
     /**
@@ -655,19 +655,6 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Access the physics system to which the character's body belongs.
-     *
-     * @return the pre-existing instance
-     */
-    @Override
-    public PhysicsSystem getPhysicsSystem() {
-        CharacterVirtual target = (CharacterVirtual) ptr;
-        PhysicsSystem result = target.getPhysicsSystem();
-
-        return result;
-    }
-
-    /**
      * Return how quickly penetration is resolved. The character is unaffected.
      *
      * @return the resolution fraction (0=never resolved, 1=all in one update)
@@ -677,6 +664,19 @@ final public class CharacterVirtualRef
         long characterVa = targetVa();
         float result
                 = CharacterVirtual.getPenetrationRecoverySpeed(characterVa);
+
+        return result;
+    }
+
+    /**
+     * Access the physics system to which the character's body belongs.
+     *
+     * @return the pre-existing instance
+     */
+    @Override
+    public PhysicsSystem getPhysicsSystem() {
+        CharacterVirtual target = (CharacterVirtual) ptr;
+        PhysicsSystem result = target.getPhysicsSystem();
 
         return result;
     }
