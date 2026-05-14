@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -196,6 +196,25 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getShap
             = reinterpret_cast<CharacterBase *> (characterVa);
     RefConst<Shape> * const pRef = reinterpret_cast<RefConst<Shape> *> (refVa);
     (*pRef) = pCharacter->GetShape();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterBase
+ * Method:    getSupportingVolume
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getSupportingVolume
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeFloats) {
+    const CharacterBase * const pCharacter
+            = reinterpret_cast<CharacterBase *> (characterVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Plane result = pCharacter->GetSupportingVolume();
+    const Vec3 normal = result.GetNormal();
+    pFloats[0] = normal.GetX();
+    pFloats[1] = normal.GetY();
+    pFloats[2] = normal.GetZ();
+    pFloats[3] = result.GetConstant();
 }
 
 /*

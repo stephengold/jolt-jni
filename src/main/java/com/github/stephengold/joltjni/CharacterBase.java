@@ -256,6 +256,21 @@ abstract public class CharacterBase
     }
 
     /**
+     * Copy the supporting volume. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public Plane getSupportingVolume() {
+        long characterVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSupportingVolume(characterVa, storeFloats);
+        Plane result = new Plane(storeFloats);
+
+        return result;
+    }
+
+    /**
      * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector
@@ -367,6 +382,9 @@ abstract public class CharacterBase
     native static long getShape(long characterVa);
 
     native static void getShapeUpdate(long characterVa, long refVa);
+
+    native static void getSupportingVolume(
+            long characterVa, FloatBuffer storeFloats);
 
     native static void getUp(long characterVa, FloatBuffer storeFloats);
 

@@ -607,6 +607,21 @@ final public class CharacterVirtualRefC
     }
 
     /**
+     * Copy the supporting volume. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public Plane getSupportingVolume() {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getSupportingVolume(characterVa, storeFloats);
+        Plane result = new Plane(storeFloats);
+
+        return result;
+    }
+
+    /**
      * Generate a TransformedShape that represents the volume occupied by the
      * character. The character is unaffected.
      *

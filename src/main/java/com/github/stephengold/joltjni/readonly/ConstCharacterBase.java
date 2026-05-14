@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.PhysicsSystem;
+import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.StateRecorder;
@@ -131,6 +132,13 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * @param storeRef storage for the reference (not {@code null}, modified)
      */
     void getShape(ShapeRefC storeRef);
+
+    /**
+     * Copy the supporting volume. The character is unaffected.
+     *
+     * @return a new object
+     */
+    Plane getSupportingVolume();
 
     /**
      * Access the physics system to which the character's body belongs, if any.
