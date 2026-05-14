@@ -43,7 +43,7 @@ boolean sShowOriginalTerrain;
 byte[] mMaterialIndices;
 float[] mTerrain;
 HeightFieldShape mHeightField;
-int mTerrainSize,sBitsPerSample=8,sBlockSizeShift=2;
+int mTerrainSize,sBitsPerSample=8,sBlockSize=2;
 PhysicsMaterialList mMaterials=new PhysicsMaterialList();
 RVec3 mHitPos=RVec3.sZero();
 Vec3 mTerrainOffset,mTerrainScale;
@@ -161,7 +161,7 @@ public void Initialize()
 
 	// Create height field
 	HeightFieldShapeSettings settings=new HeightFieldShapeSettings(mTerrain, mTerrainOffset, mTerrainScale, mTerrainSize, mMaterialIndices, mMaterials);
-	settings.setBlockSize ( 1 << sBlockSizeShift);
+	settings.setBlockSize ( sBlockSize);
 	settings.setBitsPerSample ( sBitsPerSample);
 	mHeightField = (HeightFieldShape)(settings.create().get().getPtr());
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(mHeightField, RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
@@ -211,7 +211,7 @@ public void Initialize()
 	Stats stats = mHeightField.getStats();
 
 	// Trace stats
-	Trace("Block size: %d, bits per sample: %d, min height: %g, max height: %g, avg diff: %g, max diff: %g at (%d, %d), relative error: %g%%, size: %d bytes", 1 << sBlockSizeShift, sBitsPerSample, (double)min_height, (double)max_height, (double)avg_diff, (double)max_diff, max_diff_x, max_diff_y, (double)rel_error, stats.getSizeBytes());
+	Trace("Block size: %d, bits per sample: %d, min height: %g, max height: %g, avg diff: %g, max diff: %g at (%d, %d), relative error: %g%%, size: %d bytes", sBlockSize, sBitsPerSample, (double)min_height, (double)max_height, (double)avg_diff, (double)max_diff, max_diff_x, max_diff_y, (double)rel_error, stats.getSizeBytes());
 	if (rel_error > max_error)
 		FatalError("Error too big!");
 
@@ -281,8 +281,8 @@ void HeightFieldShapeTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMen
 
 	inUI->CreateTextButton(inSubMenu, "Configuration Settings", [this, inUI]() {
 		UIElement *terrain_settings = inUI->CreateMenu();
-		inUI->CreateComboBox(terrain_settings, "Block Size", { "2", "4", "8" }, sBlockSizeShift - 1, [=](int inItem) { sBlockSizeShift = inItem + 1; });
-		inUI->CreateSlider(terrain_settings, "Bits Per Sample", (float)sBitsPerSample, 1.0f, 8.0f, 1.0f, [=](float inValue) { sBitsPerSample = (int)inValue; });
+		inUI->CreateSlider(terrain_settings, "BlockSize", (float)sBlockSize, 2.0f, 8.0f, 1.0f, [=](float inValue) { sBlockSize = (int)inValue; });
+		inUI->CreateSlider(terrain_settings, "Bits Per Sample", (float)sBitsPerSample, 1.0f, 16.0f, 1.0f, [=](float inValue) { sBitsPerSample = (int)inValue; });
 		inUI->CreateTextButton(terrain_settings, "Accept", [this]() { RestartTest(); });
 		inUI->ShowMenu(terrain_settings);
 	});
