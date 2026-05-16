@@ -227,6 +227,28 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
         return result;
     }
     // *************************************************************************
+    // Object methods
+
+    /**
+     * Return a string representation of the vertex, which is unaffected. For
+     * example:
+     * <pre>
+     * Vertex{(0.0 2.0 0.0) v(0.0 -1.0 0.0) im=0.5}
+     * </pre>
+     *
+     * @return the string representation (not {@code null}, not empty)
+     */
+    @Override
+    public String toString() {
+        Float3 p = getPosition();
+        Float3 v = getVelocity();
+        float im = getInvMass();
+        String result = "Vertex{(" + p.x + " " + p.y + " " + p.z
+                + ") v(" + v.x + " " + v.y + " " + v.z + ") im=" + im + "}";
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createCopy(long originalVa);
