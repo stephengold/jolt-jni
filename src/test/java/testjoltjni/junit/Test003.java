@@ -69,8 +69,10 @@ import com.github.stephengold.joltjni.TempAllocatorImplWithMallocFallback;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.Vertex;
+import com.github.stephengold.joltjni.VertexAttributes;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
 import com.github.stephengold.joltjni.enumerate.EFilterMode;
+import com.github.stephengold.joltjni.enumerate.ELraType;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
@@ -96,6 +98,7 @@ import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstSphere;
 import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
+import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -165,6 +168,7 @@ public class Test003 {
         doTempAllocatorImplWithMallocFallback();
         doTempAllocatorMalloc();
         doVertex();
+        doVertexAttributes();
 
         TestUtils.cleanup();
     }
@@ -818,6 +822,26 @@ public class Test003 {
         testVertexDefaults(vertexCopy);
 
         TestUtils.testClose(vertexCopy, vertex);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code VertexAttributes} class.
+     */
+    private static void doVertexAttributes() {
+        VertexAttributes attr = new VertexAttributes();
+        ConstVertexAttributes attrCopy = new VertexAttributes(attr);
+
+        testVertexAttributesDefaults(attr);
+        testVertexAttributesSetters(attr);
+
+        testVertexAttributesDefaults(attrCopy);
+
+        ConstVertexAttributes attributes
+                = new VertexAttributes(0f, 0f, Float.MAX_VALUE);
+        testVertexAttributesDefaults(attributes);
+
+        TestUtils.testClose(attributes, attrCopy, attr);
         System.gc();
     }
 
@@ -1567,5 +1591,38 @@ public class Test003 {
         Assert.assertEquals(3f, vertex.getInvMass(), 0f);
         TestUtils.assertEquals(4f, 5f, 6f, vertex.getPosition(), 0f);
         TestUtils.assertEquals(7f, 8f, 9f, vertex.getVelocity(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code VertexAttributes}.
+     *
+     * @param attr the attributes to test (not {@code null}, unaffected)
+     */
+    private static void testVertexAttributesDefaults(
+            ConstVertexAttributes attr) {
+        Assert.assertEquals(Float.MAX_VALUE, attr.getBendCompliance(), 0f);
+        Assert.assertEquals(0f, attr.getCompliance(), 0f);
+        Assert.assertEquals(1f, attr.getLraMaxDistanceMultiplier(), 0f);
+        Assert.assertEquals(ELraType.None, attr.getLraType());
+        Assert.assertEquals(0f, attr.getShearCompliance(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code VertexAttributes}.
+     *
+     * @param attr the attributes to test (not {@code null}, modified)
+     */
+    private static void testVertexAttributesSetters(VertexAttributes attr) {
+        attr.setBendCompliance(6f);
+        attr.setCompliance(7f);
+        attr.setLraMaxDistanceMultiplier(8f);
+        attr.setLraType(ELraType.GeodesicDistance);
+        attr.setShearCompliance(9f);
+
+        Assert.assertEquals(6f, attr.getBendCompliance(), 0f);
+        Assert.assertEquals(7f, attr.getCompliance(), 0f);
+        Assert.assertEquals(8f, attr.getLraMaxDistanceMultiplier(), 0f);
+        Assert.assertEquals(ELraType.GeodesicDistance, attr.getLraType());
+        Assert.assertEquals(9f, attr.getShearCompliance(), 0f);
     }
 }
