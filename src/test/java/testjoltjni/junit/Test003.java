@@ -556,11 +556,14 @@ public class Test003 {
      */
     private static void doFace() {
         Face face = new Face();
+        Face faceCopy = new Face(face);
 
         testFaceDefaults(face);
         testFaceSetters(face);
 
-        TestUtils.testClose(face);
+        testFaceDefaults(faceCopy);
+
+        TestUtils.testClose(faceCopy, face);
         System.gc();
     }
 

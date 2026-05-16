@@ -42,6 +42,17 @@ public class Face extends JoltPhysicsObject implements ConstFace {
     }
 
     /**
+     * Instantiate a copy of the specified face.
+     *
+     * @param original the face to copy (not {@code null}, unaffected)
+     */
+    public Face(ConstFace original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -147,6 +158,8 @@ public class Face extends JoltPhysicsObject implements ConstFace {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
