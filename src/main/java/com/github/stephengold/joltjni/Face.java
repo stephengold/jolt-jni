@@ -72,6 +72,8 @@ public class Face extends JoltPhysicsObject implements ConstFace {
      * @param indexInMesh the index of the vertex to assign (&ge;0, default=0)
      */
     public void setVertex(int indexInFace, int indexInMesh) {
+        assert indexInFace >= 0 && indexInFace < 3 :
+                "indexInFace = " + indexInFace;
         long faceVa = va();
         setVertex(faceVa, indexInFace, indexInMesh);
     }
@@ -101,6 +103,8 @@ public class Face extends JoltPhysicsObject implements ConstFace {
      */
     @Override
     public int getVertex(int indexInFace) {
+        assert indexInFace >= 0 && indexInFace < 3 :
+                "indexInFace = " + indexInFace;
         long faceVa = va();
         int result = getVertex(faceVa, indexInFace);
 
