@@ -41,6 +41,7 @@ import com.github.stephengold.joltjni.CharacterVirtualSettings;
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.ContactListenerList;
 import com.github.stephengold.joltjni.ContactSettings;
+import com.github.stephengold.joltjni.Face;
 import com.github.stephengold.joltjni.FilteredContactListener;
 import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.JobSystem;
@@ -82,6 +83,7 @@ import com.github.stephengold.joltjni.readonly.ConstCharacterContactKey;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
+import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
@@ -146,6 +148,7 @@ public class Test003 {
         doContactListenerList();
         doContactKey();
         doContactSettings();
+        doFace();
         doFilteredContactListener();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
@@ -545,6 +548,19 @@ public class Test003 {
         testContactSettingsSetters(settings);
 
         TestUtils.testClose(settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code Face} class.
+     */
+    private static void doFace() {
+        Face face = new Face();
+
+        testFaceDefaults(face);
+        testFaceSetters(face);
+
+        TestUtils.testClose(face);
         System.gc();
     }
 
@@ -1130,6 +1146,40 @@ public class Test003 {
         Assert.assertFalse(listener.getEnableValidate());
 
         TestUtils.testClose(olpFilter, bplFilter, bodyFilter);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code Face}.
+     *
+     * @param face the face to test (not {@code null}, unaffected)
+     */
+    private static void testFaceDefaults(ConstFace face) {
+        Assert.assertTrue(face.hasAssignedNativeObject());
+        Assert.assertTrue(face.ownsNativeObject());
+
+        Assert.assertEquals(0, face.getMaterialIndex());
+        Assert.assertEquals(0, face.getVertex(0));
+        Assert.assertEquals(0, face.getVertex(1));
+        Assert.assertEquals(0, face.getVertex(2));
+        Assert.assertTrue(face.isDegenerate());
+    }
+
+    /**
+     * Test the setters of the specified {@code Face}.
+     *
+     * @param face the face to test (not {@code null}, modified)
+     */
+    private static void testFaceSetters(Face face) {
+        face.setMaterialIndex(6);
+        face.setVertex(0, 7);
+        face.setVertex(1, 8);
+        face.setVertex(2, 5);
+
+        Assert.assertEquals(6, face.getMaterialIndex());
+        Assert.assertEquals(7, face.getVertex(0));
+        Assert.assertEquals(8, face.getVertex(1));
+        Assert.assertEquals(5, face.getVertex(2));
+        Assert.assertFalse(face.isDegenerate());
     }
 
     /**
