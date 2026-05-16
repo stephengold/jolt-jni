@@ -810,11 +810,14 @@ public class Test003 {
      */
     private static void doVertex() {
         Vertex vertex = new Vertex();
+        ConstVertex vertexCopy = new Vertex(vertex);
 
         testVertexDefaults(vertex);
         testVertexSetters(vertex);
 
-        TestUtils.testClose(vertex);
+        testVertexDefaults(vertexCopy);
+
+        TestUtils.testClose(vertexCopy, vertex);
         System.gc();
     }
 
