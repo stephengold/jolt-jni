@@ -120,6 +120,28 @@ public class Face extends JoltPhysicsObject implements ConstFace {
         return result;
     }
     // *************************************************************************
+    // Object methods
+
+    /**
+     * Return a string representation of the face, which is unaffected. For
+     * example:
+     * <pre>
+     * Face{(4 1 3) 0}
+     * </pre>
+     *
+     * @return the string representation (not {@code null}, not empty)
+     */
+    @Override
+    public String toString() {
+        int v0 = getVertex(0);
+        int v1 = getVertex(1);
+        int v2 = getVertex(2);
+        int mi = getMaterialIndex();
+        String result = "Face{(" + v0 + " " + v1 + " " + v2 + ") " + mi + "}";
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createDefault();
