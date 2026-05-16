@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -69,7 +69,7 @@ public class Face extends JoltPhysicsObject implements ConstFace {
      * Assign the specified mesh vertex to the face. (native attribute: mVertex)
      *
      * @param indexInFace which corner of the triangle (0 or 1 or 2)
-     * @param indexInMesh the index of the vertex to assign (&ge;0)
+     * @param indexInMesh the index of the vertex to assign (&ge;0, default=0)
      */
     public void setVertex(int indexInFace, int indexInMesh) {
         long faceVa = va();
