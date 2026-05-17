@@ -23,11 +23,14 @@ package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.Face;
+import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.SoftBodyCreationSettings;
 import com.github.stephengold.joltjni.SoftBodyMotionProperties;
 import com.github.stephengold.joltjni.SoftBodySharedSettings;
+import com.github.stephengold.joltjni.SoftBodyVertex;
+import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.VertexAttributes;
 import com.github.stephengold.joltjni.Volume;
@@ -36,6 +39,7 @@ import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyMotionProperties;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyVertex;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
 import com.github.stephengold.joltjni.readonly.ConstVolume;
@@ -66,6 +70,7 @@ public class Test017 {
         doFace();
         doSoftBodyCreationSettings();
         doSoftBodyMotionProperties();
+        doSoftBodyVertex();
         doVertex();
         doVertexAttributes();
         doVolume();
@@ -145,6 +150,22 @@ public class Test017 {
         testSoftBodyMotionPropertiesSetters(properties);
 
         TestUtils.testClose(properties);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code SoftBodyVertex} class.
+     */
+    private static void doSoftBodyVertex() {
+        SoftBodyVertex vertex = new SoftBodyVertex();
+        ConstSoftBodyVertex vertexCopy = new SoftBodyVertex(vertex);
+
+        testSoftBodyVertexDefaults(vertex);
+        testSoftBodyVertexSetters(vertex);
+
+        testSoftBodyVertexDefaults(vertexCopy);
+
+        TestUtils.testClose(vertexCopy, vertex);
         System.gc();
     }
 
@@ -342,6 +363,57 @@ public class Test017 {
         Assert.assertEquals(2, properties.getNumIterations());
         Assert.assertEquals(
                 9f, properties.getSkinnedMaxDistanceMultiplier(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code SoftBodyVertex}.
+     *
+     * @param vertex the vertex to test (not {@code null}, unaffected)
+     */
+    private static void testSoftBodyVertexDefaults(ConstSoftBodyVertex vertex) {
+        Assert.assertTrue(vertex.hasAssignedNativeObject());
+        Assert.assertTrue(vertex.ownsNativeObject());
+
+        Assert.assertEquals(0, vertex.getCollidingShapeIndex());
+        TestUtils.assertEquals(0f, 0f, 0f, 0f, vertex.getCollisionPlane(), 0f);
+        Assert.assertEquals(0f, vertex.getInvMass(), 0f);
+        Assert.assertEquals(0f, vertex.getLargestPenetration(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, vertex.getPosition(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, vertex.getPreviousPosition(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, vertex.getVelocity(), 0f);
+        Assert.assertFalse(vertex.hasContact());
+    }
+
+    /**
+     * Test the setters of the specified {@code SoftBodyVertex}.
+     *
+     * @param vertex the vertex to test (not {@code null}, modified)
+     */
+    private static void testSoftBodyVertexSetters(SoftBodyVertex vertex) {
+        vertex.setCollidingShapeIndex(2);
+        vertex.setCollisionPlane(new Plane(0f, 0.6f, -0.8f, 11f));
+        vertex.setHasContact(true);
+        vertex.setInvMass(3f);
+        vertex.setLargestPenetration(3.6f);
+        vertex.setPosition(new Vec3(4f, 5f, 6f));
+        vertex.setPreviousPosition(new Vec3(1f, -1f, -2f));
+        vertex.setVelocity(new Vec3(7f, 8f, 9f));
+
+        Assert.assertEquals(2, vertex.getCollidingShapeIndex());
+        TestUtils.assertEquals(
+                0f, 0.6f, -0.8f, 11f, vertex.getCollisionPlane(), 0f);
+        Assert.assertEquals(3f, vertex.getInvMass(), 0f);
+        Assert.assertEquals(3.6f, vertex.getLargestPenetration(), 0f);
+        TestUtils.assertEquals(4f, 5f, 6f, vertex.getPosition(), 0f);
+        TestUtils.assertEquals(1f, -1f, -2f, vertex.getPreviousPosition(), 0f);
+        TestUtils.assertEquals(7f, 8f, 9f, vertex.getVelocity(), 0f);
+        Assert.assertTrue(vertex.hasContact());
+
+        vertex.resetCollision();
+        Assert.assertEquals(-1, vertex.getCollidingShapeIndex());
+        Assert.assertEquals(
+                -Float.MAX_VALUE, vertex.getLargestPenetration(), 0f);
+        Assert.assertFalse(vertex.hasContact());
     }
 
     /**
