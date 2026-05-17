@@ -99,6 +99,8 @@ public class Edge extends JoltPhysicsObject implements ConstEdge {
      * @return the modified settings, for chaining
      */
     public Edge setVertex(int indexInEdge, int indexInMesh) {
+        assert indexInEdge >= 0 && indexInEdge < 2 :
+                "indexInEdge = " + indexInEdge;
         long edgeVa = va();
         setVertex(edgeVa, indexInEdge, indexInMesh);
 
@@ -143,6 +145,8 @@ public class Edge extends JoltPhysicsObject implements ConstEdge {
      */
     @Override
     public int getVertex(int indexInEdge) {
+        assert indexInEdge >= 0 && indexInEdge < 2 :
+                "indexInEdge = " + indexInEdge;
         long edgeVa = va();
         int result = getVertex(edgeVa, indexInEdge);
 
