@@ -92,7 +92,7 @@ public class SoftBodyVertex
     /**
      * Alter the collision plane. (native attribute: mCollisionPlane)
      *
-     * @param plane the desired collision plane (not null, unaffected)
+     * @param plane the desired collision plane (not {@code null}, unaffected)
      */
     public void setCollisionPlane(ConstPlane plane) {
         long vertexVa = va();
@@ -126,7 +126,7 @@ public class SoftBodyVertex
     /**
      * Relocate the vertex. (native attribute: mPosition)
      *
-     * @param location the desired location (not null, unaffected)
+     * @param location the desired location (not {@code null}, unaffected)
      */
     public void setPosition(Vec3Arg location) {
         long vertexVa = va();
@@ -139,8 +139,8 @@ public class SoftBodyVertex
     /**
      * Alter the velocity of the vertex. (native attribute: mVelocity)
      *
-     * @param velocity the desired velocity (in meters per second, not null,
-     * unaffected)
+     * @param velocity the desired velocity (in meters per second, not
+     * {@code null}, unaffected)
      */
     public void setVelocity(Vec3Arg velocity) {
         long vertexVa = va();
@@ -197,7 +197,8 @@ public class SoftBodyVertex
     }
 
     /**
-     * Return the amount of penetration. (native attribute: mLargestPenetration)
+     * Return the amount of penetration. The vertex is unaffected. (native
+     * attribute: mLargestPenetration)
      *
      * @return the depth (in meters)
      */
