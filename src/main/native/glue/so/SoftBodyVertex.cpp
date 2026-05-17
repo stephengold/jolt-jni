@@ -216,6 +216,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setCol
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    setHasContact
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setHasContact
+  (JNIEnv *, jclass, jlong vertexVa, jboolean setting) {
+    SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    pVertex->mHasContact = setting;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
  * Method:    setInvMass
  * Signature: (JF)V
  */
@@ -249,6 +261,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setPos
             = reinterpret_cast<SoftBodyVertex *> (vertexVa);
     const Vec3 location(x, y, z);
     pVertex->mPosition = location;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    setPreviousPosition
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setPreviousPosition
+  (JNIEnv *, jclass, jlong vertexVa, jfloat x, jfloat y, jfloat z) {
+    SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    const Vec3 location(x, y, z);
+    pVertex->mPreviousPosition = location;
 }
 
 /*

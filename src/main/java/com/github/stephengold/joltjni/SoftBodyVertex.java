@@ -104,6 +104,16 @@ public class SoftBodyVertex
     }
 
     /**
+     * Alter the "has contact" flag. (native attribute: mHasContact)
+     *
+     * @param setting the desired setting
+     */
+    public void setHasContact(boolean setting) {
+        long vertexVa = va();
+        setHasContact(vertexVa, setting);
+    }
+
+    /**
      * Alter the inverse mass. (native attribute: mInvMass)
      *
      * @param invMass the desired inverse mass (in 1/kilograms)
@@ -134,6 +144,20 @@ public class SoftBodyVertex
         float y = location.getY();
         float z = location.getZ();
         setPosition(vertexVa, x, y, z);
+    }
+
+    /**
+     * Alter the previous location. (native attribute: mPreviousPosition)
+     *
+     * @param location the desired previous location (not {@code null},
+     * unaffected)
+     */
+    public void setPreviousPosition(Vec3Arg location) {
+        long vertexVa = va();
+        float x = location.getX();
+        float y = location.getY();
+        float z = location.getZ();
+        setPreviousPosition(vertexVa, x, y, z);
     }
 
     /**
@@ -308,12 +332,17 @@ public class SoftBodyVertex
     native private static void setCollisionPlane(
             long vertexVa, float nx, float ny, float nz, float c);
 
+    native private static void setHasContact(long vertexVa, boolean setting);
+
     native private static void setInvMass(long vertexVa, float invMass);
 
     native private static void setLargestPenetration(
             long vertexVa, float penetration);
 
     native private static void setPosition(
+            long vertexVa, float x, float y, float z);
+
+    native private static void setPreviousPosition(
             long vertexVa, float x, float y, float z);
 
     native private static void setVelocity(
