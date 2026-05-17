@@ -154,7 +154,7 @@ public class VertexAttributes
      * Alter the type of the long-range attachment (LRA) constraint. (native
      * attribute: mLRAType)
      *
-     * @param type the desired type (not null, default=None)
+     * @param type the desired type (not {@code null}, default=None)
      */
     public void setLraType(ELraType type) {
         long attributesVa = va();
@@ -226,7 +226,7 @@ public class VertexAttributes
      * Return the type of the long-range attachment (LRA) constraint. The
      * attributes are unaffected. (native attribute: mLRAType)
      *
-     * @return the enum value (not null)
+     * @return the enum value (not {@code null})
      */
     @Override
     public ELraType getLraType() {

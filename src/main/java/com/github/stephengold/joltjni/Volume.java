@@ -67,7 +67,8 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
     /**
      * Alter the rest size of the volume. (native attribute: mSixRestVolume)
      *
-     * @param sixVolume 6 times the desired rest volume (in cubic meters)
+     * @param sixVolume 6 times the desired rest volume (in cubic meters,
+     * default=1)
      */
     public void setSixRestVolume(float sixVolume) {
         long volumeVa = va();
@@ -79,7 +80,7 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
      * mVertex)
      *
      * @param indexInVolume which corner of the tetrahedron (0 or 1 or 2 or 3)
-     * @param indexInMesh the index of the vertex to assign (&ge;0)
+     * @param indexInMesh the index of the vertex to assign (&ge;0, default=0)
      */
     public void setVertex(int indexInVolume, int indexInMesh) {
         assert indexInVolume >= 0 && indexInVolume < 4 :
