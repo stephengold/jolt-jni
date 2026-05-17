@@ -38,6 +38,7 @@ import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
@@ -186,6 +187,24 @@ final public class TestUtils {
                 minFraction, actual.getMinFraction(), tolerance);
         Assert.assertEquals("manFraction component",
                 maxFraction, actual.getMaxFraction(), tolerance);
+    }
+
+    /**
+     * Verify the components of a plane to within some tolerance.
+     *
+     * @param nx the expected X component of the normal direction
+     * @param ny the expected Y component of the normal direction
+     * @param nz the expected Z component of the normal direction
+     * @param c the expected constant
+     * @param actual the plane to test (not {@code null}, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(float nx, float ny, float nz, float c,
+            ConstPlane actual, float tolerance) {
+        Assert.assertEquals("nx", nx, actual.getNormalX(), tolerance);
+        Assert.assertEquals("ny", ny, actual.getNormalY(), tolerance);
+        Assert.assertEquals("nz", nz, actual.getNormalZ(), tolerance);
+        Assert.assertEquals("constant", c, actual.getConstant(), tolerance);
     }
 
     /**
