@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -65,6 +65,13 @@ public interface ConstSoftBodyVertex extends ConstJoltPhysicsObject {
      * @return a new location vector (relative to the body's center of mass)
      */
     Vec3 getPosition();
+
+    /**
+     * Copy the previous location. The vertex is unaffected.
+     *
+     * @return a new location vector (relative to the body's center of mass)
+     */
+    Vec3 getPreviousPosition();
 
     /**
      * Copy the velocity. The vertex is unaffected.

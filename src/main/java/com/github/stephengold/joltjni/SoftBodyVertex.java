@@ -226,6 +226,22 @@ public class SoftBodyVertex
     }
 
     /**
+     * Copy the previous location. The vertex is unaffected. (native attribute:
+     * mPreviousPosition)
+     *
+     * @return a new location vector (relative to the body's center of mass)
+     */
+    @Override
+    public Vec3 getPreviousPosition() {
+        long vertexVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPreviousPosition(vertexVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
      * Copy the velocity. The vertex is unaffected. (native attribute:
      * mVelocity)
      *
@@ -274,6 +290,9 @@ public class SoftBodyVertex
     native private static float getLargestPenetration(long vertexVa);
 
     native private static void getPosition(
+            long vertexVa, FloatBuffer storeFloats);
+
+    native private static void getPreviousPosition(
             long vertexVa, FloatBuffer storeFloats);
 
     native private static void getVelocity(

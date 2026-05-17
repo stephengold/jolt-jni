@@ -132,6 +132,23 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getPos
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    getPreviousPosition
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getPreviousPosition
+  (JNIEnv *pEnv, jclass, jlong vertexVa, jobject storeFloats) {
+    const SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pVertex->mPreviousPosition;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
  * Method:    getVelocity
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
