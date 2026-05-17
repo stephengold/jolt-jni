@@ -292,7 +292,7 @@ public class SoftBodyVertex
     @Override
     public boolean hasContact() {
         long vertexVa = va();
-        boolean result = hasContact(vertexVa);
+        boolean result = getHasContact(vertexVa);
 
         return result;
     }
@@ -310,6 +310,8 @@ public class SoftBodyVertex
     native private static void getCollisionPlane(
             long vertexVa, FloatBuffer storeFloats);
 
+    native private static boolean getHasContact(long vertexVa);
+
     native private static float getInvMass(long vertexVa);
 
     native private static float getLargestPenetration(long vertexVa);
@@ -322,8 +324,6 @@ public class SoftBodyVertex
 
     native private static void getVelocity(
             long vertexVa, FloatBuffer storeFloats);
-
-    native private static boolean hasContact(long vertexVa);
 
     native private static void resetCollision(long vertexVa);
 

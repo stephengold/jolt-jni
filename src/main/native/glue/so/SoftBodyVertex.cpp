@@ -89,6 +89,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getCol
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    getHasContact
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getHasContact
+  (JNIEnv *, jclass, jlong vertexVa) {
+    const SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    const bool result = pVertex->mHasContact;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
  * Method:    getInvMass
  * Signature: (J)F
  */
@@ -162,19 +175,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getVel
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodyVertex
- * Method:    hasContact
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_hasContact
-  (JNIEnv *, jclass, jlong vertexVa) {
-    const SoftBodyVertex * const pVertex
-            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
-    const bool result = pVertex->mHasContact;
-    return result;
 }
 
 /*
