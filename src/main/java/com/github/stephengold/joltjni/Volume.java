@@ -40,6 +40,17 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
         long volumeVa = createDefault();
         setVirtualAddress(volumeVa, () -> free(volumeVa));
     }
+
+    /**
+     * Instantiate a copy of the specified volume.
+     *
+     * @param original the volume to copy (not {@code null}, unaffected)
+     */
+    public Volume(ConstVolume original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -121,6 +132,8 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
