@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
+import java.util.Objects;
 
 /**
  * A math object used to represent a plane in 3-dimensional space.
@@ -267,6 +268,49 @@ final public class Plane implements ConstPlane {
     }
     // *************************************************************************
     // Object methods
+
+    /**
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code other} is null, false is returned. Either way, the current
+     * instance is unaffected.
+     *
+     * @param other the object to compare (unaffected) or {@code null}
+     * @return {@code true} if {@code this} and {@code other} have identical
+     * values, otherwise {@code false}
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other == null) {
+            return false;
+        } else if (getClass() != other.getClass()) {
+            return false;
+        }
+
+        final ConstPlane otherVector = (ConstPlane) other;
+        if (Float.compare(nx, otherVector.getNormalX()) != 0) {
+            return false;
+        } else if (Float.compare(ny, otherVector.getNormalY()) != 0) {
+            return false;
+        } else if (Float.compare(nz, otherVector.getNormalZ()) != 0) {
+            return false;
+        } else {
+            return Float.compare(c, otherVector.getConstant()) == 0;
+        }
+    }
+
+    /**
+     * Return a hash code. If two planes have identical values, they will have
+     * the same hash code. The plane is unaffected.
+     *
+     * @return a 32-bit value for use in hashing
+     */
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(nx, ny, nz, c);
+        return result;
+    }
 
     /**
      * Return a string representation of the plane, which is unaffected. For
