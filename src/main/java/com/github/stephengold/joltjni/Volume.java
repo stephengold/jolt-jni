@@ -82,6 +82,8 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
      * @param indexInMesh the index of the vertex to assign (&ge;0)
      */
     public void setVertex(int indexInVolume, int indexInMesh) {
+        assert indexInVolume >= 0 && indexInVolume < 4 :
+                "indexInVolume = " + indexInVolume;
         long volumeVa = va();
         setVertex(volumeVa, indexInVolume, indexInMesh);
     }
@@ -125,6 +127,8 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
      */
     @Override
     public int getVertex(int indexInVolume) {
+        assert indexInVolume >= 0 && indexInVolume < 4 :
+                "indexInVolume = " + indexInVolume;
         long volumeVa = va();
         int result = getVertex(volumeVa, indexInVolume);
 
