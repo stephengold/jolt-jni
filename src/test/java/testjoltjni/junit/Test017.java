@@ -350,6 +350,9 @@ public class Test017 {
      * @param vertex the vertex to test (not {@code null}, unaffected)
      */
     private static void testVertexDefaults(ConstVertex vertex) {
+        Assert.assertTrue(vertex.hasAssignedNativeObject());
+        Assert.assertTrue(vertex.ownsNativeObject());
+
         Assert.assertEquals(1f, vertex.getInvMass(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, vertex.getPosition(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, vertex.getVelocity(), 0f);
@@ -377,6 +380,9 @@ public class Test017 {
      */
     private static void testVertexAttributesDefaults(
             ConstVertexAttributes attr) {
+        Assert.assertTrue(attr.hasAssignedNativeObject());
+        Assert.assertTrue(attr.ownsNativeObject());
+
         Assert.assertEquals(Float.MAX_VALUE, attr.getBendCompliance(), 0f);
         Assert.assertEquals(0f, attr.getCompliance(), 0f);
         Assert.assertEquals(1f, attr.getLraMaxDistanceMultiplier(), 0f);
