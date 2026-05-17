@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.CollisionGroup;
+import com.github.stephengold.joltjni.Edge;
 import com.github.stephengold.joltjni.Face;
 import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.Quat;
@@ -35,6 +36,7 @@ import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.VertexAttributes;
 import com.github.stephengold.joltjni.Volume;
 import com.github.stephengold.joltjni.enumerate.ELraType;
+import com.github.stephengold.joltjni.readonly.ConstEdge;
 import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyMotionProperties;
@@ -67,6 +69,7 @@ public class Test017 {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
 
+        doEdge();
         doFace();
         doSoftBodyCreationSettings();
         doSoftBodyMotionProperties();
@@ -79,6 +82,22 @@ public class Test017 {
     }
     // *************************************************************************
     // Java private methods
+
+    /**
+     * Test the {@code Edge} class.
+     */
+    private static void doEdge() {
+        Edge edge = new Edge();
+        Edge edgeCopy = new Edge(edge);
+
+        testEdgeDefaults(edge);
+        testEdgeSetters(edge);
+
+        testEdgeDefaults(edgeCopy);
+
+        TestUtils.testClose(edgeCopy, edge);
+        System.gc();
+    }
 
     /**
      * Test the {@code Face} class.
@@ -219,6 +238,38 @@ public class Test017 {
 
         TestUtils.testClose(volumeCopy, volume);
         System.gc();
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code Edge}.
+     *
+     * @param edge the edge to test (not {@code null}, unaffected)
+     */
+    private static void testEdgeDefaults(ConstEdge edge) {
+        Assert.assertTrue(edge.hasAssignedNativeObject());
+        Assert.assertTrue(edge.ownsNativeObject());
+
+        Assert.assertEquals(0f, edge.getCompliance(), 0f);
+        Assert.assertEquals(1f, edge.getRestLength(), 0f);
+        Assert.assertEquals(0, edge.getVertex(0));
+        Assert.assertEquals(0, edge.getVertex(1));
+    }
+
+    /**
+     * Test the setters of the specified {@code Edge}.
+     *
+     * @param edge the edge to test (not {@code null}, modified)
+     */
+    private static void testEdgeSetters(Edge edge) {
+        edge.setCompliance(9f);
+        edge.setRestLength(4f);
+        edge.setVertex(0, 7);
+        edge.setVertex(1, 8);
+
+        Assert.assertEquals(9f, edge.getCompliance(), 0f);
+        Assert.assertEquals(4f, edge.getRestLength(), 0f);
+        Assert.assertEquals(7, edge.getVertex(0));
+        Assert.assertEquals(8, edge.getVertex(1));
     }
 
     /**
