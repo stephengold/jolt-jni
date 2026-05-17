@@ -33,6 +33,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_createCopy
+    BODYOF_CREATE_COPY(SoftBodyVertex)
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
  * Method:    createDefault
  * Signature: ()J
  */

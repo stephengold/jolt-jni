@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,6 +44,17 @@ public class SoftBodyVertex
     public SoftBodyVertex() {
         long vertexVa = createDefault();
         setVirtualAddress(vertexVa, () -> free(vertexVa));
+    }
+
+    /**
+     * Instantiate a copy of the specified vertex.
+     *
+     * @param original the vertex to copy (not {@code null}, unaffected)
+     */
+    public SoftBodyVertex(ConstSoftBodyVertex original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
     }
 
     /**
@@ -246,6 +257,8 @@ public class SoftBodyVertex
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
