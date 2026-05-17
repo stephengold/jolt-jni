@@ -850,6 +850,28 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Test whether the specified vector lies within the specified squared
+     * distance of this one. Both vectors are unaffected.
+     *
+     * @param v2 the vector to compare with (not {@code null}, unaffected)
+     * @param maxDistSq the maximum allowed squared distance (&ge;0)
+     * @return {@code true} if within the squared distance, otherwise
+     * {@code false}
+     */
+    @Override
+    public boolean isClose(Vec3Arg v2, float maxDistSq) {
+        double dx = v2.getX() - x;
+        double dy = v2.getY() - y;
+        double dz = v2.getX() - z;
+        double distanceSquared = dx * dx + dy * dy + dz * dz;
+        if (distanceSquared <= maxDistSq) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Test whether the vector contains infinities or NaNs. The vector is
      * unaffected.
      *
@@ -926,28 +948,6 @@ final public class Vec3 implements Vec3Arg {
     public boolean isNormalized(float tolerance) {
         float lengthSq = lengthSq();
         if (Math.abs(lengthSq - 1f) <= tolerance) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Test whether the specified vector lies within the specified squared
-     * distance of this one. Both vectors are unaffected.
-     *
-     * @param v2 the vector to compare with (not {@code null}, unaffected)
-     * @param maxDistSq the maximum allowed squared distance (&ge;0)
-     * @return {@code true} if within the squared distance, otherwise
-     * {@code false}
-     */
-    @Override
-    public boolean isClose(Vec3Arg v2, float maxDistSq) {
-        double dx = v2.getX() - x;
-        double dy = v2.getY() - y;
-        double dz = v2.getX() - z;
-        double distanceSquared = dx * dx + dy * dy + dz * dz;
-        if (distanceSquared <= maxDistSq) {
             return true;
         } else {
             return false;
