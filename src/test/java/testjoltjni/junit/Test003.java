@@ -70,6 +70,7 @@ import com.github.stephengold.joltjni.TempAllocatorMalloc;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.VertexAttributes;
+import com.github.stephengold.joltjni.Volume;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
 import com.github.stephengold.joltjni.enumerate.EFilterMode;
 import com.github.stephengold.joltjni.enumerate.ELraType;
@@ -99,6 +100,7 @@ import com.github.stephengold.joltjni.readonly.ConstSphere;
 import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
+import com.github.stephengold.joltjni.readonly.ConstVolume;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -169,6 +171,7 @@ public class Test003 {
         doTempAllocatorMalloc();
         doVertex();
         doVertexAttributes();
+        doVolume();
 
         TestUtils.cleanup();
     }
@@ -842,6 +845,22 @@ public class Test003 {
         testVertexAttributesDefaults(attributes);
 
         TestUtils.testClose(attributes, attrCopy, attr);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code Volume} class.
+     */
+    private static void doVolume() {
+        Volume volume = new Volume();
+        Volume volumeCopy = new Volume(volume);
+
+        testVolumeDefaults(volume);
+        testVolumeSetters(volume);
+
+        testVolumeDefaults(volumeCopy);
+
+        TestUtils.testClose(volumeCopy, volume);
         System.gc();
     }
 
@@ -1624,5 +1643,43 @@ public class Test003 {
         Assert.assertEquals(8f, attr.getLraMaxDistanceMultiplier(), 0f);
         Assert.assertEquals(ELraType.GeodesicDistance, attr.getLraType());
         Assert.assertEquals(9f, attr.getShearCompliance(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code Volume}.
+     *
+     * @param volume the volume to test (not {@code null}, unaffected)
+     */
+    private static void testVolumeDefaults(ConstVolume volume) {
+        Assert.assertTrue(volume.hasAssignedNativeObject());
+        Assert.assertTrue(volume.ownsNativeObject());
+
+        Assert.assertEquals(0f, volume.getCompliance(), 0f);
+        Assert.assertEquals(1f, volume.getSixRestVolume(), 0f);
+        Assert.assertEquals(0, volume.getVertex(0));
+        Assert.assertEquals(0, volume.getVertex(1));
+        Assert.assertEquals(0, volume.getVertex(2));
+        Assert.assertEquals(0, volume.getVertex(3));
+    }
+
+    /**
+     * Test the setters of the specified {@code Face}.
+     *
+     * @param volume the volume to test (not {@code null}, modified)
+     */
+    private static void testVolumeSetters(Volume volume) {
+        volume.setCompliance(1.5f);
+        volume.setSixRestVolume(3.2f);
+        volume.setVertex(0, 7);
+        volume.setVertex(1, 8);
+        volume.setVertex(2, 5);
+        volume.setVertex(3, 9);
+
+        Assert.assertEquals(1.5f, volume.getCompliance(), 0f);
+        Assert.assertEquals(3.2f, volume.getSixRestVolume(), 0f);
+        Assert.assertEquals(7, volume.getVertex(0));
+        Assert.assertEquals(8, volume.getVertex(1));
+        Assert.assertEquals(5, volume.getVertex(2));
+        Assert.assertEquals(9, volume.getVertex(3));
     }
 }
