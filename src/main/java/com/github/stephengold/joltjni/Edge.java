@@ -95,7 +95,7 @@ public class Edge extends JoltPhysicsObject implements ConstEdge {
      * Assign the specified mesh vertex to the edge. (native attribute: mVertex)
      *
      * @param indexInEdge which end of the edge (0 or 1)
-     * @param indexInMesh the index of the vertex to assign (&ge;0)
+     * @param indexInMesh the index of the vertex to assign (&ge;0, default=0)
      * @return the modified settings, for chaining
      */
     public Edge setVertex(int indexInEdge, int indexInMesh) {

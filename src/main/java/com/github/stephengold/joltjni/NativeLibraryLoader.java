@@ -39,10 +39,10 @@ final public class NativeLibraryLoader {
     // new methods exposed
 
     /**
-     * Load a Jolt native library.
+     * Load a native library.
      *
      * @param libraryPath the file to load (not {@code null})
-     * @return true after successful load, otherwise false
+     * @return {@code true} after a successful load, otherwise {@code false}
      */
     public static boolean loadLibrary(String libraryPath) {
         assert libraryPath != null;
