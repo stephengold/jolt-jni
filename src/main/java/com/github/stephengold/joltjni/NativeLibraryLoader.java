@@ -21,42 +21,38 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import java.util.logging.Logger;
-
 /**
  * Utility class to load native libraries.
  *
  * @author David J. Morfe
  */
-public final class NativeLibraryLoader {
-
-    /**
-     * message logger for this class
-     */
-    final public static Logger logger
-            = Logger.getLogger(NativeLibraryLoader.class.getName());
+final public class NativeLibraryLoader {
+    // *************************************************************************
+    // constructors
 
     /**
      * A private constructor to inhibit instantiation of this class.
      */
     private NativeLibraryLoader() {
     }
+    // *************************************************************************
+    // new methods exposed
 
     /**
      * Load a Jolt native library.
      *
-     * @param libraryPath
+     * @param libraryPath the file to load (not {@code null})
      * @return true after successful load, otherwise false
      */
     public static boolean loadLibrary(String libraryPath) {
+        assert libraryPath != null;
         boolean success = false;
 
         try {
-            System.load(libraryPath); // Ensures native library can successfully bind to the native context.
-            logger.info("Jolt DLL loaded");
+            System.load(libraryPath);
             success = true;
-        } catch (Throwable t) {
-            t.printStackTrace();
+        } catch (SecurityException | UnsatisfiedLinkError exception) {
+            System.err.printf("libraryPath = %s%n%s", libraryPath, exception);
         }
 
         return success;
