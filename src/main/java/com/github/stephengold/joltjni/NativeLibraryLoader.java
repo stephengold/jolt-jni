@@ -48,7 +48,7 @@ public final class NativeLibraryLoader {
      * @param libraryPath
      * @return true after successful load, otherwise false
      */
-    public static void loadLibrary(String libraryPath) {
+    public static boolean loadLibrary(String libraryPath) {
         boolean success = false;
 
         try {
