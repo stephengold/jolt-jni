@@ -41,6 +41,7 @@ jobs:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.350.0
           vulkan-use-cache: true
+      - run: clang++ --version
       - name: gradlew -Ptarget=Linux64 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -78,6 +79,7 @@ jobs:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.350.0
           vulkan-use-cache: true
+      - run: clang++ --version
       - name: gradlew -Ptarget=Linux64_fma -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -150,6 +152,7 @@ jobs:
         run: |
           ./gradlew unpackJoltSource \
             --console=plain
+      - run: clang++ --version
       - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -PuseMTL=yes -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -187,6 +190,7 @@ jobs:
         run: |
           ./gradlew unpackJoltSource \
             --console=plain
+      - run: clang++ --version
       - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -PuseMTL=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
