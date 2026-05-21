@@ -111,6 +111,8 @@ public class BodyInterface extends NonCopyable {
      */
     public void activateBody(int bodyId) {
         long bodyInterfaceVa = va();
+        assert isAdded(bodyInterfaceVa, bodyId) :
+                "Add the body before attempting to activate it.";
         activateBody(bodyInterfaceVa, bodyId);
     }
 
