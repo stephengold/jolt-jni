@@ -1,5 +1,53 @@
 # Release log for the Jolt-JNI project
 
+## Version 5.0.0 released on TBD
+
++ API changes:
+  + Deleted 2 deprecated public methods:
+    + `BodyCreationSettings.getNumPositionStepsOverride()`
+    + `BodyCreationSettings.getNumVelocityStepsOverride()`
+  + Renamed 2 interfaces and 2 classes:
+    + `ConstContact` -> `ConstCharacterContact`
+    + `ConstContactKey` -> `ConstCharacerContactKey`
+    + `Contact` -> `CharacterContact`
+    + `ContactKey` -> `CharacterContactKey`
+  + Various `CharacterContactListener` callbacks now receive a complete
+    `CharacterContact` or `CharacterContactSettings`
+    in place of fine-grained parameters.
+
++ Added a utility class `NativeLibraryLoader` (PR #47)
++ Added copy constructors to 6 soft-body classes:
+  + `Edge`
+  + `Face`
+  + `SoftBodyVertex`
+  + `Vertex`
+  + `VertexAttributes`
+  + `Volume`
++ Added new methods:
+  + `CharacterBase.setSupportingVolume()`
+  + `CharacterRef.setSupportingVolume()`
+  + `CharacterVirtualRef.setSupportingVolume()`
+  + `ConstCharacterBase.getSupportingVolume()`
+  + `ConstCharacterContact.getIsBackFacingContact()`
+  + `ConstSoftBodyVertex.getPreviousPosition()`
+  + `SoftBodyVertex.setHasContact()`
+  + `SoftBodyVertex.setPreviousPosition()`
++ Overrode 4 existing public methods:
+  + `Face.toString()`
+  + `Plane.equals()`
+  + `Plane.hashCode()`
+  + `Vertex.toString()`
+
++ Began building Windows native libraries using Visual Studio 2026
+  (instead of Visual Studio 2022).
++ Began building Linux_ARM64 native libraries using GCC v10 (instead of v9).
++ Began compiling Linux and Windows native libraries with v1.4.350.0
+  Vulkan header files (instead of v1.4.341.1).
++ Recompiled the compute shaders using Vulkan SDK v1.4.350.0
+  (instead of v1.4.341.1).
++ Updated the Jolt-Physics source and assets to sg260506 (=cd591a9).
+
+
 ## Version 4.3.0 released on 8 May 2026
 
 + Bugfixes:
