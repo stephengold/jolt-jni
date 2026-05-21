@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 5.0.0 released on TBD
+## Version 5.0.0 released on 20 May 2026
 
 + API changes:
   + Deleted 2 deprecated public methods:
@@ -8,7 +8,7 @@
     + `BodyCreationSettings.getNumVelocityStepsOverride()`
   + Renamed 2 interfaces and 2 classes:
     + `ConstContact` -> `ConstCharacterContact`
-    + `ConstContactKey` -> `ConstCharacerContactKey`
+    + `ConstContactKey` -> `ConstCharacterContactKey`
     + `Contact` -> `CharacterContact`
     + `ContactKey` -> `CharacterContactKey`
   + Various `CharacterContactListener` callbacks now receive a complete
@@ -40,7 +40,7 @@
 
 + Began building Windows native libraries using Visual Studio 2026
   (instead of Visual Studio 2022).
-+ Began building Linux_ARM64 native libraries using GCC v10 (instead of v9).
++ Began building Linux_ARM64 native libraries using GCC v11.4 (instead of v10).
 + Began compiling Linux and Windows native libraries with v1.4.350.0
   Vulkan header files (instead of v1.4.341.1).
 + Recompiled the compute shaders using Vulkan SDK v1.4.350.0
