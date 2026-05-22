@@ -241,12 +241,10 @@ model {
                     cppCompiler.args '/GR-' // disable C++ runtime type info
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
-                    cppCompiler.args "/I$projectDir/src/main/native"
+                    cppCompiler.args "/I$projectDir/src/main/native"; objcppCompiler.args "/I$projectDir/src/main/native"
                     cppCompiler.args "/I$projectDir/src/main/native/TestFramework" // for External/Perlin.h
-                    cppCompiler.args '/std:c++17'
+                    cppCompiler.args '/std:c++17'; objcppCompiler.args '/std:c++17'
                     cppCompiler.args '/wd4577' // disable warnings about using noexcept
-                    objcppCompiler.args "/I$projectDir/src/main/native"
-                    objcppCompiler.args '/std:c++17'
 
                     if (isDebug) {
                         cppCompiler.define 'JPH_FLOATING_POINT_EXCEPTIONS_ENABLED'
@@ -515,7 +513,7 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     dependsOn('assemble')
     enableAssertions = true
     if (enableNativeAccess) {
-        jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
+        jvmArgs '--enable-native-access=ALL-UNNAMED' // suppress System::load() warning
     }
 }
 tasks.withType(Test).configureEach {
