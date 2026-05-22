@@ -42,10 +42,10 @@ jobs:
           vulkan-query-version: 1.4.350.0
           vulkan-use-cache: true
       - run: clang++ --version
-      - name: gradlew -Ptarget=Linux64 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
+      - name: gradlew -Ptarget=Linux64 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Linux64 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
+          ./gradlew -Ptarget=Linux64 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain
       - if: failure()
         run: cat hs_err_pid*.log
@@ -80,10 +80,10 @@ jobs:
           vulkan-query-version: 1.4.350.0
           vulkan-use-cache: true
       - run: clang++ --version
-      - name: gradlew -Ptarget=Linux64_fma -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
+      - name: gradlew -Ptarget=Linux64_fma -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Linux64_fma -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
+          ./gradlew -Ptarget=Linux64_fma -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain
       - if: failure()
         run: cat hs_err_pid*.log
@@ -113,10 +113,10 @@ jobs:
       - uses: actions/checkout@v6
       - run: g++ --version
       - uses: gradle/actions/setup-gradle@v6
-      - name: gradlew -Ptarget=Linux_ARM64 -Ptool=gcc runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
+      - name: gradlew -Ptarget=Linux_ARM64 -Ptool=gcc -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Linux_ARM64 -Ptool=gcc runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
+          ./gradlew -Ptarget=Linux_ARM64 -Ptool=gcc -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain
       - if: failure()
         run: cat hs_err_pid*.log
@@ -226,10 +226,10 @@ jobs:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.350.0
           vulkan-use-cache: true
-      - name: gradlew -Ptarget=Windows64 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
+      - name: gradlew -Ptarget=Windows64 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Windows64 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
+          ./gradlew -Ptarget=Windows64 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain
         shell: bash
       - if: failure()
@@ -267,10 +267,10 @@ jobs:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.350.0
           vulkan-use-cache: true
-      - name: gradlew -Ptarget=Windows64_avx2 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
+      - name: gradlew -Ptarget=Windows64_avx2 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Windows64_avx2 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
+          ./gradlew -Ptarget=Windows64_avx2 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain
         shell: bash
       - if: failure()
