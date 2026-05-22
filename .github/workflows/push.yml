@@ -147,7 +147,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v6
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '26.4.1'
+          xcode-version: '26.5.0'
       - name: gradlew unpackJoltSource
         run: |
           ./gradlew unpackJoltSource \
@@ -185,7 +185,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v6
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '26.4.1'
+          xcode-version: '26.5.0'
       - name: gradlew unpackJoltSource
         run: |
           ./gradlew unpackJoltSource \
