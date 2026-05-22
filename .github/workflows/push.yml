@@ -39,7 +39,7 @@ jobs:
       - uses: humbletim/setup-vulkan-sdk@v1.2.1
         with:
           vulkan-components: Vulkan-Headers
-          vulkan-query-version: 1.4.350.0
+          vulkan-query-version: 1.4.350.1
           vulkan-use-cache: true
       - run: clang++ --version
       - name: gradlew -Ptarget=Linux64 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
@@ -77,7 +77,7 @@ jobs:
       - uses: humbletim/setup-vulkan-sdk@v1.2.1
         with:
           vulkan-components: Vulkan-Headers
-          vulkan-query-version: 1.4.350.0
+          vulkan-query-version: 1.4.350.1
           vulkan-use-cache: true
       - run: clang++ --version
       - name: gradlew -Ptarget=Linux64_fma -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
