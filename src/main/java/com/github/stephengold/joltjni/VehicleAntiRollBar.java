@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -69,7 +69,7 @@ public class VehicleAntiRollBar
     /**
      * Load settings from the specified binary stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      */
     public void restoreBinaryState(StreamIn stream) {
         long settingsVa = va();
@@ -163,7 +163,7 @@ public class VehicleAntiRollBar
     /**
      * Save the bar to the specified binary stream. The bar is unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

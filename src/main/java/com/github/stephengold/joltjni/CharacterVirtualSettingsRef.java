@@ -70,7 +70,8 @@ final public class CharacterVirtualSettingsRef
      * Alter whether the character will move through back facing triangles.
      * (native attribute: mBackFaceMode)
      *
-     * @param mode the desired mode (not null, default=CollideWithBackFaces)
+     * @param mode the desired mode (not {@code null},
+     * default=CollideWithBackFaces)
      */
     public void setBackFaceMode(EBackFaceMode mode) {
         long settingsVa = targetVa();
@@ -254,7 +255,8 @@ final public class CharacterVirtualSettingsRef
     /**
      * Replace the shape. (native attribute: mShape)
      *
-     * @param shape the desired shape (not null, unaffected, default=null)
+     * @param shape the desired shape (not {@code null}, unaffected,
+     * default=null)
      */
     public void setShape(ConstShape shape) {
         long settingsVa = targetVa();
@@ -266,7 +268,7 @@ final public class CharacterVirtualSettingsRef
      * Alter the local offset applied to the shape. (native attribute:
      * mShapeOffset)
      *
-     * @param offset the desired offset (in local coordinates, not null,
+     * @param offset the desired offset (in local coordinates, not {@code null},
      * unaffected, default=(0,0,0))
      */
     public void setShapeOffset(Vec3Arg offset) {
@@ -280,7 +282,7 @@ final public class CharacterVirtualSettingsRef
     /**
      * Alter the supporting volume. (native attribute: mSupportingVolume)
      *
-     * @param plane the desired plane of support (not null, unaffected,
+     * @param plane the desired plane of support (not {@code null}, unaffected,
      * default={(0,1,0),-1e10})
      */
     public void setSupportingVolume(ConstPlane plane) {
@@ -295,7 +297,7 @@ final public class CharacterVirtualSettingsRef
     /**
      * Alter the character's "up" direction. (native attribute: mUp)
      *
-     * @param direction the desired direction (not null, unaffected,
+     * @param direction the desired direction (not {@code null}, unaffected,
      * default=(0,1,0))
      */
     public void setUp(Vec3Arg direction) {
@@ -312,7 +314,7 @@ final public class CharacterVirtualSettingsRef
      * Determine whether the character will move through back-facing triangles.
      * The settings are unaffected. (native attribute: mBackFaceMode)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EBackFaceMode getBackFaceMode() {

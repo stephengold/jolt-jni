@@ -105,7 +105,7 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Activate the specified body.
+     * Activate the specified body, which must be added to a physics system.
      *
      * @param bodyId the ID of the body to activate
      */

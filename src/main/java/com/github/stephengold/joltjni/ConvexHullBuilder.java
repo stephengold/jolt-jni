@@ -40,7 +40,8 @@ public class ConvexHullBuilder extends NonCopyable {
     /**
      * Instantiate a builder for the specified points.
      *
-     * @param points a collection of point locations (not null, unaffected)
+     * @param points a collection of point locations (not {@code null},
+     * unaffected)
      */
     public ConvexHullBuilder(Collection<?> points) {
         int numPoints = points.size();
@@ -61,13 +62,13 @@ public class ConvexHullBuilder extends NonCopyable {
      * unaffected.
      *
      * @param storeFaceWithMaxError storage for the face with the largest error
-     * (not null, length&ge;1, modified)
+     * (not {@code null}, length&ge;1, modified)
      * @param storeMaxError storage for the magnitude of the largest error (not
-     * null, length&ge;1, modified)
-     * @param storePositionIndex storage for the index (not null, length&ge;1,
-     * modified)
-     * @param storeCoplanarDistance storage for the coplanar distance (not null,
+     * {@code null}, length&ge;1, modified)
+     * @param storePositionIndex storage for the index (not {@code null},
      * length&ge;1, modified)
+     * @param storeCoplanarDistance storage for the coplanar distance (not
+     * {@code null}, length&ge;1, modified)
      */
     public void determineMaxError(ChbFace[] storeFaceWithMaxError,
             float[] storeMaxError, int[] storePositionIndex,
@@ -89,8 +90,9 @@ public class ConvexHullBuilder extends NonCopyable {
      * Calculate the center of mass and volume of the resulting hull. The
      * builder is unaffected.
      *
-     * @param storeCom storage for the center of mass (not null, modified)
-     * @param storeVolume storage for the volume (not null, length&ge;1,
+     * @param storeCom storage for the center of mass (not {@code null},
+     * modified)
+     * @param storeVolume storage for the volume (not {@code null}, length&ge;1,
      * modified)
      */
     public void getCenterOfMassAndVolume(Vec3 storeCom, float[] storeVolume) {

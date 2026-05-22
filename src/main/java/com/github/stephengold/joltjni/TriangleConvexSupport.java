@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,9 +47,12 @@ final public class TriangleConvexSupport extends JoltPhysicsObject {
     /**
      * Instantiate a triangle from vertex locations.
      *
-     * @param v1 the desired location of the first vertex (not null, unaffected)
-     * @param v2 the desired location of the 2nd vertex (not null, unaffected)
-     * @param v3 the desired location of the 3rd vertex (not null, unaffected)
+     * @param v1 the desired location of the first vertex (not {@code null},
+     * unaffected)
+     * @param v2 the desired location of the 2nd vertex (not {@code null},
+     * unaffected)
+     * @param v3 the desired location of the 3rd vertex (not {@code null},
+     * unaffected)
      */
     public TriangleConvexSupport(Vec3Arg v1, Vec3Arg v2, Vec3Arg v3) {
         float v1x = v1.getX();

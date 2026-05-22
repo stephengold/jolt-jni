@@ -53,13 +53,16 @@ final public class CollisionDispatch {
      * @param scale2 the scale to be applied to {@code shape2} (not
      * {@code null}, unaffected)
      * @param comTransform1 from the center-of-mass of {@code shape1} to system
-     * coordinates (not null, unaffected)
+     * coordinates (not {@code null}, unaffected)
      * @param comTransform2 from the center-of-mass of {@code shape2} to system
-     * coordinates (not null, unaffected)
-     * @param creator1 to generate sub-shape IDs {@code shape1} (not null)
-     * @param creator2 to generate sub-shape IDs {@code shape2} (not null)
-     * @param collideShapeSettings options for the test (not null, unaffected)
-     * @param collector to collect the results (not null, modified)
+     * coordinates (not {@code null}, unaffected)
+     * @param creator1 to generate sub-shape IDs {@code shape1} (not
+     * {@code null})
+     * @param creator2 to generate sub-shape IDs {@code shape2} (not
+     * {@code null})
+     * @param collideShapeSettings options for the test (not {@code null},
+     * unaffected)
+     * @param collector to collect the results (not {@code null}, modified)
      */
     public static void sCollideShapeVsShape(ConstShape shape1,
             ConstShape shape2, Vec3Arg scale1, Vec3Arg scale2,
@@ -76,21 +79,25 @@ final public class CollisionDispatch {
      * Collide the specified shapes and pass collisions to the specified
      * collector.
      *
-     * @param shape1 the first colliding shape (not null, unaffected)
-     * @param shape2 the 2nd colliding shape (not null, unaffected)
-     * @param scale1 the scale to be applied to {@code shape1} (not null,
-     * unaffected)
-     * @param scale2 the scale to be applied to {@code shape2} (not null,
-     * unaffected)
+     * @param shape1 the first colliding shape (not {@code null}, unaffected)
+     * @param shape2 the 2nd colliding shape (not {@code null}, unaffected)
+     * @param scale1 the scale to be applied to {@code shape1} (not
+     * {@code null}, unaffected)
+     * @param scale2 the scale to be applied to {@code shape2} (not
+     * {@code null}, unaffected)
      * @param comTransform1 from the center-of-mass of {@code shape1} to system
-     * coordinates (not null, unaffected)
+     * coordinates (not {@code null}, unaffected)
      * @param comTransform2 from the center-of-mass of {@code shape2} to system
-     * coordinates (not null, unaffected)
-     * @param creator1 to generate sub-shape IDs {@code shape1} (not null)
-     * @param creator2 to generate sub-shape IDs {@code shape2} (not null)
-     * @param collideShapeSettings options for the test (not null, unaffected)
-     * @param collector to collect the results (not null, modified)
-     * @param filter to selectively ignore collisions (not null, unaffected)
+     * coordinates (not {@code null}, unaffected)
+     * @param creator1 to generate sub-shape IDs {@code shape1} (not
+     * {@code null})
+     * @param creator2 to generate sub-shape IDs {@code shape2} (not
+     * {@code null})
+     * @param collideShapeSettings options for the test (not {@code null},
+     * unaffected)
+     * @param collector to collect the results (not {@code null}, modified)
+     * @param filter to selectively ignore collisions (not {@code null},
+     * unaffected)
      */
     public static void sCollideShapeVsShape(ConstShape shape1,
             ConstShape shape2, Vec3Arg scale1, Vec3Arg scale2,

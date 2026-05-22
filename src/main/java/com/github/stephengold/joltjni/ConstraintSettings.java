@@ -164,7 +164,7 @@ abstract public class ConstraintSettings
     /**
      * Read a settings object from the specified binary stream.
      *
-     * @param stream where to read objects (not null)
+     * @param stream where to read objects (not {@code null})
      * @return a new object
      */
     public static ConstraintResult sRestoreFromBinaryState(StreamIn stream) {
@@ -183,7 +183,7 @@ abstract public class ConstraintSettings
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
-     * @param constraintSubType the desired subtype (not null)
+     * @param constraintSubType the desired subtype (not {@code null})
      */
     final protected void setVirtualAddressAsCoOwner(
             long settingsVa, EConstraintSubType constraintSubType) {
@@ -288,7 +288,7 @@ abstract public class ConstraintSettings
      * Save the settings to the specified binary stream. The settings are
      * unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

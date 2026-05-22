@@ -62,8 +62,8 @@ final public class TwoBodyConstraintSettingsRef extends Ref {
     /**
      * Create a constraint using the settings. The settings are unaffected.
      *
-     * @param rigidBody1 the desired first body (not null, not soft)
-     * @param rigidBody2 the desired 2nd body (not null, not soft)
+     * @param rigidBody1 the desired first body (not {@code null}, not soft)
+     * @param rigidBody2 the desired 2nd body (not {@code null}, not soft)
      * @return the new constraint, ready to be added to a {@code PhysicsSystem}
      */
     public TwoBodyConstraint create(Body rigidBody1, Body rigidBody2) {
