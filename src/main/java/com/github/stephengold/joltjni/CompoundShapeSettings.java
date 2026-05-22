@@ -142,9 +142,10 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
     /**
      * Add the specified sub-shape at the specified position.
      *
-     * @param offset the desired offset for the sub-shape (not {@code null}, unaffected)
-     * @param rotation the desired rotation for the sub-shape (not {@code null}, not
-     * zero, unaffected)
+     * @param offset the desired offset for the sub-shape (not {@code null},
+     * unaffected)
+     * @param rotation the desired rotation for the sub-shape (not {@code null},
+     * not zero, unaffected)
      * @param subSettings the desired sub-shape settings (not {@code null})
      * @return the modified settings, for chaining
      */
