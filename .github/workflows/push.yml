@@ -111,8 +111,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v6
-      - run: g++ --version
       - uses: gradle/actions/setup-gradle@v6
+      - run: g++ --version
       - name: gradlew -Ptarget=Linux_ARM64 -Ptool=gcc -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -338,8 +338,8 @@ jobs:
       - uses: actions/checkout@v6
       - run: sudo apt-get update
       - run: sudo apt install g++-9-arm-linux-gnueabihf
-      - run: arm-linux-gnueabihf-g++-9 --version
       - uses: gradle/actions/setup-gradle@v6
+      - run: arm-linux-gnueabihf-g++-9 --version
       - name: gradlew -Ptarget=Linux_ARM32hf install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -371,8 +371,8 @@ jobs:
       - uses: actions/checkout@v6
       - run: sudo apt-get update
       - run: sudo apt install g++-13-loongarch64-linux-gnu
-      - run: loongarch64-linux-gnu-g++-13 --version
       - uses: gradle/actions/setup-gradle@v6
+      - run: loongarch64-linux-gnu-g++-13 --version
       - name: gradlew -Ptarget=Linux_LoongArch64 assemble
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
