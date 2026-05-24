@@ -178,12 +178,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createZero
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_RMat44_equals
-  (JNIEnv *, jclass, jlong m1Va, jlong m2Va) {
-    const RMat44 * const pM1 = reinterpret_cast<RMat44 *> (m1Va);
-    const RMat44 * const pM2 = reinterpret_cast<RMat44 *> (m2Va);
-    const bool result = (*pM1 == *pM2);
-    return result;
-}
+  BODYOF_IS_EQUAL(RMat44)
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
