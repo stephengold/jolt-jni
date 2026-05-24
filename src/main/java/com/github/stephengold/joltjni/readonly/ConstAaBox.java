@@ -31,8 +31,8 @@ import com.github.stephengold.joltjni.Vec3;
  */
 public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
-     * Test whether the current box contains the argument box. The current box
-     * is unaffected.
+     * Test whether the current box contains the argument box. Both boxes are
+     * unaffected.
      *
      * @param other the other box to check against (not {@code null},
      * unaffected)
@@ -138,7 +138,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Check if this box overlaps with another box.
      *
-     * @param other the other box to check
+     * @param other the other box to check (not {@code null}, unaffected)
      *
      * @return {@code true} if they overlap, otherwise {@code false}
      */

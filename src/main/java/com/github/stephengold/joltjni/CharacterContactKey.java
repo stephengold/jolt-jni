@@ -70,7 +70,7 @@ public class CharacterContactKey
     /**
      * Instantiate a copy of the specified key.
      *
-     * @param original the settings to copy (not {@code null}, unaffected)
+     * @param original the key to copy (not {@code null}, unaffected)
      */
     public CharacterContactKey(CharacterContactKey original) {
         long originalVa = original.va();
@@ -166,8 +166,8 @@ public class CharacterContactKey
     }
 
     /**
-     * Test for content equivalence with another key. The key is
-     * unaffected.(native operator: binary {@code !=})
+     * Test for content equivalence with another key. The key is unaffected.
+     * (native operator: binary {@code !=})
      *
      * @param other the key to compare with (not {@code null}, unaffected)
      * @return {@code false} if equivalent, otherwise {@code true}

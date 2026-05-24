@@ -282,8 +282,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // ConstAaBox methods
 
     /**
-     * Test whether the current box contains the argument box. The current box
-     * is unaffected.
+     * Test whether the current box contains the argument box. Both boxes are
+     * unaffected.
      *
      * @param other the other box to check against (not {@code null},
      * unaffected)
