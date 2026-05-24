@@ -108,14 +108,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_getSub
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_isEqual
-  (JNIEnv *, jclass, jlong thisVa, jlong otherVa) {
-    const CollisionGroup * const pThis
-            = reinterpret_cast<CollisionGroup *> (thisVa);
-    const CollisionGroup * const pOther
-            = reinterpret_cast<CollisionGroup *> (otherVa);
-    const bool result = (*pThis) == (*pOther);
-    return result;
-}
+  BODYOF_IS_EQUAL(CollisionGroup)
 
 /*
  * Class:     com_github_stephengold_joltjni_CollisionGroup

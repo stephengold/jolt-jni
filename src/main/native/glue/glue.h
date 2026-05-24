@@ -163,6 +163,16 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     TRACE_DELETE(#className, pObject) \
     delete pObject; \
 }
+/*
+ * body of a static isEquals() method to implement comparison:
+ */
+#define BODYOF_IS_EQUAL(className) \
+  (JNIEnv *, jclass, jlong thisVa, jlong otherVa) { \
+    const className * const pThis = reinterpret_cast<className *> (thisVa); \
+    const className * const pOther = reinterpret_cast<className *> (otherVa); \
+    const bool result = (*pThis) == (*pOther); \
+    return result; \
+}
 
 /*
  * Implement 5 native methods required

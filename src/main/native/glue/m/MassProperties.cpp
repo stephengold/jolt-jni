@@ -110,14 +110,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MassProperties_getM
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_MassProperties_isEqual
-  (JNIEnv *, jclass, jlong thisVa, jlong otherVa) {
-    const MassProperties * const pThis
-            = reinterpret_cast<MassProperties *> (thisVa);
-    const MassProperties * const pOther
-            = reinterpret_cast<MassProperties *> (otherVa);
-    const bool result = (*pThis) == (*pOther);
-    return result;
-}
+  BODYOF_IS_EQUAL(MassProperties)
 
 /*
  * Class:     com_github_stephengold_joltjni_MassProperties

@@ -560,14 +560,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetti
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_isEqual
-  (JNIEnv *, jclass, jlong thisVa, jlong otherVa) {
-    const BodyCreationSettings * const pThis
-            = reinterpret_cast<BodyCreationSettings *> (thisVa);
-    const BodyCreationSettings * const pOther
-            = reinterpret_cast<BodyCreationSettings *> (otherVa);
-    const bool result = (*pThis) == (*pOther);
-    return result;
-}
+  BODYOF_IS_EQUAL(BodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings

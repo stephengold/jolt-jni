@@ -122,14 +122,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_g
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_isEqual
-  (JNIEnv *, jclass, jlong keyVa, jlong otherVa) {
-    const CharacterContactKey * const pKey1
-            = reinterpret_cast<CharacterContactKey *> (keyVa);
-    const CharacterContactKey * const pKey2
-            = reinterpret_cast<CharacterContactKey *> (otherVa);
-    const bool result = (*pKey1) == (*pKey2);
-    return result;
-}
+    BODYOF_IS_EQUAL(CharacterContactKey)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterContactKey
