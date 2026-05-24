@@ -71,13 +71,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JointState_getTransla
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JointState_set
-  (JNIEnv *, jclass, jlong targetVa, jlong sourceVa) {
-    SkeletonPose::JointState * const pTarget
-            = reinterpret_cast<SkeletonPose::JointState *> (targetVa);
-    const SkeletonPose::JointState * const pSource
-            = reinterpret_cast<SkeletonPose::JointState *> (sourceVa);
-    (*pTarget) = (*pSource);
-}
+  BODYOF_ASSIGN(SkeletonPose::JointState)
 
 /*
  * Class:     com_github_stephengold_joltjni_JointState

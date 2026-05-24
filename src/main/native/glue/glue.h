@@ -112,6 +112,16 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   JPH_ASSERT(pLongs); \
   const jlong capacityLongs = (pEnv)->GetDirectBufferCapacity(longBuffer); \
   JPH_ASSERT(capacityLongs >= 0)
+
+/*
+ * body of a static assign() method to implement assignment:
+ */
+#define BODYOF_ASSIGN(className) \
+  (JNIEnv *, jclass, jlong targetVa, jlong sourceVa) { \
+    className * const pTarget = reinterpret_cast<className *> (targetVa); \
+    const className * const pSource = reinterpret_cast<className *> (sourceVa); \
+    *pTarget = *pSource; \
+}
 /*
  * body of a static createCopy() method
  * to implement a copy constructor for a type that isn't refcounted:

@@ -36,11 +36,7 @@ using namespace JPH;
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_assign
-  (JNIEnv *, jclass, jlong targetVa, jlong sourceVa) {
-    RMat44 * const pTarget = reinterpret_cast<RMat44 *> (targetVa);
-    const RMat44 * const pSource = reinterpret_cast<RMat44 *> (sourceVa);
-    *pTarget = *pSource;
-}
+  BODYOF_ASSIGN(RMat44)
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
