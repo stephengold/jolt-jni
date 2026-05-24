@@ -72,8 +72,8 @@ public class CharacterContactKey
      *
      * @param original the key to copy (not {@code null}, unaffected)
      */
-    public CharacterContactKey(CharacterContactKey original) {
-        long originalVa = original.va();
+    public CharacterContactKey(ConstCharacterContactKey original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         Runnable freeingAction = () -> free(copyVa);
         setVirtualAddress(copyVa, freeingAction);
