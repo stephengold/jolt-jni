@@ -166,13 +166,13 @@ final public class Color implements ConstColor {
     /**
      * Instantiate a copy of an existing color.
      *
-     * @param existing the color to copy (not {@code null}, unaffected)
+     * @param original the color to copy (not {@code null}, unaffected)
      */
-    public Color(ConstColor existing) {
-        this.a = existing.getA();
-        this.b = existing.getB();
-        this.g = existing.getG();
-        this.r = existing.getR();
+    public Color(ConstColor original) {
+        this.a = original.getA();
+        this.b = original.getB();
+        this.g = original.getG();
+        this.r = original.getR();
     }
 
     /**
