@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.DoubleBuffer;
+import java.util.Objects;
 
 /**
  * A vector composed of 3 double-precision components, used to represent
@@ -754,6 +755,47 @@ final public class RVec3 implements RVec3Arg {
     }
     // *************************************************************************
     // Object methods
+
+    /**
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code other} is null, {@code false} is returned. Either way, the current
+     * instance is unaffected.
+     *
+     * @param other the object to compare (unaffected) or {@code null}
+     * @return {@code true} if {@code this} and {@code other} have identical
+     * values, otherwise {@code false}
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other == null) {
+            return false;
+        } else if (getClass() != other.getClass()) {
+            return false;
+        }
+
+        final RVec3Arg otherVector = (RVec3Arg) other;
+        if (Double.compare(xx, otherVector.xx()) != 0) {
+            return false;
+        } else if (Double.compare(yy, otherVector.yy()) != 0) {
+            return false;
+        } else {
+            return Double.compare(zz, otherVector.zz()) == 0;
+        }
+    }
+
+    /**
+     * Return a hash code. If two vectors have identical values, they will have
+     * the same hash code. The vector is unaffected.
+     *
+     * @return a 32-bit value for use in hashing
+     */
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(xx, yy, zz);
+        return result;
+    }
 
     /**
      * Return a string representation of the vector, which is unaffected. For

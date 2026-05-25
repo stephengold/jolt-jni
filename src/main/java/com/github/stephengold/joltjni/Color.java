@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstColor;
+import java.util.Objects;
 
 /**
  * An RGBA color with 8-bit components.
@@ -357,6 +358,51 @@ final public class Color implements ConstColor {
         int gg = ((int) g) << 8;
         int result = aa & 0xFF000000 | bb & 0xFF0000 | gg & 0xFF00 | r & 0xFF;
 
+        return result;
+    }
+    // *************************************************************************
+    // Object methods
+
+    /**
+     * Tests for exact equality with the argument. If {@code other} is
+     * {@code null}, {@code false} is returned. Either way, the current color is
+     * unaffected.
+     *
+     * @param other the object to compare (unaffected) or {@code null}
+     * @return {@code true} if {@code this} and {@code other} have identical
+     * values, otherwise {@code false}
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other == null) {
+            return false;
+        } else if (getClass() != other.getClass()) {
+            return false;
+        }
+
+        final ConstColor otherColor = (ConstColor) other;
+        if (r != otherColor.getR()) {
+            return false;
+        } else if (g != otherColor.getG()) {
+            return false;
+        } else if (b != otherColor.getB()) {
+            return false;
+        } else {
+            return a == otherColor.getA();
+        }
+    }
+
+    /**
+     * Return a hash code. If two colors have identical components, they will
+     * have the same hash code. The color is unaffected.
+     *
+     * @return a 32-bit value for use in hashing
+     */
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(r, g, b, a);
         return result;
     }
 }

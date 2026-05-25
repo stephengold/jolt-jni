@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.RandomNumberEngine;
 import com.github.stephengold.joltjni.std.UniformFloatDistribution;
 import java.nio.FloatBuffer;
+import java.util.Objects;
 
 /**
  * A math object used to represent rotations and orientations in 3-dimensional
@@ -587,6 +588,49 @@ final public class Quat implements QuatArg {
     }
     // *************************************************************************
     // Object methods
+
+    /**
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code other} is {@code null}, {@code false} is returned. Either way, the
+     * current instance is unaffected.
+     *
+     * @param other the object to compare (unaffected) or {@code null}
+     * @return {@code true} if {@code this} and {@code other} have identical
+     * values, otherwise {@code false}
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other == null) {
+            return false;
+        } else if (getClass() != other.getClass()) {
+            return false;
+        }
+
+        final QuatArg otherQuaternion = (QuatArg) other;
+        if (Float.compare(x, otherQuaternion.getX()) != 0) {
+            return false;
+        } else if (Float.compare(y, otherQuaternion.getY()) != 0) {
+            return false;
+        } else if (Float.compare(z, otherQuaternion.getZ()) != 0) {
+            return false;
+        } else {
+            return Float.compare(w, otherQuaternion.getW()) == 0;
+        }
+    }
+
+    /**
+     * Return a hash code. If two quaternions have identical values, they will
+     * have the same hash code. The quaternion is unaffected.
+     *
+     * @return a 32-bit value for use in hashing
+     */
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(x, y, z, w);
+        return result;
+    }
 
     /**
      * Return a string representation of the quaternion, which is unaffected.
