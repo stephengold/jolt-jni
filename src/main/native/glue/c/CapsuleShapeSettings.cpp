@@ -40,10 +40,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
- * Method:    createShapeSettings
+ * Method:    create
  * Signature: (FFJ)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_createShapeSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_create
   (JNIEnv *, jclass, jfloat halfHeight, jfloat radius, jlong materialVa) {
     const PhysicsMaterial * const pMaterial
             = reinterpret_cast<PhysicsMaterial *> (materialVa);

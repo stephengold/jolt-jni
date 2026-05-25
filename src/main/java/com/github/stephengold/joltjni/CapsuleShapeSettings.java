@@ -71,7 +71,7 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     public CapsuleShapeSettings(
             float halfHeight, float radius, PhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.va();
-        long settingsVa = createShapeSettings(halfHeight, radius, materialVa);
+        long settingsVa = create(halfHeight, radius, materialVa);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Capsule);
     }
 
@@ -150,12 +150,12 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
 
     native private static void assign(long targetVa, long sourceVa);
 
+    native private static long create(
+            float halfHeight, float radius, long materialVa);
+
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
-
-    native private static long createShapeSettings(
-            float halfHeight, float radius, long materialVa);
 
     native private static float getHalfHeightOfCylinder(long settingsVa);
 
