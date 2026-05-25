@@ -43,6 +43,17 @@ final public class MotorSettings
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public MotorSettings(ConstMotorSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
+
+    /**
      * Instantiate settings for the specified spring parameters with no limits.
      *
      * @param frequency the desired spring frequency (in Hertz)
@@ -77,17 +88,6 @@ final public class MotorSettings
      */
     MotorSettings(JoltPhysicsObject container, long settingsVa) {
         super(container, settingsVa);
-    }
-
-    /**
-     * Instantiate a copy of the specified settings.
-     *
-     * @param original the settings to copy (not {@code null}, unaffected)
-     */
-    public MotorSettings(ConstMotorSettings original) {
-        long originalVa = original.targetVa();
-        long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa, () -> free(copyVa));
     }
     // *************************************************************************
     // new methods exposed
