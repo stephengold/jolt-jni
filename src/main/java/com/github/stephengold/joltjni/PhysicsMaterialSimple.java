@@ -63,7 +63,22 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
         setVirtualAddressAsCoOwner(materialVa);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Copy the argument to the current material.
+     *
+     * @param source the material to copy (not {@code null}, unaffected)
+     */
+    public void set(PhysicsMaterialSimple source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+    // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long create(String name, int colorInt);
 

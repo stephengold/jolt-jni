@@ -70,6 +70,17 @@ public class PhysicsSettings
     // new methods exposed
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstPhysicsSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter whether objects can fall asleep. (native member: mAllowSleeping)
      *
      * @param allow {@code true} to allow sleeping, {@code false} to disallow it
@@ -804,6 +815,8 @@ public class PhysicsSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

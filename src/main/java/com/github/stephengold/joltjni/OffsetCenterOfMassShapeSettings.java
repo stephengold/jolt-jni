@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -111,6 +111,17 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(OffsetCenterOfMassShapeSettings source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the offset relative to the base shape. (native attribute: mOffset)
      *
      * @param offset the desired offset vector (not null, unaffected,
@@ -125,6 +136,8 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 
