@@ -48,13 +48,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape
 
 /*
  * Class:     com_github_stephengold_joltjni_MutableCompoundShapeSettings
- * Method:    createMutableCompoundShapeSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShapeSettings_createMutableCompoundShapeSettings
-  (JNIEnv *, jclass) {
-    MutableCompoundShapeSettings * const pSettings
-            = new MutableCompoundShapeSettings();
-    TRACE_NEW_TARGET("MutableCompoundShapeSettings", pSettings)
-    return reinterpret_cast<jlong> (pSettings);
-}
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShapeSettings_createDefault
+  BODYOF_CREATE_DEFAULT_TARGET(MutableCompoundShapeSettings)

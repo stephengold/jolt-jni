@@ -36,7 +36,7 @@ public class MutableCompoundShapeSettings extends CompoundShapeSettings {
      * Instantiate an empty settings object with no sub-shapes.
      */
     public MutableCompoundShapeSettings() {
-        long settingsVa = createMutableCompoundShapeSettings();
+        long settingsVa = createDefault();
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.MutableCompound);
     }
 
@@ -81,5 +81,5 @@ public class MutableCompoundShapeSettings extends CompoundShapeSettings {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createMutableCompoundShapeSettings();
+    native private static long createDefault();
 }
