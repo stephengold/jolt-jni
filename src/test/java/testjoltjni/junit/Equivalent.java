@@ -269,7 +269,7 @@ final class Equivalent {
      * Verify the equivalence of the specified colors.
      *
      * @param expected the expected value (not {@code null}, unaffected)
-     * @param actual the vector to test (not {@code null}, unaffected)
+     * @param actual the color to test (not {@code null}, unaffected)
      */
     static void color(ConstColor expected, ConstColor actual) {
         TestUtils.assertEquals(expected.getR(), expected.getG(),
