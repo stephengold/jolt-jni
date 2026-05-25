@@ -206,11 +206,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createTranslat
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createUninitialized
-  (JNIEnv *, jclass) {
-    Mat44 * const pResult = new Mat44();
-    TRACE_NEW("Mat44", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(Mat44)
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
