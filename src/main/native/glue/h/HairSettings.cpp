@@ -55,6 +55,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_addMater
 
 /*
  * Class:     com_github_stephengold_joltjni_HairSettings
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_assign
+  BODYOF_ASSIGN(HairSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_HairSettings
  * Method:    countMaterials
  * Signature: (J)I
  */

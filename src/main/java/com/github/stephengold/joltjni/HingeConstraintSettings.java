@@ -239,6 +239,17 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(HingeConstraintSettings source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the hinge axis of body 1. (native attribute: mHingeAxis1)
      *
      * @param direction the desired axis direction (not {@code null},
@@ -395,6 +406,8 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

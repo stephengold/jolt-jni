@@ -43,6 +43,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_LinearCurve_addPoint
 
 /*
  * Class:     com_github_stephengold_joltjni_LinearCurve
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_LinearCurve_assign
+  BODYOF_ASSIGN(LinearCurve)
+
+/*
+ * Class:     com_github_stephengold_joltjni_LinearCurve
  * Method:    clear
  * Signature: (J)V
  */

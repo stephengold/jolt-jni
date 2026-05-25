@@ -100,6 +100,17 @@ public class GroupFilterTable extends GroupFilter {
         long filterVa = va();
         enableCollision(filterVa, subGroup1, subGroup2);
     }
+
+    /**
+     * Copy the argument to the current filter.
+     *
+     * @param source the filter to copy (not {@code null}, unaffected)
+     */
+    public void set(GroupFilterTable source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
     // *************************************************************************
     // GroupFilter methods
 
@@ -118,6 +129,8 @@ public class GroupFilterTable extends GroupFilter {
     }
     // *************************************************************************
     // native methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

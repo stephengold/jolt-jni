@@ -358,6 +358,17 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(MeshShapeSettings source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the active-edge threshold angle. (native attribute:
      * mActiveEdgeCosThresholdAngle)
      *
@@ -398,6 +409,8 @@ public class MeshShapeSettings extends ShapeSettings {
 
     native private static void addTriangleVertex(
             long settingsVa, float x, float y, float z);
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

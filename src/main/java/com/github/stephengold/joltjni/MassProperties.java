@@ -117,6 +117,20 @@ final public class MassProperties
     }
 
     /**
+     * Copy the argument to the current properties.
+     *
+     * @param source the properties to copy (not {@code null}, unaffected)
+     * @return the modified properties, for chaining
+     */
+    public MassProperties set(ConstMassProperties source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+
+        return this;
+    }
+
+    /**
      * Alter the inertia tensor. (native attribute: mInertia)
      *
      * @param inertia the desired value (not {@code null}, unaffected,
@@ -258,6 +272,8 @@ final public class MassProperties
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

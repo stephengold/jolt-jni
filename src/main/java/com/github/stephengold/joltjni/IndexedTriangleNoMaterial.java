@@ -76,6 +76,17 @@ public class IndexedTriangleNoMaterial
     // new methods exposed
 
     /**
+     * Copy the argument to the current triangle.
+     *
+     * @param source the triangle to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstIndexedTriangleNoMaterial source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the mesh-vertex index of the specified corner.
      *
      * @param cornerIndex which corner to modify (0, 1, or 2)
@@ -134,6 +145,8 @@ public class IndexedTriangleNoMaterial
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createIndexedTriangleNoMaterial(
             int vi0, int vi1, int vi2);

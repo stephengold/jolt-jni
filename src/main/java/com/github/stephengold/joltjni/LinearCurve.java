@@ -98,6 +98,17 @@ public class LinearCurve extends JoltPhysicsObject implements ConstLinearCurve {
     }
 
     /**
+     * Copy the argument to the current curve.
+     *
+     * @param source the curve to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstLinearCurve source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Sort the points by their X values, in ascending order.
      */
     public void sort() {
@@ -203,6 +214,8 @@ public class LinearCurve extends JoltPhysicsObject implements ConstLinearCurve {
     // native private methods
 
     native private static void addPoint(long curveVa, float x, float y);
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static void clear(long curveVa);
 

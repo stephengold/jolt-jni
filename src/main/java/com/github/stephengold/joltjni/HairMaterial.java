@@ -71,6 +71,17 @@ public class HairMaterial
     // new methods exposed
 
     /**
+     * Copy the argument to the current material.
+     *
+     * @param source the material to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstHairMaterial source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the angular damping coefficient of the rods. (native attribute:
      * mAngularDamping)
      *
@@ -662,6 +673,8 @@ public class HairMaterial
     }
     // *************************************************************************
     // native methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

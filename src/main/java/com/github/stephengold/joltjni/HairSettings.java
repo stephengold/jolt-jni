@@ -216,6 +216,17 @@ final public class HairSettings
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstHairSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the initial gravity vector. (native member: mInitialGravity)
      *
      * @param gravity the desired acceleration vector (meters per second squared
@@ -660,6 +671,8 @@ final public class HairSettings
     // native methods
 
     native static void addMaterial(long settingsVa, long materialVa);
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native static int countMaterials(long settingsVa);
 

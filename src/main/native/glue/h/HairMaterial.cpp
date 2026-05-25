@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_HairMaterial
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairMaterial_assign
+  BODYOF_ASSIGN(HairSettings::Material)
+
+/*
+ * Class:     com_github_stephengold_joltjni_HairMaterial
  * Method:    createCopy
  * Signature: (J)J
  */

@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Gradient
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Gradient_assign
+  BODYOF_ASSIGN(HairSettings::Gradient)
+
+/*
+ * Class:     com_github_stephengold_joltjni_Gradient
  * Method:    createCopy
  * Signature: (J)J
  */

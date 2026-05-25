@@ -121,6 +121,17 @@ public class Gradient extends JoltPhysicsObject implements ConstGradient {
     }
 
     /**
+     * Copy the argument to the current gradient.
+     *
+     * @param source the gradient to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstGradient source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the parameter value when the fraction is {@code maxFraction}.
      * (native member: mMax)
      *
@@ -248,6 +259,8 @@ public class Gradient extends JoltPhysicsObject implements ConstGradient {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

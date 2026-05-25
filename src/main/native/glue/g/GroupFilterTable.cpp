@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,6 +38,14 @@ IMPLEMENT_REF(GroupFilterTable,
   Java_com_github_stephengold_joltjni_GroupFilterTableRef_free,
   Java_com_github_stephengold_joltjni_GroupFilterTableRef_getPtr,
   Java_com_github_stephengold_joltjni_GroupFilterTableRef_toRefC)
+
+/*
+ * Class:     com_github_stephengold_joltjni_GroupFilterTable
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_GroupFilterTable_assign
+  BODYOF_ASSIGN(GroupFilterTable)
 
 /*
  * Class:     com_github_stephengold_joltjni_GroupFilterTable
