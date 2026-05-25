@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -123,6 +123,16 @@ final public class Float2 {
     public void set(float[] array) {
         this.x = array[0];
         this.y = array[1];
+    }
+
+    /**
+     * Copy the argument to the current vector.
+     *
+     * @param source the vector to copy (not {@code null}, unaffected)
+     */
+    public void set(Float2 source) {
+        this.x = source.get(0);
+        this.y = source.get(1);
     }
     // *************************************************************************
     // Object methods

@@ -108,6 +108,17 @@ final public class Float3 implements ConstFloat3 {
     // new methods exposed
 
     /**
+     * Copy the argument to the current vector.
+     *
+     * @param source the vector to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstFloat3 source) {
+        this.x = source.x();
+        this.y = source.y();
+        this.z = source.z();
+    }
+
+    /**
      * Set all 3 components to specified values.
      *
      * @param x the desired X component
