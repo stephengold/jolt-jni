@@ -607,14 +607,14 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *
-     * @param m2 the 2nd matrix to test (not {@code null}, unaffected)
+     * @param other the other matrix to test (not {@code null}, unaffected)
      * @return {@code true} if equal, {@code false} if unequal
      */
     @Override
-    public boolean isEqual(Mat44Arg m2) {
-        long m1Va = va();
-        long m2Va = m2.targetVa();
-        boolean result = equals(m1Va, m2Va);
+    public boolean isEqual(Mat44Arg other) {
+        long currentVa = va();
+        long otherVa = other.targetVa();
+        boolean result = isEqual(currentVa, otherVa);
 
         return result;
     }
@@ -860,8 +860,6 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static long createZero();
 
-    native private static boolean equals(long m1Va, long m2Va);
-
     native private static void free(long matrixVa);
 
     native private static float getElement(long matrixVa, int row, int column);
@@ -877,6 +875,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static long inversed3x3(long currentVa);
 
     native private static long inversedRotationTranslation(long currentVa);
+
+    native private static boolean isEqual(long currentVa, long otherVa);
 
     native private static boolean isIdentity(long matrixVa);
 

@@ -222,14 +222,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createZero
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
- * Method:    equals
- * Signature: (JJ)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Mat44_equals
-  BODYOF_IS_EQUAL(Mat44)
-
-/*
- * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    free
  * Signature: (J)V
  */
@@ -322,6 +314,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_inversedRotati
     *pResult = pCurrent->InversedRotationTranslation();
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    isEqual
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Mat44_isEqual
+  BODYOF_IS_EQUAL(Mat44)
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
