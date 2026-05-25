@@ -42,7 +42,7 @@ public class AddConvexRadiusSupport extends JoltPhysicsObject {
      */
     public AddConvexRadiusSupport(Support support, float convexRadius) {
         long supportVa = support.va();
-        long addVa = createAdd(supportVa, convexRadius);
+        long addVa = create(supportVa, convexRadius);
         setVirtualAddress(addVa, () -> free(addVa));
     }
     // *************************************************************************
@@ -68,7 +68,7 @@ public class AddConvexRadiusSupport extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static long createAdd(long supportVa, float radius);
+    native private static long create(long supportVa, float radius);
 
     native private static void free(long addVa);
 

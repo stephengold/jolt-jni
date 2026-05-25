@@ -34,10 +34,10 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_AddConvexRadiusSupport
- * Method:    createAdd
+ * Method:    create
  * Signature: (JF)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AddConvexRadiusSupport_createAdd
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AddConvexRadiusSupport_create
   (JNIEnv *, jclass, jlong supportVa, jfloat convexRadius) {
     const ConvexShape::Support * const pSupport
             = reinterpret_cast<ConvexShape::Support *> (supportVa);
