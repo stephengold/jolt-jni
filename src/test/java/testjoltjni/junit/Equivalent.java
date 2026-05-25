@@ -592,7 +592,7 @@ final class Equivalent {
      * tolerance, ignoring their virtual addresses and ownership.
      *
      * @param expected the expected value (not {@code null}, unaffected)
-     * @param actual the vector to test (not {@code null}, unaffected)
+     * @param actual the matrix to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     static void mat44(Mat44Arg expected, Mat44Arg actual, float tolerance) {
@@ -666,7 +666,7 @@ final class Equivalent {
      * specified tolerance.
      *
      * @param expected the expected value (not {@code null}, unaffected)
-     * @param actual the vector to test (not {@code null}, unaffected)
+     * @param actual the quaternion to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     static void quat(QuatArg expected, QuatArg actual, float tolerance) {

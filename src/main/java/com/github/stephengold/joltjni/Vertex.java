@@ -72,7 +72,7 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
      * Alter the inverse mass. (native attribute: mInvMass)
      *
      * @param invMass the desired inverse mass (in 1/kilograms, default=1)
-     * @return the modified settings, for chaining
+     * @return the modified vertex, for chaining
      */
     public Vertex setInvMass(float invMass) {
         long vertexVa = va();
@@ -87,7 +87,7 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
      * @param x the desired X coordinate (default=0)
      * @param y the desired Y coordinate (default=0)
      * @param z the desired Z coordinate (default=0)
-     * @return the modified settings, for chaining
+     * @return the modified vertex, for chaining
      */
     public Vertex setPosition(float x, float y, float z) {
         long vertexVa = va();
@@ -101,7 +101,7 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
      *
      * @param location the desired location (not {@code null}, unaffected
      * default=(0,0,0))
-     * @return the modified settings, for chaining
+     * @return the modified vertex, for chaining
      */
     public Vertex setPosition(ConstFloat3 location) {
         long vertexVa = va();
@@ -118,7 +118,7 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
      *
      * @param location the desired location (not {@code null}, unaffected
      * default=(0,0,0))
-     * @return the modified settings, for chaining
+     * @return the modified vertex, for chaining
      */
     public Vertex setPosition(Vec3Arg location) {
         long vertexVa = va();
@@ -136,7 +136,7 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
      * @param x the desired X component (default=0)
      * @param y the desired Y component (default=0)
      * @param z the desired Z component (default=0)
-     * @return the modified settings, for chaining
+     * @return the modified vertex, for chaining
      */
     public Vertex setVelocity(float x, float y, float z) {
         long vertexVa = va();
@@ -150,7 +150,7 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
      *
      * @param velocity the desired velocity (in meters per second, not
      * {@code null}, unaffected default=(0,0,0))
-     * @return the modified settings, for chaining
+     * @return the modified vertex, for chaining
      */
     public Vertex setVelocity(ConstFloat3 velocity) {
         long vertexVa = va();
@@ -167,7 +167,7 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
      *
      * @param velocity the desired velocity (in meters per second, not
      * {@code null}, unaffected, default=(0,0,0))
-     * @return the modified settings, for chaining
+     * @return the modified vertex, for chaining
      */
     public Vertex setVelocity(Vec3Arg velocity) {
         long vertexVa = va();

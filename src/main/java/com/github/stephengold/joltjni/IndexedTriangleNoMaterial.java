@@ -89,7 +89,8 @@ public class IndexedTriangleNoMaterial
     // ConstIndexedTriangleNoMaterial methods
 
     /**
-     * Return the mesh-vertex index of the specified corner.
+     * Return the mesh-vertex index of the specified corner. The triangle is
+     * unaffected.
      *
      * @param cornerIndex which corner to access (0, 1, or 2)
      * @return the index of the vertex in the mesh

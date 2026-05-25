@@ -744,7 +744,7 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
-     * Return the 3rd (Z) component in double precision. The vector is
+     * Return the 3rd (Z) component in double precision. The current vector is
      * unaffected.
      *
      * @return the component value

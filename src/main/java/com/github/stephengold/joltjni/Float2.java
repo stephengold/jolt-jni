@@ -44,7 +44,7 @@ final public class Float2 {
     // constructors
 
     /**
-     * Instantiate an all-zero vector (0,0,0).
+     * Instantiate an all-zero vector (0,0).
      */
     public Float2() {
         this.x = 0f;
