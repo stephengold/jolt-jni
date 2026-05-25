@@ -102,7 +102,7 @@ public class Gradient extends JoltPhysicsObject implements ConstGradient {
      */
     public Gradient(
             float min, float max, float minFraction, float maxFraction) {
-        long gradientVa = createGradient(min, max, minFraction, maxFraction);
+        long gradientVa = create(min, max, minFraction, maxFraction);
         Runnable freeingAction = () -> free(gradientVa);
         setVirtualAddress(gradientVa, freeingAction);
     }
@@ -262,12 +262,12 @@ public class Gradient extends JoltPhysicsObject implements ConstGradient {
 
     native private static void assign(long targetVa, long sourceVa);
 
+    native private static long create(
+            float min, float max, float minFraction, float maxFraction);
+
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
-
-    native private static long createGradient(
-            float min, float max, float minFraction, float maxFraction);
 
     native private static void free(long gradientVa);
 

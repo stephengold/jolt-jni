@@ -40,6 +40,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Gradient_assign
 
 /*
  * Class:     com_github_stephengold_joltjni_Gradient
+ * Method:    create
+ * Signature: (FFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Gradient_create
+  (JNIEnv *pEnv, jclass, jfloat min, jfloat max, jfloat minFraction,
+  jfloat maxFraction) {
+    HairSettings::Gradient * const pResult
+            = new HairSettings::Gradient(min, max, minFraction, maxFraction);
+    TRACE_NEW("HairSettings::Gradient", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Gradient
  * Method:    createCopy
  * Signature: (J)J
  */
@@ -53,20 +67,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Gradient_createCopy
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Gradient_createDefault
   BODYOF_CREATE_DEFAULT(HairSettings::Gradient)
-
-/*
- * Class:     com_github_stephengold_joltjni_Gradient
- * Method:    createGradient
- * Signature: (FFFF)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Gradient_createGradient
-  (JNIEnv *pEnv, jclass, jfloat min, jfloat max, jfloat minFraction,
-  jfloat maxFraction) {
-    HairSettings::Gradient * const pResult
-            = new HairSettings::Gradient(min, max, minFraction, maxFraction);
-    TRACE_NEW("HairSettings::Gradient", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_Gradient
@@ -127,6 +127,14 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Gradient_getMinFrac
     const float result = pGradient->mMinFraction;
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_Gradient
+ * Method:    isEqual
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Gradient_isEqual
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_github_stephengold_joltjni_Gradient
