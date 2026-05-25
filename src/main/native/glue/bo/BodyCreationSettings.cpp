@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_assign
+  BODYOF_ASSIGN(BodyCreationSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    convertShapeSettings
  * Signature: (J)J
  */

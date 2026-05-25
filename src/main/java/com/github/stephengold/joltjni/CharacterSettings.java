@@ -73,6 +73,17 @@ public class CharacterSettings
     // new methods exposed
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstCharacterSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the friction ratio. (native attribute: mFriction)
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
@@ -199,6 +210,8 @@ public class CharacterSettings
     }
     // *************************************************************************
     // native methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

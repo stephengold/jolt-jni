@@ -96,6 +96,17 @@ public class CollisionGroup
     // new methods exposed
 
     /**
+     * Copy the argument to the current group.
+     *
+     * @param source the group to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstCollisionGroup source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Replace the group filter.
      *
      * @param filter the desired filter (not {@code null}, alias created)
@@ -189,6 +200,8 @@ public class CollisionGroup
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createDefault();
 

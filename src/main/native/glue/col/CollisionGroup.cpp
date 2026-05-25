@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_CollisionGroup
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_assign
+  BODYOF_ASSIGN(CollisionGroup)
+
+/*
+ * Class:     com_github_stephengold_joltjni_CollisionGroup
  * Method:    createDefault
  * Signature: ()J
  */

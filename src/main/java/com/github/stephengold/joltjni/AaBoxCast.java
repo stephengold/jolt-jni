@@ -85,6 +85,17 @@ final public class AaBoxCast extends JoltPhysicsObject {
     }
 
     /**
+     * Copy the argument to the current cast.
+     *
+     * @param source the cast to copy (not {@code null}, unaffected)
+     */
+    public void set(AaBoxCast source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the box and its starting location. (native member: mBox)
      *
      * @param box the desired extents and starting location (not {@code null},
@@ -110,6 +121,8 @@ final public class AaBoxCast extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

@@ -81,6 +81,17 @@ public class CollideShapeSettings extends CollideSettingsBase {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(CollideShapeSettings source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the treatment of back-facing triangles. (native attribute:
      * mBackFaceMode)
      *
@@ -104,6 +115,8 @@ public class CollideShapeSettings extends CollideSettingsBase {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

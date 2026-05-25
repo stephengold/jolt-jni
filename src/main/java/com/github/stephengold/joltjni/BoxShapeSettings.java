@@ -140,6 +140,17 @@ public class BoxShapeSettings
     // new methods exposed
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstBoxShapeSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the convex radius. (native attribute: mConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0, default=0.05)
@@ -196,6 +207,8 @@ public class BoxShapeSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createBoxShapeSettings(
             float hx, float hy, float hz, float convexRadius, long materialVa);

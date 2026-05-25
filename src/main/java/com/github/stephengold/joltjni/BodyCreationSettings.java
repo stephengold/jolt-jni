@@ -179,6 +179,17 @@ public class BodyCreationSettings
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstBodyCreationSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter whether a static body can be converted to kinematic or dynamic.
      * (native member: mAllowDynamicOrKinematic)
      *
@@ -1285,6 +1296,8 @@ public class BodyCreationSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long convertShapeSettings(long bodySettingsVa);
 

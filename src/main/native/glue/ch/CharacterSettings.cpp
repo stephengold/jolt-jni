@@ -41,6 +41,14 @@ IMPLEMENT_REF(CharacterSettings,
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterSettings
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_assign
+  BODYOF_ASSIGN(CharacterSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterSettings
  * Method:    createCopy
  * Signature: (J)J
  */

@@ -231,6 +231,17 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Copy the argument to the current box.
+     *
+     * @param source the box to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstAaBox source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the box to be empty.
      */
     public void setEmpty() {
@@ -557,6 +568,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static boolean contains(
             long boxVa, float x, float y, float z);

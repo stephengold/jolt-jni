@@ -41,6 +41,14 @@ IMPLEMENT_REF(CharacterVirtualSettings,
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_assign
+  BODYOF_ASSIGN(CharacterVirtualSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
  * Method:    createCopy
  * Signature: (J)J
  */
