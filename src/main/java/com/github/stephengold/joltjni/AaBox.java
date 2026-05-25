@@ -627,12 +627,12 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static float getVolume(long boxVa);
 
+    native private static boolean isValid(long boxVa);
+
     native private static boolean overlaps(
             long boxVa, float pc, float pnx, float pny, float pnz);
 
     native private static boolean overlapsAaBox(long boxVa, long otherVa);
-
-    native private static boolean isValid(long boxVa);
 
     native private static long scaled(long boxVa, float sx, float sy, float sz);
 

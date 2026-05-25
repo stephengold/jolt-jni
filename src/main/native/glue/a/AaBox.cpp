@@ -366,6 +366,18 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getVolume
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    isValid
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_isValid
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const bool result = pBox->IsValid();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    overlaps
  * Signature: (JFFFF)Z
  */
@@ -388,18 +400,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_overlapsAaB
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const AABox * const pOther = reinterpret_cast<AABox *> (otherVa);
     const bool result = pBox->Overlaps(*pOther);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    isValid
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_isValid
-  (JNIEnv *, jclass, jlong boxVa) {
-    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    const bool result = pBox->IsValid();
     return result;
 }
 
