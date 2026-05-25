@@ -405,4 +405,20 @@ final public class Color implements ConstColor {
         int result = Objects.hash(r, g, b, a);
         return result;
     }
+
+    /**
+     * Return a string representation of the color, which is unaffected. For
+     * example, the default color is represented by:
+     * <pre>
+     * Color(0 0 0 0)
+     * </pre>
+     *
+     * @return the string representation (not {@code null}, not empty)
+     */
+    @Override
+    public String toString() {
+        String result = "Color(" + (r & 0xFF) + " " + (g & 0xFF) + " "
+                + (b & 0xFF) + " " + (a & 0xFF) + ")";
+        return result;
+    }
 }
