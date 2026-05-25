@@ -84,8 +84,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     public CylinderShapeSettings(float halfHeight, float radius,
             float convexRadius, PhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.va();
-        long settingsVa = createShapeSettings(
-                halfHeight, radius, convexRadius, materialVa);
+        long settingsVa = create(halfHeight, radius, convexRadius, materialVa);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Cylinder);
     }
 
@@ -185,12 +184,12 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
 
     native private static void assign(long targetVa, long sourceVa);
 
+    native private static long create(float halfHeight, float radius,
+            float convexRadius, long materialVa);
+
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
-
-    native private static long createShapeSettings(float halfHeight,
-            float radius, float convexRadius, long materialVa);
 
     native private static float getConvexRadius(long settingsVa);
 

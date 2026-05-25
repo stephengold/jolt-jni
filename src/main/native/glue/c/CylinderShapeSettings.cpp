@@ -40,6 +40,22 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings
 
 /*
  * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
+ * Method:    create
+ * Signature: (FFFJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_create
+  (JNIEnv *, jclass, jfloat halfHeight, jfloat radius, jfloat convexRadius,
+  jlong materialVa) {
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    CylinderShapeSettings * const pResult = new CylinderShapeSettings(
+            halfHeight, radius, convexRadius, pMaterial);
+    TRACE_NEW_TARGET("CylinderShapeSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
  * Method:    createCopy
  * Signature: (J)J
  */
@@ -53,22 +69,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSetting
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_createDefault
   BODYOF_CREATE_DEFAULT_TARGET(CylinderShapeSettings)
-
-/*
- * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
- * Method:    createShapeSettings
- * Signature: (FFFJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_createShapeSettings
-  (JNIEnv *, jclass, jfloat halfHeight, jfloat radius, jfloat convexRadius,
-  jlong materialVa) {
-    const PhysicsMaterial * const pMaterial
-            = reinterpret_cast<PhysicsMaterial *> (materialVa);
-    CylinderShapeSettings * const pResult
-            = new CylinderShapeSettings(halfHeight, radius, convexRadius, pMaterial);
-    TRACE_NEW_TARGET("CylinderShapeSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
