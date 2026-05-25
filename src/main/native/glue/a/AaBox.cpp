@@ -67,10 +67,10 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_containsAaB
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    createAaBox
+ * Method:    create
  * Signature: (FFFFFF)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_create
   (JNIEnv *, jclass, jfloat minX, jfloat minY, jfloat minZ, jfloat maxX, jfloat maxY, jfloat maxZ) {
     const Vec3 min(minX, minY, minZ);
     const Vec3 max(maxX, maxY, maxZ);

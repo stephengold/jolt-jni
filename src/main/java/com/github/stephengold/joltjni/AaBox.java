@@ -98,7 +98,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         float maxX = maximum.x();
         float maxY = maximum.y();
         float maxZ = maximum.z();
-        long boxVa = createAaBox(minX, minY, minZ, maxX, maxY, maxZ);
+        long boxVa = create(minX, minY, minZ, maxX, maxY, maxZ);
         setVirtualAddress(boxVa, () -> free(boxVa));
     }
 
@@ -133,7 +133,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         float maxX = maximum.getX();
         float maxY = maximum.getY();
         float maxZ = maximum.getZ();
-        long boxVa = createAaBox(minX, minY, minZ, maxX, maxY, maxZ);
+        long boxVa = create(minX, minY, minZ, maxX, maxY, maxZ);
         setVirtualAddress(boxVa, () -> free(boxVa));
     }
     // *************************************************************************
@@ -576,7 +576,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static boolean containsAaBox(long boxVa, long otherBoxVa);
 
-    native private static long createAaBox(float minX, float minY, float minZ,
+    native private static long create(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ);
 
     native private static long createBiggest();
