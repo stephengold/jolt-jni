@@ -32,6 +32,22 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_DrawSettings
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DrawSettings_assign
+  (JNIEnv *, jclass, jlong targetVa, jlong sourceVa) {
+#ifdef JPH_DEBUG_RENDERER
+    Hair::DrawSettings * const pTarget
+            = reinterpret_cast<Hair::DrawSettings *> (targetVa);
+    const Hair::DrawSettings * const pSource
+            = reinterpret_cast<Hair::DrawSettings *> (sourceVa);
+    *pTarget = *pSource;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DrawSettings
  * Method:    createCopy
  * Signature: (J)J
  */

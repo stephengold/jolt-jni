@@ -45,6 +45,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_assign
+  BODYOF_ASSIGN(ConvexHullShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
  * Method:    countPoints
  * Signature: (J)I
  */

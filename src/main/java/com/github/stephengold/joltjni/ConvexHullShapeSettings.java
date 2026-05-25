@@ -328,6 +328,17 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConvexHullShapeSettings source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the positional tolerance used when generating the hull. (native
      * attribute: mHullTolerance)
      *
@@ -424,6 +435,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     native private static void addPoint(
             long settingsVa, float x, float y, float z);
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static int countPoints(long settingsVa);
 

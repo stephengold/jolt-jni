@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Face
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Face_assign
+  BODYOF_ASSIGN(SoftBodySharedSettings::Face)
+
+/*
+ * Class:     com_github_stephengold_joltjni_Face
  * Method:    createCopy
  * Signature: (J)J
  */

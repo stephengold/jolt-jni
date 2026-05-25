@@ -66,6 +66,17 @@ public class Face extends JoltPhysicsObject implements ConstFace {
     // new methods exposed
 
     /**
+     * Copy the argument to the current face.
+     *
+     * @param source the face to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstFace source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Assign the specified material to the face. (native attribute:
      * mMaterialIndex)
      *
@@ -158,6 +169,8 @@ public class Face extends JoltPhysicsObject implements ConstFace {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

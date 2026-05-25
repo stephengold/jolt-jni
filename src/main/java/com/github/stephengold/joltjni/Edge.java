@@ -66,6 +66,17 @@ public class Edge extends JoltPhysicsObject implements ConstEdge {
     // new methods exposed
 
     /**
+     * Copy the argument to the current edge.
+     *
+     * @param source the edge to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstEdge source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the stiffness of the spring. (native attribute: mCompliance)
      *
      * @param compliance the inverse of the desired stiffness (default=0)
@@ -154,6 +165,8 @@ public class Edge extends JoltPhysicsObject implements ConstEdge {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

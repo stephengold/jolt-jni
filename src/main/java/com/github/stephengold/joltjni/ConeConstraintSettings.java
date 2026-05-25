@@ -156,6 +156,17 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConeConstraintSettings source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the maximum angle between the twist axes of body 1 and body 2.
      * (native attribute: mHalfConeAngle)
      *
@@ -247,6 +258,8 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

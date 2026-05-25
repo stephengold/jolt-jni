@@ -59,6 +59,17 @@ public class ExtendedUpdateSettings
     // new methods exposed
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstExtendedUpdateSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the StickToFloor inStepDown parameter. (native attribute:
      * mStickToFloorStepDown)
      *
@@ -216,6 +227,8 @@ public class ExtendedUpdateSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

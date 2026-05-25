@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Edge
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Edge_assign
+  BODYOF_ASSIGN(SoftBodySharedSettings::Edge)
+
+/*
+ * Class:     com_github_stephengold_joltjni_Edge
  * Method:    createCopy
  * Signature: (J)J
  */
