@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_JointState
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JointState_assign
+  BODYOF_ASSIGN(SkeletonPose::JointState)
+
+/*
+ * Class:     com_github_stephengold_joltjni_JointState
  * Method:    getRotation
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
@@ -64,14 +72,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JointState_getTransla
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
 }
-
-/*
- * Class:     com_github_stephengold_joltjni_JointState
- * Method:    set
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JointState_set
-  BODYOF_ASSIGN(SkeletonPose::JointState)
 
 /*
  * Class:     com_github_stephengold_joltjni_JointState

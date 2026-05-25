@@ -57,7 +57,7 @@ public class JointState extends JoltPhysicsObject implements ConstJointState {
     public void set(ConstJointState source) {
         long targetVa = va();
         long sourceVa = source.targetVa();
-        set(targetVa, sourceVa);
+        assign(targetVa, sourceVa);
     }
 
     /**
@@ -124,13 +124,13 @@ public class JointState extends JoltPhysicsObject implements ConstJointState {
     // *************************************************************************
     // native private methods
 
+    native private static void assign(long targetVa, long sourceVa);
+
     native private static void getRotation(
             long stateVa, FloatBuffer storeFloats);
 
     native private static void getTranslation(
             long stateVa, FloatBuffer storeFloats);
-
-    native private static void set(long targetVa, long sourceVa);
 
     native private static void setRotation(
             long stateVa, float qx, float qy, float qz, float qw);
