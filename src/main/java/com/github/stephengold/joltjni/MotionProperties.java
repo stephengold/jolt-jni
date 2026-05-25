@@ -121,6 +121,17 @@ public class MotionProperties
     }
 
     /**
+     * Copy the argument to the current properties.
+     *
+     * @param source the properties to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstMotionProperties source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the angular damping.
      *
      * @param damping the desired coefficient value (in units of per second,
@@ -569,6 +580,8 @@ public class MotionProperties
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 
