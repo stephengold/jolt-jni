@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ public class BodyManagerDrawSettings extends JoltPhysicsObject {
      * Instantiate settings with the default values.
      */
     public BodyManagerDrawSettings() {
-        long settingsVa = createDrawSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa, () -> free(settingsVa));
     }
 
@@ -54,7 +54,7 @@ public class BodyManagerDrawSettings extends JoltPhysicsObject {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createDrawSettings();
+    native private static long createDefault();
 
     native private static void free(long settingsVa);
 }

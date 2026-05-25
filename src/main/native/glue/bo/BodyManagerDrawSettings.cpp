@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -51,10 +51,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManagerDrawSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyManagerDrawSettings
- * Method:    createDrawSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManagerDrawSettings_createDrawSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManagerDrawSettings_createDefault
   (JNIEnv *, jclass) {
 #ifdef JPH_DEBUG_RENDERER
     BodyManager::DrawSettings * const pResult = new BodyManager::DrawSettings();
