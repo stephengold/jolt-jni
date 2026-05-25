@@ -41,14 +41,13 @@ public class AdditionalConstraint extends JoltPhysicsObject {
     public AdditionalConstraint(int bodyIndex1, int bodyIndex2,
             TwoBodyConstraintSettings settings) {
         long settingsVa = settings.va();
-        long constraintVa
-                = createConstraint(bodyIndex1, bodyIndex2, settingsVa);
+        long constraintVa = create(bodyIndex1, bodyIndex2, settingsVa);
         setVirtualAddress(constraintVa, () -> free(constraintVa));
     }
     // *************************************************************************
     // native private methods
 
-    native private static long createConstraint(
+    native private static long create(
             int bodyIndex1, int bodyIndex2, long settingsVa);
 
     native private static void free(long constraintVa);

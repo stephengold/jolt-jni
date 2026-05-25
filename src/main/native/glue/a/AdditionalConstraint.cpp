@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,10 +32,10 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_AdditionalConstraint
- * Method:    createConstraint
+ * Method:    create
  * Signature: (IIJ)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AdditionalConstraint_createConstraint
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AdditionalConstraint_create
   (JNIEnv *, jclass, jint bodyIndex1, jint bodyIndex2, jlong settingsVa) {
     TwoBodyConstraintSettings * const pSettings =
             reinterpret_cast<TwoBodyConstraintSettings *> (settingsVa);
