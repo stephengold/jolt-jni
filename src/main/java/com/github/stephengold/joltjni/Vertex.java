@@ -98,21 +98,6 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     /**
      * Alter the initial location of the vertex. (native attribute: mPosition)
      *
-     * @param x the desired X coordinate (default=0)
-     * @param y the desired Y coordinate (default=0)
-     * @param z the desired Z coordinate (default=0)
-     * @return the modified vertex, for chaining
-     */
-    public Vertex setPosition(float x, float y, float z) {
-        long vertexVa = va();
-        setPosition(vertexVa, x, y, z);
-
-        return this;
-    }
-
-    /**
-     * Alter the initial location of the vertex. (native attribute: mPosition)
-     *
      * @param location the desired location (not {@code null}, unaffected
      * default=(0,0,0))
      * @return the modified vertex, for chaining
@@ -122,6 +107,21 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
         float x = location.x();
         float y = location.y();
         float z = location.z();
+        setPosition(vertexVa, x, y, z);
+
+        return this;
+    }
+
+    /**
+     * Alter the initial location of the vertex. (native attribute: mPosition)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     * @return the modified vertex, for chaining
+     */
+    public Vertex setPosition(float x, float y, float z) {
+        long vertexVa = va();
         setPosition(vertexVa, x, y, z);
 
         return this;
@@ -147,21 +147,6 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     /**
      * Alter the initial velocity of the vertex. (native attribute: mVelocity)
      *
-     * @param x the desired X component (default=0)
-     * @param y the desired Y component (default=0)
-     * @param z the desired Z component (default=0)
-     * @return the modified vertex, for chaining
-     */
-    public Vertex setVelocity(float x, float y, float z) {
-        long vertexVa = va();
-        setVelocity(vertexVa, x, y, z);
-
-        return this;
-    }
-
-    /**
-     * Alter the initial velocity of the vertex. (native attribute: mVelocity)
-     *
      * @param velocity the desired velocity (in meters per second, not
      * {@code null}, unaffected default=(0,0,0))
      * @return the modified vertex, for chaining
@@ -172,6 +157,21 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
         float vy = velocity.y();
         float vz = velocity.z();
         setVelocity(vertexVa, vx, vy, vz);
+
+        return this;
+    }
+
+    /**
+     * Alter the initial velocity of the vertex. (native attribute: mVelocity)
+     *
+     * @param x the desired X component (default=0)
+     * @param y the desired Y component (default=0)
+     * @param z the desired Z component (default=0)
+     * @return the modified vertex, for chaining
+     */
+    public Vertex setVelocity(float x, float y, float z) {
+        long vertexVa = va();
+        setVelocity(vertexVa, x, y, z);
 
         return this;
     }
