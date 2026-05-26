@@ -194,11 +194,10 @@ public class CollisionGroup
     }
 
     /**
-     * Test whether this object is equal to the argument. Both objects are
+     * Test whether this group is equivalent to the argument. Both groups are
      * unaffected. (native operator: binary {@code ==})
      *
-     * @param other the properties to compare with (not {@code null},
-     * unaffected)
+     * @param other the group to compare with (not {@code null}, unaffected)
      * @return {@code true} if equal, {@code false} if unequal
      */
     @Override

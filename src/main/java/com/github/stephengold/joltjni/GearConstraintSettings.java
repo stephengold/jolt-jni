@@ -112,7 +112,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      * Return which space the other properties are specified in. The settings
      * are unaffected. (native attribute: mSpace)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EConstraintSpace getSpace() {
         long settingsVa = va();
@@ -184,7 +184,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      * Alter which space the other properties are specified in. (native
      * attribute: mSpace)
      *
-     * @param space enum value (not null, default=WorldSpace)
+     * @param space enum value (not {@code null}, default=WorldSpace)
      */
     public void setSpace(EConstraintSpace space) {
         long settingsVa = va();

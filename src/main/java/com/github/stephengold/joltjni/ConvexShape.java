@@ -74,9 +74,10 @@ abstract public class ConvexShape extends Shape implements ConstConvexShape {
     /**
      * Calculate the shape's volume, submerged volume, and center of buoyancy.
      *
-     * @param comTransform the local-to-system transform (not null, unaffected)
-     * @param scale the scale vector (not null, unaffected)
-     * @param surface the boundary of the submerged region (not null,
+     * @param comTransform the local-to-system transform (not {@code null},
+     * unaffected)
+     * @param scale the scale vector (not {@code null}, unaffected)
+     * @param surface the boundary of the submerged region (not {@code null},
      * unaffected)
      * @param storeTotalVolume storage for the total volume, or {@code null}
      * @param storeSubmergedVolume storage for the submerged volume, or
@@ -117,10 +118,10 @@ abstract public class ConvexShape extends Shape implements ConstConvexShape {
     /**
      * Generate a support function for the shape.
      *
-     * @param supportMode how to handle convex radius (not null)
-     * @param buffer buffer storage (not null)
-     * @param scale scale factors to apply (in local coordinates, not null,
-     * unaffected)
+     * @param supportMode how to handle convex radius (not {@code null})
+     * @param buffer buffer storage (not {@code null})
+     * @param scale scale factors to apply (in local coordinates, not
+     * {@code null}, unaffected)
      * @return a new JVM object with the pre-existing native object assigned
      */
     @Override

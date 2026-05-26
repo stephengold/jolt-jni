@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,17 +47,23 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
     /**
      * Perform the GJK and EPA steps on a pair of points.
      *
-     * @param aExcluding point A without convex radius (not null, unaffected)
-     * @param aIncluding point A with convex radius (not null, unaffected)
+     * @param aExcluding point A without convex radius (not {@code null},
+     * unaffected)
+     * @param aIncluding point A with convex radius (not {@code null},
+     * unaffected)
      * @param convexRadiusA the convex radius of point A
-     * @param bExcluding point B without convex radius (not null, unaffected)
-     * @param bIncluding point B with convex radius (not null, unaffected)
+     * @param bExcluding point B without convex radius (not {@code null},
+     * unaffected)
+     * @param bIncluding point B with convex radius (not {@code null},
+     * unaffected)
      * @param convexRadiusB the convex radius of point B
      * @param collisionToleranceSq the square of the collision tolerance
      * @param penetrationTolerance the penetration tolerance
-     * @param iov the direction vector (not null, modified)
-     * @param storePointA storage for the point on point A (not null, modified)
-     * @param storePointB storage for the point on point B (not null, modified)
+     * @param iov the direction vector (not {@code null}, modified)
+     * @param storePointA storage for the point on point A (not {@code null},
+     * modified)
+     * @param storePointB storage for the point on point B (not {@code null},
+     * modified)
      * @return {@code true} if the points intersect, otherwise {@code false}
      */
     public boolean getPenetrationDepth(PointConvexSupport aExcluding,
@@ -90,18 +96,25 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
     /**
      * Perform the GJK and EPA steps on a pair of spheres.
      *
-     * @param aExcluding sphere A without convex radius (not null, unaffected)
-     * @param aIncluding sphere A with convex radius (not null, unaffected)
+     * @param aExcluding sphere A without convex radius (not {@code null},
+     * unaffected)
+     * @param aIncluding sphere A with convex radius (not {@code null},
+     * unaffected)
      * @param convexRadiusA the convex radius of sphere A
-     * @param bExcluding sphere B without convex radius (not null, unaffected)
-     * @param bIncluding sphere B with convex radius (not null, unaffected)
+     * @param bExcluding sphere B without convex radius (not {@code null},
+     * unaffected)
+     * @param bIncluding sphere B with convex radius (not {@code null},
+     * unaffected)
      * @param convexRadiusB the convex radius of sphere B
      * @param collisionToleranceSq the square of the collision tolerance
      * @param penetrationTolerance the penetration tolerance
-     * @param iov the direction vector (not null, modified)
-     * @param storePointA storage for the point on sphere A (not null, modified)
-     * @param storePointB storage for the point on sphere B (not null, modified)
-     * @return {@code true} if the spheres intersect, otherwise {@code false}
+     * @param iov the direction vector (not {@code null}, modified)
+     * @param storePointA storage for the point on sphere A (not {@code null},
+     * modified)
+     * @param storePointB storage for the point on sphere B (not {@code null},
+     * modified)
+     * @return {@code {@code null}} if the spheres intersect, otherwise
+     * {@code false}
      */
     public boolean getPenetrationDepth(Sphere aExcluding, Sphere aIncluding,
             float convexRadiusA, Sphere bExcluding, Sphere bIncluding,

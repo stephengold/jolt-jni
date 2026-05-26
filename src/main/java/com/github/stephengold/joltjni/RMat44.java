@@ -284,7 +284,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      *
      * @param rotation the rotation quaternion to use (not {@code null},
      * unaffected)
-     * @return a new object
+     * @return a new matrix
      */
     public static RMat44 sRotation(QuatArg rotation) {
         float rw = rotation.getW();
@@ -302,7 +302,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      *
      * @param rotation the amount to rotate (not {@code null}, unaffected)
      * @param offset the amount to translate (not {@code null}, unaffected)
-     * @return a new object
+     * @return a new matrix
      */
     public static RMat44 sRotationTranslation(
             QuatArg rotation, RVec3Arg offset) {

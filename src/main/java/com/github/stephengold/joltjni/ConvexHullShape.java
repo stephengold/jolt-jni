@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,9 +52,10 @@ public class ConvexHullShape extends ConvexShape {
      * Draw how vertices are moved when the shape is shrunk by the convex
      * radius. The shape is unaffected.
      *
-     * @param renderer the renderer to use (not null)
-     * @param comTransform the center-of-mass transform (not null, unaffected)
-     * @param scale the scaling to apply (not null, unaffected)
+     * @param renderer the renderer to use (not {@code null})
+     * @param comTransform the center-of-mass transform (not {@code null},
+     * unaffected)
+     * @param scale the scaling to apply (not {@code null}, unaffected)
      */
     public void drawShrunkShape(
             DebugRenderer renderer, RMat44Arg comTransform, Vec3Arg scale) {
@@ -84,7 +85,7 @@ public class ConvexHullShape extends ConvexShape {
      * Enumerate all vertices in the specified face. The shape is unaffected.
      *
      * @param faceIndex the index of the face to query (&ge;0, &lt;numFaces)
-     * @param storeIndices storage for the result (not null, modified)
+     * @param storeIndices storage for the result (not {@code null}, modified)
      * @return the number of vertices in the face
      */
     public int getFaceVertices(int faceIndex, int[] storeIndices) {
@@ -99,7 +100,7 @@ public class ConvexHullShape extends ConvexShape {
      * @param faceIndex the index of the face to query (&ge;0, &lt;numFaces)
      * @param maxVertices the maximum number of vertices to return (&ge;0,
      * default=storeIndices.length)
-     * @param storeIndices storage for the result (not null,
+     * @param storeIndices storage for the result (not {@code null},
      * length&ge;maxVertices, modified)
      * @return the number of vertices in the face (&ge;0)
      */
