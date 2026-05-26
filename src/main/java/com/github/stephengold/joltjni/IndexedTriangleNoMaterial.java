@@ -51,6 +51,18 @@ public class IndexedTriangleNoMaterial
     }
 
     /**
+     * Instantiate a copy of the specified triangle.
+     *
+     * @param original the triangle to copy (not {@code null}, unaffected)
+     */
+    public IndexedTriangleNoMaterial(ConstIndexedTriangleNoMaterial original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        Runnable freeingAction = () -> free(copyVa);
+        setVirtualAddress(copyVa, freeingAction);
+    }
+
+    /**
      * Instantiate a triangle with the specified indices.
      *
      * @param vi0 the desired first mesh-vertex index
@@ -163,6 +175,8 @@ public class IndexedTriangleNoMaterial
     // native private methods
 
     native private static void assign(long targetVa, long sourceVa);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createIndexedTriangleNoMaterial(
             int vi0, int vi1, int vi2);

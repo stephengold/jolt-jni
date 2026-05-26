@@ -40,6 +40,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleNoMate
 
 /*
  * Class:     com_github_stephengold_joltjni_IndexedTriangleNoMaterial
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleNoMaterial_createCopy
+  BODYOF_CREATE_COPY(IndexedTriangleNoMaterial)
+
+/*
+ * Class:     com_github_stephengold_joltjni_IndexedTriangleNoMaterial
  * Method:    createIndexedTriangleNoMaterial
  * Signature: (III)J
  */
