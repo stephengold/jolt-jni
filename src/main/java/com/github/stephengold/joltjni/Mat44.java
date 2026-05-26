@@ -689,14 +689,14 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Multiply the transpose of the 3x3 matrix by the specified column vector.
      * The matrix is unaffected.
      *
-     * @param vec3Arg the right factor (not {@code null}, unaffected)
+     * @param rightVector the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
-    public Vec3 multiply3x3Transposed(Vec3Arg vec3Arg) {
+    public Vec3 multiply3x3Transposed(Vec3Arg rightVector) {
         long matrixVa = va();
         FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
-        vec3Arg.copyTo(floatBuffer);
+        rightVector.copyTo(floatBuffer);
         multiply3x3Transposed(matrixVa, floatBuffer);
         Vec3 result = new Vec3(floatBuffer);
 
@@ -708,14 +708,14 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param float3 the right factor (not {@code null}, unaffected)
+     * @param rightVector the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
-    public Vec3 multiply3x4(ConstFloat3 float3) {
+    public Vec3 multiply3x4(ConstFloat3 rightVector) {
         long matrixVa = va();
         FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
-        float3.copyTo(floatBuffer);
+        rightVector.copyTo(floatBuffer);
         multiply3x4(matrixVa, floatBuffer);
         Vec3 result = new Vec3(floatBuffer);
 
@@ -727,14 +727,14 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param vec3Arg the right factor (not {@code null}, unaffected)
+     * @param vec3 the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
-    public Vec3 multiply3x4(Vec3Arg vec3Arg) {
+    public Vec3 multiply3x4(Vec3Arg vec3) {
         long matrixVa = va();
         FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
-        vec3Arg.copyTo(floatBuffer);
+        vec3.copyTo(floatBuffer);
         multiply3x4(matrixVa, floatBuffer);
         Vec3 result = new Vec3(floatBuffer);
 
@@ -762,15 +762,15 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param vec3 the left factor (not {@code null}, unaffected)
+     * @param leftVector the left factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     @Override
-    public Mat44 postTranslated(Vec3Arg vec3) {
+    public Mat44 postTranslated(Vec3Arg leftVector) {
         long matrixVa = va();
-        float x = vec3.getX();
-        float y = vec3.getY();
-        float z = vec3.getZ();
+        float x = leftVector.getX();
+        float y = leftVector.getY();
+        float z = leftVector.getZ();
         long resultVa = postTranslated(matrixVa, x, y, z);
         Mat44 result = new Mat44(resultVa, true);
 
