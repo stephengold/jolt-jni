@@ -130,14 +130,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Gradient_getMinFrac
 
 /*
  * Class:     com_github_stephengold_joltjni_Gradient
- * Method:    isEqual
- * Signature: (JJ)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Gradient_isEqual
-  (JNIEnv *, jclass, jlong, jlong);
-
-/*
- * Class:     com_github_stephengold_joltjni_Gradient
  * Method:    restoreBinaryState
  * Signature: (JJ)V
  */
