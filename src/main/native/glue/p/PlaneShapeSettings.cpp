@@ -40,6 +40,24 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_as
 
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShapeSettings
+ * Method:    create
+ * Signature: (FFFFJF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_create
+  (JNIEnv *, jclass, jfloat nx, jfloat ny, jfloat nz, jfloat planeConstant,
+  jlong materialVa, jfloat halfExtent) {
+    const Vec3 normal(nx, ny, nz);
+    const Plane plane(normal, planeConstant);
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    PlaneShapeSettings * const pSettings
+            = new PlaneShapeSettings(plane, pMaterial, halfExtent);
+    TRACE_NEW_TARGET("PlaneShapeSettings", pSettings)
+    return reinterpret_cast<jlong> (pSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PlaneShapeSettings
  * Method:    createCopy
  * Signature: (J)J
  */
@@ -53,24 +71,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_c
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_createDefault
   BODYOF_CREATE_DEFAULT_TARGET(PlaneShapeSettings)
-
-/*
- * Class:     com_github_stephengold_joltjni_PlaneShapeSettings
- * Method:    createPlaneShapeSettings
- * Signature: (FFFFJF)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_createPlaneShapeSettings
-  (JNIEnv *, jclass, jfloat nx, jfloat ny, jfloat nz, jfloat planeConstant,
-  jlong materialVa, jfloat halfExtent) {
-    const Vec3 normal(nx, ny, nz);
-    const Plane plane(normal, planeConstant);
-    const PhysicsMaterial * const pMaterial
-            = reinterpret_cast<PhysicsMaterial *> (materialVa);
-    PlaneShapeSettings * const pSettings
-            = new PlaneShapeSettings(plane, pMaterial, halfExtent);
-    TRACE_NEW_TARGET("PlaneShapeSettings", pSettings)
-    return reinterpret_cast<jlong> (pSettings);
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShapeSettings

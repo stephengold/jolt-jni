@@ -86,8 +86,8 @@ public class PlaneShapeSettings extends ShapeSettings {
         float nz = plane.getNormalZ();
         float planeConstant = plane.getConstant();
         long materialVa = (material == null) ? 0L : material.targetVa();
-        long settingsVa = createPlaneShapeSettings(
-                nx, ny, nz, planeConstant, materialVa, halfExtent);
+        long settingsVa
+                = create(nx, ny, nz, planeConstant, materialVa, halfExtent);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Plane);
     }
 
@@ -214,12 +214,12 @@ public class PlaneShapeSettings extends ShapeSettings {
 
     native private static void assign(long targetVa, long sourceVa);
 
+    native private static long create(float nx, float ny, float nz,
+            float planeConstant, long materialVa, float halfExtent);
+
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
-
-    native private static long createPlaneShapeSettings(float nx, float ny,
-            float nz, float planeConstant, long materialVa, float halfExtent);
 
     native private static float getHalfExtent(long settingsVa);
 
