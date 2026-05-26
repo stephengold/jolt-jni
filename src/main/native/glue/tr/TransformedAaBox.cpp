@@ -53,7 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TransformedAaBox_cre
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedAaBox_free
-    BODYOF_FREE(TransformedConvexObject<AABox>)
+  BODYOF_FREE(TransformedConvexObject<AABox>)
 
 /*
  * Class:     com_github_stephengold_joltjni_TransformedAaBox

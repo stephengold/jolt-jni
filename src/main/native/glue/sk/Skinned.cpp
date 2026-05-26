@@ -51,7 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createBackst
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createCopy
-    BODYOF_CREATE_COPY(SoftBodySharedSettings::Skinned)
+  BODYOF_CREATE_COPY(SoftBodySharedSettings::Skinned)
 
 /*
  * Class:     com_github_stephengold_joltjni_Skinned
@@ -59,7 +59,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createCopy
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createDefault
-    BODYOF_CREATE_DEFAULT(SoftBodySharedSettings::Skinned)
+  BODYOF_CREATE_DEFAULT(SoftBodySharedSettings::Skinned)
 
 /*
  * Class:     com_github_stephengold_joltjni_Skinned
@@ -67,7 +67,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createDefaul
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Skinned_free
-    BODYOF_FREE(SoftBodySharedSettings::Skinned)
+  BODYOF_FREE(SoftBodySharedSettings::Skinned)
 
 /*
  * Class:     com_github_stephengold_joltjni_Skinned

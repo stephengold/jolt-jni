@@ -49,7 +49,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_copy
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_createDefault
-    BODYOF_CREATE_DEFAULT(ShapeRefC)
+  BODYOF_CREATE_DEFAULT(ShapeRefC)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeRefC
@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_createDefa
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_free
-    BODYOF_FREE(ShapeRefC)
+  BODYOF_FREE(ShapeRefC)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeRefC

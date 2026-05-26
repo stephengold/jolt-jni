@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Stats_free
-    BODYOF_FREE(Shape::Stats)
+  BODYOF_FREE(Shape::Stats)
 
 /*
  * Class:     com_github_stephengold_joltjni_Stats

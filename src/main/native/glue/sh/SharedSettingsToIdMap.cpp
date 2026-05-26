@@ -39,7 +39,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_SharedSettingsToIdMap_createDefault
-    BODYOF_CREATE_DEFAULT(StreamUtils::ObjectToIDMap<SoftBodySharedSettings>)
+  BODYOF_CREATE_DEFAULT(StreamUtils::ObjectToIDMap<SoftBodySharedSettings>)
 
 /*
  * Class:     com_github_stephengold_joltjni_streamutils_SharedSettingsToIdMap
@@ -47,4 +47,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_SharedSe
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_streamutils_SharedSettingsToIdMap_free
-    BODYOF_FREE(StreamUtils::ObjectToIDMap<SoftBodySharedSettings>)
+  BODYOF_FREE(StreamUtils::ObjectToIDMap<SoftBodySharedSettings>)

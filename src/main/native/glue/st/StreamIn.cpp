@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StreamIn_free
-    BODYOF_FREE(StreamIn)
+  BODYOF_FREE(StreamIn)
 
 /*
  * Class:     com_github_stephengold_joltjni_StreamIn

@@ -53,7 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TransformedSphere_cr
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedSphere_free
-    BODYOF_FREE(TransformedConvexObject<Sphere>)
+  BODYOF_FREE(TransformedConvexObject<Sphere>)
 
 /*
  * Class:     com_github_stephengold_joltjni_TransformedSphere

@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_assign
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_createCopy
-    BODYOF_CREATE_COPY(SoftBodyVertex)
+  BODYOF_CREATE_COPY(SoftBodyVertex)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex
@@ -53,7 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_creat
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_createDefault
-    BODYOF_CREATE_DEFAULT(SoftBodyVertex)
+  BODYOF_CREATE_DEFAULT(SoftBodyVertex)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex
@@ -61,7 +61,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_creat
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_free
-    BODYOF_FREE(SoftBodyVertex)
+  BODYOF_FREE(SoftBodyVertex)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex

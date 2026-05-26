@@ -36,4 +36,4 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TempAllocator_free
-    BODYOF_FREE(TempAllocator)
+  BODYOF_FREE(TempAllocator)

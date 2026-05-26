@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_createDefault
-    BODYOF_CREATE_DEFAULT_TARGET(SwingTwistConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(SwingTwistConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings

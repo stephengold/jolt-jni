@@ -36,4 +36,4 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyContactListener_free
-    BODYOF_FREE(SoftBodyContactListener)
+  BODYOF_FREE(SoftBodyContactListener)

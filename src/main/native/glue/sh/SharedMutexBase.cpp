@@ -36,4 +36,4 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SharedMutexBase_free
-    BODYOF_FREE(SharedMutexBase)
+  BODYOF_FREE(SharedMutexBase)

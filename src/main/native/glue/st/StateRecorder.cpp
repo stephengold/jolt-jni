@@ -39,7 +39,7 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_free
-    BODYOF_FREE(StateRecorder)
+  BODYOF_FREE(StateRecorder)
 
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder

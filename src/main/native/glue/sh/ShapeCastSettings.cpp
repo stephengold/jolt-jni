@@ -52,7 +52,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeCastSettings_cr
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeCastSettings_createDefault
-    BODYOF_CREATE_DEFAULT(ShapeCastSettings)
+  BODYOF_CREATE_DEFAULT(ShapeCastSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeCastSettings

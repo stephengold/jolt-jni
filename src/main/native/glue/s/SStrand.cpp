@@ -49,7 +49,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SStrand_create
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SStrand_createDefault
-    BODYOF_CREATE_DEFAULT(HairSettings::SStrand)
+  BODYOF_CREATE_DEFAULT(HairSettings::SStrand)
 
 /*
  * Class:     com_github_stephengold_joltjni_SStrand
@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SStrand_createDefaul
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SStrand_free
-    BODYOF_FREE(HairSettings::SStrand)
+  BODYOF_FREE(HairSettings::SStrand)
 
 /*
  * Class:     com_github_stephengold_joltjni_SStrand

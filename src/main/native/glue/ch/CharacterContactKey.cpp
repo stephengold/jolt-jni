@@ -130,7 +130,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_g
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterContactKey_isEqual
-    BODYOF_IS_EQUAL(CharacterContactKey)
+  BODYOF_IS_EQUAL(CharacterContactKey)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterContactKey

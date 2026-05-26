@@ -48,7 +48,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_UniformIntDistri
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_UniformIntDistribution_free
-    BODYOF_FREE(uniform_int_distribution<int>)
+  BODYOF_FREE(uniform_int_distribution<int>)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_UniformIntDistribution

@@ -44,7 +44,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyContactSettin
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyContactSettings_createCopy
-    BODYOF_CREATE_COPY(SoftBodyContactSettings)
+  BODYOF_CREATE_COPY(SoftBodyContactSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyContactSettings
@@ -52,7 +52,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyContactSetti
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyContactSettings_createDefault
-    BODYOF_CREATE_DEFAULT(SoftBodyContactSettings)
+  BODYOF_CREATE_DEFAULT(SoftBodyContactSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyContactSettings

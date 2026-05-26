@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SupportingFace_createDefault
-    BODYOF_CREATE_DEFAULT(Shape::SupportingFace)
+  BODYOF_CREATE_DEFAULT(Shape::SupportingFace)
 
 /*
  * Class:     com_github_stephengold_joltjni_SupportingFace
@@ -44,4 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SupportingFace_creat
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SupportingFace_free
-    BODYOF_FREE(Shape::SupportingFace)
+  BODYOF_FREE(Shape::SupportingFace)

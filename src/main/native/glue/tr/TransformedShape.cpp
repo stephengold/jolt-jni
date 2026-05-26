@@ -232,7 +232,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_TransformedShape_coun
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_free
-    BODYOF_FREE(TransformedShape)
+  BODYOF_FREE(TransformedShape)
 
 /*
  * Class:     com_github_stephengold_joltjni_TransformedShape

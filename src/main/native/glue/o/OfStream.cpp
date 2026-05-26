@@ -72,7 +72,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_OfStream_createD
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_OfStream_free
-    BODYOF_FREE(ofstream)
+  BODYOF_FREE(ofstream)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_OfStream

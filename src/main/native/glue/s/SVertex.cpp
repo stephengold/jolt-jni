@@ -50,7 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SVertex_create
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SVertex_createDefault
-    BODYOF_CREATE_DEFAULT(HairSettings::SVertex)
+  BODYOF_CREATE_DEFAULT(HairSettings::SVertex)
 
 /*
  * Class:     com_github_stephengold_joltjni_SVertex
@@ -58,7 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SVertex_createDefaul
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SVertex_free
-    BODYOF_FREE(HairSettings::SVertex)
+  BODYOF_FREE(HairSettings::SVertex)
 
 /*
  * Class:     com_github_stephengold_joltjni_SVertex

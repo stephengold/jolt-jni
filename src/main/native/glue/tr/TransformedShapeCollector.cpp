@@ -36,4 +36,4 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShapeCollector_free
-    BODYOF_FREE(TransformedShapeCollector)
+  BODYOF_FREE(TransformedShapeCollector)

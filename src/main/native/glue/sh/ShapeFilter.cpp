@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeFilter_createDefault
-    BODYOF_CREATE_DEFAULT(ShapeFilter)
+  BODYOF_CREATE_DEFAULT(ShapeFilter)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeFilter
@@ -44,4 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeFilter_createDe
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeFilter_free
-    BODYOF_FREE(ShapeFilter)
+  BODYOF_FREE(ShapeFilter)

@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createCopy
-    BODYOF_CREATE_COPY(Triangle)
+  BODYOF_CREATE_COPY(Triangle)
 
 /*
  * Class:     com_github_stephengold_joltjni_Triangle
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createCopy
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createDefault
-    BODYOF_CREATE_DEFAULT(Triangle)
+  BODYOF_CREATE_DEFAULT(Triangle)
 
 /*
  * Class:     com_github_stephengold_joltjni_Triangle
@@ -69,7 +69,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createTrian
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Triangle_free
-    BODYOF_FREE(Triangle)
+  BODYOF_FREE(Triangle)
 
 /*
  * Class:     com_github_stephengold_joltjni_Triangle

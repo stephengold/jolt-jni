@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleConvexSupport_createCopy
-    BODYOF_CREATE_COPY(TriangleConvexSupport)
+  BODYOF_CREATE_COPY(TriangleConvexSupport)
 
 /*
  * Class:     com_github_stephengold_joltjni_TriangleConvexSupport
@@ -61,7 +61,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleConvexSuppor
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleConvexSupport_free
-    BODYOF_FREE(TriangleConvexSupport)
+  BODYOF_FREE(TriangleConvexSupport)
 
 /*
  * Class:     com_github_stephengold_joltjni_TriangleConvexSupport

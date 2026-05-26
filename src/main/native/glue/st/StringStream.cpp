@@ -35,7 +35,7 @@ using namespace std;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_StringStream_createDefault
-    BODYOF_CREATE_DEFAULT(stringstream)
+  BODYOF_CREATE_DEFAULT(stringstream)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_StringStream
@@ -66,7 +66,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_StringStream_cre
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_StringStream_free
-    BODYOF_FREE(stringstream)
+  BODYOF_FREE(stringstream)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_StringStream

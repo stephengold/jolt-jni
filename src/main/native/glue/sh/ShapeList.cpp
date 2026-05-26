@@ -48,7 +48,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ShapeList_capacity
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeList_createDefault
-    BODYOF_CREATE_DEFAULT(ShapeList)
+  BODYOF_CREATE_DEFAULT(ShapeList)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeList
@@ -68,7 +68,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeList_erase
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeList_free
-    BODYOF_FREE(ShapeList)
+  BODYOF_FREE(ShapeList)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeList

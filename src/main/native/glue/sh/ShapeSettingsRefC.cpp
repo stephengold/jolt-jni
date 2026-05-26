@@ -59,4 +59,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettingsRefC_co
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeSettingsRefC_free
-    BODYOF_FREE(RefConst<ShapeSettings>)
+  BODYOF_FREE(RefConst<ShapeSettings>)

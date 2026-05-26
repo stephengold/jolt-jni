@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkinWeight_create
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkinWeight_createCopy
-    BODYOF_CREATE_COPY(SoftBodySharedSettings::SkinWeight)
+  BODYOF_CREATE_COPY(SoftBodySharedSettings::SkinWeight)
 
 /*
  * Class:     com_github_stephengold_joltjni_SkinWeight
@@ -65,7 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkinWeight_createCop
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkinWeight_createDefault
-    BODYOF_CREATE_DEFAULT(SoftBodySharedSettings::SkinWeight)
+  BODYOF_CREATE_DEFAULT(SoftBodySharedSettings::SkinWeight)
 
 /*
  * Class:     com_github_stephengold_joltjni_SkinWeight

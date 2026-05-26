@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_createDefault
-    BODYOF_CREATE_DEFAULT(SubShapeIDCreator)
+  BODYOF_CREATE_DEFAULT(SubShapeIDCreator)
 
 /*
  * Class:     com_github_stephengold_joltjni_SubShapeIdCreator
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_cr
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_free
-    BODYOF_FREE(SubShapeIDCreator)
+  BODYOF_FREE(SubShapeIDCreator)
 
 /*
  * Class:     com_github_stephengold_joltjni_SubShapeIdCreator

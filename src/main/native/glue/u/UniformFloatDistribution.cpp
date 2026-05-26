@@ -48,7 +48,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_UniformFloatDist
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_UniformFloatDistribution_free
-    BODYOF_FREE(uniform_real_distribution<float>)
+  BODYOF_FREE(uniform_real_distribution<float>)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_UniformFloatDistribution

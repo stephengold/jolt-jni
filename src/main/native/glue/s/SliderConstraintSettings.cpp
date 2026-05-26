@@ -44,7 +44,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSetti
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_createCopy
-    BODYOF_CREATE_COPY_TARGET(SliderConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(SliderConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
@@ -52,7 +52,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSett
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_createDefault
-    BODYOF_CREATE_DEFAULT_TARGET(SliderConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(SliderConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings

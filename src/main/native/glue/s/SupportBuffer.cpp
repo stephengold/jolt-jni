@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SupportBuffer_createDefault
-    BODYOF_CREATE_DEFAULT(ConvexShape::SupportBuffer)
+  BODYOF_CREATE_DEFAULT(ConvexShape::SupportBuffer)
 
 /*
  * Class:     com_github_stephengold_joltjni_SupportBuffer
@@ -44,4 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SupportBuffer_create
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SupportBuffer_free
-    BODYOF_FREE(ConvexShape::SupportBuffer)
+  BODYOF_FREE(ConvexShape::SupportBuffer)

@@ -37,7 +37,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_ShapeToIdMap_createDefault
-    BODYOF_CREATE_DEFAULT(StreamUtils::ObjectToIDMap<Shape>)
+  BODYOF_CREATE_DEFAULT(StreamUtils::ObjectToIDMap<Shape>)
 
 /*
  * Class:     com_github_stephengold_joltjni_streamutils_ShapeToIdMap
@@ -45,4 +45,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_ShapeToI
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_streamutils_ShapeToIdMap_free
-    BODYOF_FREE(StreamUtils::ObjectToIDMap<Shape>)
+  BODYOF_FREE(StreamUtils::ObjectToIDMap<Shape>)
