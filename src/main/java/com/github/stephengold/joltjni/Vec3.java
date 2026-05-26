@@ -73,6 +73,17 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Instantiate from the specified {@code ConstFloat3}.
+     *
+     * @param float3 the desired component values (not {@code null}, unaffected)
+     */
+    public Vec3(ConstFloat3 float3) {
+        this.x = float3.x();
+        this.y = float3.y();
+        this.z = float3.z();
+    }
+
+    /**
      * Instantiate a vector with the specified components.
      *
      * @param x the desired X component
@@ -108,17 +119,6 @@ final public class Vec3 implements Vec3Arg {
         this.x = array[0];
         this.y = array[1];
         this.z = array[2];
-    }
-
-    /**
-     * Instantiate from the specified {@code ConstFloat3}.
-     *
-     * @param float3 the desired component values (not {@code null}, unaffected)
-     */
-    public Vec3(ConstFloat3 float3) {
-        this.x = float3.x();
-        this.y = float3.y();
-        this.z = float3.z();
     }
 
     /**
