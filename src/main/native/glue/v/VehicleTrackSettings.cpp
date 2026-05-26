@@ -32,6 +32,18 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
+ * Method:    addWheel
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_addWheel
+  (JNIEnv *, jclass, jlong settingsVa, jint wheelIndex) {
+    VehicleTrackSettings * const pSettings
+            = reinterpret_cast<VehicleTrackSettings *> (settingsVa);
+    pSettings->mWheels.push_back(wheelIndex);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
  * Method:    assign
  * Signature: (JJ)V
  */
@@ -61,18 +73,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_free
   BODYOF_FREE(VehicleTrackSettings)
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
- * Method:    addWheel
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_addWheel
-  (JNIEnv *, jclass, jlong settingsVa, jint wheelIndex) {
-    VehicleTrackSettings * const pSettings
-            = reinterpret_cast<VehicleTrackSettings *> (settingsVa);
-    pSettings->mWheels.push_back(wheelIndex);
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
