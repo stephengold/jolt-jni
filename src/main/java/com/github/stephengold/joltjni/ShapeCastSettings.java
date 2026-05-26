@@ -109,6 +109,17 @@ public class ShapeCastSettings extends CollideSettingsBase {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ShapeCastSettings source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the treatment of back-facing triangles in convex shapes. (native
      * attribute: mBackFaceModeConvex)
      *
@@ -157,6 +168,8 @@ public class ShapeCastSettings extends CollideSettingsBase {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

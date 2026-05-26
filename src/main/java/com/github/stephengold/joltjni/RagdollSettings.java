@@ -197,6 +197,17 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(RagdollSettings source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Replace the skeleton. (native attribute: mSkeleton)
      *
      * @param skeleton the desired skeleton (not null)
@@ -276,6 +287,8 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
 
     native static void addAdditionalConstraint(
             long settingsVa, long constraintVa);
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native static void calculateBodyIndexToConstraintIndex(long settingsVa);
 

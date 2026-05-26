@@ -55,6 +55,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_addAd
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_assign
+  BODYOF_ASSIGN(RagdollSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
  * Method:    calculateBodyIndexToConstraintIndex
  * Signature: (J)V
  */
