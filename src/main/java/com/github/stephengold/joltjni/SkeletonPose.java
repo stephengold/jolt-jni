@@ -90,6 +90,17 @@ public class SkeletonPose
     }
 
     /**
+     * Copy the argument to the current pose.
+     *
+     * @param source the pose to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstSkeletonPose source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the root offset.
      *
      * @param offset the desired offset (not {@code null}, unaffected)
@@ -234,6 +245,8 @@ public class SkeletonPose
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static void calculateJointMatrices(long poseVa);
 

@@ -296,6 +296,17 @@ public class SoftBodySharedSettings
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstSoftBodySharedSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Replace the materials. (native member: mMaterials)
      *
      * @param material the desired material, or {@code null}
@@ -658,6 +669,8 @@ public class SoftBodySharedSettings
     native static void addVertex(long settingsVa, long vertexVa);
 
     native static void addVolumeConstraint(long settingsVa, long volumeVa);
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native static void calculateEdgeLengths(long settingsVa);
 

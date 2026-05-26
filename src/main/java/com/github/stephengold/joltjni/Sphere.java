@@ -99,6 +99,17 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
         float z = point.getZ();
         encapsulatePoint(sphereVa, x, y, z);
     }
+
+    /**
+     * Copy the argument to the current sphere.
+     *
+     * @param source the sphere to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstSphere source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
     // *************************************************************************
     // ConstSphere methods
 
@@ -150,6 +161,8 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long create(
             float cx, float cy, float cz, float radius);

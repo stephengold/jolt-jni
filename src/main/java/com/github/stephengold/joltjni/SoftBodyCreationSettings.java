@@ -129,6 +129,20 @@ public class SoftBodyCreationSettings
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     * @return the modified settings, for chaining
+     */
+    public SoftBodyCreationSettings set(ConstSoftBodyCreationSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+
+        return this;
+    }
+
+    /**
      * Alter whether the created body will be allowed to fall asleep. (native
      * member: mAllowSleeping)
      *
@@ -742,6 +756,8 @@ public class SoftBodyCreationSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

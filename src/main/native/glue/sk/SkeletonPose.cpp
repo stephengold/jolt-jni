@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonPose
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_assign
+  BODYOF_ASSIGN(SkeletonPose)
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletonPose
  * Method:    calculateJointMatrices
  * Signature: (J)V
  */

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -98,8 +98,21 @@ public class SkinWeight extends JoltPhysicsObject {
 
         return result;
     }
+
+    /**
+     * Copy the argument to the current weight.
+     *
+     * @param source the weight to copy (not {@code null}, unaffected)
+     */
+    public void set(SkinWeight source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long create(int invBindIndex, float weight);
 

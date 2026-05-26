@@ -79,6 +79,17 @@ public class SoftBodyVertex
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstSoftBodyVertex source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the index of the colliding shape. (native attribute:
      * mCollidingShapeIndex)
      *
@@ -298,6 +309,8 @@ public class SoftBodyVertex
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 
