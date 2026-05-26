@@ -667,16 +667,16 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * component of the right factor implied to be one. Store the result in the
      * argument vector. The matrix is unaffected.
      *
-     * @param doubleBuffer the right factor and storage for the result (not
-     * null)
+     * @param storeVec the right factor and storage for the result (not
+     * {@code null})
      */
     @Override
-    public void multiply3x4InPlace(RVec3 doubleBuffer) {
+    public void multiply3x4InPlace(RVec3 storeVec) {
         long matrixVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
-        doubleBuffer.copyTo(storeDoubles);
+        storeVec.copyTo(storeDoubles);
         multiply3x4r(matrixVa, storeDoubles);
-        doubleBuffer.set(storeDoubles);
+        storeVec.set(storeDoubles);
     }
 
     /**
@@ -702,15 +702,15 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param vec3 the left factor (not {@code null}, unaffected)
+     * @param leftVector the left factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     @Override
-    public RMat44 postTranslated(Vec3Arg vec3) {
+    public RMat44 postTranslated(Vec3Arg leftVector) {
         long matrixVa = va();
-        float x = vec3.getX();
-        float y = vec3.getY();
-        float z = vec3.getZ();
+        float x = leftVector.getX();
+        float y = leftVector.getY();
+        float z = leftVector.getZ();
         long resultVa = postTranslatedSp(matrixVa, x, y, z);
         RMat44 result = new RMat44(resultVa, true);
 
