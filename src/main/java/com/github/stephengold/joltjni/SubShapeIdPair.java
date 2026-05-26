@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -115,6 +115,21 @@ final public class SubShapeIdPair
 
         return result;
     }
+
+    /**
+     * Test whether the current pair is equivalent to the argument. Both pairs
+     * are unaffected. (native operator: binary {@code ==})
+     *
+     * @param other the pair to compare with (not {@code null}, unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    public boolean isEqual(ConstSubShapeIdPair other) {
+        long thisVa = va();
+        long otherVa = other.targetVa();
+        boolean result = isEqual(thisVa, otherVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -127,4 +142,6 @@ final public class SubShapeIdPair
     native private static int getSubShapeId1(long pairVa);
 
     native private static int getSubShapeId2(long pairVa);
+
+    native private static boolean isEqual(long groupVa, long otherVa);
 }
