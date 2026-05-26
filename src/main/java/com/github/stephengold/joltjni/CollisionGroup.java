@@ -228,7 +228,7 @@ public class CollisionGroup
 
     native private static int getSubGroupId(long groupVa);
 
-    native private static boolean isEqual(long groupVa, long otherVa);
+    native private static boolean isEqual(long thisVa, long otherVa);
 
     native private static void setGroupFilter(long groupVa, long filterVa);
 
