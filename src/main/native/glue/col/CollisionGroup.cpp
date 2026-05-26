@@ -40,6 +40,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_assign
 
 /*
  * Class:     com_github_stephengold_joltjni_CollisionGroup
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_createCopy
+  BODYOF_CREATE_COPY(CollisionGroup)
+
+/*
+ * Class:     com_github_stephengold_joltjni_CollisionGroup
  * Method:    createDefault
  * Signature: ()J
  */

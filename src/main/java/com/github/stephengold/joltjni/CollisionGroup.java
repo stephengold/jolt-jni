@@ -66,6 +66,17 @@ public class CollisionGroup
     }
 
     /**
+     * Instantiate a copy of the specified group.
+     *
+     * @param original the group to copy (not {@code null}, unaffected)
+     */
+    public CollisionGroup(ConstCollisionGroup original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
+
+    /**
      * Instantiate a group with the specified filter and IDs.
      *
      * @param filter the collision-group filter (not {@code null})
@@ -202,6 +213,8 @@ public class CollisionGroup
     // native private methods
 
     native private static void assign(long targetVa, long sourceVa);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
