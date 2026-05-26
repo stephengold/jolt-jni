@@ -82,6 +82,17 @@ public class VehicleConstraintSettings
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstVehicleConstraintSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter how the vehicle accelerates and decelerates. (native attribute:
      * mController)
      *
@@ -312,6 +323,8 @@ public class VehicleConstraintSettings
 
     native static void addWheel(
             long constraintSettingsVa, long wheelSettingsVa);
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native static long createCopy(long originalVa);
 

@@ -172,6 +172,17 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     // new public methods
 
     /**
+     * Copy the argument to the current triangle.
+     *
+     * @param source the triangle to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstTriangle source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the triangle's material index. (native attribute: mMaterialIndex)
      *
      * @param materialIndex the desired material index
@@ -239,6 +250,8 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

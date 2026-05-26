@@ -78,6 +78,20 @@ public class VehicleAntiRollBar
     }
 
     /**
+     * Copy the argument to the current bar.
+     *
+     * @param source the bar to copy (not {@code null}, unaffected)
+     * @return the modified current bar, for chaining
+     */
+    public VehicleAntiRollBar set(ConstVehicleAntiRollBar source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+
+        return this;
+    }
+
+    /**
      * Alter the index of the left wheel. (native attribute: mLeftWheel)
      *
      * @param wheelIndex the index of the desired wheel (default=0)
@@ -173,6 +187,8 @@ public class VehicleAntiRollBar
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

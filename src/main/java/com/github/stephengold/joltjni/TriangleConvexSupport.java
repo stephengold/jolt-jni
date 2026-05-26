@@ -111,8 +111,21 @@ final public class TriangleConvexSupport extends JoltPhysicsObject {
 
         return result;
     }
+
+    /**
+     * Copy the argument to the current triangle.
+     *
+     * @param source the triangle to copy (not {@code null}, unaffected)
+     */
+    public void set(TriangleConvexSupport source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

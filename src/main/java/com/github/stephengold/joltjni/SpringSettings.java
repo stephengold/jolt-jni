@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,6 +79,20 @@ final public class SpringSettings
         long settingsVa = va();
         long streamVa = stream.va();
         restoreBinaryState(settingsVa, streamVa);
+    }
+
+    /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     * @return the modified current settings, for chaining
+     */
+    public SpringSettings set(ConstSpringSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+
+        return this;
     }
 
     /**
@@ -301,6 +315,8 @@ final public class SpringSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 
