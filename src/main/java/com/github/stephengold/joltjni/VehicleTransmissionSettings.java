@@ -82,6 +82,17 @@ public class VehicleTransmissionSettings
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstVehicleTransmissionSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter how long it takes to release the clutch in {@code Auto} mode.
      * (native attribute: mClutchReleaseTime)
      *
@@ -326,6 +337,8 @@ public class VehicleTransmissionSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

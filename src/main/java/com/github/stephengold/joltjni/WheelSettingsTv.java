@@ -72,6 +72,17 @@ public class WheelSettingsTv
     // new methods exposed
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstWheelSettingsTv source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the wheel's friction in the sideways direction. (native attribute:
      * mLateralFriction)
      *
@@ -163,6 +174,8 @@ public class WheelSettingsTv
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

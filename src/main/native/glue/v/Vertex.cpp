@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Vertex
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Vertex_assign
+  BODYOF_ASSIGN(SoftBodySharedSettings::Vertex)
+
+/*
+ * Class:     com_github_stephengold_joltjni_Vertex
  * Method:    createCopy
  * Signature: (J)J
  */

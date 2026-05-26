@@ -69,6 +69,20 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     // new methods exposed
 
     /**
+     * Copy the argument to the current vertex.
+     *
+     * @param source the vertex to copy (not {@code null}, unaffected)
+     * @return the modified current vertex, for chaining
+     */
+    public Vertex set(ConstVertex source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+
+        return this;
+    }
+
+    /**
      * Alter the inverse mass. (native attribute: mInvMass)
      *
      * @param invMass the desired inverse mass (in 1/kilograms, default=1)
@@ -250,6 +264,8 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

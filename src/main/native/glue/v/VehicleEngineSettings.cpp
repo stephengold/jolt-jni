@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettings_assign
+  BODYOF_ASSIGN(VehicleEngineSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
  * Method:    createCopy
  * Signature: (J)J
  */

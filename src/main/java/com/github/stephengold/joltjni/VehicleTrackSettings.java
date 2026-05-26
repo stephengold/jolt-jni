@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -139,6 +139,17 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(VehicleTrackSettings source) {
+        long targetVa = va();
+        long sourceVa = source.va();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter which wheel is powered by the engine. (native attribute:
      * mDrivenWheel)
      *
@@ -152,6 +163,8 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
     // native private methods
 
     native private static void addWheel(long settingsVa, int wheelIndex);
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

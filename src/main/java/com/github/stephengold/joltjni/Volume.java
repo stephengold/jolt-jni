@@ -55,6 +55,17 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
     // new methods exposed
 
     /**
+     * Copy the argument to the current volume.
+     *
+     * @param source the volume to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstVolume source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the stiffness of the volume. (native attribute: mCompliance)
      *
      * @param compliance the inverse of the desired stiffness (default=0)
@@ -137,6 +148,8 @@ public class Volume extends JoltPhysicsObject implements ConstVolume {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

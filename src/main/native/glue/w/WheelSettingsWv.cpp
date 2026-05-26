@@ -41,6 +41,14 @@ IMPLEMENT_REF(WheelSettingsWV,
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_assign
+  BODYOF_ASSIGN(WheelSettingsWV)
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
  * Method:    createCopy
  * Signature: (J)J
  */

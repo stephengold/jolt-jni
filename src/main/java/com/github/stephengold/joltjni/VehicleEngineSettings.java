@@ -79,6 +79,17 @@ public class VehicleEngineSettings
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstVehicleEngineSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the angular damping factor. (native attribute: mAngularDamping)
      *
      * @param damping the desired damping factor (per second, default=0.2)
@@ -242,6 +253,8 @@ public class VehicleEngineSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

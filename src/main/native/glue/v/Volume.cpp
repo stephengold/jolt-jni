@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Volume
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Volume_assign
+  BODYOF_ASSIGN(SoftBodySharedSettings::Volume)
+
+/*
+ * Class:     com_github_stephengold_joltjni_Volume
  * Method:    createCopy
  * Signature: (J)J
  */

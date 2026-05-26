@@ -73,6 +73,17 @@ public class WheelSettingsWv
     // new methods exposed
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstWheelSettingsWv source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Return the angular damping coefficient. (native attribute:
      * mAngularDamping)
      *
@@ -295,6 +306,8 @@ public class WheelSettingsWv
     }
     // *************************************************************************
     // native methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 

@@ -107,6 +107,17 @@ public class VertexAttributes
     // new methods exposed
 
     /**
+     * Copy the argument to the current attributes.
+     *
+     * @param source the attributes to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstVertexAttributes source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the compliance for bend edges. (native attribute: mBendCompliance)
      *
      * @param compliance the desired compliance value (MAX_VALUE to disable any
@@ -252,6 +263,8 @@ public class VertexAttributes
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createAttributes(
             float compliance, float shearCompliance, float bendCompliance,
