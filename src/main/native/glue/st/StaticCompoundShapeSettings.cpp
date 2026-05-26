@@ -48,13 +48,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_StaticCompoundShapeS
 
 /*
  * Class:     com_github_stephengold_joltjni_StaticCompoundShapeSettings
- * Method:    createStaticCompoundShapeSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_StaticCompoundShapeSettings_createStaticCompoundShapeSettings
-  (JNIEnv *, jclass) {
-    StaticCompoundShapeSettings * const pSettings
-            = new StaticCompoundShapeSettings();
-    TRACE_NEW_TARGET("StaticCompoundShapeSettings", pSettings)
-    return reinterpret_cast<jlong> (pSettings);
-}
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_StaticCompoundShapeSettings_createDefault
+  BODYOF_CREATE_DEFAULT_TARGET(StaticCompoundShapeSettings)
