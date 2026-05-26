@@ -40,6 +40,15 @@ public interface ConstIndexedTriangleNoMaterial extends ConstJoltPhysicsObject {
     int getIdx(int cornerIndex);
 
     /**
+     * Test whether the current triangle is equivalent to the argument. Both
+     * triangles are unaffected.
+     *
+     * @param other the triangle to compare with (not {@code null}, unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    boolean isEqual(ConstIndexedTriangleNoMaterial other);
+
+    /**
      * Write all 3 indices to the specified buffer and advance the buffer's
      * position by 3. The triangle is unaffected.
      *

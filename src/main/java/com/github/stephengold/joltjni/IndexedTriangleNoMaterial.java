@@ -114,6 +114,22 @@ public class IndexedTriangleNoMaterial
     }
 
     /**
+     * Test whether the current triangle is equivalent to the argument. Both
+     * triangles are unaffected. (native operator: binary {@code ==})
+     *
+     * @param other the triangle to compare with (not {@code null}, unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    @Override
+    public boolean isEqual(ConstIndexedTriangleNoMaterial other) {
+        long thisVa = va();
+        long otherVa = other.targetVa();
+        boolean result = isEqual(thisVa, otherVa);
+
+        return result;
+    }
+
+    /**
      * Write all 3 indices to the specified buffer and advance the buffer's
      * position by 3. The triangle is unaffected.
      *
@@ -154,6 +170,8 @@ public class IndexedTriangleNoMaterial
     native private static void free(long triangleVa);
 
     native private static int getIdx(long triangleVa, int cornerIndex);
+
+    native private static boolean isEqual(long thisVa, long otherVa);
 
     native private static void setIdx(
             long triangleVa, int cornerIndex, int meshVertexIndex);

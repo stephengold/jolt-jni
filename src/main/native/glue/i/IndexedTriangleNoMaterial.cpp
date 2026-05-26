@@ -74,6 +74,14 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleNoMate
 
 /*
  * Class:     com_github_stephengold_joltjni_IndexedTriangleNoMaterial
+ * Method:    isEqual
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleNoMaterial_isEqual
+  BODYOF_IS_EQUAL(IndexedTriangleNoMaterial)
+
+/*
+ * Class:     com_github_stephengold_joltjni_IndexedTriangleNoMaterial
  * Method:    setIdx
  * Signature: (JII)V
  */
