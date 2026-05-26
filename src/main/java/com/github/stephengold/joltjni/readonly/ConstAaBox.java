@@ -129,6 +129,15 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     float getVolume();
 
     /**
+     * Test whether the current box is equivalent to the argument. Both boxes
+     * are unaffected.
+     *
+     * @param other the box to compare with (not {@code null}, unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    boolean isEqual(ConstAaBox other);
+
+    /**
      * Test whether the box is valid. It is unaffected.
      *
      * @return {@code true} if valid, otherwise {@code false}

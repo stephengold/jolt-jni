@@ -366,6 +366,14 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getVolume
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    isEqual
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_isEqual
+  BODYOF_IS_EQUAL(AABox)
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    isValid
  * Signature: (J)Z
  */

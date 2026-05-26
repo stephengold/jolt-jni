@@ -485,6 +485,22 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Test whether the current box is equivalent to the argument. Both boxes
+     * are unaffected. (native operator: binary {@code ==})
+     *
+     * @param other the box to compare with (not {@code null}, unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    @Override
+    public boolean isEqual(ConstAaBox other) {
+        long thisVa = va();
+        long otherVa = other.targetVa();
+        boolean result = isEqual(thisVa, otherVa);
+
+        return result;
+    }
+
+    /**
      * Test whether the box is valid. It is unaffected.
      *
      * @return {@code true} if valid, otherwise {@code false}
@@ -626,6 +642,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static void getSupport(long boxVa, FloatBuffer tmpFloats);
 
     native private static float getVolume(long boxVa);
+
+    native private static boolean isEqual(long thisVa, long otherVa);
 
     native private static boolean isValid(long boxVa);
 
