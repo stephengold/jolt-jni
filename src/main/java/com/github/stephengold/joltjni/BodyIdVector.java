@@ -135,6 +135,21 @@ public class BodyIdVector extends JoltPhysicsObject {
     }
 
     /**
+     * Test whether the current vector is equivalent to the argument. Both
+     * vectors are unaffected. (native operator: binary {@code ==})
+     *
+     * @param other the vector to compare with (not {@code null}, unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    public boolean isEqual(BodyIdVector other) {
+        long thisVa = va();
+        long otherVa = other.va();
+        boolean result = isEqual(thisVa, otherVa);
+
+        return result;
+    }
+
+    /**
      * Append the specified object to the end.
      *
      * @param bodyId the ID to append
@@ -216,6 +231,8 @@ public class BodyIdVector extends JoltPhysicsObject {
     native private static void free(long vectorVa);
 
     native private static int getId(long vectorVa, int elementIndex);
+
+    native private static boolean isEqual(long groupVa, long otherVa);
 
     native private static void resize(long vectorVa, int numIds);
 

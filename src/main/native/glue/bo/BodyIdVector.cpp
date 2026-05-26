@@ -95,6 +95,14 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_getId
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector
+ * Method:    isEqual
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_isEqual
+  BODYOF_IS_EQUAL(BodyIDVector)
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyIdVector
  * Method:    resize
  * Signature: (JI)V
  */
