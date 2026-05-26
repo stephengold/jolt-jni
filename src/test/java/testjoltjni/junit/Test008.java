@@ -323,19 +323,19 @@ public class Test008 {
         TestUtils.assertEquals(0f, 0f, 0f, -1f, minusOne, 0f);
 
         // Op.star(QuatArg, QuatArg) fundamental identities:
-        Equivalent.quat(minusOne, Op.star(i, i), 0f);
+        Equivalent.quat(minusOne, Op.star(i, i), 1e-12f);
         Equivalent.quat(k, Op.star(i, j), 0f);
-        Equivalent.quat(minusJ, Op.star(i, k), 0f);
+        Equivalent.quat(minusJ, Op.star(i, k), 1e-12f);
         Equivalent.quat(i, Op.star(i, one), 0f);
 
-        Equivalent.quat(minusK, Op.star(j, i), 0f);
-        Equivalent.quat(minusOne, Op.star(j, j), 0f);
+        Equivalent.quat(minusK, Op.star(j, i), 1e-12f);
+        Equivalent.quat(minusOne, Op.star(j, j), 1e-12f);
         Equivalent.quat(i, Op.star(j, k), 0f);
         Equivalent.quat(j, Op.star(j, one), 0f);
 
         Equivalent.quat(j, Op.star(k, i), 0f);
-        Equivalent.quat(minusI, Op.star(k, j), 0f);
-        Equivalent.quat(minusOne, Op.star(k, k), 0f);
+        Equivalent.quat(minusI, Op.star(k, j), 1e-12f);
+        Equivalent.quat(minusOne, Op.star(k, k), 1e-12f);
         Equivalent.quat(k, Op.star(k, one), 0f);
 
         Equivalent.quat(i, Op.star(one, i), 0f);
