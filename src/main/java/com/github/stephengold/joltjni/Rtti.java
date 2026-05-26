@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,8 +54,26 @@ public class Rtti extends JoltPhysicsObject {
 
         return result;
     }
+
+    /**
+     * Test whether the current type information is equivalent to the argument.
+     * Both objects are unaffected. (native operator: binary {@code ==})
+     *
+     * @param other the type information to compare with (not {@code null},
+     * unaffected)
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    public boolean isEqual(Rtti other) {
+        long thisVa = va();
+        long otherVa = other.targetVa();
+        boolean result = isEqual(thisVa, otherVa);
+
+        return result;
+    }
     // *************************************************************************
     // native methods
 
     native static String getName(long rttiVa);
+
+    native private static boolean isEqual(long groupVa, long otherVa);
 }

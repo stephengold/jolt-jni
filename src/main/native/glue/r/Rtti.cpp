@@ -45,3 +45,11 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Rtti_getName
     EXCEPTION_CHECK(pEnv)
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_Rtti
+ * Method:    isEqual
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Rtti_isEqual
+  BODYOF_IS_EQUAL(RTTI)
