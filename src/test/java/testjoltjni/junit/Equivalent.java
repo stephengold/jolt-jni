@@ -118,6 +118,9 @@ final class Equivalent {
         vec3(expected.getSize(), actual.getSize(), tolerance);
         Assert.assertEquals(
                 expected.getVolume(), actual.getVolume(), tolerance);
+        if (tolerance == 0f) {
+            Assert.assertTrue(actual.isEqual(expected));
+        }
     }
 
     /**
@@ -274,6 +277,9 @@ final class Equivalent {
     static void color(ConstColor expected, ConstColor actual) {
         TestUtils.assertEquals(expected.getR(), expected.getG(),
                 expected.getB(), expected.getA(), actual);
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected.hashCode(), actual.hashCode());
+        Assert.assertEquals(expected.toString(), actual.toString());
     }
 
     /**
@@ -343,6 +349,11 @@ final class Equivalent {
             ConstFloat3 expected, ConstFloat3 actual, float tolerance) {
         TestUtils.assertEquals(
                 expected.x(), expected.y(), expected.z(), actual, tolerance);
+        if (tolerance == 0f) {
+            Assert.assertEquals(expected, actual);
+            Assert.assertEquals(expected.hashCode(), actual.hashCode());
+            Assert.assertEquals(expected.toString(), actual.toString());
+        }
     }
 
     /**
@@ -357,6 +368,11 @@ final class Equivalent {
             ConstFloat4 expected, ConstFloat4 actual, float tolerance) {
         TestUtils.assertEquals(expected.x(), expected.y(),
                 expected.z(), expected.w(), actual, tolerance);
+        if (tolerance == 0f) {
+            Assert.assertEquals(expected, actual);
+            Assert.assertEquals(expected.hashCode(), actual.hashCode());
+            Assert.assertEquals(expected.toString(), actual.toString());
+        }
     }
 
     /**
@@ -532,6 +548,7 @@ final class Equivalent {
         Assert.assertEquals(expected.getIdx(0), actual.getIdx(0));
         Assert.assertEquals(expected.getIdx(1), actual.getIdx(1));
         Assert.assertEquals(expected.getIdx(2), actual.getIdx(2));
+        Assert.assertTrue(actual.isEqual(expected));
     }
 
     /**
@@ -602,6 +619,10 @@ final class Equivalent {
         vec3(expected.getAxisY(), actual.getAxisY(), tolerance);
         vec3(expected.getAxisZ(), actual.getAxisZ(), tolerance);
         vec3(expected.getTranslation(), actual.getTranslation(), tolerance);
+        if (tolerance == 0f) {
+            Assert.assertTrue(actual.isEqual(expected));
+            Assert.assertEquals(expected.toString(), actual.toString());
+        }
     }
 
     /**
@@ -672,6 +693,11 @@ final class Equivalent {
     static void quat(QuatArg expected, QuatArg actual, float tolerance) {
         TestUtils.assertEquals(expected.getX(), expected.getY(),
                 expected.getZ(), expected.getW(), actual, tolerance);
+        if (tolerance == 0f) {
+            Assert.assertEquals(expected, actual);
+            Assert.assertEquals(expected.hashCode(), actual.hashCode());
+            Assert.assertEquals(expected.toString(), actual.toString());
+        }
     }
 
     /**
@@ -718,6 +744,11 @@ final class Equivalent {
     static void rVec3(RVec3Arg expected, RVec3Arg actual, float tolerance) {
         TestUtils.assertEquals(
                 expected.x(), expected.y(), expected.z(), actual, tolerance);
+        if (tolerance == 0f) {
+            Assert.assertEquals(expected, actual);
+            Assert.assertEquals(expected.hashCode(), actual.hashCode());
+            Assert.assertEquals(expected.toString(), actual.toString());
+        }
     }
 
     /**
@@ -1058,6 +1089,11 @@ final class Equivalent {
     static void vec3(Vec3Arg expected, Vec3Arg actual, float tolerance) {
         TestUtils.assertEquals(expected.getX(), expected.getY(),
                 expected.getZ(), actual, tolerance);
+        if (tolerance == 0f) {
+            Assert.assertEquals(expected, actual);
+            Assert.assertEquals(expected.hashCode(), actual.hashCode());
+            Assert.assertEquals(expected.toString(), actual.toString());
+        }
     }
 
     /**
