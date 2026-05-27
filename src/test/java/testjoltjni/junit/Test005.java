@@ -26,13 +26,19 @@ import com.github.stephengold.joltjni.DistanceConstraintSettings;
 import com.github.stephengold.joltjni.FixedConstraintSettings;
 import com.github.stephengold.joltjni.GearConstraintSettings;
 import com.github.stephengold.joltjni.HingeConstraintSettings;
+import com.github.stephengold.joltjni.PathConstraintSettings;
 import com.github.stephengold.joltjni.PointConstraintSettings;
+import com.github.stephengold.joltjni.PulleyConstraintSettings;
+import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.RackAndPinionConstraintSettings;
 import com.github.stephengold.joltjni.SixDofConstraintSettings;
 import com.github.stephengold.joltjni.SliderConstraintSettings;
+import com.github.stephengold.joltjni.SwingTwistConstraintSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EAxis;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
+import com.github.stephengold.joltjni.enumerate.EPathRotationConstraintType;
 import com.github.stephengold.joltjni.enumerate.ESwingType;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import org.junit.Assert;
@@ -62,9 +68,13 @@ public class Test005 {
         doFixedConstraintSettings();
         doGearConstraintSettings();
         doHingeConstraintSettings();
+        doPathConstraintSettings();
         doPointConstraintSettings();
+        doPulleyConstraintSettings();
+        doRapConstraintSettings();
         doSixDofConstraintSettings();
         doSliderConstraintSettings();
+        doSwingTwistConstraintSettings();
 
         TestUtils.cleanup();
     }
@@ -158,6 +168,23 @@ public class Test005 {
     }
 
     /**
+     * Test the {@code PathConstraintSettings} class.
+     */
+    private static void doPathConstraintSettings() {
+        PathConstraintSettings settings = new PathConstraintSettings();
+        testPathCsDefaults(settings);
+
+        PathConstraintSettings copy = new PathConstraintSettings(settings);
+        testPathCsSetters(settings);
+        testPathCsDefaults(copy);
+        settings.set(copy);
+        testPathCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
+        System.gc();
+    }
+
+    /**
      * Test the {@code PointConstraintSettings} class.
      */
     private static void doPointConstraintSettings() {
@@ -169,6 +196,42 @@ public class Test005 {
         testPointCsDefaults(copy);
         settings.set(copy);
         testPointCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code PulleyConstraintSettings} class.
+     */
+    private static void doPulleyConstraintSettings() {
+        PulleyConstraintSettings settings = new PulleyConstraintSettings();
+        testPulleyCsDefaults(settings);
+
+        PulleyConstraintSettings copy = new PulleyConstraintSettings(settings);
+        testPulleyCsSetters(settings);
+        testPulleyCsDefaults(copy);
+        settings.set(copy);
+        testPulleyCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code RackAndPinionConstraintSettings} class.
+     */
+    private static void doRapConstraintSettings() {
+        RackAndPinionConstraintSettings settings
+                = new RackAndPinionConstraintSettings();
+        testRapCsDefaults(settings);
+
+        RackAndPinionConstraintSettings copy
+                = new RackAndPinionConstraintSettings(settings);
+        testRapCsSetters(settings);
+        testRapCsDefaults(copy);
+        settings.set(copy);
+        testRapCsDefaults(settings);
 
         TestUtils.testClose(copy, settings);
         System.gc();
@@ -203,6 +266,25 @@ public class Test005 {
         testSliderCsDefaults(copy);
         settings.set(copy);
         testSliderCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code SwingTwistConstraintSettings} class.
+     */
+    private static void doSwingTwistConstraintSettings() {
+        SwingTwistConstraintSettings settings
+                = new SwingTwistConstraintSettings();
+        testSwingTwistCsDefaults(settings);
+
+        SwingTwistConstraintSettings copy
+                = new SwingTwistConstraintSettings(settings);
+        testSwingTwistCsSetters(settings);
+        testSwingTwistCsDefaults(copy);
+        settings.set(copy);
+        testSwingTwistCsDefaults(settings);
 
         TestUtils.testClose(copy, settings);
         System.gc();
@@ -446,6 +528,47 @@ public class Test005 {
 
     /**
      * Test the getters and defaults of the specified
+     * {@code PathConstraintSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, unaffected)
+     */
+    private static void testPathCsDefaults(PathConstraintSettings settings) {
+        testCsDefaults(settings);
+
+        Assert.assertEquals(0f, settings.getMaxFrictionForce(), 0f);
+        Assert.assertNull(settings.getPath());
+        Assert.assertEquals(0f, settings.getPathFraction(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getPathPosition(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, settings.getPathRotation(), 0f);
+        Assert.assertEquals(EPathRotationConstraintType.Free,
+                settings.getRotationConstraintType());
+    }
+
+    /**
+     * Test the setters of the specified {@code PathConstraintSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, modified)
+     */
+    private static void testPathCsSetters(PathConstraintSettings settings) {
+        settings.setMaxFrictionForce(0.22f);
+        settings.setPathFraction(0.27f);
+        settings.setPathPosition(new Vec3(0.31f, 0.32f, 0.33f));
+        settings.setPathRotation(new Quat(0.5f, -0.5f, -0.5f, 0.5f));
+        settings.setRotationConstraintType(
+                EPathRotationConstraintType.ConstrainAroundTangent);
+
+        Assert.assertEquals(0.22f, settings.getMaxFrictionForce(), 0f);
+        Assert.assertEquals(0.27f, settings.getPathFraction(), 0f);
+        TestUtils.assertEquals(
+                0.31f, 0.32f, 0.33f, settings.getPathPosition(), 0f);
+        TestUtils.assertEquals(
+                0.5f, -0.5f, -0.5f, 0.5f, settings.getPathRotation(), 0f);
+        Assert.assertEquals(EPathRotationConstraintType.ConstrainAroundTangent,
+                settings.getRotationConstraintType());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
      * {@code PointConstraintSettings}.
      *
      * @param settings the settings to test (not {@code null}, unaffected)
@@ -472,6 +595,95 @@ public class Test005 {
 
         TestUtils.assertEquals(0.22f, 0.23f, 0.24f, settings.getPoint1(), 0f);
         TestUtils.assertEquals(0.25f, 0.26f, 0.27f, settings.getPoint2(), 0f);
+        Assert.assertEquals(
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code PulleyConstraintSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, unaffected)
+     */
+    private static void testPulleyCsDefaults(
+            PulleyConstraintSettings settings) {
+        testCsDefaults(settings);
+
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getBodyPoint1(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getBodyPoint2(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getFixedPoint1(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getFixedPoint2(), 0f);
+        Assert.assertEquals(-1f, settings.getMaxLength(), 0f);
+        Assert.assertEquals(0f, settings.getMinLength(), 0f);
+        Assert.assertEquals(1f, settings.getRatio(), 0f);
+        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
+    }
+
+    /**
+     * Test the setters of the specified {@code PulleyConstraintSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, modified)
+     */
+    private static void testPulleyCsSetters(
+            PulleyConstraintSettings settings) {
+        settings.setBodyPoint1(new RVec3(0.12, 0.13, 0.14));
+        settings.setBodyPoint2(new RVec3(0.22, 0.23, 0.24));
+        settings.setFixedPoint1(new RVec3(0.32, 0.33, 0.34));
+        settings.setFixedPoint2(new RVec3(0.42, 0.43, 0.44));
+        settings.setMaxLength(5f);
+        settings.setMinLength(0.6f);
+        settings.setRatio(3f);
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
+
+        TestUtils.assertEquals(
+                0.12f, 0.13f, 0.14f, settings.getBodyPoint1(), 0f);
+        TestUtils.assertEquals(
+                0.22f, 0.23f, 0.24f, settings.getBodyPoint2(), 0f);
+        TestUtils.assertEquals(
+                0.32f, 0.33f, 0.34f, settings.getFixedPoint1(), 0f);
+        TestUtils.assertEquals(
+                0.42f, 0.43f, 0.44f, settings.getFixedPoint2(), 0f);
+        Assert.assertEquals(5f, settings.getMaxLength(), 0f);
+        Assert.assertEquals(0.6f, settings.getMinLength(), 0f);
+        Assert.assertEquals(3f, settings.getRatio(), 0f);
+        Assert.assertEquals(
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code RackAndPinionConstraintSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, unaffected)
+     */
+    private static void testRapCsDefaults(
+            RackAndPinionConstraintSettings settings) {
+        testCsDefaults(settings);
+
+        TestUtils.assertEquals(1f, 0f, 0f, settings.getHingeAxis(), 0f);
+        Assert.assertEquals(1f, settings.getRatio(), 0f);
+        TestUtils.assertEquals(1f, 0f, 0f, settings.getSliderAxis(), 0f);
+        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
+    }
+
+    /**
+     * Test the setters of the specified
+     * {@code RackAndPinionConstraintSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, modified)
+     */
+    private static void testRapCsSetters(
+            RackAndPinionConstraintSettings settings) {
+        settings.setHingeAxis(new Vec3(0.22f, 0.23f, 0.24f));
+        settings.setRatio(0.5f);
+        settings.setSliderAxis(new Vec3(0.25f, 0.26f, 0.27f));
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
+
+        TestUtils.assertEquals(
+                0.22f, 0.23f, 0.24f, settings.getHingeAxis(), 0f);
+        Assert.assertEquals(0.5f, settings.getRatio(), 0f);
+        TestUtils.assertEquals(
+                0.25f, 0.26f, 0.27f, settings.getSliderAxis(), 0f);
         Assert.assertEquals(
                 EConstraintSpace.LocalToBodyCom, settings.getSpace());
     }
@@ -615,5 +827,73 @@ public class Test005 {
                 0.27f, 0.28f, 0.29f, settings.getSliderAxis2(), 0f);
         Assert.assertEquals(
                 EConstraintSpace.LocalToBodyCom, settings.getSpace());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code SwingTwistConstraintSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, unaffected)
+     */
+    private static void testSwingTwistCsDefaults(
+            SwingTwistConstraintSettings settings) {
+        testCsDefaults(settings);
+
+        Assert.assertEquals(0f, settings.getMaxFrictionTorque(), 0f);
+        Assert.assertEquals(0f, settings.getNormalHalfConeAngle(), 0f);
+        TestUtils.assertEquals(0f, 1f, 0f, settings.getPlaneAxis1(), 0f);
+        TestUtils.assertEquals(0f, 1f, 0f, settings.getPlaneAxis2(), 0f);
+        Assert.assertEquals(0f, settings.getPlaneHalfConeAngle(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getPosition1(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getPosition2(), 0f);
+        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
+        Assert.assertEquals(ESwingType.Cone, settings.getSwingType());
+        TestUtils.assertEquals(1f, 0f, 0f, settings.getTwistAxis1(), 0f);
+        TestUtils.assertEquals(1f, 0f, 0f, settings.getTwistAxis2(), 0f);
+        Assert.assertEquals(0f, settings.getTwistMaxAngle(), 0f);
+        Assert.assertEquals(0f, settings.getTwistMinAngle(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code SwingTwistConstraintSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, modified)
+     */
+    private static void testSwingTwistCsSetters(
+            SwingTwistConstraintSettings settings) {
+        settings.setMaxFrictionTorque(0.01f);
+        settings.setNormalHalfConeAngle(0.02f);
+        settings.setPlaneAxis1(new Vec3(0.04f, 0.05f, 0.06f));
+        settings.setPlaneAxis2(new Vec3(0.07f, 0.08f, 0.09f));
+        settings.setPlaneHalfConeAngle(0.11f);
+        settings.setPosition1(new RVec3(0.14f, 0.15f, 0.16f));
+        settings.setPosition2(new RVec3(0.17f, 0.18f, 0.19f));
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
+        settings.setSwingType(ESwingType.Pyramid);
+        settings.setTwistAxis1(new Vec3(0.24f, 0.25f, 0.26f));
+        settings.setTwistAxis2(new Vec3(0.27f, 0.28f, 0.29f));
+        settings.setTwistMaxAngle(0.4f);
+        settings.setTwistMinAngle(0.3f);
+
+        Assert.assertEquals(0.01f, settings.getMaxFrictionTorque(), 0f);
+        Assert.assertEquals(0.02f, settings.getNormalHalfConeAngle(), 0f);
+        TestUtils.assertEquals(
+                0.04f, 0.05f, 0.06f, settings.getPlaneAxis1(), 0f);
+        TestUtils.assertEquals(
+                0.07f, 0.08f, 0.09f, settings.getPlaneAxis2(), 0f);
+        Assert.assertEquals(0.11f, settings.getPlaneHalfConeAngle(), 0f);
+        TestUtils.assertEquals(
+                0.14f, 0.15f, 0.16f, settings.getPosition1(), 0f);
+        TestUtils.assertEquals(
+                0.17f, 0.18f, 0.19f, settings.getPosition2(), 0f);
+        Assert.assertEquals(
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
+        Assert.assertEquals(ESwingType.Pyramid, settings.getSwingType());
+        TestUtils.assertEquals(
+                0.24f, 0.25f, 0.26f, settings.getTwistAxis1(), 0f);
+        TestUtils.assertEquals(
+                0.27f, 0.28f, 0.29f, settings.getTwistAxis2(), 0f);
+        Assert.assertEquals(0.4f, settings.getTwistMaxAngle(), 0f);
+        Assert.assertEquals(0.3f, settings.getTwistMinAngle(), 0f);
     }
 }
