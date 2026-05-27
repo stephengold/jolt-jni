@@ -144,8 +144,7 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
 
     native private static void resize(long listVa, int numElements);
 
-    native private static void set(
-            long listVa, int elementIndex, long refVa);
+    native private static void set(long listVa, int elementIndex, long refVa);
 
     native private static int size(long listVa);
 }
