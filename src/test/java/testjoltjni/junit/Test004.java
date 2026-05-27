@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,8 +40,8 @@ import org.junit.Test;
 import testjoltjni.TestUtils;
 
 /**
- * Automated JUnit4 tests for Jolt-JNI object creation, destruction, accessors,
- * and defaults of {@code PhysicsSettings} and {@code PhysicsSystem}.
+ * Automated JUnit4 tests for Jolt-JNI object creation, destruction, copying,
+ * accessors, and defaults of {@code PhysicsSettings} and {@code PhysicsSystem}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -128,9 +128,13 @@ public class Test004 {
         Assert.assertNotEquals(settings2.va(), settings3.va());
         testGettersAndDefaults(settings3);
 
-        TestUtils.testClose(settings3, settings2, physicsSystem, objVsObjFilter,
-                objVsBpFilter, mapObj2Bp, tab);
+        // Test the copy constructor:
+        PhysicsSettings settings4 = new PhysicsSettings(settings3);
+        Assert.assertNotEquals(settings3.va(), settings4.va());
+        testGettersAndDefaults(settings4);
 
+        TestUtils.testClose(settings4, settings3, settings2, physicsSystem,
+                objVsObjFilter, objVsBpFilter, mapObj2Bp, tab);
         TestUtils.cleanup();
     }
     // *************************************************************************
@@ -241,8 +245,7 @@ public class Test004 {
             Assert.assertNotEquals(settings.va(), settings1.va());
             testGettersAndDefaults(settings1);
 
-            TestUtils.testClose(settings1);
-            TestUtils.testClose(settings);
+            TestUtils.testClose(settings1, settings);
         }
     }
 
