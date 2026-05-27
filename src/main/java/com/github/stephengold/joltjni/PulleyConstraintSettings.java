@@ -169,7 +169,7 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Return which space the body points are specified in. The settings are
      * unaffected. (native attribute: mSpace)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EConstraintSpace getSpace() {
         long settingsVa = va();
@@ -194,7 +194,7 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the location at which the constraint will attach to body 1. (native
      * attribute: mBodyPoint1)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      */
     public void setBodyPoint1(RVec3Arg location) {
@@ -209,7 +209,7 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the location at which the constraint will attach to body 2. (native
      * attribute: mBodyPoint2)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      */
     public void setBodyPoint2(RVec3Arg location) {
@@ -224,8 +224,8 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the location to which body 1 is connected. (native attribute:
      * mFixedPoint1)
      *
-     * @param location the desired location (in system coordinates, not null,
-     * unaffected, default=(0,0,0))
+     * @param location the desired location (in system coordinates, not
+     * {@code null}, unaffected, default=(0,0,0))
      */
     public void setFixedPoint1(RVec3Arg location) {
         long settingsVa = va();
@@ -239,8 +239,8 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the location to which body 2 is connected. (native attribute:
      * mFixedPoint2)
      *
-     * @param location the desired location (in system coordinates, not null,
-     * unaffected, default=(0,0,0))
+     * @param location the desired location (in system coordinates, not
+     * {@code null}, unaffected, default=(0,0,0))
      */
     public void setFixedPoint2(RVec3Arg location) {
         long settingsVa = va();
@@ -292,7 +292,8 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Alter which space the body points are specified in. (native attribute:
      * mSpace)
      *
-     * @param space the desired constraint space (not null, default=WorldSpace)
+     * @param space the desired constraint space (not {@code null},
+     * default=WorldSpace)
      */
     public void setSpace(EConstraintSpace space) {
         long settingsVa = va();

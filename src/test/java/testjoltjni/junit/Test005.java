@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -179,7 +179,7 @@ public class Test005 {
      * Test the getters and defaults of the specified
      * {@code ConeConstraintSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testConeCsDefaults(ConeConstraintSettings settings) {
         testCsDefaults(settings);
@@ -195,7 +195,7 @@ public class Test005 {
     /**
      * Test the setters of the specified {@code ConeConstraintSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testConeCsSetters(ConeConstraintSettings settings) {
         settings.setHalfConeAngle(0.01f);
@@ -220,7 +220,7 @@ public class Test005 {
      * Test the getters and defaults of the specified
      * {@code ConstraintSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testCsDefaults(ConstConstraintSettings settings) {
         Assert.assertTrue(settings.hasAssignedNativeObject());
@@ -236,7 +236,7 @@ public class Test005 {
      * Test the getters and defaults of the specified
      * {@code DistanceConstraintSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testDistanceCsDefaults(
             DistanceConstraintSettings settings) {
@@ -253,7 +253,7 @@ public class Test005 {
     /**
      * Test the setters of the specified {@code DistanceConstraintSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testDistanceCsSetters(
             DistanceConstraintSettings settings) {
@@ -275,7 +275,7 @@ public class Test005 {
      * Test the getters and defaults of the specified
      * {@code FixedConstraintSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testFixedCsDefaults(
             FixedConstraintSettings settings) {
@@ -294,7 +294,7 @@ public class Test005 {
     /**
      * Test the setters of the specified {@code FixedConstraintSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testFixedCsSetters(
             FixedConstraintSettings settings) {
@@ -322,7 +322,7 @@ public class Test005 {
      * Test the getters and defaults of the specified
      * {@code GearConstraintSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testGearCsDefaults(
             GearConstraintSettings settings) {
@@ -337,7 +337,7 @@ public class Test005 {
     /**
      * Test the setters of the specified {@code GearConstraintSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testGearCsSetters(GearConstraintSettings settings) {
         settings.setHingeAxis1(new Vec3(0.24f, 0.25f, 0.26f));
@@ -358,7 +358,7 @@ public class Test005 {
      * Test the getters and defaults of the specified
      * {@code HingeConstraintSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testHingeCsDefaults(
             HingeConstraintSettings settings) {
@@ -380,7 +380,7 @@ public class Test005 {
     /**
      * Test the setters of the specified {@code HingeConstraintSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testHingeCsSetters(HingeConstraintSettings settings) {
         settings.setLimitsMax(0.01f);
@@ -415,7 +415,7 @@ public class Test005 {
      * Test the getters and defaults of the specified
      * {@code PointConstraintSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testPointCsDefaults(
             PointConstraintSettings settings) {
@@ -429,7 +429,7 @@ public class Test005 {
     /**
      * Test the setters of the specified {@code PointConstraintSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testPointCsSetters(
             PointConstraintSettings settings) {
@@ -447,7 +447,7 @@ public class Test005 {
      * Test the getters and defaults of the specified
      * {@code SixDofConstraintSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testSixDofCsDefaults(
             SixDofConstraintSettings settings) {
@@ -482,7 +482,7 @@ public class Test005 {
     /**
      * Test the setters of the specified {@code SixDofConstraintSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testSixDofCsSetters(SixDofConstraintSettings settings) {
         settings.setAxisX1(new Vec3(0.01f, 0.02f, 0.03f));
@@ -527,7 +527,7 @@ public class Test005 {
      * Test the getters and defaults of the specified
      * {@code SliderConstraintSettings}.
      *
-     * @param settings the settings to test (not null, unaffected)
+     * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testSliderCsDefaults(
             SliderConstraintSettings settings) {
@@ -550,7 +550,7 @@ public class Test005 {
     /**
      * Test the setters of the specified {@code SliderConstraintSettings}.
      *
-     * @param settings the settings to test (not null, modified)
+     * @param settings the settings to test (not {@code null}, modified)
      */
     private static void testSliderCsSetters(SliderConstraintSettings settings) {
         settings.setAutoDetectPoint(true);

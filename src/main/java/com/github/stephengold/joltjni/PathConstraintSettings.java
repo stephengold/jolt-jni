@@ -154,7 +154,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * The settings are unaffected. (native field: mRotationConstraintType)
      *
-     * @return the enum value (not null)
+     * @return the enum value (not {@code null})
      */
     public EPathRotationConstraintType getRotationConstraintType() {
         long settingsVa = va();
@@ -180,7 +180,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the maximum friction force when not driven by a motor. (native
      * field: mMaxFrictionForce)
      *
-     * @param force the desired force (in Newtons)
+     * @param force the desired force (in Newtons, default=0)
      */
     public void setMaxFrictionForce(float force) {
         long settingsVa = va();
@@ -202,7 +202,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      * Alter how far the body is along the path initially. (native field:
      * mPathFraction)
      *
-     * @param amount the desired amount (&ge;0)
+     * @param amount the desired amount (&ge;0, default=0)
      */
     public void setPathFraction(float amount) {
         long settingsVa = va();
@@ -212,7 +212,8 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the initial location. (native field: mPathPosition)
      *
-     * @param location the desired location (not null, unaffected)
+     * @param location the desired location (not {@code null}, unaffected,
+     * default=(0,0,0))
      */
     public void setPathPosition(Vec3Arg location) {
         long settingsVa = va();
@@ -225,7 +226,8 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the initial orientation. (native field: mPathRotation)
      *
-     * @param orientation the desired orientation (not null, unaffected)
+     * @param orientation the desired orientation (not {@code null}, unaffected,
+     * default=(0,0,0,1))
      */
     public void setPathRotation(QuatArg orientation) {
         long settingsVa = va();
@@ -239,7 +241,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the motor settings. (native field: mPositionMotorSettings)
      *
-     * @param motorSettings the desired settings (not null, unaffected)
+     * @param motorSettings the desired settings (not {@code null}, unaffected)
      */
     public void setPositionMotorSettings(MotorSettings motorSettings) {
         long constraintSettingsVa = va();
@@ -250,7 +252,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the (native field: mRotationConstraintType)
      *
-     * @param type the desired type (not null)
+     * @param type the desired type (not {@code null}, default=Free)
      */
     public void setRotationConstraintType(EPathRotationConstraintType type) {
         long settingsVa = va();

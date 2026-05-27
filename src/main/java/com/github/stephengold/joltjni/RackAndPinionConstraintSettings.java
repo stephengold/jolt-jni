@@ -158,7 +158,7 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the ratio of pinion rotation to rack translation. (native
      * attribute: mRatio)
      *
-     * @param ratio the desired radio (in radians/meter)
+     * @param ratio the desired radio (in radians/meter, default=1)
      */
     public void setRatio(float ratio) {
         long settingsVa = va();
