@@ -84,7 +84,8 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Access the path. (native field: mPath)
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
      */
     public ConstPathConstraintPath getPath() {
         long settingsVa = va();
@@ -190,11 +191,11 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Replace the current path with the specified one. (native field: mPath)
      *
-     * @param path the desired path (not null, unaffected)
+     * @param path the desired path (unaffected), or {@code null} (default=null)
      */
     public void setPath(ConstPathConstraintPath path) {
         long settingsVa = va();
-        long pathVa = path.targetVa();
+        long pathVa = (path == null) ? 0L : path.targetVa();
         setPath(settingsVa, pathVa);
     }
 
