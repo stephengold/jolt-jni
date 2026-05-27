@@ -87,7 +87,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstr
 /*
  * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
  * Method:    getSliderAxis
- * Signature: (JLjava/nio/FloatBuffer;)F
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getSliderAxis
   (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
