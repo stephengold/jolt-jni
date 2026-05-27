@@ -115,7 +115,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(PlaneShapeSettings source) {
+    public void set(PointConstraintSettings source) {
         long targetVa = va();
         long sourceVa = source.va();
         assign(targetVa, sourceVa);
