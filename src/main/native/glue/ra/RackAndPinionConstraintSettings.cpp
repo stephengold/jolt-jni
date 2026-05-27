@@ -145,7 +145,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstrai
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_setRatioDirectly
-  (JNIEnv *, jclass, jlong, jfloat);
+  (JNIEnv *, jclass, jlong  settingsVa, jfloat ratio) {
+    RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    pSettings->mRatio = ratio;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
