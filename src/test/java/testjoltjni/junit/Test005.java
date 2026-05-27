@@ -40,8 +40,8 @@ import org.junit.Test;
 import testjoltjni.TestUtils;
 
 /**
- * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
- * {@code TwoBodyConstraintsSettings} subclasses.
+ * Automated JUnit4 tests for creation, destruction, copying, accessors, and
+ * defaults of {@code TwoBodyConstraintsSettings} subclasses.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -50,7 +50,7 @@ public class Test005 {
     // new methods exposed
 
     /**
-     * Test object creation, destruction, accessors, and defaults.
+     * Test object creation, destruction, copying, accessors, and defaults.
      */
     @Test
     public void test005() {
@@ -76,11 +76,15 @@ public class Test005 {
      */
     private static void doConeConstraintSettings() {
         ConeConstraintSettings settings = new ConeConstraintSettings();
-
         testConeCsDefaults(settings);
-        testConeCsSetters(settings);
 
-        TestUtils.testClose(settings);
+        ConeConstraintSettings copy = new ConeConstraintSettings(settings);
+        testConeCsSetters(settings);
+        testConeCsDefaults(copy);
+        settings.set(copy);
+        testConeCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -89,11 +93,16 @@ public class Test005 {
      */
     private static void doDistanceConstraintSettings() {
         DistanceConstraintSettings settings = new DistanceConstraintSettings();
-
         testDistanceCsDefaults(settings);
-        testDistanceCsSetters(settings);
 
-        TestUtils.testClose(settings);
+        DistanceConstraintSettings copy
+                = new DistanceConstraintSettings(settings);
+        testDistanceCsSetters(settings);
+        testDistanceCsDefaults(copy);
+        settings.set(copy);
+        testDistanceCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -102,11 +111,15 @@ public class Test005 {
      */
     private static void doFixedConstraintSettings() {
         FixedConstraintSettings settings = new FixedConstraintSettings();
-
         testFixedCsDefaults(settings);
-        testFixedCsSetters(settings);
 
-        TestUtils.testClose(settings);
+        FixedConstraintSettings copy = new FixedConstraintSettings(settings);
+        testFixedCsSetters(settings);
+        testFixedCsDefaults(copy);
+        settings.set(copy);
+        testFixedCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -115,11 +128,15 @@ public class Test005 {
      */
     private static void doGearConstraintSettings() {
         GearConstraintSettings settings = new GearConstraintSettings();
-
         testGearCsDefaults(settings);
-        testGearCsSetters(settings);
 
-        TestUtils.testClose(settings);
+        GearConstraintSettings copy = new GearConstraintSettings(settings);
+        testGearCsSetters(settings);
+        testGearCsDefaults(copy);
+        settings.set(copy);
+        testGearCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -128,11 +145,15 @@ public class Test005 {
      */
     private static void doHingeConstraintSettings() {
         HingeConstraintSettings settings = new HingeConstraintSettings();
-
         testHingeCsDefaults(settings);
-        testHingeCsSetters(settings);
 
-        TestUtils.testClose(settings);
+        HingeConstraintSettings copy = new HingeConstraintSettings(settings);
+        testHingeCsSetters(settings);
+        testHingeCsDefaults(copy);
+        settings.set(copy);
+        testHingeCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -141,11 +162,15 @@ public class Test005 {
      */
     private static void doPointConstraintSettings() {
         PointConstraintSettings settings = new PointConstraintSettings();
-
         testPointCsDefaults(settings);
-        testPointCsSetters(settings);
 
-        TestUtils.testClose(settings);
+        PointConstraintSettings copy = new PointConstraintSettings(settings);
+        testPointCsSetters(settings);
+        testPointCsDefaults(copy);
+        settings.set(copy);
+        testPointCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -154,11 +179,15 @@ public class Test005 {
      */
     private static void doSixDofConstraintSettings() {
         SixDofConstraintSettings settings = new SixDofConstraintSettings();
-
         testSixDofCsDefaults(settings);
-        testSixDofCsSetters(settings);
 
-        TestUtils.testClose(settings);
+        SixDofConstraintSettings copy = new SixDofConstraintSettings(settings);
+        testSixDofCsSetters(settings);
+        testSixDofCsDefaults(copy);
+        settings.set(copy);
+        testSixDofCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -167,11 +196,15 @@ public class Test005 {
      */
     private static void doSliderConstraintSettings() {
         SliderConstraintSettings settings = new SliderConstraintSettings();
-
         testSliderCsDefaults(settings);
-        testSliderCsSetters(settings);
 
-        TestUtils.testClose(settings);
+        SliderConstraintSettings copy = new SliderConstraintSettings(settings);
+        testSliderCsSetters(settings);
+        testSliderCsDefaults(copy);
+        settings.set(copy);
+        testSliderCsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
