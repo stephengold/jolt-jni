@@ -368,6 +368,29 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Return the rotation angle around the specified axis. The quaternion is
+     * unaffected.
+     *
+     * @param axis the axis to use (not {@code null}, unaffected)
+     * @return the angle (in radians)
+     */
+    @Override
+    public float getRotationAngle(Vec3Arg axis) {
+        float result;
+        if (w == 0f) {
+            result = JphMath.JPH_PI;
+        } else {
+            float ax = axis.getX();
+            float ay = axis.getY();
+            float az = axis.getZ();
+            float tangent = (x * ax + y * ay + z * az) / w;
+            result = 2f * JphMath.aTan(tangent);
+        }
+
+        return result;
+    }
+
+    /**
      * Return the real (W) component. The quaternion is unaffected.
      *
      * @return the component value

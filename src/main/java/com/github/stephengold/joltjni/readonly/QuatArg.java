@@ -48,6 +48,15 @@ public interface QuatArg {
     Quat conjugated();
 
     /**
+     * Return the rotation angle around the specified axis. The quaternion is
+     * unaffected.
+     *
+     * @param axis the axis to use (not {@code null}, unaffected)
+     * @return the angle (in radians)
+     */
+    float getRotationAngle(Vec3Arg axis);
+
+    /**
      * Return the real (W) component in single precision. The quaternion is
      * unaffected.
      *
