@@ -550,6 +550,7 @@ public class Test014 {
      */
     private static void testWvControllerSettingsDefaults(
             WheeledVehicleControllerSettings wvcs) {
+        Assert.assertEquals(1.4f, wvcs.getDifferentialLimitedSlipRatio(), 0f);
         Assert.assertNotNull(wvcs.getEngine());
         Assert.assertEquals(0, wvcs.getNumDifferentials());
         Assert.assertNotNull(wvcs.getTransmission());
@@ -563,8 +564,10 @@ public class Test014 {
      */
     private static void testWvControllerSettingsSetters(
             WheeledVehicleControllerSettings wvcs) {
+        wvcs.setDifferentialLimitedSlipRatio(1.6f);
         wvcs.setNumDifferentials(2);
 
+        Assert.assertEquals(1.6f, wvcs.getDifferentialLimitedSlipRatio(), 0f);
         Assert.assertEquals(2, wvcs.getNumDifferentials());
         Assert.assertNotNull(wvcs.getDifferential(0));
         Assert.assertNotNull(wvcs.getDifferential(1));

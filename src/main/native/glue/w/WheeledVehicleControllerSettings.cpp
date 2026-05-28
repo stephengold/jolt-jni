@@ -85,6 +85,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContro
 
 /*
  * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings
+ * Method:    getDifferentialLimitedSlipRatio
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_getDifferentialLimitedSlipRatio
+  (JNIEnv *, jclass, jlong controllerSettingsVa) {
+    const WheeledVehicleControllerSettings * const pSettings
+            = reinterpret_cast<WheeledVehicleControllerSettings *> (controllerSettingsVa);
+    const float result = pSettings->mDifferentialLimitedSlipRatio;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings
  * Method:    getEngine
  * Signature: (J)J
  */
@@ -107,6 +120,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContro
             = reinterpret_cast<WheeledVehicleControllerSettings *> (settingsVa);
     VehicleTransmissionSettings * const pResult = &pSettings->mTransmission;
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings
+ * Method:    setDifferentialLimitedSlipRatio
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_setDifferentialLimitedSlipRatio
+  (JNIEnv *, jclass, jlong controllerSettingsVa, jfloat ratio) {
+    WheeledVehicleControllerSettings * const pSettings
+            = reinterpret_cast<WheeledVehicleControllerSettings *> (controllerSettingsVa);
+    pSettings->mDifferentialLimitedSlipRatio = ratio;
 }
 
 /*

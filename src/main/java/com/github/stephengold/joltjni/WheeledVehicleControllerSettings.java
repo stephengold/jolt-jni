@@ -88,6 +88,20 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
+     * Return the ratio of the max/min average wheel speed for each
+     * differential. The settings are unaffected. (native field:
+     * mDifferentialLimitedSlipRatio)
+     *
+     * @return the ratio
+     */
+    public float getDifferentialLimitedSlipRatio() {
+        long controllerSettingsVa = va();
+        float result = getDifferentialLimitedSlipRatio(controllerSettingsVa);
+
+        return result;
+    }
+
+    /**
      * Access the engine settings. (native field: mEngine)
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -141,6 +155,17 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
+     * Alter the ratio of the max/min average wheel speed for each differential.
+     * (native field: mDifferentialLimitedSlipRatio)
+     *
+     * @param ratio the desired ratio (&gt;1, default=1.4)
+     */
+    public void setDifferentialLimitedSlipRatio(float ratio) {
+        long controllerSettingsVa = va();
+        setDifferentialLimitedSlipRatio(controllerSettingsVa, ratio);
+    }
+
+    /**
      * Alter the number of differentials. (native attribute: mDifferentials)
      *
      * @param count the desired number (&ge;0, default=0)
@@ -175,9 +200,15 @@ public class WheeledVehicleControllerSettings
     native private static long getDifferential(
             long vehicleSettingsVa, int diffIndex);
 
+    native private static float getDifferentialLimitedSlipRatio(
+            long controllerSettingsVa);
+
     native private static long getEngine(long vehicleSettingsVa);
 
     native private static long getTransmission(long vehicleSettingsVa);
+
+    native private static void setDifferentialLimitedSlipRatio(
+            long controllerSettingsVa, float ratio);
 
     native private static void setNumDifferentials(long settingsVa, int count);
 }
