@@ -68,7 +68,7 @@ public class TrackedVehicleControllerSettings
      * Count how many tracks the vehicle will have. The settings are unaffected.
      * (native attribute: mTracks)
      *
-     * @return the count (&ge;0)
+     * @return the count (2)
      */
     public int getNumTracks() {
         long controllerSettingsVa = va();
@@ -80,10 +80,11 @@ public class TrackedVehicleControllerSettings
     /**
      * Access the settings for the specified track. (native field: mTracks)
      *
-     * @param index the index of the track to access (&ge;0)
+     * @param index the index of the track to access (&ge;0, &le;1)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public VehicleTrackSettings getTrack(int index) {
+        assert index == 0 || index == 1 : index;
         long controllerSettingsVa = va();
         long trackVa = getTrack(controllerSettingsVa, index);
         VehicleTrackSettings result = new VehicleTrackSettings(this, trackVa);
