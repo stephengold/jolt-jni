@@ -71,8 +71,8 @@ public class TrackedVehicleControllerSettings
      * @return the count (&ge;0)
      */
     public int getNumTracks() {
-        long vehicleSettingsVa = va();
-        int result = getNumTracks(vehicleSettingsVa);
+        long controllerSettingsVa = va();
+        int result = getNumTracks(controllerSettingsVa);
 
         return result;
     }
@@ -84,8 +84,8 @@ public class TrackedVehicleControllerSettings
      * @return a new JVM object with the pre-existing native object assigned
      */
     public VehicleTrackSettings getTrack(int index) {
-        long vehicleSettingsVa = va();
-        long trackVa = getTrack(vehicleSettingsVa, index);
+        long controllerSettingsVa = va();
+        long trackVa = getTrack(controllerSettingsVa, index);
         VehicleTrackSettings result = new VehicleTrackSettings(this, trackVa);
 
         return result;
@@ -118,11 +118,11 @@ public class TrackedVehicleControllerSettings
 
     native private static void assign(long targetVa, long sourceVa);
 
-    native private static long createCopy(long vehicleSettingsVa);
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
-    native private static int getNumTracks(long vehicleSettingsVa);
+    native private static int getNumTracks(long controllerSettingsVa);
 
-    native private static long getTrack(long vehicleSettingsVa, int index);
+    native private static long getTrack(long controllerSettingsVa, int index);
 }

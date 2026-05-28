@@ -71,9 +71,9 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleControl
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleControllerSettings_getTrack
-  (JNIEnv *, jclass, jlong settingsVa, jint trackIndex) {
+  (JNIEnv *, jclass, jlong controllerSettingsVa, jint trackIndex) {
     TrackedVehicleControllerSettings * const pVehicleSettings
-            = reinterpret_cast<TrackedVehicleControllerSettings *> (settingsVa);
+            = reinterpret_cast<TrackedVehicleControllerSettings *> (controllerSettingsVa);
     VehicleTrackSettings * const pResult
             = &pVehicleSettings->mTracks[trackIndex];
     return reinterpret_cast<jlong> (pResult);

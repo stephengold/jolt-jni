@@ -45,9 +45,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControl
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_countDifferentials
-  (JNIEnv *, jclass, jlong settingsVa) {
+  (JNIEnv *, jclass, jlong controllerSettingsVa) {
     const WheeledVehicleControllerSettings * const pSettings
-            = reinterpret_cast<WheeledVehicleControllerSettings *> (settingsVa);
+            = reinterpret_cast<WheeledVehicleControllerSettings *> (controllerSettingsVa);
     const Array<VehicleDifferentialSettings>::size_type result
             = pSettings->mDifferentials.size();
     return result;
@@ -75,9 +75,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContro
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_getDifferential
-  (JNIEnv *, jclass, jlong settingsVa, jint index) {
+  (JNIEnv *, jclass, jlong controllerSettingsVa, jint index) {
     WheeledVehicleControllerSettings * const pSettings
-            = reinterpret_cast<WheeledVehicleControllerSettings *> (settingsVa);
+            = reinterpret_cast<WheeledVehicleControllerSettings *> (controllerSettingsVa);
     VehicleDifferentialSettings * const pResult
             = &pSettings->mDifferentials[index];
     return reinterpret_cast<jlong> (pResult);
@@ -102,9 +102,9 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContr
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_getEngine
-  (JNIEnv *, jclass, jlong settingsVa) {
+  (JNIEnv *, jclass, jlong controllerSettingsVa) {
     WheeledVehicleControllerSettings * const pSettings
-            = reinterpret_cast<WheeledVehicleControllerSettings *> (settingsVa);
+            = reinterpret_cast<WheeledVehicleControllerSettings *> (controllerSettingsVa);
     VehicleEngineSettings * const pResult = &pSettings->mEngine;
     return reinterpret_cast<jlong> (pResult);
 }
@@ -115,9 +115,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContro
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_getTransmission
-  (JNIEnv *, jclass, jlong settingsVa) {
+  (JNIEnv *, jclass, jlong controllerSettingsVa) {
     WheeledVehicleControllerSettings * const pSettings
-            = reinterpret_cast<WheeledVehicleControllerSettings *> (settingsVa);
+            = reinterpret_cast<WheeledVehicleControllerSettings *> (controllerSettingsVa);
     VehicleTransmissionSettings * const pResult = &pSettings->mTransmission;
     return reinterpret_cast<jlong> (pResult);
 }
@@ -140,8 +140,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControl
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_setNumDifferentials
-  (JNIEnv *, jclass, jlong settingsVa, jint count) {
+  (JNIEnv *, jclass, jlong controllerSettingsVa, jint count) {
     WheeledVehicleControllerSettings * const pSettings
-            = reinterpret_cast<WheeledVehicleControllerSettings *> (settingsVa);
+            = reinterpret_cast<WheeledVehicleControllerSettings *> (controllerSettingsVa);
     pSettings->mDifferentials.resize(count);
 }

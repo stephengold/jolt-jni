@@ -35,8 +35,8 @@ public class WheeledVehicleControllerSettings
      * Instantiate default settings.
      */
     public WheeledVehicleControllerSettings() {
-        long settingsVa = createDefault();
-        setVirtualAddressAsCoOwner(settingsVa);
+        long controllerSettingsVa = createDefault();
+        setVirtualAddressAsCoOwner(controllerSettingsVa);
     }
 
     /**
@@ -79,8 +79,8 @@ public class WheeledVehicleControllerSettings
      * @return a new JVM object with the pre-existing native object assigned
      */
     public VehicleDifferentialSettings getDifferential(int index) {
-        long vehicleSettingsVa = va();
-        long differentialVa = getDifferential(vehicleSettingsVa, index);
+        long controllerSettingsVa = va();
+        long differentialVa = getDifferential(controllerSettingsVa, index);
         VehicleDifferentialSettings result
                 = new VehicleDifferentialSettings(this, differentialVa);
 
@@ -107,8 +107,8 @@ public class WheeledVehicleControllerSettings
      * @return a new JVM object with the pre-existing native object assigned
      */
     public VehicleEngineSettings getEngine() {
-        long vehicleSettingsVa = va();
-        long engineVa = getEngine(vehicleSettingsVa);
+        long controllerSettingsVa = va();
+        long engineVa = getEngine(controllerSettingsVa);
         VehicleEngineSettings result
                 = new VehicleEngineSettings(this, engineVa);
 
@@ -122,8 +122,8 @@ public class WheeledVehicleControllerSettings
      * @return the count (&ge;0)
      */
     public int getNumDifferentials() {
-        long vehicleSettingsVa = va();
-        int result = countDifferentials(vehicleSettingsVa);
+        long controllerSettingsVa = va();
+        int result = countDifferentials(controllerSettingsVa);
 
         return result;
     }
@@ -135,8 +135,8 @@ public class WheeledVehicleControllerSettings
      * @return a new JVM object with the pre-existing native object assigned
      */
     public VehicleTransmissionSettings getTransmission() {
-        long vehicleSettingsVa = va();
-        long transmissionVa = getTransmission(vehicleSettingsVa);
+        long controllerSettingsVa = va();
+        long transmissionVa = getTransmission(controllerSettingsVa);
         VehicleTransmissionSettings result
                 = new VehicleTransmissionSettings(this, transmissionVa);
 
@@ -171,8 +171,8 @@ public class WheeledVehicleControllerSettings
      * @param count the desired number (&ge;0, default=0)
      */
     public void setNumDifferentials(int count) {
-        long settingsVa = va();
-        setNumDifferentials(settingsVa, count);
+        long controllerSettingsVa = va();
+        setNumDifferentials(controllerSettingsVa, count);
     }
     // *************************************************************************
     // VehicleControllerSettings methods
@@ -191,24 +191,25 @@ public class WheeledVehicleControllerSettings
 
     native private static void assign(long targetVa, long sourceVa);
 
-    native private static int countDifferentials(long vehicleSettingsVa);
+    native private static int countDifferentials(long controllerSettingsVa);
 
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
     native private static long getDifferential(
-            long vehicleSettingsVa, int diffIndex);
+            long controllerSettingsVa, int diffIndex);
 
     native private static float getDifferentialLimitedSlipRatio(
             long controllerSettingsVa);
 
-    native private static long getEngine(long vehicleSettingsVa);
+    native private static long getEngine(long controllerSettingsVa);
 
-    native private static long getTransmission(long vehicleSettingsVa);
+    native private static long getTransmission(long controllerSettingsVa);
 
     native private static void setDifferentialLimitedSlipRatio(
             long controllerSettingsVa, float ratio);
 
-    native private static void setNumDifferentials(long settingsVa, int count);
+    native private static void setNumDifferentials(
+            long controllerSettingsVa, int count);
 }
