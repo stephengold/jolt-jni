@@ -65,6 +65,20 @@ public class TrackedVehicleControllerSettings
     // new methods exposed
 
     /**
+     * Access the engine settings. (native field: mEngine)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public VehicleEngineSettings getEngine() {
+        long controllerSettingsVa = va();
+        long engineVa = getEngine(controllerSettingsVa);
+        VehicleEngineSettings result
+                = new VehicleEngineSettings(this, engineVa);
+
+        return result;
+    }
+
+    /**
      * Count how many tracks the vehicle will have. The settings are unaffected.
      * (native attribute: mTracks)
      *
@@ -88,6 +102,21 @@ public class TrackedVehicleControllerSettings
         long controllerSettingsVa = va();
         long trackVa = getTrack(controllerSettingsVa, index);
         VehicleTrackSettings result = new VehicleTrackSettings(this, trackVa);
+
+        return result;
+    }
+
+    /**
+     * Access the transmission (gearbox) settings. (native attribute:
+     * mTransmission)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public VehicleTransmissionSettings getTransmission() {
+        long controllerSettingsVa = va();
+        long transmissionVa = getTransmission(controllerSettingsVa);
+        VehicleTransmissionSettings result
+                = new VehicleTransmissionSettings(this, transmissionVa);
 
         return result;
     }
@@ -123,7 +152,11 @@ public class TrackedVehicleControllerSettings
 
     native private static long createDefault();
 
+    native private static long getEngine(long controllerSettingsVa);
+
     native private static int getNumTracks(long controllerSettingsVa);
 
     native private static long getTrack(long controllerSettingsVa, int index);
+
+    native private static long getTransmission(long controllerSettingsVa);
 }

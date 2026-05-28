@@ -56,6 +56,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleContro
 
 /*
  * Class:     com_github_stephengold_joltjni_TrackedVehicleControllerSettings
+ * Method:    getEngine
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleControllerSettings_getEngine
+  (JNIEnv *, jclass, jlong controllerSettingsVa) {
+    TrackedVehicleControllerSettings * const pVehicleSettings
+            = reinterpret_cast<TrackedVehicleControllerSettings *> (controllerSettingsVa);
+    VehicleEngineSettings * const pResult = &pVehicleSettings->mEngine;
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TrackedVehicleControllerSettings
  * Method:    getNumTracks
  * Signature: (J)I
  */
@@ -76,5 +89,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleContro
             = reinterpret_cast<TrackedVehicleControllerSettings *> (controllerSettingsVa);
     VehicleTrackSettings * const pResult
             = &pVehicleSettings->mTracks[trackIndex];
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TrackedVehicleControllerSettings
+ * Method:    getTransmission
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleControllerSettings_getTransmission
+  (JNIEnv *, jclass, jlong controllerSettingsVa) {
+    TrackedVehicleControllerSettings * const pVehicleSettings
+            = reinterpret_cast<TrackedVehicleControllerSettings *> (controllerSettingsVa);
+    VehicleTransmissionSettings * const pResult
+            = &pVehicleSettings->mTransmission;
     return reinterpret_cast<jlong> (pResult);
 }
