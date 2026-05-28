@@ -40,6 +40,7 @@ import com.github.stephengold.joltjni.VehicleConstraintSettings;
 import com.github.stephengold.joltjni.VehicleControllerSettings;
 import com.github.stephengold.joltjni.WheelSettings;
 import com.github.stephengold.joltjni.WheelSettingsTv;
+import com.github.stephengold.joltjni.WheelSettingsTvRef;
 import com.github.stephengold.joltjni.WheelSettingsWv;
 import com.github.stephengold.joltjni.WheelSettingsWvRef;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
@@ -58,8 +59,8 @@ import testjoltjni.TestUtils;
 import testjoltjni.app.samples.Layers;
 
 /**
- * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
- * vehicle-related Jolt-JNI objects.
+ * Automated JUnit4 tests for creation, destruction, copying, accessors, and
+ * defaults of vehicle-related Jolt-JNI objects.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -68,7 +69,7 @@ public class Test014 {
     // new methods exposed
 
     /**
-     * Test object creation, destruction, accessors, and defaults.
+     * Test object creation, destruction, copying, accessors, and defaults.
      */
     @Test
     public void test014() {
@@ -288,24 +289,36 @@ public class Test014 {
      */
     private static void doVehicleConstraintSettings() {
         VehicleConstraintSettings vcs = new VehicleConstraintSettings();
-
         testVehicleConstraintSettingsDefaults(vcs);
-        testVehicleConstraintSettingsSetters(vcs);
 
-        TestUtils.testClose(vcs);
+        VehicleConstraintSettings copy = new VehicleConstraintSettings(vcs);
+        testVehicleConstraintSettingsSetters(vcs);
+        testVehicleConstraintSettingsDefaults(copy);
+        vcs.set(copy);
+        testVehicleConstraintSettingsDefaults(vcs);
+
+        TestUtils.testClose(copy, vcs);
         System.gc();
     }
+
 
     /**
      * Test the {@code WheelSettingsTv} class.
      */
     private static void doWheelSettingsTv() {
+        WheelSettingsTvRef ref = new WheelSettingsTv().toRef();
+        testWheelSettingsTvDefaults(ref);
+
         WheelSettingsTv wstv = new WheelSettingsTv();
-
         testWheelSettingsTvDefaults(wstv);
-        testWheelSettingsTvSetters(wstv);
 
-        TestUtils.testClose(wstv);
+        WheelSettingsTv copy = new WheelSettingsTv(wstv);
+        testWheelSettingsTvSetters(wstv);
+        testWheelSettingsTvDefaults(copy);
+        wstv.set(copy);
+        testWheelSettingsTvDefaults(wstv);
+
+        TestUtils.testClose(copy, wstv, ref.getPtr(), ref);
         System.gc();
     }
 
@@ -317,11 +330,15 @@ public class Test014 {
         testWheelSettingsWvDefaults(ref);
 
         WheelSettingsWv wswv = new WheelSettingsWv();
-
         testWheelSettingsWvDefaults(wswv);
-        testWheelSettingsWvSetters(wswv);
 
-        TestUtils.testClose(wswv, ref.getPtr(), ref);
+        WheelSettingsWv copy = new WheelSettingsWv(wswv);
+        testWheelSettingsWvSetters(wswv);
+        testWheelSettingsWvDefaults(copy);
+        wswv.set(copy);
+        testWheelSettingsWvDefaults(wswv);
+
+        TestUtils.testClose(copy, wswv, ref.getPtr(), ref);
         System.gc();
     }
 
@@ -331,11 +348,16 @@ public class Test014 {
     private static void doWvControllerSettings() {
         WheeledVehicleControllerSettings wvcs
                 = new WheeledVehicleControllerSettings();
-
         testWvControllerSettingsDefaults(wvcs);
-        testWvControllerSettingsSetters(wvcs);
 
-        TestUtils.testClose(wvcs);
+        WheeledVehicleControllerSettings copy
+                = new WheeledVehicleControllerSettings(wvcs);
+        testWvControllerSettingsSetters(wvcs);
+        testWvControllerSettingsDefaults(copy);
+        wvcs.set(copy);
+        testWvControllerSettingsDefaults(wvcs);
+
+        TestUtils.testClose(copy, wvcs);
         System.gc();
     }
 
