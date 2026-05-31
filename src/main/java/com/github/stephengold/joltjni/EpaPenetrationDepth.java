@@ -145,18 +145,23 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
     /**
      * Perform the GJK and EPA steps on a sphere and a transformed box.
      *
-     * @param aExcluding the sphere without convex radius (not null, unaffected)
-     * @param aIncluding the sphere with convex radius (not null, unaffected)
+     * @param aExcluding the sphere without convex radius (not {@code null},
+     * unaffected)
+     * @param aIncluding the sphere with convex radius (not {@code null},
+     * unaffected)
      * @param convexRadiusA the convex radius of the sphere
-     * @param bExcluding the box without convex radius (not null, unaffected)
-     * @param bIncluding the box with convex radius (not null, unaffected)
+     * @param bExcluding the box without convex radius (not {@code null},
+     * unaffected)
+     * @param bIncluding the box with convex radius (not {@code null},
+     * unaffected)
      * @param convexRadiusB the convex radius of the box
      * @param collisionToleranceSq the square of the collision tolerance
      * @param penetrationTolerance the penetration tolerance
-     * @param iov the direction vector (not null, modified)
-     * @param storePointA storage for the point on the sphere (not null,
+     * @param iov the direction vector (not {@code null}, modified)
+     * @param storePointA storage for the point on the sphere (not {@code null},
      * modified)
-     * @param storePointB storage for the point on the box (not null, modified)
+     * @param storePointB storage for the point on the box (not {@code null},
+     * modified)
      * @return {@code true} if the box and sphere intersect, otherwise
      * {@code false}
      */
@@ -189,17 +194,21 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
     /**
      * Perform the GJK and EPA steps on a pair of transformed boxes.
      *
-     * @param aExcluding box A without convex radius (not null, unaffected)
-     * @param aIncluding box A with convex radius (not null, unaffected)
+     * @param aExcluding box A without convex radius (not {@code null},
+     * unaffected)
+     * @param aIncluding box A with convex radius (not {@code null}, unaffected)
      * @param convexRadiusA the convex radius of box A
-     * @param bExcluding box B without convex radius (not null, unaffected)
-     * @param bIncluding box B with convex radius (not null, unaffected)
+     * @param bExcluding box B without convex radius (not {@code null},
+     * unaffected)
+     * @param bIncluding box B with convex radius (not {@code null}, unaffected)
      * @param convexRadiusB the convex radius of box B
      * @param collisionToleranceSq the square of the collision tolerance
      * @param penetrationTolerance the penetration tolerance
-     * @param iov the direction vector (not null, modified)
-     * @param storePointA storage for the point on box A (not null, modified)
-     * @param storePointB storage for the point on box B (not null, modified)
+     * @param iov the direction vector (not {@code null}, modified)
+     * @param storePointA storage for the point on box A (not {@code null},
+     * modified)
+     * @param storePointB storage for the point on box B (not {@code null},
+     * modified)
      * @return {@code true} if the boxes intersect, otherwise {@code false}
      */
     public boolean getPenetrationDepth(TransformedAaBox aExcluding,
@@ -233,17 +242,22 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
      * Perform the GJK and EPA steps on a transformed box and a transformed
      * sphere.
      *
-     * @param aExcluding the box without convex radius (not null, unaffected)
-     * @param aIncluding the box with convex radius (not null, unaffected)
+     * @param aExcluding the box without convex radius (not {@code null},
+     * unaffected)
+     * @param aIncluding the box with convex radius (not {@code null},
+     * unaffected)
      * @param convexRadiusA the convex radius of the box
-     * @param bExcluding the sphere without convex radius (not null, unaffected)
-     * @param bIncluding the sphere with convex radius (not null, unaffected)
+     * @param bExcluding the sphere without convex radius (not {@code null},
+     * unaffected)
+     * @param bIncluding the sphere with convex radius (not {@code null},
+     * unaffected)
      * @param convexRadiusB the convex radius of the sphere
      * @param collisionToleranceSq the square of the collision tolerance
      * @param penetrationTolerance the penetration tolerance
-     * @param iov the direction vector (not null, modified)
-     * @param storePointA storage for the point on the box (not null, modified)
-     * @param storePointB storage for the point on the sphere (not null,
+     * @param iov the direction vector (not {@code null}, modified)
+     * @param storePointA storage for the point on the box (not {@code null},
+     * modified)
+     * @param storePointB storage for the point on the sphere (not {@code null},
      * modified)
      * @return {@code true} if the box and sphere intersect, otherwise
      * {@code false}

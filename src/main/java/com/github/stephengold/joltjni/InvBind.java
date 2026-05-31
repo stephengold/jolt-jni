@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,7 +45,7 @@ public class InvBind extends JoltPhysicsObject {
      * Instantiate with the specified joint index and coordinate transform.
      *
      * @param jointIndex the desired joint index (&ge;0)
-     * @param transform the desired inverse-bind transform (not null,
+     * @param transform the desired inverse-bind transform (not {@code null},
      * unaffected)
      */
     public InvBind(int jointIndex, Mat44Arg transform) {

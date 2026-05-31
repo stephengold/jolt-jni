@@ -50,7 +50,7 @@ public interface ConstVehicleCollisionTester extends ConstJoltPhysicsObject {
 
     /**
      * Return the object layer used for collision detection when no filters are
-     * overridden.
+     * overridden. The tester is unaffected.
      *
      * @return the index of the layer
      */

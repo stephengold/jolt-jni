@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -78,7 +78,7 @@ public class HeightFieldShape extends Shape {
      *
      * @param subShapeId which sub-shape to use
      * @param localLocation the location relative to the shape's center of mass
-     * (not null, unaffected)
+     * (not {@code null}, unaffected)
      * @return a new direction vector
      */
     public Vec3 getSurfaceNormal(int subShapeId, Vec3Arg localLocation) {
@@ -113,10 +113,11 @@ public class HeightFieldShape extends Shape {
      * surface.
      *
      * @param localLocation the location relative to the shape's center of mass
-     * (not null, unaffected)
-     * @param storeSurfaceLocation storage for the surface location (not null,
+     * (not {@code null}, unaffected)
+     * @param storeSurfaceLocation storage for the surface location (not
+     * {@code null}, modified)
+     * @param storeSubShapeId storage for the sub-shape ID (not {@code null},
      * modified)
-     * @param storeSubShapeId storage for the sub-shape ID (not null, modified)
      * @return {@code true} if a valid surface location was found, otherwise
      * {@code false}
      */
@@ -147,7 +148,7 @@ public class HeightFieldShape extends Shape {
      * @param heights the height values to set
      * @param stride stride between consecutive rows in {@code heights} (in
      * floats)
-     * @param allocator for temporary allocations (not null)
+     * @param allocator for temporary allocations (not {@code null})
      */
     public void setHeights(int startX, int startY, int sizeX, int sizeY,
             FloatBuffer heights, int stride, TempAllocator allocator) {
@@ -169,7 +170,7 @@ public class HeightFieldShape extends Shape {
      * @param heights the height values to set
      * @param stride stride between consecutive rows in {@code heights} (in
      * floats)
-     * @param allocator for temporary allocations (not null)
+     * @param allocator for temporary allocations (not {@code null})
      * @param cosThresholdAngle cosine of the threshold angle (default=0.996195)
      */
     public void setHeights(int startX, int startY, int sizeX, int sizeY,

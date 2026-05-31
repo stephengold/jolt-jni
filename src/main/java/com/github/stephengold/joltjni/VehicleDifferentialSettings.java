@@ -156,7 +156,7 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
      * differential. (native attribute: mEngineTorqueRatio)
      *
      * @param fraction the desired ratio (default=1)
-     * @return the fraction, for chaining
+     * @return the fraction, for chaining TODO return void
      */
     public float setEngineTorqueRatio(float fraction) {
         long settingsVa = va();

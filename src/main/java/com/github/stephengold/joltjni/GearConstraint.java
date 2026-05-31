@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,10 +48,10 @@ public class GearConstraint extends TwoBodyConstraint {
     /**
      * Specify the hinge constraints for each gear (optional).
      *
-     * @param hinge1 the desired hinge constraint for the first gear (not null,
-     * unaffected)
-     * @param hinge2 the desired hinge constraint for the 2nd gear (not null,
-     * unaffected)
+     * @param hinge1 the desired hinge constraint for the first gear (not
+     * {@code null}, unaffected)
+     * @param hinge2 the desired hinge constraint for the 2nd gear (not
+     * {@code null}, unaffected)
      */
     public void setConstraints(ConstConstraint hinge1, ConstConstraint hinge2) {
         long gearVa = va();

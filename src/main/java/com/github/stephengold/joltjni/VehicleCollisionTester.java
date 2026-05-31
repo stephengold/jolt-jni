@@ -70,7 +70,7 @@ public class VehicleCollisionTester
      * Replace the object layer used for collision detection when no filters are
      * overridden.
      *
-     * @param objectLayer the index of the desired layer
+     * @param objectLayer the index of the desired layer (default=-1)
      */
     public void setObjectLayer(int objectLayer) {
         long testerVa = va();
@@ -138,7 +138,7 @@ public class VehicleCollisionTester
 
     /**
      * Return the object layer used for collision detection when no filters are
-     * overridden.
+     * overridden. The tester is unaffected.
      *
      * @return the index of the layer
      */

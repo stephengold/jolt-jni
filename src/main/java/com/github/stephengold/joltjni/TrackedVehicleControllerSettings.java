@@ -40,8 +40,7 @@ public class TrackedVehicleControllerSettings
     }
 
     /**
-     * Instantiate a settings object with the specified native object assigned
-     * but not owned.
+     * Instantiate a settings object with the specified native object assigned.
      *
      * @param controllerSettingsVa the virtual address of the native object to
      * assign (not zero)

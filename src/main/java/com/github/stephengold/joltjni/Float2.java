@@ -65,7 +65,7 @@ final public class Float2 {
     /**
      * Instantiate a copy of the specified vector.
      *
-     * @param rhs the vector to copy (not null, unaffected)
+     * @param rhs the vector to copy (not {@code null}, unaffected)
      */
     public Float2(Float2 rhs) {
         this.x = rhs.x;
@@ -96,7 +96,7 @@ final public class Float2 {
      * Write both components to the specified buffer and advance the buffer's
      * position by 2. The vector is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     public void put(FloatBuffer storeBuffer) {
         storeBuffer.put(x);
@@ -117,7 +117,7 @@ final public class Float2 {
     /**
      * Set both components from the specified array.
      *
-     * @param array the desired component values (not null, length&ge;2,
+     * @param array the desired component values (not {@code null}, length&ge;2,
      * unaffected)
      */
     public void set(float[] array) {
@@ -144,7 +144,7 @@ final public class Float2 {
      * Float2(0.0 0.0)
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {
