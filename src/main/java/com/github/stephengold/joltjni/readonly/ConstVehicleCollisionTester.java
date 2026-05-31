@@ -21,6 +21,10 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.BodyFilter;
+import com.github.stephengold.joltjni.BroadPhaseLayerFilter;
+import com.github.stephengold.joltjni.ObjectLayerFilter;
+
 /**
  * Read-only access to a {@code VehicleCollisionTester}. (native type: const
  * VehicleCollisionTester)
@@ -29,10 +33,34 @@ package com.github.stephengold.joltjni.readonly;
  */
 public interface ConstVehicleCollisionTester extends ConstJoltPhysicsObject {
     /**
+     * Access the body filter. The tester is unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    BodyFilter getBodyFilter();
+
+    /**
+     * Access the broadphase-layer filter. The tester is unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    BroadPhaseLayerFilter getBroadPhaseLayerFilter();
+
+    /**
      * Return the object layer used for collision detection when no filters are
      * overridden.
      *
      * @return the index of the layer
      */
     int getObjectLayer();
+
+    /**
+     * Access the object-layer filter. The tester is unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    ObjectLayerFilter getObjectLayerFilter();
 }

@@ -45,7 +45,29 @@ public class VehicleCollisionTester
     // new methods exposed
 
     /**
-     * Alter the object layer used for collision detection when no filters are
+     * Replace the body filter.
+     *
+     * @param filter the desired filter, or {@code null} for none (default=null)
+     */
+    public void setBodyFilter(BodyFilter filter) {
+        long testerVa = va();
+        long filterVa = (filter == null) ? 0L : filter.va();
+        setBodyFilter(testerVa, filterVa);
+    }
+
+    /**
+     * Replace the broadphase-layer filter.
+     *
+     * @param filter the desired filter, or {@code null} for none (default=null)
+     */
+    public void setBroadPhaseLayerFilter(BroadPhaseLayerFilter filter) {
+        long testerVa = va();
+        long filterVa = (filter == null) ? 0L : filter.va();
+        setBroadPhaseLayerFilter(testerVa, filterVa);
+    }
+
+    /**
+     * Replace the object layer used for collision detection when no filters are
      * overridden.
      *
      * @param objectLayer the index of the desired layer
@@ -53,6 +75,17 @@ public class VehicleCollisionTester
     public void setObjectLayer(int objectLayer) {
         long testerVa = va();
         setObjectLayer(testerVa, objectLayer);
+    }
+
+    /**
+     * Replace the object-layer filter.
+     *
+     * @param filter the desired filter, or {@code null} for none (default=null)
+     */
+    public void setObjectLayerFilter(ObjectLayerFilter filter) {
+        long testerVa = va();
+        long filterVa = (filter == null) ? 0L : filter.va();
+        setObjectLayerFilter(testerVa, filterVa);
     }
     // *************************************************************************
     // new protected methods
@@ -73,6 +106,37 @@ public class VehicleCollisionTester
     // ConstVehicleCollisionTester methods
 
     /**
+     * Access the body filter. The tester is unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    @Override
+    public BodyFilter getBodyFilter() {
+        long testerVa = va();
+        long resultVa = getBodyFilter(testerVa);
+        BodyFilter result = (resultVa == 0L) ? null : new BodyFilter(resultVa);
+
+        return result;
+    }
+
+    /**
+     * Access the broadphase-layer filter. The tester is unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    @Override
+    public BroadPhaseLayerFilter getBroadPhaseLayerFilter() {
+        long testerVa = va();
+        long resultVa = getBroadPhaseLayerFilter(testerVa);
+        BroadPhaseLayerFilter result = (resultVa == 0L) ? null
+                : new BroadPhaseLayerFilter(resultVa);
+
+        return result;
+    }
+
+    /**
      * Return the object layer used for collision detection when no filters are
      * overridden.
      *
@@ -82,6 +146,22 @@ public class VehicleCollisionTester
     public int getObjectLayer() {
         long testerVa = va();
         int result = getObjectLayer(testerVa);
+
+        return result;
+    }
+
+    /**
+     * Access the object-layer filter. The tester is unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    @Override
+    public ObjectLayerFilter getObjectLayerFilter() {
+        long testerVa = va();
+        long resultVa = getObjectLayerFilter(testerVa);
+        ObjectLayerFilter result = (resultVa == 0L) ? null
+                : new ObjectLayerFilter(resultVa);
 
         return result;
     }
@@ -128,13 +208,27 @@ public class VehicleCollisionTester
     // *************************************************************************
     // native methods
 
+    native private static long getBodyFilter(long testerVa);
+
+    native private static long getBroadPhaseLayerFilter(long testerVa);
+
     native private static int getObjectLayer(long testerVa);
 
+    native private static long getObjectLayerFilter(long testerVa);
+
     native private static int getRefCount(long testerVa);
+
+    native private static void setBodyFilter(long testerVa, long filterVa);
+
+    native private static void setBroadPhaseLayerFilter(
+            long testerVa, long filterVa);
 
     native private static void setEmbedded(long testerVa);
 
     native private static void setObjectLayer(long testerVa, int layer);
+
+    native private static void setObjectLayerFilter(
+            long testerVa, long filterVa);
 
     native static long toRef(long testerVa);
 }

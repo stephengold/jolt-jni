@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,6 +44,17 @@ public class ObjectLayerFilter extends NonCopyable {
      * @param dummy unused argument to distinguish from the zero-arg constructor
      */
     ObjectLayerFilter(boolean dummy) {
+    }
+
+    /**
+     * Instantiate a filter with the specified native object assigned but not
+     * owned.
+     *
+     * @param filterVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    ObjectLayerFilter(long filterVa) {
+        setVirtualAddress(filterVa);
     }
     // *************************************************************************
     // new methods exposed

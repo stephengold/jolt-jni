@@ -45,6 +45,17 @@ public class BodyFilter extends NonCopyable {
      */
     BodyFilter(boolean dummy) {
     }
+
+    /**
+     * Instantiate a filter with the specified native object assigned but not
+     * owned.
+     *
+     * @param filterVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    BodyFilter(long filterVa) {
+        setVirtualAddress(filterVa);
+    }
     // *************************************************************************
     // new methods exposed
 

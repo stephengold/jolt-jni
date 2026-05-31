@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,6 +41,33 @@ IMPLEMENT_REF(VehicleCollisionTester,
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
+ * Method:    getBodyFilter
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTester_getBodyFilter
+  (JNIEnv *, jclass, jlong testerVa) {
+    const VehicleCollisionTester * const pTester
+            = reinterpret_cast<VehicleCollisionTester *> (testerVa);
+    const BodyFilter * const result = pTester->GetBodyFilter();
+    return reinterpret_cast<jlong> (result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
+ * Method:    getBroadPhaseLayerFilter
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTester_getBroadPhaseLayerFilter
+  (JNIEnv *, jclass, jlong testerVa) {
+    const VehicleCollisionTester * const pTester
+            = reinterpret_cast<VehicleCollisionTester *> (testerVa);
+    const BroadPhaseLayerFilter * const result
+            = pTester->GetBroadPhaseLayerFilter();
+    return reinterpret_cast<jlong> (result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
  * Method:    getObjectLayer
  * Signature: (J)I
  */
@@ -54,6 +81,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTeste
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
+ * Method:    getObjectLayerFilter
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTester_getObjectLayerFilter
+  (JNIEnv *, jclass, jlong testerVa) {
+    const VehicleCollisionTester * const pTester
+            = reinterpret_cast<VehicleCollisionTester *> (testerVa);
+    const ObjectLayerFilter * const result = pTester->GetObjectLayerFilter();
+    return reinterpret_cast<jlong> (result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
  * Method:    getRefCount
  * Signature: (J)I
  */
@@ -63,6 +103,33 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTeste
             = reinterpret_cast<VehicleCollisionTester *> (testerVa);
     const uint32 result = pTester->GetRefCount();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
+ * Method:    setBodyFilter
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTester_setBodyFilter
+  (JNIEnv *, jclass, jlong testerVa, jlong filterVa) {
+    VehicleCollisionTester * const pTester
+            = reinterpret_cast<VehicleCollisionTester *> (testerVa);
+    BodyFilter * const pFilter = reinterpret_cast<BodyFilter *> (filterVa);
+    pTester->SetBodyFilter(pFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
+ * Method:    setBroadPhaseLayerFilter
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTester_setBroadPhaseLayerFilter
+  (JNIEnv *, jclass, jlong testerVa, jlong filterVa) {
+    VehicleCollisionTester * const pTester
+            = reinterpret_cast<VehicleCollisionTester *> (testerVa);
+    BroadPhaseLayerFilter * const pFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (filterVa);
+    pTester->SetBroadPhaseLayerFilter(pFilter);
 }
 
 /*
@@ -87,6 +154,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTeste
     VehicleCollisionTester * const pTester
             = reinterpret_cast<VehicleCollisionTester *> (testerVa);
     pTester->SetObjectLayer(objectLayer);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
+ * Method:    setObjectLayerFilter
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTester_setObjectLayerFilter
+  (JNIEnv *, jclass, jlong testerVa, jlong filterVa) {
+    VehicleCollisionTester * const pTester
+            = reinterpret_cast<VehicleCollisionTester *> (testerVa);
+    ObjectLayerFilter * const pFilter
+            = reinterpret_cast<ObjectLayerFilter *> (filterVa);
+    pTester->SetObjectLayerFilter(pFilter);
 }
 
 /*
