@@ -90,6 +90,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleDifferential
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
+ * Method:    getLeftRightSplit
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_getLeftRightSplit
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const VehicleDifferentialSettings * const pSettings
+            = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
+    const float result = pSettings->mLeftRightSplit;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
  * Method:    getLeftWheel
  * Signature: (J)I
  */
@@ -149,6 +162,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSe
     VehicleDifferentialSettings * const pSettings
             = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
     pSettings->mEngineTorqueRatio = fraction;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
+ * Method:    setLeftRightSplit
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_setLeftRightSplit
+  (JNIEnv *, jclass, jlong settingsVa, jfloat rightFraction) {
+    VehicleDifferentialSettings * const pSettings
+            = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
+    pSettings->mLeftRightSplit = rightFraction;
 }
 
 /*

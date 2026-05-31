@@ -91,6 +91,19 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Return the fraction of the engine's torque that is applied to the right
+     * wheel. The settings are unaffected, (native attribute: mLeftRightSplit)
+     *
+     * @return the desired fraction (all left=0, all right=1)
+     */
+    public float getLeftRightSplit() {
+        long settingsVa = va();
+        float result = getLeftRightSplit(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the index of the left wheel. The settings are unaffected. (native
      * attribute: mLeftWheel)
      *
@@ -166,6 +179,18 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Alter the fraction of the engine's torque that is applied to the right
+     * wheel. (native attribute: mLeftRightSplit)
+     *
+     * @param rightFraction the desired fraction (all left=0, all right=1,
+     * default=0.5)
+     */
+    public void setLeftRightSplit(float rightFraction) {
+        long settingsVa = va();
+        setLeftRightSplit(settingsVa, rightFraction);
+    }
+
+    /**
      * Alter which left wheel is assigned to the differential. (native
      * attribute: mLeftWheel)
      *
@@ -216,6 +241,8 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
 
     native private static float getEngineTorqueRatio(long settingsVa);
 
+    native private static float getLeftRightSplit(long settingsVa);
+
     native private static int getLeftWheel(long settingsVa);
 
     native private static float getLimitedSlipRatio(long settingsVa);
@@ -227,6 +254,9 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
 
     native private static void setEngineTorqueRatio(
             long settingsVa, float fraction);
+
+    native private static void setLeftRightSplit(
+            long settingsVa, float rightFraction);
 
     native private static void setLeftWheel(long settingsVa, int wheelIndex);
 
