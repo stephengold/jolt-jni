@@ -515,11 +515,13 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_isDoublePrec
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
   (JNIEnv *, jclass) {
     // Verify global constants defined in Jolt.java:
+    JPH_ASSERT((int)com_github_stephengold_joltjni_Jolt_cBroadPhaseLayerInvalid == cBroadPhaseLayerInvalid.GetValue());
     JPH_ASSERT(com_github_stephengold_joltjni_Jolt_cDefaultConvexRadius == cDefaultConvexRadius);
     JPH_ASSERT((int)com_github_stephengold_joltjni_Jolt_cEmptySubShapeId == SubShapeID().GetValue());
     JPH_ASSERT((int)com_github_stephengold_joltjni_Jolt_cInvalidBodyId == BodyID::cInvalidBodyID);
     JPH_ASSERT(com_github_stephengold_joltjni_Jolt_cMaxPhysicsBarriers == cMaxPhysicsBarriers);
     JPH_ASSERT(com_github_stephengold_joltjni_Jolt_cMaxPhysicsJobs == cMaxPhysicsJobs);
+    JPH_ASSERT(com_github_stephengold_joltjni_Jolt_cObjectLayerInvalid == cObjectLayerInvalid);
     JPH_ASSERT(com_github_stephengold_joltjni_Jolt_SWIZZLE_X == SWIZZLE_X);
     JPH_ASSERT(com_github_stephengold_joltjni_Jolt_SWIZZLE_Y == SWIZZLE_Y);
     JPH_ASSERT(com_github_stephengold_joltjni_Jolt_SWIZZLE_Z == SWIZZLE_Z);
