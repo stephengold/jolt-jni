@@ -222,6 +222,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTransmissionSe
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleTransmissionSettings
+ * Method:    setClutchReleaseTime
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTransmissionSettings_setClutchReleaseTime
+  (JNIEnv *, jclass, jlong settingsVa, jfloat latency) {
+    VehicleTransmissionSettings * const pSettings
+            = reinterpret_cast<VehicleTransmissionSettings *> (settingsVa);
+    pSettings->mClutchReleaseTime = latency;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTransmissionSettings
  * Method:    setClutchStrength
  * Signature: (JF)V
  */

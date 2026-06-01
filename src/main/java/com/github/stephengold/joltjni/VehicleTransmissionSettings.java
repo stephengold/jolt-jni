@@ -100,7 +100,7 @@ public class VehicleTransmissionSettings
      */
     public void setClutchReleaseTime(float latency) {
         long settingsVa = va();
-        setClutchStrength(settingsVa, latency);
+        setClutchReleaseTime(settingsVa, latency);
     }
 
     /**
@@ -368,6 +368,9 @@ public class VehicleTransmissionSettings
             long settingsVa, long streamVa);
 
     native private static void saveBinaryState(long settingsVa, long streamVa);
+
+    native private static void setClutchReleaseTime(
+            long settingsVa, float latency);
 
     native private static void setClutchStrength(
             long settingsVa, float strength);
