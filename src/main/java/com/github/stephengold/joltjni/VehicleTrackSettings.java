@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVehicleTrackSettings;
+
 /**
  * Settings to configure one track in a {@code TrackedVehicleController}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleTrackSettings extends JoltPhysicsObject {
+public class VehicleTrackSettings
+        extends JoltPhysicsObject
+        implements ConstVehicleTrackSettings {
     // *************************************************************************
     // constructors
 
@@ -54,8 +58,8 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public VehicleTrackSettings(VehicleTrackSettings original) {
-        long originalVa = original.va();
+    public VehicleTrackSettings(ConstVehicleTrackSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
@@ -74,11 +78,36 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstVehicleTrackSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
+     * Alter which wheel is powered by the engine. (native attribute:
+     * mDrivenWheel)
+     *
+     * @param wheelIndex the index of the desired wheel (&ge;0, default=0)
+     */
+    public void setDrivenWheel(int wheelIndex) {
+        long settingsVa = va();
+        setDrivenWheel(settingsVa, wheelIndex);
+    }
+    // *************************************************************************
+    // ConstVehicleTrackSettings methods
+
+    /**
      * Return the angular damping factor. The settings are unaffected. (native
      * attribute: mAngularDamping)
      *
      * @return the damping factor (per second)
      */
+    @Override
     public float getAngularDamping() {
         long settingsVa = va();
         float result = getAngularDamping(settingsVa);
@@ -92,6 +121,7 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
      *
      * @return the ratio
      */
+    @Override
     public float getDifferentialRatio() {
         long settingsVa = va();
         float result = getDifferentialRatio(settingsVa);
@@ -105,6 +135,7 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
      *
      * @return the index of the driven wheel (&ge;0)
      */
+    @Override
     public int getDrivenWheel() {
         long settingsVa = va();
         int result = getDrivenWheel(settingsVa);
@@ -118,6 +149,7 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
      *
      * @return the moment (in kilogram.meter^2)
      */
+    @Override
     public float getInertia() {
         long settingsVa = va();
         float result = getInertia(settingsVa);
@@ -131,33 +163,12 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
      *
      * @return the count (&ge;0)
      */
+    @Override
     public int getNumWheels() {
         long settingsVa = va();
         int result = getNumWheels(settingsVa);
 
         return result;
-    }
-
-    /**
-     * Copy the argument to the current settings.
-     *
-     * @param source the settings to copy (not {@code null}, unaffected)
-     */
-    public void set(VehicleTrackSettings source) {
-        long targetVa = va();
-        long sourceVa = source.va();
-        assign(targetVa, sourceVa);
-    }
-
-    /**
-     * Alter which wheel is powered by the engine. (native attribute:
-     * mDrivenWheel)
-     *
-     * @param wheelIndex the index of the desired wheel (&ge;0, default=0)
-     */
-    public void setDrivenWheel(int wheelIndex) {
-        long settingsVa = va();
-        setDrivenWheel(settingsVa, wheelIndex);
     }
     // *************************************************************************
     // native private methods
