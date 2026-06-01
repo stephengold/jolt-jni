@@ -21,13 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstTrackedVehicleControllerSettings;
+
 /**
  * Settings used to construct a {@code TrackedVehicleController}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
 public class TrackedVehicleControllerSettings
-        extends VehicleControllerSettings {
+        extends VehicleControllerSettings
+        implements ConstTrackedVehicleControllerSettings {
     // *************************************************************************
     // constructors
 
@@ -55,8 +58,8 @@ public class TrackedVehicleControllerSettings
      * @param original the settings to copy (not {@code null}, unaffected)
      */
     public TrackedVehicleControllerSettings(
-            TrackedVehicleControllerSettings original) {
-        long originalVa = original.va();
+            ConstTrackedVehicleControllerSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsCoOwner(copyVa);
     }
@@ -64,10 +67,24 @@ public class TrackedVehicleControllerSettings
     // new methods exposed
 
     /**
+     * Copy the argument to the current settings.
+     *
+     * @param source the settings to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstTrackedVehicleControllerSettings source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+    // *************************************************************************
+    // ConstTrackedVehicleControllerSettings methods
+
+    /**
      * Access the engine settings. (native field: mEngine)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public VehicleEngineSettings getEngine() {
         long controllerSettingsVa = va();
         long engineVa = getEngine(controllerSettingsVa);
@@ -83,6 +100,7 @@ public class TrackedVehicleControllerSettings
      *
      * @return the count (2)
      */
+    @Override
     public int getNumTracks() {
         long controllerSettingsVa = va();
         int result = getNumTracks(controllerSettingsVa);
@@ -96,6 +114,7 @@ public class TrackedVehicleControllerSettings
      * @param index the index of the track to access (&ge;0, &le;1)
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public VehicleTrackSettings getTrack(int index) {
         assert index == 0 || index == 1 : index;
         long controllerSettingsVa = va();
@@ -111,6 +130,7 @@ public class TrackedVehicleControllerSettings
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public VehicleTransmissionSettings getTransmission() {
         long controllerSettingsVa = va();
         long transmissionVa = getTransmission(controllerSettingsVa);
@@ -118,17 +138,6 @@ public class TrackedVehicleControllerSettings
                 = new VehicleTransmissionSettings(this, transmissionVa);
 
         return result;
-    }
-
-    /**
-     * Copy the argument to the current settings.
-     *
-     * @param source the settings to copy (not {@code null}, unaffected)
-     */
-    public void set(TrackedVehicleControllerSettings source) {
-        long targetVa = va();
-        long sourceVa = source.va();
-        assign(targetVa, sourceVa);
     }
     // *************************************************************************
     // VehicleControllerSettings methods
