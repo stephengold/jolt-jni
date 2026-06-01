@@ -52,6 +52,7 @@ import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsWv;
+import com.github.stephengold.joltjni.readonly.ConstWheeledVehicleControllerSettings;
 import java.nio.FloatBuffer;
 import org.junit.Assert;
 import org.junit.Test;
@@ -291,7 +292,8 @@ public class Test014 {
         VehicleConstraintSettings vcs = new VehicleConstraintSettings();
         testVehicleConstraintSettingsDefaults(vcs);
 
-        VehicleConstraintSettings copy = new VehicleConstraintSettings(vcs);
+        ConstVehicleConstraintSettings copy
+                = new VehicleConstraintSettings(vcs);
         testVehicleConstraintSettingsSetters(vcs);
         testVehicleConstraintSettingsDefaults(copy);
         vcs.set(copy);
@@ -312,7 +314,7 @@ public class Test014 {
         WheelSettingsTv wstv = new WheelSettingsTv();
         testWheelSettingsTvDefaults(wstv);
 
-        WheelSettingsTv copy = new WheelSettingsTv(wstv);
+        ConstWheelSettingsTv copy = new WheelSettingsTv(wstv);
         testWheelSettingsTvSetters(wstv);
         testWheelSettingsTvDefaults(copy);
         wstv.set(copy);
@@ -332,7 +334,7 @@ public class Test014 {
         WheelSettingsWv wswv = new WheelSettingsWv();
         testWheelSettingsWvDefaults(wswv);
 
-        WheelSettingsWv copy = new WheelSettingsWv(wswv);
+        ConstWheelSettingsWv copy = new WheelSettingsWv(wswv);
         testWheelSettingsWvSetters(wswv);
         testWheelSettingsWvDefaults(copy);
         wswv.set(copy);
@@ -350,7 +352,7 @@ public class Test014 {
                 = new WheeledVehicleControllerSettings();
         testWvControllerSettingsDefaults(wvcs);
 
-        WheeledVehicleControllerSettings copy
+        ConstWheeledVehicleControllerSettings copy
                 = new WheeledVehicleControllerSettings(wvcs);
         testWvControllerSettingsSetters(wvcs);
         testWvControllerSettingsDefaults(copy);
@@ -571,7 +573,7 @@ public class Test014 {
      * @param wvcs the settings to test (not {@code null}, unaffected)
      */
     private static void testWvControllerSettingsDefaults(
-            WheeledVehicleControllerSettings wvcs) {
+            ConstWheeledVehicleControllerSettings wvcs) {
         Assert.assertEquals(1.4f, wvcs.getDifferentialLimitedSlipRatio(), 0f);
         Assert.assertNotNull(wvcs.getEngine());
         Assert.assertEquals(0, wvcs.getNumDifferentials());
