@@ -21,13 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstWheeledVehicleControllerSettings;
+
 /**
  * Settings used to construct a {@code WheeledVehicleController}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
 public class WheeledVehicleControllerSettings
-        extends VehicleControllerSettings {
+        extends VehicleControllerSettings
+        implements ConstWheeledVehicleControllerSettings {
     // *************************************************************************
     // constructors
 
@@ -63,8 +66,8 @@ public class WheeledVehicleControllerSettings
      * @param original the settings to copy (not {@code null}, unaffected)
      */
     public WheeledVehicleControllerSettings(
-            WheeledVehicleControllerSettings original) {
-        long originalVa = original.va();
+            ConstWheeledVehicleControllerSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsCoOwner(copyVa);
     }
@@ -72,85 +75,13 @@ public class WheeledVehicleControllerSettings
     // new methods exposed
 
     /**
-     * Access the settings for the specified differential. (native field:
-     * mDifferentials)
-     *
-     * @param index the index of the differential to access (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public VehicleDifferentialSettings getDifferential(int index) {
-        long controllerSettingsVa = va();
-        long differentialVa = getDifferential(controllerSettingsVa, index);
-        VehicleDifferentialSettings result
-                = new VehicleDifferentialSettings(this, differentialVa);
-
-        return result;
-    }
-
-    /**
-     * Return the ratio of the max/min average wheel speed for each
-     * differential. The settings are unaffected. (native field:
-     * mDifferentialLimitedSlipRatio)
-     *
-     * @return the ratio
-     */
-    public float getDifferentialLimitedSlipRatio() {
-        long controllerSettingsVa = va();
-        float result = getDifferentialLimitedSlipRatio(controllerSettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Access the engine settings. (native field: mEngine)
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public VehicleEngineSettings getEngine() {
-        long controllerSettingsVa = va();
-        long engineVa = getEngine(controllerSettingsVa);
-        VehicleEngineSettings result
-                = new VehicleEngineSettings(this, engineVa);
-
-        return result;
-    }
-
-    /**
-     * Count how many differentials the vehicle will have. The settings are
-     * unaffected. (native attribute: mDifferentials)
-     *
-     * @return the count (&ge;0)
-     */
-    public int getNumDifferentials() {
-        long controllerSettingsVa = va();
-        int result = countDifferentials(controllerSettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Access the transmission (gearbox) settings. (native attribute:
-     * mTransmission)
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public VehicleTransmissionSettings getTransmission() {
-        long controllerSettingsVa = va();
-        long transmissionVa = getTransmission(controllerSettingsVa);
-        VehicleTransmissionSettings result
-                = new VehicleTransmissionSettings(this, transmissionVa);
-
-        return result;
-    }
-
-    /**
      * Copy the argument to the current settings.
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(WheeledVehicleControllerSettings source) {
+    public void set(ConstWheeledVehicleControllerSettings source) {
         long targetVa = va();
-        long sourceVa = source.va();
+        long sourceVa = source.targetVa();
         assign(targetVa, sourceVa);
     }
 
@@ -173,6 +104,85 @@ public class WheeledVehicleControllerSettings
     public void setNumDifferentials(int count) {
         long controllerSettingsVa = va();
         setNumDifferentials(controllerSettingsVa, count);
+    }
+    // *************************************************************************
+    // WheeledVehicleControllerSettings methods
+
+    /**
+     * Access the settings for the specified differential. (native field:
+     * mDifferentials)
+     *
+     * @param index the index of the differential to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public VehicleDifferentialSettings getDifferential(int index) {
+        long controllerSettingsVa = va();
+        long differentialVa = getDifferential(controllerSettingsVa, index);
+        VehicleDifferentialSettings result
+                = new VehicleDifferentialSettings(this, differentialVa);
+
+        return result;
+    }
+
+    /**
+     * Return the ratio of the max/min average wheel speed for each
+     * differential. The settings are unaffected. (native field:
+     * mDifferentialLimitedSlipRatio)
+     *
+     * @return the ratio
+     */
+    @Override
+    public float getDifferentialLimitedSlipRatio() {
+        long controllerSettingsVa = va();
+        float result = getDifferentialLimitedSlipRatio(controllerSettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Access the engine settings. (native field: mEngine)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public VehicleEngineSettings getEngine() {
+        long controllerSettingsVa = va();
+        long engineVa = getEngine(controllerSettingsVa);
+        VehicleEngineSettings result
+                = new VehicleEngineSettings(this, engineVa);
+
+        return result;
+    }
+
+    /**
+     * Count how many differentials the vehicle will have. The settings are
+     * unaffected. (native attribute: mDifferentials)
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getNumDifferentials() {
+        long controllerSettingsVa = va();
+        int result = countDifferentials(controllerSettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Access the transmission (gearbox) settings. (native attribute:
+     * mTransmission)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public VehicleTransmissionSettings getTransmission() {
+        long controllerSettingsVa = va();
+        long transmissionVa = getTransmission(controllerSettingsVa);
+        VehicleTransmissionSettings result
+                = new VehicleTransmissionSettings(this, transmissionVa);
+
+        return result;
     }
     // *************************************************************************
     // VehicleControllerSettings methods
