@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -59,9 +59,10 @@ public class MutableCompoundShape extends CompoundShape {
     /**
      * Add a sub-shape in the specified position.
      *
-     * @param offset the desired offset (not null, unaffected)
-     * @param rotation the desired rotation (not null, not zero, unaffected)
-     * @param subshape the desired sub-shape (not null)
+     * @param offset the desired offset (not {@code null}, unaffected)
+     * @param rotation the desired rotation (not {@code null}, not zero,
+     * unaffected)
+     * @param subshape the desired sub-shape (not {@code null})
      * @return the index of the added sub-shape
      */
     public int addShape(Vec3Arg offset, QuatArg rotation, ConstShape subshape) {
@@ -93,9 +94,9 @@ public class MutableCompoundShape extends CompoundShape {
      *
      * @param startIndex index of the first shape to reposition (&ge;0)
      * @param numSubshapes the number of sub-shapes to reposition (&ge;0)
-     * @param offsets the desired offsets (not null, unaffected,
+     * @param offsets the desired offsets (not {@code null}, unaffected,
      * length&ge;numSubShapes)
-     * @param rotations the desired rotations (not null, unaffected,
+     * @param rotations the desired rotations (not {@code null}, unaffected,
      * length&ge;numSubShapes)
      * @param offsetStride the number of bytes between the starting positions of
      * sequential offsets (&gt;0)

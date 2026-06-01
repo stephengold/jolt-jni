@@ -45,9 +45,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified samples.
      *
-     * @param samples array of height values (not null, length&ge;4, unaffected)
-     * @param offset (not null, unaffected)
-     * @param scale (not null, unaffected)
+     * @param samples array of height values (not {@code null}, length&ge;4,
+     * unaffected)
+     * @param offset (not {@code null}, unaffected)
+     * @param scale (not {@code null}, unaffected)
      * @param sampleCount the number of height values along each edge
      * (&ge;2*blockSize)
      */
@@ -59,9 +60,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified samples.
      *
-     * @param samples array of height values (not null, length&ge;4, unaffected)
-     * @param offset (not null, unaffected)
-     * @param scale (not null, unaffected)
+     * @param samples array of height values (not {@code null}, length&ge;4,
+     * unaffected)
+     * @param offset (not {@code null}, unaffected)
+     * @param scale (not {@code null}, unaffected)
      * @param sampleCount the number of height values along each edge
      * (&ge;2*blockSize)
      * @param materialIndices a material index for each sample (default=null)
@@ -75,9 +77,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified samples.
      *
-     * @param samples array of height values (not null, length&ge;4, unaffected)
-     * @param offset (not null, unaffected)
-     * @param scale (not null, unaffected)
+     * @param samples array of height values (not {@code null}, length&ge;4,
+     * unaffected)
+     * @param offset (not {@code null}, unaffected)
+     * @param scale (not {@code null}, unaffected)
      * @param sampleCount the number of height values along each edge
      * (&ge;2*blockSize)
      * @param materialIndices a material index for each sample (default=null)
@@ -102,10 +105,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified samples.
      *
-     * @param samples array of height values (not null, capacity&ge;4,
+     * @param samples array of height values (not {@code null}, capacity&ge;4,
      * unaffected)
-     * @param offset (not null, unaffected)
-     * @param scale (not null, unaffected)
+     * @param offset (not {@code null}, unaffected)
+     * @param scale (not {@code null}, unaffected)
      * @param sampleCount the number of height values along each edge
      * (&ge;2*blockSize)
      */
@@ -125,10 +128,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified samples.
      *
-     * @param samples array of height values (not null, capacity&ge;4,
+     * @param samples array of height values (not {@code null}, capacity&ge;4,
      * unaffected)
-     * @param offset (not null, unaffected)
-     * @param scale (not null, unaffected)
+     * @param offset (not {@code null}, unaffected)
+     * @param scale (not {@code null}, unaffected)
      * @param sampleCount the number of height values along each edge
      * (&ge;2*blockSize)
      * @param materialIndices a material index for each sample (default=null)
@@ -142,10 +145,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified samples.
      *
-     * @param samples array of height values (not null, capacity&ge;4,
+     * @param samples array of height values (not {@code null}, capacity&ge;4,
      * unaffected)
-     * @param offset (not null, unaffected)
-     * @param scale (not null, unaffected)
+     * @param offset (not {@code null}, unaffected)
+     * @param scale (not {@code null}, unaffected)
      * @param sampleCount the number of height values along each edge
      * (&ge;2*blockSize)
      * @param materialIndices a material index for each sample (default=null)
@@ -374,7 +377,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Alter the offset of the first sample. (native attribute: mOffset)
      *
-     * @param offset the desired offset vector (not null, unaffected,
+     * @param offset the desired offset vector (not {@code null}, unaffected,
      * default=(0,0,0))
      */
     public void setOffset(Vec3Arg offset) {
@@ -388,7 +391,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Alter the scale factors. (native attribute: mScale)
      *
-     * @param scale the desired scale factors (not null, unaffected,
+     * @param scale the desired scale factors (not {@code null}, unaffected,
      * default=(1,1,1))
      */
     public void setScale(Vec3Arg scale) {

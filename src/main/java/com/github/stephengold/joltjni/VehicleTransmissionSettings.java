@@ -174,7 +174,7 @@ public class VehicleTransmissionSettings
      * Alter the minimum time between shifts in {@code Auto} mode. (native
      * attribute: mSwitchLatency)
      *
-     * @param latency the desired latency (in seconds)
+     * @param latency the desired latency (in seconds, default=0.5)
      */
     public void setSwitchLatency(float latency) {
         long settingsVa = va();
@@ -185,7 +185,7 @@ public class VehicleTransmissionSettings
      * Alter how long it takes to shift gears in {@code Auto} mode. (native
      * attribute: mSwitchTime)
      *
-     * @param latency the desired latency (in seconds)
+     * @param latency the desired latency (in seconds, default=0.5)
      */
     public void setSwitchTime(float latency) {
         long settingsVa = va();
