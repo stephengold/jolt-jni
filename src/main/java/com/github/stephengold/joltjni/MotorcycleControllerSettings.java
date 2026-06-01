@@ -21,13 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstMotorcycleControllerSettings;
+
 /**
  * Settings used to construct a {@code MotorcycleController}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
 public class MotorcycleControllerSettings
-        extends WheeledVehicleControllerSettings {
+        extends WheeledVehicleControllerSettings
+        implements ConstMotorcycleControllerSettings {
     // *************************************************************************
     // constructors
 
@@ -57,9 +60,9 @@ public class MotorcycleControllerSettings
      * @param original the settings to copy (not {@code null}, unaffected)
      */
     public MotorcycleControllerSettings(
-            MotorcycleControllerSettings original) {
+            ConstMotorcycleControllerSettings original) {
         super(false);
-        long originalVa = original.va();
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsCoOwner(copyVa);
     }
@@ -67,93 +70,13 @@ public class MotorcycleControllerSettings
     // new methods exposed
 
     /**
-     * Return the lean smoothing factor. The settings are unaffected. (native
-     * attribute: mLeanSmoothingFactor)
-     *
-     * @return the factor
-     */
-    public float getLeanSmoothingFactor() {
-        long settingsVa = va();
-        float result = getLeanSmoothingFactor(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the spring constant for the lean spring. The settings are
-     * unaffected. (native attribute: mLeanSpringConstant)
-     *
-     * @return the spring constant
-     */
-    public float getLeanSpringConstant() {
-        long settingsVa = va();
-        float result = getLeanSpringConstant(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the damping constant for the lean spring. The settings are
-     * unaffected. (native attribute: mLeanSpringDamping)
-     *
-     * @return the damping constant
-     */
-    public float getLeanSpringDamping() {
-        long settingsVa = va();
-        float result = getLeanSpringDamping(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the coefficient of additional force to control the lean angle. The
-     * settings are unaffected. (native attribute:
-     * mLeanSpringIntegrationCoefficient)
-     *
-     * @return the integration coefficient
-     */
-    public float getLeanSpringIntegrationCoefficient() {
-        long settingsVa = va();
-        float result = getLeanSpringIntegrationCoefficient(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the rate of decay of the angle integral when the wheels are
-     * unsupported. The settings are unaffected. (native attribute:
-     * mLeanSpringIntegrationCoefficientDecay)
-     *
-     * @return the rate of decay (per second)
-     */
-    public float getLeanSpringIntegrationCoefficientDecay() {
-        long settingsVa = va();
-        float result = getLeanSpringIntegrationCoefficientDecay(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum lean angle (during turns). The settings are
-     * unaffected. (native attribute: mMaxLeanAngle)
-     *
-     * @return the angle (in radians)
-     */
-    public float getMaxLeanAngle() {
-        long settingsVa = va();
-        float result = getMaxLeanAngle(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Copy the argument to the current settings.
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(MotorcycleControllerSettings source) {
+    public void set(ConstMotorcycleControllerSettings source) {
         long targetVa = va();
-        long sourceVa = source.va();
+        long sourceVa = source.targetVa();
         assign(targetVa, sourceVa);
     }
 
@@ -220,6 +143,94 @@ public class MotorcycleControllerSettings
     public void setMaxLeanAngle(float angle) {
         long settingsVa = va();
         setMaxLeanAngle(settingsVa, angle);
+    }
+    // *************************************************************************
+    // ConstMotorcycleControllerSettings methods
+
+    /**
+     * Return the lean smoothing factor. The settings are unaffected. (native
+     * attribute: mLeanSmoothingFactor)
+     *
+     * @return the factor
+     */
+    @Override
+    public float getLeanSmoothingFactor() {
+        long settingsVa = va();
+        float result = getLeanSmoothingFactor(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the spring constant for the lean spring. The settings are
+     * unaffected. (native attribute: mLeanSpringConstant)
+     *
+     * @return the spring constant
+     */
+    @Override
+    public float getLeanSpringConstant() {
+        long settingsVa = va();
+        float result = getLeanSpringConstant(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the damping constant for the lean spring. The settings are
+     * unaffected. (native attribute: mLeanSpringDamping)
+     *
+     * @return the damping constant
+     */
+    @Override
+    public float getLeanSpringDamping() {
+        long settingsVa = va();
+        float result = getLeanSpringDamping(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the coefficient of additional force to control the lean angle. The
+     * settings are unaffected. (native attribute:
+     * mLeanSpringIntegrationCoefficient)
+     *
+     * @return the integration coefficient
+     */
+    @Override
+    public float getLeanSpringIntegrationCoefficient() {
+        long settingsVa = va();
+        float result = getLeanSpringIntegrationCoefficient(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the rate of decay of the angle integral when the wheels are
+     * unsupported. The settings are unaffected. (native attribute:
+     * mLeanSpringIntegrationCoefficientDecay)
+     *
+     * @return the rate of decay (per second)
+     */
+    @Override
+    public float getLeanSpringIntegrationCoefficientDecay() {
+        long settingsVa = va();
+        float result = getLeanSpringIntegrationCoefficientDecay(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum lean angle (during turns). The settings are
+     * unaffected. (native attribute: mMaxLeanAngle)
+     *
+     * @return the angle (in radians)
+     */
+    @Override
+    public float getMaxLeanAngle() {
+        long settingsVa = va();
+        float result = getMaxLeanAngle(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // WheeledVehicleControllerSettings methods
