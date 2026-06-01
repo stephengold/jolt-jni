@@ -23,21 +23,33 @@ package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.Body;
 import com.github.stephengold.joltjni.BodyCreationSettings;
+import com.github.stephengold.joltjni.BodyFilter;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShape;
+import com.github.stephengold.joltjni.BroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.CustomTireMaxImpulseCallback;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JphMath;
+import com.github.stephengold.joltjni.LinearCurve;
+import com.github.stephengold.joltjni.MotorcycleControllerSettings;
+import com.github.stephengold.joltjni.ObjectLayerFilter;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.SimpleTireMaxImpulseCallback;
 import com.github.stephengold.joltjni.TireMaxImpulseCallback;
+import com.github.stephengold.joltjni.TrackedVehicleControllerSettings;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.VehicleAntiRollBar;
+import com.github.stephengold.joltjni.VehicleCollisionTester;
 import com.github.stephengold.joltjni.VehicleCollisionTesterCastCylinder;
 import com.github.stephengold.joltjni.VehicleCollisionTesterCastSphere;
 import com.github.stephengold.joltjni.VehicleCollisionTesterRay;
 import com.github.stephengold.joltjni.VehicleConstraint;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
 import com.github.stephengold.joltjni.VehicleControllerSettings;
+import com.github.stephengold.joltjni.VehicleDifferentialSettings;
+import com.github.stephengold.joltjni.VehicleEngineSettings;
+import com.github.stephengold.joltjni.VehicleTrackSettings;
+import com.github.stephengold.joltjni.VehicleTransmissionSettings;
 import com.github.stephengold.joltjni.WheelSettings;
 import com.github.stephengold.joltjni.WheelSettingsTv;
 import com.github.stephengold.joltjni.WheelSettingsTvRef;
@@ -47,8 +59,17 @@ import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
+import com.github.stephengold.joltjni.enumerate.ETransmissionMode;
 import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
+import com.github.stephengold.joltjni.readonly.ConstMotorcycleControllerSettings;
+import com.github.stephengold.joltjni.readonly.ConstTrackedVehicleControllerSettings;
+import com.github.stephengold.joltjni.readonly.ConstVehicleAntiRollBar;
+import com.github.stephengold.joltjni.readonly.ConstVehicleCollisionTester;
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
+import com.github.stephengold.joltjni.readonly.ConstVehicleDifferentialSettings;
+import com.github.stephengold.joltjni.readonly.ConstVehicleEngineSettings;
+import com.github.stephengold.joltjni.readonly.ConstVehicleTrackSettings;
+import com.github.stephengold.joltjni.readonly.ConstVehicleTransmissionSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsWv;
@@ -78,12 +99,21 @@ public class Test014 {
         TestUtils.initializeNativeLibrary();
 
         doCustomTireMaxImpulseCallback();
+        doMcControllerSettings();
         doSimpleTireMaxImpulseCallback();
+        doTvControllerSettings();
+
+        doVehicleAntiRollBar();
         doVehicleCollisionTesterCastCylinder();
         doVehicleCollisionTesterCastSphere();
         doVehicleCollisionTesterRay();
         doVehicleConstraint();
         doVehicleConstraintSettings();
+        doVehicleDifferentialSettings();
+        doVehicleEngineSettings();
+        doVehicleTrackSettings();
+        doVehicleTransmissionSettings();
+
         doWvControllerSettings();
         doWheelSettingsTv();
         doWheelSettingsWv();
@@ -148,6 +178,24 @@ public class Test014 {
     }
 
     /**
+     * Test the {@code MotorcycleControllerSettings} class.
+     */
+    private static void doMcControllerSettings() {
+        MotorcycleControllerSettings mccs = new MotorcycleControllerSettings();
+        testMcControllerSettingsDefaults(mccs);
+
+        ConstMotorcycleControllerSettings copy
+                = new MotorcycleControllerSettings(mccs);
+        testMcControllerSettingsSetters(mccs);
+        testMcControllerSettingsDefaults(copy);
+        mccs.set(copy);
+        testMcControllerSettingsDefaults(mccs);
+
+        TestUtils.testClose(copy, mccs);
+        System.gc();
+    }
+
+    /**
      * Test the {@code SimpleTireMaxImpulseCallback} class.
      */
     private static void doSimpleTireMaxImpulseCallback() {
@@ -173,11 +221,48 @@ public class Test014 {
     }
 
     /**
+     * Test the {@code TrackedVehicleControllerSettings} class.
+     */
+    private static void doTvControllerSettings() {
+        TrackedVehicleControllerSettings tvcs
+                = new TrackedVehicleControllerSettings();
+        testTvControllerSettingsDefaults(tvcs);
+
+        ConstTrackedVehicleControllerSettings copy
+                = new TrackedVehicleControllerSettings(tvcs);
+        testTvControllerSettingsDefaults(copy);
+        tvcs.set(copy);
+        testTvControllerSettingsDefaults(tvcs);
+
+        TestUtils.testClose(copy, tvcs);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code VehicleAntiRollBar} class.
+     */
+    private static void doVehicleAntiRollBar() {
+        VehicleAntiRollBar varb = new VehicleAntiRollBar();
+        testVehicleAntiRollBarDefaults(varb);
+
+        ConstVehicleAntiRollBar copy = new VehicleAntiRollBar(varb);
+        testVehicleAntiRollBarSetters(varb);
+        testVehicleAntiRollBarDefaults(copy);
+        varb.set(copy);
+        testVehicleAntiRollBarDefaults(varb);
+
+        TestUtils.testClose(copy, varb);
+        System.gc();
+    }
+
+    /**
      * Test the {@code VehicleCollisionTesterCastCylinder} class.
      */
     private static void doVehicleCollisionTesterCastCylinder() {
         VehicleCollisionTesterCastCylinder vctcc
                 = new VehicleCollisionTesterCastCylinder(Layers.MOVING);
+        testVctDefaults(vctcc);
+        testVctSetters(vctcc);
 
         TestUtils.testClose(vctcc);
         System.gc();
@@ -189,6 +274,8 @@ public class Test014 {
     private static void doVehicleCollisionTesterCastSphere() {
         VehicleCollisionTesterCastSphere vctcs
                 = new VehicleCollisionTesterCastSphere(Layers.MOVING, 0.3f);
+        testVctDefaults(vctcs);
+        testVctSetters(vctcs);
 
         TestUtils.testClose(vctcs);
         System.gc();
@@ -200,6 +287,8 @@ public class Test014 {
     private static void doVehicleCollisionTesterRay() {
         VehicleCollisionTesterRay vctr
                 = new VehicleCollisionTesterRay(Layers.MOVING);
+        testVctDefaults(vctr);
+        testVctSetters(vctr);
 
         TestUtils.testClose(vctr);
         System.gc();
@@ -303,6 +392,75 @@ public class Test014 {
         System.gc();
     }
 
+    /**
+     * Test the {@code VehicleDifferentialSettings} class.
+     */
+    private static void doVehicleDifferentialSettings() {
+        VehicleDifferentialSettings vds = new VehicleDifferentialSettings();
+        testVehicleDifferentialSettingsDefaults(vds);
+
+        ConstVehicleDifferentialSettings copy
+                = new VehicleDifferentialSettings(vds);
+        testVehicleDifferentialSettingsSetters(vds);
+        testVehicleDifferentialSettingsDefaults(copy);
+        vds.set(copy);
+        testVehicleDifferentialSettingsDefaults(vds);
+
+        TestUtils.testClose(copy, vds);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code VehicleEngineSettings} class.
+     */
+    private static void doVehicleEngineSettings() {
+        VehicleEngineSettings ves = new VehicleEngineSettings();
+        testVehicleEngineSettingsDefaults(ves);
+
+        ConstVehicleEngineSettings copy = new VehicleEngineSettings(ves);
+        testVehicleEngineSettingsSetters(ves);
+        testVehicleEngineSettingsDefaults(copy);
+        ves.set(copy);
+        testVehicleEngineSettingsDefaults(ves);
+
+        TestUtils.testClose(copy, ves);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code VehicleTrackSettings} class.
+     */
+    private static void doVehicleTrackSettings() {
+        VehicleTrackSettings vts = new VehicleTrackSettings();
+        testVehicleTrackSettingsDefaults(vts);
+
+        ConstVehicleTrackSettings copy = new VehicleTrackSettings(vts);
+        testVehicleTrackSettingsSetters(vts);
+        testVehicleTrackSettingsDefaults(copy);
+        vts.set(copy);
+        testVehicleTrackSettingsDefaults(vts);
+
+        TestUtils.testClose(copy, vts);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code VehicleTransmissionSettings} class.
+     */
+    private static void doVehicleTransmissionSettings() {
+        VehicleTransmissionSettings vtms = new VehicleTransmissionSettings();
+        testVehicleTransmissionSettingsDefaults(vtms);
+
+        ConstVehicleTransmissionSettings copy
+                = new VehicleTransmissionSettings(vtms);
+        testVehicleTransmissionSettingsSetters(vtms);
+        testVehicleTransmissionSettingsDefaults(copy);
+        vtms.set(copy);
+        testVehicleTransmissionSettingsDefaults(vtms);
+
+        TestUtils.testClose(copy, vtms);
+        System.gc();
+    }
 
     /**
      * Test the {@code WheelSettingsTv} class.
@@ -361,6 +519,127 @@ public class Test014 {
 
         TestUtils.testClose(copy, wvcs);
         System.gc();
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code MotorcycleControllerSettings}.
+     *
+     * @param mccs the settings to test (not {@code null}, unaffected)
+     */
+    private static void testMcControllerSettingsDefaults(
+            ConstMotorcycleControllerSettings mccs) {
+        testWvControllerSettingsDefaults(mccs);
+
+        Assert.assertEquals(0.8f, mccs.getLeanSmoothingFactor(), 0f);
+        Assert.assertEquals(5_000f, mccs.getLeanSpringConstant(), 0f);
+        Assert.assertEquals(1_000f, mccs.getLeanSpringDamping(), 0f);
+        Assert.assertEquals(0f, mccs.getLeanSpringIntegrationCoefficient(), 0f);
+        Assert.assertEquals(
+                4f, mccs.getLeanSpringIntegrationCoefficientDecay(), 0f);
+        Assert.assertEquals(JphMath.JPH_PI / 4, mccs.getMaxLeanAngle(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code MotorcycleControllerSettings}.
+     *
+     * @param mccs the settings to test (not {@code null}, modified)
+     */
+    private static void testMcControllerSettingsSetters(
+            MotorcycleControllerSettings mccs) {
+        mccs.setLeanSmoothingFactor(0.7f);
+        mccs.setLeanSpringConstant(3_300f);
+        mccs.setLeanSpringDamping(800f);
+        mccs.setLeanSpringIntegrationCoefficient(2f);
+        mccs.setLeanSpringIntegrationCoefficientDecay(5f);
+        mccs.setMaxLeanAngle(0.4f);
+
+        testWvControllerSettingsSetters(mccs);
+
+        Assert.assertEquals(0.7f, mccs.getLeanSmoothingFactor(), 0f);
+        Assert.assertEquals(3_300f, mccs.getLeanSpringConstant(), 0f);
+        Assert.assertEquals(800f, mccs.getLeanSpringDamping(), 0f);
+        Assert.assertEquals(2f, mccs.getLeanSpringIntegrationCoefficient(), 0f);
+        Assert.assertEquals(
+                5f, mccs.getLeanSpringIntegrationCoefficientDecay(), 0f);
+        Assert.assertEquals(0.4f, mccs.getMaxLeanAngle(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code TrackedVehicleControllerSettings}.
+     *
+     * @param tvcs the settings to test (not {@code null}, unaffected)
+     */
+    private static void testTvControllerSettingsDefaults(
+            ConstTrackedVehicleControllerSettings tvcs) {
+        Assert.assertNotNull(tvcs.getEngine());
+        Assert.assertEquals(2, tvcs.getNumTracks());
+        Assert.assertNotNull(tvcs.getTransmission());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code VehicleCollisionTester}.
+     *
+     * @param vct the tester to test (not {@code null}, unaffected)
+     */
+    private static void testVctDefaults(ConstVehicleCollisionTester vct) {
+        Assert.assertNull(vct.getBodyFilter());
+        Assert.assertNull(vct.getBroadPhaseLayerFilter());
+        Assert.assertEquals(Layers.MOVING, vct.getObjectLayer());
+        Assert.assertNull(vct.getObjectLayerFilter());
+    }
+
+    /**
+     * Test the setters of the specified {@code VehicleCollisionTester}.
+     *
+     * @param vct the tester to test (not {@code null}, modified)
+     */
+    private static void testVctSetters(VehicleCollisionTester vct) {
+        BodyFilter bodyFilter = new BodyFilter();
+        vct.setBodyFilter(bodyFilter);
+
+        BroadPhaseLayerFilter bplFilter = new BroadPhaseLayerFilter();
+        vct.setBroadPhaseLayerFilter(bplFilter);
+
+        vct.setObjectLayer(2);
+
+        ObjectLayerFilter olFilter = new ObjectLayerFilter();
+        vct.setObjectLayerFilter(olFilter);
+
+        Assert.assertEquals(bodyFilter, vct.getBodyFilter());
+        Assert.assertEquals(bplFilter, vct.getBroadPhaseLayerFilter());
+        Assert.assertEquals(2, vct.getObjectLayer());
+        Assert.assertEquals(olFilter, vct.getObjectLayerFilter());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code VehicleAntiRollBar}.
+     *
+     * @param varb the bar to test (not {@code null}, unaffected)
+     */
+    private static void testVehicleAntiRollBarDefaults(
+            ConstVehicleAntiRollBar varb) {
+        Assert.assertEquals(0, varb.getLeftWheel());
+        Assert.assertEquals(1, varb.getRightWheel());
+        Assert.assertEquals(1_000f, varb.getStiffness(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code VehicleAntiRollBar}.
+     *
+     * @param varb the bar to test (not {@code null}, modified)
+     */
+    private static void testVehicleAntiRollBarSetters(VehicleAntiRollBar varb) {
+        varb.setLeftWheel(3);
+        varb.setRightWheel(2);
+        varb.setStiffness(432f);
+
+        Assert.assertEquals(3, varb.getLeftWheel());
+        Assert.assertEquals(2, varb.getRightWheel());
+        Assert.assertEquals(432f, varb.getStiffness(), 0f);
     }
 
     /**
@@ -424,6 +703,209 @@ public class Test014 {
         Assert.assertEquals(5, vcs.getNumVelocityStepsOverride());
         Assert.assertEquals(1, vcs.getNumWheels());
         TestUtils.assertEquals(0f, 0f, -1f, vcs.getUp(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code VehicleDifferentialSettings}.
+     *
+     * @param vds the settings to test (not {@code null}, unaffected)
+     */
+    private static void testVehicleDifferentialSettingsDefaults(
+            ConstVehicleDifferentialSettings vds) {
+        Assert.assertEquals(3.42f, vds.getDifferentialRatio(), 0f);
+        Assert.assertEquals(1f, vds.getEngineTorqueRatio(), 0f);
+        Assert.assertEquals(0.5f, vds.getLeftRightSplit(), 0f);
+        Assert.assertEquals(-1, vds.getLeftWheel());
+        Assert.assertEquals(1.4f, vds.getLimitedSlipRatio(), 0f);
+        Assert.assertEquals(-1, vds.getRightWheel());
+    }
+
+    /**
+     * Test the setters of the specified {@code VehicleDifferentialSettings}.
+     *
+     * @param vds the settings to test (not {@code null}, modified)
+     */
+    private static void testVehicleDifferentialSettingsSetters(
+            VehicleDifferentialSettings vds) {
+        vds.setDifferentialRatio(3f);
+        vds.setEngineTorqueRatio(1.5f);
+        vds.setLeftRightSplit(0.56f);
+        vds.setLeftWheel(4);
+        vds.setLimitedSlipRatio(1.2f);
+        vds.setRightWheel(3);
+
+        Assert.assertEquals(3f, vds.getDifferentialRatio(), 0f);
+        Assert.assertEquals(1.5f, vds.getEngineTorqueRatio(), 0f);
+        Assert.assertEquals(0.56f, vds.getLeftRightSplit(), 0f);
+        Assert.assertEquals(4, vds.getLeftWheel());
+        Assert.assertEquals(1.2f, vds.getLimitedSlipRatio(), 0f);
+        Assert.assertEquals(3, vds.getRightWheel());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code VehicleEngineSettings}.
+     *
+     * @param ves the settings to test (not {@code null}, unaffected)
+     */
+    private static void testVehicleEngineSettingsDefaults(
+            ConstVehicleEngineSettings ves) {
+        Assert.assertEquals(0.2f, ves.getAngularDamping(), 0f);
+        Assert.assertEquals(0.5f, ves.getInertia(), 0f);
+        Assert.assertEquals(6_000f, ves.getMaxRpm(), 0f);
+        Assert.assertEquals(500f, ves.getMaxTorque(), 0f);
+        Assert.assertEquals(1_000f, ves.getMinRpm(), 0f);
+
+        ConstLinearCurve nt = ves.getNormalizedTorque();
+        Assert.assertEquals(3, nt.countPoints());
+        Assert.assertEquals(0f, nt.getPointX(0), 0f);
+        Assert.assertEquals(0.66f, nt.getPointX(1), 0f);
+        Assert.assertEquals(1f, nt.getPointX(2), 0f);
+        Assert.assertEquals(0.8f, nt.getPointY(0), 0f);
+        Assert.assertEquals(1f, nt.getPointY(1), 0f);
+        Assert.assertEquals(0.8f, nt.getPointY(2), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code VehicleEngineSettings}.
+     *
+     * @param ves the settings to test (not {@code null}, modified)
+     */
+    private static void testVehicleEngineSettingsSetters(
+            VehicleEngineSettings ves) {
+        ves.setAngularDamping(0.33f);
+        ves.setInertia(0.44f);
+        ves.setMaxRpm(6_600f);
+        ves.setMaxTorque(555f);
+        ves.setMinRpm(888f);
+
+        LinearCurve nt = new LinearCurve();
+        nt.addPoint(0f, 0f);
+        nt.addPoint(1f, 9f);
+        ves.setNormalizedTorque(nt);
+
+        Assert.assertEquals(0.33f, ves.getAngularDamping(), 0f);
+        Assert.assertEquals(0.44f, ves.getInertia(), 0f);
+        Assert.assertEquals(6_600f, ves.getMaxRpm(), 0f);
+        Assert.assertEquals(555f, ves.getMaxTorque(), 0f);
+        Assert.assertEquals(888f, ves.getMinRpm(), 0f);
+
+        ConstLinearCurve ntCopy = ves.getNormalizedTorque();
+        Assert.assertEquals(2, ntCopy.countPoints());
+        Assert.assertEquals(0f, ntCopy.getPointX(0), 0f);
+        Assert.assertEquals(1f, ntCopy.getPointX(1), 0f);
+        Assert.assertEquals(0f, ntCopy.getPointY(0), 0f);
+        Assert.assertEquals(9f, ntCopy.getPointY(1), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code VehicleTrackSettings}.
+     *
+     * @param vts the settings to test (not {@code null}, unaffected)
+     */
+    private static void testVehicleTrackSettingsDefaults(
+            ConstVehicleTrackSettings vts) {
+        Assert.assertEquals(0.5f, vts.getAngularDamping(), 0f);
+        Assert.assertEquals(6f, vts.getDifferentialRatio(), 0f);
+        Assert.assertEquals(0, vts.getDrivenWheel());
+        Assert.assertEquals(10f, vts.getInertia(), 0f);
+        Assert.assertEquals(0, vts.getNumWheels());
+    }
+
+    /**
+     * Test the setters of the specified {@code VehicleTrackSettings}.
+     *
+     * @param vts the settings to test (not {@code null}, modified)
+     */
+    private static void testVehicleTrackSettingsSetters(
+            VehicleTrackSettings vts) {
+        vts.addWheel(0);
+        vts.addWheel(2);
+        vts.addWheel(3);
+        vts.addWheel(1);
+        vts.setAngularDamping(1.2f);
+        vts.setDifferentialRatio(4f);
+        vts.setDrivenWheel(1);
+        vts.setInertia(8f);
+
+        Assert.assertEquals(1.2f, vts.getAngularDamping(), 0f);
+        Assert.assertEquals(4f, vts.getDifferentialRatio(), 0f);
+        Assert.assertEquals(1, vts.getDrivenWheel());
+        Assert.assertEquals(8f, vts.getInertia(), 0f);
+        Assert.assertEquals(4, vts.getNumWheels());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code VehicleTransmissionSettings}.
+     *
+     * @param vts the settings to test (not {@code null}, unaffected)
+     */
+    private static void testVehicleTransmissionSettingsDefaults(
+            ConstVehicleTransmissionSettings vts) {
+        Assert.assertEquals(0.3f, vts.getClutchReleaseTime(), 0f);
+        Assert.assertEquals(10f, vts.getClutchStrength(), 0f);
+
+        float[] ratios = vts.getGearRatios();
+        Assert.assertEquals(5, ratios.length);
+        Assert.assertEquals(2.66f, ratios[0], 0f);
+        Assert.assertEquals(1.78f, ratios[1], 0f);
+        Assert.assertEquals(1.3f, ratios[2], 0f);
+        Assert.assertEquals(1f, ratios[3], 0f);
+        Assert.assertEquals(0.74f, ratios[4], 0f);
+
+        Assert.assertEquals(ETransmissionMode.Auto, vts.getMode());
+
+        float[] reverseRatios = vts.getReverseGearRatios();
+        Assert.assertEquals(1, reverseRatios.length);
+        Assert.assertEquals(-2.9f, reverseRatios[0], 0f);
+
+        Assert.assertEquals(2_000f, vts.getShiftDownRpm(), 0f);
+        Assert.assertEquals(4_000f, vts.getShiftUpRpm(), 0f);
+        Assert.assertEquals(0.5f, vts.getSwitchLatency(), 0f);
+        Assert.assertEquals(0.5f, vts.getSwitchTime(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code VehicleTransmissionSettings}.
+     *
+     * @param vts the settings to test (not {@code null}, modified)
+     */
+    private static void testVehicleTransmissionSettingsSetters(
+            VehicleTransmissionSettings vts) {
+        vts.setClutchReleaseTime(0.25f);
+        vts.setClutchStrength(12f);
+        vts.setGearRatios(3f, 2f, 1.5f, 1f);
+        vts.setMode(ETransmissionMode.Manual);
+        vts.setReverseGearRatios(-3f, -1f);
+        vts.setShiftDownRpm(2_400f);
+        vts.setShiftUpRpm(4_200f);
+        vts.setSwitchLatency(0.6f);
+        vts.setSwitchTime(0.44f);
+
+        Assert.assertEquals(0.25f, vts.getClutchReleaseTime(), 0f);
+        Assert.assertEquals(12f, vts.getClutchStrength(), 0f);
+
+        float[] ratios = vts.getGearRatios();
+        Assert.assertEquals(4, ratios.length);
+        Assert.assertEquals(3f, ratios[0], 0f);
+        Assert.assertEquals(2f, ratios[1], 0f);
+        Assert.assertEquals(1.5f, ratios[2], 0f);
+        Assert.assertEquals(1f, ratios[3], 0f);
+
+        Assert.assertEquals(ETransmissionMode.Manual, vts.getMode());
+
+        float[] reverseRatios = vts.getReverseGearRatios();
+        Assert.assertEquals(2, reverseRatios.length);
+        Assert.assertEquals(-3f, reverseRatios[0], 0f);
+        Assert.assertEquals(-1f, reverseRatios[1], 0f);
+
+        Assert.assertEquals(2_400f, vts.getShiftDownRpm(), 0f);
+        Assert.assertEquals(4_200f, vts.getShiftUpRpm(), 0f);
+        Assert.assertEquals(0.6f, vts.getSwitchLatency(), 0f);
+        Assert.assertEquals(0.44f, vts.getSwitchTime(), 0f);
     }
 
     /**
