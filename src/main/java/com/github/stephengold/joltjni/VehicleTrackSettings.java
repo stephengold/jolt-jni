@@ -89,6 +89,27 @@ public class VehicleTrackSettings
     }
 
     /**
+     * Alter the angular damping factor. (native attribute: mAngularDamping)
+     *
+     * @param factor the desired damping factor (per second, default=0.5)
+     */
+    public void setAngularDamping(float factor) {
+        long settingsVa = va();
+        setAngularDamping(settingsVa, factor);
+    }
+
+    /**
+     * Alter the number of gearbox rotations per driven-wheel rotation. (native
+     * attribute: mDifferentialRatio)
+     *
+     * @param ratio the desired ratio (default=6)
+     */
+    public void setDifferentialRatio(float ratio) {
+        long settingsVa = va();
+        setDifferentialRatio(settingsVa, ratio);
+    }
+
+    /**
      * Alter which wheel is powered by the engine. (native attribute:
      * mDrivenWheel)
      *
@@ -97,6 +118,17 @@ public class VehicleTrackSettings
     public void setDrivenWheel(int wheelIndex) {
         long settingsVa = va();
         setDrivenWheel(settingsVa, wheelIndex);
+    }
+
+    /**
+     * Alter the moment of inertia of the track and its wheels as seen on the
+     * driven wheel. (native attribute: mInertia)
+     *
+     * @param inertia the moment (in kilogram.meter^2, default=10)
+     */
+    public void setInertia(float inertia) {
+        long settingsVa = va();
+        setInertia(settingsVa, inertia);
     }
     // *************************************************************************
     // ConstVehicleTrackSettings methods
@@ -193,5 +225,12 @@ public class VehicleTrackSettings
 
     native private static int getNumWheels(long settingsVa);
 
+    native private static void setAngularDamping(long settingsVa, float factor);
+
+    native private static void setDifferentialRatio(
+            long settingsVa, float ratio);
+
     native private static void setDrivenWheel(long settingsVa, int wheelIndex);
+
+    native private static void setInertia(long settingsVa, float inertia);
 }

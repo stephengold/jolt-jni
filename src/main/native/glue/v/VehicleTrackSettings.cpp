@@ -141,6 +141,30 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
+ * Method:    setAngularDamping
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_setAngularDamping
+  (JNIEnv *, jclass, jlong settingsVa, jfloat factor) {
+    VehicleTrackSettings * const pSettings
+            = reinterpret_cast<VehicleTrackSettings *> (settingsVa);
+    pSettings->mAngularDamping = factor;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
+ * Method:    setDifferentialRatio
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_setDifferentialRatio
+  (JNIEnv *, jclass, jlong settingsVa, jfloat ratio) {
+    VehicleTrackSettings * const pSettings
+            = reinterpret_cast<VehicleTrackSettings *> (settingsVa);
+    pSettings->mDifferentialRatio = ratio;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
  * Method:    setDrivenWheel
  * Signature: (JI)V
  */
@@ -149,4 +173,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_
     VehicleTrackSettings * const pSettings
             = reinterpret_cast<VehicleTrackSettings *> (settingsVa);
     pSettings->mDrivenWheel = wheelIndex;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
+ * Method:    setInertia
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_setInertia
+  (JNIEnv *, jclass, jlong settingsVa, jfloat inertia) {
+    VehicleTrackSettings * const pSettings
+            = reinterpret_cast<VehicleTrackSettings *> (settingsVa);
+    pSettings->mInertia = inertia;
 }
