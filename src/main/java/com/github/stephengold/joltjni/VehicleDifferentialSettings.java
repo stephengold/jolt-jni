@@ -21,13 +21,17 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVehicleDifferentialSettings;
+
 /**
  * Settings used to configure the differential of a
  * {@code WheeledVehicleController}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleDifferentialSettings extends JoltPhysicsObject {
+public class VehicleDifferentialSettings
+        extends JoltPhysicsObject
+        implements ConstVehicleDifferentialSettings {
     // *************************************************************************
     // constructors
 
@@ -55,8 +59,9 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public VehicleDifferentialSettings(VehicleDifferentialSettings original) {
-        long originalVa = original.va();
+    public VehicleDifferentialSettings(
+            ConstVehicleDifferentialSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
@@ -64,92 +69,13 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the number of gearbox rotations per wheel rotation. The settings
-     * are unaffected. (native attribute: mDifferentialRatio)
-     *
-     * @return the ratio
-     */
-    public float getDifferentialRatio() {
-        long settingsVa = va();
-        float result = getDifferentialRatio(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the fraction of the engine's torque that is applied to this
-     * differential. The settings are unaffected. (native attribute:
-     * mEngineTorqueRatio)
-     *
-     * @return the fraction
-     */
-    public float getEngineTorqueRatio() {
-        long settingsVa = va();
-        float result = getEngineTorqueRatio(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the fraction of the engine's torque that is applied to the right
-     * wheel. The settings are unaffected, (native attribute: mLeftRightSplit)
-     *
-     * @return the desired fraction (all left=0, all right=1)
-     */
-    public float getLeftRightSplit() {
-        long settingsVa = va();
-        float result = getLeftRightSplit(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the index of the left wheel. The settings are unaffected. (native
-     * attribute: mLeftWheel)
-     *
-     * @return the index of the wheel (&ge;0) or -1 for none
-     */
-    public int getLeftWheel() {
-        long settingsVa = va();
-        int result = getLeftWheel(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the ratio of maximum wheel speed to minimum wheel speed. The
-     * settings are unaffected. (native member: mLimitedSlipRatio)
-     *
-     * @return the ratio (&gt;1, {@code FLT_MAX} for an open differential)
-     */
-    public float getLimitedSlipRatio() {
-        long settingsVa = va();
-        float result = getLimitedSlipRatio(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the index of the right wheel. The settings are unaffected. (native
-     * attribute: mRightWheel)
-     *
-     * @return the index of the wheel (&ge;0) or -1 for none
-     */
-    public int getRightWheel() {
-        long settingsVa = va();
-        int result = getRightWheel(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Copy the argument to the current settings.
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(VehicleDifferentialSettings source) {
+    public void set(ConstVehicleDifferentialSettings source) {
         long targetVa = va();
-        long sourceVa = source.va();
+        long sourceVa = source.targetVa();
         assign(targetVa, sourceVa);
     }
 
@@ -225,6 +151,93 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     public void setRightWheel(int wheelIndex) {
         long settingsVa = va();
         setRightWheel(settingsVa, wheelIndex);
+    }
+    // *************************************************************************
+    // ConstVehicleDifferentialSettings methods
+
+    /**
+     * Return the number of gearbox rotations per wheel rotation. The settings
+     * are unaffected. (native attribute: mDifferentialRatio)
+     *
+     * @return the ratio
+     */
+    @Override
+    public float getDifferentialRatio() {
+        long settingsVa = va();
+        float result = getDifferentialRatio(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the fraction of the engine's torque that is applied to this
+     * differential. The settings are unaffected. (native attribute:
+     * mEngineTorqueRatio)
+     *
+     * @return the fraction
+     */
+    @Override
+    public float getEngineTorqueRatio() {
+        long settingsVa = va();
+        float result = getEngineTorqueRatio(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the fraction of the engine's torque that is applied to the right
+     * wheel. The settings are unaffected. (native attribute: mLeftRightSplit)
+     *
+     * @return the desired fraction (all left=0, all right=1)
+     */
+    @Override
+    public float getLeftRightSplit() {
+        long settingsVa = va();
+        float result = getLeftRightSplit(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the index of the left wheel. The settings are unaffected. (native
+     * attribute: mLeftWheel)
+     *
+     * @return the index of the wheel (&ge;0) or -1 for none
+     */
+    @Override
+    public int getLeftWheel() {
+        long settingsVa = va();
+        int result = getLeftWheel(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the ratio of maximum wheel speed to minimum wheel speed. The
+     * settings are unaffected. (native member: mLimitedSlipRatio)
+     *
+     * @return the ratio (&gt;1, {@code FLT_MAX} for an open differential)
+     */
+    @Override
+    public float getLimitedSlipRatio() {
+        long settingsVa = va();
+        float result = getLimitedSlipRatio(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the index of the right wheel. The settings are unaffected. (native
+     * attribute: mRightWheel)
+     *
+     * @return the index of the wheel (&ge;0) or -1 for none
+     */
+    @Override
+    public int getRightWheel() {
+        long settingsVa = va();
+        int result = getRightWheel(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods
