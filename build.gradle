@@ -20,7 +20,7 @@ plugins {
 ext {
     joltFork = 'stephengold'
     joltTag = 'sg260518'
-    downloadedHairStraightZip = "downloads/wStraightHair.zip"
+    downloadedHairStraightZip = 'downloads/wStraightHair.zip'
     downloadedJoltZip = "downloads/JoltPhysics-${joltTag}.zip"
     downloadedVhacdZip = 'downloads/v-hacd-4.1.0.zip'
 
@@ -653,8 +653,8 @@ tasks.withType(Sign).configureEach {
 // Register tasks to download ZIP archives:
 
 tasks.register('downloadHairStraightZip', Download) {
-    //src "https://www.cemyuksel.com/research/hairmodels/wStraight.zip"
-    src "https://raw.githubusercontent.com/stephengold/hair-model-files/refs/heads/master/wStraight.zip"
+    //src 'https://www.cemyuksel.com/research/hairmodels/wStraight.zip'
+    src 'https://raw.githubusercontent.com/stephengold/hair-model-files/refs/heads/master/wStraight.zip'
     dest file(downloadedHairStraightZip)
     overwrite false
 }
@@ -674,7 +674,7 @@ tasks.register('downloadVhacdZip', Download) {
 tasks.register('unpackHairStraight', Copy) {
     dependsOn('downloadHairStraightZip', 'unpackJoltAssets')
     from (zipTree(downloadedHairStraightZip)) {
-        include "wStraight.hair"
+        include 'wStraight.hair'
     }
     into layout.projectDirectory.dir('Assets')
 }
