@@ -1,5 +1,39 @@
 # Release log for the Jolt-JNI project
 
+## Version 5.1.0 released on 1 June 2026
+
++ Bugfix:  logic error in `VehicleTransmissionSettings.setClutchReleaseTime()`
++ Bugfix:  unsatisfied link in `RackAndPinionConstraintSettings`
+
++ Added `set()` copying methods to 83 classes.
++ Added 5 read-only interfaces:
+  + `ConstMotorcycleControllerSettings`
+  + `ConstTrackedVehicleControllerSettings`
+  + `ConstVehicleDifferentialSettings`
+  + `ConstVehicleTrackSettings`
+  + `ConstWheeledVehicleControllerSettings`
++ Added getters and setters for 6 attributes of the
+  `MotorcycleControllerSettings` class.
++ Added accessors for 3 attributes of the `VehicleCollisionTester` class.
++ Added `isEqual()` methods to 5 classes.
++ Added 3 public setters to the `VehicleTrackSettings` class.
++ Added copy constructors for the `CollisionGroup` and
+  `IndexedTriangleNoMaterial` classes.
++ Added accessors for the `mLeftRightSplit` attribute of
+  `VehicleDifferentialSettings` objects.
++ Added getters for the engine and transmission of
+  `TrackedVehicleControllerSettings` objects.
++ Added accessors for the slip ratio of a `WheeledVehicleControllerSettings`.
++ Added the `getRotationAngle()` method to the `QuatArg` interface.
++ Added constant values `cBroadPhaseLayerInvalid` and `cObjectLayerInvalid`
+  to the `Jolt` class.
++ Overrode various `equals()`, `hashCode()`, and `toString()` methods.
+
++ Updated the Jolt-Physics source and assets to sg260518 (=153fd6f).
++ Began building with Vulkan SDK v1.4.350 and Xcode v26.5.0 .
++ Updated the OSHI library to v7.2.1 .
+
+
 ## Version 5.0.0 released on 20 May 2026
 
 + API changes:
