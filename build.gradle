@@ -14,12 +14,10 @@ plugins {
     alias(libs.plugins.download) // to retrieve files from URLs
 }
 
-// $artifact, $jjVersion, $useMTL, and $useVK are set in
+// $artifact, $jjVersion, $joltFork, $joltTag, $useMTL, and $useVK are set in
 // the gradle.properties file or by -P options on the Gradle command line.
 
 ext {
-    joltFork = 'stephengold'
-    joltTag = 'sg260518'
     downloadedHairStraightZip = 'downloads/wStraightHair.zip'
     downloadedJoltZip = "downloads/JoltPhysics-${joltTag}.zip"
     downloadedVhacdZip = 'downloads/v-hacd-4.1.0.zip'
