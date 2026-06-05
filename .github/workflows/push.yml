@@ -337,9 +337,9 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v6
       - run: sudo apt-get update
-      - run: sudo apt install g++-9-arm-linux-gnueabihf
+      - run: sudo apt install g++-11-arm-linux-gnueabihf
       - uses: gradle/actions/setup-gradle@v6
-      - run: arm-linux-gnueabihf-g++-9 --version
+      - run: arm-linux-gnueabihf-g++-11 --version
       - name: gradlew -Ptarget=Linux_ARM32hf install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
