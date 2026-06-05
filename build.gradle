@@ -122,7 +122,7 @@ model {
                 linker.executable = 'arm-linux-gnueabihf-g++-11'
             }
         }
-        gcc13Loong(Gcc) { // used when cross-compiling on Linux
+        gcc13Loong(Gcc) { // cross-compile on Linux
             target('Linux_LoongArch64') {
                 cppCompiler.executable = 'loongarch64-linux-gnu-g++-13'
                 linker.executable = 'loongarch64-linux-gnu-g++-13'
@@ -287,7 +287,7 @@ model {
                     }
 
                     if (os == 'osx') {
-                        // workaround when XCode isn't installed:
+                        // workaround when Xcode isn't installed:
                         //cppCompiler.args '-I', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1'
                         cppCompiler.args '-I', "$javaHome/include/darwin"
                     } else if (os == 'linux') {
