@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,14 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_CollisionEstimationResult
- * Method:    countImpulses
+ * Method:    countContactImpulses
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_countImpulses
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_countContactImpulses
   (JNIEnv *, jclass, jlong estimateVa) {
     const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    size_t result = pEstimate->mImpulses.size();
+    const uint result = pEstimate->mContactImpulse.size();
     return result;
 }
 
@@ -95,16 +95,15 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
 
 /*
  * Class:     com_github_stephengold_joltjni_CollisionEstimationResult
- * Method:    getImpulse
- * Signature: (JI)J
+ * Method:    getContactImpulse
+ * Signature: (JI)F
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getImpulse
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getContactImpulse
   (JNIEnv *, jclass, jlong estimateVa, jint index) {
-    CollisionEstimationResult * const pEstimate
+    const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    CollisionEstimationResult::Impulse * const pResult
-            = &pEstimate->mImpulses[index];
-    return reinterpret_cast<jlong> (pResult);
+    const float result = pEstimate->mContactImpulse[index];
+    return result;
 }
 
 /*

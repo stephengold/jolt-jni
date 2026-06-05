@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -74,19 +74,16 @@ public class CollisionEstimationResult extends JoltPhysicsObject {
     }
 
     /**
-     * Access the impulse for every contact point, as an array. (native
-     * attribute: mImpulses)
+     * Copy the impulses to an array. (native attribute: mContactImpulse)
      *
-     * @return a new array of new JVM objects with pre-existing native objects
-     * assigned
+     * @return a new array of impulses (in kilogram.meter per second)
      */
-    public Impulse[] getImpulses() {
+    public float[] getContactImpulses() {
         long estimateVa = va();
-        int numImpulses = countImpulses(estimateVa);
-        Impulse[] result = new Impulse[numImpulses];
+        int numImpulses = countContactImpulses(estimateVa);
+        float[] result = new float[numImpulses];
         for (int index = 0; index < numImpulses; ++index) {
-            long impulseVa = getImpulse(estimateVa, index);
-            result[index] = new Impulse(this, impulseVa);
+            result[index] = getContactImpulse(estimateVa, index);
         }
 
         return result;
@@ -124,7 +121,7 @@ public class CollisionEstimationResult extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static int countImpulses(long estimateVa);
+    native private static int countContactImpulses(long estimateVa);
 
     native private static long createDefault();
 
@@ -136,7 +133,7 @@ public class CollisionEstimationResult extends JoltPhysicsObject {
     native private static void getAngularVelocity2(
             long estimateVa, FloatBuffer storeFloats);
 
-    native private static long getImpulse(long estimateVa, int index);
+    native private static float getContactImpulse(long estimateVa, int index);
 
     native private static void getLinearVelocity1(
             long estimateVa, FloatBuffer storeFloats);

@@ -153,8 +153,8 @@ public void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactMan
 
 	// Trace the result
 	String impulses_str="";
-	for (Impulse impulse : result.getImpulses())
-		impulses_str += String.format("(%f, %f, %f) ", (double)impulse.getContactImpulse(), (double)impulse.getFrictionImpulse1(), (double)impulse.getFrictionImpulse2());
+	for (float impulse : result.getContactImpulses())
+		impulses_str += String.format("%f ", (double)impulse);
 
 	Trace("Estimated velocity after collision, body1: %08x, v=%s, w=%s, body2: %08x, v=%s, w=%s, impulses: %s",
 		inBody1.getId(), (result.getLinearVelocity1()), (result.getAngularVelocity1()),
