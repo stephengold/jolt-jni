@@ -61,6 +61,14 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      */
     private ConstBroadPhaseLayerInterface layerMap;
     /**
+     * cached reference to the system's locking {@code NarrowPhaseQuery}
+     */
+    final private ConstNarrowPhaseQuery narrowPhaseQuery;
+    /**
+     * cached reference to the system's no-lock {@code NarrowPhaseQuery}
+     */
+    final private ConstNarrowPhaseQuery narrowQueryNoLock;
+    /**
      * protect the ObjectLayerPairFilter from garbage collection
      */
     private ConstObjectLayerPairFilter ovoFilter;
@@ -81,14 +89,6 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * map virtual {@code PhysicsSystem} addresses back to JVM objects
      */
     final private static Map<Long, PhysicsSystem> va2ps = new HashMap<>(32);
-    /**
-     * cached reference to the system's locking {@code NarrowPhaseQuery}
-     */
-    final private ConstNarrowPhaseQuery narrowPhaseQuery;
-    /**
-     * cached reference to the system's no-lock {@code NarrowPhaseQuery}
-     */
-    final private ConstNarrowPhaseQuery narrowQueryNoLock;
     /**
      * protect the {@code SimShapeFilter} (if any) from garbage collection
      */
