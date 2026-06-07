@@ -28,7 +28,6 @@ import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.std.Mt19937;
 import java.util.*;
 import static com.github.stephengold.joltjni.JphMath.*;
-import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
  * A line-for-line Java translation of the Jolt-Physics "high-speed scene"

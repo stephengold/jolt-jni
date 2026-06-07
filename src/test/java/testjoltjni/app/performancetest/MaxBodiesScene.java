@@ -23,9 +23,6 @@ package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
-import java.util.*;
-import static com.github.stephengold.joltjni.JphMath.*;
-import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
  * A line-for-line Java translation of the Jolt-Physics "max-bodies scene"
