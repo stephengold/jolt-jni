@@ -28,7 +28,6 @@ import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.JphMath.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
-import static com.github.stephengold.joltjni.std.Std.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics enhanced internal-edge removal test.
  * <p>
@@ -42,6 +41,7 @@ void CreateSlidingObjects(RVec3Arg inStart)
 {
 	// Slide the shapes over the grid of boxes
 	RVec3 pos = minus(inStart , new RVec3(0, 0, 12.0));
+	String  labels[] = { "Normal", "Enhanced edge removal" };
 	for (int enhanced_removal = 0; enhanced_removal < 2; ++enhanced_removal)
 	{
 		// A box
@@ -59,13 +59,13 @@ void CreateSlidingObjects(RVec3Arg inStart)
 		plusEquals(pos ,new RVec3(0, 0, 5.0));
 
 		// Compound
-		ShapeRefC box = new BoxShape(Vec3.sReplicate(0.1f)).toRefC();
+		ShapeRefC box = new BoxShape(Vec3.sReplicate(0.2f)).toRefC();
 		StaticCompoundShapeSettings compound=new StaticCompoundShapeSettings();
 		compound.setEmbedded();
 		for (int x = 0; x < 2; ++x)
 			for (int y = 0; y < 2; ++y)
 				for (int z = 0; z < 2; ++z)
-					compound.addShape(new Vec3(x == 0? -1.9f : 1.9f, y == 0? -1.9f : 1.9f, z == 0? -1.9f : 1.9f), Quat.sIdentity(), box);
+					compound.addShape(new Vec3(x == 0? -1.8f : 1.8f, y == 0? -1.8f : 1.8f, z == 0? -1.8f : 1.8f), Quat.sIdentity(), box);
 		BodyCreationSettings compound_bcs=new BodyCreationSettings(compound, pos, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 		compound_bcs.setLinearVelocity (new Vec3(20, 0, 0));
 		compound_bcs.setEnhancedInternalEdgeRemoval ( enhanced_removal == 1);
@@ -85,7 +85,7 @@ public void Initialize()
 		for (int x = -10; x < 10; ++x)
 			for (int z = -10; z < 10; ++z)
 				compound_settings.addShape(new Vec3(size * x, 0, size * z), Quat.sIdentity(), box_shape);
-		mBodyInterface.createAndAddBody(new BodyCreationSettings(compound_settings, new RVec3(0, -1, -40), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+		int id = mBodyInterface.createAndAddBody(new BodyCreationSettings(compound_settings, new RVec3(0, -1, -40), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 
 		CreateSlidingObjects(new RVec3(-18, 1.9, -40.0));
 	}
@@ -113,9 +113,9 @@ public void Initialize()
 			}
 
 		MeshShapeSettings mesh_settings=new MeshShapeSettings(triangles);
-		mesh_settings.setActiveEdgeCosThresholdAngle ( FLT_MAX); // Turn off regular active edge determination so that we only rely on the mEnhancedInternalEdgeRemoval flag
+		mesh_settings.setActiveEdgeCosThresholdAngle ( -1.0f); // Turn off regular active edge determination so that we only rely on the mEnhancedInternalEdgeRemoval flag
 		mesh_settings.setEmbedded();
-		mBodyInterface.createAndAddBody(new BodyCreationSettings(mesh_settings, RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+		int id = mBodyInterface.createAndAddBody(new BodyCreationSettings(mesh_settings, RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 
 		CreateSlidingObjects(new RVec3(-18, 1.9, 0));
 	}
@@ -164,7 +164,7 @@ public void Initialize()
 		plane_mesh.setEmbedded();
 		BodyCreationSettings level_plane=new BodyCreationSettings(plane_mesh, new RVec3(-10, 0, 50), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 		level_plane.setFriction ( 1);
-		mBodyInterface.createAndAddBody(level_plane, EActivation.DontActivate);
+		int id = mBodyInterface.createAndAddBody(level_plane, EActivation.DontActivate);
 
 		// Roll a ball over it
 		BodyCreationSettings level_ball=new BodyCreationSettings(new SphereShape(0.5f), new RVec3(-10, 1, 41), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
@@ -206,9 +206,42 @@ public void Initialize()
 		compound_bcs.setEnhancedInternalEdgeRemoval ( true);
 		mBodyInterface.createAndAddBody(compound_bcs, EActivation.Activate);
 	}
+
+	// Create a super dense grid of triangles
+	{
+		final float size = 0.25f;
+		List<Triangle> triangles=new ArrayList<>();
+		for (int x = -100; x < 100; ++x)
+			for (int z = -5; z < 5; ++z)
+			{
+				float x1 = size * x;
+				float z1 = size * z;
+				float x2 = x1 + size;
+				float z2 = z1 + size;
+
+				Float3 v1 =new Float3(x1, 0, z1);
+				Float3 v2 =new Float3(x2, 0, z1);
+				Float3 v3 =new Float3(x1, 0, z2);
+				Float3 v4 =new Float3(x2, 0, z2);
+
+				triangles.add(new Triangle(v1, v3, v4));
+				triangles.add(new Triangle(v1, v4, v2));
+			}
+
+		MeshShapeSettings mesh_settings=new MeshShapeSettings(triangles);
+		mesh_settings.setActiveEdgeCosThresholdAngle ( -1.0f); // Turn off regular active edge determination so that we only rely on the mEnhancedInternalEdgeRemoval flag
+		mesh_settings.setEmbedded();
+		int id = mBodyInterface.createAndAddBody(new BodyCreationSettings(mesh_settings,new RVec3(0, 0, 80), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+		SetBodyLabel(id, "Dense triangle mesh");
+
+		BodyCreationSettings box_bcs=new BodyCreationSettings(new BoxShape(Vec3.sReplicate(1.0f)),new RVec3(-24, 0.9, 80), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
+		box_bcs.setLinearVelocity (new Vec3(20, 0, 0));
+		box_bcs.setEnhancedInternalEdgeRemoval ( true);
+		mBodyInterface.createAndAddBody(box_bcs, EActivation.Activate);
+	}
 }
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Increase rotation speed of the ball on the flat plane
 	mBodyInterface.addTorque(mLevelBall, new Vec3(JPH_PI * 4, 0, 0));
