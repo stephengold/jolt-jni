@@ -49,7 +49,7 @@ public interface RandomNumberEngine extends ConstJoltPhysicsObject {
     /**
      * Return the next integer in the sequence.
      *
-     * @return an integer value
+     * @return a signed 32-bit value
      */
     int nextInt();
 

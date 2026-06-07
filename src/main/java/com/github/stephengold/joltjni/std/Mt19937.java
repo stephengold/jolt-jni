@@ -87,7 +87,7 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
     /**
      * Return the next integer in the sequence.
      *
-     * @return an integer value
+     * @return an signed 32-bit value
      */
     @Override
     public int nextInt() {
