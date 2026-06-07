@@ -54,13 +54,14 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
         setVirtualAddress(generatorVa, () -> free(generatorVa));
     }
     // *************************************************************************
-    // new methods exposed
+    // RandomEngine methods
 
     /**
      * Return the maximum value that can be generated.
      *
      * @return the maximum value
      */
+    @Override
     public int max() {
         long generatorVa = va();
         int result = max(generatorVa);
@@ -73,14 +74,13 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
      *
      * @return the minimum value
      */
+    @Override
     public int min() {
         long generatorVa = va();
         int result = min(generatorVa);
 
         return result;
     }
-    // *************************************************************************
-    // RandomEngine methods
 
     /**
      * Return the next integer in the sequence.

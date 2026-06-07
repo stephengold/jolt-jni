@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,20 @@ import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 public interface RandomNumberEngine extends ConstJoltPhysicsObject {
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Return the maximum value that can be generated.
+     *
+     * @return the maximum value
+     */
+    int max();
+
+    /**
+     * Return the minimum value that can be generated.
+     *
+     * @return the minimum value
+     */
+    int min();
 
     /**
      * Return the next integer in the sequence.

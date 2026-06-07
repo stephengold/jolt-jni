@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -59,6 +59,32 @@ public class DefaultRandomEngine
     // RandomEngine methods
 
     /**
+     * Return the maximum value that can be generated.
+     *
+     * @return the maximum value
+     */
+    @Override
+    public int max() {
+        long generatorVa = va();
+        int result = max(generatorVa);
+
+        return result;
+    }
+
+    /**
+     * Return the minimum value that can be generated.
+     *
+     * @return the minimum value
+     */
+    @Override
+    public int min() {
+        long generatorVa = va();
+        int result = min(generatorVa);
+
+        return result;
+    }
+
+    /**
      * Return the next integer in the sequence.
      *
      * @return an integer value
@@ -89,6 +115,10 @@ public class DefaultRandomEngine
     native private static long createSeeded(int seed);
 
     native private static void free(long generatorVa);
+
+    native private static int max(long generatorVa);
+
+    native private static int min(long generatorVa);
 
     native private static int nextInt(long generatorVa);
 
