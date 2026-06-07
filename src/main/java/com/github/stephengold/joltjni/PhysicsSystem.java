@@ -173,6 +173,14 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     }
 
     /**
+     * Return the maximum allowed number of contact constraints. (native
+     * constant: cMaxContactConstraintsLimit)
+     *
+     * @return the largest value that {@code init()} can accept
+     */
+    native public static int cMaxContactConstraintsLimit();
+
+    /**
      * Remove and destroy all bodies in the system.
      *
      * @return the number of bodies destroyed (&ge;0)
@@ -296,7 +304,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * @param maxBodyPairs the desired maximum number of body pairs that can be
      * queued at a time (&ge;3)
      * @param maxContactConstraints the desired capacity of the
-     * contact-constraint buffer
+     * contact-constraint buffer (&le;cMaxContactConstraintsLimit)
      * @param map (not {@code null}, alias created)
      * @param ovbFilter (not {@code null}, alias created)
      * @param ovoFilter (not {@code null}, alias created)
