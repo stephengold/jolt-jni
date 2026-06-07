@@ -98,6 +98,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngi
 
 /*
  * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine
+ * Method:    nextUnsigned
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_nextUnsigned
+  (JNIEnv *, jclass, jlong generatorVa) {
+    default_random_engine * const pGenerator
+            = reinterpret_cast<default_random_engine *> (generatorVa);
+    const default_random_engine::result_type result = (*pGenerator)();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine
  * Method:    setSeed
  * Signature: (JI)V
  */

@@ -96,6 +96,20 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
     }
 
     /**
+     * Return the next integer in the sequence.
+     *
+     * @return an unsigned 32-bit value
+     */
+    @Override
+    public long nextUnsigned() {
+        long generatorVa = va();
+        long result = nextUnsigned(generatorVa);
+
+        assert result >= 0L : result;
+        return result;
+    }
+
+    /**
      * Seed the engine with the specified value.
      *
      * @param value the value to use
@@ -119,6 +133,8 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
     native private static int min(long generatorVa);
 
     native private static int nextInt(long generatorVa);
+
+    native private static long nextUnsigned(long generatorVa);
 
     native private static void setSeed(long generatorVa, int value);
 }

@@ -95,6 +95,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_nextInt
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Mt19937
+ * Method:    nextUnsigned
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_nextUnsigned
+  (JNIEnv *, jclass, jlong generatorVa) {
+    mt19937 * const pGenerator = reinterpret_cast<mt19937 *> (generatorVa);
+    const mt19937::result_type result = (*pGenerator)();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_Mt19937
  * Method:    setSeed
  * Signature: (JI)V
  */

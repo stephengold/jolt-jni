@@ -54,6 +54,13 @@ public interface RandomNumberEngine extends ConstJoltPhysicsObject {
     int nextInt();
 
     /**
+     * Return the next integer in the sequence.
+     *
+     * @return an unsigned 32-bit value
+     */
+    long nextUnsigned();
+
+    /**
      * Seed the engine with the specified value.
      *
      * @param value the value to use
