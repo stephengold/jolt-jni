@@ -89,7 +89,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_min
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_nextInt
   (JNIEnv *, jclass, jlong generatorVa) {
     mt19937 * const pGenerator = reinterpret_cast<mt19937 *> (generatorVa);
-    mt19937::result_type result = (*pGenerator)();
+    const mt19937::result_type result = (*pGenerator)();
     return result;
 }
 

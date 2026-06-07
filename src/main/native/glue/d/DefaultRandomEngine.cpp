@@ -92,7 +92,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngi
   (JNIEnv *, jclass, jlong generatorVa) {
     default_random_engine * const pGenerator
             = reinterpret_cast<default_random_engine *> (generatorVa);
-    default_random_engine::result_type result = (*pGenerator)();
+    const default_random_engine::result_type result = (*pGenerator)();
     return result;
 }
 
