@@ -260,7 +260,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Reposition the body, assuming it's kinematic.
+     * Reposition the body, assuming it's kinematic. It is illegal to reposition
+     * a sleeping body without activating it.
      *
      * @param location the desired location (in system coordinates, not
      * {@code null}, unaffected)
@@ -302,7 +303,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Directly alter the body's angular velocity.
+     * Directly alter the body's angular velocity. It is illegal to set a
+     * non-zero velocity on a sleeping body without activating it.
      *
      * @param wx the X component of the desired angular velocity (radians per
      * second in system coordinates, default=0)
@@ -317,7 +319,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Directly alter the body's angular velocity.
+     * Directly alter the body's angular velocity. It is illegal to set a
+     * non-zero velocity on a sleeping body without activating it.
      *
      * @param omega the desired angular velocity (radians per second in system
      * coordinates, not {@code null}, unaffected, default=(0,0,0))
@@ -330,7 +333,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Alter the body's angular velocity within limits.
+     * Alter the body's angular velocity within limits. It is illegal to set a
+     * non-zero velocity on a sleeping body without activating it.
      *
      * @param omega the desired angular velocity (not {@code null}, unaffected,
      * default=(0,0,0))
@@ -388,7 +392,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Directly alter the body's linear velocity.
+     * Directly alter the body's linear velocity. It is illegal to set a
+     * non-zero velocity on a sleeping body without activating it.
      *
      * @param vx the X component of the desired velocity (meters per second in
      * system coordinates, default=0)
@@ -403,7 +408,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Directly alter the body's linear velocity.
+     * Directly alter the body's linear velocity. It is illegal to set a
+     * non-zero velocity on a sleeping body without activating it.
      *
      * @param velocity the desired velocity (meters per second in system
      * coordinates, not {@code null}, unaffected, default=(0,0,0))
@@ -416,7 +422,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Alter the body's linear velocity within limits.
+     * Alter the body's linear velocity within limits. It is illegal to set a
+     * non-zero velocity on a sleeping body without activating it.
      *
      * @param velocity the desired linear velocity (in meters per second, not
      * {@code null}, unaffected, default=(0,0,0))

@@ -82,7 +82,8 @@ public class MotionProperties
     // new methods exposed
 
     /**
-     * Reposition the body, assuming it's kinematic.
+     * Reposition the body, assuming it's kinematic. It is illegal to reposition
+     * a sleeping body without activating it.
      *
      * @param offset the desired offset (from the current location, not
      * {@code null}, unaffected)
@@ -143,7 +144,8 @@ public class MotionProperties
     }
 
     /**
-     * Directly alter the angular velocity.
+     * Directly alter the angular velocity. It is illegal to set a non-zero
+     * velocity on a sleeping body without activating it.
      *
      * @param omega the desired velocity (meters per second in system
      * coordinates, not {@code null}, unaffected, default=(0,0,0))
@@ -210,7 +212,8 @@ public class MotionProperties
     }
 
     /**
-     * Directly alter the linear velocity.
+     * Directly alter the linear velocity. It is illegal to set a non-zero
+     * velocity on a sleeping body without activating it.
      *
      * @param velocity the desired velocity (meters per second in system
      * coordinates, not {@code null}, unaffected, default=(0,0,0))
