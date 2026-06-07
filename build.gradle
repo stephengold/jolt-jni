@@ -24,6 +24,7 @@ ext {
 
     baseName = "${artifact}-${jjVersion}" // for artifacts
     groupID = 'com.github.stephengold'
+    staNumSteps = '99' // number of steps (passed to SmokeTestAll)
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
 
@@ -417,6 +418,7 @@ tasks.register('debugRunTest', JavaExec) {
     mainClass = 'testjoltjni.RunTest'
 }
 tasks.register('debugSmokeTestAll', JavaExec) {
+    args '-n', staNumSteps
     debug = true
     dependsOn('unpackHairStraight', 'unpackJoltAssets')
     description = 'Debugs a "smoke test" of each of the Samples tests.'
@@ -496,7 +498,7 @@ tasks.register('runRagdollSinglePile', JavaExec) {
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runSmokeTestAll', JavaExec) {
-    args '-n', '99'
+    args '-n', staNumSteps
     dependsOn('unpackHairStraight', 'unpackJoltAssets')
     description = 'Performs a "smoke test" of each of the Samples tests.'
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
