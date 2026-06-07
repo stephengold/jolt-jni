@@ -60,24 +60,24 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_free
 /*
  * Class:     com_github_stephengold_joltjni_std_Mt19937
  * Method:    max
- * Signature: (J)I
+ * Signature: (J)J
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_max
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_max
   (JNIEnv *, jclass, jlong generatorVa) {
     const mt19937 * const pGenerator = reinterpret_cast<mt19937 *> (generatorVa);
-    const jint result = pGenerator->max();
+    const mt19937::result_type result = pGenerator->max();
     return result;
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Mt19937
  * Method:    min
- * Signature: (J)I
+ * Signature: (J)J
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_min
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_min
   (JNIEnv *, jclass, jlong generatorVa) {
     const mt19937 * const pGenerator = reinterpret_cast<mt19937 *> (generatorVa);
-    const jint result = pGenerator->min();
+    const mt19937::result_type result = pGenerator->min();
     return result;
 }
 

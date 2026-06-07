@@ -35,16 +35,16 @@ public interface RandomNumberEngine extends ConstJoltPhysicsObject {
     /**
      * Return the maximum value that can be generated.
      *
-     * @return the maximum value
+     * @return an unsigned 32-bit value
      */
-    int max();
+    long max();
 
     /**
      * Return the minimum value that can be generated.
      *
-     * @return the minimum value
+     * @return an unsigned 32-bit value
      */
-    int min();
+    long min();
 
     /**
      * Return the next integer in the sequence.

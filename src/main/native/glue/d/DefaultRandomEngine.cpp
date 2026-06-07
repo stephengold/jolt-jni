@@ -60,9 +60,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngi
 /*
  * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine
  * Method:    max
- * Signature: (J)I
+ * Signature: (J)J
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_max
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_max
   (JNIEnv *, jclass, jlong generatorVa) {
     default_random_engine * const pGenerator
             = reinterpret_cast<default_random_engine *> (generatorVa);
@@ -73,9 +73,9 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngi
 /*
  * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine
  * Method:    min
- * Signature: (J)I
+ * Signature: (J)J
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_min
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_min
   (JNIEnv *, jclass, jlong generatorVa) {
     default_random_engine * const pGenerator
             = reinterpret_cast<default_random_engine *> (generatorVa);

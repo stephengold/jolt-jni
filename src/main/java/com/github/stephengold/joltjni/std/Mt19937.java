@@ -59,26 +59,28 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
     /**
      * Return the maximum value that can be generated.
      *
-     * @return the maximum value
+     * @return an unsigned 32-bit value
      */
     @Override
-    public int max() {
+    public long max() {
         long generatorVa = va();
-        int result = max(generatorVa);
+        long result = max(generatorVa);
 
+        assert result >= 0L : result;
         return result;
     }
 
     /**
      * Return the minimum value that can be generated.
      *
-     * @return the minimum value
+     * @return an unsigned 32-bit value
      */
     @Override
-    public int min() {
+    public long min() {
         long generatorVa = va();
-        int result = min(generatorVa);
+        long result = min(generatorVa);
 
+        assert result >= 0L : result;
         return result;
     }
 
@@ -128,9 +130,9 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
 
     native private static void free(long generatorVa);
 
-    native private static int max(long generatorVa);
+    native private static long max(long generatorVa);
 
-    native private static int min(long generatorVa);
+    native private static long min(long generatorVa);
 
     native private static int nextInt(long generatorVa);
 
