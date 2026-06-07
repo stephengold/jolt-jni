@@ -170,7 +170,7 @@ public void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactMan
 	}
 }
 
-public void OnContactPersisted(ConstBody inBody1, ConstBody inBody2,  ConstContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactPersisted( ConstBody inBody1,  ConstBody inBody2,  ConstContactManifold inManifold, ContactSettings ioSettings)
 {
 	MakeBody5PartialSensor(inBody1, inBody2, inManifold, ioSettings);
 }
