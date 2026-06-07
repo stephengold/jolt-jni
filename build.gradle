@@ -449,6 +449,12 @@ tasks.register('runHelloWorld', JavaExec) {
     description = 'Runs the HelloWorld app.'
     mainClass = 'testjoltjni.app.helloworld.HelloWorld'
 }
+tasks.register('runHighSpeedScene', JavaExec) {
+    args '-s=HighSpeed'
+    description = 'Measures performance on the HighSpeed scene.'
+    enableAssertions = false
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
+}
 tasks.register('runLargeMesh', JavaExec) {
     args '-s=LargeMesh'
     description = 'Measures performance on the LargeMesh scene.'
@@ -458,6 +464,12 @@ tasks.register('runLargeMesh', JavaExec) {
 tasks.register('runListClasses', JavaExec) {
     description = 'Enumerates the public classes in Jolt JNI.'
     mainClass = 'testjoltjni.ListClasses'
+}
+tasks.register('runMaxBodiesScene', JavaExec) {
+    args '-s=MaxBodies'
+    description = 'Measures performance on the MaxBodies scene.'
+    enableAssertions = false
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runPrintTable', JavaExec) {
     description = 'Prints a table of corresponding types to "lexicon.adoc".'

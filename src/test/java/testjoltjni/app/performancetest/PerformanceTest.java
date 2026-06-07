@@ -98,6 +98,10 @@ public static void main(  String[] argv)throws IOException
 				scene = new LargeMeshScene();
 			else if (arg.substring(3).equals("CharacterVirtual"))
 				scene = new CharacterVirtualScene();
+			else if (arg.substring(3).equals("MaxBodies"))
+				scene = new MaxBodiesScene();
+			else if (arg.substring(3).equals("HighSpeed"))
+				scene = new HighSpeedScene();
 			else
 			{
 				Trace("Invalid scene");
@@ -169,7 +173,7 @@ public static void main(  String[] argv)throws IOException
 		{
 			// Print usage
 			Trace("Usage:\n"
-				 + "-s=<scene>: Select scene (Ragdoll, RagdollSinglePile, ConvexVsMesh, Pyramid, LargeMesh, CharacterVirtual)\n"
+				 + "-s=<scene>: Select scene (Ragdoll, RagdollSinglePile, ConvexVsMesh, Pyramid, LargeMesh, CharacterVirtual, MaxBodies, HighSpeed)\n"
 				 + "-i=<num physics steps>: Number of physics steps to simulate (default 500)\n"
 				 + "-q=<quality>: Test only with specified quality (Discrete, LinearCast)\n"
 				 + "-t=<num threads>: Test only with N threads (default is to iterate over 1 .. num hardware threads)\n"
