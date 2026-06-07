@@ -63,6 +63,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_createD
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector
+ * Method:    data
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_data
+  (JNIEnv *, jclass, jlong vectorVa) {
+    BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
+    BodyID * const pResult = pVector->data();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyIdVector
  * Method:    erase
  * Signature: (JII)V
  */
@@ -100,6 +112,17 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_getId
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_isEqual
   BODYOF_IS_EQUAL(BodyIDVector)
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyIdVector
+ * Method:    reserve
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_reserve
+  (JNIEnv *, jclass, jlong vectorVa, jint numElements) {
+    BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
+    pVector->reserve(numElements);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector

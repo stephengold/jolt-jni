@@ -101,6 +101,20 @@ public class BodyIdArray extends JoltPhysicsObject implements ConstBodyIdArray {
         long arrayVa = createFromBuffer(intBuffer);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param arrayVa the virtual address of the native object to assign (not
+     * zero)
+     * @param length the number of IDs (&gt;0)
+     */
+    BodyIdArray(JoltPhysicsObject container, long arrayVa, int length) {
+        super(container, arrayVa);
+        assert length > 0 : "length=" + length;
+        this.length = length;
+    }
     // *************************************************************************
     // new methods exposed
 

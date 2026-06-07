@@ -69,6 +69,20 @@ public class BodyIdVector extends JoltPhysicsObject {
     }
 
     /**
+     * Access the IDs as an array.
+     *
+     * @return a new JVM object with the pre-existing native array assigned
+     */
+    public BodyIdArray data() {
+        long vectorVa = va();
+        int length = size(vectorVa);
+        long resultVa = data(vectorVa);
+        BodyIdArray result = new BodyIdArray(this, resultVa, length);
+
+        return result;
+    }
+
+    /**
      * Test whether the vector contains one or more IDs. The vector is
      * unaffected.
      *
@@ -161,6 +175,16 @@ public class BodyIdVector extends JoltPhysicsObject {
     }
 
     /**
+     * Alter the capacity of the vector.
+     *
+     * @param numIds the desired capacity (number of IDs, &ge;0)
+     */
+    public void reserve(int numIds) {
+        long vectorVa = va();
+        reserve(vectorVa, numIds);
+    }
+
+    /**
      * Extend or truncate the vector.
      *
      * @param numIds the desired size (number of IDs, &ge;0)
@@ -225,6 +249,8 @@ public class BodyIdVector extends JoltPhysicsObject {
 
     native private static long createDefault();
 
+    native private static long data(long vectorVa);
+
     native private static void erase(
             long vectorVa, int startIndex, int stopIndex);
 
@@ -233,6 +259,8 @@ public class BodyIdVector extends JoltPhysicsObject {
     native private static int getId(long vectorVa, int elementIndex);
 
     native private static boolean isEqual(long groupVa, long otherVa);
+
+    native private static void reserve(long vectorVa, int numIds);
 
     native private static void resize(long vectorVa, int numIds);
 
