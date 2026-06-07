@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,6 +56,30 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_createSe
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_free
   BODYOF_FREE(mt19937)
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_Mt19937
+ * Method:    max
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_max
+  (JNIEnv *, jclass, jlong generatorVa) {
+    const mt19937 * const pGenerator = reinterpret_cast<mt19937 *> (generatorVa);
+    const jint result = pGenerator->max();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_Mt19937
+ * Method:    min
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_min
+  (JNIEnv *, jclass, jlong generatorVa) {
+    const mt19937 * const pGenerator = reinterpret_cast<mt19937 *> (generatorVa);
+    const jint result = pGenerator->min();
+    return result;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Mt19937
