@@ -95,7 +95,7 @@ class HighSpeedScene implements  PerformanceTestScene
 
 		// Create many instances with high velocity (don't use std::uniform_real_distribution as that is not cross platform deterministic)
 		Mt19937 rnd=new Mt19937();
-		TriFunction<Mt19937,Float,Float,Float> random_float = (Mt19937 inRnd, Float inMin, Float inMax)-> { return inMin + (float)(inRnd.nextInt() - inRnd.min()) * (inMax - inMin) / (float)(inRnd.max() - inRnd.min()); };
+		TriFunction<Mt19937,Float,Float,Float> random_float = (Mt19937 inRnd, Float inMin, Float inMax)-> { return inMin + (float)(inRnd.nextUnsigned() - inRnd.min()) * (inMax - inMin) / (float)(inRnd.max() - inRnd.min()); };
 		for (int i = 0; i < 5000; ++i)
 		{
 			// Note that we explicitly order x, y and z. Calling this in the constructor means they get called in a different order on different platforms. This breaks cross platform determinism.

@@ -123,7 +123,7 @@ public void Initialize()
 				// Sample pose
 				SkeletonPose pose=new SkeletonPose();
 				pose.setSkeleton(settings.getSkeleton());
-				animation[Math.abs(random.nextInt()) % cAnimationCount].sample(0.0f, pose);
+				animation[(int)(random.nextUnsigned() % cAnimationCount)].sample(0.0f, pose);
 
 				// Override root
 				pose.setRootOffset(start);

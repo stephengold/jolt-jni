@@ -29,7 +29,6 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.UVec4Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.RandomNumberEngine;
-import com.github.stephengold.joltjni.std.UniformFloatDistribution;
 import java.nio.FloatBuffer;
 import java.util.Objects;
 
@@ -56,10 +55,6 @@ final public class Vec3 implements Vec3Arg {
      * the 3rd (Z) component
      */
     private float z;
-    /**
-     * lazily allocated distribution, used in randomization
-     */
-    private static UniformFloatDistribution distro;
     // *************************************************************************
     // constructors
 
@@ -530,15 +525,16 @@ final public class Vec3 implements Vec3Arg {
      * @return a new unit vector
      */
     public static Vec3 sRandom(RandomNumberEngine engine) {
-        assert engine != null;
-        if (distro == null) {
-            distro = new UniformFloatDistribution(0f, 1f);
-        }
+        long em = engine.min();
+        float er = (float) (engine.max() - em);
+        float z = -1f + 2f * (engine.nextUnsigned() - em) / er;
 
-        float theta = JphMath.JPH_PI * distro.nextFloat(engine);
-        float phi = 2f * JphMath.JPH_PI * distro.nextFloat(engine);
-        Vec3 result = sUnitSpherical(theta, phi);
+        float r = JphMath.sqrt(1f - z * z);
+        float theta = 2f * JphMath.JPH_PI * (engine.nextUnsigned() - em) / er;
+        float x = r * JphMath.sin(theta);
+        float y = r * JphMath.cos(theta);
 
+        Vec3 result = new Vec3(x, y, z);
         return result;
     }
 

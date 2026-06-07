@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -63,7 +63,7 @@ void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies, floa
 		s.setShape(new BoxShape(box.getExtent(), 0.0f));
 		s.setPosition ( new RVec3(box.getCenter()));
 		s.setRotation ( Quat.sIdentity());
-		s.setObjectLayer ( (random.nextInt() % 10) == 0? Layers.MOVING : Layers.NON_MOVING);
+		s.setObjectLayer ( (random.nextUnsigned() % 10) == 0? Layers.MOVING : Layers.NON_MOVING);
 		Body body = inBodyManager.allocateBody(s);
 		inBodyManager.addBody(body);
 	}

@@ -25,7 +25,6 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.RandomNumberEngine;
-import com.github.stephengold.joltjni.std.UniformFloatDistribution;
 import java.nio.FloatBuffer;
 import java.util.Objects;
 
@@ -58,10 +57,6 @@ final public class Quat implements QuatArg {
      * the 3rd imaginary (Z) component
      */
     private float z;
-    /**
-     * lazily allocated distribution, used in randomization
-     */
-    private static UniformFloatDistribution distro;
     // *************************************************************************
     // constructors
 
@@ -297,17 +292,15 @@ final public class Quat implements QuatArg {
      * @return a new unit quaternion
      */
     public static Quat sRandom(RandomNumberEngine engine) {
-        assert engine != null;
-        if (distro == null) {
-            distro = new UniformFloatDistribution(0f, 1f);
-        }
+        long em = engine.min();
+        float er = (float) (engine.max() - em);
+        float x0 = (engine.nextInt() - em) / er;
+        float r1 = (float) JphMath.sqrt(1f - x0);
+        float r2 = (float) JphMath.sqrt(x0);
 
-        float x0 = distro.nextFloat(engine);
-        float r1 = (float) Math.sqrt(1f - x0);
-        float r2 = (float) Math.sqrt(x0);
-
-        float px = 2f * JphMath.JPH_PI * distro.nextFloat(engine);
-        float py = 2f * JphMath.JPH_PI * distro.nextFloat(engine);
+        float twoPiOverEr = 2f * JphMath.JPH_PI / er;
+        float px = twoPiOverEr * (engine.nextUnsigned() - em);
+        float py = twoPiOverEr * (engine.nextUnsigned() - em);
 
         float x = r1 * JphMath.sin(px);
         float y = r1 * JphMath.cos(px);
@@ -315,6 +308,7 @@ final public class Quat implements QuatArg {
         float w = r2 * JphMath.cos(py);
         Quat result = new Quat(x, y, z, w);
 
+        assert result.isNormalized();
         return result;
     }
 
