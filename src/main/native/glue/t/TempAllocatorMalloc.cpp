@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -61,8 +61,5 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TempAllocatorMalloc_f
     const TempAllocatorMalloc * const pAllocator
             = reinterpret_cast<TempAllocatorMalloc *> (allocatorVa);
     TRACE_DELETE("TempAllocatorMalloc", pAllocator)
-#ifndef WIN32
-    // Attempting to delete a TempAllocatorMalloc on Windows causes deadlock!
     delete pAllocator;
-#endif
 }
