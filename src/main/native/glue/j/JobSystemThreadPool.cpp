@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,10 +52,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_f
   (JNIEnv *, jclass, jlong systemVa) {
     const JobSystem * const pSystem = reinterpret_cast<JobSystem *> (systemVa);
     TRACE_DELETE("JobSystem", pSystem)
-#ifndef WIN32
-    // Attempting to delete a JobSystemThreadPool on Windows causes deadlock!
     delete pSystem;
-#endif
 }
 
 /*
