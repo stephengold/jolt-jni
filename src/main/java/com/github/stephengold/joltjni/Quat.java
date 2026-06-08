@@ -294,7 +294,7 @@ final public class Quat implements QuatArg {
     public static Quat sRandom(RandomNumberEngine engine) {
         long em = engine.min();
         float er = (float) (engine.max() - em);
-        float x0 = (engine.nextInt() - em) / er;
+        float x0 = (engine.nextUnsigned() - em) / er;
         float r1 = (float) JphMath.sqrt(1f - x0);
         float r2 = (float) JphMath.sqrt(x0);
 
