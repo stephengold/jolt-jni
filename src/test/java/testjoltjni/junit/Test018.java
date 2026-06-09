@@ -21,8 +21,15 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
+import com.github.stephengold.joltjni.CollideSettingsBase;
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.GroupFilterTable;
+import com.github.stephengold.joltjni.PhysicsSettings;
+import com.github.stephengold.joltjni.ShapeCastSettings;
+import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.enumerate.EActiveEdgeMode;
+import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
+import com.github.stephengold.joltjni.enumerate.ECollectFacesMode;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import org.junit.Assert;
@@ -48,6 +55,7 @@ public class Test018 {
         TestUtils.initializeNativeLibrary();
 
         doCollisionGroup();
+        doShapeCastSettings();
 
         TestUtils.cleanup();
     }
@@ -69,6 +77,66 @@ public class Test018 {
 
         TestUtils.testClose(copy, group);
         System.gc();
+    }
+
+    /**
+     * Test the {@code ShapeCastSettings} class.
+     */
+    private static void doShapeCastSettings() {
+        ShapeCastSettings settings = new ShapeCastSettings();
+
+        testShapeCastSettingsDefaults(settings);
+        ShapeCastSettings copy = new ShapeCastSettings(settings);
+        testShapeCastSettingsSetters(settings);
+        testShapeCastSettingsDefaults(copy);
+        settings.set(copy);
+        testShapeCastSettingsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code CollideSettingsBase}.
+     *
+     * @param settings the settings to test (not {@code null}, unaffected)
+     */
+    private static void testCollideSettingsBaseDefaults(
+            CollideSettingsBase settings) {
+        Assert.assertEquals(EActiveEdgeMode.CollideOnlyWithActive,
+                settings.getActiveEdgeMode());
+        TestUtils.assertEquals(0f, 0f, 0f,
+                settings.getActiveEdgeMovementDirection(), 0f);
+        Assert.assertEquals(ECollectFacesMode.NoFaces,
+                settings.getCollectFacesMode());
+        Assert.assertEquals(PhysicsSettings.cDefaultCollisionTolerance,
+                settings.getCollisionTolerance(), 0f);
+        Assert.assertEquals(PhysicsSettings.cDefaultPenetrationTolerance,
+                settings.getPenetrationTolerance(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code CollideSettingsBase}.
+     *
+     * @param settings the settings to test (not {@code null})
+     */
+    private static void testCollideSettingsBaseSetters(
+            CollideSettingsBase settings) {
+        settings.setActiveEdgeMode(EActiveEdgeMode.CollideWithAll);
+        settings.setActiveEdgeMovementDirection(new Vec3(1f, 2f, 3f));
+        settings.setCollectFacesMode(ECollectFacesMode.CollectFaces);
+        settings.setCollisionTolerance(0.4f);
+        settings.setPenetrationTolerance(0.5f);
+
+        Assert.assertEquals(EActiveEdgeMode.CollideWithAll,
+                settings.getActiveEdgeMode());
+        TestUtils.assertEquals(1f, 2f, 3f,
+                settings.getActiveEdgeMovementDirection(), 0f);
+        Assert.assertEquals(ECollectFacesMode.CollectFaces,
+                settings.getCollectFacesMode());
+        Assert.assertEquals(0.4f, settings.getCollisionTolerance(), 0f);
+        Assert.assertEquals(0.5f, settings.getPenetrationTolerance(), 0f);
     }
 
     /**
@@ -100,5 +168,44 @@ public class Test018 {
         Assert.assertEquals(102, group.getSubGroupId());
 
         TestUtils.testClose(actualFilter, filter);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code ShapeCastSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, unaffected)
+     */
+    private static void testShapeCastSettingsDefaults(
+            ShapeCastSettings settings) {
+        testCollideSettingsBaseDefaults(settings);
+
+        Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
+                settings.getBackFaceModeConvex());
+        Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
+                settings.getBackFaceModeTriangles());
+        Assert.assertFalse(settings.getReturnDeepestPoint());
+        Assert.assertFalse(settings.getUseShrunkenShapeAndConvexRadius());
+    }
+
+    /**
+     * Test the setters of the specified {@code ShapeCastSettings}.
+     *
+     * @param settings the group to test (not {@code null})
+     */
+    private static void testShapeCastSettingsSetters(
+            ShapeCastSettings settings) {
+        settings.setBackFaceModeConvex(EBackFaceMode.CollideWithBackFaces);
+        settings.setBackFaceModeTriangles(EBackFaceMode.CollideWithBackFaces);
+        settings.setReturnDeepestPoint(true);
+        settings.setUseShrunkenShapeAndConvexRadius(true);
+
+        testCollideSettingsBaseSetters(settings);
+
+        Assert.assertEquals(EBackFaceMode.CollideWithBackFaces,
+                settings.getBackFaceModeConvex());
+        Assert.assertEquals(EBackFaceMode.CollideWithBackFaces,
+                settings.getBackFaceModeTriangles());
+        Assert.assertTrue(settings.getReturnDeepestPoint());
+        Assert.assertTrue(settings.getUseShrunkenShapeAndConvexRadius());
     }
 }
