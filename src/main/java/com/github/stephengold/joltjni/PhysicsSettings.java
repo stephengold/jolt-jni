@@ -33,6 +33,22 @@ public class PhysicsSettings
         extends JoltPhysicsObject
         implements ConstPhysicsSettings {
     // *************************************************************************
+    // constants
+
+    /**
+     * maximum distance at which GJK considers objects to collide (in meters)
+     * <p>
+     * value should match Jolt/Physics/PhysicsSettings.h
+     */
+    final public static float cDefaultCollisionTolerance = 1e-4f;
+
+    /**
+     * determines the accuracy of the penetration depth calculation
+     * <p>
+     * value should match Jolt/Physics/PhysicsSettings.h
+     */
+    final public static float cDefaultPenetrationTolerance = 1e-4f;
+    // *************************************************************************
     // constructors
 
     /**
