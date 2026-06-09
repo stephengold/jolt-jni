@@ -82,6 +82,19 @@ public class ShapeCastSettings extends CollideSettingsBase {
     }
 
     /**
+     * Return the extra thickness for enlarging the query shape. The settings
+     * are unaffected. (native attribute: mExtraConvexRadius)
+     *
+     * @return the extra margin (in meters)
+     */
+    public float getExtraConvexRadius() {
+        long settingsVa = va();
+        float result = getExtraConvexRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Test whether to calculate penetration for the starting point. The
      * settings are unaffected. (native attribute: mReturnDeepestPoint)
      *
@@ -144,6 +157,17 @@ public class ShapeCastSettings extends CollideSettingsBase {
     }
 
     /**
+     * Alter the extra thickness for enlarging the query shape. (native
+     * attribute: mExtraConvexRadius)
+     *
+     * @param margin the desired extra margin (default=0)
+     */
+    public void setExtraConvexRadius(float margin) {
+        long settingsVa = va();
+        setExtraConvexRadius(settingsVa, margin);
+    }
+
+    /**
      * Alter whether to calculate penetration for the starting point. (native
      * attribute: mReturnDeepestPoint)
      *
@@ -179,6 +203,8 @@ public class ShapeCastSettings extends CollideSettingsBase {
 
     native private static int getBackFaceModeTriangles(long settingsVa);
 
+    native private static float getExtraConvexRadius(long settingsVa);
+
     native private static boolean getReturnDeepestPoint(long settingsVa);
 
     native private static boolean getUseShrunkenShapeAndConvexRadius(
@@ -189,6 +215,9 @@ public class ShapeCastSettings extends CollideSettingsBase {
 
     native private static void setBackFaceModeTriangles(
             long settingsVa, int ordinal);
+
+    native private static void setExtraConvexRadius(
+            long settingsVa, float margin);
 
     native private static void setReturnDeepestPoint(
             long settingsVa, boolean enable);

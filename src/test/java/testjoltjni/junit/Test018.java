@@ -183,6 +183,7 @@ public class Test018 {
                 settings.getBackFaceModeConvex());
         Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
                 settings.getBackFaceModeTriangles());
+        Assert.assertEquals(0f, settings.getExtraConvexRadius(), 0f);
         Assert.assertFalse(settings.getReturnDeepestPoint());
         Assert.assertFalse(settings.getUseShrunkenShapeAndConvexRadius());
     }
@@ -196,6 +197,7 @@ public class Test018 {
             ShapeCastSettings settings) {
         settings.setBackFaceModeConvex(EBackFaceMode.CollideWithBackFaces);
         settings.setBackFaceModeTriangles(EBackFaceMode.CollideWithBackFaces);
+        settings.setExtraConvexRadius(1f);
         settings.setReturnDeepestPoint(true);
         settings.setUseShrunkenShapeAndConvexRadius(true);
 
@@ -205,6 +207,7 @@ public class Test018 {
                 settings.getBackFaceModeConvex());
         Assert.assertEquals(EBackFaceMode.CollideWithBackFaces,
                 settings.getBackFaceModeTriangles());
+        Assert.assertEquals(1f, settings.getExtraConvexRadius(), 0f);
         Assert.assertTrue(settings.getReturnDeepestPoint());
         Assert.assertTrue(settings.getUseShrunkenShapeAndConvexRadius());
     }

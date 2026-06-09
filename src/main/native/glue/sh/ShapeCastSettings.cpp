@@ -82,6 +82,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ShapeCastSettings_get
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeCastSettings
+ * Method:    getExtraConvexRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ShapeCastSettings_getExtraConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ShapeCastSettings * const pSettings
+            = reinterpret_cast<ShapeCastSettings *> (settingsVa);
+    const float result = pSettings->mExtraConvexRadius;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeCastSettings
  * Method:    getReturnDeepestPoint
  * Signature: (J)Z
  */
@@ -130,6 +143,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeCastSettings_set
             = reinterpret_cast<ShapeCastSettings *> (settingsVa);
     const EBackFaceMode mode = (EBackFaceMode) ordinal;
     pSettings->mBackFaceModeTriangles = mode;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeCastSettings
+ * Method:    setExtraConvexRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeCastSettings_setExtraConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa, jfloat margin) {
+    ShapeCastSettings * const pSettings
+            = reinterpret_cast<ShapeCastSettings *> (settingsVa);
+    pSettings->mExtraConvexRadius = margin;
 }
 
 /*
