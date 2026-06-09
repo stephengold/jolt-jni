@@ -76,9 +76,7 @@ import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstCharacter;
 import com.github.stephengold.joltjni.readonly.ConstCharacterContactKey;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
-import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
-import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstMotionProperties;
@@ -113,6 +111,8 @@ import testjoltjni.TestUtils;
  * For soft-body related classes, see Test017.
  * <p>
  * For vehicle-related classes, see Test014.
+ * <p>
+ * For collision-related classes, see Test018.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -134,7 +134,6 @@ public class Test003 {
         doBodyIdArray();
         doCharacter();
         doCharacterVirtual();
-        doCollisionGroup();
         doContactListenerList();
         doContactKey();
         doContactSettings();
@@ -482,19 +481,6 @@ public class Test003 {
         TestUtils.testClose(characterRefC, characterRef, character);
         TestUtils.cleanupPhysicsSystem(system);
         TestUtils.testClose(settings);
-        System.gc();
-    }
-
-    /**
-     * Test the {@code CollisionGroup} class.
-     */
-    private static void doCollisionGroup() {
-        CollisionGroup group = new CollisionGroup();
-
-        testCollisionGroupDefaults(group);
-        testCollisionGroupSetters(group);
-
-        TestUtils.testClose(group);
         System.gc();
     }
 
@@ -874,37 +860,6 @@ public class Test003 {
         TestUtils.assertEquals(0f, 0f, 0f, character.getPosition(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, 1f, character.getRotation(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, character.getShapeOffset(), 0f);
-    }
-
-    /**
-     * Test the getters and defaults of the specified {@code CollisionGroup}.
-     *
-     * @param group the group to test (not {@code null}, unaffected)
-     */
-    private static void testCollisionGroupDefaults(ConstCollisionGroup group) {
-        Assert.assertNull(group.getGroupFilter());
-        Assert.assertEquals(CollisionGroup.cInvalidGroup, group.getGroupId());
-        Assert.assertEquals(
-                CollisionGroup.cInvalidGroup, group.getSubGroupId());
-    }
-
-    /**
-     * Test the setters of the specified {@code CollisionGroup}.
-     *
-     * @param group the group to test (not {@code null})
-     */
-    private static void testCollisionGroupSetters(CollisionGroup group) {
-        GroupFilterTable filter = new GroupFilterTable();
-        group.setGroupFilter(filter);
-        group.setGroupId(101);
-        group.setSubGroupId(102);
-
-        ConstGroupFilter actualFilter = group.getGroupFilter();
-        Assert.assertEquals(filter, actualFilter);
-        Assert.assertEquals(101, group.getGroupId());
-        Assert.assertEquals(102, group.getSubGroupId());
-
-        TestUtils.testClose(actualFilter, filter);
     }
 
     /**
