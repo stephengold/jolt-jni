@@ -30,6 +30,12 @@ SOFTWARE.
 
 using namespace JPH;
 
+// Verify global constants defined in CollisionGroup.java:
+void CollisionGroup_verifyGlobalConstants() {
+    JPH_ASSERT((uint32)com_github_stephengold_joltjni_CollisionGroup_cInvalidGroup == CollisionGroup::cInvalidGroup);
+    JPH_ASSERT((uint32)com_github_stephengold_joltjni_CollisionGroup_cInvalidSubGroup == CollisionGroup::cInvalidSubGroup);
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_CollisionGroup
  * Method:    assign

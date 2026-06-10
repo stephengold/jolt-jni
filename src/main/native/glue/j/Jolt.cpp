@@ -525,7 +525,13 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
     JPH_ASSERT(com_github_stephengold_joltjni_Jolt_SWIZZLE_X == SWIZZLE_X);
     JPH_ASSERT(com_github_stephengold_joltjni_Jolt_SWIZZLE_Y == SWIZZLE_Y);
     JPH_ASSERT(com_github_stephengold_joltjni_Jolt_SWIZZLE_Z == SWIZZLE_Z);
-
+#ifdef JPH_DEBUG
+    CollisionGroup_verifyGlobalConstants();
+    HairSettings_verifyGlobalConstants();
+    PhysicsSettings_verifyGlobalConstants();
+    PlaneShapeSettings_verifyGlobalConstants();
+    Std_verifyGlobalConstants();
+#endif
 #if defined(JPH_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
     if (!Allocate) {
         std::cerr << "Can't create a Factory because no default allocator is registered!"

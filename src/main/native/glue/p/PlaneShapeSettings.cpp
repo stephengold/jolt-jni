@@ -30,6 +30,11 @@ SOFTWARE.
 
 using namespace JPH;
 
+// Verify global constants defined in PlaneShapeSettings.java:
+void PlaneShapeSettings_verifyGlobalConstants() {
+    JPH_ASSERT(com_github_stephengold_joltjni_PlaneShapeSettings_cDefaultHalfExtent == PlaneShapeSettings::cDefaultHalfExtent);
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShapeSettings
  * Method:    assign

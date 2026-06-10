@@ -30,6 +30,12 @@ SOFTWARE.
 
 using namespace JPH;
 
+// Verify global constants defined in PhysicsSettings.java:
+void PhysicsSettings_verifyGlobalConstants() {
+    JPH_ASSERT(com_github_stephengold_joltjni_PhysicsSettings_cDefaultCollisionTolerance == cDefaultCollisionTolerance);
+    JPH_ASSERT(com_github_stephengold_joltjni_PhysicsSettings_cDefaultPenetrationTolerance == cDefaultPenetrationTolerance);
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    assign

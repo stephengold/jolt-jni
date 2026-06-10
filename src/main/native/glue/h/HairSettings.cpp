@@ -32,6 +32,11 @@ SOFTWARE.
 
 using namespace JPH;
 
+// Verify global constants defined in HairSettings.java:
+void HairSettings_verifyGlobalConstants() {
+    JPH_ASSERT(com_github_stephengold_joltjni_HairSettings_cDefaultIterationsPerSecond == HairSettings::cDefaultIterationsPerSecond);
+}
+
 IMPLEMENT_REF(HairSettings,
   Java_com_github_stephengold_joltjni_HairSettingsRef_copy,
   Java_com_github_stephengold_joltjni_HairSettingsRef_createDefault,

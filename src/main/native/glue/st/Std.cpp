@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,13 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "auto/com_github_stephengold_joltjni_std_Std.h"
+
+// Verify global constants defined in Std.java:
+void Std_verifyGlobalConstants() {
+    JPH_ASSERT(com_github_stephengold_joltjni_std_Std_FLT_EPSILON == FLT_EPSILON);
+    JPH_ASSERT(com_github_stephengold_joltjni_std_Std_FLT_MAX == FLT_MAX);
+    JPH_ASSERT(com_github_stephengold_joltjni_std_Std_INT_MAX == INT_MAX);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Std

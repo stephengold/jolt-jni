@@ -32,6 +32,11 @@ SOFTWARE.
 extern bool gTypesAreRegistered;
 
 #ifdef JPH_DEBUG
+extern void CollisionGroup_verifyGlobalConstants();
+extern void HairSettings_verifyGlobalConstants();
+extern void PhysicsSettings_verifyGlobalConstants();
+extern void PlaneShapeSettings_verifyGlobalConstants();
+extern void Std_verifyGlobalConstants();
 
 /*
  * test for a JVM exception:
