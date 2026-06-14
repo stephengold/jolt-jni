@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstTransformedShape;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
@@ -184,7 +185,7 @@ public class TransformedShape
      */
     @Override
     public void collideShape(ConstShape testShape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector) {
         collideShape(testShape, shapeScale, comTransform, settings, base,
                 collector, new ShapeFilter());
@@ -206,7 +207,7 @@ public class TransformedShape
      */
     @Override
     public void collideShape(ConstShape testShape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             ShapeFilter shapeFilter) {
         long transformedShapeVa = va();
@@ -215,7 +216,7 @@ public class TransformedShape
         float sy = shapeScale.getY();
         float sz = shapeScale.getZ();
         long transformVa = comTransform.targetVa();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         double xx = base.xx();
         double yy = base.yy();
         double zz = base.zz();

@@ -26,7 +26,6 @@ import com.github.stephengold.joltjni.CastRayCollector;
 import com.github.stephengold.joltjni.CastShapeCollector;
 import com.github.stephengold.joltjni.CollidePointCollector;
 import com.github.stephengold.joltjni.CollideShapeCollector;
-import com.github.stephengold.joltjni.CollideShapeSettings;
 import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.GetTrianglesContext;
 import com.github.stephengold.joltjni.Quat;
@@ -125,7 +124,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
      * @param collector the hit collector to use (not {@code null})
      */
     void collideShape(ConstShape testShape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector);
 
     /**
@@ -145,7 +144,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
      * unaffected)
      */
     void collideShape(ConstShape testShape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             ShapeFilter shapeFilter);
 

@@ -22,13 +22,16 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
+import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 
 /**
  * Configurable options for a collide-shape query.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CollideShapeSettings extends CollideSettingsBase {
+public class CollideShapeSettings
+        extends CollideSettingsBase
+        implements ConstCollideShapeSettings {
     // *************************************************************************
     // constructors
 
@@ -45,8 +48,8 @@ public class CollideShapeSettings extends CollideSettingsBase {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public CollideShapeSettings(CollideShapeSettings original) {
-        long originalVa = original.va();
+    public CollideShapeSettings(ConstCollideShapeSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsOwner(copyVa);
     }
@@ -54,40 +57,13 @@ public class CollideShapeSettings extends CollideSettingsBase {
     // new methods exposed
 
     /**
-     * Return the treatment of back-facing triangles. The settings are
-     * unaffected. (native attribute: mBackFaceMode)
-     *
-     * @return the enum value (not {@code null})
-     */
-    public EBackFaceMode getBackFaceMode() {
-        long settingsVa = va();
-        int ordinal = getBackFaceMode(settingsVa);
-        EBackFaceMode result = EBackFaceMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the maximum separation for which contacts will be reported. The
-     * settings are unaffected. (native attribute: mMaxSeparationDistance)
-     *
-     * @return the separation limit (in meters)
-     */
-    public float getMaxSeparationDistance() {
-        long settingsVa = va();
-        float result = getMaxSeparationDistance(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Copy the argument to the current settings.
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(CollideShapeSettings source) {
+    public void set(ConstCollideShapeSettings source) {
         long targetVa = va();
-        long sourceVa = source.va();
+        long sourceVa = source.targetVa();
         assign(targetVa, sourceVa);
     }
 
@@ -112,6 +88,37 @@ public class CollideShapeSettings extends CollideSettingsBase {
     public void setMaxSeparationDistance(float distance) {
         long settingsVa = va();
         setMaxSeparationDistance(settingsVa, distance);
+    }
+    // *************************************************************************
+    // ConstCollideShapeSettings methods
+
+    /**
+     * Return the treatment of back-facing triangles. The settings are
+     * unaffected. (native attribute: mBackFaceMode)
+     *
+     * @return the enum value (not {@code null})
+     */
+    @Override
+    public EBackFaceMode getBackFaceMode() {
+        long settingsVa = va();
+        int ordinal = getBackFaceMode(settingsVa);
+        EBackFaceMode result = EBackFaceMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the maximum separation for which contacts will be reported. The
+     * settings are unaffected. (native attribute: mMaxSeparationDistance)
+     *
+     * @return the separation limit (in meters)
+     */
+    @Override
+    public float getMaxSeparationDistance() {
+        long settingsVa = va();
+        float result = getMaxSeparationDistance(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

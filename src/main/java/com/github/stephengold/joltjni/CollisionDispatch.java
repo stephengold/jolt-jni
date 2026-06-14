@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -68,7 +69,7 @@ final public class CollisionDispatch {
             ConstShape shape2, Vec3Arg scale1, Vec3Arg scale2,
             Mat44Arg comTransform1, Mat44Arg comTransform2,
             SubShapeIdCreator creator1, SubShapeIdCreator creator2,
-            CollideShapeSettings collideShapeSettings,
+            ConstCollideShapeSettings collideShapeSettings,
             CollideShapeCollector collector) {
         sCollideShapeVsShape(shape1, shape2, scale1, scale2,
                 comTransform1, comTransform2, creator1, creator2,
@@ -103,7 +104,7 @@ final public class CollisionDispatch {
             ConstShape shape2, Vec3Arg scale1, Vec3Arg scale2,
             Mat44Arg comTransform1, Mat44Arg comTransform2,
             SubShapeIdCreator creator1, SubShapeIdCreator creator2,
-            CollideShapeSettings collideShapeSettings,
+            ConstCollideShapeSettings collideShapeSettings,
             CollideShapeCollector collector, ShapeFilter filter) {
         long shape1Va = shape1.targetVa();
         long shape2Va = shape2.targetVa();

@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstNarrowPhaseQuery;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
@@ -582,7 +583,7 @@ public class NarrowPhaseQuery
      */
     @Override
     public void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector) {
         collideShape(shape, shapeScale, comTransform, settings, base, collector,
                 new BroadPhaseLayerFilter());
@@ -606,7 +607,7 @@ public class NarrowPhaseQuery
      */
     @Override
     public void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter) {
         collideShape(shape, shapeScale, comTransform, settings, base, collector,
@@ -633,7 +634,7 @@ public class NarrowPhaseQuery
      */
     @Override
     public void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         collideShape(shape, shapeScale, comTransform, settings, base, collector,
@@ -661,7 +662,7 @@ public class NarrowPhaseQuery
      */
     @Override
     public void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
             BodyFilter bodyFilter) {
@@ -692,7 +693,7 @@ public class NarrowPhaseQuery
      */
     @Override
     public void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
             BodyFilter bodyFilter, ShapeFilter shapeFilter) {
@@ -702,7 +703,7 @@ public class NarrowPhaseQuery
         float sy = shapeScale.getY();
         float sz = shapeScale.getZ();
         long transformVa = comTransform.targetVa();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         double baseX = base.xx();
         double baseY = base.yy();
         double baseZ = base.zz();

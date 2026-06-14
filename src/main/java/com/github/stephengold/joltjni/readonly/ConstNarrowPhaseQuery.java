@@ -27,7 +27,6 @@ import com.github.stephengold.joltjni.CastRayCollector;
 import com.github.stephengold.joltjni.CastShapeCollector;
 import com.github.stephengold.joltjni.CollidePointCollector;
 import com.github.stephengold.joltjni.CollideShapeCollector;
-import com.github.stephengold.joltjni.CollideShapeSettings;
 import com.github.stephengold.joltjni.ObjectLayerFilter;
 import com.github.stephengold.joltjni.RRayCast;
 import com.github.stephengold.joltjni.RShapeCast;
@@ -423,7 +422,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * @param collector the hit collector to use (not {@code null})
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector);
 
     /**
@@ -443,7 +442,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * unaffected)
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter);
 
@@ -466,7 +465,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * unaffected)
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 
@@ -490,7 +489,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
             BodyFilter bodyFilter);
@@ -517,7 +516,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * unaffected)
      */
     void collideShape(ConstShape shape, Vec3Arg shapeScale,
-            RMat44Arg comTransform, CollideShapeSettings settings,
+            RMat44Arg comTransform, ConstCollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
             BodyFilter bodyFilter, ShapeFilter shapeFilter);

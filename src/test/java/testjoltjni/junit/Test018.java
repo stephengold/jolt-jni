@@ -33,6 +33,7 @@ import com.github.stephengold.joltjni.enumerate.EActiveEdgeMode;
 import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
 import com.github.stephengold.joltjni.enumerate.ECollectFacesMode;
 import com.github.stephengold.joltjni.readonly.ConstCollideSettingsBase;
+import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import org.junit.Assert;
@@ -74,7 +75,7 @@ public class Test018 {
         CollideShapeSettings settings = new CollideShapeSettings();
 
         testCollideShapeSettingsDefaults(settings);
-        CollideShapeSettings copy = new CollideShapeSettings(settings);
+        ConstCollideShapeSettings copy = new CollideShapeSettings(settings);
         testCollideShapeSettingsSetters(settings);
         testCollideShapeSettingsDefaults(copy);
         settings.set(copy);
@@ -185,7 +186,7 @@ public class Test018 {
      * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testCollideShapeSettingsDefaults(
-            CollideShapeSettings settings) {
+            ConstCollideShapeSettings settings) {
         testCollideSettingsBaseDefaults(settings);
 
         Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
