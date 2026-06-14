@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstRayCastSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstShapeCastSettings;
 import com.github.stephengold.joltjni.readonly.ConstTransformedShape;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -119,12 +120,12 @@ public class TransformedShape
      * @param shapeFilter the shape filter to apply (not null, unaffected)
      */
     @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    public void castShape(RShapeCast shapeCast, ConstShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
             ShapeFilter shapeFilter) {
         long shapeVa = va();
         long shapecastVa = shapeCast.va();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         double xx = base.xx();
         double yy = base.yy();
         double zz = base.zz();

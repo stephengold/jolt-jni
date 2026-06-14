@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstNarrowPhaseQuery;
 import com.github.stephengold.joltjni.readonly.ConstRayCastSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstShapeCastSettings;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -263,7 +264,7 @@ public class NarrowPhaseQuery
      * @param collector the hit collector to use (not {@code null})
      */
     @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    public void castShape(RShapeCast shapeCast, ConstShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector) {
         castShape(shapeCast, settings, base, collector,
                 new BroadPhaseLayerFilter());
@@ -282,7 +283,7 @@ public class NarrowPhaseQuery
      * unaffected)
      */
     @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    public void castShape(RShapeCast shapeCast, ConstShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
             BroadPhaseLayerFilter bplFilter) {
         castShape(shapeCast, settings, base, collector, bplFilter,
@@ -304,7 +305,7 @@ public class NarrowPhaseQuery
      * unaffected)
      */
     @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    public void castShape(RShapeCast shapeCast, ConstShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         castShape(shapeCast, settings, base, collector, bplFilter, olFilter,
@@ -327,7 +328,7 @@ public class NarrowPhaseQuery
      * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      */
     @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    public void castShape(RShapeCast shapeCast, ConstShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
             BodyFilter bodyFilter) {
@@ -353,13 +354,13 @@ public class NarrowPhaseQuery
      * unaffected)
      */
     @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    public void castShape(RShapeCast shapeCast, ConstShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
             BodyFilter bodyFilter, ShapeFilter shapeFilter) {
         long queryVa = va();
         long shapeCastVa = shapeCast.va();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         double baseX = base.xx();
         double baseY = base.yy();
         double baseZ = base.zz();

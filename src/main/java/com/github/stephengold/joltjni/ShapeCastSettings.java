@@ -22,13 +22,16 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
+import com.github.stephengold.joltjni.readonly.ConstShapeCastSettings;
 
 /**
  * Configurable options for a shape-cast query.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ShapeCastSettings extends CollideSettingsBase {
+public class ShapeCastSettings
+        extends CollideSettingsBase
+        implements ConstShapeCastSettings {
     // *************************************************************************
     // constructors
 
@@ -45,8 +48,8 @@ public class ShapeCastSettings extends CollideSettingsBase {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public ShapeCastSettings(ShapeCastSettings original) {
-        long originalVa = original.va();
+    public ShapeCastSettings(ConstShapeCastSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsOwner(copyVa);
     }
@@ -54,81 +57,13 @@ public class ShapeCastSettings extends CollideSettingsBase {
     // new methods exposed
 
     /**
-     * Return the policy for back-facing triangles in convex shapes. The
-     * settings are unaffected. (native attribute: mBackFaceModeConvex)
-     *
-     * @return the enum value (not {@code null})
-     */
-    public EBackFaceMode getBackFaceModeConvex() {
-        long settingsVa = va();
-        int ordinal = getBackFaceModeConvex(settingsVa);
-        EBackFaceMode result = EBackFaceMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the policy for back-facing triangles in triangle-based shapes. The
-     * settings are unaffected. (native attribute: mBackFaceModeTriangles)
-     *
-     * @return the enum value (not {@code null})
-     */
-    public EBackFaceMode getBackFaceModeTriangles() {
-        long settingsVa = va();
-        int ordinal = getBackFaceModeTriangles(settingsVa);
-        EBackFaceMode result = EBackFaceMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the extra thickness for enlarging the query shape. The settings
-     * are unaffected. (native attribute: mExtraConvexRadius)
-     *
-     * @return the extra margin (in meters)
-     */
-    public float getExtraConvexRadius() {
-        long settingsVa = va();
-        float result = getExtraConvexRadius(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether to calculate penetration for the starting point. The
-     * settings are unaffected. (native attribute: mReturnDeepestPoint)
-     *
-     * @return {@code true} to enable, {@code false} to disable
-     */
-    public boolean getReturnDeepestPoint() {
-        long settingsVa = va();
-        boolean result = getReturnDeepestPoint(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the shape should be shrunk and then expanded by the convex
-     * radius. The settings are unaffected. (native attribute:
-     * mUseShrunkenShapeAndConvexRadius)
-     *
-     * @return {@code true} to enable, {@code false} to disable
-     */
-    public boolean getUseShrunkenShapeAndConvexRadius() {
-        long settingsVa = va();
-        boolean result = getUseShrunkenShapeAndConvexRadius(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Copy the argument to the current settings.
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(ShapeCastSettings source) {
+    public void set(ConstShapeCastSettings source) {
         long targetVa = va();
-        long sourceVa = source.va();
+        long sourceVa = source.targetVa();
         assign(targetVa, sourceVa);
     }
 
@@ -189,6 +124,81 @@ public class ShapeCastSettings extends CollideSettingsBase {
     public void setUseShrunkenShapeAndConvexRadius(boolean enable) {
         long settingsVa = va();
         setUseShrunkenShapeAndConvexRadius(settingsVa, enable);
+    }
+    // *************************************************************************
+    // ConstShapeCastSettings methods
+
+    /**
+     * Return the policy for back-facing triangles in convex shapes. The
+     * settings are unaffected. (native attribute: mBackFaceModeConvex)
+     *
+     * @return the enum value (not {@code null})
+     */
+    @Override
+    public EBackFaceMode getBackFaceModeConvex() {
+        long settingsVa = va();
+        int ordinal = getBackFaceModeConvex(settingsVa);
+        EBackFaceMode result = EBackFaceMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the policy for back-facing triangles in triangle-based shapes. The
+     * settings are unaffected. (native attribute: mBackFaceModeTriangles)
+     *
+     * @return the enum value (not {@code null})
+     */
+    @Override
+    public EBackFaceMode getBackFaceModeTriangles() {
+        long settingsVa = va();
+        int ordinal = getBackFaceModeTriangles(settingsVa);
+        EBackFaceMode result = EBackFaceMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the extra thickness for enlarging the query shape. The settings
+     * are unaffected. (native attribute: mExtraConvexRadius)
+     *
+     * @return the extra margin (in meters)
+     */
+    @Override
+    public float getExtraConvexRadius() {
+        long settingsVa = va();
+        float result = getExtraConvexRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether to calculate penetration for the starting point. The
+     * settings are unaffected. (native attribute: mReturnDeepestPoint)
+     *
+     * @return {@code true} to enable, {@code false} to disable
+     */
+    @Override
+    public boolean getReturnDeepestPoint() {
+        long settingsVa = va();
+        boolean result = getReturnDeepestPoint(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the shape should be shrunk and then expanded by the convex
+     * radius. The settings are unaffected. (native attribute:
+     * mUseShrunkenShapeAndConvexRadius)
+     *
+     * @return {@code true} to enable, {@code false} to disable
+     */
+    @Override
+    public boolean getUseShrunkenShapeAndConvexRadius() {
+        long settingsVa = va();
+        boolean result = getUseShrunkenShapeAndConvexRadius(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

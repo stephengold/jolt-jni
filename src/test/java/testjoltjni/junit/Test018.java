@@ -37,6 +37,7 @@ import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstRayCastSettings;
+import com.github.stephengold.joltjni.readonly.ConstShapeCastSettings;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -127,7 +128,7 @@ public class Test018 {
         ShapeCastSettings settings = new ShapeCastSettings();
 
         testShapeCastSettingsDefaults(settings);
-        ShapeCastSettings copy = new ShapeCastSettings(settings);
+        ConstShapeCastSettings copy = new ShapeCastSettings(settings);
         testShapeCastSettingsSetters(settings);
         testShapeCastSettingsDefaults(copy);
         settings.set(copy);
@@ -281,7 +282,7 @@ public class Test018 {
      * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testShapeCastSettingsDefaults(
-            ShapeCastSettings settings) {
+            ConstShapeCastSettings settings) {
         testCollideSettingsBaseDefaults(settings);
 
         Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
