@@ -33,7 +33,6 @@ import com.github.stephengold.joltjni.RRayCast;
 import com.github.stephengold.joltjni.RShapeCast;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.RayCastResult;
-import com.github.stephengold.joltjni.RayCastSettings;
 import com.github.stephengold.joltjni.ShapeCastSettings;
 import com.github.stephengold.joltjni.ShapeFilter;
 import com.github.stephengold.joltjni.SupportingFace;
@@ -66,7 +65,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
      * @param shapeFilter the shape filter to apply (not {@code null},
      * unaffected)
      */
-    void castRay(RRayCast raycast, RayCastSettings settings,
+    void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector, ShapeFilter shapeFilter);
 
     /**

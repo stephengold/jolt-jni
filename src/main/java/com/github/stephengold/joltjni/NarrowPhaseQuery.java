@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstNarrowPhaseQuery;
+import com.github.stephengold.joltjni.readonly.ConstRayCastSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -156,7 +157,7 @@ public class NarrowPhaseQuery
      * @param collector the hit collector to use (not {@code null})
      */
     @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
+    public void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector) {
         castRay(raycast, settings, collector, new BroadPhaseLayerFilter());
     }
@@ -172,7 +173,7 @@ public class NarrowPhaseQuery
      * unaffected)
      */
     @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
+    public void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter) {
         castRay(raycast, settings, collector, bplFilter,
                 new ObjectLayerFilter());
@@ -191,7 +192,7 @@ public class NarrowPhaseQuery
      * unaffected)
      */
     @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
+    public void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
             ObjectLayerFilter olFilter) {
         castRay(raycast, settings, collector, bplFilter, olFilter,
@@ -212,7 +213,7 @@ public class NarrowPhaseQuery
      * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      */
     @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
+    public void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
             ObjectLayerFilter olFilter, BodyFilter bodyFilter) {
         castRay(raycast, settings, collector, bplFilter, olFilter, bodyFilter,
@@ -235,13 +236,13 @@ public class NarrowPhaseQuery
      * unaffected)
      */
     @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
+    public void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
             ObjectLayerFilter olFilter, BodyFilter bodyFilter,
             ShapeFilter shapeFilter) {
         long queryVa = va();
         long raycastVa = raycast.va();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         long collectorVa = collector.va();
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();

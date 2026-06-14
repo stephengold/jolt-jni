@@ -36,6 +36,7 @@ import com.github.stephengold.joltjni.readonly.ConstCollideSettingsBase;
 import com.github.stephengold.joltjni.readonly.ConstCollideShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
+import com.github.stephengold.joltjni.readonly.ConstRayCastSettings;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -109,7 +110,7 @@ public class Test018 {
         RayCastSettings settings = new RayCastSettings();
 
         testRayCastSettingsDefaults(settings);
-        RayCastSettings copy = new RayCastSettings(settings);
+        ConstRayCastSettings copy = new RayCastSettings(settings);
         testRayCastSettingsSetters(settings);
         testRayCastSettingsDefaults(copy);
         settings.set(copy);
@@ -248,7 +249,7 @@ public class Test018 {
      * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testRayCastSettingsDefaults(
-            RayCastSettings settings) {
+            ConstRayCastSettings settings) {
         Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
                 settings.getBackFaceModeConvex());
         Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,

@@ -22,13 +22,16 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
+import com.github.stephengold.joltjni.readonly.ConstRayCastSettings;
 
 /**
  * Configurable options for a ray-cast query.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class RayCastSettings extends JoltPhysicsObject {
+public class RayCastSettings
+        extends JoltPhysicsObject
+        implements ConstRayCastSettings {
     // *************************************************************************
     // constructors
 
@@ -45,8 +48,8 @@ public class RayCastSettings extends JoltPhysicsObject {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public RayCastSettings(RayCastSettings original) {
-        long originalVa = original.va();
+    public RayCastSettings(ConstRayCastSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
@@ -54,54 +57,13 @@ public class RayCastSettings extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the policy for back-facing triangles in convex shapes. The
-     * settings are unaffected. (native attribute: mBackFaceModeConvex)
-     *
-     * @return the enum value (not {@code null})
-     */
-    public EBackFaceMode getBackFaceModeConvex() {
-        long settingsVa = va();
-        int ordinal = getBackFaceModeConvex(settingsVa);
-        EBackFaceMode result = EBackFaceMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the policy for back-facing triangles in triangle-based shapes. The
-     * settings are unaffected. (native attribute: mBackFaceModeTriangles)
-     *
-     * @return the enum value (not {@code null})
-     */
-    public EBackFaceMode getBackFaceModeTriangles() {
-        long settingsVa = va();
-        int ordinal = getBackFaceModeTriangles(settingsVa);
-        EBackFaceMode result = EBackFaceMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Test whether convex shapes should be treated as solid. The settings are
-     * unaffected. (native attribute: mTreatConvexAsSolid)
-     *
-     * @return {@code true} if treated as solid, otherwise {@code false}
-     */
-    public boolean getTreatConvexAsSolid() {
-        long settingsVa = va();
-        boolean result = getTreatConvexAsSolid(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Copy the argument to the current settings.
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(RayCastSettings source) {
+    public void set(ConstRayCastSettings source) {
         long targetVa = va();
-        long sourceVa = source.va();
+        long sourceVa = source.targetVa();
         assign(targetVa, sourceVa);
     }
 
@@ -139,6 +101,52 @@ public class RayCastSettings extends JoltPhysicsObject {
     public void setTreatConvexAsSolid(boolean setting) {
         long settingsVa = va();
         setTreatConvexAsSolid(settingsVa, setting);
+    }
+    // *************************************************************************
+    // ConstRayCastSettings methods
+
+    /**
+     * Return the policy for back-facing triangles in convex shapes. The
+     * settings are unaffected. (native attribute: mBackFaceModeConvex)
+     *
+     * @return the enum value (not {@code null})
+     */
+    @Override
+    public EBackFaceMode getBackFaceModeConvex() {
+        long settingsVa = va();
+        int ordinal = getBackFaceModeConvex(settingsVa);
+        EBackFaceMode result = EBackFaceMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the policy for back-facing triangles in triangle-based shapes. The
+     * settings are unaffected. (native attribute: mBackFaceModeTriangles)
+     *
+     * @return the enum value (not {@code null})
+     */
+    @Override
+    public EBackFaceMode getBackFaceModeTriangles() {
+        long settingsVa = va();
+        int ordinal = getBackFaceModeTriangles(settingsVa);
+        EBackFaceMode result = EBackFaceMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Test whether convex shapes should be treated as solid. The settings are
+     * unaffected. (native attribute: mTreatConvexAsSolid)
+     *
+     * @return {@code true} if treated as solid, otherwise {@code false}
+     */
+    @Override
+    public boolean getTreatConvexAsSolid() {
+        long settingsVa = va();
+        boolean result = getTreatConvexAsSolid(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

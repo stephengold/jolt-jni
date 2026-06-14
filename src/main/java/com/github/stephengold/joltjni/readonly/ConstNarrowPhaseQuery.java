@@ -31,7 +31,6 @@ import com.github.stephengold.joltjni.ObjectLayerFilter;
 import com.github.stephengold.joltjni.RRayCast;
 import com.github.stephengold.joltjni.RShapeCast;
 import com.github.stephengold.joltjni.RayCastResult;
-import com.github.stephengold.joltjni.RayCastSettings;
 import com.github.stephengold.joltjni.ShapeCastSettings;
 import com.github.stephengold.joltjni.ShapeFilter;
 import com.github.stephengold.joltjni.TransformedShapeCollector;
@@ -106,7 +105,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * {@code null}, unaffected)
      * @param collector the hit collector to use (not {@code null})
      */
-    void castRay(RRayCast raycast, RayCastSettings settings,
+    void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector);
 
     /**
@@ -119,7 +118,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * @param bplFilter the broadphase-layer filter to apply (not {@code null},
      * unaffected)
      */
-    void castRay(RRayCast raycast, RayCastSettings settings,
+    void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter);
 
     /**
@@ -134,7 +133,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * @param olFilter the object-layer filter to apply (not {@code null},
      * unaffected)
      */
-    void castRay(RRayCast raycast, RayCastSettings settings,
+    void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
             ObjectLayerFilter olFilter);
 
@@ -151,7 +150,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * unaffected)
      * @param bodyFilter the body filter to apply (not {@code null}, unaffected)
      */
-    void castRay(RRayCast raycast, RayCastSettings settings,
+    void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
             ObjectLayerFilter olFilter, BodyFilter bodyFilter);
 
@@ -170,7 +169,7 @@ public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
      * @param shapeFilter the shape filter to apply (not {@code null},
      * unaffected)
      */
-    void castRay(RRayCast raycast, RayCastSettings settings,
+    void castRay(RRayCast raycast, ConstRayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
             ObjectLayerFilter olFilter, BodyFilter bodyFilter,
             ShapeFilter shapeFilter);
