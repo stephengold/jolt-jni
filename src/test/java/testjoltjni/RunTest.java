@@ -41,6 +41,8 @@ import testjoltjni.junit.Test013;
 import testjoltjni.junit.Test014;
 import testjoltjni.junit.Test015;
 import testjoltjni.junit.Test016;
+import testjoltjni.junit.Test017;
+import testjoltjni.junit.Test018;
 
 /**
  * Run specific automated tests while logging heap allocations in the glue code,
@@ -95,5 +97,7 @@ final public class RunTest {
         new Test014().test014();
         new Test015().test015();
         new Test016().test016();
+        new Test017().test017();
+        new Test018().test018();
     }
 }
