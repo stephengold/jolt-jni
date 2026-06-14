@@ -94,7 +94,7 @@ public class Test018 {
         CollisionGroup group = new CollisionGroup();
 
         testCollisionGroupDefaults(group);
-        CollisionGroup copy = new CollisionGroup(group);
+        ConstCollisionGroup copy = new CollisionGroup(group);
         testCollisionGroupSetters(group);
         testCollisionGroupDefaults(copy);
         group.set(copy);
