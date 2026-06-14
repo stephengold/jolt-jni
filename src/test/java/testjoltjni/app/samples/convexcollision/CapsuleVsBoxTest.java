@@ -34,7 +34,7 @@ import static testjoltjni.app.samples.DebugRendererSP.*;
  */
 public class CapsuleVsBoxTest extends Test{
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Create box
 	Vec3 box_min=new Vec3(-1.0f, -2.0f, 0.5f);
