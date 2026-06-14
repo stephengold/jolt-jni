@@ -43,6 +43,11 @@ RMat44 mCameraPivot=RMat44.sIdentity();
 float mBrake,mForward,mRight;
 float mPreviousForward=1f;
 
+public void Cleanup()
+{
+	mPhysicsSystem.removeStepListener(mVehicleConstraint.getStepListener());
+}
+
 public void Initialize()
 {
 	super.Initialize();
