@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EActiveEdgeMode;
 import com.github.stephengold.joltjni.enumerate.ECollectFacesMode;
+import com.github.stephengold.joltjni.readonly.ConstCollideSettingsBase;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -30,7 +31,9 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CollideSettingsBase extends JoltPhysicsObject {
+public class CollideSettingsBase
+        extends JoltPhysicsObject
+        implements ConstCollideSettingsBase {
     // *************************************************************************
     // constructors
 
@@ -41,76 +44,6 @@ public class CollideSettingsBase extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Return how edge collisions should be handled. The settings are
-     * unaffected. (native attribute: mActiveEdgeMode)
-     *
-     * @return an enum value (not {@code null})
-     */
-    public EActiveEdgeMode getActiveEdgeMode() {
-        long settingsVa = va();
-        int ordinal = getActiveEdgeMode(settingsVa);
-        EActiveEdgeMode result = EActiveEdgeMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Copy the movement direction for inactive edges. The settings are
-     * unaffected. (native attribute: mActiveEdgeMovementDirection)
-     *
-     * @return a new direction vector
-     */
-    public Vec3 getActiveEdgeMovementDirection() {
-        long settingsVa = va();
-        float dx = getActiveEdgeMovementDirectionX(settingsVa);
-        float dy = getActiveEdgeMovementDirectionY(settingsVa);
-        float dz = getActiveEdgeMovementDirectionZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
-
-        return result;
-    }
-
-    /**
-     * Return how face information should be handled. The settings are
-     * unaffected. (native attribute: mCollectFacesMode)
-     *
-     * @return an enum value (not {@code null})
-     */
-    public ECollectFacesMode getCollectFacesMode() {
-        long settingsVa = va();
-        int ordinal = getCollectFacesMode(settingsVa);
-        ECollectFacesMode result = ECollectFacesMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the collision tolerance for the GJK algorithm. The settings are
-     * unaffected. (native attribute: mCollisionTolerance)
-     *
-     * @return an enum value (not {@code null})
-     */
-    public float getCollisionTolerance() {
-        long settingsVa = va();
-        float result = getCollisionTolerance(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the termination tolerance for calculating penetration depth. The
-     * settings are unaffected. (native attribute: mPenetrationTolerance)
-     *
-     * @return the tolerance
-     */
-    public float getPenetrationTolerance() {
-        long settingsVa = va();
-        float result = getPenetrationTolerance(settingsVa);
-
-        return result;
-    }
 
     /**
      * Alter how edge collisions should be handled. (native attribute:
@@ -188,6 +121,83 @@ public class CollideSettingsBase extends JoltPhysicsObject {
     final void setVirtualAddressAsOwner(long settingsVa) {
         Runnable freeingAction = () -> free(settingsVa);
         setVirtualAddress(settingsVa, freeingAction);
+    }
+    // *************************************************************************
+    // ConstCollideSettingsBase methods
+
+    /**
+     * Return how edge collisions should be handled. The settings are
+     * unaffected. (native attribute: mActiveEdgeMode)
+     *
+     * @return an enum value (not {@code null})
+     */
+    @Override
+    public EActiveEdgeMode getActiveEdgeMode() {
+        long settingsVa = va();
+        int ordinal = getActiveEdgeMode(settingsVa);
+        EActiveEdgeMode result = EActiveEdgeMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Copy the movement direction for inactive edges. The settings are
+     * unaffected. (native attribute: mActiveEdgeMovementDirection)
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getActiveEdgeMovementDirection() {
+        long settingsVa = va();
+        float dx = getActiveEdgeMovementDirectionX(settingsVa);
+        float dy = getActiveEdgeMovementDirectionY(settingsVa);
+        float dz = getActiveEdgeMovementDirectionZ(settingsVa);
+        Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
+     * Return how face information should be handled. The settings are
+     * unaffected. (native attribute: mCollectFacesMode)
+     *
+     * @return an enum value (not {@code null})
+     */
+    @Override
+    public ECollectFacesMode getCollectFacesMode() {
+        long settingsVa = va();
+        int ordinal = getCollectFacesMode(settingsVa);
+        ECollectFacesMode result = ECollectFacesMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the collision tolerance for the GJK algorithm. The settings are
+     * unaffected. (native attribute: mCollisionTolerance)
+     *
+     * @return an enum value (not {@code null})
+     */
+    @Override
+    public float getCollisionTolerance() {
+        long settingsVa = va();
+        float result = getCollisionTolerance(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the termination tolerance for calculating penetration depth. The
+     * settings are unaffected. (native attribute: mPenetrationTolerance)
+     *
+     * @return the tolerance
+     */
+    @Override
+    public float getPenetrationTolerance() {
+        long settingsVa = va();
+        float result = getPenetrationTolerance(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

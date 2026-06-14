@@ -32,6 +32,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EActiveEdgeMode;
 import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
 import com.github.stephengold.joltjni.enumerate.ECollectFacesMode;
+import com.github.stephengold.joltjni.readonly.ConstCollideSettingsBase;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import org.junit.Assert;
@@ -141,7 +142,7 @@ public class Test018 {
      * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testCollideSettingsBaseDefaults(
-            CollideSettingsBase settings) {
+            ConstCollideSettingsBase settings) {
         Assert.assertEquals(EActiveEdgeMode.CollideOnlyWithActive,
                 settings.getActiveEdgeMode());
         TestUtils.assertEquals(0f, 0f, 0f,
