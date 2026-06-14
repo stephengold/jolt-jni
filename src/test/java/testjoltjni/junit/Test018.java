@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.CollideSettingsBase;
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.PhysicsSettings;
+import com.github.stephengold.joltjni.RayCastSettings;
 import com.github.stephengold.joltjni.ShapeCastSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EActiveEdgeMode;
@@ -55,6 +56,7 @@ public class Test018 {
         TestUtils.initializeNativeLibrary();
 
         doCollisionGroup();
+        doRayCastSettings();
         doShapeCastSettings();
 
         TestUtils.cleanup();
@@ -76,6 +78,23 @@ public class Test018 {
         testCollisionGroupDefaults(group);
 
         TestUtils.testClose(copy, group);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code RayCastSettings} class.
+     */
+    private static void doRayCastSettings() {
+        RayCastSettings settings = new RayCastSettings();
+
+        testRayCastSettingsDefaults(settings);
+        RayCastSettings copy = new RayCastSettings(settings);
+        testRayCastSettingsSetters(settings);
+        testRayCastSettingsDefaults(copy);
+        settings.set(copy);
+        testRayCastSettingsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -168,6 +187,38 @@ public class Test018 {
         Assert.assertEquals(102, group.getSubGroupId());
 
         TestUtils.testClose(actualFilter, filter);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code RayCastSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, unaffected)
+     */
+    private static void testRayCastSettingsDefaults(
+            RayCastSettings settings) {
+        Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
+                settings.getBackFaceModeConvex());
+        Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
+                settings.getBackFaceModeTriangles());
+        Assert.assertTrue(settings.getTreatConvexAsSolid());
+    }
+
+    /**
+     * Test the setters of the specified {@code RayCastSettings}.
+     *
+     * @param settings the group to test (not {@code null})
+     */
+    private static void testRayCastSettingsSetters(
+            RayCastSettings settings) {
+        settings.setBackFaceModeConvex(EBackFaceMode.CollideWithBackFaces);
+        settings.setBackFaceModeTriangles(EBackFaceMode.CollideWithBackFaces);
+        settings.setTreatConvexAsSolid(false);
+
+        Assert.assertEquals(EBackFaceMode.CollideWithBackFaces,
+                settings.getBackFaceModeConvex());
+        Assert.assertEquals(EBackFaceMode.CollideWithBackFaces,
+                settings.getBackFaceModeTriangles());
+        Assert.assertFalse(settings.getTreatConvexAsSolid());
     }
 
     /**
