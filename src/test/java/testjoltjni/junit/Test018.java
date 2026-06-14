@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.CollideSettingsBase;
+import com.github.stephengold.joltjni.CollideShapeSettings;
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.PhysicsSettings;
@@ -55,6 +56,7 @@ public class Test018 {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
 
+        doCollideShapeSettings();
         doCollisionGroup();
         doRayCastSettings();
         doShapeCastSettings();
@@ -63,6 +65,23 @@ public class Test018 {
     }
     // *************************************************************************
     // Java private methods
+
+    /**
+     * Test the {@code CollideShapeSettings} class.
+     */
+    private static void doCollideShapeSettings() {
+        CollideShapeSettings settings = new CollideShapeSettings();
+
+        testCollideShapeSettingsDefaults(settings);
+        CollideShapeSettings copy = new CollideShapeSettings(settings);
+        testCollideShapeSettingsSetters(settings);
+        testCollideShapeSettingsDefaults(copy);
+        settings.set(copy);
+        testCollideShapeSettingsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
+        System.gc();
+    }
 
     /**
      * Test the {@code CollisionGroup} class.
@@ -156,6 +175,38 @@ public class Test018 {
                 settings.getCollectFacesMode());
         Assert.assertEquals(0.4f, settings.getCollisionTolerance(), 0f);
         Assert.assertEquals(0.5f, settings.getPenetrationTolerance(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code CollideShapeSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, unaffected)
+     */
+    private static void testCollideShapeSettingsDefaults(
+            CollideShapeSettings settings) {
+        testCollideSettingsBaseDefaults(settings);
+
+        Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
+                settings.getBackFaceMode());
+        Assert.assertEquals(0f, settings.getMaxSeparationDistance(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code CollideShapeSettings}.
+     *
+     * @param settings the group to test (not {@code null})
+     */
+    private static void testCollideShapeSettingsSetters(
+            CollideShapeSettings settings) {
+        settings.setBackFaceMode(EBackFaceMode.CollideWithBackFaces);
+        settings.setMaxSeparationDistance(0.2f);
+
+        testCollideSettingsBaseSetters(settings);
+
+        Assert.assertEquals(EBackFaceMode.CollideWithBackFaces,
+                settings.getBackFaceMode());
+        Assert.assertEquals(0.2f, settings.getMaxSeparationDistance(), 0f);
     }
 
     /**
