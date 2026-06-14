@@ -35,7 +35,7 @@ tasks.withType(CppCompile).configureEach {
             'unpackJoltSource', 'unpackTestFramework', 'unpackVhacdSource')
 }
 tasks.withType(ObjectiveCppCompile).configureEach {
-    dependsOn('unpackJoltSource', 'unpackVhacdSource')
+    dependsOn('unpackJoltSource')
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
