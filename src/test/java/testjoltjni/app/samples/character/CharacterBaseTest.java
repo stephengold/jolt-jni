@@ -139,7 +139,7 @@ static final Vec3 cCharacterVelocity=new Vec3(0, 0, 2);
 
 public void Cleanup()
 {
-	if (mAnimatedCharacter != nullptr)
+	if (mAnimatedCharacter.getPtr() != nullptr)
 		mAnimatedCharacter.removeFromPhysicsSystem();
 }
 
@@ -714,12 +714,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 
 	// Animate character
-	if (mAnimatedCharacter != nullptr)
+	if (mAnimatedCharacter.getPtr() != nullptr)
 		mAnimatedCharacter.setLinearVelocity(star(sin(mTime) , cCharacterVelocity));
 
 	// Animate character virtual
 	for (CharacterVirtualRef character : new CharacterVirtualRef[]{ mAnimatedCharacterVirtual, mAnimatedCharacterVirtualWithInnerBody })
-		if (character != nullptr)
+		if (character.getPtr() != nullptr)
 		{
 			// Draw the character
 			DrawPaddedCharacter(character.getShape(), character.getCharacterPadding(), character.getCenterOfMassTransform());
