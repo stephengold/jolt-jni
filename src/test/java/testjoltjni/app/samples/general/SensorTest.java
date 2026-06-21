@@ -36,10 +36,8 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class SensorTest extends Test{
 class BodyAndCount implements Comparable<BodyAndCount>{
-    int mBodyID,mCount;
-    BodyAndCount(){}
-    BodyAndCount(int id,int cnt){mBodyID=id;mCount=cnt;}
-    public int compareTo(BodyAndCount other){return Integer.compare(mBodyID, other.mBodyID);}
+    int mBodyID,mCount;BodyAndCount(int id,int cnt){mBodyID=id;mCount=cnt;}
+    public int compareTo(BodyAndCount other){return Integer.compare(mBodyID,other.mBodyID);}
 }
 float mTime;
 final int StaticAttractor=0,StaticSensor=1,KinematicSensor=2,SensorDetectingStatic=3,NumSensors=4;
