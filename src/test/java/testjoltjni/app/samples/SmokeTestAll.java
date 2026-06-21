@@ -203,29 +203,49 @@ final public class SmokeTestAll {
     }
 
     /**
-     * Invoke key methods of the specified Test to see whether they crash.
+     * Invoke key methods of the specified Test (with no test settings) to see
+     * whether they crash.
      *
      * @param test the Test object to use (not {@code null})
      */
     private static void smokeTest(Test test) {
-        int numSteps = globalParameters.numSteps();
-        smokeTest(test, numSteps);
+        String arguments = null;
+        smokeTest(test, arguments);
     }
 
     /**
-     * Invoke key methods of the specified Test to see whether they crash.
+     * Invoke key methods of the specified Test (with the specified settings) to
+     * see whether they crash.
      *
      * @param test the Test object to use (not {@code null})
+     * @param settings a textual description of the test settings, or
+     * {@code null} for none
+     */
+    private static void smokeTest(Test test, String settings) {
+        int numSteps = globalParameters.numSteps();
+        smokeTest(test, settings, numSteps);
+    }
+
+    /**
+     * Invoke key methods of the specified Test (with the specified settings) to
+     * see whether they crash.
+     *
+     * @param test the Test object to use (not {@code null})
+     * @param settings a textual description of the test settings, or
+     * {@code null} for none
      * @param numSteps the number of physics steps to simulate (&ge;0,
      * default=defaultNumSteps)
      */
-    private static void smokeTest(Test test, int numSteps) {
+    private static void smokeTest(Test test, String settings, int numSteps) {
         ++numTests;
 
-        // Log the name of the test:
-        String testName = test.getClass().getSimpleName();
+        // Describe the test to System.out:
+        String description = test.getClass().getSimpleName();
+        if (settings != null && !settings.isBlank()) {
+            description += " with " + settings;
+        }
         System.out.printf("=== Test #%d:  %s for %d step%s%n",
-                numTests, testName, numSteps, (numSteps == 1) ? "" : "s");
+                numTests, description, numSteps, (numSteps == 1) ? "" : "s");
         System.out.flush();
 
         test.SetDebugRenderer(renderer);
