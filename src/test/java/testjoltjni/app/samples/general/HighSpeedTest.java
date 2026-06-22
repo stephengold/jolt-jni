@@ -37,14 +37,14 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class HighSpeedTest extends Test{
 
-String  sScenes[] =
+public static String  sScenes[] =
 {
 	"Simple",
 	"Convex Hull On Large Triangles",
 	"Convex Hull On Terrain1",
 };
 
-int sSelectedScene = 0;
+public int sSelectedScene = 0;
 
 void CreateDominoBlocks(RVec3Arg inOffset, int inNumWalls, float inDensity, float inRadius)
 {
