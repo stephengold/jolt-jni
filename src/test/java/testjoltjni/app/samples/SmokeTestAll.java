@@ -25,6 +25,7 @@ import com.beust.jcommander.JCommander;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import com.github.stephengold.joltjni.std.OfStream;
+import testjoltjni.MyString;
 import testjoltjni.TestUtils;
 import testjoltjni.app.samples.broadphase.*;
 import testjoltjni.app.samples.character.*;
@@ -311,8 +312,22 @@ final public class SmokeTestAll {
         // character package:
         smokeTest(new CharacterPlanetTest());
         smokeTest(new CharacterSpaceShipTest());
-        smokeTest(new CharacterTest());
-        smokeTest(new CharacterVirtualTest());
+        for (CharacterBaseTest.EType shape : CharacterBaseTest.EType.values()) {
+            for (String scene : CharacterBaseTest.sScenes) {
+                String settings
+                        = "shape=" + shape + " scene=" + MyString.quote(scene);
+
+                CharacterTest test = new CharacterTest();
+                test.sShapeType = shape;
+                test.sSceneName = scene;
+                smokeTest(test, settings);
+
+                CharacterVirtualTest cvTest = new CharacterVirtualTest();
+                cvTest.sShapeType = shape;
+                cvTest.sSceneName = scene;
+                smokeTest(cvTest, settings);
+            }
+        }
 
         // constraints package:
         smokeTestConstraints();
@@ -330,7 +345,13 @@ final public class SmokeTestAll {
 
         // hair package:
         smokeTest(new HairCollisionTest());
-        smokeTest(new HairGravityPreloadTest());
+        for (String scene : HairGravityPreloadTest.sScenes) {
+            String settings = "scene=" + MyString.quote(scene);
+
+            HairGravityPreloadTest test = new HairGravityPreloadTest();
+            test.sSceneName = scene;
+            smokeTest(test, settings);
+        }
         smokeTest(new HairTest());
 
         smokeTestRig();
@@ -342,11 +363,29 @@ final public class SmokeTestAll {
         smokeTest(new LoadSnapshotTest());
 
         // vehicle package:
-        smokeTest(new MotorcycleTest());
-        smokeTest(new TankTest());
-        smokeTest(new VehicleConstraintTest());
-        smokeTest(new VehicleSixDOFTest());
-        smokeTest(new VehicleStressTest());
+        for (String scene : VehicleTest.sScenes) {
+            String settings = "scene=" + MyString.quote(scene);
+
+            MotorcycleTest mcTest = new MotorcycleTest();
+            mcTest.sSceneName = scene;
+            smokeTest(mcTest, settings);
+
+            TankTest tankTest = new TankTest();
+            tankTest.sSceneName = scene;
+            smokeTest(tankTest, settings);
+
+            VehicleConstraintTest vcTest = new VehicleConstraintTest();
+            vcTest.sSceneName = scene;
+            smokeTest(vcTest, settings);
+
+            VehicleSixDOFTest vsdTest = new VehicleSixDOFTest();
+            vsdTest.sSceneName = scene;
+            smokeTest(vsdTest, settings);
+
+            VehicleStressTest vsTest = new VehicleStressTest();
+            vsTest.sSceneName = scene;
+            smokeTest(vsTest, settings);
+        }
 
         // water package:
         smokeTest(new BoatTest());
@@ -404,7 +443,16 @@ final public class SmokeTestAll {
         smokeTest(new GravityFactorTest());
         smokeTest(new GyroscopicForceTest());
         smokeTest(new HeavyOnLightTest());
-        smokeTest(new HighSpeedTest());
+
+        for (int sceneI = 0; sceneI < HighSpeedTest.sScenes.length; ++sceneI) {
+            String settings
+                    = "scene=" + MyString.quote(HighSpeedTest.sScenes[sceneI]);
+
+            HighSpeedTest test = new HighSpeedTest();
+            test.sSelectedScene = sceneI;
+            smokeTest(test, settings);
+        }
+
         smokeTest(new IslandTest());
         smokeTest(new KinematicTest());
         smokeTest(new LoadSaveBinaryTest());
@@ -430,12 +478,48 @@ final public class SmokeTestAll {
     private static void smokeTestRig() {
         smokeTest(new BigWorldTest());
         smokeTest(new CreateRigTest());
-        smokeTest(new KinematicRigTest());
-        smokeTest(new LoadRigTest());
+
+        for (String animation : KinematicRigTest.sAnimations) {
+            String settings = "animation=" + MyString.quote(animation);
+
+            KinematicRigTest test = new KinematicRigTest();
+            test.sAnimationName = animation;
+            smokeTest(test, settings);
+        }
+
+        for (EConstraintOverride override : EConstraintOverride.values()) {
+            if (override == EConstraintOverride.TypeSlider) {
+                continue; // native assert in CalculateConstraintProperties()
+            }
+            String settings = "override=" + override;
+
+            LoadRigTest test = new LoadRigTest();
+            test.sConstraintType = override;
+            smokeTest(test, settings);
+        }
+
         smokeTest(new LoadSaveBinaryRigTest());
         smokeTest(new LoadSaveRigTest());
-        smokeTest(new PoweredRigTest());
-        smokeTest(new RigPileTest());
+
+        for (String animation : PoweredRigTest.sAnimations) {
+            if (animation.equals("dead_pose3")) {
+                continue; // issue #2059
+            }
+            String settings = "animation=" + MyString.quote(animation);
+
+            PoweredRigTest test = new PoweredRigTest();
+            test.sAnimationName = animation;
+            smokeTest(test, settings);
+        }
+
+        for (String scene : RigPileTest.sScenes) {
+            String settings = "scene=" + MyString.quote(scene);
+
+            RigPileTest test = new RigPileTest();
+            test.sSceneName = scene;
+            smokeTest(test, settings);
+        }
+
         smokeTest(new SkeletonMapperTest());
         smokeTest(new SoftKeyframedRigTest());
     }
@@ -471,7 +555,16 @@ final public class SmokeTestAll {
         smokeTest(new CylinderShapeTest());
         smokeTest(new DeformedHeightFieldShapeTest());
         smokeTest(new EmptyShapeTest());
-        smokeTest(new HeightFieldShapeTest());
+
+        for (int tt = 0; tt < HeightFieldShapeTest.sTerrainTypes.length; ++tt) {
+            String terrain = HeightFieldShapeTest.sTerrainTypes[tt];
+            String settings = "terrain=" + MyString.quote(terrain);
+
+            HeightFieldShapeTest test = new HeightFieldShapeTest();
+            test.sTerrainType = tt;
+            smokeTest(test, settings);
+        }
+
         smokeTest(new MeshShapeTest());
         smokeTest(new MeshShapeUserDataTest());
         smokeTest(new MutableCompoundShapeTest());
@@ -503,7 +596,15 @@ final public class SmokeTestAll {
         smokeTest(new SoftBodySensorTest());
         smokeTest(new SoftBodyShapesTest());
         smokeTest(new SoftBodySkinnedConstraintTest());
-        smokeTest(new SoftBodyStressTest());
+
+        for (String scene : SoftBodyStressTest.sScenes) {
+            String settings = "scene=" + MyString.quote(scene);
+
+            SoftBodyStressTest test = new SoftBodyStressTest();
+            test.sSceneName = scene;
+            smokeTest(test, settings);
+        }
+
         smokeTest(new SoftBodyUpdatePositionTest());
         smokeTest(new SoftBodyVertexRadiusTest());
         smokeTest(new SoftBodyVsFastMovingTest());
