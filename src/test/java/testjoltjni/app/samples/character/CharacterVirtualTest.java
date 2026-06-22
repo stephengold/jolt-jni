@@ -402,9 +402,9 @@ void OnContactAdded( ConstCharacterVirtual inCharacter,  ConstCharacterContact i
 
 	if (inCharacter.getId() == mCharacter.getId())
 	{
-//	#ifdef CHARACTER_TRACE_CONTACTS
-		Trace("Contact added with body %08x, sub shape %08x", inContact.getBodyB(), inContact.getSubShapeIdB());
-//	#endif
+	//#ifdef CHARACTER_TRACE_CONTACTS
+	//	Trace("Contact added with body %08x, sub shape %08x", inContact.getBodyB(), inContact.getSubShapeIdB());
+	//#endif
 		if (mActiveContacts.find(  inContact) != -1)
 			FatalError("Got an add contact that should have been a persisted contact");
 		mActiveContacts.pushBack(inContact);
@@ -418,7 +418,7 @@ void OnContactPersisted( ConstCharacterVirtual inCharacter,  ConstCharacterConta
 	if (inCharacter.getId() == mCharacter.getId())
 	{
 	//#ifdef CHARACTER_TRACE_CONTACTS
-		Trace("Contact persisted with body %08x, sub shape %08x", inContact.getBodyB(), inContact.getSubShapeIdB());
+	//	Trace("Contact persisted with body %08x, sub shape %08x", inContact.getBodyB(), inContact.getSubShapeIdB());
 	//#endif
 		if (mActiveContacts.find(  inContact) == -1)
 			FatalError("Got a persisted contact that should have been an add contact");
@@ -430,7 +430,7 @@ void OnContactRemoved( ConstCharacterVirtual inCharacter,  int inBodyID2,  int i
 	if (inCharacter.getId() == mCharacter.getId())
 	{
 	//#ifdef CHARACTER_TRACE_CONTACTS
-		Trace("Contact removed with body %08x, sub shape %08x", inBodyID2, inSubShapeID2);
+	//	Trace("Contact removed with body %08x, sub shape %08x", inBodyID2, inSubShapeID2);
 	//#endif
 		int it = mActiveContacts.find( new CharacterContactKey('b',inBodyID2, inSubShapeID2));
 		if (it == -1)
@@ -461,7 +461,7 @@ void OnCharacterContactAdded( ConstCharacterVirtual inCharacter, ConstCharacterC
 	if (inCharacter.getId() == mCharacter.getId())
 	{
 	//#ifdef CHARACTER_TRACE_CONTACTS
-		Trace("Contact added with character %08x, sub shape %08x", inContact.getBodyB(), inContact.getSubShapeIdB());
+	//	Trace("Contact added with character %08x, sub shape %08x", inContact.getBodyB(), inContact.getSubShapeIdB());
 	//#endif
 		if (mActiveContacts.find(  inContact) != -1)
 			FatalError("Got an add contact that should have been a persisted contact");
@@ -476,7 +476,7 @@ void OnCharacterContactPersisted(ConstCharacterVirtual  inCharacter, ConstCharac
 	if (inCharacter.getId() == mCharacter.getId())
 	{
 	//#ifdef CHARACTER_TRACE_CONTACTS
-		Trace("Contact persisted with character %08x, sub shape %08x", inContact.getBodyB(), inContact.getSubShapeIdB());
+	//	Trace("Contact persisted with character %08x, sub shape %08x", inContact.getBodyB(), inContact.getSubShapeIdB());
 	//#endif
 		if (mActiveContacts.find(  inContact) == -1)
 			FatalError("Got a persisted contact that should have been an add contact");
@@ -488,7 +488,7 @@ void OnCharacterContactRemoved(ConstCharacterVirtual inCharacter,  int inOtherCh
 	if (inCharacter.getId() == mCharacter.getId())
 	{
 	//#ifdef CHARACTER_TRACE_CONTACTS
-		Trace("Contact removed with character %08x, sub shape %08x", inOtherCharacterID, inSubShapeID2);
+	//	Trace("Contact removed with character %08x, sub shape %08x", inOtherCharacterID, inSubShapeID2);
 	//#endif
 		int it = mActiveContacts.find( new CharacterContactKey('c',inOtherCharacterID, inSubShapeID2));
 		if (it == -1)
