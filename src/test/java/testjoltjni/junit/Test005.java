@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.DistanceConstraintSettings;
 import com.github.stephengold.joltjni.FixedConstraintSettings;
 import com.github.stephengold.joltjni.GearConstraintSettings;
 import com.github.stephengold.joltjni.HingeConstraintSettings;
+import com.github.stephengold.joltjni.MotorSettings;
 import com.github.stephengold.joltjni.PathConstraintSettings;
 import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.PulleyConstraintSettings;
@@ -34,13 +35,17 @@ import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.RackAndPinionConstraintSettings;
 import com.github.stephengold.joltjni.SixDofConstraintSettings;
 import com.github.stephengold.joltjni.SliderConstraintSettings;
+import com.github.stephengold.joltjni.SpringSettings;
 import com.github.stephengold.joltjni.SwingTwistConstraintSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EAxis;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EPathRotationConstraintType;
+import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.enumerate.ESwingType;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
+import com.github.stephengold.joltjni.readonly.ConstMotorSettings;
+import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -781,8 +786,35 @@ public class Test005 {
         Assert.assertFalse(settings.getAutoDetectPoint());
         Assert.assertEquals(Float.MAX_VALUE, settings.getLimitsMax(), 0f);
         Assert.assertEquals(-Float.MAX_VALUE, settings.getLimitsMin(), 0f);
-        Assert.assertNotNull(settings.getLimitsSpringSettings());
+
+        ConstSpringSettings lss = settings.getLimitsSpringSettings();
+        Assert.assertNull(lss.getConstraint());
+        Assert.assertNull(lss.getConstraintSettings());
+        Assert.assertEquals(0f, lss.getDamping(), 0f);
+        Assert.assertEquals(0f, lss.getFrequency(), 0f);
+        Assert.assertEquals(ESpringMode.FrequencyAndDamping, lss.getMode());
+        Assert.assertEquals(0f, lss.getStiffness(), 0f);
+        Assert.assertFalse(lss.hasStiffness());
+
         Assert.assertEquals(0f, settings.getMaxFrictionForce(), 0f);
+
+        ConstMotorSettings ms = settings.getMotorSettings();
+        Assert.assertNull(ms.getConstraint());
+        Assert.assertNull(ms.getConstraintSettings());
+        Assert.assertEquals(Float.MAX_VALUE, ms.getMaxForceLimit(), 0f);
+        Assert.assertEquals(Float.MAX_VALUE, ms.getMaxTorqueLimit(), 0f);
+        Assert.assertEquals(-Float.MAX_VALUE, ms.getMinForceLimit(), 0f);
+        Assert.assertEquals(-Float.MAX_VALUE, ms.getMinTorqueLimit(), 0f);
+
+        ConstSpringSettings mss = ms.getSpringSettings();
+        Assert.assertNull(mss.getConstraint());
+        Assert.assertNull(mss.getConstraintSettings());
+        Assert.assertEquals(1f, mss.getDamping(), 0f);
+        Assert.assertEquals(2f, mss.getFrequency(), 0f);
+        Assert.assertEquals(ESpringMode.FrequencyAndDamping, mss.getMode());
+        Assert.assertEquals(2f, mss.getStiffness(), 0f);
+        Assert.assertTrue(mss.hasStiffness());
+
         TestUtils.assertEquals(0f, 1f, 0f, settings.getNormalAxis1(), 0f);
         TestUtils.assertEquals(0f, 1f, 0f, settings.getNormalAxis2(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint1(), 0f);
@@ -801,7 +833,26 @@ public class Test005 {
         settings.setAutoDetectPoint(true);
         settings.setLimitsMax(0.01f);
         settings.setLimitsMin(-0.02f);
+
+        SpringSettings setLss = settings.getLimitsSpringSettings();
+        setLss.setDamping(1.1f);
+        setLss.setFrequency(1.2f);
+        setLss.setMode(ESpringMode.StiffnessAndDamping);
+        setLss.setStiffness(1.3f);
+
         settings.setMaxFrictionForce(0.03f);
+
+        MotorSettings setMs = settings.getMotorSettings();
+        setMs.setMaxForceLimit(0.51f);
+        setMs.setMaxTorqueLimit(0.52f);
+        setMs.setMinForceLimit(0.53f);
+        setMs.setMinTorqueLimit(0.54f);
+
+        SpringSettings setMss = setMs.getSpringSettings();
+        setMss.setDamping(2.1f);
+        setMss.setFrequency(2.2f);
+        setMss.setMode(ESpringMode.MassNormalizedStiffnessAndDamping);
+        setMss.setStiffness(2.3f);
 
         settings.setNormalAxis1(new Vec3(0.04f, 0.05f, 0.06f));
         settings.setNormalAxis2(new Vec3(0.07f, 0.08f, 0.09f));
@@ -814,7 +865,36 @@ public class Test005 {
         Assert.assertTrue(settings.getAutoDetectPoint());
         Assert.assertEquals(0.01f, settings.getLimitsMax(), 0f);
         Assert.assertEquals(-0.02f, settings.getLimitsMin(), 0f);
+
+        ConstSpringSettings lss = settings.getLimitsSpringSettings();
+        Assert.assertNull(lss.getConstraint());
+        Assert.assertNull(lss.getConstraintSettings());
+        Assert.assertEquals(1.1f, lss.getDamping(), 0f);
+        Assert.assertEquals(1.3f, lss.getFrequency(), 0f); // union w/ stiffness
+        Assert.assertEquals(ESpringMode.StiffnessAndDamping, lss.getMode());
+        Assert.assertEquals(1.3f, lss.getStiffness(), 0f);
+        Assert.assertTrue(lss.hasStiffness());
+
         Assert.assertEquals(0.03f, settings.getMaxFrictionForce(), 0f);
+
+        ConstMotorSettings ms = settings.getMotorSettings();
+        Assert.assertNull(ms.getConstraint());
+        Assert.assertNull(ms.getConstraintSettings());
+        Assert.assertEquals(0.51f, ms.getMaxForceLimit(), 0f);
+        Assert.assertEquals(0.52f, ms.getMaxTorqueLimit(), 0f);
+        Assert.assertEquals(0.53f, ms.getMinForceLimit(), 0f);
+        Assert.assertEquals(0.54f, ms.getMinTorqueLimit(), 0f);
+
+        ConstSpringSettings mss = ms.getSpringSettings();
+        Assert.assertNull(mss.getConstraint());
+        Assert.assertNull(mss.getConstraintSettings());
+        Assert.assertEquals(2.1f, mss.getDamping(), 0f);
+        Assert.assertEquals(2.3f, mss.getFrequency(), 0f); // union w/ stiffness
+        Assert.assertEquals(ESpringMode.MassNormalizedStiffnessAndDamping,
+                mss.getMode());
+        Assert.assertEquals(2.3f, mss.getStiffness(), 0f);
+        Assert.assertTrue(mss.hasStiffness());
+
         TestUtils.assertEquals(
                 0.04f, 0.05f, 0.06f, settings.getNormalAxis1(), 0f);
         TestUtils.assertEquals(
