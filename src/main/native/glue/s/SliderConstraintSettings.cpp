@@ -297,6 +297,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
+ * Method:    setMotorSettings
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_setMotorSettings
+  (JNIEnv *, jclass, jlong constraintSettingsVa, jlong motorSettingsVa) {
+    SliderConstraintSettings * const pConstraintSettings
+            = reinterpret_cast<SliderConstraintSettings *> (constraintSettingsVa);
+    const MotorSettings * const pMotorSettings
+            = reinterpret_cast<MotorSettings *> (motorSettingsVa);
+    pConstraintSettings->mMotorSettings = *pMotorSettings;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
  * Method:    setNormalAxis1
  * Signature: (JFFF)V
  */

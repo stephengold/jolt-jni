@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
+import com.github.stephengold.joltjni.readonly.ConstMotorSettings;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.DoubleBuffer;
@@ -310,6 +311,17 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the motor settings. (native attribute: mMotorSettings)
+     *
+     * @param motorSettings the desired settings (not {@code null}, unaffected)
+     */
+    public void setMotorSettings(ConstMotorSettings motorSettings) {
+        long constraintSettingsVa = va();
+        long motorSettingsVa = motorSettings.targetVa();
+        setMotorSettings(constraintSettingsVa, motorSettingsVa);
+    }
+
+    /**
      * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
      *
      * @param direction the desired axis direction (not null, unaffected,
@@ -488,6 +500,9 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static void setMaxFrictionForce(
             long settingsVa, float force);
+
+    native private static void setMotorSettings(
+            long constraintSettingsVa, long motorSettingsVa);
 
     native private static void setNormalAxis1(
             long settingsVa, float x, float y, float z);
