@@ -99,6 +99,25 @@ final public class RagdollSettingsRef extends Ref {
     }
 
     /**
+     * Initialize the constraint priorities so that constraints near the leaves
+     * have priority than those near the root.
+     */
+    public void calculateConstraintPriorities() {
+        calculateConstraintPriorities(0);
+    }
+
+    /**
+     * Initialize the constraint priorities so that constraints near the leaves
+     * have priority than those near the root.
+     *
+     * @param basePriority the lowest priority to use (default=0)
+     */
+    public void calculateConstraintPriorities(int basePriority) {
+        long settingsVa = targetVa();
+        RagdollSettings.calculateConstraintPriorities(settingsVa, basePriority);
+    }
+
+    /**
      * Generate a ragdoll instance from the settings, which are unaffected.
      *
      * @param groupId the collision group for the bodies

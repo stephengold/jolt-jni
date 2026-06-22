@@ -94,6 +94,25 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
+     * Initialize the constraint priorities so that constraints near the leaves
+     * have priority than those near the root.
+     */
+    public void calculateConstraintPriorities() {
+        calculateConstraintPriorities(0);
+    }
+
+    /**
+     * Initialize the constraint priorities so that constraints near the leaves
+     * have priority than those near the root.
+     *
+     * @param basePriority the lowest priority to use (default=0)
+     */
+    public void calculateConstraintPriorities(int basePriority) {
+        long settingsVa = va();
+        calculateConstraintPriorities(settingsVa, basePriority);
+    }
+
+    /**
      * Generate a ragdoll instance from the settings, which are unaffected.
      *
      * @param groupId the collision group for the bodies
@@ -289,6 +308,9 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
             long settingsVa, long constraintVa);
 
     native private static void assign(long targetVa, long sourceVa);
+
+    native static void calculateConstraintPriorities(
+            long settingsVa, int basePriority);
 
     native static void calculateBodyIndexToConstraintIndex(long settingsVa);
 

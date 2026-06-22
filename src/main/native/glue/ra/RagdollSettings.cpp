@@ -63,6 +63,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_assig
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    calculateConstraintPriorities
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_calculateConstraintPriorities
+  (JNIEnv *, jclass, jlong settingsVa, jint basePriority) {
+    RagdollSettings * const pSettings
+            = reinterpret_cast<RagdollSettings *> (settingsVa);
+    pSettings->CalculateConstraintPriorities(basePriority);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
  * Method:    calculateBodyIndexToConstraintIndex
  * Signature: (J)V
  */
