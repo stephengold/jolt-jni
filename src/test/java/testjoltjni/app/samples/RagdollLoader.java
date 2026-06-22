@@ -82,6 +82,7 @@ public static RagdollSettings sLoad(String inFileName, EMotionType inMotionType,
 					settings.setLimitsMin ( -original.getNormalHalfConeAngle());
 					settings.setLimitsMax ( original.getNormalHalfConeAngle());
 					settings.setMaxFrictionTorque ( original.getMaxFrictionTorque());
+					settings.setMotorSettings ( original.getSwingMotorSettings());
 					p.setToParent ( settings);
 					break;
 				}
@@ -95,6 +96,7 @@ public static RagdollSettings sLoad(String inFileName, EMotionType inMotionType,
 					settings.setLimitsMin ( -1.0f);
 					settings.setLimitsMax ( 1.0f);
 					settings.setMaxFrictionForce ( original.getMaxFrictionTorque());
+					settings.setMotorSettings ( original.getSwingMotorSettings());
 					p.setToParent ( settings);
 					break;
 				}
@@ -121,6 +123,9 @@ public static RagdollSettings sLoad(String inFileName, EMotionType inMotionType,
 
 	// Stabilize the constraints of the ragdoll
 	ragdoll.stabilize();
+
+	// Optional: Calculate constraint priorities to give more priority to the root
+	ragdoll.calculateConstraintPriorities();
 
 	// Calculate body <-> constraint map
 	ragdoll.calculateBodyIndexToConstraintIndex();
@@ -303,6 +308,9 @@ public static RagdollSettings sCreate()
 
 	// Optional: Stabilize the inertia of the limbs
 	settings.stabilize();
+
+	// Optional: Calculate constraint priorities to give more priority to the root
+	settings.calculateConstraintPriorities();
 
 	// Disable parent child collisions so that we don't get collisions between constrained bodies
 	settings.disableParentChildCollisions();
