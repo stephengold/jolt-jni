@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.ConstMotorSettings;
+import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.DoubleBuffer;
@@ -300,6 +301,17 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the spring settings. (native attribute: mLimitsSpringSettings)
+     *
+     * @param springSettings the desired settings (not {@code null}, unaffected)
+     */
+    public void setLimitsSpringSettings(ConstSpringSettings springSettings) {
+        long constraintSettingsVa = va();
+        long springSettingsVa = springSettings.targetVa();
+        setLimitsSpringSettings(constraintSettingsVa, springSettingsVa);
+    }
+
+    /**
      * Alter the maximum friction force when not driven by a motor. (native
      * attribute: mMaxFrictionForce)
      *
@@ -497,6 +509,9 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     native private static void setLimitsMax(long settingsVa, float limit);
 
     native private static void setLimitsMin(long settingsVa, float limit);
+
+    native private static void setLimitsSpringSettings(
+            long constraintSettingsVa, long springSettingsVa);
 
     native private static void setMaxFrictionForce(
             long settingsVa, float force);
