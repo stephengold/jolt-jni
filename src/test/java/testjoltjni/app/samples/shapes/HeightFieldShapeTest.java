@@ -48,9 +48,9 @@ PhysicsMaterialList mMaterials=new PhysicsMaterialList();
 RVec3 mHitPos=RVec3.sZero();
 Vec3 mTerrainOffset,mTerrainScale;
 
-static int sTerrainType = 0;
+public int sTerrainType = 0;
 
-static String  sTerrainTypes[] = {
+public static String  sTerrainTypes[] = {
 	"Procedural Terrain 2^N",
 	"Procedural Terrain 2^N + 1",
 	"Heightfield 1",

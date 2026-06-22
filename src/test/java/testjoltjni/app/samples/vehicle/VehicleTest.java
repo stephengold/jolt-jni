@@ -38,9 +38,9 @@ import static com.github.stephengold.joltjni.std.Std.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Vehicle/VehicleTest.cpp
  */
-abstract class VehicleTest extends Test{
+abstract public class VehicleTest extends Test{
 
-private String sScenes[] =
+public static String sScenes[] =
 {
 	"Flat",
 	"Flat With Slope",
@@ -52,7 +52,7 @@ private String sScenes[] =
 	"Terrain1",
 };
 
-String sSceneName = "Playground";
+public String sSceneName = "Playground";
 class Line {Line(RVec3 s, RVec3 e){mStart=e;mEnd=e;}
     RVec3 mStart, mEnd;
 }

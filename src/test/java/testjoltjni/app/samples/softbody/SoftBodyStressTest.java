@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,13 +33,13 @@ import static com.github.stephengold.joltjni.std.Std.*;
  */
 public class SoftBodyStressTest extends Test{
 
-String  sScenes[] =
+public static String  sScenes[] =
 {
 	"SpheresVsBoxes",
 	"LargeCloth"
 };
 
-String  sSceneName = "SpheresVsBoxes";
+public String  sSceneName = "SpheresVsBoxes";
 
 public void Initialize()
 {

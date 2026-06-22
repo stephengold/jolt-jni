@@ -37,7 +37,7 @@ import static com.github.stephengold.joltjni.std.Std.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Character/CharacterBaseTest.cpp
  */
-abstract class CharacterBaseTest extends Test{
+abstract public class CharacterBaseTest extends Test{
 
 abstract RVec3 GetCharacterPosition();
 abstract void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchStance, float inDeltaTime);
@@ -58,8 +58,8 @@ float mRampBlocksTimeLeft;
 int mConveyorBeltBody = cInvalidBodyId;
 int mSensorBody = cInvalidBodyId;
 CharacterVsCharacterCollisionSimple mCharacterVsCharacterCollision = new CharacterVsCharacterCollisionSimple();
-protected enum EType{Capsule,Cylinder,Box,Compound};
-protected EType sShapeType=EType.Capsule;
+public enum EType{Capsule,Cylinder,Box,Compound};
+public EType sShapeType=EType.Capsule;
 private float mTime;
 private RVec3 mCameraPivot = RVec3.sZero();
 private int mRotatingBody = cInvalidBodyId;
@@ -76,7 +76,7 @@ private Vec3 mControlInput = Vec3.sZero();
 private boolean mJump;
 private boolean mSwitchStance;
 
-private String sScenes[] =
+public static String sScenes[] =
 {
 	"PerlinMesh",
 	"PerlinHeightField",
@@ -87,7 +87,7 @@ private String sScenes[] =
 	"Terrain2",
 };
 
-private String sSceneName = "ObstacleCourse";
+public String sSceneName = "ObstacleCourse";
 
 // Scene constants
 static final RVec3 cRotatingPosition=new RVec3(-5, 0.15f, 15);

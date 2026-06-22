@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ RagdollRef mRagdoll=new RagdollRef();
 SkeletalAnimationRef mAnimation=new SkeletalAnimationRef();
 SkeletonPose mPose=new SkeletonPose();
 
-final String sAnimations[] =
+public static String sAnimations[] =
 {
 	"neutral",
 	"walk",
@@ -48,7 +48,7 @@ final String sAnimations[] =
 	"dead_pose4"
 };
 
-String sAnimationName = "walk";
+public String sAnimationName = "walk";
 
 public void Cleanup()
 {

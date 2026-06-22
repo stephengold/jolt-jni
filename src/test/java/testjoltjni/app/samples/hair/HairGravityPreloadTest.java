@@ -35,14 +35,14 @@ Hair mHair;
 HairSettingsRef mHairSettings=new HairSettingsRef();
 HairShaders mHairShaders=new HairShaders();
 
-String sScenes[] =
+public static String sScenes[] =
 {
 	"Zig Zag",
 	"Helix",
 	"Horizontal Bar",
 };
 
-String sSceneName = "Zig Zag";
+public String sSceneName = "Zig Zag";
 
 public void Initialize()
 {
