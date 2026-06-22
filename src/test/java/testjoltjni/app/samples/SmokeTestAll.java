@@ -258,7 +258,7 @@ final public class SmokeTestAll {
                 Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, numThreads);
         test.SetJobSystem(jobSystem);
 
-        int maxBodies = 1_300;
+        int maxBodies = 6_600; // for HighSpeedTest "Convex Hull On Terrain1"
         PhysicsSystem physicsSystem = newPhysicsSystem(maxBodies);
         test.SetPhysicsSystem(physicsSystem);
 
