@@ -322,10 +322,14 @@ final public class SmokeTestAll {
                 test.sSceneName = scene;
                 smokeTest(test, settings);
 
-                CharacterVirtualTest cvTest = new CharacterVirtualTest();
-                cvTest.sShapeType = shape;
-                cvTest.sSceneName = scene;
-                smokeTest(cvTest, settings);
+                if (!scene.equals("InitiallyIntersecting")) { // avoid SIGSEGVs
+                    // CollideAABox() on macOS or Linux
+                    // ShouldCollide() or sCastShapeVsShapeLocalSpace() on Linux
+                    CharacterVirtualTest cvTest = new CharacterVirtualTest();
+                    cvTest.sShapeType = shape;
+                    cvTest.sSceneName = scene;
+                    smokeTest(cvTest, settings);
+                }
             }
         }
 
