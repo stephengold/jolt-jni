@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/setup-java@v5
         with:
-          distribution: 'zulu'
+          distribution: 'temurin'
           java-version: 21
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
@@ -70,7 +70,7 @@ jobs:
     steps:
       - uses: actions/setup-java@v5
         with:
-          distribution: 'zulu'
+          distribution: 'temurin'
           java-version: 21
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
