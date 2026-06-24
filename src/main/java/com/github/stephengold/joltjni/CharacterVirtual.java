@@ -240,14 +240,14 @@ public class CharacterVirtual
     }
 
     /**
-     * Replace the contact listener.
+     * Replace or remove the contact listener.
      *
-     * @param listener the desired listener
+     * @param listener the desired listener, or {@code null} for none
      */
     public void setListener(CharacterContactListener listener) {
         this.contactListener = listener;
         long characterVa = va();
-        long listenerVa = listener.targetVa();
+        long listenerVa = (listener == null) ? 0L : listener.targetVa();
         setListener(characterVa, listenerVa);
     }
 
