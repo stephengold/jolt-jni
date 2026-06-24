@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -49,9 +49,9 @@ public class RotatedTranslatedShape extends DecoratedShape {
     /**
      * Instantiate a shape on the specified offset, rotation, and base shape.
      *
-     * @param offset (not null, unaffected)
-     * @param rotation (not null, not zero, unaffected)
-     * @param baseShape the base shape (not null)
+     * @param offset (not {@code null}, unaffected)
+     * @param rotation (not {@code null}, not zero, unaffected)
+     * @param baseShape the base shape (not {@code null})
      */
     public RotatedTranslatedShape(
             Vec3Arg offset, QuatArg rotation, ConstShape baseShape) {

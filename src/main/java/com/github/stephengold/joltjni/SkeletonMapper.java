@@ -48,12 +48,13 @@ public class SkeletonMapper extends JoltPhysicsObject implements RefTarget {
     /**
      * Initialize the skeleton mapper as specified.
      *
-     * @param skeleton1 source skeleton to map from (not null, unaffected)
+     * @param skeleton1 source skeleton to map from (not {@code null},
+     * unaffected)
      * @param neutralPose1 neutral pose of the source skeleton (in model space,
-     * not null, unaffected)
-     * @param skeleton2 target skeleton to map to (not null, unaffected)
+     * not {@code null}, unaffected)
+     * @param skeleton2 target skeleton to map to (not {@code null}, unaffected)
      * @param neutralPose2 neutral pose of the target skeleton (in model space,
-     * not null, unaffected)
+     * not {@code null}, unaffected)
      */
     public void initialize(ConstSkeleton skeleton1, Mat44Array neutralPose1,
             ConstSkeleton skeleton2, Mat44Array neutralPose2) {
@@ -68,8 +69,8 @@ public class SkeletonMapper extends JoltPhysicsObject implements RefTarget {
     /**
      * Lock the translations of specified joints in the target skeleton.
      *
-     * @param skeleton2 the target skeleton (not null, unaffected)
-     * @param neutralPose2 the desired pose (not null, unaffected)
+     * @param skeleton2 the target skeleton (not {@code null}, unaffected)
+     * @param neutralPose2 the desired pose (not {@code null}, unaffected)
      */
     public void lockAllTranslations(
             ConstSkeleton skeleton2, Mat44Array neutralPose2) {
@@ -82,12 +83,12 @@ public class SkeletonMapper extends JoltPhysicsObject implements RefTarget {
     /**
      * Map the specified pose.
      *
-     * @param pose1ModelSpace the pose on skeleton 1 (in model space, not null,
-     * unaffected)
-     * @param pose2LocalSpace the pose on skeleton 2 (in local space, not null,
-     * unaffected)
+     * @param pose1ModelSpace the pose on skeleton 1 (in model space, not
+     * {@code null}, unaffected)
+     * @param pose2LocalSpace the pose on skeleton 2 (in local space, not
+     * {@code null}, unaffected)
      * @param storePose2ModelSpace storage for the resulting pose on skeleton 2
-     * (in model space, not null, all elements non-null, modified)
+     * (in model space, not {@code null}, all elements non-null, modified)
      */
     public void map(Mat44Array pose1ModelSpace, Mat44Array pose2LocalSpace,
             Mat44Array storePose2ModelSpace) {
@@ -101,10 +102,10 @@ public class SkeletonMapper extends JoltPhysicsObject implements RefTarget {
     /**
      * Reverse map a pose.
      *
-     * @param pose2ModelSpace a model-space pose on skeleton 2 (not null,
-     * unaffected)
+     * @param pose2ModelSpace a model-space pose on skeleton 2 (not
+     * {@code null}, unaffected)
      * @param storePose1ModelSpace storage for the model space pose on skeleton
-     * 1 (not null, all elements non-null, modified)
+     * 1 (not {@code null}, all elements non-null, modified)
      */
     public void mapReverse(
             Mat44Array pose2ModelSpace, Mat44Array storePose1ModelSpace) {

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,8 +37,8 @@ public class ScaledShape extends DecoratedShape {
     /**
      * Instantiate a shape based on the specified shape and scale factors.
      *
-     * @param baseShape the unscaled base shape (not null)
-     * @param scaleFactors the desired scale factors (not null)
+     * @param baseShape the unscaled base shape (not {@code null})
+     * @param scaleFactors the desired scale factors (not {@code null})
      */
     public ScaledShape(ConstShape baseShape, Vec3Arg scaleFactors) {
         long baseShapeVa = baseShape.targetVa();

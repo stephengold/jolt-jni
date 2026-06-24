@@ -186,8 +186,8 @@ final public class CharacterVirtualSettingsRef
     }
 
     /**
-     * Alter how often to try stepping in the constraint solver. (native
-     * attribute: mMaxConstraintIterations)
+     * Alter the iteration limit in the constraint solver. (native attribute:
+     * mMaxConstraintIterations)
      *
      * @param numIterations the desired number of iterations (&ge;0, default=15)
      */
@@ -459,8 +459,8 @@ final public class CharacterVirtualSettingsRef
     }
 
     /**
-     * Return how often to try stepping in the constraint solver. The settings
-     * are unaffected. (native attribute: mMaxConstraintIterations)
+     * Return the iteration limit in the constraint solver. The settings are
+     * unaffected. (native attribute: mMaxConstraintIterations)
      *
      * @return the number of iterations (&ge;0)
      */

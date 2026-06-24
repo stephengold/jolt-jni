@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,9 +39,9 @@ public class TransformedSphere extends TransformedConvexObject {
     /**
      * Instantiate an object for the specified transform and sphere.
      *
-     * @param transform the desired coordinate transform (not null, uniform
-     * scaling, unaffected)
-     * @param sphere the desired base sphere (not null, unaffected)
+     * @param transform the desired coordinate transform (not {@code null},
+     * uniform scaling, unaffected)
+     * @param sphere the desired base sphere (not {@code null}, unaffected)
      */
     public TransformedSphere(Mat44Arg transform, ConstSphere sphere) {
         long transformVa = transform.targetVa();
@@ -56,7 +56,7 @@ public class TransformedSphere extends TransformedConvexObject {
      * Calculate the support vector for the specified direction. The convex
      * object is unaffected.
      *
-     * @param direction the direction to use (not null, unaffected)
+     * @param direction the direction to use (not {@code null}, unaffected)
      * @return a new location vector
      */
     @Override

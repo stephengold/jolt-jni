@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,10 +39,10 @@ public class RShapeCast extends JoltPhysicsObject {
     /**
      * Instantiate a shape cast with the specified parameters.
      *
-     * @param shape the shape to use (not null, unaffected)
-     * @param scale the scale vector to use (not null, unaffected)
-     * @param comStart the desired start position (not null, unaffected)
-     * @param offset the desired end offset from the start (not null,
+     * @param shape the shape to use (not {@code null}, unaffected)
+     * @param scale the scale vector to use (not {@code null}, unaffected)
+     * @param comStart the desired start position (not {@code null}, unaffected)
+     * @param offset the desired end offset from the start (not {@code null},
      * unaffected)
      */
     public RShapeCast(ConstShape shape, Vec3Arg scale, RMat44Arg comStart,
@@ -63,12 +63,13 @@ public class RShapeCast extends JoltPhysicsObject {
     /**
      * Instantiate a shape cast with the specified parameters.
      *
-     * @param shape the shape to use (not null, unaffected)
-     * @param scale the scale vector to use (not null, unaffected)
-     * @param comStart the desired start position (not null, unaffected)
-     * @param offset the desired end offset from the start (not null,
+     * @param shape the shape to use (not {@code null}, unaffected)
+     * @param scale the scale vector to use (not {@code null}, unaffected)
+     * @param comStart the desired start position (not {@code null}, unaffected)
+     * @param offset the desired end offset from the start (not {@code null},
      * unaffected)
-     * @param wsBounds the world-space bounds to use (not null, unaffected)
+     * @param wsBounds the world-space bounds to use (not {@code null},
+     * unaffected)
      */
     public RShapeCast(ConstShape shape, Vec3Arg scale, RMat44Arg comStart,
             Vec3Arg offset, ConstAaBox wsBounds) {
@@ -105,10 +106,11 @@ public class RShapeCast extends JoltPhysicsObject {
      * Create a shape cast using a world transform instead of a center-of-mass
      * transform.
      *
-     * @param shape the shape to use (not null, unaffected)
-     * @param scale the scale to apply (not null, unaffected)
-     * @param worldTransform the world transform to use (not null, unaffected)
-     * @param direction the direction of casting (not null, unaffected)
+     * @param shape the shape to use (not {@code null}, unaffected)
+     * @param scale the scale to apply (not {@code null}, unaffected)
+     * @param worldTransform the world transform to use (not {@code null},
+     * unaffected)
+     * @param direction the direction of casting (not {@code null}, unaffected)
      * @return a new object
      */
     public static RShapeCast sFromWorldTransform(ConstShape shape,

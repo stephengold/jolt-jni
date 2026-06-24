@@ -100,7 +100,7 @@ final public class TwoBodyConstraintRef
      * Copy the first body's pivot location. The constraint is unaffected.
      *
      * @param storeResult storage for the location in system coordinates (not
-     * null, modified)
+     * {@code null}, modified)
      */
     @Override
     public void getBody1PivotLocation(DoubleBuffer storeResult) {
@@ -245,7 +245,7 @@ final public class TwoBodyConstraintRef
     /**
      * Return the constraint's subtype. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EConstraintSubType getSubType() {
@@ -259,7 +259,7 @@ final public class TwoBodyConstraintRef
     /**
      * Return the constraint's type. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EConstraintType getType() {
@@ -287,7 +287,7 @@ final public class TwoBodyConstraintRef
      * Save the state of the constraint, for possible replay. The constraint is
      * unaffected.
      *
-     * @param recorder the recorder to write to (not null)
+     * @param recorder the recorder to write to (not {@code null})
      */
     @Override
     public void saveState(StateRecorder recorder) {

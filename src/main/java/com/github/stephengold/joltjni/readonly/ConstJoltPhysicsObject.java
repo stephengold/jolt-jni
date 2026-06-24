@@ -55,7 +55,7 @@ public interface ConstJoltPhysicsObject
      * Return the address of the target object (if this is a counted reference)
      * or else the address of the native object. No objects are affected.
      *
-     * @return the virtual address
+     * @return the virtual address, or zero if the reference is empty
      */
     long targetVa();
 }

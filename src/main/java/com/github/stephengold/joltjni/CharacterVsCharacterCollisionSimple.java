@@ -86,7 +86,7 @@ public class CharacterVsCharacterCollisionSimple
      * Remove the specified character from the collision list.
      *
      * @param characterRef a counted reference to the character to remove (not
-     * null)
+     * {@code null})
      */
     public void remove(ConstCharacterVirtual characterRef) {
         long interfaceVa = va();
