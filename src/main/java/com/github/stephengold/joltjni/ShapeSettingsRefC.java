@@ -49,11 +49,11 @@ final public class ShapeSettingsRefC extends JoltPhysicsObject {
     }
 
     /**
-     * Instantiate a reference to the specified target.
+     * Instantiate a counted reference to the specified settings.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param target the target JVM object (not {@code null})
+     * @param target the targeted JVM object (not {@code null})
      */
     ShapeSettingsRefC(long refVa, ConstShapeSettings target) {
         assert target != null;

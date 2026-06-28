@@ -51,7 +51,7 @@ final public class CharacterVirtualRefC
     // constructors
 
     /**
-     * Instantiate a reference to the specified character.
+     * Instantiate a counted reference to the specified character.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)

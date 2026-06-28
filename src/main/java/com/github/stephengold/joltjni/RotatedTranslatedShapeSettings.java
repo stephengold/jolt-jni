@@ -50,8 +50,8 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     /**
      * Instantiate a settings object with the specified rotation and base shape.
      *
-     * @param rotation (not null, not zero, unaffected)
-     * @param baseShape the base shape (not null, unaffected)
+     * @param rotation (not {@code null}, not zero, unaffected)
+     * @param baseShape the base shape (not {@code null}, unaffected)
      */
     public RotatedTranslatedShapeSettings(
             QuatArg rotation, ConstShape baseShape) {
@@ -72,8 +72,8 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * Instantiate a settings object with the specified rotation and base
      * settings.
      *
-     * @param rotation (not null, not zero, unaffected)
-     * @param baseShapeSettings settings for the base shape (not null)
+     * @param rotation (not {@code null}, not zero, unaffected)
+     * @param baseShapeSettings settings for the base shape (not {@code null})
      */
     public RotatedTranslatedShapeSettings(QuatArg rotation,
             ConstShapeSettings baseShapeSettings) {
@@ -106,9 +106,9 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * Instantiate a settings object with the specified offset, rotation, and
      * base shape.
      *
-     * @param offset (not null, unaffected)
-     * @param rotation (not null, not zero, unaffected)
-     * @param baseShape the base shape (not null, unaffected)
+     * @param offset (not {@code null}, unaffected)
+     * @param rotation (not {@code null}, not zero, unaffected)
+     * @param baseShape the base shape (not {@code null}, unaffected)
      */
     public RotatedTranslatedShapeSettings(
             Vec3Arg offset, QuatArg rotation, ConstShape baseShape) {
@@ -129,9 +129,9 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * Instantiate a settings object with the specified offset, rotation, and
      * base settings.
      *
-     * @param offset (not null, unaffected)
-     * @param rotation (not null, not zero, unaffected)
-     * @param baseShapeSettings settings for the base shape (not null)
+     * @param offset (not {@code null}, unaffected)
+     * @param rotation (not {@code null}, not zero, unaffected)
+     * @param baseShapeSettings settings for the base shape (not {@code null})
      */
     public RotatedTranslatedShapeSettings(Vec3Arg offset, QuatArg rotation,
             ConstShapeSettings baseShapeSettings) {

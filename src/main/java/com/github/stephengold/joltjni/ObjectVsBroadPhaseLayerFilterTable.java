@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,9 +34,11 @@ public class ObjectVsBroadPhaseLayerFilterTable
     /**
      * Instantiate a default filter with the specified capacity.
      *
-     * @param bplInterface the layer interface to use (not null, unaffected)
+     * @param bplInterface the layer interface to use (not {@code null},
+     * unaffected)
      * @param numBpLayers the number of broad-phase layers (&ge;1)
-     * @param olPairFilter the object-pair filter to use (not null, unaffected)
+     * @param olPairFilter the object-pair filter to use (not {@code null},
+     * unaffected)
      * @param numObjLayers the desired capacity (number of object layers)
      * (&ge;1)
      */

@@ -59,7 +59,7 @@ final public class GeometryRef extends Ref {
     // Ref methods
 
     /**
-     * Access the target geometry, if any.
+     * Access the targeted geometry, if any.
      *
      * @return the pre-existing object, or {@code null} if the reference is
      * empty

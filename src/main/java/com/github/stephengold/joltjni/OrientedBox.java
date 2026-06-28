@@ -59,10 +59,10 @@ final public class OrientedBox
     /**
      * Instantiate a box with the specified transform and half extents.
      *
-     * @param orientation the desired rotation and translation (not null,
-     * unaffected)
-     * @param halfExtents the desired half-extent on each local axis (not null,
-     * unaffected)
+     * @param orientation the desired rotation and translation (not
+     * {@code null}, unaffected)
+     * @param halfExtents the desired half-extent on each local axis (not
+     * {@code null}, unaffected)
      */
     public OrientedBox(Mat44Arg orientation, Vec3Arg halfExtents) {
         long orientationVa = orientation.targetVa();

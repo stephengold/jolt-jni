@@ -42,7 +42,7 @@ final public class VehicleCollisionTesterRayRef extends Ref {
     }
 
     /**
-     * Instantiate a reference to the specified target.
+     * Instantiate a reference to the specified tester.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)

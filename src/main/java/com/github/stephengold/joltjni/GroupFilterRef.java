@@ -55,11 +55,11 @@ final public class GroupFilterRef extends Ref {
     }
 
     /**
-     * Instantiate a reference to the specified target.
+     * Instantiate a reference to the specified filter.
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param target the target JVM object (not {@code null})
+     * @param target the targeted JVM object (not {@code null})
      */
     GroupFilterRef(long refVa, GroupFilter target) {
         assert target != null;
@@ -72,7 +72,7 @@ final public class GroupFilterRef extends Ref {
     // new methods exposed
 
     /**
-     * Access the target filter, assuming it is a {@code GroupFilterTable}.
+     * Access the targeted filter, assuming it is a {@code GroupFilterTable}.
      *
      * @return the pre-existing object, or {@code null} if the reference is
      * empty

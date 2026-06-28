@@ -87,7 +87,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     // new methods exposed
 
     /**
-     * Access the target shape, if any.
+     * Access the targeted shape, if any.
      *
      * @return the pre-existing object, or {@code null} if the reference is
      * empty
@@ -113,8 +113,8 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * Copy the vertex coordinates of the shape's debug mesh to the specified
      * buffer. The shape is unaffected.
      *
-     * @param storeBuffer the buffer to fill with vertex coordinates (not null,
-     * modified)
+     * @param storeBuffer the buffer to fill with vertex coordinates (not
+     * {@code null}, modified)
      */
     @Override
     public void copyDebugTriangles(FloatBuffer storeBuffer) {
@@ -140,12 +140,12 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     /**
      * Draw the shape using the specified renderer. The shape is unaffected.
      *
-     * @param renderer the renderer to use (not null)
+     * @param renderer the renderer to use (not {@code null})
      * @param comTransform the coordinate transform from the shape's center of
-     * mass to system coordinates (not null, unaffected)
-     * @param scale the desired scaling (not null, unaffected)
+     * mass to system coordinates (not {@code null}, unaffected)
+     * @param scale the desired scaling (not {@code null}, unaffected)
      * @param color the desired color if {@code useMaterialColors} is false (not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param useMaterialColors {@code true} to use the color in the shape's
      * material
      * @param wireframe {@code true} to draw a wire frame, {@code false} for
@@ -170,10 +170,10 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * Draw the support function with the convex radius added back on. The shape
      * is unaffected.
      *
-     * @param renderer the renderer to use (not null)
-     * @param comTransform transform to apply (not null, unaffected)
-     * @param scale scaling to apply (not null, unaffected)
-     * @param color the color using for drawing (not null, unaffected)
+     * @param renderer the renderer to use (not {@code null})
+     * @param comTransform transform to apply (not {@code null}, unaffected)
+     * @param scale scaling to apply (not {@code null}, unaffected)
+     * @param color the color using for drawing (not {@code null}, unaffected)
      * @param drawSupportDirection the direction to draw
      */
     @Override
@@ -226,7 +226,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * @param subShapeId a sub-shape ID that specifies the path to the desired
      * leaf shape
      * @param storeRemainderId storage for the remainder of the sub-shape ID
-     * after removing the path to the leaf shape (not null, length&gt;0,
+     * after removing the path to the leaf shape (not {@code null}, length&gt;0,
      * modified)
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if the ID is invalid
@@ -344,7 +344,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     /**
      * Return the shape's subtype. The shape is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EShapeSubType getSubType() {
@@ -358,7 +358,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     /**
      * Return the shape's type. The shape is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EShapeType getType() {
@@ -373,8 +373,8 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * Return the bounding box including convex radius. The shape is unaffected.
      *
      * @param comTransform the center-of-mass transform to apply to the shape
-     * (not null, unaffected)
-     * @param scale the scale factors to apply to the shape (not null,
+     * (not {@code null}, unaffected)
+     * @param scale the scale factors to apply to the shape (not {@code null},
      * unaffected)
      * @return a new, mutable box (in system coordinates)
      */
@@ -395,8 +395,8 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * Return the bounding box including convex radius. The shape is unaffected.
      *
      * @param comTransform the center-of-mass transform to apply to the shape
-     * (not null, unaffected)
-     * @param scale the scale factors to apply to the shape (not null,
+     * (not {@code null}, unaffected)
+     * @param scale the scale factors to apply to the shape (not {@code null},
      * unaffected)
      * @return a new, mutable box (in system coordinates)
      */
@@ -418,7 +418,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * Test whether the specified scale vector is valid for wrapping the current
      * shape in a {@code ScaledShape}. The current shape is unaffected.
      *
-     * @param scale the proposed scale vector (not null, unaffected)
+     * @param scale the proposed scale vector (not {@code null}, unaffected)
      * @return {@code true} if valid, otherwise {@code false}
      */
     @Override
@@ -437,7 +437,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * wrapping the current shape in a {@code ScaledShape}. The current shape is
      * unaffected.
      *
-     * @param scale the proposed scale vector (not null, unaffected)
+     * @param scale the proposed scale vector (not {@code null}, unaffected)
      * @return a new scale vector
      */
     @Override
@@ -468,7 +468,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     /**
      * Save the shape to the specified binary stream. The shape is unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {
@@ -480,7 +480,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     /**
      * Scale the current shape, which is unaffected.
      *
-     * @param scaleFactors the desired scaling on each axis (not null,
+     * @param scaleFactors the desired scaling on each axis (not {@code null},
      * unaffected)
      * @return a new JVM object with a new native object assigned
      */

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +62,7 @@ public class Part extends BodyCreationSettings {
      * Return the settings to create the joint to the part's parent. The part is
      * unaffected. (native attribute: mToParent)
      *
-     * @param subType the expected type of constraint (not null)
+     * @param subType the expected type of constraint (not {@code null})
      * @return a new JVM with the pre-existing native object assigned
      */
     public ConstraintSettings getToParent(EConstraintSubType subType) {
@@ -79,7 +79,7 @@ public class Part extends BodyCreationSettings {
      * Alter the settings to create the joint to the part's parent. (native
      * attribute: mToParent)
      *
-     * @param settings the desired settings (not null)
+     * @param settings the desired settings (not {@code null})
      */
     public void setToParent(ConstConstraintSettings settings) {
         long partVa = va();

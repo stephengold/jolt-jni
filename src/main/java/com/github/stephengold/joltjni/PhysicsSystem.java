@@ -138,7 +138,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * Add the specified constraint to the system.
      *
      * @param constraintRef a counted reference to the constraint to add (not
-     * null)
+     * {@code null})
      */
     public void addConstraint(TwoBodyConstraintRef constraintRef) {
         long systemVa = va();

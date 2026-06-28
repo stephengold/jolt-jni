@@ -88,7 +88,7 @@ public class SoftBodySharedSettings
     /**
      * Add the specified edge constraint.
      *
-     * @param edge the edge to add (not null, unaffected)
+     * @param edge the edge to add (not {@code null}, unaffected)
      */
     public void addEdgeConstraint(ConstEdge edge) {
         long settingsVa = va();
@@ -99,7 +99,7 @@ public class SoftBodySharedSettings
     /**
      * Add the specified face.
      *
-     * @param face the face to add (not null, unaffected)
+     * @param face the face to add (not {@code null}, unaffected)
      */
     public void addFace(ConstFace face) {
         long settingsVa = va();
@@ -123,7 +123,7 @@ public class SoftBodySharedSettings
      * Append the specified bend-twist constraint. (native member:
      * mRodBendTwistConstraints)
      *
-     * @param constraint the constraint to add (not null)
+     * @param constraint the constraint to add (not {@code null})
      */
     public void addRodBendTwistConstraint(ConstRodBendTwist constraint) {
         long settingsVa = va();
@@ -135,7 +135,7 @@ public class SoftBodySharedSettings
      * Append the specified discrete Cosserat rod. (native member:
      * mRodStretchShearConstraints)
      *
-     * @param rod the rod to add (not null)
+     * @param rod the rod to add (not {@code null})
      */
     public void addRodStretchShearConstraint(ConstRodStretchShear rod) {
         long settingsVa = va();
@@ -147,7 +147,7 @@ public class SoftBodySharedSettings
      * Append the specified skinning constraint. (native member:
      * mSkinnedConstraints)
      *
-     * @param skinned the constraint to add (not null)
+     * @param skinned the constraint to add (not {@code null})
      */
     public void addSkinnedConstraint(Skinned skinned) {
         long settingsVa = va();
@@ -158,7 +158,7 @@ public class SoftBodySharedSettings
     /**
      * Add the specified vertex. (native member: mVertices)
      *
-     * @param vertex the vertex to add (not null, unaffected)
+     * @param vertex the vertex to add (not {@code null}, unaffected)
      */
     public void addVertex(ConstVertex vertex) {
         long settingsVa = va();
@@ -240,7 +240,7 @@ public class SoftBodySharedSettings
      * Automatically generate constraints based on the faces.
      *
      * @param vertexAttributes the desired attributes (one for each vertex)
-     * @param bendType the desired type of bend constraint (not null,
+     * @param bendType the desired type of bend constraint (not {@code null},
      * default=Distance)
      * @param angleTolerance the desired tolerance for creating shear edges (in
      * radians, default=2*Pi/45)

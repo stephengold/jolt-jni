@@ -639,7 +639,7 @@ final public class CharacterVirtualSettingsRef
     // Ref methods
 
     /**
-     * Access the target settings, if any.
+     * Access the targeted settings, if any.
      *
      * @return the pre-existing object, or {@code null} if the reference is
      * empty

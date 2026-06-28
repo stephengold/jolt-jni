@@ -88,7 +88,7 @@ final public class SoftBodySharedSettingsRef
     /**
      * Add the specified edge constraint.
      *
-     * @param edge the edge to add (not null, unaffected)
+     * @param edge the edge to add (not {@code null}, unaffected)
      */
     public void addEdgeConstraint(ConstEdge edge) {
         long settingsVa = targetVa();
@@ -99,7 +99,7 @@ final public class SoftBodySharedSettingsRef
     /**
      * Add the specified face.
      *
-     * @param face the face to add (not null, unaffected)
+     * @param face the face to add (not {@code null}, unaffected)
      */
     public void addFace(ConstFace face) {
         long settingsVa = targetVa();
@@ -111,7 +111,7 @@ final public class SoftBodySharedSettingsRef
      * Append the specified inverse-bind matrix. (native member:
      * mInvBindMatrices)
      *
-     * @param invBind the matrix to add (not null)
+     * @param invBind the matrix to add (not {@code null})
      */
     public void addInvBindMatrix(InvBind invBind) {
         long settingsVa = targetVa();
@@ -123,7 +123,7 @@ final public class SoftBodySharedSettingsRef
      * Append the specified bend-twist constraint. (native member:
      * mRodBendTwistConstraints)
      *
-     * @param constraint the constraint to add (not null)
+     * @param constraint the constraint to add (not {@code null})
      */
     public void addRodBendTwistConstraint(ConstRodBendTwist constraint) {
         long settingsVa = targetVa();

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,8 +37,8 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
     /**
      * Instantiate a shape on the specified offset and base shape.
      *
-     * @param baseShape the base shape (not null)
-     * @param offset (not null, unaffected)
+     * @param baseShape the base shape (not {@code null})
+     * @param offset (not {@code null}, unaffected)
      */
     public OffsetCenterOfMassShape(ConstShape baseShape, Vec3Arg offset) {
         float offsetX = offset.getX();

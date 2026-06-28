@@ -964,7 +964,7 @@ final public class CharacterVirtualRef
     // Ref methods
 
     /**
-     * Access the target character, if any.
+     * Access the targeted character, if any.
      *
      * @return the pre-existing object, or {@code null} if the reference is
      * empty

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -307,8 +307,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Alter the spring settings of the specified degree of freedom.
      *
-     * @param dof which DOF to alter (not null)
-     * @param springSettings the desired settings (not null, unaffected)
+     * @param dof which DOF to alter (not {@code null})
+     * @param springSettings the desired settings (not {@code null}, unaffected)
      */
     public void setLimitsSpringSettings(
             EAxis dof, ConstSpringSettings springSettings) {
@@ -321,7 +321,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Alter the maximum friction of the specified degree of freedom.
      *
-     * @param dof which DOF to alter (not null)
+     * @param dof which DOF to alter (not {@code null})
      * @param friction the desired value
      */
     public void setMaxFriction(EAxis dof, float friction) {
@@ -333,8 +333,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Alter the motor state of the specified degree of freedom.
      *
-     * @param dof which DOF to alter (not null)
-     * @param state the desired state (not null)
+     * @param dof which DOF to alter (not {@code null})
+     * @param state the desired state (not {@code null})
      */
     public void setMotorState(EAxis dof, EMotorState state) {
         long constraintVa = va();
@@ -346,8 +346,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Alter the rotation limits.
      *
-     * @param min the lower limit for each axis (not null, unaffected)
-     * @param max the upper limit for each axis (not null, unaffected)
+     * @param min the lower limit for each axis (not {@code null}, unaffected)
+     * @param max the upper limit for each axis (not {@code null}, unaffected)
      */
     public void setRotationLimits(Vec3Arg min, Vec3Arg max) {
         long constraintVa = va();
@@ -365,7 +365,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * SetTargetVelocityCS)
      *
      * @param velocity the desired linear velocity (meters per second in body 1
-     * constraint space, not null)
+     * constraint space, not {@code null})
      */
     public void setTargetVelocityCs(Vec3Arg velocity) {
         long constraintVa = va();
@@ -380,7 +380,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * SetTargetAngularVelocityCS)
      *
      * @param omega the desired angular velocity (radians per second in body 2
-     * constraint space, not null)
+     * constraint space, not {@code null})
      */
     public void setTargetAngularVelocityCs(Vec3Arg omega) {
         long constraintVa = va();
@@ -408,7 +408,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Alter the target orientation of the angular motors in body space. (native
      * function: SetTargetOrientationBS)
      *
-     * @param orientation the desired target orientation (not null, unaffected)
+     * @param orientation the desired targetVa orientation (not {@code null},
+     * unaffected)
      */
     public void setTargetOrientationBs(QuatArg orientation) {
         long constraintVa = va();
@@ -437,8 +438,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Alter the translation limits.
      *
-     * @param min the lower limit for each axis (not null, unaffected)
-     * @param max the upper limit for each axis (not null, unaffected)
+     * @param min the lower limit for each axis (not {@code null}, unaffected)
+     * @param max the upper limit for each axis (not {@code null}, unaffected)
      */
     public void setTranslationLimits(Vec3Arg min, Vec3Arg max) {
         long constraintVa = va();

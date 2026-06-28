@@ -72,7 +72,7 @@ final public class ComputeSystemRef extends Ref {
     // Ref methods
 
     /**
-     * Access the target system, if any.
+     * Access the targeted system, if any.
      *
      * @return the pre-existing object, or {@code null} if the reference is
      * empty

@@ -34,7 +34,7 @@ final public class PhysicsMaterialRefC extends JoltPhysicsObject {
     // fields
 
     /**
-     * cache the target to reduce duplication
+     * cache the targeted material to reduce duplication
      */
     private ConstPhysicsMaterial ptr;
     // *************************************************************************
@@ -58,7 +58,7 @@ final public class PhysicsMaterialRefC extends JoltPhysicsObject {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param material the material to target (not {@code null})
+     * @param material the targeted JVM object (not {@code null})
      */
     PhysicsMaterialRefC(long refVa, ConstPhysicsMaterial material) {
         assert material != null;

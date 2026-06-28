@@ -207,7 +207,7 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
     // Ref methods
 
     /**
-     * Access the target constraint, if any.
+     * Access the targeted constraint, if any.
      *
      * @return the pre-existing object, or {@code null} if the reference is
      * empty

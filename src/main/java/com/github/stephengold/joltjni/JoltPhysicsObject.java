@@ -271,7 +271,7 @@ abstract public class JoltPhysicsObject
     }
 
     /**
-     * Return the address of the native object, assuming this is not a counted
+     * Return the address of the native object, assuming it is not a counted
      * reference. No objects are affected.
      *
      * @return the virtual address (not zero)

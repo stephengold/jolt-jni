@@ -75,7 +75,7 @@ final public class PhysicsSceneRef extends Ref {
     /**
      * Add the specified body to the scene.
      *
-     * @param body the body settings (not null, unaffected)
+     * @param body the body settings (not {@code null}, unaffected)
      */
     public void addBody(ConstBodyCreationSettings body) {
         long sceneVa = targetVa();
@@ -86,7 +86,7 @@ final public class PhysicsSceneRef extends Ref {
     /**
      * Add the specified constraint to the scene.
      *
-     * @param constraint the constraint settings (not null, unaffected)
+     * @param constraint the constraint settings (not {@code null}, unaffected)
      * @param body1 the index of the first body in the bodies list
      * @param body2 the index of the 2nd body in the bodies list
      */
@@ -100,7 +100,7 @@ final public class PhysicsSceneRef extends Ref {
     /**
      * Add the specified soft body to the scene.
      *
-     * @param softBody the soft-body settings (not null, unaffected)
+     * @param softBody the soft-body settings (not {@code null}, unaffected)
      */
     public void addSoftBody(SoftBodyCreationSettings softBody) {
         long sceneVa = targetVa();
@@ -111,7 +111,7 @@ final public class PhysicsSceneRef extends Ref {
     /**
      * Instantiate the bodies in the scene.
      *
-     * @param system where to add the bodies (not null, modified)
+     * @param system where to add the bodies (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean createBodies(PhysicsSystem system) {
@@ -137,7 +137,8 @@ final public class PhysicsSceneRef extends Ref {
     /**
      * Load the current state of the specified physics system.
      *
-     * @param system the physics system to load from (not null, unaffected)
+     * @param system the physics system to load from (not {@code null},
+     * unaffected)
      */
     public void fromPhysicsSystem(PhysicsSystem system) {
         long sceneVa = targetVa();
@@ -185,7 +186,7 @@ final public class PhysicsSceneRef extends Ref {
     /**
      * Write the scene to the specified binary stream.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      * @param saveShapes if true, save the shapes
      * @param saveGroupFilter if true, save the group filter
      */
@@ -215,7 +216,7 @@ final public class PhysicsSceneRef extends Ref {
     // Ref methods
 
     /**
-     * Access the target scene, if any.
+     * Access the targeted scene, if any.
      *
      * @return the pre-existing object, or {@code null} if the reference is
      * empty
