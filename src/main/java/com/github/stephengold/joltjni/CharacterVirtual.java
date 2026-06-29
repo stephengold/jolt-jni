@@ -247,7 +247,7 @@ public class CharacterVirtual
     public void setListener(CharacterContactListener listener) {
         this.contactListener = listener;
         long characterVa = va();
-        long listenerVa = (listener == null) ? 0L : listener.targetVa();
+        long listenerVa = (listener == null) ? 0L : listener.targetVaOrZero();
         setListener(characterVa, listenerVa);
     }
 

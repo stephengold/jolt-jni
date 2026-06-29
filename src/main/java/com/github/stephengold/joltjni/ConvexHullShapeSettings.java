@@ -90,7 +90,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
                 Vec3Arg point = (Vec3Arg) element;
                 point.put(buffer);
             }
-            long materialVa = (material == null) ? 0L : material.targetVa();
+            long materialVa
+                    = (material == null) ? 0L : material.targetVaOrZero();
             settingsVa = createSettings(
                     numPoints, buffer, maxConvexRadius, materialVa);
         }
@@ -147,7 +148,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points,
             float maxConvexRadius, ConstPhysicsMaterial material) {
         assert points.isDirect();
-        long materialVa = (material == null) ? 0L : material.targetVa();
+        long materialVa = (material == null) ? 0L : material.targetVaOrZero();
         long settingsVa = createSettings(
                 numPoints, points, maxConvexRadius, materialVa);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.ConvexHull);
@@ -214,7 +215,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         for (Vec3Arg point : points) {
             point.put(buffer);
         }
-        long materialVa = (material == null) ? 0L : material.targetVa();
+        long materialVa = (material == null) ? 0L : material.targetVaOrZero();
         long settingsVa = createSettings(
                 numPoints, buffer, maxConvexRadius, materialVa);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.ConvexHull);

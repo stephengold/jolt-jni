@@ -159,7 +159,7 @@ final public class CharacterVirtualSettingsRef
      */
     public void setInnerBodyShape(ConstShape shape) {
         long settingsVa = targetVa();
-        long shapeVa = (shape == null) ? 0L : shape.targetVa();
+        long shapeVa = (shape == null) ? 0L : shape.targetVaOrZero();
         CharacterVirtualSettings.setInnerBodyShape(settingsVa, shapeVa);
     }
 
@@ -657,7 +657,7 @@ final public class CharacterVirtualSettingsRef
      * @return the virtual address, or zero if the reference is empty
      */
     @Override
-    public long targetVa() {
+    public long targetVaOrZero() {
         long refVa = va();
         long result = getPtr(refVa);
         assert result == (ptr == null ? 0L : getPtr().va());

@@ -225,7 +225,7 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
      * @return the virtual address, or zero if the reference is empty
      */
     @Override
-    public long targetVa() {
+    public long targetVaOrZero() {
         long refVa = va();
         long result = getPtr(refVa);
         assert result == (ptr == null ? 0L : getPtr().va());

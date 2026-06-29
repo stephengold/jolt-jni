@@ -497,15 +497,30 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
+     * Return the address of the native {@code Shape}. The reference is assumed
+     * to be non-empty. No objects are affected.
+     *
+     * @return the virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        assert ptr != null;
+        long result = targetVaOrZero();
+
+        assert result != 0L;
+        return result;
+    }
+
+    /**
      * Return the address of the native {@code Shape}. No objects are affected.
      *
      * @return the virtual address, or zero if the reference is empty
      */
     @Override
-    public long targetVa() {
+    public long targetVaOrZero() {
         long refVa = va();
         long result = getPtr(refVa);
-        assert result == (ptr == null ? 0L : getPtr().targetVa());
+        assert result == (ptr == null ? 0L : ptr.targetVaOrZero());
 
         return result;
     }

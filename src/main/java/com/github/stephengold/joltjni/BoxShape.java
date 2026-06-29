@@ -109,7 +109,7 @@ public class BoxShape extends ConvexShape {
         assert yHalfExtent > 0f : yHalfExtent;
         assert zHalfExtent > 0f : zHalfExtent;
 
-        long materialVa = (material == null) ? 0L : material.targetVa();
+        long materialVa = (material == null) ? 0L : material.targetVaOrZero();
         long shapeVa = createBoxShape(xHalfExtent, yHalfExtent, zHalfExtent,
                 convexRadius, materialVa);
         setVirtualAddressAsCoOwner(shapeVa);

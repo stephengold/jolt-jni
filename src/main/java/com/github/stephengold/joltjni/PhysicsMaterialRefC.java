@@ -80,6 +80,37 @@ final public class PhysicsMaterialRefC extends JoltPhysicsObject {
         return ptr;
     }
     // *************************************************************************
+    // JoltPhysicsObject methods
+
+    /**
+     * Return the address of the native material. The reference is assumed to be
+     * non-empty. No objects are affected.
+     *
+     * @return the virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        assert ptr != null;
+        long result = targetVaOrZero();
+
+        assert result != 0L;
+        return result;
+    }
+
+    /**
+     * Return the address of the native material. No objects are affected.
+     *
+     * @return the virtual address, or zero if the reference is empty
+     */
+    @Override
+    public long targetVaOrZero() {
+        long refVa = va();
+        long result = getPtr(refVa);
+        assert result == (ptr == null ? 0L : ptr.targetVaOrZero());
+
+        return result;
+    }
+    // *************************************************************************
     // native methods
 
     native private static void free(long refVa);

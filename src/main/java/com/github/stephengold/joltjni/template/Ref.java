@@ -61,4 +61,21 @@ abstract public class Ref extends JoltPhysicsObject {
      * @return a new JVM object with a new native object assigned
      */
     abstract public Ref toRef();
+    // *************************************************************************
+    // JoltPhysicsObject methods
+
+    /**
+     * Return the address of the target of the native reference. The reference
+     * is assumed to be non-empty. No objects are affected.
+     *
+     * @return the virtual address (not zero)
+     */
+    @Override
+    final public long targetVa() {
+        assert ptr != null;
+        long result = targetVaOrZero();
+
+        assert result != 0L;
+        return result;
+    }
 }

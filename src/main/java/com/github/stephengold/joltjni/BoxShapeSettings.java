@@ -131,7 +131,7 @@ public class BoxShapeSettings
         float hx = halfExtents.getX();
         float hy = halfExtents.getY();
         float hz = halfExtents.getZ();
-        long materialVa = (material == null) ? 0L : material.targetVa();
+        long materialVa = (material == null) ? 0L : material.targetVaOrZero();
         long settingsVa = createBoxShapeSettings(
                 hx, hy, hz, convexRadius, materialVa);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Box);

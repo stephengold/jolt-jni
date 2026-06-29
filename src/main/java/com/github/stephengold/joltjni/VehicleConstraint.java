@@ -490,7 +490,7 @@ public class VehicleConstraint
      * otherwise {@code false}
      */
     private boolean verifyTester() {
-        long expectedVa = (tester == null) ? 0L : tester.targetVa();
+        long expectedVa = (tester == null) ? 0L : tester.targetVaOrZero();
         long constraintVa = va();
         long testerVa = getVehicleCollisionTester(constraintVa);
 

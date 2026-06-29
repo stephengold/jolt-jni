@@ -195,7 +195,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      */
     public void setPath(ConstPathConstraintPath path) {
         long settingsVa = va();
-        long pathVa = (path == null) ? 0L : path.targetVa();
+        long pathVa = (path == null) ? 0L : path.targetVaOrZero();
         setPath(settingsVa, pathVa);
     }
 

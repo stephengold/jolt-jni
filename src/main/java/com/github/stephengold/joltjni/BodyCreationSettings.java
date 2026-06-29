@@ -659,7 +659,7 @@ public class BodyCreationSettings
      */
     public BodyCreationSettings setShape(ConstShape shape) {
         long bodySettingsVa = va();
-        long shapeVa = (shape == null) ? 0L : shape.targetVa();
+        long shapeVa = (shape == null) ? 0L : shape.targetVaOrZero();
         setShape(bodySettingsVa, shapeVa);
 
         return this;

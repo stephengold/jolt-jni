@@ -234,7 +234,7 @@ final public class PhysicsSceneRef extends Ref {
      * @return the virtual address, or zero if the reference is empty
      */
     @Override
-    public long targetVa() {
+    public long targetVaOrZero() {
         long refVa = va();
         long result = getPtr(refVa);
 

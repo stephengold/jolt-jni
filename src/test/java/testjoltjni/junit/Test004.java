@@ -148,7 +148,7 @@ public class Test004 {
     private static void testGettersAndDefaults(ConstPhysicsSettings settings) {
         Assert.assertNotNull(settings);
         Assert.assertTrue(settings.hasAssignedNativeObject());
-        Assert.assertNotEquals(0L, settings.targetVa());
+        Assert.assertNotEquals(0L, settings.targetVaOrZero());
 
         Assert.assertTrue(settings.getAllowSleeping());
         Assert.assertEquals(0.2f, settings.getBaumgarte(), 0f);

@@ -282,6 +282,20 @@ abstract public class JoltPhysicsObject
                 getClass().getSimpleName() + " must override targetVa()";
         return va();
     }
+
+    /**
+     * Return the address of the native object, assuming it is not a counted
+     * reference. No objects are affected.
+     *
+     * @return the virtual address (may be zero)
+     */
+    @Override
+    public long targetVaOrZero() {
+        assert !(this instanceof Ref) :
+                getClass().getSimpleName() + " must override targetVaNotZero()";
+        long result = virtualAddress.get(); // Read the atomic field once.
+        return result;
+    }
     // *************************************************************************
     // Object methods
 
