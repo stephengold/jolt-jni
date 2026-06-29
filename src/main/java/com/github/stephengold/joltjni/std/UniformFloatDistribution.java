@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -53,7 +53,8 @@ public class UniformFloatDistribution extends JoltPhysicsObject {
     /**
      * Iterate and return the next {@code float} value in the sequence.
      *
-     * @param generator the sequence generator to use (not null, modified)
+     * @param generator the sequence generator to use (not {@code null},
+     * modified)
      * @return the value
      */
     public float nextFloat(RandomNumberEngine generator) {

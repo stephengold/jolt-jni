@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,9 +48,9 @@ public class RackAndPinionConstraint extends TwoBodyConstraint {
     /**
      * Specify the constraints for each body (optional).
      *
-     * @param pinion the desired hinge constraint for the pinion (not null,
-     * unaffected)
-     * @param rack the desired slider constraint for the rack (not null,
+     * @param pinion the desired hinge constraint for the pinion (not
+     * {@code null}, unaffected)
+     * @param rack the desired slider constraint for the rack (not {@code null},
      * unaffected)
      */
     public void setConstraints(ConstConstraint pinion, ConstConstraint rack) {

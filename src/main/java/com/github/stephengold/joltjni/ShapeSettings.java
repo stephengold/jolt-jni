@@ -55,7 +55,7 @@ abstract public class ShapeSettings
     /**
      * Instantiate a clone of the specified settings.
      *
-     * @param original the settings to clone (not null, unaffected)
+     * @param original the settings to clone (not {@code null}, unaffected)
      * @return a new JVM object with a new native object assigned
      */
     public static ShapeSettings cloneShapeSettings(
@@ -217,7 +217,7 @@ abstract public class ShapeSettings
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
-     * @param shapeSubType the desired subtype (not null)
+     * @param shapeSubType the desired subtype (not {@code null})
      */
     final protected void setVirtualAddressAsCoOwner(
             long settingsVa, EShapeSubType shapeSubType) {

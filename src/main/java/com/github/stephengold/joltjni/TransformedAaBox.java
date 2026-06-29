@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,9 +39,9 @@ public class TransformedAaBox extends TransformedConvexObject {
     /**
      * Instantiate an object for the specified transform and box.
      *
-     * @param transform the desired coordinate transform (not null, uniform
-     * scaling, unaffected)
-     * @param box the desired base box (not null, unaffected)
+     * @param transform the desired coordinate transform (not {@code null},
+     * uniform scaling, unaffected)
+     * @param box the desired base box (not {@code null}, unaffected)
      */
     public TransformedAaBox(Mat44Arg transform, ConstAaBox box) {
         long transformVa = transform.targetVa();
@@ -56,7 +56,7 @@ public class TransformedAaBox extends TransformedConvexObject {
      * Calculate the support vector for the specified direction. The convex
      * object is unaffected.
      *
-     * @param direction the direction to use (not null, unaffected)
+     * @param direction the direction to use (not {@code null}, unaffected)
      * @return a new location vector
      */
     @Override

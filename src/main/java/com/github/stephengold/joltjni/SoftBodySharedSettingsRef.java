@@ -136,7 +136,7 @@ final public class SoftBodySharedSettingsRef
      * Append the specified discrete Cosserat rod. (native member:
      * mRodStretchShearConstraints)
      *
-     * @param rod the rod to add (not null)
+     * @param rod the rod to add (not {@code null})
      */
     public void addRodStretchShearConstraint(ConstRodStretchShear rod) {
         long settingsVa = targetVa();
@@ -148,7 +148,7 @@ final public class SoftBodySharedSettingsRef
      * Append the specified skinning constraint. (native member:
      * mSkinnedConstraints)
      *
-     * @param skinned the constraint to add (not null)
+     * @param skinned the constraint to add (not {@code null})
      */
     public void addSkinnedConstraint(Skinned skinned) {
         long settingsVa = targetVa();
@@ -159,7 +159,7 @@ final public class SoftBodySharedSettingsRef
     /**
      * Add the specified vertex. (native member: mVertices)
      *
-     * @param vertex the vertex to add (not null, unaffected)
+     * @param vertex the vertex to add (not {@code null}, unaffected)
      */
     public void addVertex(ConstVertex vertex) {
         long settingsVa = targetVa();
@@ -170,7 +170,7 @@ final public class SoftBodySharedSettingsRef
     /**
      * Add the specified volume constraint. (native member: mVolumeConstraints)
      *
-     * @param volume the constraint to add (not null, unaffected)
+     * @param volume the constraint to add (not {@code null}, unaffected)
      */
     public void addVolumeConstraint(ConstVolume volume) {
         long settingsVa = targetVa();
@@ -215,7 +215,7 @@ final public class SoftBodySharedSettingsRef
      *
      * @param vertexAttributes the desired attributes (one for each vertex)
      * @param numAttributes the number of attributes provided (&ge;0)
-     * @param bendType the desired type of bend constraint (not null,
+     * @param bendType the desired type of bend constraint (not {@code null},
      * default=Distance)
      */
     public void createConstraints(ConstVertexAttributes vertexAttributes,
@@ -228,7 +228,7 @@ final public class SoftBodySharedSettingsRef
      * Automatically generate constraints based on the faces.
      *
      * @param vertexAttributes the desired attributes (one for each vertex)
-     * @param bendType the desired type of bend constraint (not null,
+     * @param bendType the desired type of bend constraint (not {@code null},
      * default=Distance)
      */
     public void createConstraints(
@@ -241,7 +241,7 @@ final public class SoftBodySharedSettingsRef
      * Automatically generate constraints based on the faces.
      *
      * @param vertexAttributes the desired attributes (one for each vertex)
-     * @param bendType the desired type of bend constraint (not null,
+     * @param bendType the desired type of bend constraint (not {@code null},
      * default=Distance)
      * @param angleTolerance the desired tolerance for creating shear edges (in
      * radians, default=2*Pi/45)

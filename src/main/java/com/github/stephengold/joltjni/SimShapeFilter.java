@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,14 +47,14 @@ public class SimShapeFilter extends NonCopyable {
      * Test whether the specified collision should be simulated. The filter is
      * unaffected.
      *
-     * @param body1 the first colliding body (not null, unaffected)
-     * @param shape1 the first colliding shape (not null, unaffected)
+     * @param body1 the first colliding body (not {@code null}, unaffected)
+     * @param shape1 the first colliding shape (not {@code null}, unaffected)
      * @param subShapeId1 the sub-shape ID leading from {@code body1.getShape()}
-     * to {@code shape1} (not null, unaffected)
-     * @param body2 the 2nd colliding body (not null, unaffected)
-     * @param shape2 the 2nd colliding shape (not null, unaffected)
+     * to {@code shape1} (not {@code null}, unaffected)
+     * @param body2 the 2nd colliding body (not {@code null}, unaffected)
+     * @param shape2 the 2nd colliding shape (not {@code null}, unaffected)
      * @param subShapeId2 the sub-shape ID leading from {@code body2.getShape()}
-     * to {@code shape2} (not null, unaffected)
+     * to {@code shape2} (not {@code null}, unaffected)
      * @return {@code true} if simulated, {@code false} if filtered out
      */
     public boolean shouldCollide(

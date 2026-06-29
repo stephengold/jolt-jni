@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,15 +47,15 @@ public class SimCollideBodyVsBody extends NonCopyable {
     /**
      * Collide the specified bodies. The collider is unaffected.
      *
-     * @param body1 the first colliding body (not null, unaffected)
-     * @param body2 the 2nd colliding body (not null, unaffected)
+     * @param body1 the first colliding body (not {@code null}, unaffected)
+     * @param body2 the 2nd colliding body (not {@code null}, unaffected)
      * @param comTransform1 the center-of-mass transform of the first colliding
-     * body (not null, unaffected)
+     * body (not {@code null}, unaffected)
      * @param comTransform2 the center-of-mass transform of the 2nd colliding
-     * body (not null, unaffected)
-     * @param settings the collide-shape settings (not null)
-     * @param collector the collide-shape collector (not null)
-     * @param filter the shape filter (not null, unaffected)
+     * body (not {@code null}, unaffected)
+     * @param settings the collide-shape settings (not {@code null})
+     * @param collector the collide-shape collector (not {@code null})
+     * @param filter the shape filter (not {@code null}, unaffected)
      */
     public void collide(
             ConstBody body1, ConstBody body2, Mat44Arg comTransform1,

@@ -118,7 +118,7 @@ final public class SkeletonRef extends Ref implements ConstSkeleton {
     /**
      * Find the index of the named joint.
      *
-     * @param name the name of the joint to find (not null)
+     * @param name the name of the joint to find (not {@code null})
      * @return the joint index
      */
     @Override
@@ -151,7 +151,7 @@ final public class SkeletonRef extends Ref implements ConstSkeleton {
     /**
      * Save the skeleton to the specified binary stream.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

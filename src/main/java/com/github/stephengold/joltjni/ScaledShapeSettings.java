@@ -39,8 +39,8 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     /**
      * Instantiate a settings based on the specified shape and scale factors.
      *
-     * @param baseShape the unscaled base shape (not null)
-     * @param scaleFactors the desired scale factors (not null)
+     * @param baseShape the unscaled base shape (not {@code null})
+     * @param scaleFactors the desired scale factors (not {@code null})
      */
     public ScaledShapeSettings(ConstShape baseShape, Vec3Arg scaleFactors) {
         long baseShapeVa = baseShape.targetVa();
@@ -55,8 +55,8 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     /**
      * Instantiate a settings based on the specified settings and scale factors.
      *
-     * @param baseSettings the unscaled base shape settings (not null)
-     * @param scaleFactors the desired scale factors (not null)
+     * @param baseSettings the unscaled base shape settings (not {@code null})
+     * @param scaleFactors the desired scale factors (not {@code null})
      */
     public ScaledShapeSettings(
             ConstShapeSettings baseSettings, Vec3Arg scaleFactors) {

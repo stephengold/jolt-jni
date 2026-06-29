@@ -56,8 +56,9 @@ public class VehicleConstraint
     /**
      * Instantiate a constraint for the specified body and settings.
      *
-     * @param body the body to which the constraint will apply (not null)
-     * @param settings the desired settings (not null, unaffected)
+     * @param body the body to which the constraint will apply (not
+     * {@code null})
+     * @param settings the desired settings (not {@code null}, unaffected)
      */
     public VehicleConstraint(
             Body body, ConstVehicleConstraintSettings settings) {
@@ -150,7 +151,7 @@ public class VehicleConstraint
     /**
      * Override the vehicle's gravity vector.
      *
-     * @param acceleration the desired acceleration vector (not null,
+     * @param acceleration the desired acceleration vector (not {@code null},
      * unaffected)
      */
     public void overrideGravity(Vec3Arg acceleration) {

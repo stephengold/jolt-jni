@@ -82,7 +82,8 @@ final public class VehicleConstraintSettingsRef
      * Alter how the vehicle accelerates and decelerates. (native attribute:
      * mController)
      *
-     * @param controllerSettings the desired settings (not null, default=null)
+     * @param controllerSettings the desired settings (not {@code null},
+     * default=null)
      */
     public void setController(VehicleControllerSettings controllerSettings) {
         long constraintSettingsVa = targetVa();
@@ -98,8 +99,8 @@ final public class VehicleConstraintSettingsRef
     /**
      * Alter the forward direction. (native attribute: mForward)
      *
-     * @param forward the desired forward direction (not null, unaffected,
-     * default=(0,0,1))
+     * @param forward the desired forward direction (not {@code null},
+     * unaffected, default=(0,0,1))
      */
     public void setForward(Vec3Arg forward) {
         long settingsVa = targetVa();
@@ -133,7 +134,7 @@ final public class VehicleConstraintSettingsRef
     /**
      * Alter the up direction. (native attribute: mUp)
      *
-     * @param up the desired up direction (not null, unaffected,
+     * @param up the desired up direction (not {@code null}, unaffected,
      * default=(0,1,0))
      */
     public void setUp(Vec3Arg up) {
@@ -416,7 +417,7 @@ final public class VehicleConstraintSettingsRef
      * Save the settings to the specified binary stream. The settings are
      * unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

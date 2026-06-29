@@ -68,11 +68,11 @@ public class SoftBodyCreationSettings
     /**
      * Instantiate settings for the specified shared settings.
      *
-     * @param settings the shared settings to use (not null, unaffected)
+     * @param settings the shared settings to use (not {@code null}, unaffected)
      * @param location the desired initial location (in system coordinates, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param orientation the desired initial orientation (relative to system
-     * axes, not null, unaffected)
+     * axes, not {@code null}, unaffected)
      * @param objectLayer the desired object layer (&ge;0)
      */
     public SoftBodyCreationSettings(ConstSoftBodySharedSettings settings,
@@ -161,7 +161,7 @@ public class SoftBodyCreationSettings
      * Alter the collision group to which the body will belong. (native member:
      * mCollisionGroup)
      *
-     * @param group the desired group (not null, unaffected)
+     * @param group the desired group (not {@code null}, unaffected)
      * @return the modified settings, for chaining
      */
     public SoftBodyCreationSettings setCollisionGroup(
@@ -370,7 +370,8 @@ public class SoftBodyCreationSettings
     /**
      * Replace the shared settings. (native member: mSettings)
      *
-     * @param sharedSettings the desired settings (not null, alias created)
+     * @param sharedSettings the desired settings (not {@code null}, alias
+     * created)
      * @return the modified settings, for chaining
      */
     public SoftBodyCreationSettings setSettings(

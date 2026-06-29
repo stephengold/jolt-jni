@@ -336,8 +336,8 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
      *
-     * @param direction the desired axis direction (not null, unaffected,
-     * default=(0,1,0))
+     * @param direction the desired axis direction (not {@code null},
+     * unaffected, default=(0,1,0))
      * @return the argument, for chaining
      */
     public Vec3Arg setNormalAxis1(Vec3Arg direction) {
@@ -353,8 +353,8 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
      *
-     * @param direction the desired axis direction (not null, unaffected,
-     * default=(0,1,0))
+     * @param direction the desired axis direction (not {@code null},
+     * unaffected, default=(0,1,0))
      * @return the argument, for chaining
      */
     public Vec3Arg setNormalAxis2(Vec3Arg direction) {
@@ -370,7 +370,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
      */
@@ -387,7 +387,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
      */
@@ -406,7 +406,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      * oriented.
      *
      * @param sliderAxis the desired slider axis direction (in system
-     * coordinates, not null, unaffected)
+     * coordinates, not {@code null}, unaffected)
      */
     public void setSliderAxis(Vec3Arg sliderAxis) {
         long settingsVa = va();
@@ -419,8 +419,8 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the slider axis of body 1. (native attribute: mSliderAxis1)
      *
-     * @param direction the desired axis direction (not null, unaffected,
-     * default=(1,0,0))
+     * @param direction the desired axis direction (not {@code null},
+     * unaffected, default=(1,0,0))
      * @return the argument, for chaining
      */
     public Vec3Arg setSliderAxis1(Vec3Arg direction) {
@@ -436,8 +436,8 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the slider axis of body 2. (native attribute: mSliderAxis2)
      *
-     * @param direction the desired axis direction (not null, unaffected,
-     * default=(1,0,0))
+     * @param direction the desired axis direction (not {@code null},
+     * unaffected, default=(1,0,0))
      * @return the argument, for chaining
      */
     public Vec3Arg setSliderAxis2(Vec3Arg direction) {
@@ -454,7 +454,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      * Alter which space the other properties are specified in. (native
      * attribute: mSpace)
      *
-     * @param space enum value (not null, default=WorldSpace)
+     * @param space enum value (not {@code null}, default=WorldSpace)
      */
     public void setSpace(EConstraintSpace space) {
         long settingsVa = va();

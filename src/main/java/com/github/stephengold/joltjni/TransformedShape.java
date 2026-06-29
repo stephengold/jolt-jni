@@ -91,11 +91,12 @@ public class TransformedShape
     /**
      * Cast a narrow-phase ray and collect any hits. The shape is unaffected.
      *
-     * @param raycast the test ray (not null, unaffected)
-     * @param settings the raycast configuration options to use (not null,
+     * @param raycast the test ray (not {@code null}, unaffected)
+     * @param settings the raycast configuration options to use (not
+     * {@code null}, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param shapeFilter the shape filter to apply (not {@code null},
      * unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
      */
     @Override
     public void castRay(RRayCast raycast, ConstRayCastSettings settings,
@@ -112,12 +113,14 @@ public class TransformedShape
     /**
      * Cast a narrow-phase shape and collect any hits. The shape is unaffected.
      *
-     * @param shapeCast the desired shape cast (not null, unaffected)
-     * @param settings the collision settings to use (not null, unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     * @param shapeCast the desired shape cast (not {@code null}, unaffected)
+     * @param settings the collision settings to use (not {@code null},
+     * unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param shapeFilter the shape filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void castShape(RShapeCast shapeCast, ConstShapeCastSettings settings,
@@ -140,8 +143,9 @@ public class TransformedShape
      * collide with the specified bounding box. The shape is unaffected.
      *
      * @param box the region of interest (in system coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param shapeFilter the shape filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void collectTransformedShapes(ConstAaBox box,
@@ -156,9 +160,11 @@ public class TransformedShape
     /**
      * Collect collisions with the specified point. The shape is unaffected.
      *
-     * @param point the location of the point to test (not null, unaffected)
-     * @param collector the hit collector to use (not null)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     * @param point the location of the point to test (not {@code null},
+     * unaffected)
+     * @param collector the hit collector to use (not {@code null})
+     * @param shapeFilter the shape filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void collidePoint(RVec3Arg point, CollidePointCollector collector,
@@ -175,15 +181,16 @@ public class TransformedShape
     /**
      * Collect collisions with the specified shape. The shape is unaffected.
      *
-     * @param testShape the shape to test (not null, unaffected)
-     * @param shapeScale the scaling vector for the test shape (not null,
-     * unaffected)
+     * @param testShape the shape to test (not {@code null}, unaffected)
+     * @param shapeScale the scaling vector for the test shape (not
+     * {@code null}, unaffected)
      * @param comTransform the coordinate transform to apply to the test shape's
-     * center of mass (not null, unaffected)
-     * @param settings the collision settings to use (not null, unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
+     * center of mass (not {@code null}, unaffected)
+     * @param settings the collision settings to use (not {@code null},
+     * unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
      */
     @Override
     public void collideShape(ConstShape testShape, Vec3Arg shapeScale,
@@ -196,16 +203,18 @@ public class TransformedShape
     /**
      * Collect collisions with the specified shape. The shape is unaffected.
      *
-     * @param testShape the shape to test (not null, unaffected)
-     * @param shapeScale the scaling vector for the test shape (not null,
-     * unaffected)
+     * @param testShape the shape to test (not {@code null}, unaffected)
+     * @param shapeScale the scaling vector for the test shape (not
+     * {@code null}, unaffected)
      * @param comTransform the coordinate transform to apply to the test shape's
-     * center of mass (not null, unaffected)
-     * @param settings the collision settings to use (not null, unaffected)
-     * @param base the base location for reporting hits (not null, unaffected,
-     * (0,0,0)&rarr;world coordinates)
-     * @param collector the hit collector to use (not null)
-     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     * center of mass (not {@code null}, unaffected)
+     * @param settings the collision settings to use (not {@code null},
+     * unaffected)
+     * @param base the base location for reporting hits (not {@code null},
+     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not {@code null})
+     * @param shapeFilter the shape filter to apply (not {@code null},
+     * unaffected)
      */
     @Override
     public void collideShape(ConstShape testShape, Vec3Arg shapeScale,
@@ -232,8 +241,8 @@ public class TransformedShape
      * Copy the vertex coordinates of the shape's debug mesh to the specified
      * buffer. The shape is unaffected.
      *
-     * @param storeBuffer the buffer to fill with vertex coordinates (not null,
-     * modified)
+     * @param storeBuffer the buffer to fill with vertex coordinates (not
+     * {@code null}, modified)
      */
     @Override
     public void copyDebugTriangles(FloatBuffer storeBuffer) {
@@ -336,12 +345,12 @@ public class TransformedShape
      * Get the vertices of the face that provides support in the specified
      * direction. The shape is unaffected.
      *
-     * @param subShapeId which sub-shape to use (not null, unaffected)
-     * @param direction the test direction (in world coordinates, not null,
-     * unaffected)
-     * @param base the base location for reporting face vertices (not null,
-     * unaffected, (0,0,0)&rarr;world coordinates)
-     * @param storeFace storage for face vertices (not null)
+     * @param subShapeId which sub-shape to use (not {@code null}, unaffected)
+     * @param direction the test direction (in world coordinates, not
+     * {@code null}, unaffected)
+     * @param base the base location for reporting face vertices (not
+     * {@code null}, unaffected, (0,0,0)&rarr;world coordinates)
+     * @param storeFace storage for face vertices (not {@code null})
      */
     @Override
     public void getSupportingFace(int subShapeId, Vec3Arg direction,
@@ -384,10 +393,10 @@ public class TransformedShape
      *
      * @param storeContext storage for communication with
      * {@code getTrianglesNext()}
-     * @param box the region of interest (in system coordinates, not null,
-     * unaffected)
-     * @param base the base location for reporting triangle vertices (not null,
-     * unaffected, (0,0,0)&rarr;world coordinates)
+     * @param box the region of interest (in system coordinates, not
+     * {@code null}, unaffected)
+     * @param base the base location for reporting triangle vertices (not
+     * {@code null}, unaffected, (0,0,0)&rarr;world coordinates)
      */
     @Override
     public void getTrianglesStart(GetTrianglesContext storeContext,

@@ -117,7 +117,7 @@ final public class RagdollRef extends Ref {
     /**
      * Drive the ragdoll to the specified pose by setting velocities.
      *
-     * @param pose the desired pose
+     * @param pose the desired pose (not {@code null})
      * @param time the time interval for achieving the pose (in seconds)
      * @param lockBodies (default=true)
      */

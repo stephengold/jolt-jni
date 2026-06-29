@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,7 +54,7 @@ final public class SoftBodyManifold
      * Return the ID of the body with which the specified vertex collided. The
      * manifold is unaffected. (native function: GetContactBodyID)
      *
-     * @param vertex the vertex to query (not null, unaffected)
+     * @param vertex the vertex to query (not {@code null}, unaffected)
      * @return the {@code BodyID} value
      */
     @Override
@@ -70,7 +70,7 @@ final public class SoftBodyManifold
      * Copy the contact normal direction for the specified vertex. The manifold
      * is unaffected.
      *
-     * @param vertex the vertex to query (not null, unaffected)
+     * @param vertex the vertex to query (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -89,7 +89,7 @@ final public class SoftBodyManifold
      * Copy the location of the contact point for the specified vertex. The
      * manifold is unaffected.
      *
-     * @param vertex the vertex to query (not null, unaffected)
+     * @param vertex the vertex to query (not {@code null}, unaffected)
      * @return a new location vector (in local coordinates)
      */
     @Override
@@ -158,7 +158,7 @@ final public class SoftBodyManifold
      * Test whether the specified vertex collided with something in this update.
      * The manifold is unaffected.
      *
-     * @param vertex the vertex to query (not null, unaffected)
+     * @param vertex the vertex to query (not {@code null}, unaffected)
      * @return {@code true} if it collided, otherwise {@code false}
      */
     @Override
