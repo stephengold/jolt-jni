@@ -370,8 +370,8 @@ abstract public class DebugRenderer extends NonCopyable {
             float lodScaleSq, ConstColor modelColor, GeometryRef geometry,
             ECullMode cullMode, ECastShadow castShadow, EDrawMode drawMode) {
         long transformVa = transform.targetVa();
-        int colorInt = modelColor.getUInt32();
         long boxVa = worldSpaceBounds.targetVa();
+        int colorInt = modelColor.getUInt32();
         long geometryVa = geometry.targetVa();
         int cullOrdinal = cullMode.ordinal();
         int csOrdinal = castShadow.ordinal();
