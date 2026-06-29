@@ -41,6 +41,14 @@ final public class PhysicsMaterialRefC extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate an empty reference.
+     */
+    public PhysicsMaterialRefC() {
+        long refVa = createDefault();
+        setVirtualAddress(refVa, () -> free(refVa));
+    }
+
+    /**
      * Instantiate an empty reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
@@ -112,6 +120,8 @@ final public class PhysicsMaterialRefC extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native methods
+
+    native private static long createDefault();
 
     native private static void free(long refVa);
 
