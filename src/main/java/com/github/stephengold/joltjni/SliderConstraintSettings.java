@@ -63,7 +63,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      * @param original the settings to copy (not {@code null}, unaffected)
      */
     public SliderConstraintSettings(SliderConstraintSettings original) {
-        long originalVa = original.targetVa();
+        long originalVa = original.va();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Slider);
     }

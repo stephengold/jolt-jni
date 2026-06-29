@@ -59,7 +59,7 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * @param original the settings to copy (not {@code null}, unaffected)
      */
     public PulleyConstraintSettings(PulleyConstraintSettings original) {
-        long originalVa = original.targetVa();
+        long originalVa = original.va();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Pulley);
     }

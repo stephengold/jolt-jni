@@ -58,7 +58,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
      * @param original the settings to copy (not {@code null}, unaffected)
      */
     public RagdollSettings(RagdollSettings original) {
-        long originalVa = original.targetVa();
+        long originalVa = original.va();
         long copyVa = createCopy(originalVa);
         long refVa = toRef(copyVa);
         setVirtualAddress(copyVa, () -> RagdollSettingsRef.free(refVa));

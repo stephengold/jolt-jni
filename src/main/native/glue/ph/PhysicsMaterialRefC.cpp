@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialRefC_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialRefC_free
-  (JNIEnv *, jclass, jlong refVa) {
-    RefConst<PhysicsMaterial> * const pRef
-            = reinterpret_cast<RefConst<PhysicsMaterial> *> (refVa);
-    TRACE_DELETE("RefConst<PhysicsMaterial>", pRef)
-    delete pRef;
-}
+  BODYOF_FREE(RefConst<PhysicsMaterial>)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterialRefC

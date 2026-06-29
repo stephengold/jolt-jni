@@ -62,7 +62,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * @param original the settings to copy (not {@code null}, unaffected)
      */
     public SwingTwistConstraintSettings(SwingTwistConstraintSettings original) {
-        long originalVa = original.targetVa();
+        long originalVa = original.va();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.SwingTwist);
     }
