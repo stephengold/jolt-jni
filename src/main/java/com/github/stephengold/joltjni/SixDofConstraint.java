@@ -461,8 +461,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     native private static long getLimitsSpringSettings(
             long constraintVa, int dofIndex);
 
-    native private static float getMaxFriction(
-            long constraintVa, int dofIndex);
+    native private static float getMaxFriction(long constraintVa, int dofIndex);
 
     native private static long getMotorSettings(
             long constraintVa, int dofIndex);
@@ -496,11 +495,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
     native private static void getTranslationLimitsMin(
             long constraintVa, FloatBuffer storeFloats);
 
-    native private static boolean isFixedAxis(
-            long constraintVa, int dofIndex);
+    native private static boolean isFixedAxis(long constraintVa, int dofIndex);
 
-    native private static boolean isFreeAxis(
-            long constraintVa, int dofIndex);
+    native private static boolean isFreeAxis(long constraintVa, int dofIndex);
 
     native private static void setLimitsSpringSettings(
             long constraintVa, int dofIndex, long springSettingsVa);
