@@ -40,7 +40,6 @@ jobs:
         with:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.350.1
-          vulkan-use-cache: true
       - run: clang++ --version
       - name: gradlew -Ptarget=Linux64 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
@@ -78,7 +77,6 @@ jobs:
         with:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.350.1
-          vulkan-use-cache: true
       - run: clang++ --version
       - name: gradlew -Ptarget=Linux64_fma -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
@@ -225,7 +223,6 @@ jobs:
         with:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.350.0
-          vulkan-use-cache: true
       - name: gradlew -Ptarget=Windows64 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -266,7 +263,6 @@ jobs:
         with:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.350.0
-          vulkan-use-cache: true
       - name: gradlew -Ptarget=Windows64_avx2 -PuseVK=yes -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
