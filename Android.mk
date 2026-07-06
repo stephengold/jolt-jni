@@ -493,6 +493,7 @@ $(N)/Jolt/Physics/DeterminismLog.cpp \
 $(N)/Jolt/Physics/Hair/Hair.cpp \
 $(N)/Jolt/Physics/Hair/HairSettings.cpp \
 $(N)/Jolt/Physics/Hair/HairShaders.cpp \
+$(N)/Jolt/Physics/Hair/RegisterHair.cpp \
 $(N)/Jolt/Physics/IslandBuilder.cpp \
 $(N)/Jolt/Physics/LargeIslandSplitter.cpp \
 $(N)/Jolt/Physics/PhysicsScene.cpp \

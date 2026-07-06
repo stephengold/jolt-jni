@@ -32,6 +32,7 @@ SOFTWARE.
 #include "Jolt/Physics/Body/Body.h"
 #include "Jolt/Physics/Body/BodyID.h"
 #include "Jolt/Physics/DeterminismLog.h"
+#include "Jolt/Physics/Hair/RegisterHair.h"
 #include "Jolt/Physics/PhysicsSettings.h"
 #include "Jolt/RegisterTypes.h"
 
