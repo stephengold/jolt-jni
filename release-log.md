@@ -2,6 +2,10 @@
 
 ## Version 5.2.0 released on 6 July 2026
 
++ API changes (oops! my bad):
+  + Removed the `Impulse` class and `CollisionEstimationResult.getImpulses()`.
+  + Added `CollisionEstimationResult.getContactImpulses()`.
+
 + Bugfix:  logic error in `CharacterVirtualSettings.getMaxNumHits()`
 
 + Began supporting the Android_RISCV64 platform.
