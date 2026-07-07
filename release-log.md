@@ -1,5 +1,45 @@
 # Release log for the Jolt-JNI project
 
+## Version 5.2.0 released on TBD
+
++ Bugfix:  logic error in `CharacterVirtualSettings.getMaxNumHits()`
+
++ Began supporting the Android_RISCV64 platform.
++ Added corrected signatures for
+  `CharacterVirtualSettings.setHitReductionCosMaxAngle()` and
+  `CharacterVirtualSettingsRef.setHitReductionCosMaxAngle()` and
+  deprecated the pre-existing signatures.
++ Began allowing removal of the contact listener from a `CharacterVirtual`.
++ Added interfaces:
+  + `ConstCollideSettingsBase`
+  + `ConstCollideShapeSettings`
+  + `ConstRayCastSettings`
+  + `ConstShapeCastSettings`
++ Added a no-argument constructor for the `PhysicsMaterialRefC` class.
++ Added public methods:
+  + `BodyIdVector.data()`
+  + `BodyIdVector.reserve()`
+  + `PhysicsSystem.cMaxContactConstraintsLimit()`
+  + `RagdollSettings.calculateConstraintPriorities()`
+  + `RagdollSettingsRef.calculateConstraintPriorities()`
+  + `RandomNumberEngine.max()`
+  + `RandomNumberEngine.min()`
+  + `RandomNumberEngine.nextUnsigned()`
+  + `ShapeCastSettings.getExtraConvexRadius()`
+  + `ShapeCastSettings.setExtraConvexRadius()`
+  + `SliderConstraintSettings.setMotorSettings()`
+  + `SliderConstraintSettings.setLimitsSpringSettings()`
++ Added 2 float constants to the `PhysicsSettings` class:
+  + `cDefaultCollisionTolerance`
+  + `cDefaultPenetrationTolerance`
+
++ Added null checks to `targetVa()` methods.
++ Updated the Jolt-Physics source and assets to sg260703 (=765845d).
++ Began using GCC v11 to build for the Linux_ARM32hf platform.
++ Began using Xcode v26.6.0 to build for macOS platforms.
++ Updated the OSHI library to v7.3.2 .
+
+
 ## Version 5.1.0 released on 1 June 2026
 
 + Bugfix:  logic error in `VehicleTransmissionSettings.setClutchReleaseTime()`
