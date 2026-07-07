@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 5.2.0 released on TBD
+## Version 5.2.0 released on 6 July 2026
 
 + Bugfix:  logic error in `CharacterVirtualSettings.getMaxNumHits()`
 
