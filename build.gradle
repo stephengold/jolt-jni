@@ -363,8 +363,8 @@ dependencies {
     testImplementation(libs.jcommander)  // to parse command-line arguments
     testImplementation(libs.jsnaploader) // to identify the OS and CPU
     testImplementation(libs.junit4)      // framework for automated testing
-    testRuntimeOnly(libs.log4j.impl)
-    testImplementation(libs.oshi.core)
+    testRuntimeOnly(libs.log4j.impl)     // OSHI uses slf4j-api for logging
+    testImplementation(libs.oshi.core)   // to determine available CPU features
 }
 
 java {
