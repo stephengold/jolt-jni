@@ -189,7 +189,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSetti
   (JNIEnv *, jclass, jlong settingsVa) {
     const CharacterVirtualSettings * const pSettings
             = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
-    const uint result = pSettings->mMaxConstraintIterations;
+    const uint result = pSettings->mMaxNumHits;
     return result;
 }
 
