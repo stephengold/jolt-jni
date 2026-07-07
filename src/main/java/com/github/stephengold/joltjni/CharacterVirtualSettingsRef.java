@@ -186,8 +186,8 @@ final public class CharacterVirtualSettingsRef
     }
 
     /**
-     * Alter the iteration limit in the constraint solver. (native attribute:
-     * mMaxConstraintIterations)
+     * Alter how often to try stepping in the constraint solver. (native
+     * attribute: mMaxConstraintIterations)
      *
      * @param numIterations the desired number of iterations (&ge;0, default=15)
      */
@@ -201,7 +201,7 @@ final public class CharacterVirtualSettingsRef
      * Alter the maximum number of hits to collect. (native attribute:
      * mMaxNumHits)
      *
-     * @param numHits the desired limit (&ge;0), default=256)
+     * @param numHits the desired limit (&ge;0, default=256)
      */
     public void setMaxNumHits(int numHits) {
         long settingsVa = targetVa();
@@ -223,7 +223,7 @@ final public class CharacterVirtualSettingsRef
      * Alter the maximum force applied to other bodies. (native attribute:
      * mMaxStrength)
      *
-     * @param force the desired force (in Newtons)
+     * @param force the desired force (in Newtons, default=100)
      */
     public void setMaxStrength(float force) {
         long settingsVa = targetVa();
@@ -459,8 +459,8 @@ final public class CharacterVirtualSettingsRef
     }
 
     /**
-     * Return the iteration limit in the constraint solver. The settings are
-     * unaffected. (native attribute: mMaxConstraintIterations)
+     * Return how often to try stepping in the constraint solver. The settings
+     * are unaffected. (native attribute: mMaxConstraintIterations)
      *
      * @return the number of iterations (&ge;0)
      */

@@ -208,7 +208,7 @@ public class CharacterVirtualSettings
      * Alter the maximum number of hits to collect. (native attribute:
      * mMaxNumHits)
      *
-     * @param numHits the desired limit (&ge;0), default=256)
+     * @param numHits the desired limit (&ge;0, default=256)
      */
     public void setMaxNumHits(int numHits) {
         long settingsVa = va();
@@ -219,7 +219,7 @@ public class CharacterVirtualSettings
      * Alter the maximum force applied to other bodies. (native attribute:
      * mMaxStrength)
      *
-     * @param force the desired force (in Newtons)
+     * @param force the desired force (in Newtons, default=100)
      */
     public void setMaxStrength(float force) {
         long settingsVa = va();
