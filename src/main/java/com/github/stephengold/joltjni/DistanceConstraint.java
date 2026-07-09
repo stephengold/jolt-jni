@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
+
 /**
  * A {@code TwoBodyConstraint} that holds 2 points at a fixed distance from each
  * other.
@@ -82,6 +84,17 @@ public class DistanceConstraint extends TwoBodyConstraint {
     }
 
     /**
+     * Alter the spring settings.
+     *
+     * @param springSettings the desired settings (not {@code null}, unaffected)
+     */
+    public void setLimitsSpringSettings(ConstSpringSettings springSettings) {
+        long constraintVa = va();
+        long settingsVa = springSettings.targetVa();
+        setLimitsSpringSettings(constraintVa, settingsVa);
+    }
+
+    /**
      * Alter the limits.
      *
      * @param min the desired lower limit (in meters)
@@ -99,6 +112,9 @@ public class DistanceConstraint extends TwoBodyConstraint {
     native private static float getMaxDistance(long constraintVa);
 
     native private static float getMinDistance(long constraintVa);
+
+    native private static long setLimitsSpringSettings(
+            long constraintVa, long springSettingsVa);
 
     native private static void setDistance(
             long constraintVa, float min, float max);

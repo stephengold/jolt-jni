@@ -70,6 +70,20 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_DistanceConstraint_
 
 /*
  * Class:     com_github_stephengold_joltjni_DistanceConstraint
+ * Method:    setLimitsSpringSettings
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DistanceConstraint_setLimitsSpringSettings
+  (JNIEnv *, jclass, jlong constraintVa, jlong springSettingsVa) {
+    DistanceConstraint * const pConstraint
+            = reinterpret_cast<DistanceConstraint *> (constraintVa);
+    const SpringSettings * const pSpringSettings
+            = reinterpret_cast<SpringSettings *> (springSettingsVa);
+    pConstraint->SetLimitsSpringSettings(*pSpringSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DistanceConstraint
  * Method:    setDistance
  * Signature: (JFF)V
  */

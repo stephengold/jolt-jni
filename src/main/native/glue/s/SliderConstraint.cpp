@@ -185,6 +185,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraint_setM
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraint
+ * Method:    setLimitsSpringSettings
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraint_setLimitsSpringSettings
+  (JNIEnv *, jclass, jlong constraintVa, jlong springSettingsVa) {
+    SliderConstraint * const pConstraint
+            = reinterpret_cast<SliderConstraint *> (constraintVa);
+    const SpringSettings * const pSpringSettings
+            = reinterpret_cast<SpringSettings *> (springSettingsVa);
+    pConstraint->SetLimitsSpringSettings(*pSpringSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SliderConstraint
  * Method:    setMotorState
  * Signature: (JI)V
  */

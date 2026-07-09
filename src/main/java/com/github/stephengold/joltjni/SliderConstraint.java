@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EMotorState;
+import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 
 /**
  * A {@code TwoBodyConstraint} that allows translation only along one axis and
@@ -93,6 +94,17 @@ public class SliderConstraint extends TwoBodyConstraint {
         SpringSettings result = new SpringSettings(this, settingsVa);
 
         return result;
+    }
+
+    /**
+     * Alter the spring settings.
+     *
+     * @param springSettings the desired settings (not {@code null}, unaffected)
+     */
+    public void setLimitsSpringSettings(ConstSpringSettings springSettings) {
+        long constraintVa = va();
+        long settingsVa = springSettings.targetVa();
+        setLimitsSpringSettings(constraintVa, settingsVa);
     }
 
     /**
@@ -249,6 +261,9 @@ public class SliderConstraint extends TwoBodyConstraint {
 
     native private static void setMaxFrictionForce(
             long constraintVa, float force);
+
+    native private static long setLimitsSpringSettings(
+            long constraintVa, long springSettingsVa);
 
     native private static void setMotorState(long constraintVa, int ordinal);
 

@@ -185,6 +185,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraint_setMa
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraint
+ * Method:    setLimitsSpringSettings
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraint_setLimitsSpringSettings
+  (JNIEnv *, jclass, jlong constraintVa, jlong springSettingsVa) {
+    HingeConstraint * const pConstraint
+            = reinterpret_cast<HingeConstraint *> (constraintVa);
+    const SpringSettings * const pSpringSettings
+            = reinterpret_cast<SpringSettings *> (springSettingsVa);
+    pConstraint->SetLimitsSpringSettings(*pSpringSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HingeConstraint
  * Method:    setMotorState
  * Signature: (JI)V
  */

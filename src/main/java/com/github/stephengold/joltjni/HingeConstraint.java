@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EMotorState;
+import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 
 /**
  * A {@code TwoBodyConstraint} that allows rotation only along one axis and
@@ -193,6 +194,17 @@ public class HingeConstraint extends TwoBodyConstraint {
     }
 
     /**
+     * Alter the spring settings.
+     *
+     * @param springSettings the desired settings (not {@code null}, unaffected)
+     */
+    public void setLimitsSpringSettings(ConstSpringSettings springSettings) {
+        long constraintVa = va();
+        long settingsVa = springSettings.targetVa();
+        setLimitsSpringSettings(constraintVa, settingsVa);
+    }
+
+    /**
      * Alter the state of the motor.
      *
      * @param state the desired state (not {@code null})
@@ -250,6 +262,9 @@ public class HingeConstraint extends TwoBodyConstraint {
 
     native private static void setMaxFrictionTorque(
             long constraintVa, float torque);
+
+    native private static long setLimitsSpringSettings(
+            long constraintVa, long springSettingsVa);
 
     native private static void setMotorState(long constraintVa, int ordinal);
 
