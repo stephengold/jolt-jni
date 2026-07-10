@@ -5,7 +5,7 @@ name: CI at GitHub
 on: [push]
 
 jobs:
-  Java11-Linux:
+  Java11-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
     steps:
@@ -375,7 +375,7 @@ jobs:
           ./gradlew -Ptarget=Linux_LoongArch64 assemble \
             --console=plain
 
-  Java25-Linux:
+  Java25-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
     steps:
