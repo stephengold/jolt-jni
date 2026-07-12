@@ -593,7 +593,9 @@ final public class TestUtils {
 
         } else if (NativeVariant.Os.isWindows()) {
             name = "joltjni.dll";
-            if (hasAvx2Features()) {
+            if (NativeVariant.Cpu.isARM()) {
+                subdirectory = "windows_ARM64";
+            } else if (hasAvx2Features()) {
                 subdirectory = "windows64_avx2";
             } else {
                 subdirectory = "windows64";
