@@ -32,6 +32,9 @@ SOFTWARE.
 extern bool gTypesAreRegistered;
 
 #ifdef JPH_DEBUG
+/*
+ * helper functions to verify global constants in Jolt_newFactory():
+ */
 extern void CollisionGroup_verifyGlobalConstants();
 extern void HairSettings_verifyGlobalConstants();
 extern void PhysicsSettings_verifyGlobalConstants();

@@ -15,7 +15,8 @@ plugins {
 }
 
 // $artifact, $jjVersion, $joltFork, $joltTag, $useMTL, and $useVK are set in
-// the gradle.properties file or by -P options on the Gradle command line.
+// the gradle.properties file
+// or by -P options on the Gradle command line.
 
 ext {
     downloadedHairStraightZip = 'downloads/wStraightHair.zip'
@@ -511,7 +512,6 @@ tasks.register('runTest000', JavaExec) {
 }
 
 Boolean enableNativeAccess = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
-
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     dependsOn('assemble')
