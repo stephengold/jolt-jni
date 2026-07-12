@@ -36,11 +36,27 @@ public class PhysicsSettings
     // constants
 
     /**
+     * used by {@code CapsuleShape} and {@code TaperedCapsuleShape} to determine
+     * whether the supporting face is an edge or a point.
+     * <p>
+     * value should match Jolt/Physics/PhysicsSettings.h
+     */
+    final public static float cCapsuleProjectionSlop = 0.02f;
+
+    /**
      * maximum distance at which GJK considers objects to collide (in meters)
      * <p>
      * value should match Jolt/Physics/PhysicsSettings.h
      */
     final public static float cDefaultCollisionTolerance = 1e-4f;
+
+    /**
+     * default tolerance used by to determine whether two edges are shared
+     * <p>
+     * value should match Jolt/Physics/PhysicsSettings.h
+     */
+    final public static float cDefaultInternalEdgeRemovalVertexToleranceSq
+            = 1e-8f;
 
     /**
      * determines the accuracy of the penetration depth calculation
