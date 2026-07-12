@@ -291,6 +291,10 @@ public class Test004 {
         settings.setLinearCastMaxPenetration(1f);
         Assert.assertEquals(1f, settings.getLinearCastMaxPenetration(), 0f);
 
+        settings.setInternalEdgeRemovalVertexToleranceSq(2e-3f);
+        Assert.assertEquals(2e-3f,
+                settings.getInternalEdgeRemovalVertexToleranceSq(), 0f);
+
         settings.setLinearCastThreshold(1f);
         Assert.assertEquals(1f, settings.getLinearCastThreshold(), 0f);
 

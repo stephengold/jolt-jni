@@ -232,6 +232,17 @@ public class PhysicsSettings
     }
 
     /**
+     * Alter the tolerance used by to determine whether two edges are shared.
+     * (native attribute: mInternalEdgeRemovalVertexToleranceSq)
+     *
+     * @param toleranceSq the desired tolerance (in meters^2, default=1e-8)
+     */
+    public void setInternalEdgeRemovalVertexToleranceSq(float toleranceSq) {
+        long settingsVa = va();
+        setInternalEdgeRemovalVertexToleranceSq(settingsVa, toleranceSq);
+    }
+
+    /**
      * Alter the amount of penetration tolerated by a {@code LinearCast} cast.
      * (native member: mLinearCastMaxPenetration)
      *
@@ -956,6 +967,9 @@ public class PhysicsSettings
 
     native private static void setDeterministicSimulation(
             long settingsVa, boolean setting);
+
+    native private static void setInternalEdgeRemovalVertexToleranceSq(
+            long settingsVa, float toleranceSq);
 
     native private static void setLinearCastMaxPenetration(
             long settingsVa, float penetration);

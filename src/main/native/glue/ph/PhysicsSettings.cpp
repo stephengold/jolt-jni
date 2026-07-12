@@ -531,6 +531,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setDe
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    setInternalEdgeRemovalVertexToleranceSq
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setInternalEdgeRemovalVertexToleranceSq
+  (JNIEnv *, jclass, jlong settingsVa, jfloat toleranceSq) {
+    PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    pSettings->mInternalEdgeRemovalVertexToleranceSq = toleranceSq;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    setLinearCastMaxPenetration
  * Signature: (JF)V
  */
