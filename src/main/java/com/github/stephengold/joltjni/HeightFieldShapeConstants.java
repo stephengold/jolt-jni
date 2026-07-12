@@ -62,6 +62,10 @@ final public class HeightFieldShapeConstants {
      * maximum height when converted to 16 bits
      */
     final public static int cMaxHeightValue16 = 0xFFFE;
+    /**
+     * maximum value for {@code HeightFieldShapeSettings.getBitsPerSample()}
+     */
+    final public static int cMaxBitsPerSample = 16;
     // *************************************************************************
     // constructors
 
