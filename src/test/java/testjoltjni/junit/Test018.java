@@ -193,6 +193,8 @@ public class Test018 {
 
         Assert.assertEquals(EBackFaceMode.IgnoreBackFaces,
                 settings.getBackFaceMode());
+        Assert.assertEquals(1e-8f,
+                settings.getInternalEdgeRemovalVertexToleranceSq(), 0f);
         Assert.assertEquals(0f, settings.getMaxSeparationDistance(), 0f);
     }
 

@@ -69,6 +69,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollideShapeSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_CollideShapeSettings
+ * Method:    getInternalEdgeRemovalVertexToleranceSq
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeSettings_getInternalEdgeRemovalVertexToleranceSq
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CollideShapeSettings * const pSettings
+            = reinterpret_cast<CollideShapeSettings *> (settingsVa);
+    const float result = pSettings->mInternalEdgeRemovalVertexToleranceSq;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CollideShapeSettings
  * Method:    getMaxSeparationDistance
  * Signature: (J)F
  */

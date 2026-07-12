@@ -39,6 +39,13 @@ public interface ConstCollideShapeSettings extends ConstCollideSettingsBase {
     EBackFaceMode getBackFaceMode();
 
     /**
+     * Return the tolerance used by to determine whether two edges are shared.
+     *
+     * @return the tolerance (in meters^2)
+     */
+    float getInternalEdgeRemovalVertexToleranceSq();
+
+    /**
      * Return the maximum separation for which contacts will be reported. The
      * settings are unaffected.
      *
