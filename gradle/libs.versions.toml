@@ -17,5 +17,5 @@ oshi-core = "com.github.oshi:oshi-core:7.4.0"
 
 [plugins]
 
-android-library = { id = "com.android.library", version = "8.13.2" }
+android-library = { id = "com.android.library", version = "9.2.1" }
 download = { id = "de.undercouch.download", version = "5.7.0" }
