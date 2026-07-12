@@ -376,14 +376,14 @@ jobs:
           ./gradlew -Ptarget=Linux_LoongArch64 assemble \
             --console=plain
 
-  Java25-Linux64:
+  Java26-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
-          java-version: 25
+          java-version: 26
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
       - name: gradlew -Pbt=Release -Pflavor=Sp -Ptarget=Linux64 build install
