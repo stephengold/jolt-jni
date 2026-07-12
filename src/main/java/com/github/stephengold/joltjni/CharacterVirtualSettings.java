@@ -128,20 +128,6 @@ public class CharacterVirtualSettings
      *
      * @param cosine the cosine of the maximum angle, or -1 to disable hit
      * reduction (default=0.999)
-     * @deprecated provide a {@code float} argument
-     */
-    @Deprecated
-    public void setHitReductionCosMaxAngle(int cosine) {
-        long settingsVa = va();
-        setHitReductionCosMaxAngle(settingsVa, cosine);
-    }
-
-    /**
-     * Alter the maximum angle for merging during hit reduction. (native
-     * attribute: mHitReductionCosMaxAngle)
-     *
-     * @param cosine the cosine of the maximum angle, or -1 to disable hit
-     * reduction (default=0.999)
      */
     public void setHitReductionCosMaxAngle(float cosine) {
         long settingsVa = va();
