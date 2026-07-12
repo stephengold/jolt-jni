@@ -101,6 +101,13 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
     boolean getDeterministicSimulation();
 
     /**
+     * Return the tolerance used by to determine whether two edges are shared.
+     *
+     * @return the tolerance (in meters^2)
+     */
+    float getInternalEdgeRemovalVertexToleranceSq();
+
+    /**
      * Return the amount of penetration tolerated by a {@code LinearCast} cast.
      * The settings are unaffected.
      *

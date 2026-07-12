@@ -163,6 +163,8 @@ public class Test004 {
         Assert.assertEquals(1e-4f,
                 settings.getContactPointPreserveLambdaMaxDistSq(), 0f);
         Assert.assertTrue(settings.getDeterministicSimulation());
+        Assert.assertEquals(1e-8f,
+                settings.getInternalEdgeRemovalVertexToleranceSq(), 0f);
         Assert.assertEquals(0.25f, settings.getLinearCastMaxPenetration(), 0f);
         Assert.assertEquals(0.75f, settings.getLinearCastThreshold(), 0f);
         Assert.assertEquals(1e-3f, settings.getManifoldTolerance(), 0f);

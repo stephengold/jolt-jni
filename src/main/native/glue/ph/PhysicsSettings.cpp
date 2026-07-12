@@ -189,6 +189,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_g
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getInternalEdgeRemovalVertexToleranceSq
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getInternalEdgeRemovalVertexToleranceSq
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    const float result = pSettings->mInternalEdgeRemovalVertexToleranceSq;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    getLinearCastMaxPenetration
  * Signature: (J)F
  */
