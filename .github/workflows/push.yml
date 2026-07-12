@@ -5,14 +5,14 @@ name: CI at GitHub
 on: [push]
 
 jobs:
-  Java11-Linux64:
+  Java17-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
-          java-version: 11
+          java-version: 17
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
       - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 -Ptool=gcc -x checkstyleMain -x checkstyleTest build install
