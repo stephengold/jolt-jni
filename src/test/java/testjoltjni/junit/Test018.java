@@ -206,12 +206,15 @@ public class Test018 {
     private static void testCollideShapeSettingsSetters(
             CollideShapeSettings settings) {
         settings.setBackFaceMode(EBackFaceMode.CollideWithBackFaces);
+        settings.setInternalEdgeRemovalVertexToleranceSq(2e-3f);
         settings.setMaxSeparationDistance(0.2f);
 
         testCollideSettingsBaseSetters(settings);
 
         Assert.assertEquals(EBackFaceMode.CollideWithBackFaces,
                 settings.getBackFaceMode());
+        Assert.assertEquals(2e-3f,
+                settings.getInternalEdgeRemovalVertexToleranceSq(), 0f);
         Assert.assertEquals(0.2f, settings.getMaxSeparationDistance(), 0f);
     }
 

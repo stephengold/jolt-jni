@@ -80,6 +80,17 @@ public class CollideShapeSettings
     }
 
     /**
+     * Alter the tolerance used by to determine whether two edges are shared.
+     * (native attribute: mInternalEdgeRemovalVertexToleranceSq)
+     *
+     * @param toleranceSq the desired tolerance (in meters^2, default=1e-8)
+     */
+    public void setInternalEdgeRemovalVertexToleranceSq(float toleranceSq) {
+        long settingsVa = va();
+        setInternalEdgeRemovalVertexToleranceSq(settingsVa, toleranceSq);
+    }
+
+    /**
      * Alter the maximum separation for which contacts will be reported. (native
      * attribute: mMaxSeparationDistance)
      *
@@ -151,6 +162,9 @@ public class CollideShapeSettings
     native private static float getMaxSeparationDistance(long settingsVa);
 
     native private static void setBackFaceMode(long settingsVa, int ordinal);
+
+    native private static void setInternalEdgeRemovalVertexToleranceSq(
+            long settingsVa, float toleranceSq);
 
     native private static void setMaxSeparationDistance(
             long settingsVa, float distance);
