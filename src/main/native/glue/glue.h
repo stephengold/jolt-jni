@@ -37,6 +37,7 @@ extern bool gTypesAreRegistered;
  */
 extern void CollisionGroup_verifyGlobalConstants();
 extern void HairSettings_verifyGlobalConstants();
+extern void HeightFieldShape_verifyGlobalConstants();
 extern void PhysicsSettings_verifyGlobalConstants();
 extern void PlaneShapeSettings_verifyGlobalConstants();
 extern void Std_verifyGlobalConstants();

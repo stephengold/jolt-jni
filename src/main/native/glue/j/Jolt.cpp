@@ -529,6 +529,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
 #ifdef JPH_DEBUG
     CollisionGroup_verifyGlobalConstants();
     HairSettings_verifyGlobalConstants();
+    HeightFieldShape_verifyGlobalConstants();
     PhysicsSettings_verifyGlobalConstants();
     PlaneShapeSettings_verifyGlobalConstants();
     Std_verifyGlobalConstants();

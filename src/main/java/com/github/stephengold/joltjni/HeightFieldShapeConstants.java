@@ -74,4 +74,8 @@ final public class HeightFieldShapeConstants {
      */
     private HeightFieldShapeConstants() {
     }
+    // *************************************************************************
+    // native private methods
+
+    native private static void unused(); // force JDK to create JNI header file
 }

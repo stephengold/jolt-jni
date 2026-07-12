@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,21 @@ SOFTWARE.
 #include "glue/glue.h"
 
 #include "auto/com_github_stephengold_joltjni_HeightFieldShape.h"
+#include "auto/com_github_stephengold_joltjni_HeightFieldShapeConstants.h"
 
 using namespace JPH;
+
+// Verify global constants defined in HeightFieldShapeConstants.java:
+void HeightFieldShape_verifyGlobalConstants() {
+    JPH_ASSERT(com_github_stephengold_joltjni_HeightFieldShapeConstants_cNoCollisionValue == HeightFieldShapeConstants::cNoCollisionValue);
+    JPH_ASSERT(com_github_stephengold_joltjni_HeightFieldShapeConstants_cStackSize == HeightFieldShapeConstants::cStackSize);
+    JPH_ASSERT(com_github_stephengold_joltjni_HeightFieldShapeConstants_cNumBitsXY == HeightFieldShapeConstants::cNumBitsXY);
+    JPH_ASSERT(com_github_stephengold_joltjni_HeightFieldShapeConstants_cMaskBitsXY == HeightFieldShapeConstants::cMaskBitsXY);
+    JPH_ASSERT(com_github_stephengold_joltjni_HeightFieldShapeConstants_cLevelShift == HeightFieldShapeConstants::cLevelShift);
+    JPH_ASSERT(com_github_stephengold_joltjni_HeightFieldShapeConstants_cNoCollisionValue16 == HeightFieldShapeConstants::cNoCollisionValue16);
+    JPH_ASSERT(com_github_stephengold_joltjni_HeightFieldShapeConstants_cMaxHeightValue16 == HeightFieldShapeConstants::cMaxHeightValue16);
+    JPH_ASSERT(com_github_stephengold_joltjni_HeightFieldShapeConstants_cMaxBitsPerSample == HeightFieldShapeConstants::cMaxBitsPerSample);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShape
