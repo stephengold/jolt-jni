@@ -39,7 +39,7 @@ final public class HeightFieldShapeConstants {
      */
     final public static float cNoCollisionValue = Std.FLT_MAX;
     /**
-     * stack size for WalkHeightField
+     * stack size for {@code HeightFieldShape::WalkHeightField()}
      */
     final public static int cStackSize = 128;
     /**
