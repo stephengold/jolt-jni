@@ -494,9 +494,6 @@ final public class SmokeTestAll {
         smokeTest(new LoadSaveRigTest());
 
         for (String animation : PoweredRigTest.sAnimations) {
-            if (animation.equals("dead_pose3")) {
-                continue; // issue #2059
-            }
             String settings = "animation=" + MyString.quote(animation);
 
             PoweredRigTest test = new PoweredRigTest();
