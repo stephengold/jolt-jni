@@ -276,6 +276,15 @@ model {
                     cppCompiler.args '-std=c++17'; objcppCompiler.args '-std=c++17'
                     cppCompiler.args '-Werror=return-type'; objcppCompiler.args '-Werror=return-type'
 
+                    // Override target architecture on Linux systems:
+                    if (pName == 'Linux64') {
+                        cppCompiler.args '-march=x86-64'; objcppCompiler.args '-march=x86-64'
+                    } else if (pName == 'Linux64_fma') {
+                        cppCompiler.args '-march=haswell'; objcppCompiler.args '-march=haswell'
+                    } else if (pName == 'Linux_ARM64') {
+                        cppCompiler.args '-march=armv8-a+fp16'; objcppCompiler.args '-march=armv8-a+fp16'
+                    }
+
                     if (use_fma) {
                         cppCompiler.args '-msse4.1'
                         cppCompiler.args '-msse4.2'
