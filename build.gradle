@@ -202,6 +202,8 @@ model {
                 if (use_avx2 || use_fma) {
                     cppCompiler.define 'JPH_USE_AVX2'
                     // implies use of AVX, BMI/TZCNT, F16C, LZCNT, SSE4.1, and SSE4.2
+                } else {
+                    cppCompiler.define 'JPH_CROSS_PLATFORM_DETERMINISTIC'
                 }
                 if (use_fma) {
                     cppCompiler.define 'JPH_USE_FMADD'
