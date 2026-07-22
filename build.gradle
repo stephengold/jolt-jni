@@ -65,7 +65,7 @@ model {
 
     platforms {
         // To build native libraries for Android, use "android.gradle" instead.
-        Linux64 {
+        Linux64 { // Linux on a generic 64-bit x86 architecture with SSE2
             architecture 'x86-64'
             operatingSystem 'linux'
         }
@@ -338,6 +338,7 @@ model {
                     //   osx/aarch64/com/github/stephengold/libjoltjni.dylib
                     //   windows/x86-64/com/github/stephengold/joltjni.dll
                     //   windows/x86-64-avx2/com/github/stephengold/joltjni.dll
+                    //   windows/aarch64/com/github/stephengold/libjoltjni.dll
 
                     String subdirectory = targetPlatform.architecture.name
                     if (use_fma) {

@@ -534,5 +534,3 @@ $(N)/Jolt/TriangleSplitter/TriangleSplitterMean.cpp \
 $(N)/TestFramework/External/Perlin.cpp
 
 include $(BUILD_SHARED_LIBRARY)
-
-###

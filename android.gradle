@@ -10,7 +10,8 @@ plugins {
 }
 
 // $artifact, $jjVersion, and $useVK are set in
-// the gradle.properties file or by -P options on the Gradle command line.
+// the gradle.properties file
+// or by -P options on the Gradle command line.
 
 ext {
     baseName = "${artifact}-${jjVersion}" // for artifacts
