@@ -3,7 +3,7 @@
 [The Jolt-JNI Project][project] provides
 [JVM] bindings for [Jolt Physics][jolt]
 and [Khaled Mamou's V-HACD Library][vhacd],
-to facilitate physics simulation in JVM languages such as [Java] and [Kotlin].
+to facilitate 3-D physics simulation in JVM languages such as [Java] and [Kotlin].
 
 Source code (in Java and C++) is provided under
 [an MIT license][license].
@@ -140,7 +140,7 @@ correct the situation: sgold@sonic.net
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
 [gitkraken]: https://www.gitkraken.com "GitKraken client"
-[gradle]: https://gradle.org "Gradle"
+[gradle]: https://gradle.org "Gradle Project"
 [idea]: https://www.jetbrains.com/idea/ "IntelliJ IDEA"
 [java]: https://en.wikipedia.org/wiki/Java_(programming_language) "Java programming language"
 [jolt]: https://jrouwe.github.io/JoltPhysics "Jolt Physics"
@@ -149,10 +149,10 @@ correct the situation: sgold@sonic.net
 [license]: https://github.com/stephengold/jolt-jni/blob/master/LICENSE "Jolt-JNI license"
 [llvm]: https://www.llvm.org "LLVM Compiler"
 [macstadium]: https://www.macstadium.com/ "MacStadium"
-[markdown]: https://daringfireball.net/projects/markdown "Markdown"
+[markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [meld]: https://meldmerge.org "Meld merge tool"
-[mint]: https://linuxmint.com "Linux Mint"
-[netbeans]: https://netbeans.org "NetBeans"
+[mint]: https://linuxmint.com "Linux Mint Project"
+[netbeans]: https://netbeans.org "NetBeans Project"
 [project]: https://github.com/stephengold/jolt-jni "Jolt-JNI project"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [studio]: https://developer.android.com/studio "Android Studio IDE"
