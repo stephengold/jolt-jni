@@ -284,7 +284,7 @@ model {
                     } else if (pName == 'Linux64_fma') {
                         cppCompiler.args '-march=haswell'; objcppCompiler.args '-march=haswell'
                     } else if (pName == 'Linux_ARM64') {
-                        cppCompiler.args '-march=armv8-a+fp16'; objcppCompiler.args '-march=armv8-a+fp16'
+                        cppCompiler.args '-march=armv8-a'; objcppCompiler.args '-march=armv8-a'
                     }
 
                     if (use_fma) {
