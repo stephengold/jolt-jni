@@ -215,6 +215,20 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsCo
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    implementsCrossPlatformDeterminism
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsCrossPlatformDeterminism
+  (JNIEnv *, jclass) {
+#ifdef JPH_CROSS_PLATFORM_DETERMINISTIC
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    implementsDebugRendering
  * Signature: ()Z
  */

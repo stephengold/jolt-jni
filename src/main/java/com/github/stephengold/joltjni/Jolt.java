@@ -205,6 +205,14 @@ final public class Jolt {
     native public static boolean implementsComputeVk();
 
     /**
+     * Test whether the native library implements cross-platform determinism.
+     * (native macro: JPH_CROSS_PLATFORM_DETERMINISTIC)
+     *
+     * @return {@code true} if implemented, otherwise {@code false}
+     */
+    native public static boolean implementsCrossPlatformDeterminism();
+
+    /**
      * Test whether the native library implements debug rendering. (native
      * macro: JPH_DEBUG_RENDERER)
      *
