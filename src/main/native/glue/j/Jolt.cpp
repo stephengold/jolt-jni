@@ -351,9 +351,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installCerrTrace
 }
 
 #ifdef JPH_ENABLE_ASSERTS
-
-// Callback for asserts that print to std::cout and then crash the JVM with an
-// EXCEPTION_ACCESS_VIOLATION or SIGILL
+// Assert callback that writes to cout
+// and then crashes the JVM with an EXCEPTION_ACCESS_VIOLATION or SIGILL.
+// Intended for testing only!
 static bool CrashAssertFailed(const char *inExpression, const char *inMessage,
         const char *inFile, uint inLine) {
     // Print to the standard output:
@@ -363,7 +363,6 @@ static bool CrashAssertFailed(const char *inExpression, const char *inMessage,
     bool result = *(volatile bool *)0;
     return result;
 };
-
 #endif // JPH_ENABLE_ASSERTS
 
 /*
@@ -382,8 +381,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installCrashAsse
 }
 
 #ifdef JPH_ENABLE_ASSERTS
-
-// Callback for asserts that print to std::cout and then request a breakpoint:
+// Assert callback that writes to cout and then triggers a native breakpoint:
 static bool DefaultAssertFailed(const char *inExpression, const char *inMessage,
         const char *inFile, uint inLine) {
     // Print to the standard output:
@@ -393,7 +391,6 @@ static bool DefaultAssertFailed(const char *inExpression, const char *inMessage,
     // Request a breakpoint:
     return true;
 };
-
 #endif // JPH_ENABLE_ASSERTS
 
 /*
@@ -433,13 +430,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installDefaultTr
 }
 
 #ifdef JPH_ENABLE_ASSERTS
-
-// Callback for asserts that are silently ignored:
+// Assert callback that silently ignores assertions:
 static bool IgnoreAssertFailed(const char *inExpression, const char *inMessage,
         const char *inFile, uint inLine) {
     return false;
 };
-
 #endif // JPH_ENABLE_ASSERTS
 
 /*
