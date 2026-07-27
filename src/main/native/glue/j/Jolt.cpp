@@ -503,6 +503,32 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installJavaTrace
     Trace = JavaTrace;
 }
 
+#ifdef JPH_ENABLE_ASSERTS
+// Assert callback that passes the assertion parameters to JPH:Trace()
+// but doesn't interrupt execution:
+static bool TraceAssertFailed(const char *inExpression, const char *inMessage,
+        const char *inFile, uint inLine) {
+    Trace("%s:%u: (%s) %s",
+            inFile, inLine, inExpression, inMessage!=nullptr ? inMessage : "");
+    return false;
+};
+#endif // JPH_ENABLE_ASSERTS
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    installTraceAssertCallback
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installTraceAssertCallback
+  (JNIEnv *, jclass) {
+#ifdef JPH_ENABLE_ASSERTS
+    AssertFailed = TraceAssertFailed;
+#elif defined(JPH_DEBUG)
+    std::cout << "Jolt.installTraceAssertCallback() has no effect unless JPH_ENABLE_ASSERTS is defined."
+            << std::endl;
+#endif
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    isDoublePrecision

@@ -283,6 +283,12 @@ final public class Jolt {
     native public static void installJavaTraceCallback(PrintStream stream);
 
     /**
+     * Install an alternative assert callback that passes the assertion
+     * parameters to {@code JPH:Trace()} but doesn't interrupt execution.
+     */
+    native public static void installTraceAssertCallback();
+
+    /**
      * Test whether the native library uses double-precision location vectors.
      * (native macro: JPH_DOUBLE_PRECISION)
      *
