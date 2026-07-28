@@ -232,10 +232,10 @@ jobs:
       - if: failure()
         run: cat hs_err_pid*.log
         shell: bash
-      - name: gradlew -Partifact=jolt-jni-Windows64 -Ptarget=Windows64 -PuseVK=set -PwithJavadocJar=set -PwithSourcesJar=set clean release
+      - name: gradlew -Partifact=jolt-jni-Windows64 -Ptarget=Windows64 -PuseVK=set clean release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          ./gradlew -Partifact=jolt-jni-Windows64 -Ptarget=Windows64 -PuseVK=set -PwithJavadocJar=set -PwithSourcesJar=set clean release \
+          ./gradlew -Partifact=jolt-jni-Windows64 -Ptarget=Windows64 -PuseVK=set clean release \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \

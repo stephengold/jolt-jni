@@ -14,8 +14,6 @@
 + Updated the Gradle build tool to v9.6.1 .
   This affects some of the build procedures.
   Also, JDK 17 or higher is now required to build.
-+ To reduce redundancy, javadoc and source JARs will be published
-  only for "jolt-jni-Android" and "jolt-jni-Windows64" artifacts.
 + Enabled cross-platform determinism on all platforms
   except `Linux64_fma` and `Windows64_avx2`.
 + Added support for the `Windows_ARM64` platform
