@@ -95,7 +95,7 @@ public class VehicleDifferentialSettings
      * differential. (native attribute: mEngineTorqueRatio)
      *
      * @param fraction the desired ratio (default=1)
-     * @return the fraction, for chaining TODO return void
+     * @return the fraction, for chaining
      */
     public float setEngineTorqueRatio(float fraction) {
         long settingsVa = va();
