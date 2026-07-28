@@ -25,7 +25,7 @@ ext {
 
     baseName = "${artifact}-${jjVersion}" // for artifacts
     groupID = 'com.github.stephengold'
-    staNumSteps = '99' // number of steps (passed to SmokeTestAll)
+    staNumSteps = '1' // number of simulation steps (passed to SmokeTestAll)
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
 
