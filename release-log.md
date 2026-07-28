@@ -1,5 +1,44 @@
 # Release log for the Jolt-JNI project
 
+## Version 6.0.0 released on TBD
+
++ API changes:
+  + Removed `ConstPhysicsSettings.getDeterministicSimulation()`.
+  + Removed `CharacterVirtualSettings.setHitReductionCosMaxAngle(int)`.
+  + Removed `CharacterVirtualSettingsRef.setHitReductionCosMaxAngle(int)`.
+  + Removed `PhysicsSettings.setDeterministicSimulation()`.
+
++ Bugfix:  `SIGILL` on `Linux_ARM64` platforms
+  that lack the SHA-3 CPU feature (issue #50)
+
++ Updated the Gradle build tool to v9.6.1 .
+  This affects some of the build procedures.
+  Also, JDK 17 or higher is now required to build.
++ To reduce redundancy, javadoc and source JARs will be published
+  only for "jolt-jni-Android" and "jolt-jni-Windows64" artifacts.
++ Enabled cross-platform determinism on all platforms
+  except `Linux64_fma` and `Windows64_avx2`.
++ Added support for the `Windows_ARM64` platform
+  and began publishing pre-built native libraries for it.
+
++ Added 6 public methods:
+  + `CollideShapeSettings.setInternalEdgeRemovalVertexToleranceSq()`
+  + `ConstCollideShapeSettings.getInteralEdgeRemovealVertexToleranceSq()`
+  + `ConstPhysicsSettings.getInternalEdgeRemovalVertexToleranceSq()`
+  + `Jolt.implementsCrossPlatformDeterminism()`
+  + `Jolt.installTraceAssertCallback()`
+  + `PhysicsSettings.setInternalEdgeRemovalVertexToleranceSq()`
+
++ Added 3 public constants:
+  + `HeightfieldShapeConstants.cMaxBitsPerSample`
+  + `PhysicsSettings.cCapsuleProjectionSlop`
+  + `PhysicsSettings.cDefaultInternalEdgeRemovalVertexToleranceSq`
+
++ Updated Jolt-Physics sources/assets to 16960dd (sg260728).
++ Began using the Vulkan v1.4.357.0 headers when building native libraries.
++ Updated the OSHI library to v7.4.2 .
+
+
 ## Version 5.2.0 released on 6 July 2026
 
 + API changes (oops! my bad):
