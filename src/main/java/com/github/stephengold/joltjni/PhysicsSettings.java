@@ -220,18 +220,6 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter whether physics simulation is deterministic. (native member:
-     * mDeterministicSimulation)
-     *
-     * @param setting {@code true} to be deterministic, {@code false} to relax
-     * this policy (default=true)
-     */
-    public void setDeterministicSimulation(boolean setting) {
-        long settingsVa = va();
-        setDeterministicSimulation(settingsVa, setting);
-    }
-
-    /**
      * Alter the tolerance used by to determine whether two edges are shared.
      * (native attribute: mInternalEdgeRemovalVertexToleranceSq)
      *
@@ -585,20 +573,6 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether physics simulation is deterministic. The settings are
-     * unaffected. (native member: mDeterministicSimulation)
-     *
-     * @return {@code true} if it is deterministic, otherwise {@code false}
-     */
-    @Override
-    public boolean getDeterministicSimulation() {
-        long settingsVa = va();
-        boolean result = getDeterministicSimulation(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Return the tolerance used by to determine whether two edges are shared.
      * (native attribute: mInternalEdgeRemovalVertexToleranceSq)
      *
@@ -901,8 +875,6 @@ public class PhysicsSettings
     native private static float getContactPointPreserveLambdaMaxDistSq(
             long settingsVa);
 
-    native private static boolean getDeterministicSimulation(long settingsVa);
-
     native private static float getInternalEdgeRemovalVertexToleranceSq(
             long settingsVa);
 
@@ -964,9 +936,6 @@ public class PhysicsSettings
 
     native private static void setContactPointPreserveLambdaMaxDistSq(
             long settingsVa, float squaredDistance);
-
-    native private static void setDeterministicSimulation(
-            long settingsVa, boolean setting);
 
     native private static void setInternalEdgeRemovalVertexToleranceSq(
             long settingsVa, float toleranceSq);

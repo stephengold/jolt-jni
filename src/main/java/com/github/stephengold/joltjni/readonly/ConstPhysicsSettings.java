@@ -93,14 +93,6 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
     float getContactPointPreserveLambdaMaxDistSq();
 
     /**
-     * Test whether physics simulation is deterministic. The settings are
-     * unaffected.
-     *
-     * @return {@code true} if it is deterministic, otherwise {@code false}
-     */
-    boolean getDeterministicSimulation();
-
-    /**
      * Return the tolerance used by to determine whether two edges are shared.
      *
      * @return the tolerance (in meters^2)

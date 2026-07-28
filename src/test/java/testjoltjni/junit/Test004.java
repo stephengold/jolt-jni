@@ -162,7 +162,6 @@ public class Test004 {
                 settings.getContactNormalCosMaxDeltaRotation(), 1e-8f);
         Assert.assertEquals(1e-4f,
                 settings.getContactPointPreserveLambdaMaxDistSq(), 0f);
-        Assert.assertTrue(settings.getDeterministicSimulation());
         Assert.assertEquals(1e-8f,
                 settings.getInternalEdgeRemovalVertexToleranceSq(), 0f);
         Assert.assertEquals(0.25f, settings.getLinearCastMaxPenetration(), 0f);
@@ -284,9 +283,6 @@ public class Test004 {
         settings.setContactPointPreserveLambdaMaxDistSq(1f);
         Assert.assertEquals(
                 1f, settings.getContactPointPreserveLambdaMaxDistSq(), 0f);
-
-        settings.setDeterministicSimulation(false);
-        Assert.assertFalse(settings.getDeterministicSimulation());
 
         settings.setLinearCastMaxPenetration(1f);
         Assert.assertEquals(1f, settings.getLinearCastMaxPenetration(), 0f);

@@ -176,19 +176,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_get
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
- * Method:    getDeterministicSimulation
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getDeterministicSimulation
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PhysicsSettings * const pSettings
-            = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    const bool result = pSettings->mDeterministicSimulation;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    getInternalEdgeRemovalVertexToleranceSq
  * Signature: (J)F
  */
@@ -515,18 +502,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setCo
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
     pSettings->mContactPointPreserveLambdaMaxDistSq = squaredDistance;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSettings
- * Method:    setDeterministicSimulation
- * Signature: (JZ)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setDeterministicSimulation
-  (JNIEnv *, jclass, jlong settingsVa, jboolean setting) {
-    PhysicsSettings * const pSettings
-            = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mDeterministicSimulation = setting;
 }
 
 /*
