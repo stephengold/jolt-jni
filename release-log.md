@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 6.0.0 released on TBD
+## Version 6.0.0 released on 28 July 2026
 
 + API changes:
   + Removed `ConstPhysicsSettings.getDeterministicSimulation()`.
