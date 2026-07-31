@@ -303,10 +303,10 @@ jobs:
         with:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.357.0
-      - name: gradlew -Ptarget=Windows_ARM64 -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
+      - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows_ARM64 -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Windows_ARM64 -PuseVK=setx checkstyleMain -x checkstyleTest runSmokeTestAll build install \
+          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows_ARM64 -PuseVK=setx checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain
         shell: bash
       - if: failure()
