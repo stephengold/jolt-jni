@@ -30,6 +30,7 @@ import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.BroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.CollisionGroup;
+import com.github.stephengold.joltjni.ConnectedConstraint;
 import com.github.stephengold.joltjni.ContactListenerList;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.FilteredContactListener;
@@ -43,6 +44,7 @@ import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.MotionProperties;
 import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
+import com.github.stephengold.joltjni.PulleyConstraintSettings;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.SkinWeight;
@@ -63,6 +65,7 @@ import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstConnectedConstraint;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
 import com.github.stephengold.joltjni.readonly.ConstLinearCurve;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
@@ -121,6 +124,7 @@ public class Test003 {
         doAaBoxCast();
         doBodyCreationSettings();
         doBodyIdArray();
+        doConnectedConstraint();
         doContactListenerList();
         doContactSettings();
         doFilteredContactListener();
@@ -413,6 +417,23 @@ public class Test003 {
             TestUtils.testClose(bodyIdArray);
         }
 
+        System.gc();
+    }
+
+    /**
+     * Test the {@code ConnectedConstraint} class.
+     */
+    private static void doConnectedConstraint() {
+        ConnectedConstraint constraint = new ConnectedConstraint();
+        testConnectedConstraintDefaults(constraint);
+
+        ConnectedConstraint copy = new ConnectedConstraint(constraint);
+        testConnectedConstraintSetters(constraint);
+        testConnectedConstraintDefaults(copy);
+        constraint.set(copy);
+        testConnectedConstraintDefaults(constraint);
+
+        TestUtils.testClose(copy, constraint);
         System.gc();
     }
 
@@ -744,6 +765,42 @@ public class Test003 {
         Assert.assertEquals(20L, bcs.getUserData());
 
         TestUtils.testClose(group, filter);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code ConnectedConstraint}.
+     *
+     * @param constraint the constraint to test (not {@code null}, unaffected)
+     */
+    private static void testConnectedConstraintDefaults(
+            ConstConnectedConstraint constraint) {
+        Assert.assertTrue(constraint.hasAssignedNativeObject());
+        Assert.assertTrue(constraint.ownsNativeObject());
+
+        Assert.assertEquals(0, constraint.getBody1());
+        Assert.assertEquals(0, constraint.getBody2());
+        Assert.assertNull(constraint.getSettings());
+    }
+
+    /**
+     * Test the setters of the specified {@code ConnectedConstraint}.
+     *
+     * @param constraint the settings to test (not {@code null}, modified)
+     */
+    private static void testConnectedConstraintSetters(
+            ConnectedConstraint constraint) {
+        constraint.setBody1(3);
+        constraint.setBody2(4);
+        PulleyConstraintSettings settings = new PulleyConstraintSettings();
+        constraint.setSettings(settings);
+
+        // Verify the new parameter values:
+        Assert.assertEquals(3, constraint.getBody1());
+        Assert.assertEquals(4, constraint.getBody2());
+        Assert.assertEquals(settings, constraint.getSettings());
+
+        TestUtils.testClose(settings);
     }
 
     /**
