@@ -159,6 +159,60 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
+     * Access the constraints as a Java array.
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    public ConnectedConstraint[] getConstraints() {
+        long sceneVa = va();
+        int numConstraints = getNumConstraints(sceneVa);
+        ConnectedConstraint[] result = new ConnectedConstraint[numConstraints];
+        for (int constraintI = 0; constraintI < numConstraints; ++constraintI) {
+            long settingsVa = getConstraint(sceneVa, constraintI);
+            result[constraintI] = new ConnectedConstraint(this, settingsVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Count the bodies in the scene.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumBodies() {
+        long sceneVa = va();
+        int result = getNumBodies(sceneVa);
+
+        return result;
+    }
+
+    /**
+     * Count the constraints in the scene.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumConstraints() {
+        long sceneVa = va();
+        int result = getNumConstraints(sceneVa);
+
+        return result;
+    }
+
+    /**
+     * Count the soft bodies in the scene.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumSoftBodies() {
+        long sceneVa = va();
+        int result = getNumSoftBodies(sceneVa);
+
+        return result;
+    }
+
+    /**
      * Access the soft-body creation settings as a Java array.
      *
      * @return a new array of new JVM objects with pre-existing native objects
@@ -263,7 +317,11 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
 
     native static long getBody(long sceneVa, int bodyIndex);
 
+    native static long getConstraint(long sceneVa, int constraintI);
+
     native static int getNumBodies(long sceneVa);
+
+    native static int getNumConstraints(long sceneVa);
 
     native static int getNumSoftBodies(long sceneVa);
 

@@ -145,6 +145,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getBody
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    getConstraint
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getConstraint
+  (JNIEnv *, jclass, jlong sceneVa, jint constraintIndex) {
+    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
+    PhysicsScene::ConnectedConstraint * const pResult
+            = &pScene->GetConstraints()[constraintIndex];
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
  * Method:    getNumBodies
  * Signature: (J)I
  */
@@ -153,6 +166,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getNumBo
     const PhysicsScene * const pScene
             = reinterpret_cast<PhysicsScene *> (sceneVa);
     const size_t result = pScene->GetNumBodies();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    getNumConstraints
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getNumConstraints
+  (JNIEnv *, jclass, jlong sceneVa) {
+    const PhysicsScene * const pScene
+            = reinterpret_cast<PhysicsScene *> (sceneVa);
+    const size_t result = pScene->GetNumConstraints();
     return result;
 }
 
