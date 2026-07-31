@@ -41,7 +41,7 @@ final public class HairSettings
         extends JoltPhysicsObject
         implements ConstHairSettings, RefTarget {
     // *************************************************************************
-    // constants
+    // constants - value must match Jolt/Physics/Hair/HairSettings.h
 
     /**
      * default simulation rate for hair (in iterations per second)

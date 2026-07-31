@@ -33,7 +33,7 @@ public class CollisionGroup
         extends JoltPhysicsObject
         implements ConstCollisionGroup {
     // *************************************************************************
-    // constants
+    // constants - values must match Jolt/Physics/Collision/CollisionGroup.h
 
     /**
      * invalid main group
