@@ -39,6 +39,11 @@ IMPLEMENT_REF(PhysicsScene,
   Java_com_github_stephengold_joltjni_PhysicsSceneRef_getPtr,
   Java_com_github_stephengold_joltjni_PhysicsSceneRef_toRefC)
 
+// Verify global constants defined in PhysicsScene.java:
+void PhysicsScene_verifyGlobalConstants() {
+    JPH_ASSERT((int)com_github_stephengold_joltjni_PhysicsScene_cFixedToWorld == PhysicsScene::cFixedToWorld);
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene
  * Method:    addBody

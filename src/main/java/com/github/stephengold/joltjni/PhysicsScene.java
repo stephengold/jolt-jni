@@ -33,6 +33,13 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     // *************************************************************************
+    // constants - values must match Jolt/Physics/PhysicsScene.h
+
+    /**
+     * body index that denotes attachment to the fixed world
+     */
+    final public static int cFixedToWorld = 0xFFFF_FFFF;
+    // *************************************************************************
     // constructors
 
     /**
