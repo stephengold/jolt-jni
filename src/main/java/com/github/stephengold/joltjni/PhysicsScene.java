@@ -256,13 +256,13 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
 
     native static long getBody(long sceneVa, int bodyIndex);
 
-    native static long getSoftBody(long sceneVa, int sbIndex);
-
     native static int getNumBodies(long sceneVa);
 
     native static int getNumSoftBodies(long sceneVa);
 
     native private static int getRefCount(long sceneVa);
+
+    native static long getSoftBody(long sceneVa, int sbIndex);
 
     native static void saveBinaryState(long sceneVa, long streamVa,
             boolean saveShapes, boolean saveGroupFilter);

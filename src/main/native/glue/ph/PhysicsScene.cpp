@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -140,19 +140,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getBody
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene
- * Method:    getSoftBody
- * Signature: (JI)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getSoftBody
-  (JNIEnv *, jclass, jlong sceneVa, jint sbIndex) {
-    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
-    SoftBodyCreationSettings * const pResult
-            = &pScene->GetSoftBodies()[sbIndex];
-    return reinterpret_cast<jlong> (pResult);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsScene
  * Method:    getNumBodies
  * Signature: (J)I
  */
@@ -188,6 +175,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getRefCo
             = reinterpret_cast<PhysicsScene *> (sceneVa);
     const uint32 result = pScene->GetRefCount();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    getSoftBody
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getSoftBody
+  (JNIEnv *, jclass, jlong sceneVa, jint sbIndex) {
+    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
+    SoftBodyCreationSettings * const pResult
+            = &pScene->GetSoftBodies()[sbIndex];
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
