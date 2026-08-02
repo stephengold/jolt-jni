@@ -177,7 +177,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Count the bodies in the scene.
+     * Count the bodies in the scene. The scene is unaffected.
      *
      * @return the count (&ge;0)
      */
@@ -189,7 +189,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Count the constraints in the scene.
+     * Count the constraints in the scene. The scene is unaffected.
      *
      * @return the count (&ge;0)
      */
@@ -201,7 +201,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Count the soft bodies in the scene.
+     * Count the soft bodies in the scene. The scene is unaffected.
      *
      * @return the count (&ge;0)
      */
