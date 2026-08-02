@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsScene;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsSystem;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.template.RefTarget;
@@ -31,7 +32,9 @@ import com.github.stephengold.joltjni.template.RefTarget;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
+public class PhysicsScene
+        extends JoltPhysicsObject
+        implements ConstPhysicsScene, RefTarget {
     // *************************************************************************
     // constants - values must match Jolt/Physics/PhysicsScene.h
 
@@ -141,11 +144,28 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
+     * Attempt to de-serialize a saved scene from the specified stream.
+     *
+     * @param stream the stream to read (not {@code null})
+     * @return a new object
+     */
+    public static PhysicsSceneResult sRestoreFromBinaryState(StreamIn stream) {
+        long streamVa = stream.va();
+        long resultVa = sRestoreFromBinaryState(streamVa);
+        PhysicsSceneResult result = new PhysicsSceneResult(resultVa, true);
+
+        return result;
+    }
+    // *************************************************************************
+    // ConstPhysicsScene methods
+
+    /**
      * Access the body-creation settings as a Java array.
      *
      * @return a new array of new JVM objects with the pre-existing native
      * objects assigned
      */
+    @Override
     public BodyCreationSettings[] getBodies() {
         long sceneVa = va();
         int numBodies = getNumBodies(sceneVa);
@@ -164,6 +184,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      * @return a new array of new JVM objects with the pre-existing native
      * objects assigned
      */
+    @Override
     public ConnectedConstraint[] getConstraints() {
         long sceneVa = va();
         int numConstraints = getNumConstraints(sceneVa);
@@ -181,6 +202,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      *
      * @return the count (&ge;0)
      */
+    @Override
     public int getNumBodies() {
         long sceneVa = va();
         int result = getNumBodies(sceneVa);
@@ -193,6 +215,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      *
      * @return the count (&ge;0)
      */
+    @Override
     public int getNumConstraints() {
         long sceneVa = va();
         int result = getNumConstraints(sceneVa);
@@ -205,6 +228,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      *
      * @return the count (&ge;0)
      */
+    @Override
     public int getNumSoftBodies() {
         long sceneVa = va();
         int result = getNumSoftBodies(sceneVa);
@@ -218,6 +242,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      * @return a new array of new JVM objects with pre-existing native objects
      * assigned
      */
+    @Override
     public SoftBodyCreationSettings[] getSoftBodies() {
         long sceneVa = va();
         int numBodies = getNumSoftBodies(sceneVa);
@@ -238,25 +263,12 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      * @param saveShapes if true, save the shapes
      * @param saveGroupFilter if true, save the group filter
      */
+    @Override
     public void saveBinaryState(
             StreamOut stream, boolean saveShapes, boolean saveGroupFilter) {
         long sceneVa = va();
         long streamVa = stream.va();
         saveBinaryState(sceneVa, streamVa, saveShapes, saveGroupFilter);
-    }
-
-    /**
-     * Attempt to de-serialize a saved scene from the specified stream.
-     *
-     * @param stream the stream to read (not {@code null})
-     * @return a new object
-     */
-    public static PhysicsSceneResult sRestoreFromBinaryState(StreamIn stream) {
-        long streamVa = stream.va();
-        long resultVa = sRestoreFromBinaryState(streamVa);
-        PhysicsSceneResult result = new PhysicsSceneResult(resultVa, true);
-
-        return result;
     }
     // *************************************************************************
     // RefTarget methods
