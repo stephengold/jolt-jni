@@ -128,6 +128,12 @@ model {
                 linker.executable = 'arm-linux-gnueabihf-g++-11'
             }
         }
+        gcc11Arm64(Gcc) { // cross-compile on Linux
+            target('Linux_ARM64') {
+                cppCompiler.executable = 'aarch64-linux-gnu-g++-11'
+                linker.executable = 'aarch64-linux-gnu-g++-11'
+            }
+        }
         gcc13Loong(Gcc) { // cross-compile on Linux
             target('Linux_LoongArch64') {
                 cppCompiler.executable = 'loongarch64-linux-gnu-g++-13'
