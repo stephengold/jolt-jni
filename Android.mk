@@ -92,6 +92,7 @@ $(N)/glue/ch/ChbEdge.cpp \
 $(N)/glue/ch/ChbFace.cpp \
 $(N)/glue/co/ConeConstraint.cpp \
 $(N)/glue/co/ConeConstraintSettings.cpp \
+$(N)/glue/co/ConnectedConstraint.cpp \
 $(N)/glue/co/Constraint.cpp \
 $(N)/glue/co/ConstraintResult.cpp \
 $(N)/glue/co/Constraints.cpp \
