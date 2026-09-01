@@ -71,6 +71,8 @@
         </module>
         <module name="AnnotationUseStyle"/>
         <module name="MissingDeprecated"/>
+        <module name="MissingOverrideOnRecordAccessor"/>
+        <module name="SuppressWarningsHolder"/>
 
         <!-- Checks for blocks:                       -->
         <!-- See https://checkstyle.org/checks/blocks -->
@@ -139,6 +141,11 @@
             <property name="tokens" value="STRING_LITERAL, CHAR_LITERAL"/>
         </module>
         <module name="IllegalType"/>
+        <module name="MatchXpath">
+            <property name="id" value="singleLineCommentStartWithSpace"/>
+            <property name="query" value="//SINGLE_LINE_COMMENT[./COMMENT_CONTENT[not(starts-with(@text, ' ')) and not(starts-with(@text, '/')) and not(@text = '\n') and not(ends-with(@text, '//\n'))]]"/>
+            <message key="matchxpath.match" value="''//'' must be followed by a whitespace."/>
+        </module>
         <module name="MissingSwitchDefault"/>
         <module name="ModifiedControlVariable"/>
         <module name="MultipleVariableDeclarations"/>
