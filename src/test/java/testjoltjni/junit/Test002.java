@@ -184,7 +184,7 @@ public class Test002 {
         ConstShape capsuleShape = new CapsuleShape(0.75f, 0.5f);
         ConstShapeSettings chss = new ConvexHullShapeSettings(hullVertices);
         ShapeResult chssResult = chss.create();
-        dynamicShapes = new ShapeRefC[]{
+        dynamicShapes = new ShapeRefC[] {
             boxShape.toRefC(),
             sphereShape.toRefC(),
             capsuleShape.toRefC(),

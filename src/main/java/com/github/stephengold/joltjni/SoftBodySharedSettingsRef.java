@@ -221,7 +221,7 @@ final public class SoftBodySharedSettingsRef
     public void createConstraints(ConstVertexAttributes vertexAttributes,
             int numAttributes, EBendType bendType) {
         createConstraints(
-                new ConstVertexAttributes[]{vertexAttributes}, bendType);
+                new ConstVertexAttributes[] {vertexAttributes}, bendType);
     }
 
     /**

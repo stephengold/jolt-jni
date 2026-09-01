@@ -118,7 +118,7 @@ abstract public class JoltPhysicsObject
      * @param va the virtual address of the native object to assign (not zero)
      */
     protected JoltPhysicsObject(JoltPhysicsObject container, long va) {
-        assert va  != 0L;
+        assert va != 0L;
         virtualAddress.set(va);
 
         assert container == null || container.ownsNativeObject() : container;
@@ -184,7 +184,7 @@ abstract public class JoltPhysicsObject
      * @param va the virtual address of the native object to assign (not zero)
      */
     final protected void setVirtualAddress(long va) {
-        assert va  != 0L : "invalid virtual address";
+        assert va != 0L : "invalid virtual address";
         assert !hasAssignedNativeObject() : "native object already assigned";
         assert freeingActionRef.get() == null;
 

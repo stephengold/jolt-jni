@@ -491,7 +491,7 @@ final class Equivalent {
 
         int numRenderVertices = actual.countRenderVertices();
         Assert.assertEquals(expected.countRenderVertices(), numRenderVertices);
-        // TODO verify each vertex
+        // TODO: verify each vertex
 
         int numScalpTriangles = actual.countScalpTriangles();
         Assert.assertEquals(expected.countScalpTriangles(), numScalpTriangles);
