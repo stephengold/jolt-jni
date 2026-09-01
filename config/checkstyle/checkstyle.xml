@@ -45,7 +45,7 @@
         <property name="eachLine" value="true"/>
     </module>
 
-    <!-- Exclude all 'app' files from style checking:                                   -->
+    <!-- Exclude all 'testjoltjni/app' files from style checking:                       -->
     <!-- See https://checkstyle.org/filefilters/beforeexecutionexclusionfilefilter.html -->
     <module name="BeforeExecutionExclusionFileFilter">
         <property name="fileNamePattern" value="testjoltjni[/\\]app"/>

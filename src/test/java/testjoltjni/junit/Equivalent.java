@@ -803,7 +803,7 @@ final class Equivalent {
                 expected.getMassProperties(), actual.getMassProperties());
         Assert.assertEquals(
                 expected.getRevisionCount(), actual.getRevisionCount(), 0f);
-        //assertEquals(expected.getStats(), actual.getStats());
+        // assertEquals(expected.getStats(), actual.getStats());
         Assert.assertEquals(expected.getSubShapeIdBitsRecursive(),
                 actual.getSubShapeIdBitsRecursive());
         Assert.assertEquals(expected.getSubType(), actual.getSubType());

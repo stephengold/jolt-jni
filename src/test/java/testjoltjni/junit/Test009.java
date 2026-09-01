@@ -98,8 +98,8 @@ public class Test009 {
         TestUtils.initializeNativeLibrary();
 
         ProgressListener listener = (double overallPercent, double sp,
-                double op, String sn, String on)
-                -> Test009.this.progressPercent = overallPercent;
+                double op, String sn, String on) ->
+                Test009.this.progressPercent = overallPercent;
         Decomposer decomposer = new Decomposer().addProgressListener(listener);
 
         // Decompose the triangle mesh into 3 hulls:

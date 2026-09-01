@@ -142,7 +142,7 @@ final public class PrintTable {
             return true;
 
         } else {
-            //System.out.println(
+            // System.out.println(
             //        "Got " + responseCode + " from " + url.toString());
             return false;
         }
