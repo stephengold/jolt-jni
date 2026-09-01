@@ -561,6 +561,11 @@ tasks.register('checkstyle') {
     dependsOn 'checkstyleMain', 'checkstyleTest'
     description = 'Checks the style of all Java sourcecode.'
 }
+tasks.withType(Checkstyle).configureEach {
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 // Register publishing tasks:
 
