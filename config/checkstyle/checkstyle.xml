@@ -333,9 +333,9 @@
 
         <!-- Checks for whitespace:                       -->
         <!-- See https://checkstyle.org/checks/whitespace -->
+        <module name="ArrayBracketNoWhitespace"/>
         <module name="EmptyForInitializerPad"/>
         <module name="EmptyForIteratorPad"/>
-        <module name="ArrayBracketNoWhitespace"/>
         <module name="EmptyLineSeparator">
             <property name="allowMultipleEmptyLines" value="false"/>
             <property name="allowNoEmptyLineBetweenFields" value="true"/>
