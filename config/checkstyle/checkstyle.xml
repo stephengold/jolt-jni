@@ -168,7 +168,6 @@
             <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
             <property name="separateLineBetweenGroups" value="true"/>
             <property name="sortImportsInGroupAlphabetically" value="true"/>
-            <property name="tokens" value="IMPORT, STATIC_IMPORT, PACKAGE_DEF"/>
         </module>
         <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
@@ -210,9 +209,7 @@
         <!-- See https://checkstyle.org/checks/misc -->
         <module name="ArrayTypeStyle"/>
         <module name="AvoidEscapedUnicodeCharacters"/>
-        <module name="CommentsIndentation">
-            <property name="tokens" value="SINGLE_LINE_COMMENT, BLOCK_COMMENT_BEGIN"/>
-        </module>
+        <module name="CommentsIndentation"/>
         <module name="HexLiteralCase"/>
         <module name="Indentation">
             <property name="arrayInitIndent" value="4"/>
