@@ -56,6 +56,14 @@ public interface ConstCharacterContact extends ConstCharacterContactKey {
     Vec3 getContactNormal();
 
     /**
+     * Copy the contact normal. The contact is unaffected.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getContactNormal(Vec3 out);
+
+    /**
      * Return the contact separation. The contact is unaffected.
      *
      * @return the signed distance (in meters, &le;0&rarr;actual contact,
@@ -103,6 +111,14 @@ public interface ConstCharacterContact extends ConstCharacterContactKey {
     Vec3 getLinearVelocity();
 
     /**
+     * Copy the linear velocity of the contact. The contact is unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getLinearVelocity(Vec3 out);
+
+    /**
      * Return the motion type of the colliding object. The contact is
      * unaffected.
      *
@@ -118,11 +134,27 @@ public interface ConstCharacterContact extends ConstCharacterContactKey {
     RVec3 getPosition();
 
     /**
+     * Copy the location of the contact. The contact is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getPosition(RVec3 out);
+
+    /**
      * Copy the surface normal of the contact. The contact is unaffected.
      *
      * @return a new direction vector
      */
     Vec3 getSurfaceNormal();
+
+    /**
+     * Copy the surface normal of the contact. The contact is unaffected.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getSurfaceNormal(Vec3 out);
 
     /**
      * Return the user data of the colliding object. The contact is unaffected.

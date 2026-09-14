@@ -48,14 +48,28 @@ public class Hair extends NonCopyable {
      */
     public Hair(ConstHairSettings settings, RVec3Arg location,
             QuatArg orientation, int objectLayer) {
+        this(settings, location.xx(), location.yy(), location.zz(),
+                orientation.getX(), orientation.getY(), orientation.getZ(),
+                orientation.getW(), objectLayer);
+    }
+
+    /**
+     * Instantiate a simulation with the specified settings.
+     *
+     * @param settings the settings to use (not {@code null}, unaffected)
+     * @param xx the desired X coordinate of the location
+     * @param yy the desired Y coordinate of the location
+     * @param zz the desired Z coordinate of the location
+     * @param qx the X component of the orientation
+     * @param qy the Y component of the orientation
+     * @param qz the Z component of the orientation
+     * @param qw the W component of the orientation
+     * @param objectLayer the object layer for the simulation
+     */
+    public Hair(ConstHairSettings settings,
+            double xx, double yy, double zz,
+            float qx, float qy, float qz, float qw, int objectLayer) {
         long settingsVa = settings.targetVa();
-        double xx = location.xx();
-        double yy = location.yy();
-        double zz = location.zz();
-        float qw = orientation.getW();
-        float qx = orientation.getX();
-        float qy = orientation.getY();
-        float qz = orientation.getZ();
         long hairVa
                 = create(settingsVa, xx, yy, zz, qx, qy, qz, qw, objectLayer);
         Runnable freeingAction = () -> free(hairVa);

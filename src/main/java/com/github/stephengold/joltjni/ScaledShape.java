@@ -41,10 +41,21 @@ public class ScaledShape extends DecoratedShape {
      * @param scaleFactors the desired scale factors (not {@code null})
      */
     public ScaledShape(ConstShape baseShape, Vec3Arg scaleFactors) {
+        this(baseShape, scaleFactors.getX(), scaleFactors.getY(),
+                scaleFactors.getZ());
+    }
+
+    /**
+     * Instantiate a shape based on the specified shape and scale factors.
+     *
+     * @param baseShape the unscaled base shape (not {@code null})
+     * @param scaleX the desired scale factor on the local X axis
+     * @param scaleY the desired scale factor on the local Y axis
+     * @param scaleZ the desired scale factor on the local Z axis
+     */
+    public ScaledShape(ConstShape baseShape,
+            float scaleX, float scaleY, float scaleZ) {
         long baseShapeVa = baseShape.targetVa();
-        float scaleX = scaleFactors.getX();
-        float scaleY = scaleFactors.getY();
-        float scaleZ = scaleFactors.getZ();
         long scaledShapeVa
                 = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);
         setVirtualAddressAsCoOwner(scaledShapeVa);

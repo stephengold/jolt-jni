@@ -150,11 +150,23 @@ final public class CharacterSettingsRef
      * default={(0,1,0),-1e10})
      */
     public void setSupportingVolume(ConstPlane plane) {
-        long settingsVa = targetVa();
         float nx = plane.getNormalX();
         float ny = plane.getNormalY();
         float nz = plane.getNormalZ();
         float c = plane.getConstant();
+        setSupportingVolume(nx, ny, nz, c);
+    }
+
+    /**
+     * Alter the supporting volume. (native attribute: mSupportingVolume)
+     *
+     * @param nx the X component of the plane's normal (in system coordinates)
+     * @param ny the Y component of the plane's normal (in system coordinates)
+     * @param nz the Z component of the plane's normal (in system coordinates)
+     * @param c the plane constant (in system coordinates)
+     */
+    public void setSupportingVolume(float nx, float ny, float nz, float c) {
+        long settingsVa = targetVa();
         CharacterBaseSettings.setSupportingVolume(settingsVa, nx, ny, nz, c);
     }
 
@@ -165,10 +177,24 @@ final public class CharacterSettingsRef
      * default=(0,1,0))
      */
     public void setUp(Vec3Arg direction) {
-        long settingsVa = targetVa();
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
+        setUp(dx, dy, dz);
+    }
+
+    /**
+     * Alter the character's "up" direction. (native attribute: mUp)
+     *
+     * @param dx the X component of the desired direction (in system
+     * coordinates, default=0)
+     * @param dy the Y component of the desired direction (in system
+     * coordinates, default=1)
+     * @param dz the Z component of the desired direction (in system
+     * coordinates, default=0)
+     */
+    public void setUp(float dx, float dy, float dz) {
+        long settingsVa = targetVa();
         CharacterBaseSettings.setUp(settingsVa, dx, dy, dz);
     }
     // *************************************************************************
@@ -306,6 +332,19 @@ final public class CharacterSettingsRef
     }
 
     /**
+     * Copy the supporting volume. The settings are unaffected.
+     *
+     * @param out storage for the plane (not {@code null}, modified)
+     */
+    @Override
+    public void getSupportingVolume(Plane out) {
+        long settingsVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBaseSettings.getSupportingVolume(settingsVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the character's "up" direction. The settings are unaffected. (native
      * attribute: mUp)
      *
@@ -313,12 +352,24 @@ final public class CharacterSettingsRef
      */
     @Override
     public Vec3 getUp() {
+        Vec3 result = new Vec3();
+        getUp(result);
+        return result;
+    }
+
+    /**
+     * Copy the character's "up" direction. The settings are unaffected. (native
+     * attribute: mUp)
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getUp(Vec3 out) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterBaseSettings.getUp(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
     // *************************************************************************
     // Ref methods

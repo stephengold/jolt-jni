@@ -70,12 +70,30 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     Vec3 getGroundNormal();
 
     /**
+     * Copy the normal direction at the point of contact with the supporting
+     * surface. The character is unaffected.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getGroundNormal(Vec3 out);
+
+    /**
      * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
      * @return a new location vector (in system coordinates)
      */
     RVec3 getGroundPosition();
+
+    /**
+     * Copy the location of the point of contact with the supporting surface.
+     * The character is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getGroundPosition(RVec3 out);
 
     /**
      * Return the relationship between the character and its supporting surface.
@@ -108,6 +126,15 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * @return a new velocity vector (meters per second in system coordinates)
      */
     Vec3 getGroundVelocity();
+
+    /**
+     * Copy the world-space velocity of the supporting surface. The character is
+     * unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getGroundVelocity(Vec3 out);
 
     /**
      * Access the physics system to which the character's body belongs, if any.
@@ -149,11 +176,29 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     Plane getSupportingVolume();
 
     /**
+     * Copy the supporting volume. The character is unaffected.
+     *
+     * @param out storage for the plane (not {@code null}, modified)
+     */
+    void getSupportingVolume(Plane out);
+
+    /**
      * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector
      */
-    Vec3 getUp();
+    default Vec3 getUp() {
+        Vec3 result = new Vec3();
+        getUp(result);
+        return result;
+    }
+
+    /**
+     * Copy the character's "up" direction. The character is unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    void getUp(Vec3 out);
 
     /**
      * Test whether the specified normal direction is too steep. The character
@@ -163,6 +208,20 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * @return {@code true} if too steep, otherwise {@code false}
      */
     boolean isSlopeTooSteep(Vec3Arg normal);
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
+     * @param nx the X component of the surface normal to test (in system
+     * coordinates)
+     * @param ny the Y component of the surface normal to test (in system
+     * coordinates)
+     * @param nz the Z component of the surface normal to test (in system
+     * coordinates)
+     * @return {@code true} if too steep, otherwise {@code false}
+     */
+    boolean isSlopeTooSteep(float nx, float ny, float nz);
 
     /**
      * Test whether the character is supported. The character is unaffected.

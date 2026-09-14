@@ -275,12 +275,24 @@ final public class CharacterVirtualRefC
      */
     @Override
     public Vec3 getGroundNormal() {
+        Vec3 result = new Vec3();
+        getGroundNormal(result);
+        return result;
+    }
+
+    /**
+     * Copy the normal direction at the point of contact with the supporting
+     * surface. The character is unaffected.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getGroundNormal(Vec3 out) {
         long characterVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterBase.getGroundNormal(characterVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -291,12 +303,24 @@ final public class CharacterVirtualRefC
      */
     @Override
     public RVec3 getGroundPosition() {
+        RVec3 result = new RVec3();
+        getGroundPosition(result);
+        return result;
+    }
+
+    /**
+     * Copy the location of the point of contact with the supporting surface.
+     * The character is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getGroundPosition(RVec3 out) {
         long characterVa = targetVa();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         CharacterBase.getGroundPosition(characterVa, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
-
-        return result;
+        out.set(storeDoubles);
     }
 
     /**
@@ -350,12 +374,24 @@ final public class CharacterVirtualRefC
      */
     @Override
     public Vec3 getGroundVelocity() {
+        Vec3 result = new Vec3();
+        getGroundVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the world-space velocity of the supporting surface. The character is
+     * unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getGroundVelocity(Vec3 out) {
         long characterVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterBase.getGroundVelocity(characterVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -408,12 +444,23 @@ final public class CharacterVirtualRefC
      */
     @Override
     public Vec3 getLinearVelocity() {
+        Vec3 result = new Vec3();
+        getLinearVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the linear velocity of the character. The character is unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 out) {
         long characterVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterVirtual.getLinearVelocity(characterVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -503,12 +550,23 @@ final public class CharacterVirtualRefC
      */
     @Override
     public RVec3 getPosition() {
+        RVec3 result = new RVec3();
+        getPosition(result);
+        return result;
+    }
+
+    /**
+     * Copy the location of the character. The character is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 out) {
         long characterVa = targetVa();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         CharacterVirtual.getPosition(characterVa, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
-
-        return result;
+        out.set(storeDoubles);
     }
 
     /**
@@ -622,6 +680,19 @@ final public class CharacterVirtualRefC
     }
 
     /**
+     * Copy the supporting volume. The character is unaffected.
+     *
+     * @param out storage for the plane (not {@code null}, modified)
+     */
+    @Override
+    public void getSupportingVolume(Plane out) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getSupportingVolume(characterVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Generate a TransformedShape that represents the volume occupied by the
      * character. The character is unaffected.
      *
@@ -643,12 +714,22 @@ final public class CharacterVirtualRefC
      */
     @Override
     public Vec3 getUp() {
+        Vec3 result = new Vec3();
+        getUp(result);
+        return result;
+    }
+
+    /**
+     * Copy the character's "up" direction. The character is unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getUp(Vec3 out) {
         long characterVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterBase.getUp(characterVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -725,13 +806,27 @@ final public class CharacterVirtualRefC
      */
     @Override
     public boolean isSlopeTooSteep(Vec3Arg normal) {
-        long characterVa = targetVa();
         float nx = normal.getX();
         float ny = normal.getY();
         float nz = normal.getZ();
-        boolean result = CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
+        boolean result = isSlopeTooSteep(nx, ny, nz);
 
         return result;
+    }
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
+     * @param nx the X component of the surface normal to test
+     * @param ny the Y component of the surface normal to test
+     * @param nz the Z component of the surface normal to test
+     * @return {@code true} if too steep, otherwise {@code false}
+     */
+    @Override
+    public boolean isSlopeTooSteep(float nx, float ny, float nz) {
+        long characterVa = targetVa();
+        return CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
     }
 
     /**

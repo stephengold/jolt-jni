@@ -65,10 +65,21 @@ final public class OrientedBox
      * {@code null}, unaffected)
      */
     public OrientedBox(Mat44Arg orientation, Vec3Arg halfExtents) {
+        this(orientation, halfExtents.getX(), halfExtents.getY(),
+                halfExtents.getZ());
+    }
+
+    /**
+     * Instantiate a box with the specified transform and half extents.
+     *
+     * @param orientation the desired rotation and translation (not
+     * {@code null}, unaffected)
+     * @param hx the desired half extent on the local X axis (&gt;0)
+     * @param hy the desired half extent on the local Y axis (&gt;0)
+     * @param hz the desired half extent on the local Z axis (&gt;0)
+     */
+    public OrientedBox(Mat44Arg orientation, float hx, float hy, float hz) {
         long orientationVa = orientation.targetVa();
-        float hx = halfExtents.getX();
-        float hy = halfExtents.getY();
-        float hz = halfExtents.getZ();
         long boxVa = createBox(orientationVa, hx, hy, hz);
         setVirtualAddress(boxVa, () -> free(boxVa));
     }

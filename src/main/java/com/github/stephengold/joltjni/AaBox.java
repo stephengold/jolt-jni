@@ -92,14 +92,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * unaffected)
      */
     public AaBox(RVec3Arg minimum, RVec3Arg maximum) {
-        float minX = minimum.x();
-        float minY = minimum.y();
-        float minZ = minimum.z();
-        float maxX = maximum.x();
-        float maxY = maximum.y();
-        float maxZ = maximum.z();
-        long boxVa = create(minX, minY, minZ, maxX, maxY, maxZ);
-        setVirtualAddress(boxVa, () -> free(boxVa));
+        this(minimum.x(), minimum.y(), minimum.z(),
+                maximum.x(), maximum.y(), maximum.z());
     }
 
     /**
@@ -111,11 +105,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @param halfExtent the desired half extent
      */
     public AaBox(Vec3Arg center, float halfExtent) {
-        float cx = center.getX();
-        float cy = center.getY();
-        float cz = center.getZ();
-        long boxVa = createCubic(cx, cy, cz, halfExtent);
-        setVirtualAddress(boxVa, () -> free(boxVa));
+        this(center.getX(), center.getY(), center.getZ(), halfExtent);
     }
 
     /**
@@ -127,13 +117,37 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * unaffected)
      */
     public AaBox(Vec3Arg minimum, Vec3Arg maximum) {
-        float minX = minimum.getX();
-        float minY = minimum.getY();
-        float minZ = minimum.getZ();
-        float maxX = maximum.getX();
-        float maxY = maximum.getY();
-        float maxZ = maximum.getZ();
+        this(minimum.getX(), minimum.getY(), minimum.getZ(),
+                maximum.getX(), maximum.getY(), maximum.getZ());
+    }
+
+    /**
+     * Instantiate a box with the specified minimum and maximum coordinates.
+     *
+     * @param minX the desired minimum X coordinate
+     * @param minY the desired minimum Y coordinate
+     * @param minZ the desired minimum Z coordinate
+     * @param maxX the desired maximum X coordinate
+     * @param maxY the desired maximum Y coordinate
+     * @param maxZ the desired maximum Z coordinate
+     */
+    public AaBox(float minX, float minY, float minZ,
+            float maxX, float maxY, float maxZ) {
         long boxVa = create(minX, minY, minZ, maxX, maxY, maxZ);
+        setVirtualAddress(boxVa, () -> free(boxVa));
+    }
+
+    /**
+     * Instantiate a cubic box with the specified center coordinates and half
+     * extent.
+     *
+     * @param cx the desired X coordinate of the center
+     * @param cy the desired Y coordinate of the center
+     * @param cz the desired Z coordinate of the center
+     * @param halfExtent the desired half extent
+     */
+    public AaBox(float cx, float cy, float cz, float halfExtent) {
+        long boxVa = createCubic(cx, cy, cz, halfExtent);
         setVirtualAddress(boxVa, () -> free(boxVa));
     }
     // *************************************************************************

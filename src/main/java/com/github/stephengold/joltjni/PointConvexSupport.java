@@ -38,9 +38,17 @@ public class PointConvexSupport extends JoltPhysicsObject {
      * @param location the desired location (not null, unaffected)
      */
     public PointConvexSupport(Vec3Arg location) {
-        float x = location.getX();
-        float y = location.getY();
-        float z = location.getZ();
+        this(location.getX(), location.getY(), location.getZ());
+    }
+
+    /**
+     * Instantiate a point at the specified location.
+     *
+     * @param x the desired X coordinate
+     * @param y the desired Y coordinate
+     * @param z the desired Z coordinate
+     */
+    public PointConvexSupport(float x, float y, float z) {
         long pointVa = create(x, y, z);
         setVirtualAddress(pointVa, () -> free(pointVa));
     }

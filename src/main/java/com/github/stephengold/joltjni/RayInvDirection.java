@@ -47,9 +47,17 @@ public class RayInvDirection extends JoltPhysicsObject {
      * @param direction the direction to use (not null, unaffected)
      */
     public RayInvDirection(Vec3Arg direction) {
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
+        this(direction.getX(), direction.getY(), direction.getZ());
+    }
+
+    /**
+     * Instantiate inverse of the specified direction.
+     *
+     * @param dx the X component of the direction
+     * @param dy the Y component of the direction
+     * @param dz the Z component of the direction
+     */
+    public RayInvDirection(float dx, float dy, float dz) {
         long dirVa = create(dx, dy, dz);
         setVirtualAddress(dirVa, () -> free(dirVa));
     }

@@ -101,10 +101,7 @@ final public class Plane implements ConstPlane {
      * @param c the desired constant
      */
     public Plane(Vec3Arg normal, float c) {
-        this.nx = normal.getX();
-        this.ny = normal.getY();
-        this.nz = normal.getZ();
-        this.c = c;
+        this(normal.getX(), normal.getY(), normal.getZ(), c);
     }
     // *************************************************************************
     // new methods exposed
@@ -118,7 +115,7 @@ final public class Plane implements ConstPlane {
         this.nx = source.getNormalX();
         this.ny = source.getNormalY();
         this.nz = source.getNormalZ();
-        this.nz = source.getConstant();
+        this.c = source.getConstant();
     }
 
     /**

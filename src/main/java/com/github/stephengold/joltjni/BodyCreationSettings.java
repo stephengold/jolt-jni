@@ -194,6 +194,28 @@ public class BodyCreationSettings
             QuatArg orient, EMotionType motionType, int objLayer) {
         this(shapeRef.getPtr(), loc, orient, motionType, objLayer);
     }
+
+    /**
+     * Instantiate settings for the specified shape reference.
+     *
+     * @param shapeRef a reference to the desired shape (not {@code null})
+     * @param locX the desired X coordinate of the location
+     * @param locY the desired Y coordinate of the location
+     * @param locZ the desired Z coordinate of the location
+     * @param orientX the X component of the desired orientation
+     * @param orientY the Y component of the desired orientation
+     * @param orientZ the Z component of the desired orientation
+     * @param orientW the W component of the desired orientation
+     * @param motionType the desired motion type (not {@code null})
+     * @param objLayer the ID of the desired object layer
+     */
+    public BodyCreationSettings(ShapeRef shapeRef,
+            double locX, double locY, double locZ,
+            float orientX, float orientY, float orientZ, float orientW,
+            EMotionType motionType, int objLayer) {
+        this(shapeRef.getPtr(), locX, locY, locZ,
+                orientX, orientY, orientZ, orientW, motionType, objLayer);
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -652,11 +674,7 @@ public class BodyCreationSettings
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setPosition(RVec3Arg location) {
-        long bodySettingsVa = va();
-        double xx = location.xx();
-        double yy = location.yy();
-        double zz = location.zz();
-        setPosition(bodySettingsVa, xx, yy, zz);
+        setPosition(location.xx(), location.yy(), location.zz());
 
         return this;
     }
@@ -686,11 +704,28 @@ public class BodyCreationSettings
     public BodyCreationSettings setRotation(QuatArg quat) {
         assert quat.isNormalized() : "length =" + quat.length();
 
+        setRotation(quat.getX(), quat.getY(), quat.getZ(), quat.getW());
+
+        return this;
+    }
+
+    /**
+     * Alter the (initial) orientation of the body's axes. (native member:
+     * mRotation)
+     *
+     * @param qx the X component of the desired rotation (relative to the
+     * system axes, default=0)
+     * @param qy the Y component of the desired rotation (relative to the
+     * system axes, default=0)
+     * @param qz the Z component of the desired rotation (relative to the
+     * system axes, default=0)
+     * @param qw the W component of the desired rotation (relative to the
+     * system axes, default=1)
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings setRotation(
+            float qx, float qy, float qz, float qw) {
         long bodySettingsVa = va();
-        float qw = quat.getW();
-        float qx = quat.getX();
-        float qy = quat.getY();
-        float qz = quat.getZ();
         setRotation(bodySettingsVa, qx, qy, qz, qw);
 
         return this;
@@ -844,12 +879,24 @@ public class BodyCreationSettings
      */
     @Override
     public Vec3 getAngularVelocity() {
+        Vec3 result = new Vec3();
+        getAngularVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the (initial) angular velocity. The settings are unaffected. (native
+     * member: mAngularVelocity)
+     *
+     * @param out storage for the velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getAngularVelocity(Vec3 out) {
         long bodySettingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAngularVelocity(bodySettingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -987,12 +1034,24 @@ public class BodyCreationSettings
      */
     @Override
     public Vec3 getLinearVelocity() {
+        Vec3 result = new Vec3();
+        getLinearVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the (initial) linear velocity. The settings are unaffected. (native
+     * member: mLinearVelocity)
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 out) {
         long bodySettingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(bodySettingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -1162,15 +1221,27 @@ public class BodyCreationSettings
      */
     @Override
     public RVec3 getPosition() {
-        long bodySettingsVa = va();
-        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
-        getPosition(bodySettingsVa, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
-
+        RVec3 result = new RVec3();
+        getPosition(result);
         assert Double.isFinite(result.xx()) : "xx = " + result.xx();
         assert Double.isFinite(result.yy()) : "yy = " + result.yy();
         assert Double.isFinite(result.zz()) : "zz = " + result.zz();
         return result;
+    }
+
+    /**
+     * Copy the (initial) location. The settings are unaffected. (native member:
+     * mPosition)
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 out) {
+        long bodySettingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(bodySettingsVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**
@@ -1195,12 +1266,24 @@ public class BodyCreationSettings
      */
     @Override
     public Quat getRotation() {
+        Quat result = new Quat();
+        getRotation(result);
+        return result;
+    }
+
+    /**
+     * Copy the (initial) orientation of the body's axes. The settings are
+     * unaffected. (native member: mRotation)
+     *
+     * @param out storage for the rotation (relative to the system axes, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getRotation(Quat out) {
         long bodySettingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotation(bodySettingsVa, storeFloats);
-        Quat result = new Quat(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**

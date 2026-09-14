@@ -60,15 +60,38 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public Character(ConstCharacterSettings settings, RVec3Arg location,
             QuatArg orientation, long userData, PhysicsSystem system) {
+        this(settings, location.xx(), location.yy(), location.zz(),
+                orientation.getX(), orientation.getY(), orientation.getZ(),
+                orientation.getW(), userData, system);
+    }
+
+    /**
+     * Instantiate a character with the specified properties.
+     *
+     * @param settings the settings to use (not {@code null}, unaffected)
+     * @param locX the desired initial X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired initial Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired initial Z coordinate of the location (in system
+     * coordinates)
+     * @param qx the X component of the desired initial orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired initial orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired initial orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired initial orientation (in system
+     * coordinates)
+     * @param userData the desired user-data value
+     * @param system where to add the body (not {@code null})
+     */
+    public Character(ConstCharacterSettings settings,
+                     double locX, double locY, double locZ,
+                     float qx, float qy, float qz, float qw,
+                     long userData, PhysicsSystem system) {
         this.system = system;
         long settingsVa = settings.targetVa();
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
-        float qx = orientation.getX();
-        float qy = orientation.getY();
-        float qz = orientation.getZ();
-        float qw = orientation.getW();
         long systemVa = system.va();
         long characterVa = createCharacter(settingsVa, locX, locY, locZ,
                 qx, qy, qz, qw, userData, systemVa);
@@ -109,6 +132,21 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Apply an impulse to the character's center of mass, using the locking
+     * body interface.
+     *
+     * @param impulseX the X component of the impulse (kilogram.meters per
+     * second in system coordinates)
+     * @param impulseY the Y component of the impulse (kilogram.meters per
+     * second in system coordinates)
+     * @param impulseZ the Z component of the impulse (kilogram.meters per
+     * second in system coordinates)
+     */
+    public void addImpulse(float impulseX, float impulseY, float impulseZ) {
+        addImpulse(impulseX, impulseY, impulseZ, true);
+    }
+
+    /**
      * Apply an impulse to the character's center of mass.
      *
      * @param impulse the impulse vector (kilogram.meters per second in system
@@ -117,11 +155,26 @@ public class Character extends CharacterBase implements ConstCharacter {
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void addImpulse(Vec3Arg impulse, boolean lockBodies) {
+        addImpulse(impulse.getX(), impulse.getY(), impulse.getZ(), lockBodies);
+    }
+
+    /**
+     * Apply an impulse to the character's center of mass.
+     *
+     * @param impulseX the X component of the impulse (kilogram.meters per
+     * second in system coordinates)
+     * @param impulseY the Y component of the impulse (kilogram.meters per
+     * second in system coordinates)
+     * @param impulseZ the Z component of the impulse (kilogram.meters per
+     * second in system coordinates)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void addImpulse(
+            float impulseX, float impulseY, float impulseZ,
+            boolean lockBodies) {
         long characterVa = va();
-        float x = impulse.getX();
-        float y = impulse.getY();
-        float z = impulse.getZ();
-        addImpulse(characterVa, x, y, z, lockBodies);
+        addImpulse(characterVa, impulseX, impulseY, impulseZ, lockBodies);
     }
 
     /**
@@ -135,6 +188,20 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Add to the character's linear velocity, using the locking body interface.
+     *
+     * @param deltaVX the X component of the change in velocity (meters per
+     * second in system coordinates)
+     * @param deltaVY the Y component of the change in velocity (meters per
+     * second in system coordinates)
+     * @param deltaVZ the Z component of the change in velocity (meters per
+     * second in system coordinates)
+     */
+    public void addLinearVelocity(float deltaVX, float deltaVY, float deltaVZ) {
+        addLinearVelocity(deltaVX, deltaVY, deltaVZ, true);
+    }
+
+    /**
      * Add to the character's linear velocity.
      *
      * @param deltaV the change in velocity (meters per second in system
@@ -143,11 +210,26 @@ public class Character extends CharacterBase implements ConstCharacter {
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void addLinearVelocity(Vec3Arg deltaV, boolean lockBodies) {
+        addLinearVelocity(
+                deltaV.getX(), deltaV.getY(), deltaV.getZ(), lockBodies);
+    }
+
+    /**
+     * Add to the character's linear velocity.
+     *
+     * @param deltaVX the X component of the change in velocity (meters per
+     * second in system coordinates)
+     * @param deltaVY the Y component of the change in velocity (meters per
+     * second in system coordinates)
+     * @param deltaVZ the Z component of the change in velocity (meters per
+     * second in system coordinates)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void addLinearVelocity(
+            float deltaVX, float deltaVY, float deltaVZ, boolean lockBodies) {
         long characterVa = va();
-        float vx = deltaV.getX();
-        float vy = deltaV.getY();
-        float vz = deltaV.getZ();
-        addLinearVelocity(characterVa, vx, vy, vz, lockBodies);
+        addLinearVelocity(characterVa, deltaVX, deltaVY, deltaVZ, lockBodies);
     }
 
     /**
@@ -170,6 +252,16 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Add the character to its {@code PhysicsSystem} using the locking body
+     * interface.
+     *
+     * @param activation the ordinal of the desired {@code EActivation} value
+     */
+    public void addToPhysicsSystem(int activation) {
+        addToPhysicsSystem(activation, true);
+    }
+
+    /**
      * Add the character to its {@code PhysicsSystem}.
      *
      * @param activation whether to activate the character (not {@code null},
@@ -178,9 +270,19 @@ public class Character extends CharacterBase implements ConstCharacter {
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void addToPhysicsSystem(EActivation activation, boolean lockBodies) {
+        addToPhysicsSystem(activation.ordinal(), lockBodies);
+    }
+
+    /**
+     * Add the character to its {@code PhysicsSystem}.
+     *
+     * @param activation the ordinal of the desired {@code EActivation} value
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void addToPhysicsSystem(int activation, boolean lockBodies) {
         long characterVa = va();
-        int ordinal = activation.ordinal();
-        addToPhysicsSystem(characterVa, ordinal, lockBodies);
+        addToPhysicsSystem(characterVa, activation, lockBodies);
     }
 
     /**
@@ -260,6 +362,27 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Alter the character's motion, using the locking body interface.
+     *
+     * @param vx the X component of the desired linear velocity (meters per
+     * second in system coordinates)
+     * @param vy the Y component of the desired linear velocity (meters per
+     * second in system coordinates)
+     * @param vz the Z component of the desired linear velocity (meters per
+     * second in system coordinates)
+     * @param wx the X component of the desired angular velocity (radians per
+     * second in system coordinates)
+     * @param wy the Y component of the desired angular velocity (radians per
+     * second in system coordinates)
+     * @param wz the Z component of the desired angular velocity (radians per
+     * second in system coordinates)
+     */
+    public void setLinearAndAngularVelocity(
+            float vx, float vy, float vz, float wx, float wy, float wz) {
+        setLinearAndAngularVelocity(vx, vy, vz, wx, wy, wz, true);
+    }
+
+    /**
      * Alter the character's motion.
      *
      * @param linearVelocity the desired linear velocity (meters per second in
@@ -271,13 +394,33 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public void setLinearAndAngularVelocity(Vec3Arg linearVelocity,
             Vec3Arg omega, boolean lockBodies) {
+        setLinearAndAngularVelocity(
+                linearVelocity.getX(), linearVelocity.getY(),
+                linearVelocity.getZ(),
+                omega.getX(), omega.getY(), omega.getZ(), lockBodies);
+    }
+
+    /**
+     * Alter the character's motion.
+     *
+     * @param vx the X component of the desired linear velocity (meters per
+     * second in system coordinates)
+     * @param vy the Y component of the desired linear velocity (meters per
+     * second in system coordinates)
+     * @param vz the Z component of the desired linear velocity (meters per
+     * second in system coordinates)
+     * @param wx the X component of the desired angular velocity (radians per
+     * second in system coordinates)
+     * @param wy the Y component of the desired angular velocity (radians per
+     * second in system coordinates)
+     * @param wz the Z component of the desired angular velocity (radians per
+     * second in system coordinates)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setLinearAndAngularVelocity(float vx, float vy, float vz,
+            float wx, float wy, float wz, boolean lockBodies) {
         long characterVa = va();
-        float vx = linearVelocity.getX();
-        float vy = linearVelocity.getY();
-        float vz = linearVelocity.getZ();
-        float wx = omega.getX();
-        float wy = omega.getY();
-        float wz = omega.getZ();
         setLinearAndAngularVelocity(
                 characterVa, vx, vy, vz, wx, wy, wz, lockBodies);
     }
@@ -350,6 +493,20 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Relocate and activate the character using the locking body interface.
+     *
+     * @param locX the desired X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired Z coordinate of the location (in system
+     * coordinates)
+     */
+    public void setPosition(double locX, double locY, double locZ) {
+        setPosition(locX, locY, locZ, EActivation.Activate, true);
+    }
+
+    /**
      * Relocate the character, optionally activating it, using the locking body
      * interface.
      *
@@ -360,6 +517,42 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public void setPosition(RVec3Arg location, EActivation activation) {
         setPosition(location, activation, true);
+    }
+
+    /**
+     * Relocate the character, optionally activating it, using the locking body
+     * interface.
+     *
+     * @param locX the desired X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired Z coordinate of the location (in system
+     * coordinates)
+     * @param activation whether to activate the character (not {@code null},
+     * default=Activate)
+     */
+    public void setPosition(double locX, double locY, double locZ,
+            EActivation activation) {
+        int ordinal = activation.ordinal();
+        setPosition(locX, locY, locZ, ordinal, true);
+    }
+
+    /**
+     * Relocate the character, optionally activating it, using the locking body
+     * interface.
+     *
+     * @param locX the desired X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired Z coordinate of the location (in system
+     * coordinates)
+     * @param activation the ordinal of the desired {@code EActivation} value
+     */
+    public void setPosition(double locX, double locY, double locZ,
+            int activation) {
+        setPosition(locX, locY, locZ, activation, true);
     }
 
     /**
@@ -374,12 +567,48 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public void setPosition(
             RVec3Arg location, EActivation activation, boolean lockBodies) {
-        long characterVa = va();
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
+        setPosition(location.xx(), location.yy(), location.zz(), activation,
+                lockBodies);
+    }
+
+    /**
+     * Relocate the character, optionally activating it.
+     *
+     * @param locX the desired X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired Z coordinate of the location (in system
+     * coordinates)
+     * @param activation whether to activate the character (not {@code null},
+     * default=Activate)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setPosition(double locX, double locY, double locZ,
+            EActivation activation, boolean lockBodies) {
         int ordinal = activation.ordinal();
-        setPosition(characterVa, locX, locY, locZ, ordinal, lockBodies);
+        setPosition(locX, locY, locZ, ordinal, lockBodies);
+    }
+
+    /**
+     * Relocate the character, optionally activating it.
+     *
+     * @param locX the desired X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired Z coordinate of the location (in system
+     * coordinates)
+     * @param activation the ordinal of the desired {@code EActivation} value
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setPosition(
+            double locX, double locY, double locZ, int activation,
+            boolean lockBodies) {
+        long characterVa = va();
+        setPosition(characterVa, locX, locY, locZ, activation, lockBodies);
     }
 
     /**
@@ -410,6 +639,60 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Reposition the character, optionally activating it, using the locking
+     * body interface.
+     *
+     * @param locX the desired X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired Z coordinate of the location (in system
+     * coordinates)
+     * @param qx the X component of the desired orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired orientation (in system
+     * coordinates)
+     * @param activation whether to activate the character (not {@code null},
+     * default=Activate)
+     */
+    public void setPositionAndRotation(double locX, double locY, double locZ,
+            float qx, float qy, float qz, float qw,
+            EActivation activation) {
+        setPositionAndRotation(
+                locX, locY, locZ, qx, qy, qz, qw, activation, true);
+    }
+
+    /**
+     * Reposition the character, optionally activating it, using the locking
+     * body interface.
+     *
+     * @param locX the desired X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired Z coordinate of the location (in system
+     * coordinates)
+     * @param qx the X component of the desired orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired orientation (in system
+     * coordinates)
+     * @param activation the ordinal of the desired {@code EActivation} value
+     */
+    public void setPositionAndRotation(double locX, double locY, double locZ,
+            float qx, float qy, float qz, float qw, int activation) {
+        setPositionAndRotation(
+                locX, locY, locZ, qx, qy, qz, qw, activation, true);
+    }
+
+    /**
      * Reposition the character, optionally activating it.
      *
      * @param location the desired location (in system coordinates, not
@@ -423,17 +706,69 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public void setPositionAndRotation(RVec3Arg location, QuatArg orientation,
             EActivation activation, boolean lockBodies) {
-        long characterVa = va();
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
-        float qx = orientation.getX();
-        float qy = orientation.getY();
-        float qz = orientation.getZ();
-        float qw = orientation.getW();
         int ordinal = activation.ordinal();
-        setPositionAndRotation(characterVa, locX, locY, locZ,
+        setPositionAndRotation(location.xx(), location.yy(), location.zz(),
+                orientation.getX(), orientation.getY(), orientation.getZ(),
+                orientation.getW(), ordinal, lockBodies);
+    }
+
+    /**
+     * Reposition the character, optionally activating it.
+     *
+     * @param locX the desired X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired Z coordinate of the location (in system
+     * coordinates)
+     * @param qx the X component of the desired orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired orientation (in system
+     * coordinates)
+     * @param activation whether to activate the character (not {@code null},
+     * default=Activate)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setPositionAndRotation(double locX, double locY, double locZ,
+            float qx, float qy, float qz, float qw, EActivation activation,
+            boolean lockBodies) {
+        int ordinal = activation.ordinal();
+        setPositionAndRotation(locX, locY, locZ,
                 qx, qy, qz, qw, ordinal, lockBodies);
+    }
+
+    /**
+     * Reposition the character, optionally activating it.
+     *
+     * @param locX the desired X coordinate of the location (in system
+     * coordinates)
+     * @param locY the desired Y coordinate of the location (in system
+     * coordinates)
+     * @param locZ the desired Z coordinate of the location (in system
+     * coordinates)
+     * @param qx the X component of the desired orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired orientation (in system
+     * coordinates)
+     * @param activation the ordinal of the desired {@code EActivation} value
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setPositionAndRotation(double locX, double locY, double locZ,
+            float qx, float qy, float qz, float qw, int activation,
+            boolean lockBodies) {
+        long characterVa = va();
+        setPositionAndRotation(characterVa, locX, locY, locZ,
+                qx, qy, qz, qw, activation, lockBodies);
     }
 
     /**
@@ -444,6 +779,22 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public void setRotation(QuatArg orientation) {
         setRotation(orientation, EActivation.Activate);
+    }
+
+    /**
+     * Re-orient and activate the character using the locking body interface.
+     *
+     * @param qx the X component of the desired orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired orientation (in system
+     * coordinates)
+     */
+    public void setRotation(float qx, float qy, float qz, float qw) {
+        setRotation(qx, qy, qz, qw, EActivation.Activate);
     }
 
     /**
@@ -459,6 +810,45 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Re-orient the character, optionally activating it, using the locking
+     * body interface.
+     *
+     * @param qx the X component of the desired orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired orientation (in system
+     * coordinates)
+     * @param activation whether to activate the character (not {@code null},
+     * default=Activate)
+     */
+    public void setRotation(
+            float qx, float qy, float qz, float qw, EActivation activation) {
+        setRotation(qx, qy, qz, qw, activation, true);
+    }
+
+    /**
+     * Re-orient the character, optionally activating it, using the locking
+     * body interface.
+     *
+     * @param qx the X component of the desired orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired orientation (in system
+     * coordinates)
+     * @param activation the ordinal of the desired {@code EActivation} value
+     */
+    public void setRotation(
+            float qx, float qy, float qz, float qw, int activation) {
+        setRotation(qx, qy, qz, qw, activation, true);
+    }
+
+    /**
      * Re-orient the character, optionally activating it.
      *
      * @param orientation the desired orientation (in system coordinates, not
@@ -470,13 +860,68 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public void setRotation(
             QuatArg orientation, EActivation activation, boolean lockBodies) {
-        long characterVa = va();
-        float qx = orientation.getX();
-        float qy = orientation.getY();
-        float qz = orientation.getZ();
-        float qw = orientation.getW();
+        setRotation(orientation.getX(), orientation.getY(),
+                orientation.getZ(), orientation.getW(),
+                activation, lockBodies);
+    }
+
+    /**
+     * Re-orient the character, optionally activating it.
+     *
+     * @param orientation the desired orientation (in system coordinates, not
+     * null, unaffected)
+     * @param activation the ordinal of the desired {@code EActivation} value
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setRotation(
+            QuatArg orientation, int activation, boolean lockBodies) {
+        setRotation(orientation.getX(), orientation.getY(),
+                orientation.getZ(), orientation.getW(),
+                activation, lockBodies);
+    }
+
+    /**
+     * Re-orient the character, optionally activating it.
+     *
+     * @param qx the X component of the desired orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired orientation (in system
+     * coordinates)
+     * @param activation whether to activate the character (not {@code null},
+     * default=Activate)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setRotation(float qx, float qy, float qz, float qw,
+            EActivation activation, boolean lockBodies) {
         int ordinal = activation.ordinal();
-        setRotation(characterVa, qx, qy, qz, qw, ordinal, lockBodies);
+        setRotation(qx, qy, qz, qw, ordinal, lockBodies);
+    }
+
+    /**
+     * Re-orient the character, optionally activating it.
+     *
+     * @param qx the X component of the desired orientation (in system
+     * coordinates)
+     * @param qy the Y component of the desired orientation (in system
+     * coordinates)
+     * @param qz the Z component of the desired orientation (in system
+     * coordinates)
+     * @param qw the W component of the desired orientation (in system
+     * coordinates)
+     * @param activation the ordinal of the desired {@code EActivation} value
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setRotation(float qx, float qy, float qz, float qw,
+            int activation, boolean lockBodies) {
+        long characterVa = va();
+        setRotation(characterVa, qx, qy, qz, qw, activation, lockBodies);
     }
 
     /**
@@ -560,6 +1005,18 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Copy the location of the rigid body's center of mass using the locking
+     * body interface. The character is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getCenterOfMassPosition(RVec3 out) {
+        getCenterOfMassPosition(true, out);
+    }
+
+    /**
      * Copy the location of the rigid body's center of mass. The character is
      * unaffected.
      *
@@ -569,12 +1026,26 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     @Override
     public RVec3 getCenterOfMassPosition(boolean lockBodies) {
+        RVec3 result = new RVec3();
+        getCenterOfMassPosition(lockBodies, result);
+        return result;
+    }
+
+    /**
+     * Copy the location of the rigid body's center of mass. The character is
+     * unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getCenterOfMassPosition(boolean lockBodies, RVec3 out) {
         long characterVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getCenterOfMassPosition(characterVa, storeDoubles, lockBodies);
-        RVec3 result = new RVec3(storeDoubles);
-
-        return result;
+        out.set(storeDoubles);
     }
 
     /**
@@ -645,6 +1116,18 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Copy the linear velocity of the character using the locking body
+     * interface. The character is unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 out) {
+        getLinearVelocity(true, out);
+    }
+
+    /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -653,12 +1136,25 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     @Override
     public Vec3 getLinearVelocity(boolean lockBodies) {
+        Vec3 result = new Vec3();
+        getLinearVelocity(lockBodies, result);
+        return result;
+    }
+
+    /**
+     * Copy the linear velocity of the character. The character is unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(boolean lockBodies, Vec3 out) {
         long characterVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(characterVa, storeFloats, lockBodies);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -684,6 +1180,18 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Copy the location of the character using the locking body interface. The
+     * character is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 out) {
+        getPosition(true, out);
+    }
+
+    /**
      * Copy the location of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -692,12 +1200,25 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     @Override
     public RVec3 getPosition(boolean lockBodies) {
+        RVec3 result = new RVec3();
+        getPosition(lockBodies, result);
+        return result;
+    }
+
+    /**
+     * Copy the location of the character. The character is unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(boolean lockBodies, RVec3 out) {
         long characterVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition(characterVa, storeDoubles, lockBodies);
-        RVec3 result = new RVec3(storeDoubles);
-
-        return result;
+        out.set(storeDoubles);
     }
 
     /**
@@ -750,6 +1271,18 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Copy the orientation of the character using the locking body interface.
+     * The character is unaffected.
+     *
+     * @param out storage for the orientation (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getRotation(Quat out) {
+        getRotation(true, out);
+    }
+
+    /**
      * Copy the orientation of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -758,12 +1291,25 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     @Override
     public Quat getRotation(boolean lockBodies) {
+        Quat result = new Quat();
+        getRotation(lockBodies, result);
+        return result;
+    }
+
+    /**
+     * Copy the orientation of the character. The character is unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @param out storage for the orientation (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getRotation(boolean lockBodies, Quat out) {
         long characterVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotation(characterVa, storeFloats, lockBodies);
-        Quat result = new Quat(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**

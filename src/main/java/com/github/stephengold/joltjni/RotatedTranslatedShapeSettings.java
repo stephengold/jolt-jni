@@ -55,13 +55,28 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      */
     public RotatedTranslatedShapeSettings(
             QuatArg rotation, ConstShape baseShape) {
+        this(rotation.getX(), rotation.getY(), rotation.getZ(),
+                rotation.getW(), baseShape);
+    }
+
+    /**
+     * Instantiate a settings object with the specified rotation and base shape.
+     *
+     * @param rotX the X component of the rotation (relative to the system
+     * axes)
+     * @param rotY the Y component of the rotation (relative to the system
+     * axes)
+     * @param rotZ the Z component of the rotation (relative to the system
+     * axes)
+     * @param rotW the W component of the rotation (relative to the system
+     * axes)
+     * @param baseShape the base shape (not {@code null}, unaffected)
+     */
+    public RotatedTranslatedShapeSettings(float rotX, float rotY, float rotZ,
+            float rotW, ConstShape baseShape) {
         float offsetX = 0f;
         float offsetY = 0f;
         float offsetZ = 0f;
-        float rotW = rotation.getW();
-        float rotX = rotation.getX();
-        float rotY = rotation.getY();
-        float rotZ = rotation.getZ();
         long baseShapeVa = baseShape.targetVa();
         long rtssVa = createSettingsFromShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
@@ -77,13 +92,29 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      */
     public RotatedTranslatedShapeSettings(QuatArg rotation,
             ConstShapeSettings baseShapeSettings) {
+        this(rotation.getX(), rotation.getY(), rotation.getZ(),
+                rotation.getW(), baseShapeSettings);
+    }
+
+    /**
+     * Instantiate a settings object with the specified rotation and base
+     * settings.
+     *
+     * @param rotX the X component of the rotation (relative to the system
+     * axes)
+     * @param rotY the Y component of the rotation (relative to the system
+     * axes)
+     * @param rotZ the Z component of the rotation (relative to the system
+     * axes)
+     * @param rotW the W component of the rotation (relative to the system
+     * axes)
+     * @param baseShapeSettings settings for the base shape (not {@code null})
+     */
+    public RotatedTranslatedShapeSettings(float rotX, float rotY, float rotZ,
+            float rotW, ConstShapeSettings baseShapeSettings) {
         float offsetX = 0f;
         float offsetY = 0f;
         float offsetZ = 0f;
-        float rotW = rotation.getW();
-        float rotX = rotation.getX();
-        float rotY = rotation.getY();
-        float rotZ = rotation.getZ();
         long baseShapeSettingsVa = baseShapeSettings.targetVa();
         long rtssVa = createSettingsFromShapeSettings(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeSettingsVa);
@@ -112,13 +143,31 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      */
     public RotatedTranslatedShapeSettings(
             Vec3Arg offset, QuatArg rotation, ConstShape baseShape) {
-        float offsetX = offset.getX();
-        float offsetY = offset.getY();
-        float offsetZ = offset.getZ();
-        float rotW = rotation.getW();
-        float rotX = rotation.getX();
-        float rotY = rotation.getY();
-        float rotZ = rotation.getZ();
+        this(offset.getX(), offset.getY(), offset.getZ(),
+                rotation.getX(), rotation.getY(), rotation.getZ(),
+                rotation.getW(), baseShape);
+    }
+
+    /**
+     * Instantiate a settings object with the specified offset, rotation, and
+     * base shape.
+     *
+     * @param offsetX the desired X offset
+     * @param offsetY the desired Y offset
+     * @param offsetZ the desired Z offset
+     * @param rotX the X component of the rotation (relative to the system
+     * axes)
+     * @param rotY the Y component of the rotation (relative to the system
+     * axes)
+     * @param rotZ the Z component of the rotation (relative to the system
+     * axes)
+     * @param rotW the W component of the rotation (relative to the system
+     * axes)
+     * @param baseShape the base shape (not {@code null}, unaffected)
+     */
+    public RotatedTranslatedShapeSettings(float offsetX, float offsetY,
+            float offsetZ, float rotX, float rotY, float rotZ, float rotW,
+            ConstShape baseShape) {
         long baseShapeVa = baseShape.targetVa();
         long rtssVa = createSettingsFromShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
@@ -135,13 +184,31 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      */
     public RotatedTranslatedShapeSettings(Vec3Arg offset, QuatArg rotation,
             ConstShapeSettings baseShapeSettings) {
-        float offsetX = offset.getX();
-        float offsetY = offset.getY();
-        float offsetZ = offset.getZ();
-        float rotW = rotation.getW();
-        float rotX = rotation.getX();
-        float rotY = rotation.getY();
-        float rotZ = rotation.getZ();
+        this(offset.getX(), offset.getY(), offset.getZ(),
+                rotation.getX(), rotation.getY(), rotation.getZ(),
+                rotation.getW(), baseShapeSettings);
+    }
+
+    /**
+     * Instantiate a settings object with the specified offset, rotation, and
+     * base settings.
+     *
+     * @param offsetX the desired X offset
+     * @param offsetY the desired Y offset
+     * @param offsetZ the desired Z offset
+     * @param rotX the X component of the rotation (relative to the system
+     * axes)
+     * @param rotY the Y component of the rotation (relative to the system
+     * axes)
+     * @param rotZ the Z component of the rotation (relative to the system
+     * axes)
+     * @param rotW the W component of the rotation (relative to the system
+     * axes)
+     * @param baseShapeSettings settings for the base shape (not {@code null})
+     */
+    public RotatedTranslatedShapeSettings(float offsetX, float offsetY,
+            float offsetZ, float rotX, float rotY, float rotZ, float rotW,
+            ConstShapeSettings baseShapeSettings) {
         long baseShapeSettingsVa = baseShapeSettings.targetVa();
         long rtssVa = createSettingsFromShapeSettings(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeSettingsVa);

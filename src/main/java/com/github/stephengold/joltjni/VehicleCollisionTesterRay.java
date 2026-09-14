@@ -65,9 +65,25 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
      */
     public VehicleCollisionTesterRay(
             int objectLayer, Vec3Arg up, float maxSlopeAngle) {
-        float ux = up.getX();
-        float uy = up.getY();
-        float uz = up.getZ();
+        this(objectLayer, up.getX(), up.getY(), up.getZ(), maxSlopeAngle);
+    }
+
+    /**
+     * Instantiate a tester with the specified properties.
+     *
+     * @param objectLayer the index of the desired object layer for collisions
+     * @param ux the X component of the "up" direction (in system coordinates,
+     * default=0)
+     * @param uy the Y component of the "up" direction (in system coordinates,
+     * default=1)
+     * @param uz the Z component of the "up" direction (in system coordinates,
+     * default=0)
+     * @param maxSlopeAngle the maximum angle to consider for colliding wheels
+     * (in radians, default=4*Pi/9)
+     */
+    public VehicleCollisionTesterRay(
+            int objectLayer, float ux, float uy, float uz,
+            float maxSlopeAngle) {
         long testerVa = createTester(objectLayer, ux, uy, uz, maxSlopeAngle);
         setVirtualAddressAsCoOwner(testerVa);
     }

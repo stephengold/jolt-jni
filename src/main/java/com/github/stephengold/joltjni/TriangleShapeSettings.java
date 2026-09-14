@@ -99,15 +99,31 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
      */
     public TriangleShapeSettings(Vec3Arg v1, Vec3Arg v2, Vec3Arg v3,
             float convexRadius, PhysicsMaterial material) {
-        float v1x = v1.getX();
-        float v1y = v1.getY();
-        float v1z = v1.getZ();
-        float v2x = v2.getX();
-        float v2y = v2.getY();
-        float v2z = v2.getZ();
-        float v3x = v3.getX();
-        float v3y = v3.getY();
-        float v3z = v3.getZ();
+        this(v1.getX(), v1.getY(), v1.getZ(),
+                v2.getX(), v2.getY(), v2.getZ(),
+                v3.getX(), v3.getY(), v3.getZ(), convexRadius, material);
+    }
+
+    /**
+     * Instantiate settings for the specified vertices.
+     *
+     * @param v1x the X coordinate of the first vertex
+     * @param v1y the Y coordinate of the first vertex
+     * @param v1z the Z coordinate of the first vertex
+     * @param v2x the X coordinate of the 2nd vertex
+     * @param v2y the Y coordinate of the 2nd vertex
+     * @param v2z the Z coordinate of the 2nd vertex
+     * @param v3x the X coordinate of the 3rd vertex
+     * @param v3y the Y coordinate of the 3rd vertex
+     * @param v3z the Z coordinate of the 3rd vertex
+     * @param convexRadius the desired convex radius (default=0)
+     * @param material the desired surface properties (not null, unaffected) or
+     * {@code null} for default properties (default=null)
+     */
+    public TriangleShapeSettings(float v1x, float v1y, float v1z,
+            float v2x, float v2y, float v2z,
+            float v3x, float v3y, float v3z, float convexRadius,
+            PhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createTriangleShapeSettings(v1x, v1y, v1z, v2x, v2y,
                 v2z, v3x, v3y, v3z, convexRadius, materialVa);
