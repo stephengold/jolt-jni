@@ -114,10 +114,24 @@ abstract public class WheelSettings
      * @return the modified settings, for chaining
      */
     public WheelSettings setPosition(Vec3Arg position) {
+        setPosition(position.getX(), position.getY(), position.getZ());
+
+        return this;
+    }
+
+    /**
+     * Relocate the attachment point. (native attribute: mPosition)
+     *
+     * @param x the desired X coordinate of the attachment point (in the body's
+     * local coordinates, default=0)
+     * @param y the desired Y coordinate of the attachment point (in the body's
+     * local coordinates, default=0)
+     * @param z the desired Z coordinate of the attachment point (in the body's
+     * local coordinates, default=0)
+     * @return the modified settings, for chaining
+     */
+    public WheelSettings setPosition(float x, float y, float z) {
         long settingsVa = va();
-        float x = position.getX();
-        float y = position.getY();
-        float z = position.getZ();
         setPosition(settingsVa, x, y, z);
 
         return this;
@@ -145,10 +159,22 @@ abstract public class WheelSettings
      * @return the modified settings, for chaining
      */
     public WheelSettings setSteeringAxis(Vec3Arg direction) {
+        setSteeringAxis(direction.getX(), direction.getY(), direction.getZ());
+
+        return this;
+    }
+
+    /**
+     * Alter the steering axis (upward direction). (native attribute:
+     * mSteeringAxis)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=1)
+     * @param dz the desired Z component of the direction (default=0)
+     * @return the modified settings, for chaining
+     */
+    public WheelSettings setSteeringAxis(float dx, float dy, float dz) {
         long settingsVa = va();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
         setSteeringAxis(settingsVa, dx, dy, dz);
 
         return this;
@@ -163,10 +189,23 @@ abstract public class WheelSettings
      * @return the modified settings, for chaining
      */
     public WheelSettings setSuspensionDirection(Vec3Arg direction) {
+        setSuspensionDirection(
+                direction.getX(), direction.getY(), direction.getZ());
+
+        return this;
+    }
+
+    /**
+     * Alter the downward direction of the suspension. (native attribute:
+     * mSuspensionDirection)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=-1)
+     * @param dz the desired Z component of the direction (default=0)
+     * @return the modified settings, for chaining
+     */
+    public WheelSettings setSuspensionDirection(float dx, float dy, float dz) {
         long settingsVa = va();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
         setSuspensionDirection(settingsVa, dx, dy, dz);
 
         return this;
@@ -181,10 +220,26 @@ abstract public class WheelSettings
      * @return the modified settings, for chaining
      */
     public WheelSettings setSuspensionForcePoint(Vec3Arg location) {
+        setSuspensionForcePoint(
+                location.getX(), location.getY(), location.getZ());
+
+        return this;
+    }
+
+    /**
+     * Alter the location where tire forces will be applied if the force-point
+     * option is enabled. (native attribute: mSuspensionForcePoint)
+     *
+     * @param x the desired X coordinate of the location (in the body
+     * coordinates, default=0)
+     * @param y the desired Y coordinate of the location (in the body
+     * coordinates, default=0)
+     * @param z the desired Z coordinate of the location (in the body
+     * coordinates, default=0)
+     * @return the modified settings, for chaining
+     */
+    public WheelSettings setSuspensionForcePoint(float x, float y, float z) {
         long settingsVa = va();
-        float x = location.getX();
-        float y = location.getY();
-        float z = location.getZ();
         setSuspensionForcePoint(settingsVa, x, y, z);
 
         return this;
@@ -241,10 +296,22 @@ abstract public class WheelSettings
      * @return the modified settings, for chaining
      */
     public WheelSettings setWheelForward(Vec3Arg direction) {
+        setWheelForward(direction.getX(), direction.getY(), direction.getZ());
+
+        return this;
+    }
+
+    /**
+     * Alter the forward direction when steering is neutral. (native attribute:
+     * mWheelForward)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=0)
+     * @param dz the desired Z component of the direction (default=1)
+     * @return the modified settings, for chaining
+     */
+    public WheelSettings setWheelForward(float dx, float dy, float dz) {
         long settingsVa = va();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
         setWheelForward(settingsVa, dx, dy, dz);
 
         return this;
@@ -259,10 +326,22 @@ abstract public class WheelSettings
      * @return the modified settings, for chaining
      */
     public WheelSettings setWheelUp(Vec3Arg direction) {
+        setWheelUp(direction.getX(), direction.getY(), direction.getZ());
+
+        return this;
+    }
+
+    /**
+     * Alter the "up" direction when steering is neutral. (native attribute:
+     * mWheelUp)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=1)
+     * @param dz the desired Z component of the direction (default=0)
+     * @return the modified settings, for chaining
+     */
+    public WheelSettings setWheelUp(float dx, float dy, float dz) {
         long settingsVa = va();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
         setWheelUp(settingsVa, dx, dy, dz);
 
         return this;
@@ -306,12 +385,24 @@ abstract public class WheelSettings
      */
     @Override
     public Vec3 getPosition() {
+        Vec3 result = new Vec3();
+        getPosition(result);
+        return result;
+    }
+
+    /**
+     * Copy the location of the attachment point. The settings are unaffected.
+     * (native attribute: mPosition)
+     *
+     * @param out storage for the location (in the body's local coordinates,
+     * not {@code null}, modified)
+     */
+    @Override
+    public void getPosition(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPosition(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -336,12 +427,23 @@ abstract public class WheelSettings
      */
     @Override
     public Vec3 getSteeringAxis() {
+        Vec3 result = new Vec3();
+        getSteeringAxis(result);
+        return result;
+    }
+
+    /**
+     * Copy the steering axis (upward direction). The settings are unaffected.
+     * (native attribute: mSteeringAxis)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getSteeringAxis(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSteeringAxis(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -352,12 +454,23 @@ abstract public class WheelSettings
      */
     @Override
     public Vec3 getSuspensionDirection() {
+        Vec3 result = new Vec3();
+        getSuspensionDirection(result);
+        return result;
+    }
+
+    /**
+     * Copy the downward direction of the suspension. The settings are
+     * unaffected. (native attribute: mSuspensionDirection)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getSuspensionDirection(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSuspensionDirection(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -369,12 +482,25 @@ abstract public class WheelSettings
      */
     @Override
     public Vec3 getSuspensionForcePoint() {
+        Vec3 result = new Vec3();
+        getSuspensionForcePoint(result);
+        return result;
+    }
+
+    /**
+     * Copy the location where tire forces will be applied if the force-point
+     * option is enabled. The settings are unaffected. (native attribute:
+     * mSuspensionForcePoint)
+     *
+     * @param out storage for the location (in body coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getSuspensionForcePoint(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSuspensionForcePoint(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -442,12 +568,23 @@ abstract public class WheelSettings
      */
     @Override
     public Vec3 getWheelForward() {
+        Vec3 result = new Vec3();
+        getWheelForward(result);
+        return result;
+    }
+
+    /**
+     * Copy the forward direction when steering is neutral. The settings are
+     * unaffected. (native attribute: mWheelForward)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getWheelForward(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getWheelForward(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -458,12 +595,23 @@ abstract public class WheelSettings
      */
     @Override
     public Vec3 getWheelUp() {
+        Vec3 result = new Vec3();
+        getWheelUp(result);
+        return result;
+    }
+
+    /**
+     * Copy the "up" direction when steering is neutral. The settings are
+     * unaffected. (native attribute: mWheelUp)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getWheelUp(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getWheelUp(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**

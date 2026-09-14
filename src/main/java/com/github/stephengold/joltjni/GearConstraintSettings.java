@@ -73,12 +73,22 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      * @return a new direction vector
      */
     public Vec3 getHingeAxis1() {
+        Vec3 result = new Vec3();
+        getHingeAxis1(result);
+        return result;
+    }
+
+    /**
+     * Copy the hinge axis for body 1. The settings are unaffected. (native
+     * attribute: mHingeAxis1)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getHingeAxis1(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getHingeAxis1(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -88,12 +98,22 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      * @return a new direction vector
      */
     public Vec3 getHingeAxis2() {
+        Vec3 result = new Vec3();
+        getHingeAxis2(result);
+        return result;
+    }
+
+    /**
+     * Copy the hinge axis for body 2. The settings are unaffected. (native
+     * attribute: mHingeAxis2)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getHingeAxis2(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getHingeAxis2(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -139,10 +159,18 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      * @param axis the desired direction vector (default=(1,0,0))
      */
     public void setHingeAxis1(Vec3Arg axis) {
+        setHingeAxis1(axis.getX(), axis.getY(), axis.getZ());
+    }
+
+    /**
+     * Alter the hinge axis for body 1. (native attribute: mHingeAxis1)
+     *
+     * @param x the desired X component of the direction (default=1)
+     * @param y the desired Y component of the direction (default=0)
+     * @param z the desired Z component of the direction (default=0)
+     */
+    public void setHingeAxis1(float x, float y, float z) {
         long settingsVa = va();
-        float x = axis.getX();
-        float y = axis.getY();
-        float z = axis.getZ();
         setHingeAxis1(settingsVa, x, y, z);
     }
 
@@ -152,10 +180,18 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      * @param axis the desired direction vector (default=(1,0,0))
      */
     public void setHingeAxis2(Vec3Arg axis) {
+        setHingeAxis2(axis.getX(), axis.getY(), axis.getZ());
+    }
+
+    /**
+     * Alter the hinge axis for body 2. (native attribute: mHingeAxis2)
+     *
+     * @param x the desired X component of the direction (default=1)
+     * @param y the desired Y component of the direction (default=0)
+     * @param z the desired Z component of the direction (default=0)
+     */
+    public void setHingeAxis2(float x, float y, float z) {
         long settingsVa = va();
-        float x = axis.getX();
-        float y = axis.getY();
-        float z = axis.getZ();
         setHingeAxis2(settingsVa, x, y, z);
     }
 

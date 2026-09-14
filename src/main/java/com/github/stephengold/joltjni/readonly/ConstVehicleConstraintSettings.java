@@ -56,6 +56,13 @@ public interface ConstVehicleConstraintSettings
     Vec3 getForward();
 
     /**
+     * Copy the "forward" vector. The settings are unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    void getForward(Vec3 out);
+
+    /**
      * Return the vehicle's maximum pitch/roll angle. The settings are
      * unaffected.
      *
@@ -83,6 +90,13 @@ public interface ConstVehicleConstraintSettings
      * @return a new direction vector
      */
     Vec3 getUp();
+
+    /**
+     * Copy the "up" vector. The settings are unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    void getUp(Vec3 out);
 
     /**
      * Access the settings of the specified wheel.

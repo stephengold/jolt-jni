@@ -76,12 +76,22 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      * @return a new direction vector
      */
     public Vec3 getHingeAxis() {
+        Vec3 result = new Vec3();
+        getHingeAxis(result);
+        return result;
+    }
+
+    /**
+     * Copy the hinge axis of the pinion. The settings are unaffected. (native
+     * attribute: mHingeAxis)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getHingeAxis(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getHingeAxis(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -104,12 +114,22 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      * @return a new direction vector
      */
     public Vec3 getSliderAxis() {
+        Vec3 result = new Vec3();
+        getSliderAxis(result);
+        return result;
+    }
+
+    /**
+     * Copy the translation axis of the slider. The settings are unaffected.
+     * (native attribute: mSliderAxis)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getSliderAxis(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSliderAxis(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -145,13 +165,21 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      * @return the argument, for chaining
      */
     public Vec3Arg setHingeAxis(Vec3Arg direction) {
-        long settingsVa = va();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
-        setHingeAxis(settingsVa, dx, dy, dz);
+        setHingeAxis(direction.getX(), direction.getY(), direction.getZ());
 
         return direction;
+    }
+
+    /**
+     * Alter the hinge axis of the pinion. (native attribute: mHingeAxis)
+     *
+     * @param dx the desired X component of the axis direction (default=1)
+     * @param dy the desired Y component of the axis direction (default=0)
+     * @param dz the desired Z component of the axis direction (default=0)
+     */
+    public void setHingeAxis(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setHingeAxis(settingsVa, dx, dy, dz);
     }
 
     /**
@@ -185,13 +213,21 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      * @return the argument, for chaining
      */
     public Vec3Arg setSliderAxis(Vec3Arg direction) {
-        long settingsVa = va();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
-        setSliderAxis(settingsVa, dx, dy, dz);
+        setSliderAxis(direction.getX(), direction.getY(), direction.getZ());
 
         return direction;
+    }
+
+    /**
+     * Alter the translation axis of the rack. (native attribute: mSliderAxis)
+     *
+     * @param dx the desired X component of the axis direction (default=1)
+     * @param dy the desired Y component of the axis direction (default=0)
+     * @param dz the desired Z component of the axis direction (default=0)
+     */
+    public void setSliderAxis(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setSliderAxis(settingsVa, dx, dy, dz);
     }
 
     /**

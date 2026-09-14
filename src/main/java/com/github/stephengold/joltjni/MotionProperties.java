@@ -151,10 +151,22 @@ public class MotionProperties
      * coordinates, not {@code null}, unaffected, default=(0,0,0))
      */
     public void setAngularVelocity(Vec3Arg omega) {
+        setAngularVelocity(omega.getX(), omega.getY(), omega.getZ());
+    }
+
+    /**
+     * Directly alter the angular velocity. It is illegal to set a non-zero
+     * velocity on a sleeping body without activating it.
+     *
+     * @param wx the X component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wy the Y component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wz the Z component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     */
+    public void setAngularVelocity(float wx, float wy, float wz) {
         long propertiesVa = va();
-        float wx = omega.getX();
-        float wy = omega.getY();
-        float wz = omega.getZ();
         setAngularVelocity(propertiesVa, wx, wy, wz);
     }
 
@@ -178,14 +190,26 @@ public class MotionProperties
      * {@code null}, unaffected)
      */
     public void setInverseInertia(Vec3Arg diagonal, QuatArg rotation) {
+        setInverseInertia(diagonal.getX(), diagonal.getY(), diagonal.getZ(),
+                rotation.getX(), rotation.getY(), rotation.getZ(),
+                rotation.getW());
+    }
+
+    /**
+     * Alter the diagonal components of the inverse inertia matrix of the body.
+     * If inertia changes, mass should probably change as well.
+     *
+     * @param dx the desired X element of the diagonal
+     * @param dy the desired Y element of the diagonal
+     * @param dz the desired Z element of the diagonal
+     * @param rx the X component of the orientation of the principal axes
+     * @param ry the Y component of the orientation of the principal axes
+     * @param rz the Z component of the orientation of the principal axes
+     * @param rw the W component of the orientation of the principal axes
+     */
+    public void setInverseInertia(float dx, float dy, float dz,
+            float rx, float ry, float rz, float rw) {
         long propertiesVa = va();
-        float dx = diagonal.getX();
-        float dy = diagonal.getY();
-        float dz = diagonal.getZ();
-        float rw = rotation.getW();
-        float rx = rotation.getX();
-        float ry = rotation.getY();
-        float rz = rotation.getZ();
         setInverseInertia(propertiesVa, dx, dy, dz, rx, ry, rz, rw);
     }
 
@@ -219,10 +243,22 @@ public class MotionProperties
      * coordinates, not {@code null}, unaffected, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
+        setLinearVelocity(velocity.getX(), velocity.getY(), velocity.getZ());
+    }
+
+    /**
+     * Directly alter the linear velocity. It is illegal to set a non-zero
+     * velocity on a sleeping body without activating it.
+     *
+     * @param vx the X component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vy the Y component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vz the Z component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     */
+    public void setLinearVelocity(float vx, float vy, float vz) {
         long propertiesVa = va();
-        float vx = velocity.getX();
-        float vy = velocity.getY();
-        float vz = velocity.getZ();
         setLinearVelocity(propertiesVa, vx, vy, vz);
     }
 
@@ -292,13 +328,24 @@ public class MotionProperties
      */
     @Override
     public Vec3 getAccumulatedForce() {
+        Vec3 result = new Vec3();
+        getAccumulatedForce(result);
+        return result;
+    }
+
+    /**
+     * Copy the net force acting on the body. The properties are unaffected.
+     *
+     * @param out storage for the force (Newtons in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getAccumulatedForce(Vec3 out) {
         long propertiesVa = va();
         float x = getAccumulatedForceX(propertiesVa);
         float y = getAccumulatedForceY(propertiesVa);
         float z = getAccumulatedForceZ(propertiesVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
+        out.set(x, y, z);
     }
 
     /**
@@ -308,13 +355,24 @@ public class MotionProperties
      */
     @Override
     public Vec3 getAccumulatedTorque() {
+        Vec3 result = new Vec3();
+        getAccumulatedTorque(result);
+        return result;
+    }
+
+    /**
+     * Copy the net torque acting on the body. The properties are unaffected.
+     *
+     * @param out storage for the torque (Newton meters in system coordinates,
+     * not {@code null}, modified)
+     */
+    @Override
+    public void getAccumulatedTorque(Vec3 out) {
         long propertiesVa = va();
         float x = getAccumulatedTorqueX(propertiesVa);
         float y = getAccumulatedTorqueY(propertiesVa);
         float z = getAccumulatedTorqueZ(propertiesVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
+        out.set(x, y, z);
     }
 
     /**
@@ -389,12 +447,23 @@ public class MotionProperties
      */
     @Override
     public Vec3 getAngularVelocity() {
+        Vec3 result = new Vec3();
+        getAngularVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the angular velocity. The properties are unaffected.
+     *
+     * @param out storage for the velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getAngularVelocity(Vec3 out) {
         long propertiesVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAngularVelocity(propertiesVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -418,12 +487,23 @@ public class MotionProperties
      */
     @Override
     public Quat getInertiaRotation() {
+        Quat result = new Quat();
+        getInertiaRotation(result);
+        return result;
+    }
+
+    /**
+     * Copy the rotation that takes the inverse-inertia diagonal to local
+     * coordinates. The properties are unaffected.
+     *
+     * @param out storage for the rotation (not {@code null}, modified)
+     */
+    @Override
+    public void getInertiaRotation(Quat out) {
         long propertiesVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getInertiaRotation(propertiesVa, storeFloats);
-        Quat result = new Quat(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -434,12 +514,24 @@ public class MotionProperties
      */
     @Override
     public Vec3 getInverseInertiaDiagonal() {
+        Vec3 result = new Vec3();
+        getInverseInertiaDiagonal(result);
+        return result;
+    }
+
+    /**
+     * Copy the diagonal components of the inverse inertia matrix, assuming a
+     * dynamic body. The properties are unaffected.
+     *
+     * @param out storage for the diagonal (all components &ge;0, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getInverseInertiaDiagonal(Vec3 out) {
         long propertiesVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getInverseInertiaDiagonal(propertiesVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -488,12 +580,23 @@ public class MotionProperties
      */
     @Override
     public Vec3 getLinearVelocity() {
+        Vec3 result = new Vec3();
+        getLinearVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the linear velocity. The properties are unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 out) {
         long propertiesVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(propertiesVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**

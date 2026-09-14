@@ -150,10 +150,21 @@ public class SoftBodyVertex
      * @param location the desired location (not {@code null}, unaffected)
      */
     public void setPosition(Vec3Arg location) {
+        setPosition(location.getX(), location.getY(), location.getZ());
+    }
+
+    /**
+     * Relocate the vertex. (native attribute: mPosition)
+     *
+     * @param x the desired X coordinate (relative to the body's center of
+     * mass)
+     * @param y the desired Y coordinate (relative to the body's center of
+     * mass)
+     * @param z the desired Z coordinate (relative to the body's center of
+     * mass)
+     */
+    public void setPosition(float x, float y, float z) {
         long vertexVa = va();
-        float x = location.getX();
-        float y = location.getY();
-        float z = location.getZ();
         setPosition(vertexVa, x, y, z);
     }
 
@@ -164,10 +175,21 @@ public class SoftBodyVertex
      * unaffected)
      */
     public void setPreviousPosition(Vec3Arg location) {
+        setPreviousPosition(location.getX(), location.getY(), location.getZ());
+    }
+
+    /**
+     * Alter the previous location. (native attribute: mPreviousPosition)
+     *
+     * @param x the desired X coordinate (relative to the body's center of
+     * mass)
+     * @param y the desired Y coordinate (relative to the body's center of
+     * mass)
+     * @param z the desired Z coordinate (relative to the body's center of
+     * mass)
+     */
+    public void setPreviousPosition(float x, float y, float z) {
         long vertexVa = va();
-        float x = location.getX();
-        float y = location.getY();
-        float z = location.getZ();
         setPreviousPosition(vertexVa, x, y, z);
     }
 
@@ -178,10 +200,18 @@ public class SoftBodyVertex
      * {@code null}, unaffected)
      */
     public void setVelocity(Vec3Arg velocity) {
+        setVelocity(velocity.getX(), velocity.getY(), velocity.getZ());
+    }
+
+    /**
+     * Alter the velocity of the vertex. (native attribute: mVelocity)
+     *
+     * @param vx the desired X component of the velocity (meters per second)
+     * @param vy the desired Y component of the velocity (meters per second)
+     * @param vz the desired Z component of the velocity (meters per second)
+     */
+    public void setVelocity(float vx, float vy, float vz) {
         long vertexVa = va();
-        float vx = velocity.getX();
-        float vy = velocity.getY();
-        float vz = velocity.getZ();
         setVelocity(vertexVa, vx, vy, vz);
     }
     // *************************************************************************
@@ -253,12 +283,24 @@ public class SoftBodyVertex
      */
     @Override
     public Vec3 getPosition() {
+        Vec3 result = new Vec3();
+        getPosition(result);
+        return result;
+    }
+
+    /**
+     * Copy the location. The vertex is unaffected. (native attribute:
+     * mPosition)
+     *
+     * @param out storage for the location (relative to the body's center of
+     * mass, not {@code null}, modified)
+     */
+    @Override
+    public void getPosition(Vec3 out) {
         long vertexVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPosition(vertexVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -269,12 +311,24 @@ public class SoftBodyVertex
      */
     @Override
     public Vec3 getPreviousPosition() {
+        Vec3 result = new Vec3();
+        getPreviousPosition(result);
+        return result;
+    }
+
+    /**
+     * Copy the previous location. The vertex is unaffected. (native attribute:
+     * mPreviousPosition)
+     *
+     * @param out storage for the location (relative to the body's center of
+     * mass, not {@code null}, modified)
+     */
+    @Override
+    public void getPreviousPosition(Vec3 out) {
         long vertexVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPreviousPosition(vertexVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -286,12 +340,24 @@ public class SoftBodyVertex
      */
     @Override
     public Vec3 getVelocity() {
+        Vec3 result = new Vec3();
+        getVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the velocity. The vertex is unaffected. (native attribute:
+     * mVelocity)
+     *
+     * @param out storage for the velocity (relative to the body's center of
+     * mass, in meters per second, not {@code null}, modified)
+     */
+    @Override
+    public void getVelocity(Vec3 out) {
         long vertexVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getVelocity(vertexVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**

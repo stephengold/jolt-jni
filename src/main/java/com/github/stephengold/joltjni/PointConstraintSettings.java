@@ -73,12 +73,22 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
      * @return a new location vector
      */
     public RVec3 getPoint1() {
+        RVec3 result = new RVec3();
+        getPoint1(result);
+        return result;
+    }
+
+    /**
+     * Copy the constraint location for body 1. The settings are unaffected.
+     * (native attribute: mPoint1)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPoint1(RVec3 out) {
         long settingsVa = va();
         DoubleBuffer storeFloats = Temporaries.doubleBuffer1.get();
         getPoint1(settingsVa, storeFloats);
-        RVec3 result = new RVec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -88,12 +98,22 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
      * @return a new location vector
      */
     public RVec3 getPoint2() {
+        RVec3 result = new RVec3();
+        getPoint2(result);
+        return result;
+    }
+
+    /**
+     * Copy the constraint location for body 2. The settings are unaffected.
+     * (native attribute: mPoint2)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPoint2(RVec3 out) {
         long settingsVa = va();
         DoubleBuffer storeFloats = Temporaries.doubleBuffer1.get();
         getPoint2(settingsVa, storeFloats);
-        RVec3 result = new RVec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**

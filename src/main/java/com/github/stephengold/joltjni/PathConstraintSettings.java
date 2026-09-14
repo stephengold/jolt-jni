@@ -115,12 +115,22 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      * @return a new vector
      */
     public Vec3 getPathPosition() {
+        Vec3 result = new Vec3();
+        getPathPosition(result);
+        return result;
+    }
+
+    /**
+     * Copy the starting location. The settings are unaffected. (native field:
+     * mPathPosition)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPathPosition(Vec3 out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPathPosition(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -130,12 +140,22 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      * @return a new quaternion
      */
     public Quat getPathRotation() {
+        Quat result = new Quat();
+        getPathRotation(result);
+        return result;
+    }
+
+    /**
+     * Copy the initial rotation. The path is unaffected. (native field:
+     * mPathRotation)
+     *
+     * @param out storage for the orientation (not {@code null}, modified)
+     */
+    public void getPathRotation(Quat out) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPathRotation(settingsVa, storeFloats);
-        Quat result = new Quat(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -217,11 +237,19 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      * default=(0,0,0))
      */
     public void setPathPosition(Vec3Arg location) {
+        setPathPosition(location.getX(), location.getY(), location.getZ());
+    }
+
+    /**
+     * Alter the initial location. (native field: mPathPosition)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPathPosition(float x, float y, float z) {
         long settingsVa = va();
-        float locX = location.getX();
-        float locY = location.getY();
-        float locZ = location.getZ();
-        setPathPosition(settingsVa, locX, locY, locZ);
+        setPathPosition(settingsVa, x, y, z);
     }
 
     /**
@@ -231,11 +259,20 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      * default=(0,0,0,1))
      */
     public void setPathRotation(QuatArg orientation) {
+        setPathRotation(orientation.getX(), orientation.getY(),
+                orientation.getZ(), orientation.getW());
+    }
+
+    /**
+     * Alter the initial orientation. (native field: mPathRotation)
+     *
+     * @param qx the X component of the desired orientation (default=0)
+     * @param qy the Y component of the desired orientation (default=0)
+     * @param qz the Z component of the desired orientation (default=0)
+     * @param qw the W component of the desired orientation (default=1)
+     */
+    public void setPathRotation(float qx, float qy, float qz, float qw) {
         long settingsVa = va();
-        float qw = orientation.getW();
-        float qx = orientation.getX();
-        float qy = orientation.getY();
-        float qz = orientation.getZ();
         setPathRotation(settingsVa, qx, qy, qz, qw);
     }
 

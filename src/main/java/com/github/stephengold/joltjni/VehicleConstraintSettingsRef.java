@@ -103,10 +103,18 @@ final public class VehicleConstraintSettingsRef
      * unaffected, default=(0,0,1))
      */
     public void setForward(Vec3Arg forward) {
+        setForward(forward.getX(), forward.getY(), forward.getZ());
+    }
+
+    /**
+     * Alter the forward direction. (native attribute: mForward)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=0)
+     * @param dz the desired Z component of the direction (default=1)
+     */
+    public void setForward(float dx, float dy, float dz) {
         long settingsVa = targetVa();
-        float dx = forward.getX();
-        float dy = forward.getY();
-        float dz = forward.getZ();
         VehicleConstraintSettings.setForward(settingsVa, dx, dy, dz);
     }
 
@@ -138,10 +146,18 @@ final public class VehicleConstraintSettingsRef
      * default=(0,1,0))
      */
     public void setUp(Vec3Arg up) {
+        setUp(up.getX(), up.getY(), up.getZ());
+    }
+
+    /**
+     * Alter the up direction. (native attribute: mUp)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=1)
+     * @param dz the desired Z component of the direction (default=0)
+     */
+    public void setUp(float dx, float dy, float dz) {
         long settingsVa = targetVa();
-        float dx = up.getX();
-        float dy = up.getY();
-        float dz = up.getZ();
         VehicleConstraintSettings.setUp(settingsVa, dx, dy, dz);
     }
     // *************************************************************************
@@ -260,12 +276,23 @@ final public class VehicleConstraintSettingsRef
      */
     @Override
     public Vec3 getForward() {
+        Vec3 result = new Vec3();
+        getForward(result);
+        return result;
+    }
+
+    /**
+     * Copy the "forward" vector. The settings are unaffected. (native
+     * attribute: mForward)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getForward(Vec3 out) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         VehicleConstraintSettings.getForward(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -366,12 +393,23 @@ final public class VehicleConstraintSettingsRef
      */
     @Override
     public Vec3 getUp() {
+        Vec3 result = new Vec3();
+        getUp(result);
+        return result;
+    }
+
+    /**
+     * Copy the "up" vector. The settings are unaffected. (native attribute:
+     * mUp)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getUp(Vec3 out) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         VehicleConstraintSettings.getUp(settingsVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**

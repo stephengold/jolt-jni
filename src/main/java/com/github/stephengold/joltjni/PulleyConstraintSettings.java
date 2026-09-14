@@ -73,12 +73,22 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * @return a location vector
      */
     public RVec3 getBodyPoint1() {
+        RVec3 result = new RVec3();
+        getBodyPoint1(result);
+        return result;
+    }
+
+    /**
+     * Copy the location at which the constraint will attach to body 1. The
+     * settings are unaffected. (native attribute: mBodyPoint1)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getBodyPoint1(RVec3 out) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getBodyPoint1(settingsVa, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
-
-        return result;
+        out.set(storeDoubles);
     }
 
     /**
@@ -88,12 +98,22 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * @return a location vector
      */
     public RVec3 getBodyPoint2() {
+        RVec3 result = new RVec3();
+        getBodyPoint2(result);
+        return result;
+    }
+
+    /**
+     * Copy the location at which the constraint will attach to body 2. The
+     * settings are unaffected. (native attribute: mBodyPoint2)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getBodyPoint2(RVec3 out) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getBodyPoint2(settingsVa, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
-
-        return result;
+        out.set(storeDoubles);
     }
 
     /**
@@ -103,12 +123,23 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * @return a location vector (in system coordinates)
      */
     public RVec3 getFixedPoint1() {
+        RVec3 result = new RVec3();
+        getFixedPoint1(result);
+        return result;
+    }
+
+    /**
+     * Copy the location to which body 1 is connected. The settings are
+     * unaffected. (native attribute: mFixedPoint1)
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    public void getFixedPoint1(RVec3 out) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getFixedPoint1(settingsVa, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
-
-        return result;
+        out.set(storeDoubles);
     }
 
     /**
@@ -118,12 +149,23 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * @return a location vector (in system coordinates)
      */
     public RVec3 getFixedPoint2() {
+        RVec3 result = new RVec3();
+        getFixedPoint2(result);
+        return result;
+    }
+
+    /**
+     * Copy the location to which body 2 is connected. The settings are
+     * unaffected. (native attribute: mFixedPoint2)
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    public void getFixedPoint2(RVec3 out) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getFixedPoint2(settingsVa, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
-
-        return result;
+        out.set(storeDoubles);
     }
 
     /**
@@ -198,11 +240,20 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * default=(0,0,0))
      */
     public void setBodyPoint1(RVec3Arg location) {
+        setBodyPoint1(location.xx(), location.yy(), location.zz());
+    }
+
+    /**
+     * Alter the location at which the constraint will attach to body 1. (native
+     * attribute: mBodyPoint1)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setBodyPoint1(double x, double y, double z) {
         long settingsVa = va();
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
-        setBodyPoint1(settingsVa, locX, locY, locZ);
+        setBodyPoint1(settingsVa, x, y, z);
     }
 
     /**
@@ -213,11 +264,20 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * default=(0,0,0))
      */
     public void setBodyPoint2(RVec3Arg location) {
+        setBodyPoint2(location.xx(), location.yy(), location.zz());
+    }
+
+    /**
+     * Alter the location at which the constraint will attach to body 2. (native
+     * attribute: mBodyPoint2)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setBodyPoint2(double x, double y, double z) {
         long settingsVa = va();
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
-        setBodyPoint2(settingsVa, locX, locY, locZ);
+        setBodyPoint2(settingsVa, x, y, z);
     }
 
     /**
@@ -228,11 +288,20 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * {@code null}, unaffected, default=(0,0,0))
      */
     public void setFixedPoint1(RVec3Arg location) {
+        setFixedPoint1(location.xx(), location.yy(), location.zz());
+    }
+
+    /**
+     * Alter the location to which body 1 is connected. (native attribute:
+     * mFixedPoint1)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setFixedPoint1(double x, double y, double z) {
         long settingsVa = va();
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
-        setFixedPoint1(settingsVa, locX, locY, locZ);
+        setFixedPoint1(settingsVa, x, y, z);
     }
 
     /**
@@ -243,11 +312,20 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * {@code null}, unaffected, default=(0,0,0))
      */
     public void setFixedPoint2(RVec3Arg location) {
+        setFixedPoint2(location.xx(), location.yy(), location.zz());
+    }
+
+    /**
+     * Alter the location to which body 2 is connected. (native attribute:
+     * mFixedPoint2)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setFixedPoint2(double x, double y, double z) {
         long settingsVa = va();
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
-        setFixedPoint2(settingsVa, locX, locY, locZ);
+        setFixedPoint2(settingsVa, x, y, z);
     }
 
     /**

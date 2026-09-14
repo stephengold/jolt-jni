@@ -117,12 +117,23 @@ public class Wheel extends NonCopyable implements ConstWheel {
      */
     @Override
     public Vec3 getContactLateral() {
+        Vec3 result = new Vec3();
+        getContactLateral(result);
+        return result;
+    }
+
+    /**
+     * Copy the wheel's lateral (sideways) direction.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getContactLateral(Vec3 out) {
         long wheelVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getContactLateral(wheelVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -132,12 +143,23 @@ public class Wheel extends NonCopyable implements ConstWheel {
      */
     @Override
     public Vec3 getContactLongitudinal() {
+        Vec3 result = new Vec3();
+        getContactLongitudinal(result);
+        return result;
+    }
+
+    /**
+     * Copy the wheel's longitudinal direction.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getContactLongitudinal(Vec3 out) {
         long wheelVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getContactLongitudinal(wheelVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -147,12 +169,23 @@ public class Wheel extends NonCopyable implements ConstWheel {
      */
     @Override
     public Vec3 getContactNormal() {
+        Vec3 result = new Vec3();
+        getContactNormal(result);
+        return result;
+    }
+
+    /**
+     * Copy the contact normal direction.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getContactNormal(Vec3 out) {
         long wheelVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getContactNormal(wheelVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -162,12 +195,23 @@ public class Wheel extends NonCopyable implements ConstWheel {
      */
     @Override
     public Vec3 getContactPointVelocity() {
+        Vec3 result = new Vec3();
+        getContactPointVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the velocity of the contact point.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getContactPointVelocity(Vec3 out) {
         long wheelVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getContactPointVelocity(wheelVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -177,12 +221,23 @@ public class Wheel extends NonCopyable implements ConstWheel {
      */
     @Override
     public RVec3 getContactPosition() {
+        RVec3 result = new RVec3();
+        getContactPosition(result);
+        return result;
+    }
+
+    /**
+     * Copy the location of the contact point.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getContactPosition(RVec3 out) {
         long wheelVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getContactPosition(wheelVa, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
-
-        return result;
+        out.set(storeDoubles);
     }
 
     /**
