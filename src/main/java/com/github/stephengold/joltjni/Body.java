@@ -84,10 +84,21 @@ public class Body extends NonCopyable implements ConstBody {
      * coordinates, not {@code null}, unaffected)
      */
     public void addAngularImpulse(Vec3Arg impulse) {
+        addAngularImpulse(impulse.getX(), impulse.getY(), impulse.getZ());
+    }
+
+    /**
+     * Apply the specified angular impulse to the body.
+     *
+     * @param x the X component of the impulse (Newton meter seconds in system
+     * coordinates)
+     * @param y the Y component of the impulse (Newton meter seconds in system
+     * coordinates)
+     * @param z the Z component of the impulse (Newton meter seconds in system
+     * coordinates)
+     */
+    public void addAngularImpulse(float x, float y, float z) {
         long bodyVa = va();
-        float x = impulse.getX();
-        float y = impulse.getY();
-        float z = impulse.getZ();
         addAngularImpulse(bodyVa, x, y, z);
     }
 
@@ -98,10 +109,18 @@ public class Body extends NonCopyable implements ConstBody {
      * {@code null}, unaffected)
      */
     public void addForce(Vec3Arg force) {
+        addForce(force.getX(), force.getY(), force.getZ());
+    }
+
+    /**
+     * Apply the specified force to the body's center of mass.
+     *
+     * @param fx the X component of the force (Newtons in system coordinates)
+     * @param fy the Y component of the force (Newtons in system coordinates)
+     * @param fz the Z component of the force (Newtons in system coordinates)
+     */
+    public void addForce(float fx, float fy, float fz) {
         long bodyVa = va();
-        float fx = force.getX();
-        float fy = force.getY();
-        float fz = force.getZ();
         addForce(bodyVa, fx, fy, fz);
     }
 
@@ -113,13 +132,26 @@ public class Body extends NonCopyable implements ConstBody {
      * not {@code null}, unaffected)
      */
     public void addForce(Vec3Arg force, RVec3Arg location) {
+        addForce(force.getX(), force.getY(), force.getZ(),
+                location.xx(), location.yy(), location.zz());
+    }
+
+    /**
+     * Apply the specified force at the specified location.
+     *
+     * @param fx the X component of the force (Newtons in system coordinates)
+     * @param fy the Y component of the force (Newtons in system coordinates)
+     * @param fz the Z component of the force (Newtons in system coordinates)
+     * @param locX the X coordinate where the force is applied (in system
+     * coordinates)
+     * @param locY the Y coordinate where the force is applied (in system
+     * coordinates)
+     * @param locZ the Z coordinate where the force is applied (in system
+     * coordinates)
+     */
+    public void addForce(float fx, float fy, float fz,
+                         double locX, double locY, double locZ) {
         long bodyVa = va();
-        float fx = force.getX();
-        float fy = force.getY();
-        float fz = force.getZ();
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
         addForce(bodyVa, fx, fy, fz, locX, locY, locZ);
     }
 
@@ -177,10 +209,21 @@ public class Body extends NonCopyable implements ConstBody {
      * {@code null}, unaffected)
      */
     public void addTorque(Vec3Arg torque) {
+        addTorque(torque.getX(), torque.getY(), torque.getZ());
+    }
+
+    /**
+     * Apply the specified torque to the body.
+     *
+     * @param x the X component of the torque (Newton meters in system
+     * coordinates)
+     * @param y the Y component of the torque (Newton meters in system
+     * coordinates)
+     * @param z the Z component of the torque (Newton meters in system
+     * coordinates)
+     */
+    public void addTorque(float x, float y, float z) {
         long bodyVa = va();
-        float x = torque.getX();
-        float y = torque.getY();
-        float z = torque.getZ();
         addTorque(bodyVa, x, y, z);
     }
 
@@ -223,22 +266,60 @@ public class Body extends NonCopyable implements ConstBody {
             RVec3Arg surfacePosition, Vec3Arg surfaceNormal, float buoyancy,
             float linearDrag, float angularDrag, Vec3Arg fluidVelocity,
             Vec3Arg gravity, float deltaTime) {
+        return applyBuoyancyImpulse(
+                surfacePosition.xx(), surfacePosition.yy(),
+                surfacePosition.zz(),
+                surfaceNormal.getX(), surfaceNormal.getY(),
+                surfaceNormal.getZ(),
+                buoyancy, linearDrag, angularDrag,
+                fluidVelocity.getX(), fluidVelocity.getY(),
+                fluidVelocity.getZ(),
+                gravity.getX(), gravity.getY(), gravity.getZ(), deltaTime
+        );
+    }
+
+    /**
+     * Apply an impulse that simulates buoyancy and drag.
+     *
+     * @param spx the X coordinate of the fluid's surface (in system
+     * coordinates)
+     * @param spy the Y coordinate of the fluid's surface (in system
+     * coordinates)
+     * @param spz the Z coordinate of the fluid's surface (in system
+     * coordinates)
+     * @param snx the X component of the upward normal direction of the fluid's
+     * surface (in system coordinates)
+     * @param sny the Y component of the upward normal direction of the fluid's
+     * surface (in system coordinates)
+     * @param snz the Z component of the upward normal direction of the fluid's
+     * surface (in system coordinates)
+     * @param buoyancy the mass of the displaced fluid divided by the body's
+     * mass (1&rarr;neutral buoyancy)
+     * @param linearDrag the drag factor for linear motion
+     * @param angularDrag the drag factor for angular motion
+     * @param fvx the X component of the fluid's velocity (meters per second in
+     * system coordinates)
+     * @param fvy the Y component of the fluid's velocity (meters per second in
+     * system coordinates)
+     * @param fvz the Z component of the fluid's velocity (meters per second in
+     * system coordinates)
+     * @param gx the X component of the gravity vector (in system coordinates)
+     * @param gy the Y component of the gravity vector (in system coordinates)
+     * @param gz the Z component of the gravity vector (in system coordinates)
+     * @param deltaTime the duration of the simulation step (in seconds)
+     * @return {@code true} if an impulse was applied, {@code false} if not in
+     * the fluid
+     */
+    public boolean applyBuoyancyImpulse(
+            double spx, double spy, double spz,
+            float snx, float sny, float snz,
+            float buoyancy, float linearDrag, float angularDrag,
+            float fvx, float fvy, float fvz,
+            float gx, float gy, float gz, float deltaTime) {
         long bodyVa = va();
-        double surfaceX = surfacePosition.xx();
-        double surfaceY = surfacePosition.yy();
-        double surfaceZ = surfacePosition.zz();
-        float nx = surfaceNormal.getX();
-        float ny = surfaceNormal.getY();
-        float nz = surfaceNormal.getZ();
-        float vx = fluidVelocity.getX();
-        float vy = fluidVelocity.getY();
-        float vz = fluidVelocity.getZ();
-        float gravityX = gravity.getX();
-        float gravityY = gravity.getY();
-        float gravityZ = gravity.getZ();
-        boolean result = applyBuoyancyImpulse(bodyVa, surfaceX, surfaceY,
-                surfaceZ, nx, ny, nz, buoyancy, linearDrag, angularDrag,
-                vx, vy, vz, gravityX, gravityY, gravityZ, deltaTime);
+        boolean result = applyBuoyancyImpulse(bodyVa, spx, spy,
+                spz, snx, sny, snz, buoyancy, linearDrag, angularDrag,
+                fvx, fvy, fvz, gx, gy, gz, deltaTime);
 
         return result;
     }
@@ -272,14 +353,37 @@ public class Body extends NonCopyable implements ConstBody {
      */
     public void moveKinematic(
             RVec3Arg location, QuatArg orientation, float deltaTime) {
+        moveKinematic(
+                location.xx(), location.yy(), location.zz(),
+                orientation.getX(), orientation.getY(),
+                orientation.getZ(), orientation.getW(), deltaTime);
+    }
+
+    /**
+     * Reposition the body, assuming it's kinematic. It is illegal to reposition
+     * a sleeping body without activating it.
+     *
+     * @param xx the X coordinate of the desired location (in system
+     * coordinates)
+     * @param yy the Y coordinate of the desired location (in system
+     * coordinates)
+     * @param zz the Z coordinate of the desired location (in system
+     * coordinates)
+     * @param qx the X component of the desired orientation (relative to the
+     * system axes)
+     * @param qy the Y component of the desired orientation (relative to the
+     * system axes)
+     * @param qz the Z component of the desired orientation (relative to the
+     * system axes)
+     * @param qw the W component of the desired orientation (relative to the
+     * system axes)
+     * @param deltaTime time until the desired position is reached (in seconds,
+     * &gt;0)
+     */
+    public void moveKinematic(
+            double xx, double yy, double zz,
+            float qx, float qy, float qz, float qw, float deltaTime) {
         long bodyVa = va();
-        double xx = location.xx();
-        double yy = location.yy();
-        double zz = location.zz();
-        float qw = orientation.getW();
-        float qx = orientation.getX();
-        float qy = orientation.getY();
-        float qz = orientation.getZ();
         moveKinematic(bodyVa, xx, yy, zz, qx, qy, qz, qw, deltaTime);
     }
 
@@ -340,10 +444,22 @@ public class Body extends NonCopyable implements ConstBody {
      * default=(0,0,0))
      */
     public void setAngularVelocityClamped(Vec3Arg omega) {
+        setAngularVelocityClamped(omega.getX(), omega.getY(), omega.getZ());
+    }
+
+    /**
+     * Alter the body's angular velocity within limits. It is illegal to set a
+     * non-zero velocity on a sleeping body without activating it.
+     *
+     * @param wx the X component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wy the Y component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wz the Z component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     */
+    public void setAngularVelocityClamped(float wx, float wy, float wz) {
         long bodyVa = va();
-        float wx = omega.getX();
-        float wy = omega.getY();
-        float wz = omega.getZ();
         setAngularVelocityClamped(bodyVa, wx, wy, wz);
     }
 
@@ -429,10 +545,23 @@ public class Body extends NonCopyable implements ConstBody {
      * {@code null}, unaffected, default=(0,0,0))
      */
     public void setLinearVelocityClamped(Vec3Arg velocity) {
+        setLinearVelocityClamped(
+                velocity.getX(), velocity.getY(), velocity.getZ());
+    }
+
+    /**
+     * Alter the body's linear velocity within limits. It is illegal to set a
+     * non-zero velocity on a sleeping body without activating it.
+     *
+     * @param vx the X component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vy the Y component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vz the Z component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     */
+    public void setLinearVelocityClamped(float vx, float vy, float vz) {
         long bodyVa = va();
-        float vx = velocity.getX();
-        float vy = velocity.getY();
-        float vz = velocity.getZ();
         setLinearVelocityClamped(bodyVa, vx, vy, vz);
     }
 
@@ -481,14 +610,36 @@ public class Body extends NonCopyable implements ConstBody {
      */
     public void setPositionAndRotationInternal(
             RVec3Arg location, QuatArg orientation, boolean resetSleepTimer) {
+        setPositionAndRotationInternal(
+                location.xx(), location.yy(), location.zz(),
+                orientation.getX(), orientation.getY(), orientation.getZ(),
+                orientation.getW(), resetSleepTimer);
+    }
+
+    /**
+     * Reposition the body.
+     *
+     * @param locX the X coordinate of the desired location (in system
+     * coordinates)
+     * @param locY the Y coordinate of the desired location (in system
+     * coordinates)
+     * @param locZ the Z coordinate of the desired location (in system
+     * coordinates)
+     * @param qx the X component of the desired orientation (relative to the
+     * system axes)
+     * @param qy the Y component of the desired orientation (relative to the
+     * system axes)
+     * @param qz the Z component of the desired orientation (relative to the
+     * system axes)
+     * @param qw the W component of the desired orientation (relative to the
+     * system axes)
+     * @param resetSleepTimer {@code true} to reset the body's sleep timer,
+     * {@code false} to leave the timer unchanged
+     */
+    public void setPositionAndRotationInternal(
+            double locX, double locY, double locZ,
+            float qx, float qy, float qz, float qw, boolean resetSleepTimer) {
         long bodyVa = va();
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
-        float qw = orientation.getW();
-        float qx = orientation.getX();
-        float qy = orientation.getY();
-        float qz = orientation.getZ();
         setPositionAndRotationInternal(
                 bodyVa, locX, locY, locZ, qx, qy, qz, qw, resetSleepTimer);
     }
@@ -549,12 +700,23 @@ public class Body extends NonCopyable implements ConstBody {
      */
     @Override
     public Vec3 getAccumulatedForce() {
+        Vec3 result = new Vec3();
+        getAccumulatedForce(result);
+        return result;
+    }
+
+    /**
+     * Copy the net force acting on the body. The body is unaffected.
+     *
+     * @param out storage for the force (Newtons in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getAccumulatedForce(Vec3 out) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAccumulatedForce(bodyVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -564,12 +726,23 @@ public class Body extends NonCopyable implements ConstBody {
      */
     @Override
     public Vec3 getAccumulatedTorque() {
+        Vec3 result = new Vec3();
+        getAccumulatedTorque(result);
+        return result;
+    }
+
+    /**
+     * Copy the net torque acting on the body. The body is unaffected.
+     *
+     * @param out storage for the torque (Newton meters in system coordinates,
+     * not {@code null}, modified)
+     */
+    @Override
+    public void getAccumulatedTorque(Vec3 out) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAccumulatedTorque(bodyVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -592,12 +765,23 @@ public class Body extends NonCopyable implements ConstBody {
      */
     @Override
     public Vec3 getAngularVelocity() {
+        Vec3 result = new Vec3();
+        getAngularVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the body's angular velocity. The body is unaffected.
+     *
+     * @param out storage for the angular velocity (radians per second in
+     * system coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getAngularVelocity(Vec3 out) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAngularVelocity(bodyVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -791,12 +975,23 @@ public class Body extends NonCopyable implements ConstBody {
      */
     @Override
     public Vec3 getLinearVelocity() {
+        Vec3 result = new Vec3();
+        getLinearVelocity(result);
+        return result;
+    }
+
+    /**
+     * Copy the body's linear velocity. The body is unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 out) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(bodyVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -882,15 +1077,27 @@ public class Body extends NonCopyable implements ConstBody {
      */
     @Override
     public RVec3 getPosition() {
-        long bodyVa = va();
-        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
-        getPosition(bodyVa, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
-
+        RVec3 result = new RVec3();
+        getPosition(result);
         assert Double.isFinite(result.xx()) : "xx = " + result.xx();
         assert Double.isFinite(result.yy()) : "yy = " + result.yy();
         assert Double.isFinite(result.zz()) : "zz = " + result.zz();
         return result;
+    }
+
+    /**
+     * Copy the location of the body's origin (which might not coincide with its
+     * center of mass). The body is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 out) {
+        long bodyVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(bodyVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**
@@ -935,12 +1142,23 @@ public class Body extends NonCopyable implements ConstBody {
      */
     @Override
     public Quat getRotation() {
+        Quat result = new Quat();
+        getRotation(result);
+        return result;
+    }
+
+    /**
+     * Copy the body's orientation. The body is unaffected.
+     *
+     * @param out storage for the orientation (relative to the system axes, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getRotation(Quat out) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotation(bodyVa, storeFloats);
-        Quat result = new Quat(storeFloats);
-
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -1043,15 +1261,64 @@ public class Body extends NonCopyable implements ConstBody {
      */
     @Override
     public Vec3 getWorldSpaceSurfaceNormal(int subShapeId, RVec3Arg location) {
+        Vec3 result = new Vec3();
+        getWorldSpaceSurfaceNormal(subShapeId, location, result);
+        return result;
+    }
+
+    /**
+     * Copy the surface normal of a particular subshape at the specified
+     * location. The body is unaffected.
+     *
+     * @param subShapeId the ID of the sub-shape to use
+     * @param xx the X coordinate of the location (in system coordinates)
+     * @param yy the Y coordinate of the location (in system coordinates)
+     * @param zz the Z coordinate of the location (in system coordinates)
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getWorldSpaceSurfaceNormal(
+            int subShapeId, double xx, double yy, double zz) {
+        Vec3 result = new Vec3();
+        getWorldSpaceSurfaceNormal(subShapeId, xx, yy, zz, result);
+        return result;
+    }
+
+    /**
+     * Copy the surface normal of a particular subshape at the specified
+     * location. The body is unaffected.
+     *
+     * @param subShapeId the ID of the sub-shape to use
+     * @param location the location to use (not {@code null}, unaffected)
+     * @param out storage for the normal (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getWorldSpaceSurfaceNormal(
+            int subShapeId, RVec3Arg location, Vec3 out) {
+        getWorldSpaceSurfaceNormal(subShapeId, location.xx(),
+                location.yy(), location.zz(), out);
+    }
+
+    /**
+     * Copy the surface normal of a particular subshape at the specified
+     * location. The body is unaffected.
+     *
+     * @param subShapeId the ID of the sub-shape to use
+     * @param xx the X coordinate of the location (in system coordinates)
+     * @param yy the Y coordinate of the location (in system coordinates)
+     * @param zz the Z coordinate of the location (in system coordinates)
+     * @param out storage for the normal (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getWorldSpaceSurfaceNormal(
+            int subShapeId, double xx, double yy, double zz, Vec3 out) {
         long bodyVa = va();
-        double xx = location.xx();
-        double yy = location.yy();
-        double zz = location.zz();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getWorldSpaceSurfaceNormal(bodyVa, subShapeId, xx, yy, zz, storeFloats);
-
-        Vec3 result = new Vec3(storeFloats);
-        return result;
+        out.set(storeFloats);
     }
 
     /**
@@ -1064,7 +1331,6 @@ public class Body extends NonCopyable implements ConstBody {
         long bodyVa = va();
         long matrixVa = getWorldTransform(bodyVa);
         RMat44 result = new RMat44(matrixVa, true);
-
         return result;
     }
 

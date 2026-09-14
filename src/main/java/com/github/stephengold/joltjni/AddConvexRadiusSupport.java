@@ -55,16 +55,52 @@ public class AddConvexRadiusSupport extends JoltPhysicsObject {
      * @return a new offset vector
      */
     public Vec3 getSupport(Vec3Arg direction) {
-        long addVa = va();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getSupport(addVa, dx, dy, dz, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
+        Vec3 result = new Vec3();
+        getSupport(direction.getX(), direction.getY(),
+                direction.getZ(), result);
         return result;
     }
+
+    /**
+     * Evaluate the augmented support function for the specified direction.
+     *
+     * @param dx the X component of the direction
+     * @param dy the Y component of the direction
+     * @param dz the Z component of the direction
+     *
+     * @return a new offset vector
+     */
+    public Vec3 getSupport(float dx, float dy, float dz) {
+        Vec3 result = new Vec3();
+        getSupport(dx, dy, dz, result);
+        return result;
+    }
+
+    /**
+     * Evaluate the augmented support function for the specified direction.
+     *
+     * @param direction the direction to use (not {@code null}, unaffected)
+     * @param out storage for the offset vector (not {@code null}, modified)
+     */
+    public void getSupport(Vec3Arg direction, Vec3 out) {
+        getSupport(direction.getX(), direction.getY(), direction.getZ(), out);
+    }
+
+    /**
+     * Evaluate the augmented support function for the specified direction.
+     *
+     * @param dx the X component of the direction
+     * @param dy the Y component of the direction
+     * @param dz the Z component of the direction
+     * @param out storage for the offset vector (not {@code null}, modified)
+     */
+    public void getSupport(float dx, float dy, float dz, Vec3 out) {
+        long addVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSupport(addVa, dx, dy, dz, storeFloats);
+        out.set(storeFloats);
+    }
+
     // *************************************************************************
     // native private methods
 

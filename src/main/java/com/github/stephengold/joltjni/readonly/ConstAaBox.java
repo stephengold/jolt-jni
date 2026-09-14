@@ -48,7 +48,20 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      *
      * @return {@code true} if contained, otherwise {@code false}
      */
-    boolean contains(Vec3Arg point);
+    default boolean contains(Vec3Arg point) {
+        return contains(point.getX(), point.getY(), point.getZ());
+    }
+
+    /**
+     * Test whether the box contains the specified point. The box is unaffected.
+     *
+     * @param x the X coordinate of the point to test
+     * @param y the Y coordinate of the point to test
+     * @param z the Z coordinate of the point to test
+     *
+     * @return {@code true} if contained, otherwise {@code false}
+     */
+    boolean contains(float x, float y, float z);
 
     /**
      * Locate the center of the box. The box is unaffected.
@@ -67,11 +80,41 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     Vec3 getClosestPoint(Vec3Arg location);
 
     /**
+     * Locate the closest point on or in the box for the specified location. The
+     * box is unaffected.
+     *
+     * @param x the X coordinate of the location
+     * @param y the Y coordinate of the location
+     * @param z the Z coordinate of the location
+     * @param out storage for the closest point (not {@code null}, modified)
+     */
+    void getClosestPoint(float x, float y, float z, Vec3 out);
+
+    /**
+     * Locate the closest point on or in the box for the specified location. The
+     * box is unaffected.
+     *
+     * @param x the X coordinate of the location
+     * @param y the Y coordinate of the location
+     * @param z the Z coordinate of the location
+     *
+     * @return a new vector
+     */
+    Vec3 getClosestPoint(float x, float y, float z);
+
+    /**
      * Copy the (half) extent of the box. The box is unaffected.
      *
      * @return a new vector
      */
     Vec3 getExtent();
+
+    /**
+     * Copy the (half) extent of the box. The box is unaffected.
+     *
+     * @param out storage for the extent (not {@code null}, modified)
+     */
+    void getExtent(Vec3 out);
 
     /**
      * Copy the maximum contained coordinate on each axis. The box is
@@ -82,6 +125,14 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     Vec3 getMax();
 
     /**
+     * Copy the maximum contained coordinate on each axis. The box is
+     * unaffected.
+     *
+     * @param out storage for the maximum (not {@code null}, modified)
+     */
+    void getMax(Vec3 out);
+
+    /**
      * Copy the minimum contained coordinate on each axis. The box is
      * unaffected.
      *
@@ -90,11 +141,26 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     Vec3 getMin();
 
     /**
+     * Copy the minimum contained coordinate on each axis. The box is
+     * unaffected.
+     *
+     * @param out storage for the minimum (not {@code null}, modified)
+     */
+    void getMin(Vec3 out);
+
+    /**
      * Copy the size (full extent) on each axis. The box is unaffected.
      *
      * @return a new vector
      */
     Vec3 getSize();
+
+    /**
+     * Copy the size (full extent) on each axis. The box is unaffected.
+     *
+     * @param out storage for the size (not {@code null}, modified)
+     */
+    void getSize(Vec3 out);
 
     /**
      * Get the squared distance between the box and the specified point.
@@ -106,6 +172,17 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     float getSqDistanceTo(Vec3Arg point);
 
     /**
+     * Get the squared distance between the box and the specified point.
+     *
+     * @param x the X coordinate of the point to measure from
+     * @param y the Y coordinate of the point to measure from
+     * @param z the Z coordinate of the point to measure from
+     *
+     * @return the distance, or zero if the point lies inside the box
+     */
+    float getSqDistanceTo(float x, float y, float z);
+
+    /**
      * Calculate the support vector for this convex shape.
      *
      * @param direction the direction vector
@@ -113,6 +190,37 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * @return the support vector
      */
     Vec3 getSupport(Vec3Arg direction);
+
+    /**
+     * Calculate the support vector for this convex shape.
+     *
+     * @param x the X component of the direction vector
+     * @param y the Y component of the direction vector
+     * @param z the Z component of the direction vector
+     *
+     * @return the support vector
+     */
+    Vec3 getSupport(float x, float y, float z);
+
+    /**
+     * Calculate the support vector for this convex shape. The shape is
+     * unaffected.
+     *
+     * @param direction the direction vector (not {@code null}, unaffected)
+     * @param out storage for the support vector (not {@code null}, modified)
+     */
+    void getSupport(Vec3Arg direction, Vec3 out);
+
+    /**
+     * Calculate the support vector for this convex shape. The shape is
+     * unaffected.
+     *
+     * @param x the X component of the direction vector
+     * @param y the Y component of the direction vector
+     * @param z the Z component of the direction vector
+     * @param out storage for the support vector (not {@code null}, modified)
+     */
+    void getSupport(float x, float y, float z, Vec3 out);
 
     /**
      * Get surface area of bounding box.
@@ -164,12 +272,35 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     boolean overlaps(ConstPlane plane);
 
     /**
+     * Check if this box overlaps with a plane.
+     *
+     * @param constant the plane constant
+     * @param normalX the X component of the plane's normal
+     * @param normalY the Y component of the plane's normal
+     * @param normalZ the Z component of the plane's normal
+     *
+     * @return {@code true} if they overlap, otherwise {@code false}
+     */
+    boolean overlaps(
+            float constant, float normalX, float normalY, float normalZ);
+
+    /**
      * Return a scaled copy of the box. The current box is unaffected.
      *
      * @param factors the scale factors to apply (not {@code null}, unaffected)
      * @return a new object
      */
     AaBox scaled(Vec3Arg factors);
+
+    /**
+     * Return a scaled copy of the box. The current box is unaffected.
+     *
+     * @param x the scale factor to apply to the local X axis
+     * @param y the scale factor to apply to the local Y axis
+     * @param z the scale factor to apply to the local Z axis
+     * @return a new object
+     */
+    AaBox scaled(float x, float y, float z);
 
     /**
      * Return a transformed copy of the box. The current box is unaffected.

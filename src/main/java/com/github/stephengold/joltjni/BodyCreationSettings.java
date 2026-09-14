@@ -84,11 +84,34 @@ public class BodyCreationSettings
      */
     public BodyCreationSettings(ConstShape shape, RVec3Arg loc, QuatArg orient,
             EMotionType motionType, int objLayer) {
+        this(shape, loc.xx(), loc.yy(), loc.zz(),
+                orient.getX(), orient.getY(), orient.getZ(), orient.getW(),
+                motionType, objLayer);
+    }
+
+    /**
+     * Instantiate cooked settings for the specified shape.
+     *
+     * @param shape the desired shape (not {@code null})
+     * @param locX the desired X coordinate of the location
+     * @param locY the desired Y coordinate of the location
+     * @param locZ the desired Z coordinate of the location
+     * @param orientX the X component of the desired orientation
+     * @param orientY the Y component of the desired orientation
+     * @param orientZ the Z component of the desired orientation
+     * @param orientW the W component of the desired orientation
+     * @param motionType the desired motion type (not {@code null})
+     * @param objLayer the ID of the desired object layer (&ge;0)
+     */
+    public BodyCreationSettings(ConstShape shape,
+            double locX, double locY, double locZ,
+            float orientX, float orientY, float orientZ, float orientW,
+            EMotionType motionType, int objLayer) {
         long shapeVa = shape.targetVa();
         int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createFromShape(shapeVa, loc.xx(), loc.yy(),
-                loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
-                orient.getW(), motionTypeOrdinal, objLayer);
+        long bodySettingsVa = createFromShape(shapeVa, locX, locY,
+                locZ, orientX, orientY, orientZ,
+                orientW, motionTypeOrdinal, objLayer);
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
 
@@ -103,11 +126,34 @@ public class BodyCreationSettings
      */
     public BodyCreationSettings(ConstShapeSettings shapeSettings, RVec3Arg loc,
             QuatArg orient, EMotionType motionType, int objLayer) {
+        this(shapeSettings, loc.xx(),
+                loc.yy(), loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
+                orient.getW(), motionType, objLayer);
+    }
+
+    /**
+     * Instantiate uncooked settings for the specified shape settings.
+     *
+     * @param shapeSettings the desired shape settings (not {@code null})
+     * @param locX the desired X coordinate of the location
+     * @param locY the desired Y coordinate of the location
+     * @param locZ the desired Z coordinate of the location
+     * @param orientX the X component of the desired orientation
+     * @param orientY the Y component of the desired orientation
+     * @param orientZ the Z component of the desired orientation
+     * @param orientW the W component of the desired orientation
+     * @param motionType the desired motion type (not {@code null})
+     * @param objLayer the ID of the desired object layer
+     */
+    public BodyCreationSettings(ConstShapeSettings shapeSettings,
+            double locX, double locY, double locZ,
+            float orientX, float orientY, float orientZ, float orientW,
+            EMotionType motionType, int objLayer) {
         long shapeSettingsVa = shapeSettings.targetVa();
         int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createFromShapeSettings(shapeSettingsVa, loc.xx(),
-                loc.yy(), loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
-                orient.getW(), motionTypeOrdinal, objLayer);
+        long bodySettingsVa = createFromShapeSettings(shapeSettingsVa, locX,
+                locY, locZ, orientX, orientY, orientZ,
+                orientW, motionTypeOrdinal, objLayer);
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
 

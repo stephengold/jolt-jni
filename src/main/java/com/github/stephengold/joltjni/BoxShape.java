@@ -105,6 +105,19 @@ public class BoxShape extends ConvexShape {
     }
 
     /**
+     * Instantiate a shape with the specified half extents and convex radius.
+     *
+     * @param xHalfExtent the desired half extent on the local X axis (&gt;0)
+     * @param yHalfExtent the desired half extent on the local Y axis (&gt;0)
+     * @param zHalfExtent the desired half extent on the local Z axis (&gt;0)
+     * @param convexRadius the desired convex radius (default=0.05)
+     */
+    public BoxShape(float xHalfExtent, float yHalfExtent, float zHalfExtent,
+                    float convexRadius) {
+        this(xHalfExtent, yHalfExtent, zHalfExtent, convexRadius, null);
+    }
+
+    /**
      * Instantiate a shape with the specified parameters.
      *
      * @param halfExtents the desired half extents on each local axis (not
@@ -114,9 +127,21 @@ public class BoxShape extends ConvexShape {
      */
     public BoxShape(Vec3Arg halfExtents, float convexRadius,
             ConstPhysicsMaterial material) {
-        float xHalfExtent = halfExtents.getX();
-        float yHalfExtent = halfExtents.getY();
-        float zHalfExtent = halfExtents.getZ();
+        this(halfExtents.getX(), halfExtents.getY(), halfExtents.getZ(),
+                convexRadius, material);
+    }
+
+    /**
+     * Instantiate a shape with the specified parameters.
+     *
+     * @param xHalfExtent the desired half extent on the local X axis (&gt;0)
+     * @param yHalfExtent the desired half extent on the local Y axis (&gt;0)
+     * @param zHalfExtent the desired half extent on the local Z axis (&gt;0)
+     * @param convexRadius the desired convex radius (default=0.05)
+     * @param material the desired material (default=null)
+     */
+    public BoxShape(float xHalfExtent, float yHalfExtent, float zHalfExtent,
+                    float convexRadius, ConstPhysicsMaterial material) {
         assert xHalfExtent > 0f : xHalfExtent;
         assert yHalfExtent > 0f : yHalfExtent;
         assert zHalfExtent > 0f : zHalfExtent;
