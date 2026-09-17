@@ -142,6 +142,19 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Apply the specified angular impulse to the specified body.
+     *
+     * @param bodyId the ID of the body
+     * @param lx the X component of the impulse vector
+     * @param ly the Y component of the impulse vector
+     * @param lz the Z component of the impulse vector
+     */
+    public void addAngularImpulse(int bodyId, float lx, float ly, float lz) {
+        long bodyInterfaceVa = va();
+        addAngularImpulse(bodyInterfaceVa, bodyId, lx, ly, lz);
+    }
+
+    /**
      * Abort adding bodies to the physics system.
      *
      * @param bodyIds the IDs of the bodies to be added (not {@code null},
@@ -276,6 +289,19 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Apply the specified force to the specified body's center of mass.
+     *
+     * @param bodyId the ID of the body
+     * @param fx the X component of the force vector
+     * @param fy the Y component of the force vector
+     * @param fz the Z component of the force vector
+     */
+    public void addForce(int bodyId, float fx, float fy, float fz) {
+        long bodyInterfaceVa = va();
+        addForce(bodyInterfaceVa, bodyId, fx, fy, fz);
+    }
+
+    /**
      * Apply the specified force to the specified body at the specified
      * location.
      *
@@ -295,6 +321,24 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Apply the specified force to the specified body at the specified
+     * location.
+     *
+     * @param bodyId the ID of the body
+     * @param fx the X component of the force vector
+     * @param fy the Y component of the force vector
+     * @param fz the Z component of the force vector
+     * @param locX the X coordinate where the force is applied
+     * @param locY the Y coordinate where the force is applied
+     * @param locZ the Z coordinate where the force is applied
+     */
+    public void addForce(int bodyId, float fx, float fy, float fz,
+                         double locX, double locY, double locZ) {
+        long bodyInterfaceVa = va();
+        addForce(bodyInterfaceVa, bodyId, fx, fy, fz, locX, locY, locZ);
+    }
+
+    /**
      * Apply the specified impulse to the specified body's center of mass.
      *
      * @param bodyId the ID of the body
@@ -305,6 +349,19 @@ public class BodyInterface extends NonCopyable {
         float jx = impulse.getX();
         float jy = impulse.getY();
         float jz = impulse.getZ();
+        addImpulse(bodyInterfaceVa, bodyId, jx, jy, jz);
+    }
+
+    /**
+     * Apply the specified impulse to the specified body's center of mass.
+     *
+     * @param bodyId the ID of the body
+     * @param jx the X component of the impulse vector
+     * @param jy the Y component of the impulse vector
+     * @param jz the Z component of the impulse vector
+     */
+    public void addImpulse(int bodyId, float jx, float jy, float jz) {
+        long bodyInterfaceVa = va();
         addImpulse(bodyInterfaceVa, bodyId, jx, jy, jz);
     }
 
@@ -328,6 +385,24 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Apply the specified impulse to the specified body at the specified
+     * location.
+     *
+     * @param bodyId the ID of the body
+     * @param jx the X component of the impulse vector
+     * @param jy the Y component of the impulse vector
+     * @param jz the Z component of the impulse vector
+     * @param locX the X coordinate where the impulse is applied
+     * @param locY the Y coordinate where the impulse is applied
+     * @param locZ the Z coordinate where the impulse is applied
+     */
+    public void addImpulse(int bodyId, float jx, float jy, float jz,
+                           double locX, double locY, double locZ) {
+        long bodyInterfaceVa = va();
+        addImpulse(bodyInterfaceVa, bodyId, jx, jy, jz, locX, locY, locZ);
+    }
+
+    /**
      * Apply the specified torque to the specified body.
      *
      * @param bodyId the ID of the body
@@ -338,6 +413,19 @@ public class BodyInterface extends NonCopyable {
         float x = torque.getX();
         float y = torque.getY();
         float z = torque.getZ();
+        addTorque(bodyInterfaceVa, bodyId, x, y, z);
+    }
+
+    /**
+     * Apply the specified torque to the specified body.
+     *
+     * @param bodyId the ID of the body
+     * @param x the X component of the torque vector
+     * @param y the Y component of the torque vector
+     * @param z the Z component of the torque vector
+     */
+    public void addTorque(int bodyId, float x, float y, float z) {
+        long bodyInterfaceVa = va();
         addTorque(bodyInterfaceVa, bodyId, x, y, z);
     }
 
@@ -982,6 +1070,22 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Alter the angular velocity of the specified body.
+     *
+     * @param bodyId the ID of the body to modify
+     * @param wx the X component of the desired rates (radians per second in
+     * system coordinates)
+     * @param wy the Y component of the desired rates (radians per second in
+     * system coordinates)
+     * @param wz the Z component of the desired rates (radians per second in
+     * system coordinates)
+     */
+    public void setAngularVelocity(int bodyId, float wx, float wy, float wz) {
+        long bodyInterfaceVa = va();
+        setAngularVelocity(bodyInterfaceVa, bodyId, wx, wy, wz);
+    }
+
+    /**
      * Alter the friction ratio of the specified body.
      *
      * @param bodyId the ID of the body to modify
@@ -1034,6 +1138,30 @@ public class BodyInterface extends NonCopyable {
         float wx = angularVelocity.getX();
         float wy = angularVelocity.getY();
         float wz = angularVelocity.getZ();
+        setLinearAndAngularVelocity(
+                bodyInterfaceVa, bodyId, vx, vy, vz, wx, wy, wz);
+    }
+
+    /**
+     * Alter the linear and angular velocities of the specified body.
+     *
+     * @param bodyId the ID of the body to modify
+     * @param vx the X component of the desired linear velocity of the body's
+     * center of mass (meters per second in system coordinates)
+     * @param vy the Y component of the desired linear velocity of the body's
+     * center of mass (meters per second in system coordinates)
+     * @param vz the Z component of the desired linear velocity of the body's
+     * center of mass (meters per second in system coordinates)
+     * @param wx the X component of the desired angular velocity (radians per
+     * second in system coordinates)
+     * @param wy the Y component of the desired angular velocity (radians per
+     * second in system coordinates)
+     * @param wz the Z component of the desired angular velocity (radians per
+     * second in system coordinates)
+     */
+    public void setLinearAndAngularVelocity(int bodyId,
+                                            float vx, float vy, float vz, float wx, float wy, float wz) {
+        long bodyInterfaceVa = va();
         setLinearAndAngularVelocity(
                 bodyInterfaceVa, bodyId, vx, vy, vz, wx, wy, wz);
     }
@@ -1128,6 +1256,23 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Relocate the specified body.
+     *
+     * @param bodyId the ID of the body to relocate
+     * @param locX the desired X coordinate of the location
+     * @param locY the desired Y coordinate of the location
+     * @param locZ the desired Z coordinate of the location
+     * @param activationMode whether to activate the body (not {@code null})
+     */
+    public void setPosition(int bodyId,
+                            double locX, double locY, double locZ,
+                            EActivation activationMode) {
+        long bodyInterfaceVa = va();
+        int ordinal = activationMode.ordinal();
+        setPosition(bodyInterfaceVa, bodyId, locX, locY, locZ, ordinal);
+    }
+
+    /**
      * Reposition the specified body.
      *
      * @param bodyId the ID of the body to modify
@@ -1145,6 +1290,29 @@ public class BodyInterface extends NonCopyable {
         float qx = orientation.getX();
         float qy = orientation.getY();
         float qz = orientation.getZ();
+        int ordinal = activationMode.ordinal();
+        setPositionAndRotation(bodyInterfaceVa, bodyId, locX, locY, locZ,
+                qx, qy, qz, qw, ordinal);
+    }
+
+    /**
+     * Reposition the specified body.
+     *
+     * @param bodyId the ID of the body to modify
+     * @param locX the desired X coordinate of the location
+     * @param locY the desired Y coordinate of the location
+     * @param locZ the desired Z coordinate of the location
+     * @param qx the X component of the desired orientation
+     * @param qy the Y component of the desired orientation
+     * @param qz the Z component of the desired orientation
+     * @param qw the W component of the desired orientation
+     * @param activationMode whether to activate the body (not {@code null})
+     */
+    public void setPositionAndRotation(int bodyId,
+                                       double locX, double locY, double locZ,
+                                       float qx, float qy, float qz, float qw,
+                                       EActivation activationMode) {
+        long bodyInterfaceVa = va();
         int ordinal = activationMode.ordinal();
         setPositionAndRotation(bodyInterfaceVa, bodyId, locX, locY, locZ,
                 qx, qy, qz, qw, ordinal);

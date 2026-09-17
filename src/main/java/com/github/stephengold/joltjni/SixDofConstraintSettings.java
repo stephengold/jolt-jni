@@ -87,6 +87,19 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the X axis for body 1. The settings are unaffected. (native
+     * attribute: mAxisX1)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getAxisX1(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisX1(settingsVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the X axis for body 2. The settings are unaffected. (native
      * attribute: mAxisX2)
      *
@@ -99,6 +112,20 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+
+    /**
+     * Copy the X axis for body 2. The settings are unaffected. (native
+     * attribute: mAxisX2)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getAxisX2(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisX2(settingsVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -117,6 +144,19 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the Y axis for body 1. The settings are unaffected. (native
+     * attribute: mAxisY1)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getAxisY1(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisY1(settingsVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the Y axis for body 2. The settings are unaffected. (native
      * attribute: mAxisY2)
      *
@@ -129,6 +169,19 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the Y axis for body 2. The settings are unaffected. (native
+     * attribute: mAxisY2)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getAxisY2(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisY2(settingsVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -266,6 +319,19 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the constraint location for body 1. The settings are unaffected.
+     * (native attribute: mPosition1)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPosition1(RVec3 out) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition1(settingsVa, storeDoubles);
+        out.set(storeDoubles);
+    }
+
+    /**
      * Copy the constraint location for body 2. The settings are unaffected.
      * (native attribute: mPosition2)
      *
@@ -278,6 +344,20 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+
+    /**
+     * Copy the constraint location for body 2. The settings are unaffected.
+     * (native attribute: mPosition2)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPosition2(RVec3 out) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition2(settingsVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**
@@ -406,6 +486,18 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the X axis for body 1. (native attribute: mAxisX1)
+     *
+     * @param x the desired X component of the direction (default=1)
+     * @param y the desired Y component of the direction (default=0)
+     * @param z the desired Z component of the direction (default=0)
+     */
+    public void setAxisX1(float x, float y, float z) {
+        long settingsVa = va();
+        setAxisX1(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the X axis for body 2. (native attribute: mAxisX2)
      *
      * @param axis the desired direction vector (default=(1,0,0))
@@ -419,6 +511,18 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
         setAxisX2(settingsVa, x, y, z);
 
         return axis;
+    }
+
+    /**
+     * Alter the X axis for body 2. (native attribute: mAxisX2)
+     *
+     * @param x the desired X component of the direction (default=1)
+     * @param y the desired Y component of the direction (default=0)
+     * @param z the desired Z component of the direction (default=0)
+     */
+    public void setAxisX2(float x, float y, float z) {
+        long settingsVa = va();
+        setAxisX2(settingsVa, x, y, z);
     }
 
     /**
@@ -438,6 +542,18 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the Y axis for body 1. (native attribute: mAxisY1)
+     *
+     * @param x the desired X component of the direction (default=0)
+     * @param y the desired Y component of the direction (default=1)
+     * @param z the desired Z component of the direction (default=0)
+     */
+    public void setAxisY1(float x, float y, float z) {
+        long settingsVa = va();
+        setAxisY1(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the Y axis for body 2. (native attribute: mAxisY2)
      *
      * @param axis the desired direction vector (default=(0,1,0))
@@ -451,6 +567,18 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
         setAxisY2(settingsVa, x, y, z);
 
         return axis;
+    }
+
+    /**
+     * Alter the Y axis for body 2. (native attribute: mAxisY2)
+     *
+     * @param x the desired X component of the direction (default=0)
+     * @param y the desired Y component of the direction (default=1)
+     * @param z the desired Z component of the direction (default=0)
+     */
+    public void setAxisY2(float x, float y, float z) {
+        long settingsVa = va();
+        setAxisY2(settingsVa, x, y, z);
     }
 
     /**
@@ -562,6 +690,18 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the constraint location for body 1. (native attribute: mPosition1)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPosition1(double x, double y, double z) {
+        long settingsVa = va();
+        setPosition1(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the constraint location for body 2. (native attribute: mPosition2)
      *
      * @param location the desired location (not null, unaffected,
@@ -576,6 +716,18 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
         setPosition2(settingsVa, x, y, z);
 
         return location;
+    }
+
+    /**
+     * Alter the constraint location for body 2. (native attribute: mPosition2)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPosition2(double x, double y, double z) {
+        long settingsVa = va();
+        setPosition2(settingsVa, x, y, z);
     }
 
     /**

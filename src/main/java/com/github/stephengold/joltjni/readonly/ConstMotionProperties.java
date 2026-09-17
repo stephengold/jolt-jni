@@ -42,11 +42,27 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     Vec3 getAccumulatedForce();
 
     /**
+     * Copy the net force acting on the body. The properties are unaffected.
+     *
+     * @param out storage for the force (Newtons in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getAccumulatedForce(Vec3 out);
+
+    /**
      * Copy the net torque acting on the body. The properties are unaffected.
      *
      * @return a new torque vector (Newton meters in system coordinates)
      */
     Vec3 getAccumulatedTorque();
+
+    /**
+     * Copy the net torque acting on the body. The properties are unaffected.
+     *
+     * @param out storage for the torque (Newton meters in system coordinates,
+     * not {@code null}, modified)
+     */
+    void getAccumulatedTorque(Vec3 out);
 
     /**
      * Return the allowed degrees of freedom. The properties are unaffected.
@@ -86,6 +102,14 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     Vec3 getAngularVelocity();
 
     /**
+     * Copy the angular velocity. The properties are unaffected.
+     *
+     * @param out storage for the velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getAngularVelocity(Vec3 out);
+
+    /**
      * Return the gravity factor. The properties are unaffected.
      *
      * @return the factor
@@ -101,12 +125,29 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     Quat getInertiaRotation();
 
     /**
+     * Copy the rotation that takes the inverse-inertia diagonal to local
+     * coordinates. The properties are unaffected.
+     *
+     * @param out storage for the rotation (not {@code null}, modified)
+     */
+    void getInertiaRotation(Quat out);
+
+    /**
      * Copy the diagonal components of the inverse inertia matrix, assuming a
      * dynamic body. The properties are unaffected.
      *
      * @return a new vector (all components &ge;0)
      */
     Vec3 getInverseInertiaDiagonal();
+
+    /**
+     * Copy the diagonal components of the inverse inertia matrix, assuming a
+     * dynamic body. The properties are unaffected.
+     *
+     * @param out storage for the diagonal (all components &ge;0, not
+     * {@code null}, modified)
+     */
+    void getInverseInertiaDiagonal(Vec3 out);
 
     /**
      * Return the body's inverse mass. The properties are unaffected.
@@ -135,6 +176,14 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
      * @return a new velocity vector (meters per second in system coordinates)
      */
     Vec3 getLinearVelocity();
+
+    /**
+     * Copy the linear velocity. The properties are unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getLinearVelocity(Vec3 out);
 
     /**
      * Copy the inverse-inertia matrix. The properties are unaffected.

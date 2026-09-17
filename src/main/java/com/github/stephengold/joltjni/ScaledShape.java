@@ -50,6 +50,23 @@ public class ScaledShape extends DecoratedShape {
         setVirtualAddressAsCoOwner(scaledShapeVa);
     }
 
+
+    /**
+     * Instantiate a shape based on the specified shape and scale factors.
+     *
+     * @param baseShape the unscaled base shape (not {@code null})
+     * @param scaleX the desired scale factor on the local X axis
+     * @param scaleY the desired scale factor on the local Y axis
+     * @param scaleZ the desired scale factor on the local Z axis
+     */
+    public ScaledShape(ConstShape baseShape,
+                       float scaleX, float scaleY, float scaleZ) {
+        long baseShapeVa = baseShape.targetVa();
+        long scaledShapeVa
+                = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);
+        setVirtualAddressAsCoOwner(scaledShapeVa);
+    }
+
     /**
      * Instantiate a shape with the specified native object assigned.
      *

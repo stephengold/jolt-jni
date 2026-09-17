@@ -105,6 +105,33 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified samples.
      *
+     * @param samples array of height values (not {@code null}, length&ge;4,
+     * unaffected)
+     * @param offsetX the desired X offset
+     * @param offsetY the desired Y offset
+     * @param offsetZ the desired Z offset
+     * @param scaleX the desired scale factor on the local X axis
+     * @param scaleY the desired scale factor on the local Y axis
+     * @param scaleZ the desired scale factor on the local Z axis
+     * @param sampleCount the number of height values along each edge
+     * (&ge;2*blockSize)
+     * @param materialIndices a material index for each sample (default=null)
+     * @param materialList the list of materials
+     */
+    public HeightFieldShapeSettings(float[] samples,
+                                    float offsetX, float offsetY, float offsetZ,
+                                    float scaleX, float scaleY, float scaleZ, int sampleCount,
+                                    byte[] materialIndices, PhysicsMaterialList materialList) {
+        long listVa = materialList.va();
+        long settingsVa = createSettingsFromArray(
+                samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
+                sampleCount, materialIndices, listVa);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
+    }
+
+    /**
+     * Instantiate settings for the specified samples.
+     *
      * @param samples array of height values (not {@code null}, capacity&ge;4,
      * unaffected)
      * @param offset (not {@code null}, unaffected)
@@ -120,6 +147,28 @@ public class HeightFieldShapeSettings extends ShapeSettings {
         float scaleX = scale.getX();
         float scaleY = scale.getY();
         float scaleZ = scale.getZ();
+        long settingsVa = createFromBufferNoMats(samples, offsetX, offsetY,
+                offsetZ, scaleX, scaleY, scaleZ, sampleCount);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
+    }
+
+    /**
+     * Instantiate settings for the specified samples.
+     *
+     * @param samples array of height values (not {@code null}, capacity&ge;4,
+     * unaffected)
+     * @param offsetX the desired X offset
+     * @param offsetY the desired Y offset
+     * @param offsetZ the desired Z offset
+     * @param scaleX the desired scale factor on the local X axis
+     * @param scaleY the desired scale factor on the local Y axis
+     * @param scaleZ the desired scale factor on the local Z axis
+     * @param sampleCount the number of height values along each edge
+     * (&ge;2*blockSize)
+     */
+    public HeightFieldShapeSettings(FloatBuffer samples,
+                                    float offsetX, float offsetY, float offsetZ,
+                                    float scaleX, float scaleY, float scaleZ, int sampleCount) {
         long settingsVa = createFromBufferNoMats(samples, offsetX, offsetY,
                 offsetZ, scaleX, scaleY, scaleZ, sampleCount);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
@@ -163,6 +212,33 @@ public class HeightFieldShapeSettings extends ShapeSettings {
         float scaleX = scale.getX();
         float scaleY = scale.getY();
         float scaleZ = scale.getZ();
+        long listVa = materialList.va();
+        long settingsVa = createSettingsFromBuffer(
+                samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
+                sampleCount, materialIndices, listVa);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
+    }
+
+    /**
+     * Instantiate settings for the specified samples.
+     *
+     * @param samples array of height values (not {@code null}, capacity&ge;4,
+     * unaffected)
+     * @param offsetX the desired X offset
+     * @param offsetY the desired Y offset
+     * @param offsetZ the desired Z offset
+     * @param scaleX the desired scale factor on the local X axis
+     * @param scaleY the desired scale factor on the local Y axis
+     * @param scaleZ the desired scale factor on the local Z axis
+     * @param sampleCount the number of height values along each edge
+     * (&ge;2*blockSize)
+     * @param materialIndices a material index for each sample (default=null)
+     * @param materialList the list of materials
+     */
+    public HeightFieldShapeSettings(FloatBuffer samples,
+                                    float offsetX, float offsetY, float offsetZ,
+                                    float scaleX, float scaleY, float scaleZ, int sampleCount,
+                                    byte[] materialIndices, PhysicsMaterialList materialList) {
         long listVa = materialList.va();
         long settingsVa = createSettingsFromBuffer(
                 samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,

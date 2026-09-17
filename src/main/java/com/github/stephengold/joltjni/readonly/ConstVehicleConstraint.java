@@ -65,6 +65,13 @@ public interface ConstVehicleConstraint extends ConstConstraint {
     Vec3 getGravityOverride();
 
     /**
+     * Copy the gravity override. The constraint is unaffected.
+     *
+     * @param out storage for the vector (not {@code null}, modified)
+     */
+    void getGravityOverride(Vec3 out);
+
+    /**
      * Copy the local "forward" direction. The constraint is unaffected.
      *
      * @return a new direction vector
@@ -72,11 +79,25 @@ public interface ConstVehicleConstraint extends ConstConstraint {
     Vec3 getLocalForward();
 
     /**
+     * Copy the local "forward" direction. The constraint is unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    void getLocalForward(Vec3 out);
+
+    /**
      * Copy the local "up" direction. The constraint is unaffected.
      *
      * @return a new direction vector
      */
     Vec3 getLocalUp();
+
+    /**
+     * Copy the local "up" direction. The constraint is unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    void getLocalUp(Vec3 out);
 
     /**
      * Return the vehicle's maximum pitch/roll angle. The constraint is
@@ -159,6 +180,14 @@ public interface ConstVehicleConstraint extends ConstConstraint {
      * @return a new direction vector (in system coordinates)
      */
     Vec3 getWorldUp();
+
+    /**
+     * Copy the "up" direction based on gravity. The constraint is unaffected.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getWorldUp(Vec3 out);
 
     /**
      * Test whether gravity is overridden. The constraint is unaffected.

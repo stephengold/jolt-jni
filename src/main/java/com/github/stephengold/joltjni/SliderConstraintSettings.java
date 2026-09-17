@@ -168,6 +168,19 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the normal axis of body 1. The settings are unaffected. (native
+     * attribute: mNormalAxis1)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getNormalAxis1(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getNormalAxis1(settingsVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the normal axis of body 2. The settings are unaffected. (native
      * attribute: mNormalAxis2)
      *
@@ -180,6 +193,19 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the normal axis of body 2. The settings are unaffected. (native
+     * attribute: mNormalAxis2)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getNormalAxis2(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getNormalAxis2(settingsVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -198,6 +224,19 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the constraint location for body 1. The settings are unaffected.
+     * (native attribute: mPoint1)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPoint1(RVec3 out) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint1(settingsVa, storeDoubles);
+        out.set(storeDoubles);
+    }
+
+    /**
      * Copy the constraint location for body 2. The settings are unaffected.
      * (native attribute: mPoint2)
      *
@@ -210,6 +249,19 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the constraint location for body 2. The settings are unaffected.
+     * (native attribute: mPoint2)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPoint2(RVec3 out) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint2(settingsVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**
@@ -228,6 +280,19 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the slider axis of body 1. The settings are unaffected. (native
+     * attribute: mSliderAxis1)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getSliderAxis1(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSliderAxis1(settingsVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the slider axis of body 2. The settings are unaffected. (native
      * attribute: mSliderAxis2)
      *
@@ -240,6 +305,19 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the slider axis of body 2. The settings are unaffected. (native
+     * attribute: mSliderAxis2)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getSliderAxis2(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSliderAxis2(settingsVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -351,6 +429,18 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
+     *
+     * @param x the desired X component of the axis direction (default=0)
+     * @param y the desired Y component of the axis direction (default=1)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setNormalAxis1(float x, float y, float z) {
+        long settingsVa = va();
+        setNormalAxis1(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
      *
      * @param direction the desired axis direction (not {@code null},
@@ -365,6 +455,18 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
         setNormalAxis2(settingsVa, x, y, z);
 
         return direction;
+    }
+
+    /**
+     * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
+     *
+     * @param x the desired X component of the axis direction (default=0)
+     * @param y the desired Y component of the axis direction (default=1)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setNormalAxis2(float x, float y, float z) {
+        long settingsVa = va();
+        setNormalAxis2(settingsVa, x, y, z);
     }
 
     /**
@@ -385,6 +487,18 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPoint1(double x, double y, double z) {
+        long settingsVa = va();
+        setPoint1(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param location the desired location (not {@code null}, unaffected,
@@ -402,6 +516,18 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPoint2(double x, double y, double z) {
+        long settingsVa = va();
+        setPoint2(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the slider and normal axes, assuming the bodies are correctly
      * oriented.
      *
@@ -413,6 +539,19 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
         float dx = sliderAxis.getX();
         float dy = sliderAxis.getY();
         float dz = sliderAxis.getZ();
+        setSliderAxis(settingsVa, dx, dy, dz);
+    }
+
+    /**
+     * Alter the slider and normal axes, assuming the bodies are correctly
+     * oriented.
+     *
+     * @param dx the desired X component of the slider axis direction
+     * @param dy the desired Y component of the slider axis direction
+     * @param dz the desired Z component of the slider axis direction
+     */
+    public void setSliderAxis(float dx, float dy, float dz) {
+        long settingsVa = va();
         setSliderAxis(settingsVa, dx, dy, dz);
     }
 
@@ -434,6 +573,18 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the slider axis of body 1. (native attribute: mSliderAxis1)
+     *
+     * @param x the desired X component of the axis direction (default=1)
+     * @param y the desired Y component of the axis direction (default=0)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setSliderAxis1(float x, float y, float z) {
+        long settingsVa = va();
+        setSliderAxis1(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the slider axis of body 2. (native attribute: mSliderAxis2)
      *
      * @param direction the desired axis direction (not {@code null},
@@ -448,6 +599,18 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
         setSliderAxis2(settingsVa, x, y, z);
 
         return direction;
+    }
+
+    /**
+     * Alter the slider axis of body 2. (native attribute: mSliderAxis2)
+     *
+     * @param x the desired X component of the axis direction (default=1)
+     * @param y the desired Y component of the axis direction (default=0)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setSliderAxis2(float x, float y, float z) {
+        long settingsVa = va();
+        setSliderAxis2(settingsVa, x, y, z);
     }
 
     /**

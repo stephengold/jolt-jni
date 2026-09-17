@@ -52,6 +52,22 @@ public class RRayCast extends JoltPhysicsObject {
         long raycastVa = createRRayCast(xx, yy, zz, dx, dy, dz);
         setVirtualAddress(raycastVa, () -> free(raycastVa));
     }
+
+    /**
+     * Instantiate a ray cast with the specified endpoints.
+     *
+     * @param xx the desired X coordinate of the start location
+     * @param yy the desired Y coordinate of the start location
+     * @param zz the desired Z coordinate of the start location
+     * @param dx the X component of the end offset from the start
+     * @param dy the Y component of the end offset from the start
+     * @param dz the Z component of the end offset from the start
+     */
+    public RRayCast(double xx, double yy, double zz,
+                    float dx, float dy, float dz) {
+        long raycastVa = createRRayCast(xx, yy, zz, dx, dy, dz);
+        setVirtualAddress(raycastVa, () -> free(raycastVa));
+    }
     // *************************************************************************
     // new methods exposed
 

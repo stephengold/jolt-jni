@@ -44,6 +44,18 @@ public class PointConvexSupport extends JoltPhysicsObject {
         long pointVa = create(x, y, z);
         setVirtualAddress(pointVa, () -> free(pointVa));
     }
+
+    /**
+     * Instantiate a point at the specified location.
+     *
+     * @param x the desired X coordinate
+     * @param y the desired Y coordinate
+     * @param z the desired Z coordinate
+     */
+    public PointConvexSupport(float x, float y, float z) {
+        long pointVa = create(x, y, z);
+        setVirtualAddress(pointVa, () -> free(pointVa));
+    }
     // *************************************************************************
     // native private methods
 
