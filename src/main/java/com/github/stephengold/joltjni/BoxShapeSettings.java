@@ -117,6 +117,19 @@ public class BoxShapeSettings
     }
 
     /**
+     * Instantiate settings for the specified half extents and convex radius.
+     *
+     * @param xHalfExtent the desired half extent on the local X axis (&gt;0)
+     * @param yHalfExtent the desired half extent on the local Y axis (&gt;0)
+     * @param zHalfExtent the desired half extent on the local Z axis (&gt;0)
+     * @param convexRadius the desired convex radius (&ge;0, default=0.05)
+     */
+    public BoxShapeSettings(float xHalfExtent, float yHalfExtent,
+                            float zHalfExtent, float convexRadius) {
+        this(xHalfExtent, yHalfExtent, zHalfExtent, convexRadius, null);
+    }
+
+    /**
      * Instantiate settings for the specified half extents, convex radius, and
      * material.
      *
@@ -134,6 +147,26 @@ public class BoxShapeSettings
         long materialVa = (material == null) ? 0L : material.targetVaOrZero();
         long settingsVa = createBoxShapeSettings(
                 hx, hy, hz, convexRadius, materialVa);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Box);
+    }
+
+    /**
+     * Instantiate settings for the specified half extents, convex radius, and
+     * material.
+     *
+     * @param xHalfExtent the desired half extent on the local X axis (&gt;0)
+     * @param yHalfExtent the desired half extent on the local Y axis (&gt;0)
+     * @param zHalfExtent the desired half extent on the local Z axis (&gt;0)
+     * @param convexRadius the desired convex radius (&ge;0, default=0.05)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
+     */
+    public BoxShapeSettings(float xHalfExtent, float yHalfExtent,
+                            float zHalfExtent, float convexRadius,
+                            ConstPhysicsMaterial material) {
+        long materialVa = (material == null) ? 0L : material.targetVaOrZero();
+        long settingsVa = createBoxShapeSettings(xHalfExtent, yHalfExtent,
+                zHalfExtent, convexRadius, materialVa);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Box);
     }
     // *************************************************************************
@@ -173,6 +206,21 @@ public class BoxShapeSettings
         float hz = halfExtents.getZ();
         setHalfExtent(settingsVa, hx, hy, hz);
     }
+
+    /**
+     * Alter the extent of the box. (native attribute: mHalfExtent)
+     *
+     * @param hx the desired half extent on the local X axis (&ge;0,
+     * default=0)
+     * @param hy the desired half extent on the local Y axis (&ge;0,
+     * default=0)
+     * @param hz the desired half extent on the local Z axis (&ge;0,
+     * default=0)
+     */
+    public void setHalfExtent(float hx, float hy, float hz) {
+        long settingsVa = va();
+        setHalfExtent(settingsVa, hx, hy, hz);
+    }
     // *************************************************************************
     // ConstBoxShapeSettings methods
 
@@ -204,6 +252,20 @@ public class BoxShapeSettings
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the extent of the box. The settings are unaffected. (native
+     * attribute: mHalfExtent)
+     *
+     * @param out storage for the half extents (not {@code null}, modified)
+     */
+    @Override
+    public void getHalfExtent(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHalfExtent(settingsVa, storeFloats);
+        out.set(storeFloats);
     }
     // *************************************************************************
     // native private methods

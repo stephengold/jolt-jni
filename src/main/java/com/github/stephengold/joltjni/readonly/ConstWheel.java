@@ -53,11 +53,27 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     Vec3 getContactLateral();
 
     /**
+     * Copy the wheel's lateral (sideways) direction.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getContactLateral(Vec3 out);
+
+    /**
      * Copy the wheel's longitudinal direction.
      *
      * @return a new direction vector (in system coordinates)
      */
     Vec3 getContactLongitudinal();
+
+    /**
+     * Copy the wheel's longitudinal direction.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getContactLongitudinal(Vec3 out);
 
     /**
      * Copy the contact normal direction.
@@ -67,6 +83,14 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     Vec3 getContactNormal();
 
     /**
+     * Copy the contact normal direction.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getContactNormal(Vec3 out);
+
+    /**
      * Copy the velocity of the contact point.
      *
      * @return a new velocity vector (meters per second in system coordinates)
@@ -74,11 +98,27 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     Vec3 getContactPointVelocity();
 
     /**
+     * Copy the velocity of the contact point.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getContactPointVelocity(Vec3 out);
+
+    /**
      * Copy the location of the contact point.
      *
      * @return a new location vector (in system coordinates)
      */
     RVec3 getContactPosition();
+
+    /**
+     * Copy the location of the contact point.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getContactPosition(RVec3 out);
 
     /**
      * Return ID of the sub-shape that's supporting the vehicle.

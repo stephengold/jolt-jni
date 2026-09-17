@@ -53,6 +53,22 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     }
 
     /**
+     * Instantiate a settings based on the specified shape and scale factors.
+     *
+     * @param baseShape the unscaled base shape (not {@code null})
+     * @param scaleX the desired scale factor on the local X axis
+     * @param scaleY the desired scale factor on the local Y axis
+     * @param scaleZ the desired scale factor on the local Z axis
+     */
+    public ScaledShapeSettings(ConstShape baseShape,
+                               float scaleX, float scaleY, float scaleZ) {
+        long baseShapeVa = baseShape.targetVa();
+        long settingsVa = createScaledShapeSettingsFromShape(
+                baseShapeVa, scaleX, scaleY, scaleZ);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Scaled);
+    }
+
+    /**
      * Instantiate a settings based on the specified settings and scale factors.
      *
      * @param baseSettings the unscaled base shape settings (not {@code null})
@@ -64,6 +80,22 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         float scaleX = scaleFactors.getX();
         float scaleY = scaleFactors.getY();
         float scaleZ = scaleFactors.getZ();
+        long settingsVa = createScaledShapeSettingsFromSettings(
+                baseSettingsVa, scaleX, scaleY, scaleZ);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Scaled);
+    }
+
+    /**
+     * Instantiate a settings based on the specified settings and scale factors.
+     *
+     * @param baseSettings the unscaled base shape settings (not {@code null})
+     * @param scaleX the desired scale factor on the local X axis
+     * @param scaleY the desired scale factor on the local Y axis
+     * @param scaleZ the desired scale factor on the local Z axis
+     */
+    public ScaledShapeSettings(ConstShapeSettings baseSettings,
+                               float scaleX, float scaleY, float scaleZ) {
+        long baseSettingsVa = baseSettings.targetVa();
         long settingsVa = createScaledShapeSettingsFromSettings(
                 baseSettingsVa, scaleX, scaleY, scaleZ);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Scaled);

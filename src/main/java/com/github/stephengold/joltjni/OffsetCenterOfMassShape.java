@@ -50,6 +50,21 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
     }
 
     /**
+     * Instantiate a shape on the specified offset and base shape.
+     *
+     * @param baseShape the base shape (not {@code null})
+     * @param offsetX the desired X offset
+     * @param offsetY the desired Y offset
+     * @param offsetZ the desired Z offset
+     */
+    public OffsetCenterOfMassShape(ConstShape baseShape,
+                                   float offsetX, float offsetY, float offsetZ) {
+        long baseShapeVa = baseShape.targetVa();
+        long ocomShapeVa = createShape(baseShapeVa, offsetX, offsetY, offsetZ);
+        setVirtualAddressAsCoOwner(ocomShapeVa);
+    }
+
+    /**
      * Instantiate a shape with the specified native object assigned.
      *
      * @param ocomShapeVa the virtual address of the native object to assign

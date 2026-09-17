@@ -78,6 +78,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     Vec3 getAngularVelocity();
 
     /**
+     * Copy the (initial) angular velocity. The settings are unaffected.
+     *
+     * @param out storage for the velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getAngularVelocity(Vec3 out);
+
+    /**
      * Test whether the gyroscopic force will be applied. The settings are
      * unaffected.
      *
@@ -148,6 +156,15 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * @return a new velocity vector (meters per second in system coordinates)
      */
     Vec3 getLinearVelocity();
+
+
+    /**
+     * Copy the (initial) linear velocity. The settings are unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getLinearVelocity(Vec3 out);
 
     /**
      * Calculate the body's mass and inertia. As a side effect, this method may
@@ -233,6 +250,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     RVec3 getPosition();
 
     /**
+     * Copy the (initial) location. The settings are unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getPosition(RVec3 out);
+
+    /**
      * Return the restitution ratio. The settings are unaffected.
      *
      * @return the ratio (typically &ge;0 and &le;1)
@@ -246,6 +271,15 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * @return a new rotation quaternion (relative to the system axes)
      */
     Quat getRotation();
+
+    /**
+     * Copy the (initial) orientation of the body's axes. The settings are
+     * unaffected.
+     *
+     * @param out storage for the rotation (relative to the system axes, not
+     * {@code null}, modified)
+     */
+    void getRotation(Quat out);
 
     /**
      * Acquire read-only access to the shape. As a side effect, if the

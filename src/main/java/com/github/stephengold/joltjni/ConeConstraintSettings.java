@@ -97,6 +97,19 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the constraint location for body 1. The settings are unaffected.
+     * (native attribute: mPoint1)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPoint1(RVec3 out) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint1(settingsVa, storeDoubles);
+        out.set(storeDoubles);
+    }
+
+    /**
      * Copy the constraint location for body 2. The settings are unaffected.
      * (native attribute: mPoint2)
      *
@@ -109,6 +122,19 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the constraint location for body 2. The settings are unaffected.
+     * (native attribute: mPoint2)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPoint2(RVec3 out) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint2(settingsVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**
@@ -141,6 +167,19 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the twist axis of body 1. The settings are unaffected. (native
+     * attribute: mTwistAxis1)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getTwistAxis1(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTwistAxis1(settingsVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the twist axis of body 2. The settings are unaffected. (native
      * attribute: mTwistAxis2)
      *
@@ -153,6 +192,19 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the twist axis of body 2. The settings are unaffected. (native
+     * attribute: mTwistAxis2)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getTwistAxis2(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTwistAxis2(settingsVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -195,6 +247,18 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPoint1(double x, double y, double z) {
+        long settingsVa = va();
+        setPoint1(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param location the desired location (not {@code null}, unaffected,
@@ -209,6 +273,18 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
         setPoint2(settingsVa, x, y, z);
 
         return location;
+    }
+
+    /**
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPoint2(double x, double y, double z) {
+        long settingsVa = va();
+        setPoint2(settingsVa, x, y, z);
     }
 
     /**
@@ -241,6 +317,18 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the twist axis of body 1. (native attribute: mTwistAxis1)
+     *
+     * @param x the desired X component of the axis direction (default=1)
+     * @param y the desired Y component of the axis direction (default=0)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setTwistAxis1(float x, float y, float z) {
+        long settingsVa = va();
+        setTwistAxis1(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
      *
      * @param direction the desired axis direction (not {@code null},
@@ -255,6 +343,18 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
         setTwistAxis2(settingsVa, x, y, z);
 
         return direction;
+    }
+
+    /**
+     * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
+     *
+     * @param x the desired X component of the axis direction (default=1)
+     * @param y the desired Y component of the axis direction (default=0)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setTwistAxis2(float x, float y, float z) {
+        long settingsVa = va();
+        setTwistAxis2(settingsVa, x, y, z);
     }
     // *************************************************************************
     // native private methods

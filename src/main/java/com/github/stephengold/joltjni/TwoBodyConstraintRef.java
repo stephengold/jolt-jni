@@ -109,6 +109,32 @@ final public class TwoBodyConstraintRef
     }
 
     /**
+     * Copy the first body's pivot location. The constraint is unaffected.
+     *
+     * @return a new location vector (in system coordinates)
+     */
+    @Override
+    public RVec3 getBody1PivotLocation() {
+        RVec3 result = new RVec3();
+        getBody1PivotLocation(result);
+        return result;
+    }
+
+    /**
+     * Copy the first body's pivot location. The constraint is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getBody1PivotLocation(RVec3 out) {
+        long constraintVa = targetVa();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        TwoBodyConstraint.getBody1PivotLocation(constraintVa, storeDoubles);
+        out.set(storeDoubles);
+    }
+
+    /**
      * Access the 2nd body in the constraint. The constraint is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -132,6 +158,32 @@ final public class TwoBodyConstraintRef
     public void getBody2PivotLocation(DoubleBuffer storeResult) {
         long constraintVa = targetVa();
         TwoBodyConstraint.getBody2PivotLocation(constraintVa, storeResult);
+    }
+
+    /**
+     * Copy the 2nd body's pivot location. The constraint is unaffected.
+     *
+     * @return a new location vector (in system coordinates)
+     */
+    @Override
+    public RVec3 getBody2PivotLocation() {
+        RVec3 result = new RVec3();
+        getBody2PivotLocation(result);
+        return result;
+    }
+
+    /**
+     * Copy the 2nd body's pivot location. The constraint is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getBody2PivotLocation(RVec3 out) {
+        long constraintVa = targetVa();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        TwoBodyConstraint.getBody2PivotLocation(constraintVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**

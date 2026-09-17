@@ -291,6 +291,24 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
      *
+     * @param pointX the X coordinate of the location to test
+     * @param pointY the Y coordinate of the location to test
+     * @param pointZ the Z coordinate of the location to test
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     */
+    @Override
+    public void collidePoint(float pointX, float pointY, float pointZ,
+                             CollideShapeBodyCollector collector,
+                             BroadPhaseLayerFilter bplFilter) {
+        collidePoint(pointX, pointY, pointZ, collector, bplFilter,
+                new ObjectLayerFilter());
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified point.
+     *
      * @param point the location to test (not {@code null}, unaffected)
      * @param collector the hit collector to use (not {@code null})
      * @param bplFilter the broadphase-layer filter to apply (not {@code null},
@@ -305,6 +323,30 @@ public class BroadPhaseQuery
         float pointX = point.getX();
         float pointY = point.getY();
         float pointZ = point.getZ();
+        long collectorVa = collector.va();
+        long bplFilterVa = bplFilter.va();
+        long olFilterVa = olFilter.va();
+        collidePoint(queryVa, pointX, pointY, pointZ, collectorVa, bplFilterVa,
+                olFilterVa);
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified point.
+     *
+     * @param pointX the X coordinate of the location to test
+     * @param pointY the Y coordinate of the location to test
+     * @param pointZ the Z coordinate of the location to test
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     */
+    @Override
+    public void collidePoint(float pointX, float pointY, float pointZ,
+                             CollideShapeBodyCollector collector,
+                             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
+        long queryVa = va();
         long collectorVa = collector.va();
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();
@@ -329,6 +371,22 @@ public class BroadPhaseQuery
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
+     * @param centerX the X coordinate of the sphere's center
+     * @param centerY the Y coordinate of the sphere's center
+     * @param centerZ the Z coordinate of the sphere's center
+     * @param radius the radius of the test sphere
+     * @param collector the hit collector to use (not {@code null})
+     */
+    @Override
+    public void collideSphere(float centerX, float centerY, float centerZ,
+                              float radius, CollideShapeBodyCollector collector) {
+        collideSphere(centerX, centerY, centerZ, radius, collector,
+                new BroadPhaseLayerFilter());
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified test sphere.
+     *
      * @param center the center of the test sphere (not {@code null},
      * unaffected)
      * @param radius the radius of the test sphere
@@ -342,6 +400,25 @@ public class BroadPhaseQuery
             BroadPhaseLayerFilter bplFilter) {
         collideSphere(
                 center, radius, collector, bplFilter, new ObjectLayerFilter());
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified test sphere.
+     *
+     * @param centerX the X coordinate of the sphere's center
+     * @param centerY the Y coordinate of the sphere's center
+     * @param centerZ the Z coordinate of the sphere's center
+     * @param radius the radius of the test sphere
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     */
+    @Override
+    public void collideSphere(float centerX, float centerY, float centerZ,
+                              float radius, CollideShapeBodyCollector collector,
+                              BroadPhaseLayerFilter bplFilter) {
+        collideSphere(centerX, centerY, centerZ, radius, collector, bplFilter,
+                new ObjectLayerFilter());
     }
 
     /**
@@ -370,6 +447,33 @@ public class BroadPhaseQuery
         collideSphere(queryVa, centerX, centerY, centerZ, radius, collectorVa,
                 bplFilterVa, olFilterVa);
     }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified test sphere.
+     *
+     * @param centerX the X coordinate of the sphere's center
+     * @param centerY the Y coordinate of the sphere's center
+     * @param centerZ the Z coordinate of the sphere's center
+     * @param radius the radius of the test sphere
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     */
+    @Override
+    public void collideSphere(
+            float centerX, float centerY, float centerZ,
+            float radius, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
+        long queryVa = va();
+        long collectorVa = collector.va();
+        long bplFilterVa = bplFilter.va();
+        long olFilterVa = olFilter.va();
+        collideSphere(queryVa, centerX, centerY, centerZ, radius, collectorVa,
+                bplFilterVa, olFilterVa);
+    }
+
     // *************************************************************************
     // protected methods
 

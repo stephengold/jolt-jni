@@ -126,6 +126,20 @@ public class Wheel extends NonCopyable implements ConstWheel {
     }
 
     /**
+     * Copy the wheel's lateral (sideways) direction.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getContactLateral(Vec3 out) {
+        long wheelVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getContactLateral(wheelVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the wheel's longitudinal direction.
      *
      * @return a new direction vector (in system coordinates)
@@ -138,6 +152,20 @@ public class Wheel extends NonCopyable implements ConstWheel {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the wheel's longitudinal direction.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getContactLongitudinal(Vec3 out) {
+        long wheelVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getContactLongitudinal(wheelVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -156,6 +184,20 @@ public class Wheel extends NonCopyable implements ConstWheel {
     }
 
     /**
+     * Copy the contact normal direction.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getContactNormal(Vec3 out) {
+        long wheelVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getContactNormal(wheelVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the velocity of the contact point.
      *
      * @return a new velocity vector (meters per second in system coordinates)
@@ -171,6 +213,20 @@ public class Wheel extends NonCopyable implements ConstWheel {
     }
 
     /**
+     * Copy the velocity of the contact point.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getContactPointVelocity(Vec3 out) {
+        long wheelVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getContactPointVelocity(wheelVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the location of the contact point.
      *
      * @return a new location vector (in system coordinates)
@@ -183,6 +239,20 @@ public class Wheel extends NonCopyable implements ConstWheel {
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the location of the contact point.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getContactPosition(RVec3 out) {
+        long wheelVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getContactPosition(wheelVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**

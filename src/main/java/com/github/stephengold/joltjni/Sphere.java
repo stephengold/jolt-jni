@@ -83,6 +83,19 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
         long sphereVa = create(x, y, z, radius);
         setVirtualAddress(sphereVa, () -> free(sphereVa));
     }
+
+    /**
+     * Instantiate a sphere with the specified center and radius.
+     *
+     * @param x the desired X coordinate of the center
+     * @param y the desired Y coordinate of the center
+     * @param z the desired Z coordinate of the center
+     * @param radius the desired radius
+     */
+    public Sphere(float x, float y, float z, float radius) {
+        long sphereVa = create(x, y, z, radius);
+        setVirtualAddress(sphereVa, () -> free(sphereVa));
+    }
     // *************************************************************************
     // new methods exposed
 

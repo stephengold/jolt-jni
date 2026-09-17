@@ -76,6 +76,19 @@ public class JointState extends JoltPhysicsObject implements ConstJointState {
     }
 
     /**
+     * Alter the rotation component. (native attribute: mRotation)
+     *
+     * @param qx the X component of the desired rotation (default=0)
+     * @param qy the Y component of the desired rotation (default=0)
+     * @param qz the Z component of the desired rotation (default=0)
+     * @param qw the W component of the desired rotation (default=1)
+     */
+    public void setRotation(float qx, float qy, float qz, float qw) {
+        long stateVa = va();
+        setRotation(stateVa, qx, qy, qz, qw);
+    }
+
+    /**
      * Alter the translation offset component. (native attribute: mTranslation)
      *
      * @param offset the desired offset (not {@code null}, unaffected,
@@ -86,6 +99,18 @@ public class JointState extends JoltPhysicsObject implements ConstJointState {
         float x = offset.getX();
         float y = offset.getY();
         float z = offset.getZ();
+        setTranslation(stateVa, x, y, z);
+    }
+
+    /**
+     * Alter the translation offset component. (native attribute: mTranslation)
+     *
+     * @param x the desired X offset (default=0)
+     * @param y the desired Y offset (default=0)
+     * @param z the desired Z offset (default=0)
+     */
+    public void setTranslation(float x, float y, float z) {
+        long stateVa = va();
         setTranslation(stateVa, x, y, z);
     }
     // *************************************************************************
@@ -107,6 +132,19 @@ public class JointState extends JoltPhysicsObject implements ConstJointState {
     }
 
     /**
+     * Copy the rotation. The state is unaffected. (native attribute: mRotation)
+     *
+     * @param out storage for the rotation (not {@code null}, modified)
+     */
+    @Override
+    public void getRotation(Quat out) {
+        long stateVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(stateVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the translation offset. The state is unaffected. (native attribute:
      * mTranslation)
      *
@@ -120,6 +158,20 @@ public class JointState extends JoltPhysicsObject implements ConstJointState {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the translation offset. The state is unaffected. (native attribute:
+     * mTranslation)
+     *
+     * @param out storage for the offset (not {@code null}, modified)
+     */
+    @Override
+    public void getTranslation(Vec3 out) {
+        long stateVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTranslation(stateVa, storeFloats);
+        out.set(storeFloats);
     }
     // *************************************************************************
     // native private methods

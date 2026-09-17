@@ -86,6 +86,19 @@ abstract public class CharacterBase
     }
 
     /**
+     * Alter the plane of support. (native attribute: mSupportingVolume)
+     *
+     * @param nx the X component of the plane's normal (in system coordinates)
+     * @param ny the Y component of the plane's normal (in system coordinates)
+     * @param nz the Z component of the plane's normal (in system coordinates)
+     * @param c the plane constant (in system coordinates)
+     */
+    public void setSupportingVolume(float nx, float ny, float nz, float c) {
+        long characterVa = va();
+        setSupportingVolume(characterVa, nx, ny, nz, c);
+    }
+
+    /**
      * Alter the character's "up" direction.
      *
      * @param up the desired direction (not {@code null}, unaffected,
@@ -96,6 +109,21 @@ abstract public class CharacterBase
         float x = up.getX();
         float y = up.getY();
         float z = up.getZ();
+        setUp(characterVa, x, y, z);
+    }
+
+    /**
+     * Alter the character's "up" direction. (native attribute: mUp)
+     *
+     * @param x the X component of the desired direction (in system
+     * coordinates, default=0)
+     * @param y the Y component of the desired direction (in system
+     * coordinates, default=1)
+     * @param z the Z component of the desired direction (in system
+     * coordinates, default=0)
+     */
+    public void setUp(float x, float y, float z) {
+        long characterVa = va();
         setUp(characterVa, x, y, z);
     }
     // *************************************************************************
@@ -167,6 +195,22 @@ abstract public class CharacterBase
     }
 
     /**
+     * Copy the normal direction at the point of contact with the supporting
+     * surface. The character is unaffected.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getGroundNormal(Vec3 out) {
+        long characterVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getGroundNormal(characterVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+
+    /**
      * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
@@ -180,6 +224,21 @@ abstract public class CharacterBase
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the location of the point of contact with the supporting surface.
+     * The character is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getGroundPosition(RVec3 out) {
+        long characterVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getGroundPosition(characterVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**
@@ -242,6 +301,21 @@ abstract public class CharacterBase
     }
 
     /**
+     * Copy the world-space velocity of the supporting surface. The character is
+     * unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getGroundVelocity(Vec3 out) {
+        long characterVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getGroundVelocity(characterVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Access the character's shape. The character is unaffected.
      *
      * @return a new immutable JVM object with the pre-existing native object
@@ -286,6 +360,19 @@ abstract public class CharacterBase
     }
 
     /**
+     * Copy the supporting volume. The character is unaffected.
+     *
+     * @param out storage for the plane (not {@code null}, modified)
+     */
+    @Override
+    public void getSupportingVolume(Plane out) {
+        long characterVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSupportingVolume(characterVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector
@@ -298,6 +385,19 @@ abstract public class CharacterBase
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the character's "up" direction. The character is unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getUp(Vec3 out) {
+        long characterVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getUp(characterVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -316,6 +416,24 @@ abstract public class CharacterBase
         boolean result = isSlopeTooSteep(characterVa, nx, ny, nz);
 
         return result;
+    }
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
+     * @param nx the X component of the surface normal to test (in system
+     * coordinates)
+     * @param ny the Y component of the surface normal to test (in system
+     * coordinates)
+     * @param nz the Z component of the surface normal to test (in system
+     * coordinates)
+     * @return {@code true} if too steep, otherwise {@code false}
+     */
+    @Override
+    public boolean isSlopeTooSteep(float nx, float ny, float nz) {
+        long characterVa = va();
+        return isSlopeTooSteep(characterVa, nx, ny, nz);
     }
 
     /**

@@ -47,6 +47,14 @@ public interface ConstWheelSettings extends ConstSerializableObject {
     Vec3 getPosition();
 
     /**
+     * Copy the location of the attachment point. The settings are unaffected.
+     *
+     * @param out storage for the location (in the body's local system, not
+     * {@code null}, modified)
+     */
+    void getPosition(Vec3 out);
+
+    /**
      * Return the radius of the wheel. The settings are unaffected.
      *
      * @return the radius (in meters)
@@ -61,6 +69,13 @@ public interface ConstWheelSettings extends ConstSerializableObject {
     Vec3 getSteeringAxis();
 
     /**
+     * Copy the steering axis (upward direction). The settings are unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    void getSteeringAxis(Vec3 out);
+
+    /**
      * Copy the downward direction of the suspension. The settings are
      * unaffected.
      *
@@ -69,12 +84,29 @@ public interface ConstWheelSettings extends ConstSerializableObject {
     Vec3 getSuspensionDirection();
 
     /**
+     * Copy the downward direction of the suspension. The settings are
+     * unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    void getSuspensionDirection(Vec3 out);
+
+    /**
      * Copy the location where (if enabled) tire forces will be applied. The
      * settings are unaffected.
      *
      * @return a new location vector (in body coordinates)
      */
     Vec3 getSuspensionForcePoint();
+
+    /**
+     * Copy the location where (if enabled) tire forces will be applied. The
+     * settings are unaffected.
+     *
+     * @param out storage for the location (in body coordinates, not
+     * {@code null}, modified)
+     */
+    void getSuspensionForcePoint(Vec3 out);
 
     /**
      * Return the maximum displacement from the attachment point. The settings
@@ -116,12 +148,28 @@ public interface ConstWheelSettings extends ConstSerializableObject {
     Vec3 getWheelForward();
 
     /**
+     * Copy the forward direction when steering is neutral. The settings are
+     * unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    void getWheelForward(Vec3 out);
+
+    /**
      * Copy the "up" direction when steering is neutral. The settings are
      * unaffected.
      *
      * @return a new direction vector
      */
     Vec3 getWheelUp();
+
+    /**
+     * Copy the "up" direction when steering is neutral. The settings are
+     * unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    void getWheelUp(Vec3 out);
 
     /**
      * Return the width of the wheel. The settings are unaffected.

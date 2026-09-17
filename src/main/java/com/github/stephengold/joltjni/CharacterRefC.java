@@ -109,6 +109,18 @@ final public class CharacterRefC
     }
 
     /**
+     * Copy the location of the rigid body's center of mass using the locking
+     * body interface. The character is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getCenterOfMassPosition(RVec3 out) {
+        getCenterOfMassPosition(true, out);
+    }
+
+    /**
      * Copy the location of the rigid body's center of mass. The character is
      * unaffected.
      *
@@ -125,6 +137,24 @@ final public class CharacterRefC
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the location of the rigid body's center of mass. The character is
+     * unaffected.
+     *f
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getCenterOfMassPosition(boolean lockBodies, RVec3 out) {
+        long characterVa = targetVa();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        com.github.stephengold.joltjni.Character.getCenterOfMassPosition(
+                characterVa, storeDoubles, lockBodies);
+        out.set(storeDoubles);
     }
 
     /**
@@ -222,6 +252,21 @@ final public class CharacterRefC
     }
 
     /**
+     * Copy the normal direction at the point of contact with the supporting
+     * surface. The character is unaffected.
+     *
+     * @param out storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getGroundNormal(Vec3 out) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getGroundNormal(characterVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
@@ -235,6 +280,21 @@ final public class CharacterRefC
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the location of the point of contact with the supporting surface.
+     * The character is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getGroundPosition(RVec3 out) {
+        long characterVa = targetVa();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        CharacterBase.getGroundPosition(characterVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**
@@ -297,6 +357,21 @@ final public class CharacterRefC
     }
 
     /**
+     * Copy the world-space velocity of the supporting surface. The character is
+     * unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getGroundVelocity(Vec3 out) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getGroundVelocity(characterVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Return the character's object layer, using the locking body interface.
      * The character is unaffected.
      *
@@ -337,6 +412,18 @@ final public class CharacterRefC
     }
 
     /**
+     * Copy the linear velocity of the character using the locking body
+     * interface. The character is unaffected.
+     *
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 out) {
+        getLinearVelocity(true, out);
+    }
+
+    /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -352,6 +439,23 @@ final public class CharacterRefC
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the linear velocity of the character. The character is unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @param out storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(boolean lockBodies, Vec3 out) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        com.github.stephengold.joltjni.Character.getLinearVelocity(
+                characterVa, storeFloats, lockBodies);
+        out.set(storeFloats);
     }
 
     /**
@@ -378,6 +482,18 @@ final public class CharacterRefC
     }
 
     /**
+     * Copy the location of the character using the locking body interface. The
+     * character is unaffected.
+     *
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 out) {
+        getPosition(true, out);
+    }
+
+    /**
      * Copy the location of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -393,6 +509,23 @@ final public class CharacterRefC
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the location of the character. The character is unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @param out storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(boolean lockBodies, RVec3 out) {
+        long characterVa = targetVa();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        com.github.stephengold.joltjni.Character.getPosition(
+                characterVa, storeDoubles, lockBodies);
+        out.set(storeDoubles);
     }
 
     /**
@@ -459,6 +592,18 @@ final public class CharacterRefC
     }
 
     /**
+     * Copy the orientation of the character using the locking body interface.
+     * The character is unaffected.
+     *
+     * @param out storage for the orientation (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getRotation(Quat out) {
+        getRotation(true, out);
+    }
+
+    /**
      * Copy the orientation of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -474,6 +619,23 @@ final public class CharacterRefC
         Quat result = new Quat(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the orientation of the character. The character is unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @param out storage for the orientation (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getRotation(boolean lockBodies, Quat out) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        com.github.stephengold.joltjni.Character.getRotation(
+                characterVa, storeFloats, lockBodies);
+        out.set(storeFloats);
     }
 
     /**
@@ -521,6 +683,19 @@ final public class CharacterRefC
     }
 
     /**
+     * Copy the supporting volume. The character is unaffected.
+     *
+     * @param out storage for the plane (not {@code null}, modified)
+     */
+    @Override
+    public void getSupportingVolume(Plane out) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getSupportingVolume(characterVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Generate a TransformedShape that represents the volume occupied by the
      * character, using the locking body interface. The character is unaffected.
      *
@@ -562,6 +737,19 @@ final public class CharacterRefC
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the character's "up" direction. The character is unaffected.
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getUp(Vec3 out) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getUp(characterVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -608,6 +796,23 @@ final public class CharacterRefC
         float nx = normal.getX();
         float ny = normal.getY();
         float nz = normal.getZ();
+        boolean result = CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
+
+        return result;
+    }
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
+     * @param nx the X component of the surface normal to test
+     * @param ny the Y component of the surface normal to test
+     * @param nz the Z component of the surface normal to test
+     * @return {@code true} if too steep, otherwise {@code false}
+     */
+    @Override
+    public boolean isSlopeTooSteep(float nx, float ny, float nz) {
+        long characterVa = targetVa();
         boolean result = CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
 
         return result;

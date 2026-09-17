@@ -111,6 +111,19 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the plane axis of body 1. The settings are unaffected. (native
+     * attribute: mPlaneAxis1)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getPlaneAxis1(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPlaneAxis1(settingsVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the plane axis of body 2. The settings are unaffected. (native
      * attribute: mPlaneAxis2)
      *
@@ -123,6 +136,19 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the plane axis of body 2. The settings are unaffected. (native
+     * attribute: mPlaneAxis2)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getPlaneAxis2(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPlaneAxis2(settingsVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -155,6 +181,19 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the initial location of body 1. The settings are unaffected. (native
+     * attribute: mPosition1)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPosition1(RVec3 out) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition1(settingsVa, storeDoubles);
+        out.set(storeDoubles);
+    }
+
+    /**
      * Copy the initial location of body 2. The settings are unaffected. (native
      * attribute: mPosition2)
      *
@@ -167,6 +206,19 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the initial location of body 2. The settings are unaffected. (native
+     * attribute: mPosition2)
+     *
+     * @param out storage for the location (not {@code null}, modified)
+     */
+    public void getPosition2(RVec3 out) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition2(settingsVa, storeDoubles);
+        out.set(storeDoubles);
     }
 
     /**
@@ -226,6 +278,19 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the twist axis of body 1. The settings are unaffected. (native
+     * attribute: mTwistAxis1)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getTwistAxis1(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTwistAxis1(settingsVa, storeFloats);
+        out.set(storeFloats);
+    }
+
+    /**
      * Copy the twist axis of body 2. The settings are unaffected. (native
      * attribute: mTwistAxis2)
      *
@@ -238,6 +303,19 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the twist axis of body 2. The settings are unaffected. (native
+     * attribute: mTwistAxis2)
+     *
+     * @param out storage for the direction (not {@code null}, modified)
+     */
+    public void getTwistAxis2(Vec3 out) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTwistAxis2(settingsVa, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
@@ -330,6 +408,18 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the plane axis of body 1. (native attribute: mPlaneAxis1)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=1)
+     * @param dz the desired Z component of the direction (default=0)
+     */
+    public void setPlaneAxis1(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setPlaneAxis1(settingsVa, dx, dy, dz);
+    }
+
+    /**
      * Alter the plane axis of body 2. (native attribute: mPlaneAxis2)
      *
      * @param axisDirection the desired direction (not {@code null}, unaffected,
@@ -344,6 +434,18 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         setPlaneAxis2(settingsVa, dx, dy, dz);
 
         return axisDirection;
+    }
+
+    /**
+     * Alter the plane axis of body 2. (native attribute: mPlaneAxis2)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=1)
+     * @param dz the desired Z component of the direction (default=0)
+     */
+    public void setPlaneAxis2(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setPlaneAxis2(settingsVa, dx, dy, dz);
     }
 
     /**
@@ -375,6 +477,18 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the initial location of the body 1. (native attribute: mPosition1)
+     *
+     * @param locX the desired X coordinate (default=0)
+     * @param locY the desired Y coordinate (default=0)
+     * @param locZ the desired Z coordinate (default=0)
+     */
+    public void setPosition1(double locX, double locY, double locZ) {
+        long settingsVa = va();
+        setPosition1(settingsVa, locX, locY, locZ);
+    }
+
+    /**
      * Alter the initial location of body 2. (native attribute: mPosition2)
      *
      * @param location the desired location (not {@code null}, unaffected,
@@ -390,6 +504,19 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
 
         return location;
     }
+
+    /**
+     * Alter the initial location of body 2. (native attribute: mPosition2)
+     *
+     * @param locX the desired X coordinate (default=0)
+     * @param locY the desired Y coordinate (default=0)
+     * @param locZ the desired Z coordinate (default=0)
+     */
+    public void setPosition2(double locX, double locY, double locZ) {
+        long settingsVa = va();
+        setPosition2(settingsVa, locX, locY, locZ);
+    }
+
 
     /**
      * Alter which space the other properties are specified in. (native
@@ -447,6 +574,18 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the twist axis of the body 1. (native attribute: mTwistAxis1)
+     *
+     * @param dx the desired X component of the direction (default=1)
+     * @param dy the desired Y component of the direction (default=0)
+     * @param dz the desired Z component of the direction (default=0)
+     */
+    public void setTwistAxis1(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setTwistAxis1(settingsVa, dx, dy, dz);
+    }
+
+    /**
      * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
      *
      * @param axisDirection the desired direction (not {@code null}, unaffected,
@@ -461,6 +600,18 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         setTwistAxis2(settingsVa, dx, dy, dz);
 
         return axisDirection;
+    }
+
+    /**
+     * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
+     *
+     * @param dx the desired X component of the direction (default=1)
+     * @param dy the desired Y component of the direction (default=0)
+     * @param dz the desired Z component of the direction (default=0)
+     */
+    public void setTwistAxis2(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setTwistAxis2(settingsVa, dx, dy, dz);
     }
 
     /**
