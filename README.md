@@ -98,7 +98,7 @@ Jolt JNI is derived from open-source software:
   + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
 
 Useful code was contributed by TropheusJ, wil (aka JNightRider), xI-Mx-Ix,
-MORIMORI0317, and David J. Morfe (aka jakeee51).
+MORIMORI0317, David J. Morfe (aka jakeee51), and Bogdan (aka DeusSixik).
 
 This project also made use of the following software tools:
 
