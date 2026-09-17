@@ -7,7 +7,7 @@ on: [push]
 jobs:
   Java17-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/setup-java@v6
         with:
@@ -28,7 +28,7 @@ jobs:
 
   Java21-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/setup-java@v6
         with:
@@ -65,7 +65,7 @@ jobs:
 
   Java21-Linux64_fma:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/setup-java@v6
         with:
@@ -366,7 +366,7 @@ jobs:
 
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/setup-java@v6
         with:
