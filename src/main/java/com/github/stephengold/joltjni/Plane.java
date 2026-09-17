@@ -118,7 +118,7 @@ final public class Plane implements ConstPlane {
         this.nx = source.getNormalX();
         this.ny = source.getNormalY();
         this.nz = source.getNormalZ();
-        this.nz = source.getConstant();
+        this.c = source.getConstant();
     }
 
     /**
