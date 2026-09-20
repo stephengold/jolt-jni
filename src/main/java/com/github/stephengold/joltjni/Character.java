@@ -1180,21 +1180,6 @@ public class Character extends CharacterBase implements ConstCharacter {
         return system;
     }
 
-    @Override
-    public void getSupportingVolume(Plane out) {
-
-    }
-
-    @Override
-    public void getUp(Vec3 out) {
-
-    }
-
-    @Override
-    public boolean isSlopeTooSteep(float nx, float ny, float nz) {
-        return false;
-    }
-
     /**
      * Copy the location of the character using the locking body interface. The
      * character is unaffected.
