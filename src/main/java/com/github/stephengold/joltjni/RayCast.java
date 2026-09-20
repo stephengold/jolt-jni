@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +62,7 @@ public class RayCast extends JoltPhysicsObject {
      * @param dz the Z component of the end offset from the start
      */
     public RayCast(float startX, float startY, float startZ,
-                   float dx, float dy, float dz) {
+            float dx, float dy, float dz) {
         long raycastVa = createRayCast(startX, startY, startZ, dx, dy, dz);
         setVirtualAddress(raycastVa, () -> free(raycastVa));
     }

@@ -218,7 +218,7 @@ public class MotionProperties
      * @param rw the W component of the orientation of the principal axes
      */
     public void setInverseInertia(float dx, float dy, float dz,
-                                  float rx, float ry, float rz, float rw) {
+            float rx, float ry, float rz, float rw) {
         long propertiesVa = va();
         setInverseInertia(propertiesVa, dx, dy, dz, rx, ry, rz, rw);
     }

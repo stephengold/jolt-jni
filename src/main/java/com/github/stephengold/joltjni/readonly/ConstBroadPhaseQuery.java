@@ -197,8 +197,8 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
      * unaffected)
      */
     void collidePoint(float pointX, float pointY, float pointZ,
-                      CollideShapeBodyCollector collector,
-                      BroadPhaseLayerFilter bplFilter);
+            CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter);
 
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
@@ -226,8 +226,8 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
      * unaffected)
      */
     void collidePoint(float pointX, float pointY, float pointZ,
-                      CollideShapeBodyCollector collector,
-                      BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
+            CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
@@ -250,7 +250,7 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
      * @param collector the hit collector to use (not {@code null})
      */
     void collideSphere(float centerX, float centerY, float centerZ,
-                       float radius, CollideShapeBodyCollector collector);
+            float radius, CollideShapeBodyCollector collector);
 
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
@@ -278,8 +278,8 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
      * unaffected)
      */
     void collideSphere(float centerX, float centerY, float centerZ,
-                       float radius, CollideShapeBodyCollector collector,
-                       BroadPhaseLayerFilter bplFilter);
+            float radius, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter);
 
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
@@ -311,6 +311,6 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
      * unaffected)
      */
     void collideSphere(float centerX, float centerY, float centerZ,
-                       float radius, CollideShapeBodyCollector collector,
-                       BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
+            float radius, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 }

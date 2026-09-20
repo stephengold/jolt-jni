@@ -362,7 +362,6 @@ final public class CharacterSettingsRef
         return result;
     }
 
-
     /**
      * Copy the character's "up" direction. The settings are unaffected. (native
      * attribute: mUp)

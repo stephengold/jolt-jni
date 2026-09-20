@@ -68,22 +68,17 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         setVirtualAddressAsCoOwner(rtssVa, EShapeSubType.RotatedTranslated);
     }
 
-
     /**
      * Instantiate a settings object with the specified rotation and base shape.
      *
-     * @param rotX the X component of the rotation (relative to the system
-     * axes)
-     * @param rotY the Y component of the rotation (relative to the system
-     * axes)
-     * @param rotZ the Z component of the rotation (relative to the system
-     * axes)
-     * @param rotW the W component of the rotation (relative to the system
-     * axes)
+     * @param rotX the X component of the rotation (relative to the system axes)
+     * @param rotY the Y component of the rotation (relative to the system axes)
+     * @param rotZ the Z component of the rotation (relative to the system axes)
+     * @param rotW the W component of the rotation (relative to the system axes)
      * @param baseShape the base shape (not {@code null}, unaffected)
      */
     public RotatedTranslatedShapeSettings(float rotX, float rotY, float rotZ,
-                                          float rotW, ConstShape baseShape) {
+            float rotW, ConstShape baseShape) {
         float offsetX = 0f;
         float offsetY = 0f;
         float offsetZ = 0f;
@@ -119,18 +114,14 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * Instantiate a settings object with the specified rotation and base
      * settings.
      *
-     * @param rotX the X component of the rotation (relative to the system
-     * axes)
-     * @param rotY the Y component of the rotation (relative to the system
-     * axes)
-     * @param rotZ the Z component of the rotation (relative to the system
-     * axes)
-     * @param rotW the W component of the rotation (relative to the system
-     * axes)
+     * @param rotX the X component of the rotation (relative to the system axes)
+     * @param rotY the Y component of the rotation (relative to the system axes)
+     * @param rotZ the Z component of the rotation (relative to the system axes)
+     * @param rotW the W component of the rotation (relative to the system axes)
      * @param baseShapeSettings settings for the base shape (not {@code null})
      */
     public RotatedTranslatedShapeSettings(float rotX, float rotY, float rotZ,
-                                          float rotW, ConstShapeSettings baseShapeSettings) {
+            float rotW, ConstShapeSettings baseShapeSettings) {
         float offsetX = 0f;
         float offsetY = 0f;
         float offsetZ = 0f;
@@ -182,19 +173,15 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * @param offsetX the desired X offset
      * @param offsetY the desired Y offset
      * @param offsetZ the desired Z offset
-     * @param rotX the X component of the rotation (relative to the system
-     * axes)
-     * @param rotY the Y component of the rotation (relative to the system
-     * axes)
-     * @param rotZ the Z component of the rotation (relative to the system
-     * axes)
-     * @param rotW the W component of the rotation (relative to the system
-     * axes)
+     * @param rotX the X component of the rotation (relative to the system axes)
+     * @param rotY the Y component of the rotation (relative to the system axes)
+     * @param rotZ the Z component of the rotation (relative to the system axes)
+     * @param rotW the W component of the rotation (relative to the system axes)
      * @param baseShape the base shape (not {@code null}, unaffected)
      */
     public RotatedTranslatedShapeSettings(float offsetX, float offsetY,
-                                          float offsetZ, float rotX, float rotY, float rotZ, float rotW,
-                                          ConstShape baseShape) {
+            float offsetZ, float rotX, float rotY, float rotZ, float rotW,
+            ConstShape baseShape) {
         long baseShapeVa = baseShape.targetVa();
         long rtssVa = createSettingsFromShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
@@ -231,19 +218,15 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * @param offsetX the desired X offset
      * @param offsetY the desired Y offset
      * @param offsetZ the desired Z offset
-     * @param rotX the X component of the rotation (relative to the system
-     * axes)
-     * @param rotY the Y component of the rotation (relative to the system
-     * axes)
-     * @param rotZ the Z component of the rotation (relative to the system
-     * axes)
-     * @param rotW the W component of the rotation (relative to the system
-     * axes)
+     * @param rotX the X component of the rotation (relative to the system axes)
+     * @param rotY the Y component of the rotation (relative to the system axes)
+     * @param rotZ the Z component of the rotation (relative to the system axes)
+     * @param rotW the W component of the rotation (relative to the system axes)
      * @param baseShapeSettings settings for the base shape (not {@code null})
      */
     public RotatedTranslatedShapeSettings(float offsetX, float offsetY,
-                                          float offsetZ, float rotX, float rotY, float rotZ, float rotW,
-                                          ConstShapeSettings baseShapeSettings) {
+            float offsetZ, float rotX, float rotY, float rotZ, float rotW,
+            ConstShapeSettings baseShapeSettings) {
         long baseShapeSettingsVa = baseShapeSettings.targetVa();
         long rtssVa = createSettingsFromShapeSettings(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeSettingsVa);

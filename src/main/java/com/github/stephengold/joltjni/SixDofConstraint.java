@@ -208,7 +208,6 @@ public class SixDofConstraint extends TwoBodyConstraint {
         return result;
     }
 
-
     /**
      * Copy the rotation lower limits. The constraint is unaffected.
      *
@@ -270,8 +269,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Copy the target position of the linear motors. The constraint is
      * unaffected. (native function: GetTargetPositionCS)
      *
-     * @param out storage for the offset (meters in body 1 constraint space,
-     * not {@code null}, modified)
+     * @param out storage for the offset (meters in body 1 constraint space, not
+     * {@code null}, modified)
      */
     public void getTargetPositionCs(Vec3 out) {
         long constraintVa = va();
@@ -539,7 +538,6 @@ public class SixDofConstraint extends TwoBodyConstraint {
         float wz = omega.getZ();
         setTargetAngularVelocityCs(constraintVa, wx, wy, wz);
     }
-
 
     /**
      * Alter the target velocities of the angular motors. (native function:

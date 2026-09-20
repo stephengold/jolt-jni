@@ -58,7 +58,7 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
      * @param offsetZ the desired Z offset
      */
     public OffsetCenterOfMassShape(ConstShape baseShape,
-                                   float offsetX, float offsetY, float offsetZ) {
+            float offsetX, float offsetY, float offsetZ) {
         long baseShapeVa = baseShape.targetVa();
         long ocomShapeVa = createShape(baseShapeVa, offsetX, offsetY, offsetZ);
         setVirtualAddressAsCoOwner(ocomShapeVa);

@@ -131,9 +131,9 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
      * {@code null} for default properties (default=null)
      */
     public TriangleShapeSettings(float v1x, float v1y, float v1z,
-                                 float v2x, float v2y, float v2z,
-                                 float v3x, float v3y, float v3z, float convexRadius,
-                                 PhysicsMaterial material) {
+            float v2x, float v2y, float v2z,
+            float v3x, float v3y, float v3z, float convexRadius,
+            PhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createTriangleShapeSettings(v1x, v1y, v1z, v2x, v2y,
                 v2z, v3x, v3y, v3z, convexRadius, materialVa);

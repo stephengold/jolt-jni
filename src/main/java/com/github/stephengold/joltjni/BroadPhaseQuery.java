@@ -300,8 +300,8 @@ public class BroadPhaseQuery
      */
     @Override
     public void collidePoint(float pointX, float pointY, float pointZ,
-                             CollideShapeBodyCollector collector,
-                             BroadPhaseLayerFilter bplFilter) {
+            CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter) {
         collidePoint(pointX, pointY, pointZ, collector, bplFilter,
                 new ObjectLayerFilter());
     }
@@ -344,8 +344,8 @@ public class BroadPhaseQuery
      */
     @Override
     public void collidePoint(float pointX, float pointY, float pointZ,
-                             CollideShapeBodyCollector collector,
-                             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
+            CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         long queryVa = va();
         long collectorVa = collector.va();
         long bplFilterVa = bplFilter.va();
@@ -379,7 +379,7 @@ public class BroadPhaseQuery
      */
     @Override
     public void collideSphere(float centerX, float centerY, float centerZ,
-                              float radius, CollideShapeBodyCollector collector) {
+            float radius, CollideShapeBodyCollector collector) {
         collideSphere(centerX, centerY, centerZ, radius, collector,
                 new BroadPhaseLayerFilter());
     }
@@ -415,8 +415,8 @@ public class BroadPhaseQuery
      */
     @Override
     public void collideSphere(float centerX, float centerY, float centerZ,
-                              float radius, CollideShapeBodyCollector collector,
-                              BroadPhaseLayerFilter bplFilter) {
+            float radius, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter) {
         collideSphere(centerX, centerY, centerZ, radius, collector, bplFilter,
                 new ObjectLayerFilter());
     }
@@ -462,8 +462,7 @@ public class BroadPhaseQuery
      * unaffected)
      */
     @Override
-    public void collideSphere(
-            float centerX, float centerY, float centerZ,
+    public void collideSphere(float centerX, float centerY, float centerZ,
             float radius, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         long queryVa = va();
@@ -473,7 +472,6 @@ public class BroadPhaseQuery
         collideSphere(queryVa, centerX, centerY, centerZ, radius, collectorVa,
                 bplFilterVa, olFilterVa);
     }
-
     // *************************************************************************
     // protected methods
 

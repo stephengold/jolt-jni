@@ -99,9 +99,9 @@ public class Character extends CharacterBase implements ConstCharacter {
      * @param system where to add the body (not {@code null})
      */
     public Character(ConstCharacterSettings settings,
-                     double locX, double locY, double locZ,
-                     float qx, float qy, float qz, float qw,
-                     long userData, PhysicsSystem system) {
+            double locX, double locY, double locZ,
+            float qx, float qy, float qz, float qw,
+            long userData, PhysicsSystem system) {
         this.system = system;
         long settingsVa = settings.targetVa();
         long systemVa = system.va();
@@ -294,7 +294,6 @@ public class Character extends CharacterBase implements ConstCharacter {
         addToPhysicsSystem(characterVa, ordinal, lockBodies);
     }
 
-
     /**
      * Add the character to its {@code PhysicsSystem}.
      *
@@ -446,7 +445,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setLinearAndAngularVelocity(float vx, float vy, float vz,
-                                            float wx, float wy, float wz, boolean lockBodies) {
+            float wx, float wy, float wz, boolean lockBodies) {
         long characterVa = va();
         setLinearAndAngularVelocity(
                 characterVa, vx, vy, vz, wx, wy, wz, lockBodies);
@@ -560,7 +559,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * default=Activate)
      */
     public void setPosition(double locX, double locY, double locZ,
-                            EActivation activation) {
+            EActivation activation) {
         int ordinal = activation.ordinal();
         setPosition(locX, locY, locZ, ordinal, true);
     }
@@ -578,7 +577,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * @param activation the ordinal of the desired {@code EActivation} value
      */
     public void setPosition(double locX, double locY, double locZ,
-                            int activation) {
+            int activation) {
         setPosition(locX, locY, locZ, activation, true);
     }
 
@@ -602,7 +601,6 @@ public class Character extends CharacterBase implements ConstCharacter {
         setPosition(characterVa, locX, locY, locZ, ordinal, lockBodies);
     }
 
-
     /**
      * Relocate the character, optionally activating it.
      *
@@ -618,11 +616,10 @@ public class Character extends CharacterBase implements ConstCharacter {
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setPosition(double locX, double locY, double locZ,
-                            EActivation activation, boolean lockBodies) {
+            EActivation activation, boolean lockBodies) {
         int ordinal = activation.ordinal();
         setPosition(locX, locY, locZ, ordinal, lockBodies);
     }
-
 
     /**
      * Relocate the character, optionally activating it.
@@ -693,8 +690,8 @@ public class Character extends CharacterBase implements ConstCharacter {
      * default=Activate)
      */
     public void setPositionAndRotation(double locX, double locY, double locZ,
-                                       float qx, float qy, float qz, float qw,
-                                       EActivation activation) {
+            float qx, float qy, float qz, float qw,
+            EActivation activation) {
         setPositionAndRotation(
                 locX, locY, locZ, qx, qy, qz, qw, activation, true);
     }
@@ -720,7 +717,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * @param activation the ordinal of the desired {@code EActivation} value
      */
     public void setPositionAndRotation(double locX, double locY, double locZ,
-                                       float qx, float qy, float qz, float qw, int activation) {
+            float qx, float qy, float qz, float qw, int activation) {
         setPositionAndRotation(
                 locX, locY, locZ, qx, qy, qz, qw, activation, true);
     }
@@ -752,7 +749,6 @@ public class Character extends CharacterBase implements ConstCharacter {
                 qx, qy, qz, qw, ordinal, lockBodies);
     }
 
-
     /**
      * Reposition the character, optionally activating it.
      *
@@ -776,8 +772,8 @@ public class Character extends CharacterBase implements ConstCharacter {
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setPositionAndRotation(double locX, double locY, double locZ,
-                                       float qx, float qy, float qz, float qw, EActivation activation,
-                                       boolean lockBodies) {
+            float qx, float qy, float qz, float qw, EActivation activation,
+            boolean lockBodies) {
         int ordinal = activation.ordinal();
         setPositionAndRotation(locX, locY, locZ,
                 qx, qy, qz, qw, ordinal, lockBodies);
@@ -805,8 +801,8 @@ public class Character extends CharacterBase implements ConstCharacter {
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setPositionAndRotation(double locX, double locY, double locZ,
-                                       float qx, float qy, float qz, float qw, int activation,
-                                       boolean lockBodies) {
+            float qx, float qy, float qz, float qw, int activation,
+            boolean lockBodies) {
         long characterVa = va();
         setPositionAndRotation(characterVa, locX, locY, locZ,
                 qx, qy, qz, qw, activation, lockBodies);
@@ -851,8 +847,8 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Re-orient the character, optionally activating it, using the locking
-     * body interface.
+     * Re-orient the character, optionally activating it, using the locking body
+     * interface.
      *
      * @param qx the X component of the desired orientation (in system
      * coordinates)
@@ -871,8 +867,8 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Re-orient the character, optionally activating it, using the locking
-     * body interface.
+     * Re-orient the character, optionally activating it, using the locking body
+     * interface.
      *
      * @param qx the X component of the desired orientation (in system
      * coordinates)
@@ -926,7 +922,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setRotation(float qx, float qy, float qz, float qw,
-                            int activation, boolean lockBodies) {
+            int activation, boolean lockBodies) {
         long characterVa = va();
         setRotation(characterVa, qx, qy, qz, qw, activation, lockBodies);
     }

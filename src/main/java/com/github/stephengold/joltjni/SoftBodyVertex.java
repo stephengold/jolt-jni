@@ -160,12 +160,9 @@ public class SoftBodyVertex
     /**
      * Relocate the vertex. (native attribute: mPosition)
      *
-     * @param x the desired X coordinate (relative to the body's center of
-     * mass)
-     * @param y the desired Y coordinate (relative to the body's center of
-     * mass)
-     * @param z the desired Z coordinate (relative to the body's center of
-     * mass)
+     * @param x the desired X coordinate (relative to the body's center of mass)
+     * @param y the desired Y coordinate (relative to the body's center of mass)
+     * @param z the desired Z coordinate (relative to the body's center of mass)
      */
     public void setPosition(float x, float y, float z) {
         long vertexVa = va();
@@ -189,12 +186,9 @@ public class SoftBodyVertex
     /**
      * Alter the previous location. (native attribute: mPreviousPosition)
      *
-     * @param x the desired X coordinate (relative to the body's center of
-     * mass)
-     * @param y the desired Y coordinate (relative to the body's center of
-     * mass)
-     * @param z the desired Z coordinate (relative to the body's center of
-     * mass)
+     * @param x the desired X coordinate (relative to the body's center of mass)
+     * @param y the desired Y coordinate (relative to the body's center of mass)
+     * @param z the desired Z coordinate (relative to the body's center of mass)
      */
     public void setPreviousPosition(float x, float y, float z) {
         long vertexVa = va();

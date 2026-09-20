@@ -92,8 +92,8 @@ public class TriangleShape extends ConvexShape {
      * @param convexRadius the desired convex radius (default=0)
      */
     public TriangleShape(float v1x, float v1y, float v1z,
-                         float v2x, float v2y, float v2z,
-                         float v3x, float v3y, float v3z, float convexRadius) {
+            float v2x, float v2y, float v2z,
+            float v3x, float v3y, float v3z, float convexRadius) {
         long shapeVa = createTriangleShape(
                 v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, convexRadius);
         setVirtualAddressAsCoOwner(shapeVa);

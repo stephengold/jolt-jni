@@ -119,9 +119,9 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      * @param materialList the list of materials
      */
     public HeightFieldShapeSettings(float[] samples,
-                                    float offsetX, float offsetY, float offsetZ,
-                                    float scaleX, float scaleY, float scaleZ, int sampleCount,
-                                    byte[] materialIndices, PhysicsMaterialList materialList) {
+            float offsetX, float offsetY, float offsetZ,
+            float scaleX, float scaleY, float scaleZ, int sampleCount,
+            byte[] materialIndices, PhysicsMaterialList materialList) {
         long listVa = materialList.va();
         long settingsVa = createSettingsFromArray(
                 samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
@@ -167,8 +167,8 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      * (&ge;2*blockSize)
      */
     public HeightFieldShapeSettings(FloatBuffer samples,
-                                    float offsetX, float offsetY, float offsetZ,
-                                    float scaleX, float scaleY, float scaleZ, int sampleCount) {
+            float offsetX, float offsetY, float offsetZ,
+            float scaleX, float scaleY, float scaleZ, int sampleCount) {
         long settingsVa = createFromBufferNoMats(samples, offsetX, offsetY,
                 offsetZ, scaleX, scaleY, scaleZ, sampleCount);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
@@ -236,9 +236,9 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      * @param materialList the list of materials
      */
     public HeightFieldShapeSettings(FloatBuffer samples,
-                                    float offsetX, float offsetY, float offsetZ,
-                                    float scaleX, float scaleY, float scaleZ, int sampleCount,
-                                    byte[] materialIndices, PhysicsMaterialList materialList) {
+            float offsetX, float offsetY, float offsetZ,
+            float scaleX, float scaleY, float scaleZ, int sampleCount,
+            byte[] materialIndices, PhysicsMaterialList materialList) {
         long listVa = materialList.va();
         long settingsVa = createSettingsFromBuffer(
                 samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,

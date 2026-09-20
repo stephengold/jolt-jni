@@ -155,7 +155,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
      * @param v3z the desired Z coordinate of the 3rd vertex
      */
     public Triangle(float v1x, float v1y, float v1z,
-                    float v2x, float v2y, float v2z, float v3x, float v3y, float v3z) {
+            float v2x, float v2y, float v2z, float v3x, float v3y, float v3z) {
         this(v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, 0, 0);
     }
 
@@ -203,8 +203,8 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
      * @param userData the desired user data
      */
     public Triangle(float v1x, float v1y, float v1z,
-                    float v2x, float v2y, float v2z,
-                    float v3x, float v3y, float v3z, int materialIndex, int userData) {
+            float v2x, float v2y, float v2z,
+            float v3x, float v3y, float v3z, int materialIndex, int userData) {
         long triangleVa = createTriangle(v1x, v1y, v1z, v2x, v2y, v2z,
                 v3x, v3y, v3z, materialIndex, userData);
         setVirtualAddress(triangleVa, () -> free(triangleVa));

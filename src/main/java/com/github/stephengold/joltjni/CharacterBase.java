@@ -115,12 +115,12 @@ abstract public class CharacterBase
     /**
      * Alter the character's "up" direction. (native attribute: mUp)
      *
-     * @param x the X component of the desired direction (in system
-     * coordinates, default=0)
-     * @param y the Y component of the desired direction (in system
-     * coordinates, default=1)
-     * @param z the Z component of the desired direction (in system
-     * coordinates, default=0)
+     * @param x the X component of the desired direction (in system coordinates,
+     * default=0)
+     * @param y the Y component of the desired direction (in system coordinates,
+     * default=1)
+     * @param z the Z component of the desired direction (in system coordinates,
+     * default=0)
      */
     public void setUp(float x, float y, float z) {
         long characterVa = va();
@@ -208,7 +208,6 @@ abstract public class CharacterBase
         getGroundNormal(characterVa, storeFloats);
         out.set(storeFloats);
     }
-
 
     /**
      * Copy the location of the point of contact with the supporting surface.

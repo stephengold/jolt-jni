@@ -107,9 +107,9 @@ public class BodyCreationSettings
      * @param objLayer the ID of the desired object layer (&ge;0)
      */
     public BodyCreationSettings(ConstShape shape,
-                                double locX, double locY, double locZ,
-                                float orientX, float orientY, float orientZ, float orientW,
-                                EMotionType motionType, int objLayer) {
+            double locX, double locY, double locZ,
+            float orientX, float orientY, float orientZ, float orientW,
+            EMotionType motionType, int objLayer) {
         long shapeVa = shape.targetVa();
         int motionTypeOrdinal = motionType.ordinal();
         long bodySettingsVa = createFromShape(shapeVa, locX, locY,
@@ -152,9 +152,9 @@ public class BodyCreationSettings
      * @param objLayer the ID of the desired object layer
      */
     public BodyCreationSettings(ConstShapeSettings shapeSettings,
-                                double locX, double locY, double locZ,
-                                float orientX, float orientY, float orientZ, float orientW,
-                                EMotionType motionType, int objLayer) {
+            double locX, double locY, double locZ,
+            float orientX, float orientY, float orientZ, float orientW,
+            EMotionType motionType, int objLayer) {
         long shapeSettingsVa = shapeSettings.targetVa();
         int motionTypeOrdinal = motionType.ordinal();
         long bodySettingsVa = createFromShapeSettings(shapeSettingsVa, locX,
@@ -216,9 +216,9 @@ public class BodyCreationSettings
      * @param objLayer the ID of the desired object layer
      */
     public BodyCreationSettings(ShapeRef shapeRef,
-                                double locX, double locY, double locZ,
-                                float orientX, float orientY, float orientZ, float orientW,
-                                EMotionType motionType, int objLayer) {
+            double locX, double locY, double locZ,
+            float orientX, float orientY, float orientZ, float orientW,
+            EMotionType motionType, int objLayer) {
         this(shapeRef.getPtr(), locX, locY, locZ,
                 orientX, orientY, orientZ, orientW, motionType, objLayer);
     }
@@ -728,14 +728,14 @@ public class BodyCreationSettings
      * Alter the (initial) orientation of the body's axes. (native member:
      * mRotation)
      *
-     * @param qx the X component of the desired rotation (relative to the
-     * system axes, default=0)
-     * @param qy the Y component of the desired rotation (relative to the
-     * system axes, default=0)
-     * @param qz the Z component of the desired rotation (relative to the
-     * system axes, default=0)
-     * @param qw the W component of the desired rotation (relative to the
-     * system axes, default=1)
+     * @param qx the X component of the desired rotation (relative to the system
+     * axes, default=0)
+     * @param qy the Y component of the desired rotation (relative to the system
+     * axes, default=0)
+     * @param qz the Z component of the desired rotation (relative to the system
+     * axes, default=0)
+     * @param qw the W component of the desired rotation (relative to the system
+     * axes, default=1)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setRotation(
@@ -744,7 +744,7 @@ public class BodyCreationSettings
         setRotation(bodySettingsVa, qx, qy, qz, qw);
 
         return this;
-        }
+    }
 
     /**
      * Replace the shape and null out the shape settings.

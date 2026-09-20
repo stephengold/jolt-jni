@@ -114,7 +114,6 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
         return result;
     }
 
-
     /**
      * Copy the X axis for body 2. The settings are unaffected. (native
      * attribute: mAxisX2)
@@ -345,7 +344,6 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
         return result;
     }
-
 
     /**
      * Copy the constraint location for body 2. The settings are unaffected.

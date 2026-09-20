@@ -348,8 +348,8 @@ final public class WheelSettingsTvRef
      * Copy the location of the attachment point. The settings are unaffected.
      * (native attribute: mPosition)
      *
-     * @param out storage for the location (in the body's local coordinates,
-     * not {@code null}, modified)
+     * @param out storage for the location (in the body's local coordinates, not
+     * {@code null}, modified)
      */
     @Override
     public void getPosition(Vec3 out) {

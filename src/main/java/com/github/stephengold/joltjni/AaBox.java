@@ -148,7 +148,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @param maxZ the desired maximum Z coordinate
      */
     public AaBox(float minX, float minY, float minZ,
-                 float maxX, float maxY, float maxZ) {
+            float maxX, float maxY, float maxZ) {
         long boxVa = create(minX, minY, minZ, maxX, maxY, maxZ);
         setVirtualAddress(boxVa, () -> free(boxVa));
     }
@@ -425,6 +425,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     public Vec3 getClosestPoint(float x, float y, float z) {
         Vec3 result = new Vec3();
         getClosestPoint(x, y, z, result);
+
         return result;
     }
 
@@ -765,10 +766,11 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @return {@code true} if they overlap, otherwise {@code false}
      */
     @Override
-    public boolean overlaps(float constant, float normalX, float normalY, float normalZ) {
+    public boolean overlaps(
+            float constant, float normalX, float normalY, float normalZ) {
         long boxVa = va();
-
         boolean result = overlaps(boxVa, constant, normalX, normalY, normalZ);
+
         return result;
     }
 
@@ -803,6 +805,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         long boxVa = va();
         long resultVa = scaled(boxVa, x, y, z);
         AaBox result = new AaBox(resultVa, true);
+
         return result;
     }
 

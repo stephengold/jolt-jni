@@ -113,7 +113,7 @@ public class BoxShape extends ConvexShape {
      * @param convexRadius the desired convex radius (default=0.05)
      */
     public BoxShape(float xHalfExtent, float yHalfExtent, float zHalfExtent,
-                    float convexRadius) {
+            float convexRadius) {
         this(xHalfExtent, yHalfExtent, zHalfExtent, convexRadius, null);
     }
 
@@ -150,7 +150,7 @@ public class BoxShape extends ConvexShape {
      * @param material the desired material (default=null)
      */
     public BoxShape(float xHalfExtent, float yHalfExtent, float zHalfExtent,
-                    float convexRadius, ConstPhysicsMaterial material) {
+            float convexRadius, ConstPhysicsMaterial material) {
         assert xHalfExtent > 0f : xHalfExtent;
         assert yHalfExtent > 0f : yHalfExtent;
         assert zHalfExtent > 0f : zHalfExtent;

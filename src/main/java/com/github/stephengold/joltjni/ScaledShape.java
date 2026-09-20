@@ -50,7 +50,6 @@ public class ScaledShape extends DecoratedShape {
         setVirtualAddressAsCoOwner(scaledShapeVa);
     }
 
-
     /**
      * Instantiate a shape based on the specified shape and scale factors.
      *
@@ -60,7 +59,7 @@ public class ScaledShape extends DecoratedShape {
      * @param scaleZ the desired scale factor on the local Z axis
      */
     public ScaledShape(ConstShape baseShape,
-                       float scaleX, float scaleY, float scaleZ) {
+            float scaleX, float scaleY, float scaleZ) {
         long baseShapeVa = baseShape.targetVa();
         long scaledShapeVa
                 = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);

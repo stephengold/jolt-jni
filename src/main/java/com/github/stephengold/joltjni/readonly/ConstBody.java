@@ -94,8 +94,8 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Copy the body's angular velocity. The body is unaffected.
      *
-     * @param out storage for the angular velocity (radians per second in
-     * system coordinates, not {@code null}, modified)
+     * @param out storage for the angular velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
      */
     void getAngularVelocity(Vec3 out);
 

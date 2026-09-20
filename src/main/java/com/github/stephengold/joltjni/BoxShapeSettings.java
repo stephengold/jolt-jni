@@ -125,7 +125,7 @@ public class BoxShapeSettings
      * @param convexRadius the desired convex radius (&ge;0, default=0.05)
      */
     public BoxShapeSettings(float xHalfExtent, float yHalfExtent,
-                            float zHalfExtent, float convexRadius) {
+            float zHalfExtent, float convexRadius) {
         this(xHalfExtent, yHalfExtent, zHalfExtent, convexRadius, null);
     }
 
@@ -162,8 +162,8 @@ public class BoxShapeSettings
      * unaffected) or {@code null} for default properties (default=null)
      */
     public BoxShapeSettings(float xHalfExtent, float yHalfExtent,
-                            float zHalfExtent, float convexRadius,
-                            ConstPhysicsMaterial material) {
+            float zHalfExtent, float convexRadius,
+            ConstPhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.targetVaOrZero();
         long settingsVa = createBoxShapeSettings(xHalfExtent, yHalfExtent,
                 zHalfExtent, convexRadius, materialVa);
@@ -210,12 +210,9 @@ public class BoxShapeSettings
     /**
      * Alter the extent of the box. (native attribute: mHalfExtent)
      *
-     * @param hx the desired half extent on the local X axis (&ge;0,
-     * default=0)
-     * @param hy the desired half extent on the local Y axis (&ge;0,
-     * default=0)
-     * @param hz the desired half extent on the local Z axis (&ge;0,
-     * default=0)
+     * @param hx the desired half extent on the local X axis (&ge;0, default=0)
+     * @param hy the desired half extent on the local Y axis (&ge;0, default=0)
+     * @param hz the desired half extent on the local Z axis (&ge;0, default=0)
      */
     public void setHalfExtent(float hx, float hy, float hz) {
         long settingsVa = va();

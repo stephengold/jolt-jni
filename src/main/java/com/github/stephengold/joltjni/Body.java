@@ -164,7 +164,7 @@ public class Body extends NonCopyable implements ConstBody {
      * coordinates)
      */
     public void addForce(float fx, float fy, float fz,
-                         double locX, double locY, double locZ) {
+            double locX, double locY, double locZ) {
         long bodyVa = va();
         addForce(bodyVa, fx, fy, fz, locX, locY, locZ);
     }
@@ -826,8 +826,8 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Copy the body's angular velocity. The body is unaffected.
      *
-     * @param out storage for the angular velocity (radians per second in
-     * system coordinates, not {@code null}, modified)
+     * @param out storage for the angular velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
      */
     @Override
     public void getAngularVelocity(Vec3 out) {

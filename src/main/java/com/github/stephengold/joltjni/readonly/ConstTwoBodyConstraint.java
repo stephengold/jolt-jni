@@ -24,7 +24,6 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.Body;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.RVec3;
-
 import java.nio.DoubleBuffer;
 
 /**

@@ -61,7 +61,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
      * @param scaleZ the desired scale factor on the local Z axis
      */
     public ScaledShapeSettings(ConstShape baseShape,
-                               float scaleX, float scaleY, float scaleZ) {
+            float scaleX, float scaleY, float scaleZ) {
         long baseShapeVa = baseShape.targetVa();
         long settingsVa = createScaledShapeSettingsFromShape(
                 baseShapeVa, scaleX, scaleY, scaleZ);
@@ -94,7 +94,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
      * @param scaleZ the desired scale factor on the local Z axis
      */
     public ScaledShapeSettings(ConstShapeSettings baseSettings,
-                               float scaleX, float scaleY, float scaleZ) {
+            float scaleX, float scaleY, float scaleZ) {
         long baseSettingsVa = baseSettings.targetVa();
         long settingsVa = createScaledShapeSettingsFromSettings(
                 baseSettingsVa, scaleX, scaleY, scaleZ);

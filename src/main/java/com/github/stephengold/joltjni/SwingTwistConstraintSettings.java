@@ -517,7 +517,6 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         setPosition2(settingsVa, locX, locY, locZ);
     }
 
-
     /**
      * Alter which space the other properties are specified in. (native
      * attribute: mSpace)

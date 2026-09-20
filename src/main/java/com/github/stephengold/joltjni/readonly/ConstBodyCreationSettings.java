@@ -157,7 +157,6 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      */
     Vec3 getLinearVelocity();
 
-
     /**
      * Copy the (initial) linear velocity. The settings are unaffected.
      *

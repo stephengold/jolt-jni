@@ -76,8 +76,8 @@ public class Hair extends NonCopyable {
      * @param objectLayer the object layer for the simulation
      */
     public Hair(ConstHairSettings settings,
-                double xx, double yy, double zz,
-                float qx, float qy, float qz, float qw, int objectLayer) {
+            double xx, double yy, double zz,
+            float qx, float qy, float qz, float qw, int objectLayer) {
         long settingsVa = settings.targetVa();
         long hairVa
                 = create(settingsVa, xx, yy, zz, qx, qy, qz, qw, objectLayer);

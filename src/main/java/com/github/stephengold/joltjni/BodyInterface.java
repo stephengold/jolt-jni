@@ -333,7 +333,7 @@ public class BodyInterface extends NonCopyable {
      * @param locZ the Z coordinate where the force is applied
      */
     public void addForce(int bodyId, float fx, float fy, float fz,
-                         double locX, double locY, double locZ) {
+            double locX, double locY, double locZ) {
         long bodyInterfaceVa = va();
         addForce(bodyInterfaceVa, bodyId, fx, fy, fz, locX, locY, locZ);
     }
@@ -397,7 +397,7 @@ public class BodyInterface extends NonCopyable {
      * @param locZ the Z coordinate where the impulse is applied
      */
     public void addImpulse(int bodyId, float jx, float jy, float jz,
-                           double locX, double locY, double locZ) {
+            double locX, double locY, double locZ) {
         long bodyInterfaceVa = va();
         addImpulse(bodyInterfaceVa, bodyId, jx, jy, jz, locX, locY, locZ);
     }
@@ -1160,7 +1160,7 @@ public class BodyInterface extends NonCopyable {
      * second in system coordinates)
      */
     public void setLinearAndAngularVelocity(int bodyId,
-                                            float vx, float vy, float vz, float wx, float wy, float wz) {
+            float vx, float vy, float vz, float wx, float wy, float wz) {
         long bodyInterfaceVa = va();
         setLinearAndAngularVelocity(
                 bodyInterfaceVa, bodyId, vx, vy, vz, wx, wy, wz);
@@ -1265,8 +1265,8 @@ public class BodyInterface extends NonCopyable {
      * @param activationMode whether to activate the body (not {@code null})
      */
     public void setPosition(int bodyId,
-                            double locX, double locY, double locZ,
-                            EActivation activationMode) {
+            double locX, double locY, double locZ,
+            EActivation activationMode) {
         long bodyInterfaceVa = va();
         int ordinal = activationMode.ordinal();
         setPosition(bodyInterfaceVa, bodyId, locX, locY, locZ, ordinal);
@@ -1309,9 +1309,9 @@ public class BodyInterface extends NonCopyable {
      * @param activationMode whether to activate the body (not {@code null})
      */
     public void setPositionAndRotation(int bodyId,
-                                       double locX, double locY, double locZ,
-                                       float qx, float qy, float qz, float qw,
-                                       EActivation activationMode) {
+            double locX, double locY, double locZ,
+            float qx, float qy, float qz, float qw,
+            EActivation activationMode) {
         long bodyInterfaceVa = va();
         int ordinal = activationMode.ordinal();
         setPositionAndRotation(bodyInterfaceVa, bodyId, locX, locY, locZ,

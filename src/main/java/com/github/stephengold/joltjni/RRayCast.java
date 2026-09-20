@@ -64,7 +64,7 @@ public class RRayCast extends JoltPhysicsObject {
      * @param dz the Z component of the end offset from the start
      */
     public RRayCast(double xx, double yy, double zz,
-                    float dx, float dy, float dz) {
+            float dx, float dy, float dz) {
         long raycastVa = createRRayCast(xx, yy, zz, dx, dy, dz);
         setVirtualAddress(raycastVa, () -> free(raycastVa));
     }

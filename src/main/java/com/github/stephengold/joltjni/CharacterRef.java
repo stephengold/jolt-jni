@@ -1015,7 +1015,6 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         return result;
     }
 
-
     /**
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
