@@ -142,7 +142,7 @@ final public class CharacterRefC
     /**
      * Copy the location of the rigid body's center of mass. The character is
      * unaffected.
-     *f
+     *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      * @param out storage for the location (in system coordinates, not
