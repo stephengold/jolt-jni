@@ -358,6 +358,18 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         return result;
     }
 
+    /**
+     * Test whether the box contains the specified point. The box is unaffected.
+     *
+     * @param x the X coordinate of the point to test (not {@code null},
+     * unaffected)
+     * @param y the Y coordinate of the point to test (not {@code null},
+     * unaffected)
+     * @param z the Z coordinate of the point to test (not {@code null},
+     * unaffected)
+     *
+     * @return {@code true} if contained, otherwise {@code false}
+     */
     @Override
     public boolean contains(float x, float y, float z) {
         long boxVa = va();
