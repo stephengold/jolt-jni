@@ -87,13 +87,13 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the hinge axis of body 1. The settings are unaffected. (native
      * attribute: mHingeAxis1)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getHingeAxis1(Vec3 out) {
+    public void getHingeAxis1(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getHingeAxis1(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -115,13 +115,13 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the hinge axis of body 2. The settings are unaffected. (native
      * attribute: mHingeAxis2)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getHingeAxis2(Vec3 out) {
+    public void getHingeAxis2(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getHingeAxis2(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -209,13 +209,13 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the normal axis of body 1. The settings are unaffected. (native
      * attribute: mNormalAxis1)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getNormalAxis1(Vec3 out) {
+    public void getNormalAxis1(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getNormalAxis1(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -237,13 +237,13 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the normal axis of body 2. The settings are unaffected. (native
      * attribute: mNormalAxis2)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getNormalAxis2(Vec3 out) {
+    public void getNormalAxis2(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getNormalAxis2(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -265,13 +265,13 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the constraint location for body 1. The settings are unaffected.
      * (native attribute: mPoint1)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getPoint1(RVec3 out) {
+    public void getPoint1(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPoint1(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -293,13 +293,13 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the constraint location for body 2. The settings are unaffected.
      * (native attribute: mPoint2)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getPoint2(RVec3 out) {
+    public void getPoint2(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPoint2(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**

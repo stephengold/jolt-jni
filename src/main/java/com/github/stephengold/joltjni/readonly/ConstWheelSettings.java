@@ -49,10 +49,10 @@ public interface ConstWheelSettings extends ConstSerializableObject {
     /**
      * Copy the location of the attachment point. The settings are unaffected.
      *
-     * @param out storage for the location (in the body's local system, not
-     * {@code null}, modified)
+     * @param storeResult storage for the location (in the body's local system,
+     * not {@code null}, modified)
      */
-    void getPosition(Vec3 out);
+    void getPosition(Vec3 storeResult);
 
     /**
      * Return the radius of the wheel. The settings are unaffected.
@@ -71,9 +71,9 @@ public interface ConstWheelSettings extends ConstSerializableObject {
     /**
      * Copy the steering axis (upward direction). The settings are unaffected.
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    void getSteeringAxis(Vec3 out);
+    void getSteeringAxis(Vec3 storeResult);
 
     /**
      * Copy the downward direction of the suspension. The settings are
@@ -87,9 +87,9 @@ public interface ConstWheelSettings extends ConstSerializableObject {
      * Copy the downward direction of the suspension. The settings are
      * unaffected.
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    void getSuspensionDirection(Vec3 out);
+    void getSuspensionDirection(Vec3 storeResult);
 
     /**
      * Copy the location where (if enabled) tire forces will be applied. The
@@ -103,10 +103,10 @@ public interface ConstWheelSettings extends ConstSerializableObject {
      * Copy the location where (if enabled) tire forces will be applied. The
      * settings are unaffected.
      *
-     * @param out storage for the location (in body coordinates, not
+     * @param storeResult storage for the location (in body coordinates, not
      * {@code null}, modified)
      */
-    void getSuspensionForcePoint(Vec3 out);
+    void getSuspensionForcePoint(Vec3 storeResult);
 
     /**
      * Return the maximum displacement from the attachment point. The settings
@@ -151,9 +151,9 @@ public interface ConstWheelSettings extends ConstSerializableObject {
      * Copy the forward direction when steering is neutral. The settings are
      * unaffected.
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    void getWheelForward(Vec3 out);
+    void getWheelForward(Vec3 storeResult);
 
     /**
      * Copy the "up" direction when steering is neutral. The settings are
@@ -167,9 +167,9 @@ public interface ConstWheelSettings extends ConstSerializableObject {
      * Copy the "up" direction when steering is neutral. The settings are
      * unaffected.
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    void getWheelUp(Vec3 out);
+    void getWheelUp(Vec3 storeResult);
 
     /**
      * Return the width of the wheel. The settings are unaffected.

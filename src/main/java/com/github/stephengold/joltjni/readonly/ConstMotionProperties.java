@@ -44,10 +44,10 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     /**
      * Copy the net force acting on the body. The properties are unaffected.
      *
-     * @param out storage for the force (Newtons in system coordinates, not
-     * {@code null}, modified)
+     * @param storeResult storage for the force (Newtons in system coordinates,
+     * not {@code null}, modified)
      */
-    void getAccumulatedForce(Vec3 out);
+    void getAccumulatedForce(Vec3 storeResult);
 
     /**
      * Copy the net torque acting on the body. The properties are unaffected.
@@ -59,10 +59,10 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     /**
      * Copy the net torque acting on the body. The properties are unaffected.
      *
-     * @param out storage for the torque (Newton meters in system coordinates,
-     * not {@code null}, modified)
+     * @param storeResult storage for the torque (Newton meters in system
+     * coordinates, not {@code null}, modified)
      */
-    void getAccumulatedTorque(Vec3 out);
+    void getAccumulatedTorque(Vec3 storeResult);
 
     /**
      * Return the allowed degrees of freedom. The properties are unaffected.
@@ -104,10 +104,10 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     /**
      * Copy the angular velocity. The properties are unaffected.
      *
-     * @param out storage for the velocity (radians per second in system
+     * @param storeResult storage for the velocity (radians per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getAngularVelocity(Vec3 out);
+    void getAngularVelocity(Vec3 storeResult);
 
     /**
      * Return the gravity factor. The properties are unaffected.
@@ -128,9 +128,9 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
      * Copy the rotation that takes the inverse-inertia diagonal to local
      * coordinates. The properties are unaffected.
      *
-     * @param out storage for the rotation (not {@code null}, modified)
+     * @param storeResult storage for the rotation (not {@code null}, modified)
      */
-    void getInertiaRotation(Quat out);
+    void getInertiaRotation(Quat storeResult);
 
     /**
      * Copy the diagonal components of the inverse inertia matrix, assuming a
@@ -144,10 +144,10 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
      * Copy the diagonal components of the inverse inertia matrix, assuming a
      * dynamic body. The properties are unaffected.
      *
-     * @param out storage for the diagonal (all components &ge;0, not
+     * @param storeResult storage for the diagonal (all components &ge;0, not
      * {@code null}, modified)
      */
-    void getInverseInertiaDiagonal(Vec3 out);
+    void getInverseInertiaDiagonal(Vec3 storeResult);
 
     /**
      * Return the body's inverse mass. The properties are unaffected.
@@ -180,10 +180,10 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     /**
      * Copy the linear velocity. The properties are unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getLinearVelocity(Vec3 out);
+    void getLinearVelocity(Vec3 storeResult);
 
     /**
      * Copy the inverse-inertia matrix. The properties are unaffected.

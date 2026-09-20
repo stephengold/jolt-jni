@@ -57,10 +57,10 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Copy the net force acting on the body. The body is unaffected.
      *
-     * @param out storage for the force (Newtons in system coordinates, not
-     * {@code null}, modified)
+     * @param storeResult storage for the force (Newtons in system coordinates,
+     * not {@code null}, modified)
      */
-    void getAccumulatedForce(Vec3 out);
+    void getAccumulatedForce(Vec3 storeResult);
 
     /**
      * Copy the net torque acting on the body. The body is unaffected.
@@ -72,10 +72,10 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Copy the net torque acting on the body. The body is unaffected.
      *
-     * @param out storage for the torque (Newton meters in system coordinates,
-     * not {@code null}, modified)
+     * @param storeResult storage for the torque (Newton meters in system
+     * coordinates, not {@code null}, modified)
      */
-    void getAccumulatedTorque(Vec3 out);
+    void getAccumulatedTorque(Vec3 storeResult);
 
     /**
      * Test whether the body is allowed to fall asleep. The body is unaffected.
@@ -94,10 +94,10 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Copy the body's angular velocity. The body is unaffected.
      *
-     * @param out storage for the angular velocity (radians per second in system
-     * coordinates, not {@code null}, modified)
+     * @param storeResult storage for the angular velocity (radians per second
+     * in system coordinates, not {@code null}, modified)
      */
-    void getAngularVelocity(Vec3 out);
+    void getAngularVelocity(Vec3 storeResult);
 
     /**
      * Generate settings to reconstruct the (rigid) body. The body is
@@ -204,10 +204,10 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Copy the body's linear velocity. The body is unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getLinearVelocity(Vec3 out);
+    void getLinearVelocity(Vec3 storeResult);
 
     /**
      * Access the body's motion properties if it is dynamic or kinematic.
@@ -253,10 +253,10 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * Copy the location of the body's origin (which might not coincide with its
      * center of mass). The body is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getPosition(RVec3 out);
+    void getPosition(RVec3 storeResult);
 
     /**
      * Copy the position of the body. The body is unaffected.
@@ -285,10 +285,10 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Copy the body's orientation. The body is unaffected.
      *
-     * @param out storage for the orientation (relative to the system axes, not
-     * {@code null}, modified)
+     * @param storeResult storage for the orientation (relative to the system
+     * axes, not {@code null}, modified)
      */
-    void getRotation(Quat out);
+    void getRotation(Quat storeResult);
 
     /**
      * Access the body's shape. The body is unaffected.
@@ -367,11 +367,11 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      *
      * @param subShapeId the ID of the sub-shape to use
      * @param location the location to use (not {@code null}, unaffected)
-     * @param out storage for the normal (in system coordinates, not
+     * @param storeResult storage for the normal (in system coordinates, not
      * {@code null}, modified)
      */
     void getWorldSpaceSurfaceNormal(
-            int subShapeId, RVec3Arg location, Vec3 out);
+            int subShapeId, RVec3Arg location, Vec3 storeResult);
 
     /**
      * Copy the surface normal of a particular subshape at the specified
@@ -381,11 +381,11 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * @param xx the X coordinate of the location (in system coordinates)
      * @param yy the Y coordinate of the location (in system coordinates)
      * @param zz the Z coordinate of the location (in system coordinates)
-     * @param out storage for the normal (in system coordinates, not
+     * @param storeResult storage for the normal (in system coordinates, not
      * {@code null}, modified)
      */
     void getWorldSpaceSurfaceNormal(
-            int subShapeId, double xx, double yy, double zz, Vec3 out);
+            int subShapeId, double xx, double yy, double zz, Vec3 storeResult);
 
     /**
      * Copy the world transform. The body is unaffected.

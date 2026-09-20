@@ -80,10 +80,10 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Copy the (initial) angular velocity. The settings are unaffected.
      *
-     * @param out storage for the velocity (radians per second in system
+     * @param storeResult storage for the velocity (radians per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getAngularVelocity(Vec3 out);
+    void getAngularVelocity(Vec3 storeResult);
 
     /**
      * Test whether the gyroscopic force will be applied. The settings are
@@ -160,10 +160,10 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Copy the (initial) linear velocity. The settings are unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getLinearVelocity(Vec3 out);
+    void getLinearVelocity(Vec3 storeResult);
 
     /**
      * Calculate the body's mass and inertia. As a side effect, this method may
@@ -251,10 +251,10 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Copy the (initial) location. The settings are unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getPosition(RVec3 out);
+    void getPosition(RVec3 storeResult);
 
     /**
      * Return the restitution ratio. The settings are unaffected.
@@ -275,10 +275,10 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * Copy the (initial) orientation of the body's axes. The settings are
      * unaffected.
      *
-     * @param out storage for the rotation (relative to the system axes, not
-     * {@code null}, modified)
+     * @param storeResult storage for the rotation (relative to the system axes,
+     * not {@code null}, modified)
      */
-    void getRotation(Quat out);
+    void getRotation(Quat storeResult);
 
     /**
      * Acquire read-only access to the shape. As a side effect, if the

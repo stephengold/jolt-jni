@@ -296,14 +296,14 @@ final public class VehicleConstraintSettingsRef
      * Copy the "forward" vector. The settings are unaffected. (native
      * attribute: mForward)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
     @Override
-    public void getForward(Vec3 out) {
+    public void getForward(Vec3 storeResult) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         VehicleConstraintSettings.getForward(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -416,14 +416,14 @@ final public class VehicleConstraintSettingsRef
      * Copy the "up" vector. The settings are unaffected. (native attribute:
      * mUp)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
     @Override
-    public void getUp(Vec3 out) {
+    public void getUp(Vec3 storeResult) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         VehicleConstraintSettings.getUp(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

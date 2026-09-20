@@ -348,15 +348,15 @@ final public class WheelSettingsTvRef
      * Copy the location of the attachment point. The settings are unaffected.
      * (native attribute: mPosition)
      *
-     * @param out storage for the location (in the body's local coordinates, not
-     * {@code null}, modified)
+     * @param storeResult storage for the location (in the body's local
+     * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getPosition(Vec3 out) {
+    public void getPosition(Vec3 storeResult) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         WheelSettings.getPosition(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -407,14 +407,14 @@ final public class WheelSettingsTvRef
      * Copy the steering axis (upward direction). The settings are unaffected.
      * (native attribute: mSteeringAxis)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
     @Override
-    public void getSteeringAxis(Vec3 out) {
+    public void getSteeringAxis(Vec3 storeResult) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         WheelSettings.getSteeringAxis(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -437,14 +437,14 @@ final public class WheelSettingsTvRef
      * Copy the downward direction of the suspension. The settings are
      * unaffected. (native attribute: mSuspensionDirection)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
     @Override
-    public void getSuspensionDirection(Vec3 out) {
+    public void getSuspensionDirection(Vec3 storeResult) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         WheelSettings.getSuspensionDirection(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -469,15 +469,15 @@ final public class WheelSettingsTvRef
      * option is enabled. The settings are unaffected. (native attribute:
      * mSuspensionForcePoint)
      *
-     * @param out storage for the location (in body coordinates, not
+     * @param storeResult storage for the location (in body coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getSuspensionForcePoint(Vec3 out) {
+    public void getSuspensionForcePoint(Vec3 storeResult) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         WheelSettings.getSuspensionForcePoint(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -558,14 +558,14 @@ final public class WheelSettingsTvRef
      * Copy the forward direction when steering is neutral. The settings are
      * unaffected. (native attribute: mWheelForward)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
     @Override
-    public void getWheelForward(Vec3 out) {
+    public void getWheelForward(Vec3 storeResult) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         WheelSettings.getWheelForward(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -588,14 +588,14 @@ final public class WheelSettingsTvRef
      * Copy the "up" direction when steering is neutral. The settings are
      * unaffected. (native attribute: mWheelUp)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
     @Override
-    public void getWheelUp(Vec3 out) {
+    public void getWheelUp(Vec3 storeResult) {
         long settingsVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         WheelSettings.getWheelUp(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

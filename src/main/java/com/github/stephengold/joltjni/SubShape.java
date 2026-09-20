@@ -168,14 +168,14 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
      * Copy the center-of-mass location. The sub-shape is unaffected. (native
      * function: GetPositionCOM)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
     @Override
-    public void getPositionCom(Vec3 out) {
+    public void getPositionCom(Vec3 storeResult) {
         long subshapeVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPositionCom(subshapeVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -196,14 +196,14 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     /**
      * Copy the rotation. The sub-shape is unaffected.
      *
-     * @param out storage for the rotation (not {@code null}, modified)
+     * @param storeResult storage for the rotation (not {@code null}, modified)
      */
     @Override
-    public void getRotation(Quat out) {
+    public void getRotation(Quat storeResult) {
         long subShapeVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotation(subShapeVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

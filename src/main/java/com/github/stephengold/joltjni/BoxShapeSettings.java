@@ -255,14 +255,15 @@ public class BoxShapeSettings
      * Copy the extent of the box. The settings are unaffected. (native
      * attribute: mHalfExtent)
      *
-     * @param out storage for the half extents (not {@code null}, modified)
+     * @param storeResult storage for the half extents (not {@code null},
+     * modified)
      */
     @Override
-    public void getHalfExtent(Vec3 out) {
+    public void getHalfExtent(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getHalfExtent(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
     // *************************************************************************
     // native private methods

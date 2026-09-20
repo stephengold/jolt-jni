@@ -190,14 +190,14 @@ abstract public class CharacterBaseSettings
      * Copy the supporting volume. The settings are unaffected. (native
      * attribute: mSupportingVolume)
      *
-     * @param out storage for the plane (not {@code null}, modified)
+     * @param storeResult storage for the plane (not {@code null}, modified)
      */
     @Override
-    public void getSupportingVolume(Plane out) {
+    public void getSupportingVolume(Plane storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSupportingVolume(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -220,15 +220,15 @@ abstract public class CharacterBaseSettings
      * Copy the character's "up" direction. The settings are unaffected. (native
      * attribute: mUp)
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getUp(Vec3 out) {
+    public void getUp(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getUp(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
     // *************************************************************************
     // native methods

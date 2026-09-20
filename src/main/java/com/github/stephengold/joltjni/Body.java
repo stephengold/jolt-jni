@@ -755,15 +755,15 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Copy the net force acting on the body. The body is unaffected.
      *
-     * @param out storage for the force (Newtons in system coordinates, not
-     * {@code null}, modified)
+     * @param storeResult storage for the force (Newtons in system coordinates,
+     * not {@code null}, modified)
      */
     @Override
-    public void getAccumulatedForce(Vec3 out) {
+    public void getAccumulatedForce(Vec3 storeResult) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAccumulatedForce(bodyVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -784,15 +784,15 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Copy the net torque acting on the body. The body is unaffected.
      *
-     * @param out storage for the torque (Newton meters in system coordinates,
-     * not {@code null}, modified)
+     * @param storeResult storage for the torque (Newton meters in system
+     * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getAccumulatedTorque(Vec3 out) {
+    public void getAccumulatedTorque(Vec3 storeResult) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAccumulatedTorque(bodyVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -826,15 +826,15 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Copy the body's angular velocity. The body is unaffected.
      *
-     * @param out storage for the angular velocity (radians per second in system
-     * coordinates, not {@code null}, modified)
+     * @param storeResult storage for the angular velocity (radians per second
+     * in system coordinates, not {@code null}, modified)
      */
     @Override
-    public void getAngularVelocity(Vec3 out) {
+    public void getAngularVelocity(Vec3 storeResult) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAngularVelocity(bodyVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -1039,15 +1039,15 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Copy the body's linear velocity. The body is unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getLinearVelocity(Vec3 out) {
+    public void getLinearVelocity(Vec3 storeResult) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(bodyVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -1148,15 +1148,15 @@ public class Body extends NonCopyable implements ConstBody {
      * Copy the location of the body's origin (which might not coincide with its
      * center of mass). The body is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getPosition(RVec3 out) {
+    public void getPosition(RVec3 storeResult) {
         long bodyVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition(bodyVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -1212,15 +1212,15 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Copy the body's orientation. The body is unaffected.
      *
-     * @param out storage for the orientation (relative to the system axes, not
-     * {@code null}, modified)
+     * @param storeResult storage for the orientation (relative to the system
+     * axes, not {@code null}, modified)
      */
     @Override
-    public void getRotation(Quat out) {
+    public void getRotation(Quat storeResult) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotation(bodyVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -1359,14 +1359,14 @@ public class Body extends NonCopyable implements ConstBody {
      *
      * @param subShapeId the ID of the sub-shape to use
      * @param location the location to use (not {@code null}, unaffected)
-     * @param out storage for the normal (in system coordinates, not
+     * @param storeResult storage for the normal (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
     public void getWorldSpaceSurfaceNormal(
-            int subShapeId, RVec3Arg location, Vec3 out) {
+            int subShapeId, RVec3Arg location, Vec3 storeResult) {
         getWorldSpaceSurfaceNormal(subShapeId, location.xx(),
-                location.yy(), location.zz(), out);
+                location.yy(), location.zz(), storeResult);
     }
 
     /**
@@ -1377,16 +1377,16 @@ public class Body extends NonCopyable implements ConstBody {
      * @param xx the X coordinate of the location (in system coordinates)
      * @param yy the Y coordinate of the location (in system coordinates)
      * @param zz the Z coordinate of the location (in system coordinates)
-     * @param out storage for the normal (in system coordinates, not
+     * @param storeResult storage for the normal (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
     public void getWorldSpaceSurfaceNormal(
-            int subShapeId, double xx, double yy, double zz, Vec3 out) {
+            int subShapeId, double xx, double yy, double zz, Vec3 storeResult) {
         long bodyVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getWorldSpaceSurfaceNormal(bodyVa, subShapeId, xx, yy, zz, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

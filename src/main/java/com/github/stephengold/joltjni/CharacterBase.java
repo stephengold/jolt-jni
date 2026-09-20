@@ -198,15 +198,15 @@ abstract public class CharacterBase
      * Copy the normal direction at the point of contact with the supporting
      * surface. The character is unaffected.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getGroundNormal(Vec3 out) {
+    public void getGroundNormal(Vec3 storeResult) {
         long characterVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getGroundNormal(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -229,15 +229,15 @@ abstract public class CharacterBase
      * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getGroundPosition(RVec3 out) {
+    public void getGroundPosition(RVec3 storeResult) {
         long characterVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getGroundPosition(characterVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -303,15 +303,15 @@ abstract public class CharacterBase
      * Copy the world-space velocity of the supporting surface. The character is
      * unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getGroundVelocity(Vec3 out) {
+    public void getGroundVelocity(Vec3 storeResult) {
         long characterVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getGroundVelocity(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -361,14 +361,14 @@ abstract public class CharacterBase
     /**
      * Copy the supporting volume. The character is unaffected.
      *
-     * @param out storage for the plane (not {@code null}, modified)
+     * @param storeResult storage for the plane (not {@code null}, modified)
      */
     @Override
-    public void getSupportingVolume(Plane out) {
+    public void getSupportingVolume(Plane storeResult) {
         long characterVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSupportingVolume(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -389,14 +389,14 @@ abstract public class CharacterBase
     /**
      * Copy the character's "up" direction. The character is unaffected.
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
     @Override
-    public void getUp(Vec3 out) {
+    public void getUp(Vec3 storeResult) {
         long characterVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getUp(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

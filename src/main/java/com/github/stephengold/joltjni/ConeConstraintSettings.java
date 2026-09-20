@@ -100,13 +100,13 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the constraint location for body 1. The settings are unaffected.
      * (native attribute: mPoint1)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getPoint1(RVec3 out) {
+    public void getPoint1(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPoint1(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -128,13 +128,13 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the constraint location for body 2. The settings are unaffected.
      * (native attribute: mPoint2)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getPoint2(RVec3 out) {
+    public void getPoint2(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPoint2(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -170,13 +170,13 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the twist axis of body 1. The settings are unaffected. (native
      * attribute: mTwistAxis1)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getTwistAxis1(Vec3 out) {
+    public void getTwistAxis1(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTwistAxis1(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -198,13 +198,13 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the twist axis of body 2. The settings are unaffected. (native
      * attribute: mTwistAxis2)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getTwistAxis2(Vec3 out) {
+    public void getTwistAxis2(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTwistAxis2(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

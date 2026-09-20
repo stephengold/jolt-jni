@@ -597,15 +597,15 @@ public class CharacterVirtual
     /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getLinearVelocity(Vec3 out) {
+    public void getLinearVelocity(Vec3 storeResult) {
         long characterVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -704,15 +704,15 @@ public class CharacterVirtual
     /**
      * Copy the location of the character. The character is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getPosition(RVec3 out) {
+    public void getPosition(RVec3 storeResult) {
         long characterVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition(characterVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**

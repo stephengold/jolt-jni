@@ -123,15 +123,15 @@ public class CharacterContact
     /**
      * Copy the contact normal. The contact is unaffected.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getContactNormal(Vec3 out) {
+    public void getContactNormal(Vec3 storeResult) {
         long contactVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getContactNormal(contactVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -226,15 +226,15 @@ public class CharacterContact
     /**
      * Copy the linear velocity of the contact. The contact is unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getLinearVelocity(Vec3 out) {
+    public void getLinearVelocity(Vec3 storeResult) {
         long contactVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(contactVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -271,15 +271,15 @@ public class CharacterContact
     /**
      * Copy the location of the contact. The contact is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getPosition(RVec3 out) {
+    public void getPosition(RVec3 storeResult) {
         long contactVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition(contactVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -301,15 +301,15 @@ public class CharacterContact
     /**
      * Copy the surface normal of the contact. The contact is unaffected.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getSurfaceNormal(Vec3 out) {
+    public void getSurfaceNormal(Vec3 storeResult) {
         long contactVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSurfaceNormal(contactVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

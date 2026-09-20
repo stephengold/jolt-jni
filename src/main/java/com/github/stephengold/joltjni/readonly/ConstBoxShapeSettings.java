@@ -48,7 +48,8 @@ public interface ConstBoxShapeSettings extends ConstConvexShapeSettings {
      * Copy the extent of the box. The settings are unaffected. (native
      * attribute: mHalfExtent)
      *
-     * @param out storage for the half extents (not {@code null}, modified)
+     * @param storeResult storage for the half extents (not {@code null},
+     * modified)
      */
-    void getHalfExtent(Vec3 out);
+    void getHalfExtent(Vec3 storeResult);
 }

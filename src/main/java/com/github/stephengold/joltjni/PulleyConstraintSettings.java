@@ -85,13 +85,13 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the location at which the constraint will attach to body 1. The
      * settings are unaffected. (native attribute: mBodyPoint1)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getBodyPoint1(RVec3 out) {
+    public void getBodyPoint1(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getBodyPoint1(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -113,13 +113,13 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the location at which the constraint will attach to body 2. The
      * settings are unaffected. (native attribute: mBodyPoint2)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getBodyPoint2(RVec3 out) {
+    public void getBodyPoint2(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getBodyPoint2(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -141,14 +141,14 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the location to which body 1 is connected. The settings are
      * unaffected. (native attribute: mFixedPoint1)
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    public void getFixedPoint1(RVec3 out) {
+    public void getFixedPoint1(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getFixedPoint1(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -170,14 +170,14 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the location to which body 2 is connected. The settings are
      * unaffected. (native attribute: mFixedPoint2)
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    public void getFixedPoint2(RVec3 out) {
+    public void getFixedPoint2(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getFixedPoint2(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**

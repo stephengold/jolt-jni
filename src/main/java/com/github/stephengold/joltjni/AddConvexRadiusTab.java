@@ -87,13 +87,14 @@ public class AddConvexRadiusTab extends JoltPhysicsObject {
      * @param dx the X component of the direction
      * @param dy the Y component of the direction
      * @param dz the Z component of the direction
-     * @param out storage for the offset vector (not {@code null}, modified)
+     * @param storeResult storage for the offset vector (not {@code null},
+     * modified)
      */
-    public void getSupport(float dx, float dy, float dz, Vec3 out) {
+    public void getSupport(float dx, float dy, float dz, Vec3 storeResult) {
         long addVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSupport(addVa, dx, dy, dz, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
     // *************************************************************************
     // native private methods

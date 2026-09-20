@@ -287,15 +287,15 @@ final public class CharacterVirtualRefC
      * Copy the normal direction at the point of contact with the supporting
      * surface. The character is unaffected.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getGroundNormal(Vec3 out) {
+    public void getGroundNormal(Vec3 storeResult) {
         long characterVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterBase.getGroundNormal(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -318,15 +318,15 @@ final public class CharacterVirtualRefC
      * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getGroundPosition(RVec3 out) {
+    public void getGroundPosition(RVec3 storeResult) {
         long characterVa = targetVa();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         CharacterBase.getGroundPosition(characterVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -392,15 +392,15 @@ final public class CharacterVirtualRefC
      * Copy the world-space velocity of the supporting surface. The character is
      * unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getGroundVelocity(Vec3 out) {
+    public void getGroundVelocity(Vec3 storeResult) {
         long characterVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterBase.getGroundVelocity(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -464,15 +464,15 @@ final public class CharacterVirtualRefC
     /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getLinearVelocity(Vec3 out) {
+    public void getLinearVelocity(Vec3 storeResult) {
         long characterVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterVirtual.getLinearVelocity(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -573,15 +573,15 @@ final public class CharacterVirtualRefC
     /**
      * Copy the location of the character. The character is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getPosition(RVec3 out) {
+    public void getPosition(RVec3 storeResult) {
         long characterVa = targetVa();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         CharacterVirtual.getPosition(characterVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -697,14 +697,14 @@ final public class CharacterVirtualRefC
     /**
      * Copy the supporting volume. The character is unaffected.
      *
-     * @param out storage for the plane (not {@code null}, modified)
+     * @param storeResult storage for the plane (not {@code null}, modified)
      */
     @Override
-    public void getSupportingVolume(Plane out) {
+    public void getSupportingVolume(Plane storeResult) {
         long characterVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterBase.getSupportingVolume(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -740,14 +740,14 @@ final public class CharacterVirtualRefC
     /**
      * Copy the character's "up" direction. The character is unaffected.
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
     @Override
-    public void getUp(Vec3 out) {
+    public void getUp(Vec3 storeResult) {
         long characterVa = targetVa();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         CharacterBase.getUp(characterVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

@@ -88,13 +88,13 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the hinge axis of the pinion. The settings are unaffected. (native
      * attribute: mHingeAxis)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getHingeAxis(Vec3 out) {
+    public void getHingeAxis(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getHingeAxis(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -129,13 +129,13 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the translation axis of the slider. The settings are unaffected.
      * (native attribute: mSliderAxis)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getSliderAxis(Vec3 out) {
+    public void getSliderAxis(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSliderAxis(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

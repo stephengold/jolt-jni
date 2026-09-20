@@ -906,15 +906,15 @@ public class BodyCreationSettings
      * Copy the (initial) angular velocity. The settings are unaffected. (native
      * member: mAngularVelocity)
      *
-     * @param out storage for the velocity (radians per second in system
+     * @param storeResult storage for the velocity (radians per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getAngularVelocity(Vec3 out) {
+    public void getAngularVelocity(Vec3 storeResult) {
         long bodySettingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAngularVelocity(bodySettingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -1064,15 +1064,15 @@ public class BodyCreationSettings
      * Copy the (initial) linear velocity. The settings are unaffected. (native
      * member: mLinearVelocity)
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getLinearVelocity(Vec3 out) {
+    public void getLinearVelocity(Vec3 storeResult) {
         long bodySettingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(bodySettingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -1257,15 +1257,15 @@ public class BodyCreationSettings
      * Copy the (initial) location. The settings are unaffected. (native member:
      * mPosition)
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getPosition(RVec3 out) {
+    public void getPosition(RVec3 storeResult) {
         long bodySettingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition(bodySettingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -1302,15 +1302,15 @@ public class BodyCreationSettings
      * Copy the (initial) orientation of the body's axes. The settings are
      * unaffected. (native member: mRotation)
      *
-     * @param out storage for the rotation (relative to the system axes, not
-     * {@code null}, modified)
+     * @param storeResult storage for the rotation (relative to the system axes,
+     * not {@code null}, modified)
      */
     @Override
-    public void getRotation(Quat out) {
+    public void getRotation(Quat storeResult) {
         long bodySettingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotation(bodySettingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

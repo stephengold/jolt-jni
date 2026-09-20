@@ -1011,12 +1011,12 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Copy the location of the rigid body's center of mass using the locking
      * body interface. The character is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getCenterOfMassPosition(RVec3 out) {
-        getCenterOfMassPosition(true, out);
+    public void getCenterOfMassPosition(RVec3 storeResult) {
+        getCenterOfMassPosition(true, storeResult);
     }
 
     /**
@@ -1043,15 +1043,15 @@ public class Character extends CharacterBase implements ConstCharacter {
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getCenterOfMassPosition(boolean lockBodies, RVec3 out) {
+    public void getCenterOfMassPosition(boolean lockBodies, RVec3 storeResult) {
         long characterVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getCenterOfMassPosition(characterVa, storeDoubles, lockBodies);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -1125,12 +1125,12 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Copy the linear velocity of the character using the locking body
      * interface. The character is unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getLinearVelocity(Vec3 out) {
-        getLinearVelocity(true, out);
+    public void getLinearVelocity(Vec3 storeResult) {
+        getLinearVelocity(true, storeResult);
     }
 
     /**
@@ -1155,15 +1155,15 @@ public class Character extends CharacterBase implements ConstCharacter {
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
     @Override
-    public void getLinearVelocity(boolean lockBodies, Vec3 out) {
+    public void getLinearVelocity(boolean lockBodies, Vec3 storeResult) {
         long characterVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(characterVa, storeFloats, lockBodies);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -1192,12 +1192,12 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Copy the location of the character using the locking body interface. The
      * character is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getPosition(RVec3 out) {
-        getPosition(true, out);
+    public void getPosition(RVec3 storeResult) {
+        getPosition(true, storeResult);
     }
 
     /**
@@ -1222,15 +1222,15 @@ public class Character extends CharacterBase implements ConstCharacter {
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getPosition(boolean lockBodies, RVec3 out) {
+    public void getPosition(boolean lockBodies, RVec3 storeResult) {
         long characterVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition(characterVa, storeDoubles, lockBodies);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -1286,12 +1286,12 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Copy the orientation of the character using the locking body interface.
      * The character is unaffected.
      *
-     * @param out storage for the orientation (in system coordinates, not
-     * {@code null}, modified)
+     * @param storeResult storage for the orientation (in system coordinates,
+     * not {@code null}, modified)
      */
     @Override
-    public void getRotation(Quat out) {
-        getRotation(true, out);
+    public void getRotation(Quat storeResult) {
+        getRotation(true, storeResult);
     }
 
     /**
@@ -1316,15 +1316,15 @@ public class Character extends CharacterBase implements ConstCharacter {
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
-     * @param out storage for the orientation (in system coordinates, not
-     * {@code null}, modified)
+     * @param storeResult storage for the orientation (in system coordinates,
+     * not {@code null}, modified)
      */
     @Override
-    public void getRotation(boolean lockBodies, Quat out) {
+    public void getRotation(boolean lockBodies, Quat storeResult) {
         long characterVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotation(characterVa, storeFloats, lockBodies);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

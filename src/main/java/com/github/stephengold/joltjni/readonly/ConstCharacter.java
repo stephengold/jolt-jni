@@ -55,10 +55,10 @@ public interface ConstCharacter extends ConstCharacterBase {
      * Copy the location of the rigid body's center of mass using the locking
      * body interface. The character is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getCenterOfMassPosition(RVec3 out);
+    void getCenterOfMassPosition(RVec3 storeResult);
 
     /**
      * Copy the location of the rigid body's center of mass. The character is
@@ -76,10 +76,10 @@ public interface ConstCharacter extends ConstCharacterBase {
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getCenterOfMassPosition(boolean lockBodies, RVec3 out);
+    void getCenterOfMassPosition(boolean lockBodies, RVec3 storeResult);
 
     /**
      * Generate settings to reconstruct the character, using the locking body
@@ -127,10 +127,10 @@ public interface ConstCharacter extends ConstCharacterBase {
      * Copy the linear velocity of the character using the locking body
      * interface. The character is unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getLinearVelocity(Vec3 out);
+    void getLinearVelocity(Vec3 storeResult);
 
     /**
      * Copy the linear velocity of the character. The character is unaffected.
@@ -146,10 +146,10 @@ public interface ConstCharacter extends ConstCharacterBase {
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getLinearVelocity(boolean lockBodies, Vec3 out);
+    void getLinearVelocity(boolean lockBodies, Vec3 storeResult);
 
     /**
      * Copy the location of the character using the locking body interface. The
@@ -163,10 +163,10 @@ public interface ConstCharacter extends ConstCharacterBase {
      * Copy the location of the character using the locking body interface. The
      * character is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getPosition(RVec3 out);
+    void getPosition(RVec3 storeResult);
 
     /**
      * Copy the location of the character. The character is unaffected.
@@ -182,10 +182,10 @@ public interface ConstCharacter extends ConstCharacterBase {
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getPosition(boolean lockBodies, RVec3 out);
+    void getPosition(boolean lockBodies, RVec3 storeResult);
 
     /**
      * Copy the position of the associated body using the locking body
@@ -223,10 +223,10 @@ public interface ConstCharacter extends ConstCharacterBase {
      * Copy the orientation of the character using the locking body interface.
      * The character is unaffected.
      *
-     * @param out storage for the orientation (in system coordinates, not
-     * {@code null}, modified)
+     * @param storeResult storage for the orientation (in system coordinates,
+     * not {@code null}, modified)
      */
-    void getRotation(Quat out);
+    void getRotation(Quat storeResult);
 
     /**
      * Copy the orientation of the character. The character is unaffected.
@@ -242,10 +242,10 @@ public interface ConstCharacter extends ConstCharacterBase {
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
-     * @param out storage for the orientation (in system coordinates, not
-     * {@code null}, modified)
+     * @param storeResult storage for the orientation (in system coordinates,
+     * not {@code null}, modified)
      */
-    void getRotation(boolean lockBodies, Quat out);
+    void getRotation(boolean lockBodies, Quat storeResult);
 
     /**
      * Generate a TransformedShape that represents the volume occupied by the

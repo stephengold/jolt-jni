@@ -90,13 +90,13 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the X axis for body 1. The settings are unaffected. (native
      * attribute: mAxisX1)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getAxisX1(Vec3 out) {
+    public void getAxisX1(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAxisX1(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -118,13 +118,13 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the X axis for body 2. The settings are unaffected. (native
      * attribute: mAxisX2)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getAxisX2(Vec3 out) {
+    public void getAxisX2(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAxisX2(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -146,13 +146,13 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the Y axis for body 1. The settings are unaffected. (native
      * attribute: mAxisY1)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getAxisY1(Vec3 out) {
+    public void getAxisY1(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAxisY1(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -174,13 +174,13 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the Y axis for body 2. The settings are unaffected. (native
      * attribute: mAxisY2)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getAxisY2(Vec3 out) {
+    public void getAxisY2(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAxisY2(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -321,13 +321,13 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the constraint location for body 1. The settings are unaffected.
      * (native attribute: mPosition1)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getPosition1(RVec3 out) {
+    public void getPosition1(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition1(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -349,13 +349,13 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the constraint location for body 2. The settings are unaffected.
      * (native attribute: mPosition2)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getPosition2(RVec3 out) {
+    public void getPosition2(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition2(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**

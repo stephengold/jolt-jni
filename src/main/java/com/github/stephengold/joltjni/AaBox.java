@@ -436,10 +436,11 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @param x the X coordinate of the location
      * @param y the Y coordinate of the location
      * @param z the Z coordinate of the location
-     * @param out storage for the closest point (not {@code null}, modified)
+     * @param storeResult storage for the closest point (not {@code null},
+     * modified)
      */
     @Override
-    public void getClosestPoint(float x, float y, float z, Vec3 out) {
+    public void getClosestPoint(float x, float y, float z, Vec3 storeResult) {
         FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
         floatBuffer.put(0, x);
         floatBuffer.put(1, y);
@@ -447,7 +448,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         long boxVa = va();
 
         getClosestPoint(boxVa, floatBuffer);
-        out.set(floatBuffer);
+        storeResult.set(floatBuffer);
     }
 
     /**
@@ -468,14 +469,14 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Copy the (half) extent of the box. The box is unaffected.
      *
-     * @param out storage for the extent (not {@code null}, modified)
+     * @param storeResult storage for the extent (not {@code null}, modified)
      */
     @Override
-    public void getExtent(Vec3 out) {
+    public void getExtent(Vec3 storeResult) {
         long boxVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getExtent(boxVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -498,14 +499,14 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * Copy the maximum contained coordinate on each axis. The box is
      * unaffected. (native member: mMax)
      *
-     * @param out storage for the maximum (not {@code null}, modified)
+     * @param storeResult storage for the maximum (not {@code null}, modified)
      */
     @Override
-    public void getMax(Vec3 out) {
+    public void getMax(Vec3 storeResult) {
         long boxVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getMax(boxVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -528,14 +529,14 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * Copy the minimum contained coordinate on each axis. The box is
      * unaffected. (native member: mMin)
      *
-     * @param out storage for the minimum (not {@code null}, modified)
+     * @param storeResult storage for the minimum (not {@code null}, modified)
      */
     @Override
-    public void getMin(Vec3 out) {
+    public void getMin(Vec3 storeResult) {
         long boxVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getMin(boxVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -556,14 +557,14 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Copy the size (full extent) on each axis. The box is unaffected.
      *
-     * @param out storage for the size (not {@code null}, modified)
+     * @param storeResult storage for the size (not {@code null}, modified)
      */
     @Override
-    public void getSize(Vec3 out) {
+    public void getSize(Vec3 storeResult) {
         long boxVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSize(boxVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -628,9 +629,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      */
     @Override
     public Vec3 getSupport(float x, float y, float z) {
-        Vec3 out = new Vec3();
-        getSupport(x, y, z, out);
-        return out;
+        Vec3 storeResult = new Vec3();
+        getSupport(x, y, z, storeResult);
+        return storeResult;
     }
 
     /**
@@ -638,11 +639,13 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * unaffected.
      *
      * @param direction the direction vector (not {@code null}, unaffected)
-     * @param out storage for the support vector (not {@code null}, modified)
+     * @param storeResult storage for the support vector (not {@code null},
+     * modified)
      */
     @Override
-    public void getSupport(Vec3Arg direction, Vec3 out) {
-        getSupport(direction.getX(), direction.getY(), direction.getZ(), out);
+    public void getSupport(Vec3Arg direction, Vec3 storeResult) {
+        getSupport(direction.getX(), direction.getY(), direction.getZ(),
+                storeResult);
     }
 
     /**
@@ -652,17 +655,18 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @param x the X component of the direction vector
      * @param y the Y component of the direction vector
      * @param z the Z component of the direction vector
-     * @param out storage for the support vector (not {@code null}, modified)
+     * @param storeResult storage for the support vector (not {@code null},
+     * modified)
      */
     @Override
-    public void getSupport(float x, float y, float z, Vec3 out) {
+    public void getSupport(float x, float y, float z, Vec3 storeResult) {
         FloatBuffer tmpFloats = Temporaries.floatBuffer1.get();
         tmpFloats.put(0, x);
         tmpFloats.put(1, y);
         tmpFloats.put(2, z);
         long boxVa = va();
         getSupport(boxVa, tmpFloats);
-        out.set(tmpFloats);
+        storeResult.set(tmpFloats);
     }
 
     /**

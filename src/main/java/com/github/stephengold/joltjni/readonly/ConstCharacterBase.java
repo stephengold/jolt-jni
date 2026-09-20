@@ -73,10 +73,10 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Copy the normal direction at the point of contact with the supporting
      * surface. The character is unaffected.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
-    void getGroundNormal(Vec3 out);
+    void getGroundNormal(Vec3 storeResult);
 
     /**
      * Copy the location of the point of contact with the supporting surface.
@@ -90,10 +90,10 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getGroundPosition(RVec3 out);
+    void getGroundPosition(RVec3 storeResult);
 
     /**
      * Return the relationship between the character and its supporting surface.
@@ -131,10 +131,10 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Copy the world-space velocity of the supporting surface. The character is
      * unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getGroundVelocity(Vec3 out);
+    void getGroundVelocity(Vec3 storeResult);
 
     /**
      * Access the physics system to which the character's body belongs, if any.
@@ -171,9 +171,9 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     /**
      * Copy the supporting volume. The character is unaffected.
      *
-     * @param out storage for the plane (not {@code null}, modified)
+     * @param storeResult storage for the plane (not {@code null}, modified)
      */
-    void getSupportingVolume(Plane out);
+    void getSupportingVolume(Plane storeResult);
 
     /**
      * Copy the supporting volume. The character is unaffected.
@@ -192,9 +192,9 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     /**
      * Copy the character's "up" direction. The character is unaffected.
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    void getUp(Vec3 out);
+    void getUp(Vec3 storeResult);
 
     /**
      * Test whether the specified normal direction is too steep. The character

@@ -127,13 +127,13 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the starting location. The settings are unaffected. (native field:
      * mPathPosition)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getPathPosition(Vec3 out) {
+    public void getPathPosition(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPathPosition(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -155,13 +155,14 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the initial rotation. The path is unaffected. (native field:
      * mPathRotation)
      *
-     * @param out storage for the orientation (not {@code null}, modified)
+     * @param storeResult storage for the orientation (not {@code null},
+     * modified)
      */
-    public void getPathRotation(Quat out) {
+    public void getPathRotation(Quat storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPathRotation(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

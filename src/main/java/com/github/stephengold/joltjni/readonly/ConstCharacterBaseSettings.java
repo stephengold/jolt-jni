@@ -74,9 +74,9 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
      * Copy the supporting volume. The settings are unaffected. (native
      * attribute: mSupportingVolume)
      *
-     * @param out storage for the plane (not {@code null}, modified)
+     * @param storeResult storage for the plane (not {@code null}, modified)
      */
-    void getSupportingVolume(Plane out);
+    void getSupportingVolume(Plane storeResult);
 
     /**
      * Copy the character's "up" direction. The settings are unaffected.
@@ -88,8 +88,8 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
     /**
      * Copy the character's "up" direction. The settings are unaffected.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
-    void getUp(Vec3 out);
+    void getUp(Vec3 storeResult);
 }

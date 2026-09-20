@@ -69,10 +69,10 @@ public interface ConstSoftBodyVertex extends ConstJoltPhysicsObject {
     /**
      * Copy the location. The vertex is unaffected.
      *
-     * @param out storage for the location (relative to the body's center of
-     * mass, not {@code null}, modified)
+     * @param storeResult storage for the location (relative to the body's
+     * center of mass, not {@code null}, modified)
      */
-    void getPosition(Vec3 out);
+    void getPosition(Vec3 storeResult);
 
     /**
      * Copy the previous location. The vertex is unaffected.
@@ -84,10 +84,10 @@ public interface ConstSoftBodyVertex extends ConstJoltPhysicsObject {
     /**
      * Copy the previous location. The vertex is unaffected.
      *
-     * @param out storage for the location (relative to the body's center of
-     * mass, not {@code null}, modified)
+     * @param storeResult storage for the location (relative to the body's
+     * center of mass, not {@code null}, modified)
      */
-    void getPreviousPosition(Vec3 out);
+    void getPreviousPosition(Vec3 storeResult);
 
     /**
      * Copy the velocity. The vertex is unaffected.
@@ -100,10 +100,10 @@ public interface ConstSoftBodyVertex extends ConstJoltPhysicsObject {
     /**
      * Copy the velocity. The vertex is unaffected.
      *
-     * @param out storage for the velocity (relative to the body's center of
-     * mass, in meters per second, not {@code null}, modified)
+     * @param storeResult storage for the velocity (relative to the body's
+     * center of mass, in meters per second, not {@code null}, modified)
      */
-    void getVelocity(Vec3 out);
+    void getVelocity(Vec3 storeResult);
 
     /**
      * Test whether the vertex collided during the previous update. The vertex

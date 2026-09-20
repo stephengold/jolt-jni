@@ -114,13 +114,13 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the plane axis of body 1. The settings are unaffected. (native
      * attribute: mPlaneAxis1)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getPlaneAxis1(Vec3 out) {
+    public void getPlaneAxis1(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPlaneAxis1(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -142,13 +142,13 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the plane axis of body 2. The settings are unaffected. (native
      * attribute: mPlaneAxis2)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getPlaneAxis2(Vec3 out) {
+    public void getPlaneAxis2(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPlaneAxis2(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -184,13 +184,13 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the initial location of body 1. The settings are unaffected. (native
      * attribute: mPosition1)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getPosition1(RVec3 out) {
+    public void getPosition1(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition1(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -212,13 +212,13 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the initial location of body 2. The settings are unaffected. (native
      * attribute: mPosition2)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    public void getPosition2(RVec3 out) {
+    public void getPosition2(RVec3 storeResult) {
         long settingsVa = va();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition2(settingsVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -281,13 +281,13 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the twist axis of body 1. The settings are unaffected. (native
      * attribute: mTwistAxis1)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getTwistAxis1(Vec3 out) {
+    public void getTwistAxis1(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTwistAxis1(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -309,13 +309,13 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Copy the twist axis of body 2. The settings are unaffected. (native
      * attribute: mTwistAxis2)
      *
-     * @param out storage for the direction (not {@code null}, modified)
+     * @param storeResult storage for the direction (not {@code null}, modified)
      */
-    public void getTwistAxis2(Vec3 out) {
+    public void getTwistAxis2(Vec3 storeResult) {
         long settingsVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTwistAxis2(settingsVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

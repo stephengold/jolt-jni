@@ -159,13 +159,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Copy the rotation of the constraint. The constraint is unaffected.
      *
-     * @param out storage for the rotation (not {@code null}, modified)
+     * @param storeResult storage for the rotation (not {@code null}, modified)
      */
-    public void getRotationInConstraintSpace(Quat out) {
+    public void getRotationInConstraintSpace(Quat storeResult) {
         long constraintVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotationInConstraintSpace(constraintVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -185,13 +185,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Copy the rotation upper limits. The constraint is unaffected.
      *
-     * @param out storage for the limits (not {@code null}, modified)
+     * @param storeResult storage for the limits (not {@code null}, modified)
      */
-    public void getRotationLimitsMax(Vec3 out) {
+    public void getRotationLimitsMax(Vec3 storeResult) {
         long constraintVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotationLimitsMax(constraintVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -211,13 +211,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Copy the rotation lower limits. The constraint is unaffected.
      *
-     * @param out storage for the limits (not {@code null}, modified)
+     * @param storeResult storage for the limits (not {@code null}, modified)
      */
-    public void getRotationLimitsMin(Vec3 out) {
+    public void getRotationLimitsMin(Vec3 storeResult) {
         long constraintVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getRotationLimitsMin(constraintVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -240,14 +240,14 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Copy the target velocities of the angular motors. The constraint is
      * unaffected. (native function: GetTargetAngularVelocityCS)
      *
-     * @param out storage for the velocity (radians per second in body 2
+     * @param storeResult storage for the velocity (radians per second in body 2
      * constraint space, not {@code null}, modified)
      */
-    public void getTargetAngularVelocityCs(Vec3 out) {
+    public void getTargetAngularVelocityCs(Vec3 storeResult) {
         long constraintVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTargetAngularVelocityCs(constraintVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -269,14 +269,14 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Copy the target position of the linear motors. The constraint is
      * unaffected. (native function: GetTargetPositionCS)
      *
-     * @param out storage for the offset (meters in body 1 constraint space, not
-     * {@code null}, modified)
+     * @param storeResult storage for the offset (meters in body 1 constraint
+     * space, not {@code null}, modified)
      */
-    public void getTargetPositionCs(Vec3 out) {
+    public void getTargetPositionCs(Vec3 storeResult) {
         long constraintVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTargetPositionCs(constraintVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -298,14 +298,14 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Copy the target orientation of the angular motors. The constraint is
      * unaffected. (native function: GetTargetOrientationCS)
      *
-     * @param out storage for the orientation (in body 1 constraint space, not
-     * {@code null}, modified)
+     * @param storeResult storage for the orientation (in body 1 constraint
+     * space, not {@code null}, modified)
      */
-    public void getTargetOrientationCs(Quat out) {
+    public void getTargetOrientationCs(Quat storeResult) {
         long constraintVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTargetOrientationCs(constraintVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -328,14 +328,14 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Copy the target velocities of the linear motors. The constraint is
      * unaffected. (native function: GetTargetVelocityCS)
      *
-     * @param out storage for the velocity (meters per second in body 1
+     * @param storeResult storage for the velocity (meters per second in body 1
      * constraint space, not {@code null}, modified)
      */
-    public void getTargetVelocityCs(Vec3 out) {
+    public void getTargetVelocityCs(Vec3 storeResult) {
         long constraintVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTargetVelocityCs(constraintVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -355,13 +355,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Copy the translation upper limits. The constraint is unaffected.
      *
-     * @param out storage for the limits (not {@code null}, modified)
+     * @param storeResult storage for the limits (not {@code null}, modified)
      */
-    public void getTranslationLimitsMax(Vec3 out) {
+    public void getTranslationLimitsMax(Vec3 storeResult) {
         long constraintVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTranslationLimitsMax(constraintVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -381,13 +381,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Copy the translation lower limits. The constraint is unaffected.
      *
-     * @param out storage for the limits (not {@code null}, modified)
+     * @param storeResult storage for the limits (not {@code null}, modified)
      */
-    public void getTranslationLimitsMin(Vec3 out) {
+    public void getTranslationLimitsMin(Vec3 storeResult) {
         long constraintVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getTranslationLimitsMin(constraintVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

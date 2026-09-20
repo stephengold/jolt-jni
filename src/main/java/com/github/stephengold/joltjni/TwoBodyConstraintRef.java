@@ -123,15 +123,15 @@ final public class TwoBodyConstraintRef
     /**
      * Copy the first body's pivot location. The constraint is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getBody1PivotLocation(RVec3 out) {
+    public void getBody1PivotLocation(RVec3 storeResult) {
         long constraintVa = targetVa();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         TwoBodyConstraint.getBody1PivotLocation(constraintVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -175,15 +175,15 @@ final public class TwoBodyConstraintRef
     /**
      * Copy the 2nd body's pivot location. The constraint is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
     @Override
-    public void getBody2PivotLocation(RVec3 out) {
+    public void getBody2PivotLocation(RVec3 storeResult) {
         long constraintVa = targetVa();
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         TwoBodyConstraint.getBody2PivotLocation(constraintVa, storeDoubles);
-        out.set(storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**

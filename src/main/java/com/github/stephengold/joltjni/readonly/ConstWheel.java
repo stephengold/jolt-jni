@@ -55,10 +55,10 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     /**
      * Copy the wheel's lateral (sideways) direction.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
-    void getContactLateral(Vec3 out);
+    void getContactLateral(Vec3 storeResult);
 
     /**
      * Copy the wheel's longitudinal direction.
@@ -70,10 +70,10 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     /**
      * Copy the wheel's longitudinal direction.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
-    void getContactLongitudinal(Vec3 out);
+    void getContactLongitudinal(Vec3 storeResult);
 
     /**
      * Copy the contact normal direction.
@@ -85,10 +85,10 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     /**
      * Copy the contact normal direction.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
-    void getContactNormal(Vec3 out);
+    void getContactNormal(Vec3 storeResult);
 
     /**
      * Copy the velocity of the contact point.
@@ -100,10 +100,10 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     /**
      * Copy the velocity of the contact point.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getContactPointVelocity(Vec3 out);
+    void getContactPointVelocity(Vec3 storeResult);
 
     /**
      * Copy the location of the contact point.
@@ -115,10 +115,10 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     /**
      * Copy the location of the contact point.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getContactPosition(RVec3 out);
+    void getContactPosition(RVec3 storeResult);
 
     /**
      * Return ID of the sub-shape that's supporting the vehicle.

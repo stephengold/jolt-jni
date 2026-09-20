@@ -58,10 +58,10 @@ public interface ConstTwoBodyConstraint extends ConstConstraint {
     /**
      * Copy the first body's pivot location. The constraint is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getBody1PivotLocation(RVec3 out);
+    void getBody1PivotLocation(RVec3 storeResult);
 
     /**
      * Access the 2nd body in the constraint. The constraint is unaffected.
@@ -88,10 +88,10 @@ public interface ConstTwoBodyConstraint extends ConstConstraint {
     /**
      * Copy the 2nd body's pivot location. The constraint is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getBody2PivotLocation(RVec3 out);
+    void getBody2PivotLocation(RVec3 storeResult);
 
     /**
      * Calculate the coordinate transform from constraint space to body 1. The

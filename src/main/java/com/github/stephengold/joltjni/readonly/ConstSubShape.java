@@ -54,9 +54,9 @@ public interface ConstSubShape extends ConstJoltPhysicsObject {
      * Copy the center-of-mass location. The sub-shape is unaffected. (native
      * function: GetPositionCOM)
      *
-     * @param out storage for the location (not {@code null}, modified)
+     * @param storeResult storage for the location (not {@code null}, modified)
      */
-    void getPositionCom(Vec3 out);
+    void getPositionCom(Vec3 storeResult);
 
     /**
      * Copy the rotation. The sub-shape is unaffected.
@@ -68,9 +68,9 @@ public interface ConstSubShape extends ConstJoltPhysicsObject {
     /**
      * Copy the rotation. The sub-shape is unaffected.
      *
-     * @param out storage for the rotation (not {@code null}, modified)
+     * @param storeResult storage for the rotation (not {@code null}, modified)
      */
-    void getRotation(Quat out);
+    void getRotation(Quat storeResult);
 
     /**
      * Access the child shape. The sub-shape is unaffected.

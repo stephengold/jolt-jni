@@ -58,10 +58,10 @@ public interface ConstCharacterContact extends ConstCharacterContactKey {
     /**
      * Copy the contact normal. The contact is unaffected.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
-    void getContactNormal(Vec3 out);
+    void getContactNormal(Vec3 storeResult);
 
     /**
      * Return the contact separation. The contact is unaffected.
@@ -113,10 +113,10 @@ public interface ConstCharacterContact extends ConstCharacterContactKey {
     /**
      * Copy the linear velocity of the contact. The contact is unaffected.
      *
-     * @param out storage for the velocity (meters per second in system
+     * @param storeResult storage for the velocity (meters per second in system
      * coordinates, not {@code null}, modified)
      */
-    void getLinearVelocity(Vec3 out);
+    void getLinearVelocity(Vec3 storeResult);
 
     /**
      * Return the motion type of the colliding object. The contact is
@@ -136,10 +136,10 @@ public interface ConstCharacterContact extends ConstCharacterContactKey {
     /**
      * Copy the location of the contact. The contact is unaffected.
      *
-     * @param out storage for the location (in system coordinates, not
+     * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
-    void getPosition(RVec3 out);
+    void getPosition(RVec3 storeResult);
 
     /**
      * Copy the surface normal of the contact. The contact is unaffected.
@@ -151,10 +151,10 @@ public interface ConstCharacterContact extends ConstCharacterContactKey {
     /**
      * Copy the surface normal of the contact. The contact is unaffected.
      *
-     * @param out storage for the direction (in system coordinates, not
+     * @param storeResult storage for the direction (in system coordinates, not
      * {@code null}, modified)
      */
-    void getSurfaceNormal(Vec3 out);
+    void getSurfaceNormal(Vec3 storeResult);
 
     /**
      * Return the user data of the colliding object. The contact is unaffected.

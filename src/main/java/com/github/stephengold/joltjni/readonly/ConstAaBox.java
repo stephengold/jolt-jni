@@ -96,9 +96,10 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * @param x the X coordinate of the location
      * @param y the Y coordinate of the location
      * @param z the Z coordinate of the location
-     * @param out storage for the closest point (not {@code null}, modified)
+     * @param storeResult storage for the closest point (not {@code null},
+     * modified)
      */
-    void getClosestPoint(float x, float y, float z, Vec3 out);
+    void getClosestPoint(float x, float y, float z, Vec3 storeResult);
 
     /**
      * Copy the (half) extent of the box. The box is unaffected.
@@ -110,9 +111,9 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Copy the (half) extent of the box. The box is unaffected.
      *
-     * @param out storage for the extent (not {@code null}, modified)
+     * @param storeResult storage for the extent (not {@code null}, modified)
      */
-    void getExtent(Vec3 out);
+    void getExtent(Vec3 storeResult);
 
     /**
      * Copy the maximum contained coordinate on each axis. The box is
@@ -126,9 +127,9 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * Copy the maximum contained coordinate on each axis. The box is
      * unaffected.
      *
-     * @param out storage for the maximum (not {@code null}, modified)
+     * @param storeResult storage for the maximum (not {@code null}, modified)
      */
-    void getMax(Vec3 out);
+    void getMax(Vec3 storeResult);
 
     /**
      * Copy the minimum contained coordinate on each axis. The box is
@@ -142,9 +143,9 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * Copy the minimum contained coordinate on each axis. The box is
      * unaffected.
      *
-     * @param out storage for the minimum (not {@code null}, modified)
+     * @param storeResult storage for the minimum (not {@code null}, modified)
      */
-    void getMin(Vec3 out);
+    void getMin(Vec3 storeResult);
 
     /**
      * Copy the size (full extent) on each axis. The box is unaffected.
@@ -156,9 +157,9 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Copy the size (full extent) on each axis. The box is unaffected.
      *
-     * @param out storage for the size (not {@code null}, modified)
+     * @param storeResult storage for the size (not {@code null}, modified)
      */
-    void getSize(Vec3 out);
+    void getSize(Vec3 storeResult);
 
     /**
      * Get the squared distance between the box and the specified point.
@@ -205,9 +206,10 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * unaffected.
      *
      * @param direction the direction vector (not {@code null}, unaffected)
-     * @param out storage for the support vector (not {@code null}, modified)
+     * @param storeResult storage for the support vector (not {@code null},
+     * modified)
      */
-    void getSupport(Vec3Arg direction, Vec3 out);
+    void getSupport(Vec3Arg direction, Vec3 storeResult);
 
     /**
      * Calculate the support vector for this convex shape. The shape is
@@ -216,9 +218,10 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * @param x the X component of the direction vector
      * @param y the Y component of the direction vector
      * @param z the Z component of the direction vector
-     * @param out storage for the support vector (not {@code null}, modified)
+     * @param storeResult storage for the support vector (not {@code null},
+     * modified)
      */
-    void getSupport(float x, float y, float z, Vec3 out);
+    void getSupport(float x, float y, float z, Vec3 storeResult);
 
     /**
      * Get surface area of bounding box.

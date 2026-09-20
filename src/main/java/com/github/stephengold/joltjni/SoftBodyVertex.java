@@ -301,15 +301,15 @@ public class SoftBodyVertex
      * Copy the location. The vertex is unaffected. (native attribute:
      * mPosition)
      *
-     * @param out storage for the location (relative to the body's center of
-     * mass, not {@code null}, modified)
+     * @param storeResult storage for the location (relative to the body's
+     * center of mass, not {@code null}, modified)
      */
     @Override
-    public void getPosition(Vec3 out) {
+    public void getPosition(Vec3 storeResult) {
         long vertexVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPosition(vertexVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -332,15 +332,15 @@ public class SoftBodyVertex
      * Copy the previous location. The vertex is unaffected. (native attribute:
      * mPreviousPosition)
      *
-     * @param out storage for the location (relative to the body's center of
-     * mass, not {@code null}, modified)
+     * @param storeResult storage for the location (relative to the body's
+     * center of mass, not {@code null}, modified)
      */
     @Override
-    public void getPreviousPosition(Vec3 out) {
+    public void getPreviousPosition(Vec3 storeResult) {
         long vertexVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPreviousPosition(vertexVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -364,15 +364,15 @@ public class SoftBodyVertex
      * Copy the velocity. The vertex is unaffected. (native attribute:
      * mVelocity)
      *
-     * @param out storage for the velocity (relative to the body's center of
-     * mass, in meters per second, not {@code null}, modified)
+     * @param storeResult storage for the velocity (relative to the body's
+     * center of mass, in meters per second, not {@code null}, modified)
      */
     @Override
-    public void getVelocity(Vec3 out) {
+    public void getVelocity(Vec3 storeResult) {
         long vertexVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getVelocity(vertexVa, storeFloats);
-        out.set(storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
