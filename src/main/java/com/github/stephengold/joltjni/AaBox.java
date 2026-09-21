@@ -610,9 +610,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      */
     @Override
     public Vec3 getSupport(float x, float y, float z) {
-        Vec3 storeResult = new Vec3();
-        getSupport(x, y, z, storeResult);
-        return storeResult;
+        Vec3 result = new Vec3();
+        getSupport(x, y, z, result);
+
+        return result;
     }
 
     /**
