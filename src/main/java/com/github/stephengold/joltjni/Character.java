@@ -235,16 +235,6 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Add the character to its {@code PhysicsSystem} using the locking body
-     * interface.
-     *
-     * @param activation the ordinal of the desired {@code EActivation} value
-     */
-    public void addToPhysicsSystem(int activation) {
-        addToPhysicsSystem(activation, true);
-    }
-
-    /**
      * Add the character to its {@code PhysicsSystem}.
      *
      * @param activation whether to activate the character (not {@code null},
@@ -256,18 +246,6 @@ public class Character extends CharacterBase implements ConstCharacter {
         long characterVa = va();
         int ordinal = activation.ordinal();
         addToPhysicsSystem(characterVa, ordinal, lockBodies);
-    }
-
-    /**
-     * Add the character to its {@code PhysicsSystem}.
-     *
-     * @param activation the ordinal of the desired {@code EActivation} value
-     * @param lockBodies {@code true} &rarr; use the locking body interface,
-     * {@code false} &rarr; use the non-locking body interface (default=true)
-     */
-    public void addToPhysicsSystem(int activation, boolean lockBodies) {
-        long characterVa = va();
-        addToPhysicsSystem(characterVa, activation, lockBodies);
     }
 
     /**
@@ -501,25 +479,9 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public void setPosition(
             double locX, double locY, double locZ, EActivation activation) {
+        long characterVa = va();
         int ordinal = activation.ordinal();
-        setPosition(locX, locY, locZ, ordinal, true);
-    }
-
-    /**
-     * Relocate the character, optionally activating it, using the locking body
-     * interface.
-     *
-     * @param locX the desired X coordinate of the location (in system
-     * coordinates)
-     * @param locY the desired Y coordinate of the location (in system
-     * coordinates)
-     * @param locZ the desired Z coordinate of the location (in system
-     * coordinates)
-     * @param activation the ordinal of the desired {@code EActivation} value
-     */
-    public void setPosition(double locX, double locY, double locZ,
-            int activation) {
-        setPosition(locX, locY, locZ, activation, true);
+        setPosition(characterVa, locX, locY, locZ, ordinal, true);
     }
 
     /**
@@ -538,28 +500,9 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public void setPosition(double locX, double locY, double locZ,
             EActivation activation, boolean lockBodies) {
-        int ordinal = activation.ordinal();
-        setPosition(locX, locY, locZ, ordinal, lockBodies);
-    }
-
-    /**
-     * Relocate the character, optionally activating it.
-     *
-     * @param locX the desired X coordinate of the location (in system
-     * coordinates)
-     * @param locY the desired Y coordinate of the location (in system
-     * coordinates)
-     * @param locZ the desired Z coordinate of the location (in system
-     * coordinates)
-     * @param activation the ordinal of the desired {@code EActivation} value
-     * @param lockBodies {@code true} &rarr; use the locking body interface,
-     * {@code false} &rarr; use the non-locking body interface (default=true)
-     */
-    public void setPosition(
-            double locX, double locY, double locZ, int activation,
-            boolean lockBodies) {
         long characterVa = va();
-        setPosition(characterVa, locX, locY, locZ, activation, lockBodies);
+        int ordinal = activation.ordinal();
+        setPosition(characterVa, locX, locY, locZ, ordinal, lockBodies);
     }
 
     /**
@@ -658,64 +601,10 @@ public class Character extends CharacterBase implements ConstCharacter {
     public void setPositionAndRotation(double locX, double locY, double locZ,
             float qx, float qy, float qz, float qw, EActivation activation,
             boolean lockBodies) {
-        int ordinal = activation.ordinal();
-        setPositionAndRotation(locX, locY, locZ,
-                qx, qy, qz, qw, ordinal, lockBodies);
-    }
-
-    /**
-     * Reposition the character, optionally activating it, using the locking
-     * body interface.
-     *
-     * @param locX the desired X coordinate of the location (in system
-     * coordinates)
-     * @param locY the desired Y coordinate of the location (in system
-     * coordinates)
-     * @param locZ the desired Z coordinate of the location (in system
-     * coordinates)
-     * @param qx the X component of the desired orientation (in system
-     * coordinates)
-     * @param qy the Y component of the desired orientation (in system
-     * coordinates)
-     * @param qz the Z component of the desired orientation (in system
-     * coordinates)
-     * @param qw the W component of the desired orientation (in system
-     * coordinates)
-     * @param activation the ordinal of the desired {@code EActivation} value
-     */
-    public void setPositionAndRotation(double locX, double locY, double locZ,
-            float qx, float qy, float qz, float qw, int activation) {
-        setPositionAndRotation(
-                locX, locY, locZ, qx, qy, qz, qw, activation, true);
-    }
-
-    /**
-     * Reposition the character, optionally activating it.
-     *
-     * @param locX the desired X coordinate of the location (in system
-     * coordinates)
-     * @param locY the desired Y coordinate of the location (in system
-     * coordinates)
-     * @param locZ the desired Z coordinate of the location (in system
-     * coordinates)
-     * @param qx the X component of the desired orientation (in system
-     * coordinates)
-     * @param qy the Y component of the desired orientation (in system
-     * coordinates)
-     * @param qz the Z component of the desired orientation (in system
-     * coordinates)
-     * @param qw the W component of the desired orientation (in system
-     * coordinates)
-     * @param activation the ordinal of the desired {@code EActivation} value
-     * @param lockBodies {@code true} &rarr; use the locking body interface,
-     * {@code false} &rarr; use the non-locking body interface (default=true)
-     */
-    public void setPositionAndRotation(double locX, double locY, double locZ,
-            float qx, float qy, float qz, float qw, int activation,
-            boolean lockBodies) {
         long characterVa = va();
+        int ordinal = activation.ordinal();
         setPositionAndRotation(characterVa, locX, locY, locZ,
-                qx, qy, qz, qw, activation, lockBodies);
+                qx, qy, qz, qw, ordinal, lockBodies);
     }
 
     /**
@@ -805,47 +694,8 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public void setRotation(
             float qx, float qy, float qz, float qw, EActivation activation) {
-        setRotation(qx, qy, qz, qw, activation.ordinal(), true);
-    }
-
-    /**
-     * Re-orient the character, optionally activating it, using the locking body
-     * interface.
-     *
-     * @param qx the X component of the desired orientation (in system
-     * coordinates)
-     * @param qy the Y component of the desired orientation (in system
-     * coordinates)
-     * @param qz the Z component of the desired orientation (in system
-     * coordinates)
-     * @param qw the W component of the desired orientation (in system
-     * coordinates)
-     * @param activation the ordinal of the desired {@code EActivation} value
-     */
-    public void setRotation(
-            float qx, float qy, float qz, float qw, int activation) {
-        setRotation(qx, qy, qz, qw, activation, true);
-    }
-
-    /**
-     * Re-orient the character, optionally activating it.
-     *
-     * @param qx the X component of the desired orientation (in system
-     * coordinates)
-     * @param qy the Y component of the desired orientation (in system
-     * coordinates)
-     * @param qz the Z component of the desired orientation (in system
-     * coordinates)
-     * @param qw the W component of the desired orientation (in system
-     * coordinates)
-     * @param activation the ordinal of the desired {@code EActivation} value
-     * @param lockBodies {@code true} &rarr; use the locking body interface,
-     * {@code false} &rarr; use the non-locking body interface (default=true)
-     */
-    public void setRotation(float qx, float qy, float qz, float qw,
-            int activation, boolean lockBodies) {
         long characterVa = va();
-        setRotation(characterVa, qx, qy, qz, qw, activation, lockBodies);
+        setRotation(characterVa, qx, qy, qz, qw, activation.ordinal(), true);
     }
 
     /**

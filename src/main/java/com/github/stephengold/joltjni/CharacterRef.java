@@ -91,16 +91,6 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Add the character to its {@code PhysicsSystem} using the locking body
-     * interface.
-     *
-     * @param activation the ordinal of the desired {@code EActivation} value
-     */
-    public void addToPhysicsSystem(int activation) {
-        addToPhysicsSystem(activation, true);
-    }
-
-    /**
      * Add the character to its {@code PhysicsSystem}.
      *
      * @param activation whether to activate the character (not {@code null},
@@ -111,20 +101,6 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public void addToPhysicsSystem(EActivation activation, boolean lockBodies) {
         long characterVa = targetVa();
         int ordinal = activation.ordinal();
-        com.github.stephengold.joltjni.Character.addToPhysicsSystem(
-                characterVa, ordinal, lockBodies);
-    }
-
-    /**
-     * Add the character to its {@code PhysicsSystem}.
-     *
-     * @param activation the ordinal of the desired {@code EActivation} value
-     * @param lockBodies {@code true} &rarr; use the locking body interface,
-     * {@code false} &rarr; use the non-locking body interface (default=true)
-     */
-    public void addToPhysicsSystem(int activation, boolean lockBodies) {
-        long characterVa = targetVa();
-        int ordinal = activation;
         com.github.stephengold.joltjni.Character.addToPhysicsSystem(
                 characterVa, ordinal, lockBodies);
     }
