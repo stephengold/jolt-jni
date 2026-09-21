@@ -43,13 +43,6 @@ public interface ConstTwoBodyConstraint extends ConstConstraint {
     /**
      * Copy the first body's pivot location. The constraint is unaffected.
      *
-     * @return a new location vector (in system coordinates)
-     */
-    RVec3 getBody1PivotLocation();
-
-    /**
-     * Copy the first body's pivot location. The constraint is unaffected.
-     *
      * @param storeResult storage for the location in system coordinates (not
      * {@code null}, modified)
      */
@@ -69,13 +62,6 @@ public interface ConstTwoBodyConstraint extends ConstConstraint {
      * @return a new JVM object with the pre-existing native object assigned
      */
     Body getBody2();
-
-    /**
-     * Copy the 2nd body's pivot location. The constraint is unaffected.
-     *
-     * @return a new location vector (in system coordinates)
-     */
-    RVec3 getBody2PivotLocation();
 
     /**
      * Copy the 2nd body's pivot location. The constraint is unaffected.

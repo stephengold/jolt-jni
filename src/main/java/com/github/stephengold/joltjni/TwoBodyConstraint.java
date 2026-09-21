@@ -88,18 +88,6 @@ abstract public class TwoBodyConstraint
     /**
      * Copy the first body's pivot location. The constraint is unaffected.
      *
-     * @return a new location vector (in system coordinates)
-     */
-    @Override
-    public RVec3 getBody1PivotLocation() {
-        RVec3 result = new RVec3();
-        getBody1PivotLocation(result);
-        return result;
-    }
-
-    /**
-     * Copy the first body's pivot location. The constraint is unaffected.
-     *
      * @param storeResult storage for the location (in system coordinates, not
      * {@code null}, modified)
      */
@@ -135,18 +123,6 @@ abstract public class TwoBodyConstraint
     public void getBody2PivotLocation(DoubleBuffer storeResult) {
         long constraintVa = va();
         getBody2PivotLocation(constraintVa, storeResult);
-    }
-
-    /**
-     * Copy the 2nd body's pivot location. The constraint is unaffected.
-     *
-     * @return a new location vector (in system coordinates)
-     */
-    @Override
-    public RVec3 getBody2PivotLocation() {
-        RVec3 result = new RVec3();
-        getBody2PivotLocation(result);
-        return result;
     }
 
     /**
