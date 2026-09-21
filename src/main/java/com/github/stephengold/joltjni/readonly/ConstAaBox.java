@@ -273,7 +273,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     boolean overlaps(ConstPlane plane);
 
     /**
-     * Check if this box overlaps with a plane.
+     * Check if this box overlaps with a plane. The box is unaffected.
      *
      * @param constant the plane constant
      * @param normalX the X component of the plane's normal

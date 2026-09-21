@@ -343,12 +343,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Test whether the box contains the specified point. The box is unaffected.
      *
-     * @param x the X coordinate of the point to test (not {@code null},
-     * unaffected)
-     * @param y the Y coordinate of the point to test (not {@code null},
-     * unaffected)
-     * @param z the Z coordinate of the point to test (not {@code null},
-     * unaffected)
+     * @param x the X coordinate of the point to test
+     * @param y the Y coordinate of the point to test
+     * @param z the Z coordinate of the point to test
      *
      * @return {@code true} if contained, otherwise {@code false}
      */
@@ -568,7 +565,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Get the squared distance between the box and the specified point.
+     * Get the squared distance between the box and the specified point. The box
+     * is unaffected.
      *
      * @param x the X coordinate of the point to measure from
      * @param y the Y coordinate of the point to measure from
@@ -601,7 +599,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Calculate the support vector for this convex shape.
+     * Calculate the support vector for this convex shape. The shape is
+     * unaffected.
      *
      * @param x the X component of the direction vector
      * @param y the Y component of the direction vector
@@ -760,7 +759,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Check if this box overlaps with a plane.
+     * Check if this box overlaps with a plane. The box is unaffected.
      *
      * @param constant the plane constant
      * @param normalX the X component of the plane's normal
