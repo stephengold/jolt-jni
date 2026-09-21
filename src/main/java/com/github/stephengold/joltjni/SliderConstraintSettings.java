@@ -414,6 +414,18 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
      *
+     * @param x the desired X component of the axis direction (default=0)
+     * @param y the desired Y component of the axis direction (default=1)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setNormalAxis1(float x, float y, float z) {
+        long settingsVa = va();
+        setNormalAxis1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
+     *
      * @param direction the desired axis direction (not {@code null},
      * unaffected, default=(0,1,0))
      * @return the argument, for chaining
@@ -429,15 +441,15 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
+     * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
      *
      * @param x the desired X component of the axis direction (default=0)
      * @param y the desired Y component of the axis direction (default=1)
      * @param z the desired Z component of the axis direction (default=0)
      */
-    public void setNormalAxis1(float x, float y, float z) {
+    public void setNormalAxis2(float x, float y, float z) {
         long settingsVa = va();
-        setNormalAxis1(settingsVa, x, y, z);
+        setNormalAxis2(settingsVa, x, y, z);
     }
 
     /**
@@ -458,15 +470,15 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
-     * @param x the desired X component of the axis direction (default=0)
-     * @param y the desired Y component of the axis direction (default=1)
-     * @param z the desired Z component of the axis direction (default=0)
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
      */
-    public void setNormalAxis2(float x, float y, float z) {
+    public void setPoint1(double x, double y, double z) {
         long settingsVa = va();
-        setNormalAxis2(settingsVa, x, y, z);
+        setPoint1(settingsVa, x, y, z);
     }
 
     /**
@@ -487,15 +499,15 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native attribute: mPoint1)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param x the desired X coordinate (default=0)
      * @param y the desired Y coordinate (default=0)
      * @param z the desired Z coordinate (default=0)
      */
-    public void setPoint1(double x, double y, double z) {
+    public void setPoint2(double x, double y, double z) {
         long settingsVa = va();
-        setPoint1(settingsVa, x, y, z);
+        setPoint2(settingsVa, x, y, z);
     }
 
     /**
@@ -516,15 +528,16 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 2. (native attribute: mPoint2)
+     * Alter the slider and normal axes, assuming the bodies are correctly
+     * oriented.
      *
-     * @param x the desired X coordinate (default=0)
-     * @param y the desired Y coordinate (default=0)
-     * @param z the desired Z coordinate (default=0)
+     * @param dx the desired X component of the slider axis direction
+     * @param dy the desired Y component of the slider axis direction
+     * @param dz the desired Z component of the slider axis direction
      */
-    public void setPoint2(double x, double y, double z) {
+    public void setSliderAxis(float dx, float dy, float dz) {
         long settingsVa = va();
-        setPoint2(settingsVa, x, y, z);
+        setSliderAxis(settingsVa, dx, dy, dz);
     }
 
     /**
@@ -543,16 +556,15 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the slider and normal axes, assuming the bodies are correctly
-     * oriented.
+     * Alter the slider axis of body 1. (native attribute: mSliderAxis1)
      *
-     * @param dx the desired X component of the slider axis direction
-     * @param dy the desired Y component of the slider axis direction
-     * @param dz the desired Z component of the slider axis direction
+     * @param x the desired X component of the axis direction (default=1)
+     * @param y the desired Y component of the axis direction (default=0)
+     * @param z the desired Z component of the axis direction (default=0)
      */
-    public void setSliderAxis(float dx, float dy, float dz) {
+    public void setSliderAxis1(float x, float y, float z) {
         long settingsVa = va();
-        setSliderAxis(settingsVa, dx, dy, dz);
+        setSliderAxis1(settingsVa, x, y, z);
     }
 
     /**
@@ -573,15 +585,15 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the slider axis of body 1. (native attribute: mSliderAxis1)
+     * Alter the slider axis of body 2. (native attribute: mSliderAxis2)
      *
      * @param x the desired X component of the axis direction (default=1)
      * @param y the desired Y component of the axis direction (default=0)
      * @param z the desired Z component of the axis direction (default=0)
      */
-    public void setSliderAxis1(float x, float y, float z) {
+    public void setSliderAxis2(float x, float y, float z) {
         long settingsVa = va();
-        setSliderAxis1(settingsVa, x, y, z);
+        setSliderAxis2(settingsVa, x, y, z);
     }
 
     /**
@@ -599,18 +611,6 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
         setSliderAxis2(settingsVa, x, y, z);
 
         return direction;
-    }
-
-    /**
-     * Alter the slider axis of body 2. (native attribute: mSliderAxis2)
-     *
-     * @param x the desired X component of the axis direction (default=1)
-     * @param y the desired Y component of the axis direction (default=0)
-     * @param z the desired Z component of the axis direction (default=0)
-     */
-    public void setSliderAxis2(float x, float y, float z) {
-        long settingsVa = va();
-        setSliderAxis2(settingsVa, x, y, z);
     }
 
     /**

@@ -77,25 +77,6 @@ public class BodyCreationSettings
      * Instantiate cooked settings for the specified shape.
      *
      * @param shape the desired shape (not {@code null})
-     * @param loc the desired location (not {@code null}, unaffected)
-     * @param orient the desired orientation (not {@code null}, unaffected)
-     * @param motionType the desired motion type (not {@code null})
-     * @param objLayer the ID of the desired object layer (&ge;0)
-     */
-    public BodyCreationSettings(ConstShape shape, RVec3Arg loc, QuatArg orient,
-            EMotionType motionType, int objLayer) {
-        long shapeVa = shape.targetVa();
-        int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createFromShape(shapeVa, loc.xx(), loc.yy(),
-                loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
-                orient.getW(), motionTypeOrdinal, objLayer);
-        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
-    }
-
-    /**
-     * Instantiate cooked settings for the specified shape.
-     *
-     * @param shape the desired shape (not {@code null})
      * @param locX the desired X coordinate of the location
      * @param locY the desired Y coordinate of the location
      * @param locZ the desired Z coordinate of the location
@@ -119,20 +100,20 @@ public class BodyCreationSettings
     }
 
     /**
-     * Instantiate uncooked settings for the specified shape settings.
+     * Instantiate cooked settings for the specified shape.
      *
-     * @param shapeSettings the desired shape settings (not {@code null})
+     * @param shape the desired shape (not {@code null})
      * @param loc the desired location (not {@code null}, unaffected)
      * @param orient the desired orientation (not {@code null}, unaffected)
      * @param motionType the desired motion type (not {@code null})
-     * @param objLayer the ID of the desired object layer
+     * @param objLayer the ID of the desired object layer (&ge;0)
      */
-    public BodyCreationSettings(ConstShapeSettings shapeSettings, RVec3Arg loc,
-            QuatArg orient, EMotionType motionType, int objLayer) {
-        long shapeSettingsVa = shapeSettings.targetVa();
+    public BodyCreationSettings(ConstShape shape, RVec3Arg loc, QuatArg orient,
+            EMotionType motionType, int objLayer) {
+        long shapeVa = shape.targetVa();
         int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createFromShapeSettings(shapeSettingsVa, loc.xx(),
-                loc.yy(), loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
+        long bodySettingsVa = createFromShape(shapeVa, loc.xx(), loc.yy(),
+                loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
                 orient.getW(), motionTypeOrdinal, objLayer);
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
@@ -164,6 +145,25 @@ public class BodyCreationSettings
     }
 
     /**
+     * Instantiate uncooked settings for the specified shape settings.
+     *
+     * @param shapeSettings the desired shape settings (not {@code null})
+     * @param loc the desired location (not {@code null}, unaffected)
+     * @param orient the desired orientation (not {@code null}, unaffected)
+     * @param motionType the desired motion type (not {@code null})
+     * @param objLayer the ID of the desired object layer
+     */
+    public BodyCreationSettings(ConstShapeSettings shapeSettings, RVec3Arg loc,
+            QuatArg orient, EMotionType motionType, int objLayer) {
+        long shapeSettingsVa = shapeSettings.targetVa();
+        int motionTypeOrdinal = motionType.ordinal();
+        long bodySettingsVa = createFromShapeSettings(shapeSettingsVa, loc.xx(),
+                loc.yy(), loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
+                orient.getW(), motionTypeOrdinal, objLayer);
+        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -191,20 +191,6 @@ public class BodyCreationSettings
      * Instantiate settings for the specified shape reference.
      *
      * @param shapeRef a reference to the desired shape (not {@code null})
-     * @param loc the desired location (not {@code null}, unaffected)
-     * @param orient the desired orientation (not {@code null}, unaffected)
-     * @param motionType the desired motion type (not {@code null})
-     * @param objLayer the ID of the desired object layer
-     */
-    public BodyCreationSettings(ShapeRef shapeRef, RVec3Arg loc,
-            QuatArg orient, EMotionType motionType, int objLayer) {
-        this(shapeRef.getPtr(), loc, orient, motionType, objLayer);
-    }
-
-    /**
-     * Instantiate settings for the specified shape reference.
-     *
-     * @param shapeRef a reference to the desired shape (not {@code null})
      * @param locX the desired X coordinate of the location
      * @param locY the desired Y coordinate of the location
      * @param locZ the desired Z coordinate of the location
@@ -221,6 +207,20 @@ public class BodyCreationSettings
             EMotionType motionType, int objLayer) {
         this(shapeRef.getPtr(), locX, locY, locZ,
                 orientX, orientY, orientZ, orientW, motionType, objLayer);
+    }
+
+    /**
+     * Instantiate settings for the specified shape reference.
+     *
+     * @param shapeRef a reference to the desired shape (not {@code null})
+     * @param loc the desired location (not {@code null}, unaffected)
+     * @param orient the desired orientation (not {@code null}, unaffected)
+     * @param motionType the desired motion type (not {@code null})
+     * @param objLayer the ID of the desired object layer
+     */
+    public BodyCreationSettings(ShapeRef shapeRef, RVec3Arg loc,
+            QuatArg orient, EMotionType motionType, int objLayer) {
+        this(shapeRef.getPtr(), loc, orient, motionType, objLayer);
     }
     // *************************************************************************
     // new methods exposed
@@ -707,27 +707,6 @@ public class BodyCreationSettings
      * Alter the (initial) orientation of the body's axes. (native member:
      * mRotation)
      *
-     * @param quat the desired rotation (relative to the system axes, not
-     * {@code null}, normalized, unaffected, default=(0,0,0,1))
-     * @return the modified settings, for chaining
-     */
-    public BodyCreationSettings setRotation(QuatArg quat) {
-        assert quat.isNormalized() : "length =" + quat.length();
-
-        long bodySettingsVa = va();
-        float qw = quat.getW();
-        float qx = quat.getX();
-        float qy = quat.getY();
-        float qz = quat.getZ();
-        setRotation(bodySettingsVa, qx, qy, qz, qw);
-
-        return this;
-    }
-
-    /**
-     * Alter the (initial) orientation of the body's axes. (native member:
-     * mRotation)
-     *
      * @param qx the X component of the desired rotation (relative to the system
      * axes, default=0)
      * @param qy the Y component of the desired rotation (relative to the system
@@ -741,6 +720,27 @@ public class BodyCreationSettings
     public BodyCreationSettings setRotation(
             float qx, float qy, float qz, float qw) {
         long bodySettingsVa = va();
+        setRotation(bodySettingsVa, qx, qy, qz, qw);
+
+        return this;
+    }
+
+    /**
+     * Alter the (initial) orientation of the body's axes. (native member:
+     * mRotation)
+     *
+     * @param quat the desired rotation (relative to the system axes, not
+     * {@code null}, normalized, unaffected, default=(0,0,0,1))
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings setRotation(QuatArg quat) {
+        assert quat.isNormalized() : "length =" + quat.length();
+
+        long bodySettingsVa = va();
+        float qw = quat.getW();
+        float qx = quat.getX();
+        float qy = quat.getY();
+        float qz = quat.getZ();
         setRotation(bodySettingsVa, qx, qy, qz, qw);
 
         return this;

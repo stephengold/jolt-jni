@@ -33,6 +33,28 @@ public class TriangleShape extends ConvexShape {
     // constructors
 
     /**
+     * Instantiate a shape with the specified vertices and convex radius.
+     *
+     * @param v1x the X coordinate of the first vertex
+     * @param v1y the Y coordinate of the first vertex
+     * @param v1z the Z coordinate of the first vertex
+     * @param v2x the X coordinate of the 2nd vertex
+     * @param v2y the Y coordinate of the 2nd vertex
+     * @param v2z the Z coordinate of the 2nd vertex
+     * @param v3x the X coordinate of the 3rd vertex
+     * @param v3y the Y coordinate of the 3rd vertex
+     * @param v3z the Z coordinate of the 3rd vertex
+     * @param convexRadius the desired convex radius (default=0)
+     */
+    public TriangleShape(float v1x, float v1y, float v1z,
+            float v2x, float v2y, float v2z,
+            float v3x, float v3y, float v3z, float convexRadius) {
+        long shapeVa = createTriangleShape(
+                v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, convexRadius);
+        setVirtualAddressAsCoOwner(shapeVa);
+    }
+
+    /**
      * Instantiate a shape with the specified native object assigned.
      *
      * @param shapeVa the virtual address of the native object to assign (not
@@ -72,28 +94,6 @@ public class TriangleShape extends ConvexShape {
         float v3x = v3.getX();
         float v3y = v3.getY();
         float v3z = v3.getZ();
-        long shapeVa = createTriangleShape(
-                v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, convexRadius);
-        setVirtualAddressAsCoOwner(shapeVa);
-    }
-
-    /**
-     * Instantiate a shape with the specified vertices and convex radius.
-     *
-     * @param v1x the X coordinate of the first vertex
-     * @param v1y the Y coordinate of the first vertex
-     * @param v1z the Z coordinate of the first vertex
-     * @param v2x the X coordinate of the 2nd vertex
-     * @param v2y the Y coordinate of the 2nd vertex
-     * @param v2z the Z coordinate of the 2nd vertex
-     * @param v3x the X coordinate of the 3rd vertex
-     * @param v3y the Y coordinate of the 3rd vertex
-     * @param v3z the Z coordinate of the 3rd vertex
-     * @param convexRadius the desired convex radius (default=0)
-     */
-    public TriangleShape(float v1x, float v1y, float v1z,
-            float v2x, float v2y, float v2z,
-            float v3x, float v3y, float v3z, float convexRadius) {
         long shapeVa = createTriangleShape(
                 v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, convexRadius);
         setVirtualAddressAsCoOwner(shapeVa);

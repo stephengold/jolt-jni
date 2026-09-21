@@ -99,20 +99,6 @@ abstract public class CharacterBase
     }
 
     /**
-     * Alter the character's "up" direction.
-     *
-     * @param up the desired direction (not {@code null}, unaffected,
-     * default=(0,1,0))
-     */
-    public void setUp(Vec3Arg up) {
-        long characterVa = va();
-        float x = up.getX();
-        float y = up.getY();
-        float z = up.getZ();
-        setUp(characterVa, x, y, z);
-    }
-
-    /**
      * Alter the character's "up" direction. (native attribute: mUp)
      *
      * @param x the X component of the desired direction (in system coordinates,
@@ -124,6 +110,20 @@ abstract public class CharacterBase
      */
     public void setUp(float x, float y, float z) {
         long characterVa = va();
+        setUp(characterVa, x, y, z);
+    }
+
+    /**
+     * Alter the character's "up" direction.
+     *
+     * @param up the desired direction (not {@code null}, unaffected,
+     * default=(0,1,0))
+     */
+    public void setUp(Vec3Arg up) {
+        long characterVa = va();
+        float x = up.getX();
+        float y = up.getY();
+        float z = up.getZ();
         setUp(characterVa, x, y, z);
     }
     // *************************************************************************
@@ -403,24 +403,6 @@ abstract public class CharacterBase
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
-     * @param normal the surface normal to test (not {@code null}, unaffected)
-     * @return {@code true} if too steep, otherwise {@code false}
-     */
-    @Override
-    public boolean isSlopeTooSteep(Vec3Arg normal) {
-        long characterVa = va();
-        float nx = normal.getX();
-        float ny = normal.getY();
-        float nz = normal.getZ();
-        boolean result = isSlopeTooSteep(characterVa, nx, ny, nz);
-
-        return result;
-    }
-
-    /**
-     * Test whether the specified normal direction is too steep. The character
-     * is unaffected.
-     *
      * @param nx the X component of the surface normal to test (in system
      * coordinates)
      * @param ny the Y component of the surface normal to test (in system
@@ -433,6 +415,24 @@ abstract public class CharacterBase
     public boolean isSlopeTooSteep(float nx, float ny, float nz) {
         long characterVa = va();
         return isSlopeTooSteep(characterVa, nx, ny, nz);
+    }
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
+     * @param normal the surface normal to test (not {@code null}, unaffected)
+     * @return {@code true} if too steep, otherwise {@code false}
+     */
+    @Override
+    public boolean isSlopeTooSteep(Vec3Arg normal) {
+        long characterVa = va();
+        float nx = normal.getX();
+        float ny = normal.getY();
+        float nz = normal.getZ();
+        boolean result = isSlopeTooSteep(characterVa, nx, ny, nz);
+
+        return result;
     }
 
     /**

@@ -240,6 +240,18 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the initial location. (native field: mPathPosition)
      *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPathPosition(float x, float y, float z) {
+        long settingsVa = va();
+        setPathPosition(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the initial location. (native field: mPathPosition)
+     *
      * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      */
@@ -252,15 +264,16 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the initial location. (native field: mPathPosition)
+     * Alter the initial orientation. (native field: mPathRotation)
      *
-     * @param x the desired X coordinate (default=0)
-     * @param y the desired Y coordinate (default=0)
-     * @param z the desired Z coordinate (default=0)
+     * @param qx the X component of the desired orientation (default=0)
+     * @param qy the Y component of the desired orientation (default=0)
+     * @param qz the Z component of the desired orientation (default=0)
+     * @param qw the W component of the desired orientation (default=1)
      */
-    public void setPathPosition(float x, float y, float z) {
+    public void setPathRotation(float qx, float qy, float qz, float qw) {
         long settingsVa = va();
-        setPathPosition(settingsVa, x, y, z);
+        setPathRotation(settingsVa, qx, qy, qz, qw);
     }
 
     /**
@@ -275,19 +288,6 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
         float qx = orientation.getX();
         float qy = orientation.getY();
         float qz = orientation.getZ();
-        setPathRotation(settingsVa, qx, qy, qz, qw);
-    }
-
-    /**
-     * Alter the initial orientation. (native field: mPathRotation)
-     *
-     * @param qx the X component of the desired orientation (default=0)
-     * @param qy the Y component of the desired orientation (default=0)
-     * @param qz the Z component of the desired orientation (default=0)
-     * @param qw the W component of the desired orientation (default=1)
-     */
-    public void setPathRotation(float qx, float qy, float qz, float qw) {
-        long settingsVa = va();
         setPathRotation(settingsVa, qx, qy, qz, qw);
     }
 

@@ -43,17 +43,17 @@ public interface ConstTwoBodyConstraint extends ConstConstraint {
     /**
      * Copy the first body's pivot location. The constraint is unaffected.
      *
-     * @param storeResult storage for the location in system coordinates (not
-     * {@code null}, modified)
+     * @return a new location vector (in system coordinates)
      */
-    void getBody1PivotLocation(DoubleBuffer storeResult);
+    RVec3 getBody1PivotLocation();
 
     /**
      * Copy the first body's pivot location. The constraint is unaffected.
      *
-     * @return a new location vector (in system coordinates)
+     * @param storeResult storage for the location in system coordinates (not
+     * {@code null}, modified)
      */
-    RVec3 getBody1PivotLocation();
+    void getBody1PivotLocation(DoubleBuffer storeResult);
 
     /**
      * Copy the first body's pivot location. The constraint is unaffected.
@@ -73,17 +73,17 @@ public interface ConstTwoBodyConstraint extends ConstConstraint {
     /**
      * Copy the 2nd body's pivot location. The constraint is unaffected.
      *
-     * @param storeResult storage for the location in system coordinates (not
-     * {@code null}, modified)
+     * @return a new location vector (in system coordinates)
      */
-    void getBody2PivotLocation(DoubleBuffer storeResult);
+    RVec3 getBody2PivotLocation();
 
     /**
      * Copy the 2nd body's pivot location. The constraint is unaffected.
      *
-     * @return a new location vector (in system coordinates)
+     * @param storeResult storage for the location in system coordinates (not
+     * {@code null}, modified)
      */
-    RVec3 getBody2PivotLocation();
+    void getBody2PivotLocation(DoubleBuffer storeResult);
 
     /**
      * Copy the 2nd body's pivot location. The constraint is unaffected.

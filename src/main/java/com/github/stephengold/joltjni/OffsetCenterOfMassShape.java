@@ -38,12 +38,12 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
      * Instantiate a shape on the specified offset and base shape.
      *
      * @param baseShape the base shape (not {@code null})
-     * @param offset (not {@code null}, unaffected)
+     * @param offsetX the desired X offset
+     * @param offsetY the desired Y offset
+     * @param offsetZ the desired Z offset
      */
-    public OffsetCenterOfMassShape(ConstShape baseShape, Vec3Arg offset) {
-        float offsetX = offset.getX();
-        float offsetY = offset.getY();
-        float offsetZ = offset.getZ();
+    public OffsetCenterOfMassShape(ConstShape baseShape,
+            float offsetX, float offsetY, float offsetZ) {
         long baseShapeVa = baseShape.targetVa();
         long ocomShapeVa = createShape(baseShapeVa, offsetX, offsetY, offsetZ);
         setVirtualAddressAsCoOwner(ocomShapeVa);
@@ -53,12 +53,12 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
      * Instantiate a shape on the specified offset and base shape.
      *
      * @param baseShape the base shape (not {@code null})
-     * @param offsetX the desired X offset
-     * @param offsetY the desired Y offset
-     * @param offsetZ the desired Z offset
+     * @param offset (not {@code null}, unaffected)
      */
-    public OffsetCenterOfMassShape(ConstShape baseShape,
-            float offsetX, float offsetY, float offsetZ) {
+    public OffsetCenterOfMassShape(ConstShape baseShape, Vec3Arg offset) {
+        float offsetX = offset.getX();
+        float offsetY = offset.getY();
+        float offsetZ = offset.getZ();
         long baseShapeVa = baseShape.targetVa();
         long ocomShapeVa = createShape(baseShapeVa, offsetX, offsetY, offsetZ);
         setVirtualAddressAsCoOwner(ocomShapeVa);

@@ -174,20 +174,6 @@ final public class CharacterSettingsRef
     /**
      * Alter the character's "up" direction. (native attribute: mUp)
      *
-     * @param direction the desired direction (not {@code null}, unaffected,
-     * default=(0,1,0))
-     */
-    public void setUp(Vec3Arg direction) {
-        long settingsVa = targetVa();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
-        CharacterBaseSettings.setUp(settingsVa, dx, dy, dz);
-    }
-
-    /**
-     * Alter the character's "up" direction. (native attribute: mUp)
-     *
      * @param dx the X component of the desired direction (in system
      * coordinates, default=0)
      * @param dy the Y component of the desired direction (in system
@@ -197,6 +183,20 @@ final public class CharacterSettingsRef
      */
     public void setUp(float dx, float dy, float dz) {
         long settingsVa = targetVa();
+        CharacterBaseSettings.setUp(settingsVa, dx, dy, dz);
+    }
+
+    /**
+     * Alter the character's "up" direction. (native attribute: mUp)
+     *
+     * @param direction the desired direction (not {@code null}, unaffected,
+     * default=(0,1,0))
+     */
+    public void setUp(Vec3Arg direction) {
+        long settingsVa = targetVa();
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
         CharacterBaseSettings.setUp(settingsVa, dx, dy, dz);
     }
     // *************************************************************************

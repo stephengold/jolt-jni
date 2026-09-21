@@ -170,6 +170,36 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
      *
+     * @param pointX the X coordinate of the location to test
+     * @param pointY the Y coordinate of the location to test
+     * @param pointZ the Z coordinate of the location to test
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     */
+    void collidePoint(float pointX, float pointY, float pointZ,
+            CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter);
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified point.
+     *
+     * @param pointX the X coordinate of the location to test
+     * @param pointY the Y coordinate of the location to test
+     * @param pointZ the Z coordinate of the location to test
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not {@code null},
+     * unaffected)
+     */
+    void collidePoint(float pointX, float pointY, float pointZ,
+            CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified point.
+     *
      * @param point the location to test (not {@code null}, unaffected)
      * @param collector the hit collector to use (not {@code null})
      */
@@ -189,20 +219,6 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified point.
      *
-     * @param pointX the X coordinate of the location to test
-     * @param pointY the Y coordinate of the location to test
-     * @param pointZ the Z coordinate of the location to test
-     * @param collector the hit collector to use (not {@code null})
-     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
-     * unaffected)
-     */
-    void collidePoint(float pointX, float pointY, float pointZ,
-            CollideShapeBodyCollector collector,
-            BroadPhaseLayerFilter bplFilter);
-
-    /**
-     * Collect bodies whose bounding boxes intersect the specified point.
-     *
      * @param point the location to test (not {@code null}, unaffected)
      * @param collector the hit collector to use (not {@code null})
      * @param bplFilter the broadphase-layer filter to apply (not {@code null},
@@ -212,33 +228,6 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
      */
     void collidePoint(Vec3Arg point, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
-
-    /**
-     * Collect bodies whose bounding boxes intersect the specified point.
-     *
-     * @param pointX the X coordinate of the location to test
-     * @param pointY the Y coordinate of the location to test
-     * @param pointZ the Z coordinate of the location to test
-     * @param collector the hit collector to use (not {@code null})
-     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
-     * unaffected)
-     * @param olFilter the object-layer filter to apply (not {@code null},
-     * unaffected)
-     */
-    void collidePoint(float pointX, float pointY, float pointZ,
-            CollideShapeBodyCollector collector,
-            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
-
-    /**
-     * Collect bodies whose bounding boxes intersect the specified test sphere.
-     *
-     * @param center the center of the test sphere (not {@code null},
-     * unaffected)
-     * @param radius the radius of the test sphere
-     * @param collector the hit collector to use (not {@code null})
-     */
-    void collideSphere(
-            Vec3Arg center, float radius, CollideShapeBodyCollector collector);
 
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
@@ -255,20 +244,6 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
-     * @param center the center of the test sphere (not {@code null},
-     * unaffected)
-     * @param radius the radius of the test sphere
-     * @param collector the hit collector to use (not {@code null})
-     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
-     * unaffected)
-     */
-    void collideSphere(
-            Vec3Arg center, float radius, CollideShapeBodyCollector collector,
-            BroadPhaseLayerFilter bplFilter);
-
-    /**
-     * Collect bodies whose bounding boxes intersect the specified test sphere.
-     *
      * @param centerX the X coordinate of the sphere's center
      * @param centerY the Y coordinate of the sphere's center
      * @param centerZ the Z coordinate of the sphere's center
@@ -284,8 +259,9 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
-     * @param center the center of the test sphere (not {@code null},
-     * unaffected)
+     * @param centerX the X coordinate of the sphere's center
+     * @param centerY the Y coordinate of the sphere's center
+     * @param centerZ the Z coordinate of the sphere's center
      * @param radius the radius of the test sphere
      * @param collector the hit collector to use (not {@code null})
      * @param bplFilter the broadphase-layer filter to apply (not {@code null},
@@ -293,16 +269,40 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
      * @param olFilter the object-layer filter to apply (not {@code null},
      * unaffected)
      */
-    void collideSphere(
-            Vec3Arg center, float radius, CollideShapeBodyCollector collector,
+    void collideSphere(float centerX, float centerY, float centerZ,
+            float radius, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 
     /**
      * Collect bodies whose bounding boxes intersect the specified test sphere.
      *
-     * @param centerX the X coordinate of the sphere's center
-     * @param centerY the Y coordinate of the sphere's center
-     * @param centerZ the Z coordinate of the sphere's center
+     * @param center the center of the test sphere (not {@code null},
+     * unaffected)
+     * @param radius the radius of the test sphere
+     * @param collector the hit collector to use (not {@code null})
+     */
+    void collideSphere(
+            Vec3Arg center, float radius, CollideShapeBodyCollector collector);
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified test sphere.
+     *
+     * @param center the center of the test sphere (not {@code null},
+     * unaffected)
+     * @param radius the radius of the test sphere
+     * @param collector the hit collector to use (not {@code null})
+     * @param bplFilter the broadphase-layer filter to apply (not {@code null},
+     * unaffected)
+     */
+    void collideSphere(
+            Vec3Arg center, float radius, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter);
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified test sphere.
+     *
+     * @param center the center of the test sphere (not {@code null},
+     * unaffected)
      * @param radius the radius of the test sphere
      * @param collector the hit collector to use (not {@code null})
      * @param bplFilter the broadphase-layer filter to apply (not {@code null},
@@ -310,7 +310,7 @@ public interface ConstBroadPhaseQuery extends ConstJoltPhysicsObject {
      * @param olFilter the object-layer filter to apply (not {@code null},
      * unaffected)
      */
-    void collideSphere(float centerX, float centerY, float centerZ,
-            float radius, CollideShapeBodyCollector collector,
+    void collideSphere(
+            Vec3Arg center, float radius, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 }

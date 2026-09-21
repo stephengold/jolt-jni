@@ -63,6 +63,19 @@ public class JointState extends JoltPhysicsObject implements ConstJointState {
     /**
      * Alter the rotation component. (native attribute: mRotation)
      *
+     * @param qx the X component of the desired rotation (default=0)
+     * @param qy the Y component of the desired rotation (default=0)
+     * @param qz the Z component of the desired rotation (default=0)
+     * @param qw the W component of the desired rotation (default=1)
+     */
+    public void setRotation(float qx, float qy, float qz, float qw) {
+        long stateVa = va();
+        setRotation(stateVa, qx, qy, qz, qw);
+    }
+
+    /**
+     * Alter the rotation component. (native attribute: mRotation)
+     *
      * @param rotation the desired rotation (not {@code null}, unaffected,
      * default=(0,0,0,1))
      */
@@ -76,16 +89,15 @@ public class JointState extends JoltPhysicsObject implements ConstJointState {
     }
 
     /**
-     * Alter the rotation component. (native attribute: mRotation)
+     * Alter the translation offset component. (native attribute: mTranslation)
      *
-     * @param qx the X component of the desired rotation (default=0)
-     * @param qy the Y component of the desired rotation (default=0)
-     * @param qz the Z component of the desired rotation (default=0)
-     * @param qw the W component of the desired rotation (default=1)
+     * @param x the desired X offset (default=0)
+     * @param y the desired Y offset (default=0)
+     * @param z the desired Z offset (default=0)
      */
-    public void setRotation(float qx, float qy, float qz, float qw) {
+    public void setTranslation(float x, float y, float z) {
         long stateVa = va();
-        setRotation(stateVa, qx, qy, qz, qw);
+        setTranslation(stateVa, x, y, z);
     }
 
     /**
@@ -99,18 +111,6 @@ public class JointState extends JoltPhysicsObject implements ConstJointState {
         float x = offset.getX();
         float y = offset.getY();
         float z = offset.getZ();
-        setTranslation(stateVa, x, y, z);
-    }
-
-    /**
-     * Alter the translation offset component. (native attribute: mTranslation)
-     *
-     * @param x the desired X offset (default=0)
-     * @param y the desired Y offset (default=0)
-     * @param z the desired Z offset (default=0)
-     */
-    public void setTranslation(float x, float y, float z) {
-        long stateVa = va();
         setTranslation(stateVa, x, y, z);
     }
     // *************************************************************************

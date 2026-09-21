@@ -147,21 +147,6 @@ public class MotionProperties
      * Directly alter the angular velocity. It is illegal to set a non-zero
      * velocity on a sleeping body without activating it.
      *
-     * @param omega the desired velocity (meters per second in system
-     * coordinates, not {@code null}, unaffected, default=(0,0,0))
-     */
-    public void setAngularVelocity(Vec3Arg omega) {
-        long propertiesVa = va();
-        float wx = omega.getX();
-        float wy = omega.getY();
-        float wz = omega.getZ();
-        setAngularVelocity(propertiesVa, wx, wy, wz);
-    }
-
-    /**
-     * Directly alter the angular velocity. It is illegal to set a non-zero
-     * velocity on a sleeping body without activating it.
-     *
      * @param wx the X component of the desired angular velocity (radians per
      * second in system coordinates, default=0)
      * @param wy the Y component of the desired angular velocity (radians per
@@ -175,6 +160,21 @@ public class MotionProperties
     }
 
     /**
+     * Directly alter the angular velocity. It is illegal to set a non-zero
+     * velocity on a sleeping body without activating it.
+     *
+     * @param omega the desired velocity (meters per second in system
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
+     */
+    public void setAngularVelocity(Vec3Arg omega) {
+        long propertiesVa = va();
+        float wx = omega.getX();
+        float wy = omega.getY();
+        float wz = omega.getZ();
+        setAngularVelocity(propertiesVa, wx, wy, wz);
+    }
+
+    /**
      * Alter the gravity factor.
      *
      * @param factor the desired factor (default=0)
@@ -182,6 +182,24 @@ public class MotionProperties
     public void setGravityFactor(float factor) {
         long propertiesVa = va();
         setGravityFactor(propertiesVa, factor);
+    }
+
+    /**
+     * Alter the diagonal components of the inverse inertia matrix of the body.
+     * If inertia changes, mass should probably change as well.
+     *
+     * @param dx the desired X element of the diagonal
+     * @param dy the desired Y element of the diagonal
+     * @param dz the desired Z element of the diagonal
+     * @param rx the X component of the orientation of the principal axes
+     * @param ry the Y component of the orientation of the principal axes
+     * @param rz the Z component of the orientation of the principal axes
+     * @param rw the W component of the orientation of the principal axes
+     */
+    public void setInverseInertia(float dx, float dy, float dz,
+            float rx, float ry, float rz, float rw) {
+        long propertiesVa = va();
+        setInverseInertia(propertiesVa, dx, dy, dz, rx, ry, rz, rw);
     }
 
     /**
@@ -202,24 +220,6 @@ public class MotionProperties
         float rx = rotation.getX();
         float ry = rotation.getY();
         float rz = rotation.getZ();
-        setInverseInertia(propertiesVa, dx, dy, dz, rx, ry, rz, rw);
-    }
-
-    /**
-     * Alter the diagonal components of the inverse inertia matrix of the body.
-     * If inertia changes, mass should probably change as well.
-     *
-     * @param dx the desired X element of the diagonal
-     * @param dy the desired Y element of the diagonal
-     * @param dz the desired Z element of the diagonal
-     * @param rx the X component of the orientation of the principal axes
-     * @param ry the Y component of the orientation of the principal axes
-     * @param rz the Z component of the orientation of the principal axes
-     * @param rw the W component of the orientation of the principal axes
-     */
-    public void setInverseInertia(float dx, float dy, float dz,
-            float rx, float ry, float rz, float rw) {
-        long propertiesVa = va();
         setInverseInertia(propertiesVa, dx, dy, dz, rx, ry, rz, rw);
     }
 
@@ -249,21 +249,6 @@ public class MotionProperties
      * Directly alter the linear velocity. It is illegal to set a non-zero
      * velocity on a sleeping body without activating it.
      *
-     * @param velocity the desired velocity (meters per second in system
-     * coordinates, not {@code null}, unaffected, default=(0,0,0))
-     */
-    public void setLinearVelocity(Vec3Arg velocity) {
-        long propertiesVa = va();
-        float vx = velocity.getX();
-        float vy = velocity.getY();
-        float vz = velocity.getZ();
-        setLinearVelocity(propertiesVa, vx, vy, vz);
-    }
-
-    /**
-     * Directly alter the linear velocity. It is illegal to set a non-zero
-     * velocity on a sleeping body without activating it.
-     *
      * @param vx the X component of the desired velocity (meters per second in
      * system coordinates, default=0)
      * @param vy the Y component of the desired velocity (meters per second in
@@ -273,6 +258,21 @@ public class MotionProperties
      */
     public void setLinearVelocity(float vx, float vy, float vz) {
         long propertiesVa = va();
+        setLinearVelocity(propertiesVa, vx, vy, vz);
+    }
+
+    /**
+     * Directly alter the linear velocity. It is illegal to set a non-zero
+     * velocity on a sleeping body without activating it.
+     *
+     * @param velocity the desired velocity (meters per second in system
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
+     */
+    public void setLinearVelocity(Vec3Arg velocity) {
+        long propertiesVa = va();
+        float vx = velocity.getX();
+        float vy = velocity.getY();
+        float vz = velocity.getZ();
         setLinearVelocity(propertiesVa, vx, vy, vz);
     }
 

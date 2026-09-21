@@ -232,6 +232,18 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPoint1(double x, double y, double z) {
+        long settingsVa = va();
+        setPoint1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
+     *
      * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
@@ -247,15 +259,15 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native attribute: mPoint1)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param x the desired X coordinate (default=0)
      * @param y the desired Y coordinate (default=0)
      * @param z the desired Z coordinate (default=0)
      */
-    public void setPoint1(double x, double y, double z) {
+    public void setPoint2(double x, double y, double z) {
         long settingsVa = va();
-        setPoint1(settingsVa, x, y, z);
+        setPoint2(settingsVa, x, y, z);
     }
 
     /**
@@ -276,18 +288,6 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 2. (native attribute: mPoint2)
-     *
-     * @param x the desired X coordinate (default=0)
-     * @param y the desired Y coordinate (default=0)
-     * @param z the desired Z coordinate (default=0)
-     */
-    public void setPoint2(double x, double y, double z) {
-        long settingsVa = va();
-        setPoint2(settingsVa, x, y, z);
-    }
-
-    /**
      * Alter which space the other properties are specified in. (native
      * attribute: mSpace)
      *
@@ -297,6 +297,18 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
         long settingsVa = va();
         int ordinal = space.ordinal();
         setSpace(settingsVa, ordinal);
+    }
+
+    /**
+     * Alter the twist axis of body 1. (native attribute: mTwistAxis1)
+     *
+     * @param x the desired X component of the axis direction (default=1)
+     * @param y the desired Y component of the axis direction (default=0)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setTwistAxis1(float x, float y, float z) {
+        long settingsVa = va();
+        setTwistAxis1(settingsVa, x, y, z);
     }
 
     /**
@@ -317,15 +329,15 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the twist axis of body 1. (native attribute: mTwistAxis1)
+     * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
      *
      * @param x the desired X component of the axis direction (default=1)
      * @param y the desired Y component of the axis direction (default=0)
      * @param z the desired Z component of the axis direction (default=0)
      */
-    public void setTwistAxis1(float x, float y, float z) {
+    public void setTwistAxis2(float x, float y, float z) {
         long settingsVa = va();
-        setTwistAxis1(settingsVa, x, y, z);
+        setTwistAxis2(settingsVa, x, y, z);
     }
 
     /**
@@ -343,18 +355,6 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
         setTwistAxis2(settingsVa, x, y, z);
 
         return direction;
-    }
-
-    /**
-     * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
-     *
-     * @param x the desired X component of the axis direction (default=1)
-     * @param y the desired Y component of the axis direction (default=0)
-     * @param z the desired Z component of the axis direction (default=0)
-     */
-    public void setTwistAxis2(float x, float y, float z) {
-        long settingsVa = va();
-        setTwistAxis2(settingsVa, x, y, z);
     }
     // *************************************************************************
     // native private methods

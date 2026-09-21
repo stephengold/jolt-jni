@@ -462,6 +462,22 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Alter the rotation limits.
      *
+     * @param minX the lower limit on the X axis
+     * @param minY the lower limit on the Y axis
+     * @param minZ the lower limit on the Z axis
+     * @param maxX the upper limit on the X axis
+     * @param maxY the upper limit on the Y axis
+     * @param maxZ the upper limit on the Z axis
+     */
+    public void setRotationLimits(float minX, float minY, float minZ,
+            float maxX, float maxY, float maxZ) {
+        long constraintVa = va();
+        setRotationLimits(constraintVa, minX, minY, minZ, maxX, maxY, maxZ);
+    }
+
+    /**
+     * Alter the rotation limits.
+     *
      * @param min the lower limit for each axis (not {@code null}, unaffected)
      * @param max the upper limit for each axis (not {@code null}, unaffected)
      */
@@ -474,38 +490,6 @@ public class SixDofConstraint extends TwoBodyConstraint {
         float maxY = max.getY();
         float maxZ = max.getZ();
         setRotationLimits(constraintVa, minX, minY, minZ, maxX, maxY, maxZ);
-    }
-
-    /**
-     * Alter the rotation limits.
-     *
-     * @param minX the lower limit on the X axis
-     * @param minY the lower limit on the Y axis
-     * @param minZ the lower limit on the Z axis
-     * @param maxX the upper limit on the X axis
-     * @param maxY the upper limit on the Y axis
-     * @param maxZ the upper limit on the Z axis
-     */
-    public void setRotationLimits(
-            float minX, float minY, float minZ,
-            float maxX, float maxY, float maxZ) {
-        long constraintVa = va();
-        setRotationLimits(constraintVa, minX, minY, minZ, maxX, maxY, maxZ);
-    }
-
-    /**
-     * Alter the target velocities of the linear motors. (native function:
-     * SetTargetVelocityCS)
-     *
-     * @param velocity the desired linear velocity (meters per second in body 1
-     * constraint space, not {@code null})
-     */
-    public void setTargetVelocityCs(Vec3Arg velocity) {
-        long constraintVa = va();
-        float vx = velocity.getX();
-        float vy = velocity.getY();
-        float vz = velocity.getZ();
-        setTargetVelocityCs(constraintVa, vx, vy, vz);
     }
 
     /**
@@ -525,18 +509,18 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target velocities of the angular motors. (native function:
-     * SetTargetAngularVelocityCS)
+     * Alter the target velocities of the linear motors. (native function:
+     * SetTargetVelocityCS)
      *
-     * @param omega the desired angular velocity (radians per second in body 2
+     * @param velocity the desired linear velocity (meters per second in body 1
      * constraint space, not {@code null})
      */
-    public void setTargetAngularVelocityCs(Vec3Arg omega) {
+    public void setTargetVelocityCs(Vec3Arg velocity) {
         long constraintVa = va();
-        float wx = omega.getX();
-        float wy = omega.getY();
-        float wz = omega.getZ();
-        setTargetAngularVelocityCs(constraintVa, wx, wy, wz);
+        float vx = velocity.getX();
+        float vy = velocity.getY();
+        float vz = velocity.getZ();
+        setTargetVelocityCs(constraintVa, vx, vy, vz);
     }
 
     /**
@@ -556,6 +540,34 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
+     * Alter the target velocities of the angular motors. (native function:
+     * SetTargetAngularVelocityCS)
+     *
+     * @param omega the desired angular velocity (radians per second in body 2
+     * constraint space, not {@code null})
+     */
+    public void setTargetAngularVelocityCs(Vec3Arg omega) {
+        long constraintVa = va();
+        float wx = omega.getX();
+        float wy = omega.getY();
+        float wz = omega.getZ();
+        setTargetAngularVelocityCs(constraintVa, wx, wy, wz);
+    }
+
+    /**
+     * Alter the target position of the linear motors. (native function:
+     * SetTargetPositionCS)
+     *
+     * @param x the desired X offset (meters in body 1 constraint space)
+     * @param y the desired Y offset (meters in body 1 constraint space)
+     * @param z the desired Z offset (meters in body 1 constraint space)
+     */
+    public void setTargetPositionCs(float x, float y, float z) {
+        long constraintVa = va();
+        setTargetPositionCs(constraintVa, x, y, z);
+    }
+
+    /**
      * Alter the target position of the linear motors. (native function:
      * SetTargetPositionCS)
      *
@@ -570,16 +582,17 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target position of the linear motors. (native function:
-     * SetTargetPositionCS)
+     * Alter the target orientation of the angular motors in body space. (native
+     * function: SetTargetOrientationBS)
      *
-     * @param x the desired X offset (meters in body 1 constraint space)
-     * @param y the desired Y offset (meters in body 1 constraint space)
-     * @param z the desired Z offset (meters in body 1 constraint space)
+     * @param qx the X component of the desired orientation
+     * @param qy the Y component of the desired orientation
+     * @param qz the Z component of the desired orientation
+     * @param qw the W component of the desired orientation
      */
-    public void setTargetPositionCs(float x, float y, float z) {
+    public void setTargetOrientationBs(float qx, float qy, float qz, float qw) {
         long constraintVa = va();
-        setTargetPositionCs(constraintVa, x, y, z);
+        setTargetOrientationBs(constraintVa, qx, qy, qz, qw);
     }
 
     /**
@@ -599,18 +612,18 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target orientation of the angular motors in body space. (native
-     * function: SetTargetOrientationBS)
+     * Alter the target orientation of the angular motors. (native function:
+     * SetTargetOrientationCS)
      *
      * @param qx the X component of the desired orientation
      * @param qy the Y component of the desired orientation
      * @param qz the Z component of the desired orientation
      * @param qw the W component of the desired orientation
      */
-    public void setTargetOrientationBs(
+    public void setTargetOrientationCs(
             float qx, float qy, float qz, float qw) {
         long constraintVa = va();
-        setTargetOrientationBs(constraintVa, qx, qy, qz, qw);
+        setTargetOrientationCs(constraintVa, qx, qy, qz, qw);
     }
 
     /**
@@ -629,18 +642,20 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target orientation of the angular motors. (native function:
-     * SetTargetOrientationCS)
+     * Alter the translation limits.
      *
-     * @param qx the X component of the desired orientation
-     * @param qy the Y component of the desired orientation
-     * @param qz the Z component of the desired orientation
-     * @param qw the W component of the desired orientation
+     * @param minX the lower limit on the X axis
+     * @param minY the lower limit on the Y axis
+     * @param minZ the lower limit on the Z axis
+     * @param maxX the upper limit on the X axis
+     * @param maxY the upper limit on the Y axis
+     * @param maxZ the upper limit on the Z axis
      */
-    public void setTargetOrientationCs(
-            float qx, float qy, float qz, float qw) {
+    public void setTranslationLimits(
+            float minX, float minY, float minZ,
+            float maxX, float maxY, float maxZ) {
         long constraintVa = va();
-        setTargetOrientationCs(constraintVa, qx, qy, qz, qw);
+        setTranslationLimits(constraintVa, minX, minY, minZ, maxX, maxY, maxZ);
     }
 
     /**
@@ -657,23 +672,6 @@ public class SixDofConstraint extends TwoBodyConstraint {
         float maxX = max.getX();
         float maxY = max.getY();
         float maxZ = max.getZ();
-        setTranslationLimits(constraintVa, minX, minY, minZ, maxX, maxY, maxZ);
-    }
-
-    /**
-     * Alter the translation limits.
-     *
-     * @param minX the lower limit on the X axis
-     * @param minY the lower limit on the Y axis
-     * @param minZ the lower limit on the Z axis
-     * @param maxX the upper limit on the X axis
-     * @param maxY the upper limit on the Y axis
-     * @param maxZ the upper limit on the Z axis
-     */
-    public void setTranslationLimits(
-            float minX, float minY, float minZ,
-            float maxX, float maxY, float maxZ) {
-        long constraintVa = va();
         setTranslationLimits(constraintVa, minX, minY, minZ, maxX, maxY, maxZ);
     }
     // *************************************************************************

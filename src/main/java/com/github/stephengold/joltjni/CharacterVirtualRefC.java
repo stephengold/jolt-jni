@@ -819,6 +819,21 @@ final public class CharacterVirtualRefC
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
+     * @param nx the X component of the surface normal to test
+     * @param ny the Y component of the surface normal to test
+     * @param nz the Z component of the surface normal to test
+     * @return {@code true} if too steep, otherwise {@code false}
+     */
+    @Override
+    public boolean isSlopeTooSteep(float nx, float ny, float nz) {
+        long characterVa = targetVa();
+        return CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
+    }
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
      * @param normal the surface normal to test (not {@code null}, unaffected)
      * @return {@code true} if too steep, otherwise {@code false}
      */
@@ -831,21 +846,6 @@ final public class CharacterVirtualRefC
         boolean result = CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
 
         return result;
-    }
-
-    /**
-     * Test whether the specified normal direction is too steep. The character
-     * is unaffected.
-     *
-     * @param nx the X component of the surface normal to test
-     * @param ny the Y component of the surface normal to test
-     * @param nz the Z component of the surface normal to test
-     * @return {@code true} if too steep, otherwise {@code false}
-     */
-    @Override
-    public boolean isSlopeTooSteep(float nx, float ny, float nz) {
-        long characterVa = targetVa();
-        return CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
     }
 
     /**

@@ -124,6 +124,18 @@ final public class AaBoxCast extends JoltPhysicsObject {
     /**
      * Alter the length and direction of the cast. (native member: mDirection)
      *
+     * @param x the desired X component of the direction and length
+     * @param y the desired Y component of the direction and length
+     * @param z the desired Z component of the direction and length
+     */
+    public void setDirection(float x, float y, float z) {
+        long boxCastVa = va();
+        setDirection(boxCastVa, x, y, z);
+    }
+
+    /**
+     * Alter the length and direction of the cast. (native member: mDirection)
+     *
      * @param offset the desired direction and length of the cast.
      */
     public void setDirection(Vec3Arg offset) {
@@ -132,18 +144,6 @@ final public class AaBoxCast extends JoltPhysicsObject {
         float dy = offset.getY();
         float dz = offset.getZ();
         setDirection(boxCastVa, dx, dy, dz);
-    }
-
-    /**
-     * Alter the length and direction of the cast. (native member: mDirection)
-     *
-     * @param x the desired X component of the direction and length
-     * @param y the desired Y component of the direction and length
-     * @param z the desired Z component of the direction and length
-     */
-    public void setDirection(float x, float y, float z) {
-        long boxCastVa = va();
-        setDirection(boxCastVa, x, y, z);
     }
     // *************************************************************************
     // native private methods

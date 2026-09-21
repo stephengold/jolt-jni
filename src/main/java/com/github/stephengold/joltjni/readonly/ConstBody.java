@@ -342,16 +342,6 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * location. The body is unaffected.
      *
      * @param subShapeId the ID of the sub-shape to use
-     * @param location the location to use (not {@code null}, unaffected)
-     * @return a new direction vector
-     */
-    Vec3 getWorldSpaceSurfaceNormal(int subShapeId, RVec3Arg location);
-
-    /**
-     * Copy the surface normal of a particular subshape at the specified
-     * location. The body is unaffected.
-     *
-     * @param subShapeId the ID of the sub-shape to use
      * @param xx the X coordinate of the location (in system coordinates)
      * @param yy the Y coordinate of the location (in system coordinates)
      * @param zz the Z coordinate of the location (in system coordinates)
@@ -366,18 +356,6 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * location. The body is unaffected.
      *
      * @param subShapeId the ID of the sub-shape to use
-     * @param location the location to use (not {@code null}, unaffected)
-     * @param storeResult storage for the normal (in system coordinates, not
-     * {@code null}, modified)
-     */
-    void getWorldSpaceSurfaceNormal(
-            int subShapeId, RVec3Arg location, Vec3 storeResult);
-
-    /**
-     * Copy the surface normal of a particular subshape at the specified
-     * location. The body is unaffected.
-     *
-     * @param subShapeId the ID of the sub-shape to use
      * @param xx the X coordinate of the location (in system coordinates)
      * @param yy the Y coordinate of the location (in system coordinates)
      * @param zz the Z coordinate of the location (in system coordinates)
@@ -386,6 +364,28 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      */
     void getWorldSpaceSurfaceNormal(
             int subShapeId, double xx, double yy, double zz, Vec3 storeResult);
+
+    /**
+     * Copy the surface normal of a particular subshape at the specified
+     * location. The body is unaffected.
+     *
+     * @param subShapeId the ID of the sub-shape to use
+     * @param location the location to use (not {@code null}, unaffected)
+     * @return a new direction vector
+     */
+    Vec3 getWorldSpaceSurfaceNormal(int subShapeId, RVec3Arg location);
+
+    /**
+     * Copy the surface normal of a particular subshape at the specified
+     * location. The body is unaffected.
+     *
+     * @param subShapeId the ID of the sub-shape to use
+     * @param location the location to use (not {@code null}, unaffected)
+     * @param storeResult storage for the normal (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getWorldSpaceSurfaceNormal(
+            int subShapeId, RVec3Arg location, Vec3 storeResult);
 
     /**
      * Copy the world transform. The body is unaffected.

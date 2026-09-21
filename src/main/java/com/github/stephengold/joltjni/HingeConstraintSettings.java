@@ -330,6 +330,18 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the hinge axis of body 1. (native attribute: mHingeAxis1)
      *
+     * @param x the desired X component of the axis direction (default=0)
+     * @param y the desired Y component of the axis direction (default=1)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setHingeAxis1(float x, float y, float z) {
+        long settingsVa = va();
+        setHingeAxis1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the hinge axis of body 1. (native attribute: mHingeAxis1)
+     *
      * @param direction the desired axis direction (not {@code null},
      * unaffected, default=(0,1,0))
      * @return the argument, for chaining
@@ -345,15 +357,15 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the hinge axis of body 1. (native attribute: mHingeAxis1)
+     * Alter the hinge axis of body 2. (native attribute: mHingeAxis2)
      *
      * @param x the desired X component of the axis direction (default=0)
      * @param y the desired Y component of the axis direction (default=1)
      * @param z the desired Z component of the axis direction (default=0)
      */
-    public void setHingeAxis1(float x, float y, float z) {
+    public void setHingeAxis2(float x, float y, float z) {
         long settingsVa = va();
-        setHingeAxis1(settingsVa, x, y, z);
+        setHingeAxis2(settingsVa, x, y, z);
     }
 
     /**
@@ -371,18 +383,6 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
         setHingeAxis2(settingsVa, x, y, z);
 
         return direction;
-    }
-
-    /**
-     * Alter the hinge axis of body 2. (native attribute: mHingeAxis2)
-     *
-     * @param x the desired X component of the axis direction (default=0)
-     * @param y the desired Y component of the axis direction (default=1)
-     * @param z the desired Z component of the axis direction (default=0)
-     */
-    public void setHingeAxis2(float x, float y, float z) {
-        long settingsVa = va();
-        setHingeAxis2(settingsVa, x, y, z);
     }
 
     /**
@@ -430,6 +430,18 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
      *
+     * @param x the desired X component of the axis direction (default=0)
+     * @param y the desired Y component of the axis direction (default=1)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setNormalAxis1(float x, float y, float z) {
+        long settingsVa = va();
+        setNormalAxis1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
+     *
      * @param direction the desired axis direction (not {@code null},
      * unaffected, default=(0,1,0))
      * @return the argument, for chaining
@@ -445,15 +457,15 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
+     * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
      *
      * @param x the desired X component of the axis direction (default=0)
      * @param y the desired Y component of the axis direction (default=1)
      * @param z the desired Z component of the axis direction (default=0)
      */
-    public void setNormalAxis1(float x, float y, float z) {
+    public void setNormalAxis2(float x, float y, float z) {
         long settingsVa = va();
-        setNormalAxis1(settingsVa, x, y, z);
+        setNormalAxis2(settingsVa, x, y, z);
     }
 
     /**
@@ -474,15 +486,15 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
-     * @param x the desired X component of the axis direction (default=0)
-     * @param y the desired Y component of the axis direction (default=1)
-     * @param z the desired Z component of the axis direction (default=0)
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
      */
-    public void setNormalAxis2(float x, float y, float z) {
+    public void setPoint1(double x, double y, double z) {
         long settingsVa = va();
-        setNormalAxis2(settingsVa, x, y, z);
+        setPoint1(settingsVa, x, y, z);
     }
 
     /**
@@ -503,15 +515,15 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native attribute: mPoint1)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param x the desired X coordinate (default=0)
      * @param y the desired Y coordinate (default=0)
      * @param z the desired Z coordinate (default=0)
      */
-    public void setPoint1(double x, double y, double z) {
+    public void setPoint2(double x, double y, double z) {
         long settingsVa = va();
-        setPoint1(settingsVa, x, y, z);
+        setPoint2(settingsVa, x, y, z);
     }
 
     /**
@@ -529,18 +541,6 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
         setPoint2(settingsVa, x, y, z);
 
         return location;
-    }
-
-    /**
-     * Alter the constraint location for body 2. (native attribute: mPoint2)
-     *
-     * @param x the desired X coordinate (default=0)
-     * @param y the desired Y coordinate (default=0)
-     * @param z the desired Z coordinate (default=0)
-     */
-    public void setPoint2(double x, double y, double z) {
-        long settingsVa = va();
-        setPoint2(settingsVa, x, y, z);
     }
 
     /**

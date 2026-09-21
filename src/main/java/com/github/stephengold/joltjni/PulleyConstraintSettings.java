@@ -248,6 +248,19 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the location at which the constraint will attach to body 1. (native
      * attribute: mBodyPoint1)
      *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setBodyPoint1(double x, double y, double z) {
+        long settingsVa = va();
+        setBodyPoint1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the location at which the constraint will attach to body 1. (native
+     * attribute: mBodyPoint1)
+     *
      * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      */
@@ -260,16 +273,16 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the location at which the constraint will attach to body 1. (native
-     * attribute: mBodyPoint1)
+     * Alter the location at which the constraint will attach to body 2. (native
+     * attribute: mBodyPoint2)
      *
      * @param x the desired X coordinate (default=0)
      * @param y the desired Y coordinate (default=0)
      * @param z the desired Z coordinate (default=0)
      */
-    public void setBodyPoint1(double x, double y, double z) {
+    public void setBodyPoint2(double x, double y, double z) {
         long settingsVa = va();
-        setBodyPoint1(settingsVa, x, y, z);
+        setBodyPoint2(settingsVa, x, y, z);
     }
 
     /**
@@ -288,16 +301,16 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the location at which the constraint will attach to body 2. (native
-     * attribute: mBodyPoint2)
+     * Alter the location to which body 1 is connected. (native attribute:
+     * mFixedPoint1)
      *
      * @param x the desired X coordinate (default=0)
      * @param y the desired Y coordinate (default=0)
      * @param z the desired Z coordinate (default=0)
      */
-    public void setBodyPoint2(double x, double y, double z) {
+    public void setFixedPoint1(double x, double y, double z) {
         long settingsVa = va();
-        setBodyPoint2(settingsVa, x, y, z);
+        setFixedPoint1(settingsVa, x, y, z);
     }
 
     /**
@@ -316,16 +329,16 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the location to which body 1 is connected. (native attribute:
-     * mFixedPoint1)
+     * Alter the location to which body 2 is connected. (native attribute:
+     * mFixedPoint2)
      *
      * @param x the desired X coordinate (default=0)
      * @param y the desired Y coordinate (default=0)
      * @param z the desired Z coordinate (default=0)
      */
-    public void setFixedPoint1(double x, double y, double z) {
+    public void setFixedPoint2(double x, double y, double z) {
         long settingsVa = va();
-        setFixedPoint1(settingsVa, x, y, z);
+        setFixedPoint2(settingsVa, x, y, z);
     }
 
     /**
@@ -341,19 +354,6 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
         double locY = location.yy();
         double locZ = location.zz();
         setFixedPoint2(settingsVa, locX, locY, locZ);
-    }
-
-    /**
-     * Alter the location to which body 2 is connected. (native attribute:
-     * mFixedPoint2)
-     *
-     * @param x the desired X coordinate (default=0)
-     * @param y the desired Y coordinate (default=0)
-     * @param z the desired Z coordinate (default=0)
-     */
-    public void setFixedPoint2(double x, double y, double z) {
-        long settingsVa = va();
-        setFixedPoint2(settingsVa, x, y, z);
     }
 
     /**

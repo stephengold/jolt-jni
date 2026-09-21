@@ -109,23 +109,6 @@ abstract public class WheelSettings
     /**
      * Relocate the attachment point. (native attribute: mPosition)
      *
-     * @param position the location of the attachment point (in the body's local
-     * coordinates, not {@code null}, unaffected, default=(0,0,0))
-     * @return the modified settings, for chaining
-     */
-    public WheelSettings setPosition(Vec3Arg position) {
-        long settingsVa = va();
-        float x = position.getX();
-        float y = position.getY();
-        float z = position.getZ();
-        setPosition(settingsVa, x, y, z);
-
-        return this;
-    }
-
-    /**
-     * Relocate the attachment point. (native attribute: mPosition)
-     *
      * @param x the desired X coordinate of the attachment point (in the body's
      * local coordinates, default=0)
      * @param y the desired Y coordinate of the attachment point (in the body's
@@ -142,6 +125,23 @@ abstract public class WheelSettings
     }
 
     /**
+     * Relocate the attachment point. (native attribute: mPosition)
+     *
+     * @param position the location of the attachment point (in the body's local
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
+     * @return the modified settings, for chaining
+     */
+    public WheelSettings setPosition(Vec3Arg position) {
+        long settingsVa = va();
+        float x = position.getX();
+        float y = position.getY();
+        float z = position.getZ();
+        setPosition(settingsVa, x, y, z);
+
+        return this;
+    }
+
+    /**
      * Alter the radius of the wheel. (native attribute: mRadius)
      *
      * @param radius the desired radius (in meters, default=0.3)
@@ -150,6 +150,22 @@ abstract public class WheelSettings
     public WheelSettings setRadius(float radius) {
         long settingsVa = va();
         setRadius(settingsVa, radius);
+
+        return this;
+    }
+
+    /**
+     * Alter the steering axis (upward direction). (native attribute:
+     * mSteeringAxis)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=1)
+     * @param dz the desired Z component of the direction (default=0)
+     * @return the modified settings, for chaining
+     */
+    public WheelSettings setSteeringAxis(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setSteeringAxis(settingsVa, dx, dy, dz);
 
         return this;
     }
@@ -173,17 +189,17 @@ abstract public class WheelSettings
     }
 
     /**
-     * Alter the steering axis (upward direction). (native attribute:
-     * mSteeringAxis)
+     * Alter the downward direction of the suspension. (native attribute:
+     * mSuspensionDirection)
      *
      * @param dx the desired X component of the direction (default=0)
-     * @param dy the desired Y component of the direction (default=1)
+     * @param dy the desired Y component of the direction (default=-1)
      * @param dz the desired Z component of the direction (default=0)
      * @return the modified settings, for chaining
      */
-    public WheelSettings setSteeringAxis(float dx, float dy, float dz) {
+    public WheelSettings setSuspensionDirection(float dx, float dy, float dz) {
         long settingsVa = va();
-        setSteeringAxis(settingsVa, dx, dy, dz);
+        setSuspensionDirection(settingsVa, dx, dy, dz);
 
         return this;
     }
@@ -207,17 +223,20 @@ abstract public class WheelSettings
     }
 
     /**
-     * Alter the downward direction of the suspension. (native attribute:
-     * mSuspensionDirection)
+     * Alter the location where tire forces will be applied if the force-point
+     * option is enabled. (native attribute: mSuspensionForcePoint)
      *
-     * @param dx the desired X component of the direction (default=0)
-     * @param dy the desired Y component of the direction (default=-1)
-     * @param dz the desired Z component of the direction (default=0)
+     * @param x the desired X coordinate of the location (in the body
+     * coordinates, default=0)
+     * @param y the desired Y coordinate of the location (in the body
+     * coordinates, default=0)
+     * @param z the desired Z coordinate of the location (in the body
+     * coordinates, default=0)
      * @return the modified settings, for chaining
      */
-    public WheelSettings setSuspensionDirection(float dx, float dy, float dz) {
+    public WheelSettings setSuspensionForcePoint(float x, float y, float z) {
         long settingsVa = va();
-        setSuspensionDirection(settingsVa, dx, dy, dz);
+        setSuspensionForcePoint(settingsVa, x, y, z);
 
         return this;
     }
@@ -235,25 +254,6 @@ abstract public class WheelSettings
         float x = location.getX();
         float y = location.getY();
         float z = location.getZ();
-        setSuspensionForcePoint(settingsVa, x, y, z);
-
-        return this;
-    }
-
-    /**
-     * Alter the location where tire forces will be applied if the force-point
-     * option is enabled. (native attribute: mSuspensionForcePoint)
-     *
-     * @param x the desired X coordinate of the location (in the body
-     * coordinates, default=0)
-     * @param y the desired Y coordinate of the location (in the body
-     * coordinates, default=0)
-     * @param z the desired Z coordinate of the location (in the body
-     * coordinates, default=0)
-     * @return the modified settings, for chaining
-     */
-    public WheelSettings setSuspensionForcePoint(float x, float y, float z) {
-        long settingsVa = va();
         setSuspensionForcePoint(settingsVa, x, y, z);
 
         return this;
@@ -305,6 +305,22 @@ abstract public class WheelSettings
      * Alter the forward direction when steering is neutral. (native attribute:
      * mWheelForward)
      *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=0)
+     * @param dz the desired Z component of the direction (default=1)
+     * @return the modified settings, for chaining
+     */
+    public WheelSettings setWheelForward(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setWheelForward(settingsVa, dx, dy, dz);
+
+        return this;
+    }
+
+    /**
+     * Alter the forward direction when steering is neutral. (native attribute:
+     * mWheelForward)
+     *
      * @param direction the desired direction (not {@code null}, unaffected,
      * default=(0,0,1))
      * @return the modified settings, for chaining
@@ -320,17 +336,17 @@ abstract public class WheelSettings
     }
 
     /**
-     * Alter the forward direction when steering is neutral. (native attribute:
-     * mWheelForward)
+     * Alter the "up" direction when steering is neutral. (native attribute:
+     * mWheelUp)
      *
      * @param dx the desired X component of the direction (default=0)
-     * @param dy the desired Y component of the direction (default=0)
-     * @param dz the desired Z component of the direction (default=1)
+     * @param dy the desired Y component of the direction (default=1)
+     * @param dz the desired Z component of the direction (default=0)
      * @return the modified settings, for chaining
      */
-    public WheelSettings setWheelForward(float dx, float dy, float dz) {
+    public WheelSettings setWheelUp(float dx, float dy, float dz) {
         long settingsVa = va();
-        setWheelForward(settingsVa, dx, dy, dz);
+        setWheelUp(settingsVa, dx, dy, dz);
 
         return this;
     }
@@ -348,22 +364,6 @@ abstract public class WheelSettings
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
-        setWheelUp(settingsVa, dx, dy, dz);
-
-        return this;
-    }
-
-    /**
-     * Alter the "up" direction when steering is neutral. (native attribute:
-     * mWheelUp)
-     *
-     * @param dx the desired X component of the direction (default=0)
-     * @param dy the desired Y component of the direction (default=1)
-     * @param dz the desired Z component of the direction (default=0)
-     * @return the modified settings, for chaining
-     */
-    public WheelSettings setWheelUp(float dx, float dy, float dz) {
-        long settingsVa = va();
         setWheelUp(settingsVa, dx, dy, dz);
 
         return this;

@@ -171,16 +171,16 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     /**
      * Copy the supporting volume. The character is unaffected.
      *
-     * @param storeResult storage for the plane (not {@code null}, modified)
+     * @return a new object
      */
-    void getSupportingVolume(Plane storeResult);
+    Plane getSupportingVolume();
 
     /**
      * Copy the supporting volume. The character is unaffected.
      *
-     * @return a new object
+     * @param storeResult storage for the plane (not {@code null}, modified)
      */
-    Plane getSupportingVolume();
+    void getSupportingVolume(Plane storeResult);
 
     /**
      * Copy the character's "up" direction. The character is unaffected.
@@ -200,15 +200,6 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
-     * @param normal the surface normal to test (not {@code null}, unaffected)
-     * @return {@code true} if too steep, otherwise {@code false}
-     */
-    boolean isSlopeTooSteep(Vec3Arg normal);
-
-    /**
-     * Test whether the specified normal direction is too steep. The character
-     * is unaffected.
-     *
      * @param nx the X component of the surface normal to test (in system
      * coordinates)
      * @param ny the Y component of the surface normal to test (in system
@@ -218,6 +209,15 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * @return {@code true} if too steep, otherwise {@code false}
      */
     boolean isSlopeTooSteep(float nx, float ny, float nz);
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
+     * @param normal the surface normal to test (not {@code null}, unaffected)
+     * @return {@code true} if too steep, otherwise {@code false}
+     */
+    boolean isSlopeTooSteep(Vec3Arg normal);
 
     /**
      * Test whether the character is supported. The character is unaffected.

@@ -393,6 +393,18 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the plane axis of body 1. (native attribute: mPlaneAxis1)
      *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=1)
+     * @param dz the desired Z component of the direction (default=0)
+     */
+    public void setPlaneAxis1(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setPlaneAxis1(settingsVa, dx, dy, dz);
+    }
+
+    /**
+     * Alter the plane axis of body 1. (native attribute: mPlaneAxis1)
+     *
      * @param axisDirection the desired direction (not {@code null}, unaffected,
      * default=(0,1,0))
      * @return the argument, for chaining
@@ -408,15 +420,15 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the plane axis of body 1. (native attribute: mPlaneAxis1)
+     * Alter the plane axis of body 2. (native attribute: mPlaneAxis2)
      *
      * @param dx the desired X component of the direction (default=0)
      * @param dy the desired Y component of the direction (default=1)
      * @param dz the desired Z component of the direction (default=0)
      */
-    public void setPlaneAxis1(float dx, float dy, float dz) {
+    public void setPlaneAxis2(float dx, float dy, float dz) {
         long settingsVa = va();
-        setPlaneAxis1(settingsVa, dx, dy, dz);
+        setPlaneAxis2(settingsVa, dx, dy, dz);
     }
 
     /**
@@ -437,18 +449,6 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the plane axis of body 2. (native attribute: mPlaneAxis2)
-     *
-     * @param dx the desired X component of the direction (default=0)
-     * @param dy the desired Y component of the direction (default=1)
-     * @param dz the desired Z component of the direction (default=0)
-     */
-    public void setPlaneAxis2(float dx, float dy, float dz) {
-        long settingsVa = va();
-        setPlaneAxis2(settingsVa, dx, dy, dz);
-    }
-
-    /**
      * Alter the half-angle of the plane cone. (native attribute:
      * mPlaneHalfConeAngle)
      *
@@ -457,6 +457,18 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     public void setPlaneHalfConeAngle(float angle) {
         long settingsVa = va();
         setPlaneHalfConeAngle(settingsVa, angle);
+    }
+
+    /**
+     * Alter the initial location of the body 1. (native attribute: mPosition1)
+     *
+     * @param locX the desired X coordinate (default=0)
+     * @param locY the desired Y coordinate (default=0)
+     * @param locZ the desired Z coordinate (default=0)
+     */
+    public void setPosition1(double locX, double locY, double locZ) {
+        long settingsVa = va();
+        setPosition1(settingsVa, locX, locY, locZ);
     }
 
     /**
@@ -477,15 +489,15 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the initial location of the body 1. (native attribute: mPosition1)
+     * Alter the initial location of body 2. (native attribute: mPosition2)
      *
      * @param locX the desired X coordinate (default=0)
      * @param locY the desired Y coordinate (default=0)
      * @param locZ the desired Z coordinate (default=0)
      */
-    public void setPosition1(double locX, double locY, double locZ) {
+    public void setPosition2(double locX, double locY, double locZ) {
         long settingsVa = va();
-        setPosition1(settingsVa, locX, locY, locZ);
+        setPosition2(settingsVa, locX, locY, locZ);
     }
 
     /**
@@ -503,18 +515,6 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         setPosition2(settingsVa, locX, locY, locZ);
 
         return location;
-    }
-
-    /**
-     * Alter the initial location of body 2. (native attribute: mPosition2)
-     *
-     * @param locX the desired X coordinate (default=0)
-     * @param locY the desired Y coordinate (default=0)
-     * @param locZ the desired Z coordinate (default=0)
-     */
-    public void setPosition2(double locX, double locY, double locZ) {
-        long settingsVa = va();
-        setPosition2(settingsVa, locX, locY, locZ);
     }
 
     /**
@@ -558,6 +558,18 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the twist axis of the body 1. (native attribute: mTwistAxis1)
      *
+     * @param dx the desired X component of the direction (default=1)
+     * @param dy the desired Y component of the direction (default=0)
+     * @param dz the desired Z component of the direction (default=0)
+     */
+    public void setTwistAxis1(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setTwistAxis1(settingsVa, dx, dy, dz);
+    }
+
+    /**
+     * Alter the twist axis of the body 1. (native attribute: mTwistAxis1)
+     *
      * @param axisDirection the desired direction (not {@code null}, unaffected,
      * default=(1,0,0))
      * @return the argument, for chaining
@@ -573,15 +585,15 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the twist axis of the body 1. (native attribute: mTwistAxis1)
+     * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
      *
      * @param dx the desired X component of the direction (default=1)
      * @param dy the desired Y component of the direction (default=0)
      * @param dz the desired Z component of the direction (default=0)
      */
-    public void setTwistAxis1(float dx, float dy, float dz) {
+    public void setTwistAxis2(float dx, float dy, float dz) {
         long settingsVa = va();
-        setTwistAxis1(settingsVa, dx, dy, dz);
+        setTwistAxis2(settingsVa, dx, dy, dz);
     }
 
     /**
@@ -599,18 +611,6 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         setTwistAxis2(settingsVa, dx, dy, dz);
 
         return axisDirection;
-    }
-
-    /**
-     * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
-     *
-     * @param dx the desired X component of the direction (default=1)
-     * @param dy the desired Y component of the direction (default=0)
-     * @param dz the desired Z component of the direction (default=0)
-     */
-    public void setTwistAxis2(float dx, float dy, float dz) {
-        long settingsVa = va();
-        setTwistAxis2(settingsVa, dx, dy, dz);
     }
 
     /**

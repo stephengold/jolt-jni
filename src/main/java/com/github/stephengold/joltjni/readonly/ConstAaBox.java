@@ -44,15 +44,6 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Test whether the box contains the specified point. The box is unaffected.
      *
-     * @param point the point to test (not {@code null}, unaffected)
-     *
-     * @return {@code true} if contained, otherwise {@code false}
-     */
-    boolean contains(Vec3Arg point);
-
-    /**
-     * Test whether the box contains the specified point. The box is unaffected.
-     *
      * @param x the X coordinate of the point to test
      * @param y the Y coordinate of the point to test
      * @param z the Z coordinate of the point to test
@@ -62,20 +53,20 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     boolean contains(float x, float y, float z);
 
     /**
+     * Test whether the box contains the specified point. The box is unaffected.
+     *
+     * @param point the point to test (not {@code null}, unaffected)
+     *
+     * @return {@code true} if contained, otherwise {@code false}
+     */
+    boolean contains(Vec3Arg point);
+
+    /**
      * Locate the center of the box. The box is unaffected.
      *
      * @return a new location vector
      */
     Vec3 getCenter();
-
-    /**
-     * Locate the closest point on or in the box for the specified location. The
-     * box is unaffected.
-     *
-     * @param location the starting location (not {@code null}, unaffected)
-     * @return a new vector
-     */
-    Vec3 getClosestPoint(Vec3Arg location);
 
     /**
      * Locate the closest point on or in the box for the specified location. The
@@ -100,6 +91,15 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * modified)
      */
     void getClosestPoint(float x, float y, float z, Vec3 storeResult);
+
+    /**
+     * Locate the closest point on or in the box for the specified location. The
+     * box is unaffected.
+     *
+     * @param location the starting location (not {@code null}, unaffected)
+     * @return a new vector
+     */
+    Vec3 getClosestPoint(Vec3Arg location);
 
     /**
      * Copy the (half) extent of the box. The box is unaffected.
@@ -164,15 +164,6 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Get the squared distance between the box and the specified point.
      *
-     * @param point the point to measure from (not {@code null}, unaffected)
-     *
-     * @return the distance, or zero if {@code point} lies inside the box
-     */
-    float getSqDistanceTo(Vec3Arg point);
-
-    /**
-     * Get the squared distance between the box and the specified point.
-     *
      * @param x the X coordinate of the point to measure from
      * @param y the Y coordinate of the point to measure from
      * @param z the Z coordinate of the point to measure from
@@ -182,13 +173,13 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     float getSqDistanceTo(float x, float y, float z);
 
     /**
-     * Calculate the support vector for this convex shape.
+     * Get the squared distance between the box and the specified point.
      *
-     * @param direction the direction vector
+     * @param point the point to measure from (not {@code null}, unaffected)
      *
-     * @return the support vector
+     * @return the distance, or zero if {@code point} lies inside the box
      */
-    Vec3 getSupport(Vec3Arg direction);
+    float getSqDistanceTo(Vec3Arg point);
 
     /**
      * Calculate the support vector for this convex shape.
@@ -205,16 +196,6 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * Calculate the support vector for this convex shape. The shape is
      * unaffected.
      *
-     * @param direction the direction vector (not {@code null}, unaffected)
-     * @param storeResult storage for the support vector (not {@code null},
-     * modified)
-     */
-    void getSupport(Vec3Arg direction, Vec3 storeResult);
-
-    /**
-     * Calculate the support vector for this convex shape. The shape is
-     * unaffected.
-     *
      * @param x the X component of the direction vector
      * @param y the Y component of the direction vector
      * @param z the Z component of the direction vector
@@ -222,6 +203,25 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * modified)
      */
     void getSupport(float x, float y, float z, Vec3 storeResult);
+
+    /**
+     * Calculate the support vector for this convex shape.
+     *
+     * @param direction the direction vector
+     *
+     * @return the support vector
+     */
+    Vec3 getSupport(Vec3Arg direction);
+
+    /**
+     * Calculate the support vector for this convex shape. The shape is
+     * unaffected.
+     *
+     * @param direction the direction vector (not {@code null}, unaffected)
+     * @param storeResult storage for the support vector (not {@code null},
+     * modified)
+     */
+    void getSupport(Vec3Arg direction, Vec3 storeResult);
 
     /**
      * Get surface area of bounding box.
@@ -288,20 +288,20 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Return a scaled copy of the box. The current box is unaffected.
      *
-     * @param factors the scale factors to apply (not {@code null}, unaffected)
-     * @return a new object
-     */
-    AaBox scaled(Vec3Arg factors);
-
-    /**
-     * Return a scaled copy of the box. The current box is unaffected.
-     *
      * @param x the scale factor to apply to the local X axis
      * @param y the scale factor to apply to the local Y axis
      * @param z the scale factor to apply to the local Z axis
      * @return a new object
      */
     AaBox scaled(float x, float y, float z);
+
+    /**
+     * Return a scaled copy of the box. The current box is unaffected.
+     *
+     * @param factors the scale factors to apply (not {@code null}, unaffected)
+     * @return a new object
+     */
+    AaBox scaled(Vec3Arg factors);
 
     /**
      * Return a transformed copy of the box. The current box is unaffected.

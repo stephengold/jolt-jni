@@ -214,6 +214,18 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the X axis for body 1. (native attribute: mAxisX1)
      *
+     * @param x the X component of the desired direction (default=1)
+     * @param y the Y component of the desired direction (default=0)
+     * @param z the Z component of the desired direction (default=0)
+     */
+    public void setAxisX1(float x, float y, float z) {
+        long settingsVa = va();
+        setAxisX1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the X axis for body 1. (native attribute: mAxisX1)
+     *
      * @param axis the desired direction vector (default=(1,0,0))
      */
     public void setAxisX1(Vec3Arg axis) {
@@ -225,15 +237,15 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the X axis for body 1. (native attribute: mAxisX1)
+     * Alter the X axis for body 2. (native attribute: mAxisX2)
      *
      * @param x the X component of the desired direction (default=1)
      * @param y the Y component of the desired direction (default=0)
      * @param z the Z component of the desired direction (default=0)
      */
-    public void setAxisX1(float x, float y, float z) {
+    public void setAxisX2(float x, float y, float z) {
         long settingsVa = va();
-        setAxisX1(settingsVa, x, y, z);
+        setAxisX2(settingsVa, x, y, z);
     }
 
     /**
@@ -250,15 +262,15 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the X axis for body 2. (native attribute: mAxisX2)
+     * Alter the Y axis for body 1. (native attribute: mAxisY1)
      *
-     * @param x the X component of the desired direction (default=1)
-     * @param y the Y component of the desired direction (default=0)
+     * @param x the X component of the desired direction (default=0)
+     * @param y the Y component of the desired direction (default=1)
      * @param z the Z component of the desired direction (default=0)
      */
-    public void setAxisX2(float x, float y, float z) {
+    public void setAxisY1(float x, float y, float z) {
         long settingsVa = va();
-        setAxisX2(settingsVa, x, y, z);
+        setAxisY1(settingsVa, x, y, z);
     }
 
     /**
@@ -275,15 +287,15 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the Y axis for body 1. (native attribute: mAxisY1)
+     * Alter the Y axis for body 2. (native attribute: mAxisY2)
      *
      * @param x the X component of the desired direction (default=0)
      * @param y the Y component of the desired direction (default=1)
      * @param z the Z component of the desired direction (default=0)
      */
-    public void setAxisY1(float x, float y, float z) {
+    public void setAxisY2(float x, float y, float z) {
         long settingsVa = va();
-        setAxisY1(settingsVa, x, y, z);
+        setAxisY2(settingsVa, x, y, z);
     }
 
     /**
@@ -300,15 +312,15 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the Y axis for body 2. (native attribute: mAxisY2)
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
-     * @param x the X component of the desired direction (default=0)
-     * @param y the Y component of the desired direction (default=1)
-     * @param z the Z component of the desired direction (default=0)
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
      */
-    public void setAxisY2(float x, float y, float z) {
+    public void setPoint1(double x, double y, double z) {
         long settingsVa = va();
-        setAxisY2(settingsVa, x, y, z);
+        setPoint1(settingsVa, x, y, z);
     }
 
     /**
@@ -329,15 +341,15 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native attribute: mPoint1)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param x the desired X coordinate (default=0)
      * @param y the desired Y coordinate (default=0)
      * @param z the desired Z coordinate (default=0)
      */
-    public void setPoint1(double x, double y, double z) {
+    public void setPoint2(double x, double y, double z) {
         long settingsVa = va();
-        setPoint1(settingsVa, x, y, z);
+        setPoint2(settingsVa, x, y, z);
     }
 
     /**
@@ -355,18 +367,6 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
         setPoint2(settingsVa, x, y, z);
 
         return location;
-    }
-
-    /**
-     * Alter the constraint location for body 2. (native attribute: mPoint2)
-     *
-     * @param x the desired X coordinate (default=0)
-     * @param y the desired Y coordinate (default=0)
-     * @param z the desired Z coordinate (default=0)
-     */
-    public void setPoint2(double x, double y, double z) {
-        long settingsVa = va();
-        setPoint2(settingsVa, x, y, z);
     }
 
     /**

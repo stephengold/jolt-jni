@@ -53,6 +53,18 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     /**
      * Alter the center-of-mass location. (native function: SetPositionCOM)
      *
+     * @param x the desired X coordinate of the center of mass
+     * @param y the desired Y coordinate of the center of mass
+     * @param z the desired Z coordinate of the center of mass
+     */
+    public void setPositionCom(float x, float y, float z) {
+        long subshapeVa = va();
+        setPositionCom(subshapeVa, x, y, z);
+    }
+
+    /**
+     * Alter the center-of-mass location. (native function: SetPositionCOM)
+     *
      * @param location the desired location (not {@code null}, unaffected)
      */
     public void setPositionCom(Vec3Arg location) {
@@ -64,15 +76,16 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     }
 
     /**
-     * Alter the center-of-mass location. (native function: SetPositionCOM)
+     * Alter the rotation.
      *
-     * @param x the desired X coordinate of the center of mass
-     * @param y the desired Y coordinate of the center of mass
-     * @param z the desired Z coordinate of the center of mass
+     * @param qx the X component of the desired rotation
+     * @param qy the Y component of the desired rotation
+     * @param qz the Z component of the desired rotation
+     * @param qw the W component of the desired rotation
      */
-    public void setPositionCom(float x, float y, float z) {
+    public void setRotation(float qx, float qy, float qz, float qw) {
         long subshapeVa = va();
-        setPositionCom(subshapeVa, x, y, z);
+        setRotation(subshapeVa, qx, qy, qz, qw);
     }
 
     /**
@@ -86,19 +99,6 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
         float qx = rotation.getX();
         float qy = rotation.getY();
         float qz = rotation.getZ();
-        setRotation(subshapeVa, qx, qy, qz, qw);
-    }
-
-    /**
-     * Alter the rotation.
-     *
-     * @param qx the X component of the desired rotation
-     * @param qy the Y component of the desired rotation
-     * @param qz the Z component of the desired rotation
-     * @param qw the W component of the desired rotation
-     */
-    public void setRotation(float qx, float qy, float qz, float qw) {
-        long subshapeVa = va();
         setRotation(subshapeVa, qx, qy, qz, qw);
     }
 

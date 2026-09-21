@@ -52,15 +52,6 @@ public interface ConstCharacter extends ConstCharacterBase {
     RVec3 getCenterOfMassPosition();
 
     /**
-     * Copy the location of the rigid body's center of mass using the locking
-     * body interface. The character is unaffected.
-     *
-     * @param storeResult storage for the location (in system coordinates, not
-     * {@code null}, modified)
-     */
-    void getCenterOfMassPosition(RVec3 storeResult);
-
-    /**
      * Copy the location of the rigid body's center of mass. The character is
      * unaffected.
      *
@@ -80,6 +71,15 @@ public interface ConstCharacter extends ConstCharacterBase {
      * {@code null}, modified)
      */
     void getCenterOfMassPosition(boolean lockBodies, RVec3 storeResult);
+
+    /**
+     * Copy the location of the rigid body's center of mass using the locking
+     * body interface. The character is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getCenterOfMassPosition(RVec3 storeResult);
 
     /**
      * Generate settings to reconstruct the character, using the locking body
@@ -124,15 +124,6 @@ public interface ConstCharacter extends ConstCharacterBase {
     Vec3 getLinearVelocity();
 
     /**
-     * Copy the linear velocity of the character using the locking body
-     * interface. The character is unaffected.
-     *
-     * @param storeResult storage for the velocity (meters per second in system
-     * coordinates, not {@code null}, modified)
-     */
-    void getLinearVelocity(Vec3 storeResult);
-
-    /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -152,21 +143,21 @@ public interface ConstCharacter extends ConstCharacterBase {
     void getLinearVelocity(boolean lockBodies, Vec3 storeResult);
 
     /**
+     * Copy the linear velocity of the character using the locking body
+     * interface. The character is unaffected.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getLinearVelocity(Vec3 storeResult);
+
+    /**
      * Copy the location of the character using the locking body interface. The
      * character is unaffected.
      *
      * @return a new location vector (in system coordinates)
      */
     RVec3 getPosition();
-
-    /**
-     * Copy the location of the character using the locking body interface. The
-     * character is unaffected.
-     *
-     * @param storeResult storage for the location (in system coordinates, not
-     * {@code null}, modified)
-     */
-    void getPosition(RVec3 storeResult);
 
     /**
      * Copy the location of the character. The character is unaffected.
@@ -186,6 +177,15 @@ public interface ConstCharacter extends ConstCharacterBase {
      * {@code null}, modified)
      */
     void getPosition(boolean lockBodies, RVec3 storeResult);
+
+    /**
+     * Copy the location of the character using the locking body interface. The
+     * character is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getPosition(RVec3 storeResult);
 
     /**
      * Copy the position of the associated body using the locking body
@@ -220,15 +220,6 @@ public interface ConstCharacter extends ConstCharacterBase {
     Quat getRotation();
 
     /**
-     * Copy the orientation of the character using the locking body interface.
-     * The character is unaffected.
-     *
-     * @param storeResult storage for the orientation (in system coordinates,
-     * not {@code null}, modified)
-     */
-    void getRotation(Quat storeResult);
-
-    /**
      * Copy the orientation of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -246,6 +237,15 @@ public interface ConstCharacter extends ConstCharacterBase {
      * not {@code null}, modified)
      */
     void getRotation(boolean lockBodies, Quat storeResult);
+
+    /**
+     * Copy the orientation of the character using the locking body interface.
+     * The character is unaffected.
+     *
+     * @param storeResult storage for the orientation (in system coordinates,
+     * not {@code null}, modified)
+     */
+    void getRotation(Quat storeResult);
 
     /**
      * Generate a TransformedShape that represents the volume occupied by the

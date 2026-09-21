@@ -322,18 +322,6 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Copy the location of the rigid body's center of mass using the locking
-     * body interface. The character is unaffected.
-     *
-     * @param storeResult storage for the location (in system coordinates, not
-     * {@code null}, modified)
-     */
-    @Override
-    public void getCenterOfMassPosition(RVec3 storeResult) {
-        getCenterOfMassPosition(true, storeResult);
-    }
-
-    /**
      * Copy the location of the rigid body's center of mass. The character is
      * unaffected.
      *
@@ -368,6 +356,18 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         com.github.stephengold.joltjni.Character.getCenterOfMassPosition(
                 characterVa, storeDoubles, lockBodies);
         storeResult.set(storeDoubles);
+    }
+
+    /**
+     * Copy the location of the rigid body's center of mass using the locking
+     * body interface. The character is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getCenterOfMassPosition(RVec3 storeResult) {
+        getCenterOfMassPosition(true, storeResult);
     }
 
     /**
@@ -625,18 +625,6 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Copy the linear velocity of the character using the locking body
-     * interface. The character is unaffected.
-     *
-     * @param storeResult storage for the velocity (meters per second in system
-     * coordinates, not {@code null}, modified)
-     */
-    @Override
-    public void getLinearVelocity(Vec3 storeResult) {
-        getLinearVelocity(true, storeResult);
-    }
-
-    /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -672,6 +660,18 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
+     * Copy the linear velocity of the character using the locking body
+     * interface. The character is unaffected.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 storeResult) {
+        getLinearVelocity(true, storeResult);
+    }
+
+    /**
      * Access the physics system to which the character's body belongs.
      *
      * @return the pre-existing instance
@@ -693,18 +693,6 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public RVec3 getPosition() {
         RVec3 result = getPosition(true);
         return result;
-    }
-
-    /**
-     * Copy the location of the character using the locking body interface. The
-     * character is unaffected.
-     *
-     * @param storeResult storage for the location (in system coordinates, not
-     * {@code null}, modified)
-     */
-    @Override
-    public void getPosition(RVec3 storeResult) {
-        getPosition(true, storeResult);
     }
 
     /**
@@ -740,6 +728,18 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         com.github.stephengold.joltjni.Character.getPosition(
                 characterVa, storeDoubles, lockBodies);
         storeResult.set(storeDoubles);
+    }
+
+    /**
+     * Copy the location of the character using the locking body interface. The
+     * character is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 storeResult) {
+        getPosition(true, storeResult);
     }
 
     /**
@@ -806,18 +806,6 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Copy the orientation of the character using the locking body interface.
-     * The character is unaffected.
-     *
-     * @param storeResult storage for the orientation (in system coordinates,
-     * not {@code null}, modified)
-     */
-    @Override
-    public void getRotation(Quat storeResult) {
-        getRotation(true, storeResult);
-    }
-
-    /**
      * Copy the orientation of the character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -850,6 +838,18 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         com.github.stephengold.joltjni.Character.getRotation(
                 characterVa, storeFloats, lockBodies);
         storeResult.set(storeFloats);
+    }
+
+    /**
+     * Copy the orientation of the character using the locking body interface.
+     * The character is unaffected.
+     *
+     * @param storeResult storage for the orientation (in system coordinates,
+     * not {@code null}, modified)
+     */
+    @Override
+    public void getRotation(Quat storeResult) {
+        getRotation(true, storeResult);
     }
 
     /**
@@ -1001,6 +1001,21 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
+     * @param nx the X component of the surface normal to test
+     * @param ny the Y component of the surface normal to test
+     * @param nz the Z component of the surface normal to test
+     * @return {@code true} if too steep, otherwise {@code false}
+     */
+    @Override
+    public boolean isSlopeTooSteep(float nx, float ny, float nz) {
+        long characterVa = targetVa();
+        return CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
+    }
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
      * @param normal the surface normal to test (not {@code null}, unaffected)
      * @return {@code true} if too steep, otherwise {@code false}
      */
@@ -1013,21 +1028,6 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         boolean result = CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
 
         return result;
-    }
-
-    /**
-     * Test whether the specified normal direction is too steep. The character
-     * is unaffected.
-     *
-     * @param nx the X component of the surface normal to test
-     * @param ny the Y component of the surface normal to test
-     * @param nz the Z component of the surface normal to test
-     * @return {@code true} if too steep, otherwise {@code false}
-     */
-    @Override
-    public boolean isSlopeTooSteep(float nx, float ny, float nz) {
-        long characterVa = targetVa();
-        return CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
     }
 
     /**

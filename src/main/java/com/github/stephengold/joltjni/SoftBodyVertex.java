@@ -147,6 +147,18 @@ public class SoftBodyVertex
     /**
      * Relocate the vertex. (native attribute: mPosition)
      *
+     * @param x the desired X coordinate (relative to the body's center of mass)
+     * @param y the desired Y coordinate (relative to the body's center of mass)
+     * @param z the desired Z coordinate (relative to the body's center of mass)
+     */
+    public void setPosition(float x, float y, float z) {
+        long vertexVa = va();
+        setPosition(vertexVa, x, y, z);
+    }
+
+    /**
+     * Relocate the vertex. (native attribute: mPosition)
+     *
      * @param location the desired location (not {@code null}, unaffected)
      */
     public void setPosition(Vec3Arg location) {
@@ -158,15 +170,15 @@ public class SoftBodyVertex
     }
 
     /**
-     * Relocate the vertex. (native attribute: mPosition)
+     * Alter the previous location. (native attribute: mPreviousPosition)
      *
      * @param x the desired X coordinate (relative to the body's center of mass)
      * @param y the desired Y coordinate (relative to the body's center of mass)
      * @param z the desired Z coordinate (relative to the body's center of mass)
      */
-    public void setPosition(float x, float y, float z) {
+    public void setPreviousPosition(float x, float y, float z) {
         long vertexVa = va();
-        setPosition(vertexVa, x, y, z);
+        setPreviousPosition(vertexVa, x, y, z);
     }
 
     /**
@@ -184,15 +196,15 @@ public class SoftBodyVertex
     }
 
     /**
-     * Alter the previous location. (native attribute: mPreviousPosition)
+     * Alter the velocity of the vertex. (native attribute: mVelocity)
      *
-     * @param x the desired X coordinate (relative to the body's center of mass)
-     * @param y the desired Y coordinate (relative to the body's center of mass)
-     * @param z the desired Z coordinate (relative to the body's center of mass)
+     * @param vx the desired X component of the velocity (meters per second)
+     * @param vy the desired Y component of the velocity (meters per second)
+     * @param vz the desired Z component of the velocity (meters per second)
      */
-    public void setPreviousPosition(float x, float y, float z) {
+    public void setVelocity(float vx, float vy, float vz) {
         long vertexVa = va();
-        setPreviousPosition(vertexVa, x, y, z);
+        setVelocity(vertexVa, vx, vy, vz);
     }
 
     /**
@@ -206,18 +218,6 @@ public class SoftBodyVertex
         float vx = velocity.getX();
         float vy = velocity.getY();
         float vz = velocity.getZ();
-        setVelocity(vertexVa, vx, vy, vz);
-    }
-
-    /**
-     * Alter the velocity of the vertex. (native attribute: mVelocity)
-     *
-     * @param vx the desired X component of the velocity (meters per second)
-     * @param vy the desired Y component of the velocity (meters per second)
-     * @param vz the desired Z component of the velocity (meters per second)
-     */
-    public void setVelocity(float vx, float vy, float vz) {
-        long vertexVa = va();
         setVelocity(vertexVa, vx, vy, vz);
     }
     // *************************************************************************

@@ -113,6 +113,47 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
+     * Instantiate a triangle from component values.
+     *
+     * @param v1x the desired X coordinate of the first vertex
+     * @param v1y the desired Y coordinate of the first vertex
+     * @param v1z the desired Z coordinate of the first vertex
+     * @param v2x the desired X coordinate of the 2nd vertex
+     * @param v2y the desired Y coordinate of the 2nd vertex
+     * @param v2z the desired Z coordinate of the 2nd vertex
+     * @param v3x the desired X coordinate of the 3rd vertex
+     * @param v3y the desired Y coordinate of the 3rd vertex
+     * @param v3z the desired Z coordinate of the 3rd vertex
+     */
+    public Triangle(float v1x, float v1y, float v1z,
+            float v2x, float v2y, float v2z, float v3x, float v3y, float v3z) {
+        this(v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, 0, 0);
+    }
+
+    /**
+     * Instantiate the specified triangle.
+     *
+     * @param v1x the desired X coordinate of the first vertex
+     * @param v1y the desired Y coordinate of the first vertex
+     * @param v1z the desired Z coordinate of the first vertex
+     * @param v2x the desired X coordinate of the 2nd vertex
+     * @param v2y the desired Y coordinate of the 2nd vertex
+     * @param v2z the desired Z coordinate of the 2nd vertex
+     * @param v3x the desired X coordinate of the 3rd vertex
+     * @param v3y the desired Y coordinate of the 3rd vertex
+     * @param v3z the desired Z coordinate of the 3rd vertex
+     * @param materialIndex the desired material index
+     * @param userData the desired user data
+     */
+    public Triangle(float v1x, float v1y, float v1z,
+            float v2x, float v2y, float v2z,
+            float v3x, float v3y, float v3z, int materialIndex, int userData) {
+        long triangleVa = createTriangle(v1x, v1y, v1z, v2x, v2y, v2z,
+                v3x, v3y, v3z, materialIndex, userData);
+        setVirtualAddress(triangleVa, () -> free(triangleVa));
+    }
+
+    /**
      * Instantiate a triangle from {@code Vec3Arg} locations.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
@@ -142,24 +183,6 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
-     * Instantiate a triangle from component values.
-     *
-     * @param v1x the desired X coordinate of the first vertex
-     * @param v1y the desired Y coordinate of the first vertex
-     * @param v1z the desired Z coordinate of the first vertex
-     * @param v2x the desired X coordinate of the 2nd vertex
-     * @param v2y the desired Y coordinate of the 2nd vertex
-     * @param v2z the desired Z coordinate of the 2nd vertex
-     * @param v3x the desired X coordinate of the 3rd vertex
-     * @param v3y the desired Y coordinate of the 3rd vertex
-     * @param v3z the desired Z coordinate of the 3rd vertex
-     */
-    public Triangle(float v1x, float v1y, float v1z,
-            float v2x, float v2y, float v2z, float v3x, float v3y, float v3z) {
-        this(v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, 0, 0);
-    }
-
-    /**
      * Instantiate the specified triangle.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
@@ -182,29 +205,6 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
         float v3x = v3.getX();
         float v3y = v3.getY();
         float v3z = v3.getZ();
-        long triangleVa = createTriangle(v1x, v1y, v1z, v2x, v2y, v2z,
-                v3x, v3y, v3z, materialIndex, userData);
-        setVirtualAddress(triangleVa, () -> free(triangleVa));
-    }
-
-    /**
-     * Instantiate the specified triangle.
-     *
-     * @param v1x the desired X coordinate of the first vertex
-     * @param v1y the desired Y coordinate of the first vertex
-     * @param v1z the desired Z coordinate of the first vertex
-     * @param v2x the desired X coordinate of the 2nd vertex
-     * @param v2y the desired Y coordinate of the 2nd vertex
-     * @param v2z the desired Z coordinate of the 2nd vertex
-     * @param v3x the desired X coordinate of the 3rd vertex
-     * @param v3y the desired Y coordinate of the 3rd vertex
-     * @param v3z the desired Z coordinate of the 3rd vertex
-     * @param materialIndex the desired material index
-     * @param userData the desired user data
-     */
-    public Triangle(float v1x, float v1y, float v1z,
-            float v2x, float v2y, float v2z,
-            float v3x, float v3y, float v3z, int materialIndex, int userData) {
         long triangleVa = createTriangle(v1x, v1y, v1z, v2x, v2y, v2z,
                 v3x, v3y, v3z, materialIndex, userData);
         setVirtualAddress(triangleVa, () -> free(triangleVa));
