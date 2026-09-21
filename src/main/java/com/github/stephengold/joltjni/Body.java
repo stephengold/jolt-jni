@@ -305,52 +305,6 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Apply an impulse that simulates buoyancy and drag.
-     *
-     * @param spx the X coordinate of the fluid's surface (in system
-     * coordinates)
-     * @param spy the Y coordinate of the fluid's surface (in system
-     * coordinates)
-     * @param spz the Z coordinate of the fluid's surface (in system
-     * coordinates)
-     * @param snx the X component of the upward normal direction of the fluid's
-     * surface (in system coordinates)
-     * @param sny the Y component of the upward normal direction of the fluid's
-     * surface (in system coordinates)
-     * @param snz the Z component of the upward normal direction of the fluid's
-     * surface (in system coordinates)
-     * @param buoyancy the mass of the displaced fluid divided by the body's
-     * mass (1&rarr;neutral buoyancy)
-     * @param linearDrag the drag factor for linear motion
-     * @param angularDrag the drag factor for angular motion
-     * @param fvx the X component of the fluid's velocity (meters per second in
-     * system coordinates)
-     * @param fvy the Y component of the fluid's velocity (meters per second in
-     * system coordinates)
-     * @param fvz the Z component of the fluid's velocity (meters per second in
-     * system coordinates)
-     * @param gx the X component of the gravity vector (in system coordinates)
-     * @param gy the Y component of the gravity vector (in system coordinates)
-     * @param gz the Z component of the gravity vector (in system coordinates)
-     * @param deltaTime the duration of the simulation step (in seconds)
-     * @return {@code true} if an impulse was applied, {@code false} if not in
-     * the fluid
-     */
-    public boolean applyBuoyancyImpulse(
-            double spx, double spy, double spz,
-            float snx, float sny, float snz,
-            float buoyancy, float linearDrag, float angularDrag,
-            float fvx, float fvy, float fvz,
-            float gx, float gy, float gz, float deltaTime) {
-        long bodyVa = va();
-        boolean result = applyBuoyancyImpulse(bodyVa, spx, spy,
-                spz, snx, sny, snz, buoyancy, linearDrag, angularDrag,
-                fvx, fvy, fvz, gx, gy, gz, deltaTime);
-
-        return result;
-    }
-
-    /**
      * Overwrite the state of the current soft body with the specified creation
      * settings. Not allowed when the body is in the physics system.
      *

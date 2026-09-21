@@ -76,41 +76,6 @@ public class Character extends CharacterBase implements ConstCharacter {
         setVirtualAddress(characterVa,
                 () -> CharacterRef.freeWithSystem(refVa, system));
     }
-
-    /**
-     * Instantiate a character with the specified properties.
-     *
-     * @param settings the settings to use (not {@code null}, unaffected)
-     * @param locX the desired initial X coordinate of the location (in system
-     * coordinates)
-     * @param locY the desired initial Y coordinate of the location (in system
-     * coordinates)
-     * @param locZ the desired initial Z coordinate of the location (in system
-     * coordinates)
-     * @param qx the X component of the desired initial orientation (in system
-     * coordinates)
-     * @param qy the Y component of the desired initial orientation (in system
-     * coordinates)
-     * @param qz the Z component of the desired initial orientation (in system
-     * coordinates)
-     * @param qw the W component of the desired initial orientation (in system
-     * coordinates)
-     * @param userData the desired user-data value
-     * @param system where to add the body (not {@code null})
-     */
-    public Character(ConstCharacterSettings settings,
-            double locX, double locY, double locZ,
-            float qx, float qy, float qz, float qw,
-            long userData, PhysicsSystem system) {
-        this.system = system;
-        long settingsVa = settings.targetVa();
-        long systemVa = system.va();
-        long characterVa = createCharacter(settingsVa, locX, locY, locZ,
-                qx, qy, qz, qw, userData, systemVa);
-        long refVa = toRef(characterVa);
-        setVirtualAddress(characterVa,
-                () -> CharacterRef.freeWithSystem(refVa, system));
-    }
     // *************************************************************************
     // new methods exposed
 

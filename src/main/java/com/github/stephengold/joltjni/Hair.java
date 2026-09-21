@@ -61,29 +61,6 @@ public class Hair extends NonCopyable {
         Runnable freeingAction = () -> free(hairVa);
         setVirtualAddress(hairVa, freeingAction);
     }
-
-    /**
-     * Instantiate a simulation with the specified settings.
-     *
-     * @param settings the settings to use (not {@code null}, unaffected)
-     * @param xx the desired X coordinate of the location
-     * @param yy the desired Y coordinate of the location
-     * @param zz the desired Z coordinate of the location
-     * @param qx the X component of the orientation
-     * @param qy the Y component of the orientation
-     * @param qz the Z component of the orientation
-     * @param qw the W component of the orientation
-     * @param objectLayer the object layer for the simulation
-     */
-    public Hair(ConstHairSettings settings,
-            double xx, double yy, double zz,
-            float qx, float qy, float qz, float qw, int objectLayer) {
-        long settingsVa = settings.targetVa();
-        long hairVa
-                = create(settingsVa, xx, yy, zz, qx, qy, qz, qw, objectLayer);
-        Runnable freeingAction = () -> free(hairVa);
-        setVirtualAddress(hairVa, freeingAction);
-    }
     // *************************************************************************
     // new methods exposed
 
