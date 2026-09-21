@@ -1,5 +1,32 @@
 # Release log for the Jolt-JNI project
 
+## Version 6.1.0 released on TBD
+
++ Bugfix:  logic error in `Plane.set(ConstPlane)` (pull request #53)
+
++ Added public methods and constructors:
+  + 347 alternative signatures for methods and constructors, intended to reduce
+    the need for short-lived `Vec3` and similar objects (pull request #52)
+  + `BoxShape` constructor that takes doubles (for convenience of Clojure apps)
+  + `PhysicsScene.getConstraints()`
+  + `PhysicsScene.getNumBodies()`
+  + `PhysicsScene.getNumConstraints()`
+  + `PhysicsScene.getNumSoftBodies()`
++ Added the `ConnectedConstraint` class.
++ Added interfaces `ConstConnectedConstraint` and `ConstPhysicsScene`.
++ Added the public constant `PhysicsScene.cFixedToWorld`.
+
++ Updated Jolt-Physics sources/assets to 71de1ae (sg260915).
++ Began building native libraries with Vulkan v1.4.357.1 headers.
++ Updated the Android NDK to r30.
++ Updated the OSHI library to v7.6.1 .
+
+
+## Version 6.0.2 released on 13 August 2026 (Linux_ARM64 only)
+
+Bugfix:  `SIGILL` on `Linux_ARM64` platforms
+that lack the SHA-3 CPU feature (issue #50)
+
 ## Version 6.0.0 released on 28 July 2026
 
 + API changes:
@@ -7,9 +34,6 @@
   + Removed `CharacterVirtualSettings.setHitReductionCosMaxAngle(int)`.
   + Removed `CharacterVirtualSettingsRef.setHitReductionCosMaxAngle(int)`.
   + Removed `PhysicsSettings.setDeterministicSimulation()`.
-
-+ Bugfix:  `SIGILL` on `Linux_ARM64` platforms
-  that lack the SHA-3 CPU feature (issue #50)
 
 + Updated the Gradle build tool to v9.6.1 .
   This affects some of the build procedures.
