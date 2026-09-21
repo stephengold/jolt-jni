@@ -77,6 +77,32 @@ public class BodyCreationSettings
      * Instantiate cooked settings for the specified shape.
      *
      * @param shape the desired shape (not {@code null})
+     * @param locX the desired X coordinate of the location
+     * @param locY the desired Y coordinate of the location
+     * @param locZ the desired Z coordinate of the location
+     * @param orientX the X component of the desired orientation
+     * @param orientY the Y component of the desired orientation
+     * @param orientZ the Z component of the desired orientation
+     * @param orientW the W component of the desired orientation
+     * @param motionType the desired motion type (not {@code null})
+     * @param objLayer the ID of the desired object layer (&ge;0)
+     */
+    public BodyCreationSettings(ConstShape shape,
+            double locX, double locY, double locZ,
+            float orientX, float orientY, float orientZ, float orientW,
+            EMotionType motionType, int objLayer) {
+        long shapeVa = shape.targetVa();
+        int motionTypeOrdinal = motionType.ordinal();
+        long bodySettingsVa = createFromShape(shapeVa, locX, locY,
+                locZ, orientX, orientY, orientZ,
+                orientW, motionTypeOrdinal, objLayer);
+        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
+    }
+
+    /**
+     * Instantiate cooked settings for the specified shape.
+     *
+     * @param shape the desired shape (not {@code null})
      * @param loc the desired location (not {@code null}, unaffected)
      * @param orient the desired orientation (not {@code null}, unaffected)
      * @param motionType the desired motion type (not {@code null})
@@ -89,6 +115,32 @@ public class BodyCreationSettings
         long bodySettingsVa = createFromShape(shapeVa, loc.xx(), loc.yy(),
                 loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
                 orient.getW(), motionTypeOrdinal, objLayer);
+        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
+    }
+
+    /**
+     * Instantiate uncooked settings for the specified shape settings.
+     *
+     * @param shapeSettings the desired shape settings (not {@code null})
+     * @param locX the desired X coordinate of the location
+     * @param locY the desired Y coordinate of the location
+     * @param locZ the desired Z coordinate of the location
+     * @param orientX the X component of the desired orientation
+     * @param orientY the Y component of the desired orientation
+     * @param orientZ the Z component of the desired orientation
+     * @param orientW the W component of the desired orientation
+     * @param motionType the desired motion type (not {@code null})
+     * @param objLayer the ID of the desired object layer
+     */
+    public BodyCreationSettings(ConstShapeSettings shapeSettings,
+            double locX, double locY, double locZ,
+            float orientX, float orientY, float orientZ, float orientW,
+            EMotionType motionType, int objLayer) {
+        long shapeSettingsVa = shapeSettings.targetVa();
+        int motionTypeOrdinal = motionType.ordinal();
+        long bodySettingsVa = createFromShapeSettings(shapeSettingsVa, locX,
+                locY, locZ, orientX, orientY, orientZ,
+                orientW, motionTypeOrdinal, objLayer);
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
 
@@ -133,6 +185,28 @@ public class BodyCreationSettings
     BodyCreationSettings(long bodySettingsVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(bodySettingsVa) : null;
         setVirtualAddress(bodySettingsVa, freeingAction);
+    }
+
+    /**
+     * Instantiate settings for the specified shape reference.
+     *
+     * @param shapeRef a reference to the desired shape (not {@code null})
+     * @param locX the desired X coordinate of the location
+     * @param locY the desired Y coordinate of the location
+     * @param locZ the desired Z coordinate of the location
+     * @param orientX the X component of the desired orientation
+     * @param orientY the Y component of the desired orientation
+     * @param orientZ the Z component of the desired orientation
+     * @param orientW the W component of the desired orientation
+     * @param motionType the desired motion type (not {@code null})
+     * @param objLayer the ID of the desired object layer
+     */
+    public BodyCreationSettings(ShapeRef shapeRef,
+            double locX, double locY, double locZ,
+            float orientX, float orientY, float orientZ, float orientW,
+            EMotionType motionType, int objLayer) {
+        this(shapeRef.getPtr(), locX, locY, locZ,
+                orientX, orientY, orientZ, orientW, motionType, objLayer);
     }
 
     /**
@@ -633,6 +707,28 @@ public class BodyCreationSettings
      * Alter the (initial) orientation of the body's axes. (native member:
      * mRotation)
      *
+     * @param qx the X component of the desired rotation (relative to the system
+     * axes, default=0)
+     * @param qy the Y component of the desired rotation (relative to the system
+     * axes, default=0)
+     * @param qz the Z component of the desired rotation (relative to the system
+     * axes, default=0)
+     * @param qw the W component of the desired rotation (relative to the system
+     * axes, default=1)
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings setRotation(
+            float qx, float qy, float qz, float qw) {
+        long bodySettingsVa = va();
+        setRotation(bodySettingsVa, qx, qy, qz, qw);
+
+        return this;
+    }
+
+    /**
+     * Alter the (initial) orientation of the body's axes. (native member:
+     * mRotation)
+     *
      * @param quat the desired rotation (relative to the system axes, not
      * {@code null}, normalized, unaffected, default=(0,0,0,1))
      * @return the modified settings, for chaining
@@ -807,6 +903,21 @@ public class BodyCreationSettings
     }
 
     /**
+     * Copy the (initial) angular velocity. The settings are unaffected. (native
+     * member: mAngularVelocity)
+     *
+     * @param storeResult storage for the velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getAngularVelocity(Vec3 storeResult) {
+        long bodySettingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAngularVelocity(bodySettingsVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Test whether the gyroscopic force will be applied. The settings are
      * unaffected. (native member: mApplyGyroscopicForce)
      *
@@ -947,6 +1058,21 @@ public class BodyCreationSettings
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the (initial) linear velocity. The settings are unaffected. (native
+     * member: mLinearVelocity)
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 storeResult) {
+        long bodySettingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(bodySettingsVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -1128,6 +1254,21 @@ public class BodyCreationSettings
     }
 
     /**
+     * Copy the (initial) location. The settings are unaffected. (native member:
+     * mPosition)
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 storeResult) {
+        long bodySettingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(bodySettingsVa, storeDoubles);
+        storeResult.set(storeDoubles);
+    }
+
+    /**
      * Return the restitution ratio. The settings are unaffected. (native
      * member: mRestitution)
      *
@@ -1155,6 +1296,21 @@ public class BodyCreationSettings
         Quat result = new Quat(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the (initial) orientation of the body's axes. The settings are
+     * unaffected. (native member: mRotation)
+     *
+     * @param storeResult storage for the rotation (relative to the system axes,
+     * not {@code null}, modified)
+     */
+    @Override
+    public void getRotation(Quat storeResult) {
+        long bodySettingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(bodySettingsVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

@@ -99,6 +99,18 @@ final public class VehicleConstraintSettingsRef
     /**
      * Alter the forward direction. (native attribute: mForward)
      *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=0)
+     * @param dz the desired Z component of the direction (default=1)
+     */
+    public void setForward(float dx, float dy, float dz) {
+        long settingsVa = targetVa();
+        VehicleConstraintSettings.setForward(settingsVa, dx, dy, dz);
+    }
+
+    /**
+     * Alter the forward direction. (native attribute: mForward)
+     *
      * @param forward the desired forward direction (not {@code null},
      * unaffected, default=(0,0,1))
      */
@@ -129,6 +141,18 @@ final public class VehicleConstraintSettingsRef
     public void setNumAntiRollBars(int count) {
         long settingsVa = targetVa();
         VehicleConstraintSettings.setNumAntiRollBars(settingsVa, count);
+    }
+
+    /**
+     * Alter the up direction. (native attribute: mUp)
+     *
+     * @param dx the desired X component of the direction (default=0)
+     * @param dy the desired Y component of the direction (default=1)
+     * @param dz the desired Z component of the direction (default=0)
+     */
+    public void setUp(float dx, float dy, float dz) {
+        long settingsVa = targetVa();
+        VehicleConstraintSettings.setUp(settingsVa, dx, dy, dz);
     }
 
     /**
@@ -269,6 +293,20 @@ final public class VehicleConstraintSettingsRef
     }
 
     /**
+     * Copy the "forward" vector. The settings are unaffected. (native
+     * attribute: mForward)
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getForward(Vec3 storeResult) {
+        long settingsVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        VehicleConstraintSettings.getForward(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Return the vehicle's maximum pitch/roll angle. The settings are
      * unaffected. (native attribute: mMaxPitchRollAngle)
      *
@@ -372,6 +410,20 @@ final public class VehicleConstraintSettingsRef
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the "up" vector. The settings are unaffected. (native attribute:
+     * mUp)
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getUp(Vec3 storeResult) {
+        long settingsVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        VehicleConstraintSettings.getUp(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

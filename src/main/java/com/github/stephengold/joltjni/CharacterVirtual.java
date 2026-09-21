@@ -595,6 +595,20 @@ public class CharacterVirtual
     }
 
     /**
+     * Copy the linear velocity of the character. The character is unaffected.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 storeResult) {
+        long characterVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(characterVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Return the character's mass. The character is unaffected.
      *
      * @return the mass (in kilograms)
@@ -685,6 +699,20 @@ public class CharacterVirtual
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the location of the character. The character is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 storeResult) {
+        long characterVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(characterVa, storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**

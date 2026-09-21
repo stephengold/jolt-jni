@@ -85,6 +85,19 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the hinge axis of the pinion. The settings are unaffected. (native
+     * attribute: mHingeAxis)
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    public void getHingeAxis(Vec3 storeResult) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHingeAxis(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Return the ratio of pinion rotation divided rack translation. The
      * settings are unaffected. (native attribute: mRatio)
      *
@@ -110,6 +123,19 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the translation axis of the slider. The settings are unaffected.
+     * (native attribute: mSliderAxis)
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    public void getSliderAxis(Vec3 storeResult) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSliderAxis(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -155,6 +181,18 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the hinge axis of the pinion. (native attribute: mHingeAxis)
+     *
+     * @param dx the desired X component of the axis direction (default=1)
+     * @param dy the desired Y component of the axis direction (default=0)
+     * @param dz the desired Z component of the axis direction (default=0)
+     */
+    public void setHingeAxis(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setHingeAxis(settingsVa, dx, dy, dz);
+    }
+
+    /**
      * Alter the ratio of pinion rotation to rack translation. (native
      * attribute: mRatio)
      *
@@ -192,6 +230,18 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
         setSliderAxis(settingsVa, dx, dy, dz);
 
         return direction;
+    }
+
+    /**
+     * Alter the translation axis of the rack. (native attribute: mSliderAxis)
+     *
+     * @param dx the desired X component of the axis direction (default=1)
+     * @param dy the desired Y component of the axis direction (default=0)
+     * @param dz the desired Z component of the axis direction (default=0)
+     */
+    public void setSliderAxis(float dx, float dy, float dz) {
+        long settingsVa = va();
+        setSliderAxis(settingsVa, dx, dy, dz);
     }
 
     /**

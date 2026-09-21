@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,6 +56,13 @@ public interface ConstVehicleConstraintSettings
     Vec3 getForward();
 
     /**
+     * Copy the "forward" vector. The settings are unaffected.
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    void getForward(Vec3 storeResult);
+
+    /**
      * Return the vehicle's maximum pitch/roll angle. The settings are
      * unaffected.
      *
@@ -83,6 +90,13 @@ public interface ConstVehicleConstraintSettings
      * @return a new direction vector
      */
     Vec3 getUp();
+
+    /**
+     * Copy the "up" vector. The settings are unaffected.
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    void getUp(Vec3 storeResult);
 
     /**
      * Access the settings of the specified wheel.

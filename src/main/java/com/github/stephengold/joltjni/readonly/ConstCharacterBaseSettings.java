@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,9 +71,25 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
     Plane getSupportingVolume();
 
     /**
+     * Copy the supporting volume. The settings are unaffected. (native
+     * attribute: mSupportingVolume)
+     *
+     * @param storeResult storage for the plane (not {@code null}, modified)
+     */
+    void getSupportingVolume(Plane storeResult);
+
+    /**
      * Copy the character's "up" direction. The settings are unaffected.
      *
      * @return a new direction vector (in system coordinates)
      */
     Vec3 getUp();
+
+    /**
+     * Copy the character's "up" direction. The settings are unaffected.
+     *
+     * @param storeResult storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getUp(Vec3 storeResult);
 }

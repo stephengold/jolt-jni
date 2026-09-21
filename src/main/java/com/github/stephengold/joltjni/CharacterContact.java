@@ -121,6 +121,20 @@ public class CharacterContact
     }
 
     /**
+     * Copy the contact normal. The contact is unaffected.
+     *
+     * @param storeResult storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getContactNormal(Vec3 storeResult) {
+        long contactVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getContactNormal(contactVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Return the contact separation. The contact is unaffected. (native
      * attribute: mDistance)
      *
@@ -210,6 +224,20 @@ public class CharacterContact
     }
 
     /**
+     * Copy the linear velocity of the contact. The contact is unaffected.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 storeResult) {
+        long contactVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(contactVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Return the motion type of the colliding object. The contact is
      * unaffected. (native attribute: mGetMotionTypeB)
      *
@@ -241,6 +269,20 @@ public class CharacterContact
     }
 
     /**
+     * Copy the location of the contact. The contact is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 storeResult) {
+        long contactVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(contactVa, storeDoubles);
+        storeResult.set(storeDoubles);
+    }
+
+    /**
      * Copy the surface normal of the contact. The contact is unaffected.
      * (native attribute: mSurfaceNormal)
      *
@@ -254,6 +296,20 @@ public class CharacterContact
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the surface normal of the contact. The contact is unaffected.
+     *
+     * @param storeResult storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getSurfaceNormal(Vec3 storeResult) {
+        long contactVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSurfaceNormal(contactVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

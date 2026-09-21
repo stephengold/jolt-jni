@@ -276,6 +276,19 @@ public class VehicleConstraint
     }
 
     /**
+     * Copy the gravity override. The constraint is unaffected.
+     *
+     * @param storeResult storage for the vector (not {@code null}, modified)
+     */
+    @Override
+    public void getGravityOverride(Vec3 storeResult) {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getGravityOverride(constraintVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the local "forward" direction. The constraint is unaffected.
      *
      * @return a new direction vector
@@ -291,6 +304,19 @@ public class VehicleConstraint
     }
 
     /**
+     * Copy the local "forward" direction. The constraint is unaffected.
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getLocalForward(Vec3 storeResult) {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLocalForward(constraintVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the local "up" direction. The constraint is unaffected.
      *
      * @return a new direction vector
@@ -303,6 +329,19 @@ public class VehicleConstraint
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the local "up" direction. The constraint is unaffected.
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getLocalUp(Vec3 storeResult) {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLocalUp(constraintVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -451,6 +490,20 @@ public class VehicleConstraint
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the "up" direction based on gravity. The constraint is unaffected.
+     *
+     * @param storeResult storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getWorldUp(Vec3 storeResult) {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWorldUp(constraintVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

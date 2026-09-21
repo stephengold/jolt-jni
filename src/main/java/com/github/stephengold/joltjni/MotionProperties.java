@@ -147,6 +147,22 @@ public class MotionProperties
      * Directly alter the angular velocity. It is illegal to set a non-zero
      * velocity on a sleeping body without activating it.
      *
+     * @param wx the X component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wy the Y component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wz the Z component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     */
+    public void setAngularVelocity(float wx, float wy, float wz) {
+        long propertiesVa = va();
+        setAngularVelocity(propertiesVa, wx, wy, wz);
+    }
+
+    /**
+     * Directly alter the angular velocity. It is illegal to set a non-zero
+     * velocity on a sleeping body without activating it.
+     *
      * @param omega the desired velocity (meters per second in system
      * coordinates, not {@code null}, unaffected, default=(0,0,0))
      */
@@ -166,6 +182,24 @@ public class MotionProperties
     public void setGravityFactor(float factor) {
         long propertiesVa = va();
         setGravityFactor(propertiesVa, factor);
+    }
+
+    /**
+     * Alter the diagonal components of the inverse inertia matrix of the body.
+     * If inertia changes, mass should probably change as well.
+     *
+     * @param dx the desired X element of the diagonal
+     * @param dy the desired Y element of the diagonal
+     * @param dz the desired Z element of the diagonal
+     * @param rx the X component of the orientation of the principal axes
+     * @param ry the Y component of the orientation of the principal axes
+     * @param rz the Z component of the orientation of the principal axes
+     * @param rw the W component of the orientation of the principal axes
+     */
+    public void setInverseInertia(float dx, float dy, float dz,
+            float rx, float ry, float rz, float rw) {
+        long propertiesVa = va();
+        setInverseInertia(propertiesVa, dx, dy, dz, rx, ry, rz, rw);
     }
 
     /**
@@ -209,6 +243,22 @@ public class MotionProperties
     public void setLinearDamping(float damping) {
         long propertiesVa = va();
         setLinearDamping(propertiesVa, damping);
+    }
+
+    /**
+     * Directly alter the linear velocity. It is illegal to set a non-zero
+     * velocity on a sleeping body without activating it.
+     *
+     * @param vx the X component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vy the Y component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vz the Z component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     */
+    public void setLinearVelocity(float vx, float vy, float vz) {
+        long propertiesVa = va();
+        setLinearVelocity(propertiesVa, vx, vy, vz);
     }
 
     /**
@@ -302,6 +352,21 @@ public class MotionProperties
     }
 
     /**
+     * Copy the net force acting on the body. The properties are unaffected.
+     *
+     * @param storeResult storage for the force (Newtons in system coordinates,
+     * not {@code null}, modified)
+     */
+    @Override
+    public void getAccumulatedForce(Vec3 storeResult) {
+        long propertiesVa = va();
+        float x = getAccumulatedForceX(propertiesVa);
+        float y = getAccumulatedForceY(propertiesVa);
+        float z = getAccumulatedForceZ(propertiesVa);
+        storeResult.set(x, y, z);
+    }
+
+    /**
      * Copy the net torque acting on the body. The properties are unaffected.
      *
      * @return a new torque vector (Newton meters in system coordinates)
@@ -315,6 +380,21 @@ public class MotionProperties
         Vec3 result = new Vec3(x, y, z);
 
         return result;
+    }
+
+    /**
+     * Copy the net torque acting on the body. The properties are unaffected.
+     *
+     * @param storeResult storage for the torque (Newton meters in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getAccumulatedTorque(Vec3 storeResult) {
+        long propertiesVa = va();
+        float x = getAccumulatedTorqueX(propertiesVa);
+        float y = getAccumulatedTorqueY(propertiesVa);
+        float z = getAccumulatedTorqueZ(propertiesVa);
+        storeResult.set(x, y, z);
     }
 
     /**
@@ -398,6 +478,20 @@ public class MotionProperties
     }
 
     /**
+     * Copy the angular velocity. The properties are unaffected.
+     *
+     * @param storeResult storage for the velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getAngularVelocity(Vec3 storeResult) {
+        long propertiesVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAngularVelocity(propertiesVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Return the gravity factor. The properties are unaffected.
      *
      * @return the factor
@@ -427,6 +521,20 @@ public class MotionProperties
     }
 
     /**
+     * Copy the rotation that takes the inverse-inertia diagonal to local
+     * coordinates. The properties are unaffected.
+     *
+     * @param storeResult storage for the rotation (not {@code null}, modified)
+     */
+    @Override
+    public void getInertiaRotation(Quat storeResult) {
+        long propertiesVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getInertiaRotation(propertiesVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the diagonal components of the inverse inertia matrix, assuming a
      * dynamic body. The properties are unaffected.
      *
@@ -440,6 +548,21 @@ public class MotionProperties
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the diagonal components of the inverse inertia matrix, assuming a
+     * dynamic body. The properties are unaffected.
+     *
+     * @param storeResult storage for the diagonal (all components &ge;0, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getInverseInertiaDiagonal(Vec3 storeResult) {
+        long propertiesVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getInverseInertiaDiagonal(propertiesVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -494,6 +617,20 @@ public class MotionProperties
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the linear velocity. The properties are unaffected.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 storeResult) {
+        long propertiesVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(propertiesVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**

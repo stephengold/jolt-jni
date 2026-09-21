@@ -60,6 +60,36 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Instantiate a cubic box with the specified center coordinates and half
+     * extent.
+     *
+     * @param cx the desired X coordinate of the center
+     * @param cy the desired Y coordinate of the center
+     * @param cz the desired Z coordinate of the center
+     * @param halfExtent the desired half extent
+     */
+    public AaBox(float cx, float cy, float cz, float halfExtent) {
+        long boxVa = createCubic(cx, cy, cz, halfExtent);
+        setVirtualAddress(boxVa, () -> free(boxVa));
+    }
+
+    /**
+     * Instantiate a box with the specified minimum and maximum coordinates.
+     *
+     * @param minX the desired minimum X coordinate
+     * @param minY the desired minimum Y coordinate
+     * @param minZ the desired minimum Z coordinate
+     * @param maxX the desired maximum X coordinate
+     * @param maxY the desired maximum Y coordinate
+     * @param maxZ the desired maximum Z coordinate
+     */
+    public AaBox(float minX, float minY, float minZ,
+            float maxX, float maxY, float maxZ) {
+        long boxVa = create(minX, minY, minZ, maxX, maxY, maxZ);
+        setVirtualAddress(boxVa, () -> free(boxVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -313,6 +343,23 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Test whether the box contains the specified point. The box is unaffected.
      *
+     * @param x the X coordinate of the point to test
+     * @param y the Y coordinate of the point to test
+     * @param z the Z coordinate of the point to test
+     *
+     * @return {@code true} if contained, otherwise {@code false}
+     */
+    @Override
+    public boolean contains(float x, float y, float z) {
+        long boxVa = va();
+        boolean result = contains(boxVa, x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Test whether the box contains the specified point. The box is unaffected.
+     *
      * @param point the point to test (not {@code null}, unaffected)
      *
      * @return {@code true} if contained, otherwise {@code false}
@@ -341,6 +388,46 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Locate the closest point on or in the box for the specified location. The
+     * box is unaffected.
+     *
+     * @param x the X coordinate of the location
+     * @param y the Y coordinate of the location
+     * @param z the Z coordinate of the location
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getClosestPoint(float x, float y, float z) {
+        Vec3 result = new Vec3();
+        getClosestPoint(x, y, z, result);
+
+        return result;
+    }
+
+    /**
+     * Locate the closest point on or in the box for the specified location. The
+     * box is unaffected.
+     *
+     * @param x the X coordinate of the location
+     * @param y the Y coordinate of the location
+     * @param z the Z coordinate of the location
+     * @param storeResult storage for the closest point (not {@code null},
+     * modified)
+     */
+    @Override
+    public void getClosestPoint(float x, float y, float z, Vec3 storeResult) {
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        floatBuffer.put(0, x);
+        floatBuffer.put(1, y);
+        floatBuffer.put(2, z);
+        long boxVa = va();
+
+        getClosestPoint(boxVa, floatBuffer);
+        storeResult.set(floatBuffer);
     }
 
     /**
@@ -377,6 +464,19 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Copy the (half) extent of the box. The box is unaffected.
+     *
+     * @param storeResult storage for the extent (not {@code null}, modified)
+     */
+    @Override
+    public void getExtent(Vec3 storeResult) {
+        long boxVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getExtent(boxVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the maximum contained coordinate on each axis. The box is
      * unaffected. (native member: mMax)
      *
@@ -390,6 +490,20 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the maximum contained coordinate on each axis. The box is
+     * unaffected. (native member: mMax)
+     *
+     * @param storeResult storage for the maximum (not {@code null}, modified)
+     */
+    @Override
+    public void getMax(Vec3 storeResult) {
+        long boxVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getMax(boxVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -409,6 +523,20 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Copy the minimum contained coordinate on each axis. The box is
+     * unaffected. (native member: mMin)
+     *
+     * @param storeResult storage for the minimum (not {@code null}, modified)
+     */
+    @Override
+    public void getMin(Vec3 storeResult) {
+        long boxVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getMin(boxVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the size (full extent) on each axis. The box is unaffected.
      *
      * @return a new vector
@@ -421,6 +549,35 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the size (full extent) on each axis. The box is unaffected.
+     *
+     * @param storeResult storage for the size (not {@code null}, modified)
+     */
+    @Override
+    public void getSize(Vec3 storeResult) {
+        long boxVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSize(boxVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
+     * Get the squared distance between the box and the specified point. The box
+     * is unaffected.
+     *
+     * @param x the X coordinate of the point to measure from
+     * @param y the Y coordinate of the point to measure from
+     * @param z the Z coordinate of the point to measure from
+     *
+     * @return the distance, or zero if the point lies inside the box
+     */
+    @Override
+    public float getSqDistanceTo(float x, float y, float z) {
+        long boxVa = va();
+        return getSqDistanceTo(boxVa, x, y, z);
     }
 
     /**
@@ -442,6 +599,45 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Calculate the support vector for this convex shape. The shape is
+     * unaffected.
+     *
+     * @param x the X component of the direction vector
+     * @param y the Y component of the direction vector
+     * @param z the Z component of the direction vector
+     *
+     * @return the support vector
+     */
+    @Override
+    public Vec3 getSupport(float x, float y, float z) {
+        Vec3 result = new Vec3();
+        getSupport(x, y, z, result);
+
+        return result;
+    }
+
+    /**
+     * Calculate the support vector for this convex shape. The shape is
+     * unaffected.
+     *
+     * @param x the X component of the direction vector
+     * @param y the Y component of the direction vector
+     * @param z the Z component of the direction vector
+     * @param storeResult storage for the support vector (not {@code null},
+     * modified)
+     */
+    @Override
+    public void getSupport(float x, float y, float z, Vec3 storeResult) {
+        FloatBuffer tmpFloats = Temporaries.floatBuffer1.get();
+        tmpFloats.put(0, x);
+        tmpFloats.put(1, y);
+        tmpFloats.put(2, z);
+        long boxVa = va();
+        getSupport(boxVa, tmpFloats);
+        storeResult.set(tmpFloats);
+    }
+
+    /**
      * Calculate the support vector for this convex shape.
      *
      * @param direction the direction vector
@@ -457,6 +653,20 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         Vec3 vec3 = new Vec3(tmpFloats);
 
         return vec3;
+    }
+
+    /**
+     * Calculate the support vector for this convex shape. The shape is
+     * unaffected.
+     *
+     * @param direction the direction vector (not {@code null}, unaffected)
+     * @param storeResult storage for the support vector (not {@code null},
+     * modified)
+     */
+    @Override
+    public void getSupport(Vec3Arg direction, Vec3 storeResult) {
+        getSupport(direction.getX(), direction.getY(), direction.getZ(),
+                storeResult);
     }
 
     /**
@@ -546,6 +756,42 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         float pnz = plane.getNormalZ();
 
         boolean result = overlaps(boxVa, pc, pnx, pny, pnz);
+        return result;
+    }
+
+    /**
+     * Check if this box overlaps with a plane. The box is unaffected.
+     *
+     * @param constant the plane constant
+     * @param normalX the X component of the plane's normal
+     * @param normalY the Y component of the plane's normal
+     * @param normalZ the Z component of the plane's normal
+     *
+     * @return {@code true} if they overlap, otherwise {@code false}
+     */
+    @Override
+    public boolean overlaps(
+            float constant, float normalX, float normalY, float normalZ) {
+        long boxVa = va();
+        boolean result = overlaps(boxVa, constant, normalX, normalY, normalZ);
+
+        return result;
+    }
+
+    /**
+     * Return a scaled copy of the box. The current box is unaffected.
+     *
+     * @param x the scale factor to apply to the local X axis
+     * @param y the scale factor to apply to the local Y axis
+     * @param z the scale factor to apply to the local Z axis
+     * @return a new object
+     */
+    @Override
+    public AaBox scaled(float x, float y, float z) {
+        long boxVa = va();
+        long resultVa = scaled(boxVa, x, y, z);
+        AaBox result = new AaBox(resultVa, true);
+
         return result;
     }
 

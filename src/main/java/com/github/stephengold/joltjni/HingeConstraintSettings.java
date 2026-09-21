@@ -84,6 +84,19 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the hinge axis of body 1. The settings are unaffected. (native
+     * attribute: mHingeAxis1)
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    public void getHingeAxis1(Vec3 storeResult) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHingeAxis1(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the hinge axis of body 2. The settings are unaffected. (native
      * attribute: mHingeAxis2)
      *
@@ -96,6 +109,19 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the hinge axis of body 2. The settings are unaffected. (native
+     * attribute: mHingeAxis2)
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    public void getHingeAxis2(Vec3 storeResult) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHingeAxis2(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -180,6 +206,19 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the normal axis of body 1. The settings are unaffected. (native
+     * attribute: mNormalAxis1)
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    public void getNormalAxis1(Vec3 storeResult) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getNormalAxis1(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the normal axis of body 2. The settings are unaffected. (native
      * attribute: mNormalAxis2)
      *
@@ -192,6 +231,19 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the normal axis of body 2. The settings are unaffected. (native
+     * attribute: mNormalAxis2)
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    public void getNormalAxis2(Vec3 storeResult) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getNormalAxis2(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -210,6 +262,19 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the constraint location for body 1. The settings are unaffected.
+     * (native attribute: mPoint1)
+     *
+     * @param storeResult storage for the location (not {@code null}, modified)
+     */
+    public void getPoint1(RVec3 storeResult) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint1(settingsVa, storeDoubles);
+        storeResult.set(storeDoubles);
+    }
+
+    /**
      * Copy the constraint location for body 2. The settings are unaffected.
      * (native attribute: mPoint2)
      *
@@ -222,6 +287,19 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the constraint location for body 2. The settings are unaffected.
+     * (native attribute: mPoint2)
+     *
+     * @param storeResult storage for the location (not {@code null}, modified)
+     */
+    public void getPoint2(RVec3 storeResult) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint2(settingsVa, storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -252,6 +330,18 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the hinge axis of body 1. (native attribute: mHingeAxis1)
      *
+     * @param x the desired X component of the axis direction (default=0)
+     * @param y the desired Y component of the axis direction (default=1)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setHingeAxis1(float x, float y, float z) {
+        long settingsVa = va();
+        setHingeAxis1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the hinge axis of body 1. (native attribute: mHingeAxis1)
+     *
      * @param direction the desired axis direction (not {@code null},
      * unaffected, default=(0,1,0))
      * @return the argument, for chaining
@@ -264,6 +354,18 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
         setHingeAxis1(settingsVa, x, y, z);
 
         return direction;
+    }
+
+    /**
+     * Alter the hinge axis of body 2. (native attribute: mHingeAxis2)
+     *
+     * @param x the desired X component of the axis direction (default=0)
+     * @param y the desired Y component of the axis direction (default=1)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setHingeAxis2(float x, float y, float z) {
+        long settingsVa = va();
+        setHingeAxis2(settingsVa, x, y, z);
     }
 
     /**
@@ -328,6 +430,18 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
      *
+     * @param x the desired X component of the axis direction (default=0)
+     * @param y the desired Y component of the axis direction (default=1)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setNormalAxis1(float x, float y, float z) {
+        long settingsVa = va();
+        setNormalAxis1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
+     *
      * @param direction the desired axis direction (not {@code null},
      * unaffected, default=(0,1,0))
      * @return the argument, for chaining
@@ -340,6 +454,18 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
         setNormalAxis1(settingsVa, x, y, z);
 
         return direction;
+    }
+
+    /**
+     * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
+     *
+     * @param x the desired X component of the axis direction (default=0)
+     * @param y the desired Y component of the axis direction (default=1)
+     * @param z the desired Z component of the axis direction (default=0)
+     */
+    public void setNormalAxis2(float x, float y, float z) {
+        long settingsVa = va();
+        setNormalAxis2(settingsVa, x, y, z);
     }
 
     /**
@@ -362,6 +488,18 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPoint1(double x, double y, double z) {
+        long settingsVa = va();
+        setPoint1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
+     *
      * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
@@ -374,6 +512,18 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
         setPoint1(settingsVa, x, y, z);
 
         return location;
+    }
+
+    /**
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
+     *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPoint2(double x, double y, double z) {
+        long settingsVa = va();
+        setPoint2(settingsVa, x, y, z);
     }
 
     /**

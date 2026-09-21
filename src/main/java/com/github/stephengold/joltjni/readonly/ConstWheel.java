@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -53,11 +53,27 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     Vec3 getContactLateral();
 
     /**
+     * Copy the wheel's lateral (sideways) direction.
+     *
+     * @param storeResult storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getContactLateral(Vec3 storeResult);
+
+    /**
      * Copy the wheel's longitudinal direction.
      *
      * @return a new direction vector (in system coordinates)
      */
     Vec3 getContactLongitudinal();
+
+    /**
+     * Copy the wheel's longitudinal direction.
+     *
+     * @param storeResult storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getContactLongitudinal(Vec3 storeResult);
 
     /**
      * Copy the contact normal direction.
@@ -67,6 +83,14 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     Vec3 getContactNormal();
 
     /**
+     * Copy the contact normal direction.
+     *
+     * @param storeResult storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getContactNormal(Vec3 storeResult);
+
+    /**
      * Copy the velocity of the contact point.
      *
      * @return a new velocity vector (meters per second in system coordinates)
@@ -74,11 +98,27 @@ public interface ConstWheel extends ConstJoltPhysicsObject {
     Vec3 getContactPointVelocity();
 
     /**
+     * Copy the velocity of the contact point.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getContactPointVelocity(Vec3 storeResult);
+
+    /**
      * Copy the location of the contact point.
      *
      * @return a new location vector (in system coordinates)
      */
     RVec3 getContactPosition();
+
+    /**
+     * Copy the location of the contact point.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getContactPosition(RVec3 storeResult);
 
     /**
      * Return ID of the sub-shape that's supporting the vehicle.

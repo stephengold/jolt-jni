@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,4 +43,13 @@ public interface ConstBoxShapeSettings extends ConstConvexShapeSettings {
      * @return a new vector: one-half of extent on each local axis
      */
     Vec3 getHalfExtent();
+
+    /**
+     * Copy the extent of the box. The settings are unaffected. (native
+     * attribute: mHalfExtent)
+     *
+     * @param storeResult storage for the half extents (not {@code null},
+     * modified)
+     */
+    void getHalfExtent(Vec3 storeResult);
 }

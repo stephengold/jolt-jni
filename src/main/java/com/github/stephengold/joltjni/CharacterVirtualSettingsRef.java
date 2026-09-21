@@ -607,6 +607,20 @@ final public class CharacterVirtualSettingsRef
     }
 
     /**
+     * Copy the supporting volume. The settings are unaffected. (native
+     * attribute: mSupportingVolume)
+     *
+     * @param storeResult storage for the plane (not {@code null}, modified)
+     */
+    @Override
+    public void getSupportingVolume(Plane storeResult) {
+        long settingsVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBaseSettings.getSupportingVolume(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the character's "up" direction. The settings are unaffected. (native
      * attribute: mUp)
      *
@@ -620,6 +634,21 @@ final public class CharacterVirtualSettingsRef
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the character's "up" direction. The settings are unaffected. (native
+     * attribute: mUp)
+     *
+     * @param storeResult storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getUp(Vec3 storeResult) {
+        long settingsVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBaseSettings.getUp(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
     }
     // *************************************************************************
     // Ref methods

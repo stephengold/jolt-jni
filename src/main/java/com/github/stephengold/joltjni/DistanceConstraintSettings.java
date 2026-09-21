@@ -123,6 +123,19 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the constraint location for body 1. The settings are unaffected.
+     * (native attribute: mPoint1)
+     *
+     * @param storeResult storage for the location (not {@code null}, modified)
+     */
+    public void getPoint1(RVec3 storeResult) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint1(settingsVa, storeDoubles);
+        storeResult.set(storeDoubles);
+    }
+
+    /**
      * Copy the constraint location for body 2. The settings are unaffected.
      * (native attribute: mPoint2)
      *
@@ -135,6 +148,19 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the constraint location for body 2. The settings are unaffected.
+     * (native attribute: mPoint2)
+     *
+     * @param storeResult storage for the location (not {@code null}, modified)
+     */
+    public void getPoint2(RVec3 storeResult) {
+        long settingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint2(settingsVa, storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**

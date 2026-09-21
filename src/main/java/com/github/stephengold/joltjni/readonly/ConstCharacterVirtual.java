@@ -134,6 +134,14 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     Vec3 getLinearVelocity();
 
     /**
+     * Copy the linear velocity of the character. The character is unaffected.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getLinearVelocity(Vec3 storeResult);
+
+    /**
      * Return the character's mass. The character is unaffected.
      *
      * @return the mass (in kilograms)
@@ -177,6 +185,14 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * @return a new location vector (in system coordinates)
      */
     RVec3 getPosition();
+
+    /**
+     * Copy the location of the character. The character is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getPosition(RVec3 storeResult);
 
     /**
      * Copy the position of the character. The character is unaffected.

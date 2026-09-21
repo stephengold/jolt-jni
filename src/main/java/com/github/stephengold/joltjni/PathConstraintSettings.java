@@ -124,6 +124,19 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Copy the starting location. The settings are unaffected. (native field:
+     * mPathPosition)
+     *
+     * @param storeResult storage for the location (not {@code null}, modified)
+     */
+    public void getPathPosition(Vec3 storeResult) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPathPosition(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the initial rotation. The path is unaffected. (native field:
      * mPathRotation)
      *
@@ -136,6 +149,20 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
         Quat result = new Quat(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the initial rotation. The path is unaffected. (native field:
+     * mPathRotation)
+     *
+     * @param storeResult storage for the orientation (not {@code null},
+     * modified)
+     */
+    public void getPathRotation(Quat storeResult) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPathRotation(settingsVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -213,6 +240,18 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the initial location. (native field: mPathPosition)
      *
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
+     */
+    public void setPathPosition(float x, float y, float z) {
+        long settingsVa = va();
+        setPathPosition(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the initial location. (native field: mPathPosition)
+     *
      * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      */
@@ -222,6 +261,19 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
         float locY = location.getY();
         float locZ = location.getZ();
         setPathPosition(settingsVa, locX, locY, locZ);
+    }
+
+    /**
+     * Alter the initial orientation. (native field: mPathRotation)
+     *
+     * @param qx the X component of the desired orientation (default=0)
+     * @param qy the Y component of the desired orientation (default=0)
+     * @param qz the Z component of the desired orientation (default=0)
+     * @param qw the W component of the desired orientation (default=1)
+     */
+    public void setPathRotation(float qx, float qy, float qz, float qw) {
+        long settingsVa = va();
+        setPathRotation(settingsVa, qx, qy, qz, qw);
     }
 
     /**

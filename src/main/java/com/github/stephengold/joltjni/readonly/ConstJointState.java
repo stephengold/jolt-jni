@@ -39,9 +39,23 @@ public interface ConstJointState extends ConstJoltPhysicsObject {
     Quat getRotation();
 
     /**
+     * Copy the rotation. The state is unaffected.
+     *
+     * @param storeResult storage for the rotation (not {@code null}, modified)
+     */
+    void getRotation(Quat storeResult);
+
+    /**
      * Copy the translation offset. The state is unaffected.
      *
      * @return a new offset vector
      */
     Vec3 getTranslation();
+
+    /**
+     * Copy the translation offset. The state is unaffected.
+     *
+     * @param storeResult storage for the offset (not {@code null}, modified)
+     */
+    void getTranslation(Vec3 storeResult);
 }

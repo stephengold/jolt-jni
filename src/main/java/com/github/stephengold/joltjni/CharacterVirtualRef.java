@@ -467,6 +467,21 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Copy the normal direction of the point of contact with the supporting
+     * surface. The character is unaffected.
+     *
+     * @param storeResult storage for the direction (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getGroundNormal(Vec3 storeResult) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getGroundNormal(characterVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
@@ -480,6 +495,21 @@ final public class CharacterVirtualRef
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the location of the point of contact with the supporting surface.
+     * The character is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getGroundPosition(RVec3 storeResult) {
+        long characterVa = targetVa();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        CharacterBase.getGroundPosition(characterVa, storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -542,6 +572,21 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Copy the world-space velocity of the supporting surface. The character is
+     * unaffected.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getGroundVelocity(Vec3 storeResult) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getGroundVelocity(characterVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Return the maximum angle for merging during hit reduction. The character
      * is unaffected.
      *
@@ -597,6 +642,20 @@ final public class CharacterVirtualRef
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the linear velocity of the character. The character is unaffected.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    @Override
+    public void getLinearVelocity(Vec3 storeResult) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterVirtual.getLinearVelocity(characterVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -694,6 +753,20 @@ final public class CharacterVirtualRef
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
+    }
+
+    /**
+     * Copy the location of the character. The character is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    @Override
+    public void getPosition(RVec3 storeResult) {
+        long characterVa = targetVa();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        CharacterVirtual.getPosition(characterVa, storeDoubles);
+        storeResult.set(storeDoubles);
     }
 
     /**
@@ -807,6 +880,19 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Copy the supporting volume. The character is unaffected.
+     *
+     * @param storeResult storage for the plane (not {@code null}, modified)
+     */
+    @Override
+    public void getSupportingVolume(Plane storeResult) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getSupportingVolume(characterVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Generate a TransformedShape that represents the volume occupied by the
      * character. The character is unaffected.
      *
@@ -834,6 +920,19 @@ final public class CharacterVirtualRef
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the character's "up" direction. The character is unaffected.
+     *
+     * @param storeResult storage for the direction (not {@code null}, modified)
+     */
+    @Override
+    public void getUp(Vec3 storeResult) {
+        long characterVa = targetVa();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getUp(characterVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -899,6 +998,24 @@ final public class CharacterVirtualRef
                 characterVa, otherVa);
 
         return result;
+    }
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
+     * @param nx the X component of the surface normal to test (in system
+     * coordinates)
+     * @param ny the Y component of the surface normal to test (in system
+     * coordinates)
+     * @param nz the Z component of the surface normal to test (in system
+     * coordinates)
+     * @return {@code true} if too steep, otherwise {@code false}
+     */
+    @Override
+    public boolean isSlopeTooSteep(float nx, float ny, float nz) {
+        long characterVa = targetVa();
+        return CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
     }
 
     /**

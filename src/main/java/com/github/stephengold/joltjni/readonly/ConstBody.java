@@ -55,11 +55,27 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     Vec3 getAccumulatedForce();
 
     /**
+     * Copy the net force acting on the body. The body is unaffected.
+     *
+     * @param storeResult storage for the force (Newtons in system coordinates,
+     * not {@code null}, modified)
+     */
+    void getAccumulatedForce(Vec3 storeResult);
+
+    /**
      * Copy the net torque acting on the body. The body is unaffected.
      *
      * @return a new torque vector (Newton meters in system coordinates)
      */
     Vec3 getAccumulatedTorque();
+
+    /**
+     * Copy the net torque acting on the body. The body is unaffected.
+     *
+     * @param storeResult storage for the torque (Newton meters in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getAccumulatedTorque(Vec3 storeResult);
 
     /**
      * Test whether the body is allowed to fall asleep. The body is unaffected.
@@ -74,6 +90,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * @return a new velocity vector (radians per second in system coordinates)
      */
     Vec3 getAngularVelocity();
+
+    /**
+     * Copy the body's angular velocity. The body is unaffected.
+     *
+     * @param storeResult storage for the angular velocity (radians per second
+     * in system coordinates, not {@code null}, modified)
+     */
+    void getAngularVelocity(Vec3 storeResult);
 
     /**
      * Generate settings to reconstruct the (rigid) body. The body is
@@ -178,6 +202,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     Vec3 getLinearVelocity();
 
     /**
+     * Copy the body's linear velocity. The body is unaffected.
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    void getLinearVelocity(Vec3 storeResult);
+
+    /**
      * Access the body's motion properties if it is dynamic or kinematic.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
@@ -218,6 +250,15 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     RVec3 getPosition();
 
     /**
+     * Copy the location of the body's origin (which might not coincide with its
+     * center of mass). The body is unaffected.
+     *
+     * @param storeResult storage for the location (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getPosition(RVec3 storeResult);
+
+    /**
      * Copy the position of the body. The body is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
@@ -240,6 +281,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * @return a new rotation quaternion (relative to the system axes)
      */
     Quat getRotation();
+
+    /**
+     * Copy the body's orientation. The body is unaffected.
+     *
+     * @param storeResult storage for the orientation (relative to the system
+     * axes, not {@code null}, modified)
+     */
+    void getRotation(Quat storeResult);
 
     /**
      * Access the body's shape. The body is unaffected.
@@ -293,10 +342,50 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * location. The body is unaffected.
      *
      * @param subShapeId the ID of the sub-shape to use
+     * @param xx the X coordinate of the location (in system coordinates)
+     * @param yy the Y coordinate of the location (in system coordinates)
+     * @param zz the Z coordinate of the location (in system coordinates)
+     *
+     * @return a new direction vector
+     */
+    Vec3 getWorldSpaceSurfaceNormal(
+            int subShapeId, double xx, double yy, double zz);
+
+    /**
+     * Copy the surface normal of a particular subshape at the specified
+     * location. The body is unaffected.
+     *
+     * @param subShapeId the ID of the sub-shape to use
+     * @param xx the X coordinate of the location (in system coordinates)
+     * @param yy the Y coordinate of the location (in system coordinates)
+     * @param zz the Z coordinate of the location (in system coordinates)
+     * @param storeResult storage for the normal (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getWorldSpaceSurfaceNormal(
+            int subShapeId, double xx, double yy, double zz, Vec3 storeResult);
+
+    /**
+     * Copy the surface normal of a particular subshape at the specified
+     * location. The body is unaffected.
+     *
+     * @param subShapeId the ID of the sub-shape to use
      * @param location the location to use (not {@code null}, unaffected)
      * @return a new direction vector
      */
     Vec3 getWorldSpaceSurfaceNormal(int subShapeId, RVec3Arg location);
+
+    /**
+     * Copy the surface normal of a particular subshape at the specified
+     * location. The body is unaffected.
+     *
+     * @param subShapeId the ID of the sub-shape to use
+     * @param location the location to use (not {@code null}, unaffected)
+     * @param storeResult storage for the normal (in system coordinates, not
+     * {@code null}, modified)
+     */
+    void getWorldSpaceSurfaceNormal(
+            int subShapeId, RVec3Arg location, Vec3 storeResult);
 
     /**
      * Copy the world transform. The body is unaffected.

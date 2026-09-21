@@ -59,6 +59,20 @@ public class CollisionEstimationResult extends JoltPhysicsObject {
     }
 
     /**
+     * Copy the angular velocity of body 1. The estimate is unaffected. (native
+     * attribute: mAngularVelocity1)
+     *
+     * @param storeResult storage for the velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    public void getAngularVelocity1(Vec3 storeResult) {
+        long estimateVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAngularVelocity1(estimateVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the angular velocity of body 2. The estimate is unaffected. (native
      * attribute: mAngularVelocity2)
      *
@@ -71,6 +85,20 @@ public class CollisionEstimationResult extends JoltPhysicsObject {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the angular velocity of body 2. The estimate is unaffected. (native
+     * attribute: mAngularVelocity2)
+     *
+     * @param storeResult storage for the velocity (radians per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    public void getAngularVelocity2(Vec3 storeResult) {
+        long estimateVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAngularVelocity2(estimateVa, storeFloats);
+        storeResult.set(storeFloats);
     }
 
     /**
@@ -105,6 +133,20 @@ public class CollisionEstimationResult extends JoltPhysicsObject {
     }
 
     /**
+     * Copy the linear velocity of body 1. The estimate is unaffected. (native
+     * attribute: mLinearVelocity1)
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    public void getLinearVelocity1(Vec3 storeResult) {
+        long estimateVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity1(estimateVa, storeFloats);
+        storeResult.set(storeFloats);
+    }
+
+    /**
      * Copy the linear velocity of body 2. The estimate is unaffected. (native
      * attribute: mLinearVelocity1)
      *
@@ -117,6 +159,20 @@ public class CollisionEstimationResult extends JoltPhysicsObject {
         Vec3 result = new Vec3(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Copy the linear velocity of body 2. The estimate is unaffected. (native
+     * attribute: mLinearVelocity2)
+     *
+     * @param storeResult storage for the velocity (meters per second in system
+     * coordinates, not {@code null}, modified)
+     */
+    public void getLinearVelocity2(Vec3 storeResult) {
+        long estimateVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity2(estimateVa, storeFloats);
+        storeResult.set(storeFloats);
     }
     // *************************************************************************
     // native private methods

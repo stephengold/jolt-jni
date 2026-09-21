@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,22 @@ import java.nio.FloatBuffer;
 public class RayCast extends JoltPhysicsObject {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate a ray cast with the specified endpoints.
+     *
+     * @param startX the desired X coordinate of the start location
+     * @param startY the desired Y coordinate of the start location
+     * @param startZ the desired Z coordinate of the start location
+     * @param dx the X component of the end offset from the start
+     * @param dy the Y component of the end offset from the start
+     * @param dz the Z component of the end offset from the start
+     */
+    public RayCast(float startX, float startY, float startZ,
+            float dx, float dy, float dz) {
+        long raycastVa = createRayCast(startX, startY, startZ, dx, dy, dz);
+        setVirtualAddress(raycastVa, () -> free(raycastVa));
+    }
 
     /**
      * Instantiate a ray cast with the specified endpoints.
