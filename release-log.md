@@ -1,9 +1,9 @@
 # Release log for the Jolt-JNI project
 
-## Version 6.1.1 released on TBD
+## Version 6.1.1 released on 21 September 2026
 
 Bugfix:  Linux natives fail to load on some systems because they were
-accidentally built with   
+accidentally built with Clang v21.1.8  
 
 
 ## Version 6.1.0 released on 21 September 2026
