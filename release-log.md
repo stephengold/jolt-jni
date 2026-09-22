@@ -1,5 +1,11 @@
 # Release log for the Jolt-JNI project
 
+## Version 6.1.1 released on TBD
+
+Bugfix:  Linux natives fail to load on some systems because they were
+accidentally built with   
+
+
 ## Version 6.1.0 released on 21 September 2026
 
 + Bugfix:  logic error in `Plane.set(ConstPlane)` (pull request #53)
