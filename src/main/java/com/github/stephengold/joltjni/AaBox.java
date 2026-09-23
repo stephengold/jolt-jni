@@ -194,19 +194,6 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Enlarge the box to include the specified location.
-     *
-     * @param location the location to include (not {@code null}, unaffected)
-     */
-    public void encapsulate(Vec3Arg location) {
-        long boxVa = va();
-        float locX = location.getX();
-        float locY = location.getY();
-        float locZ = location.getZ();
-        encapsulate(boxVa, locX, locY, locZ);
-    }
-
-    /**
      * Enlarge the box to include the specified triangle.
      *
      * @param vertices array of vertex locations (not {@code null}, unaffected)
@@ -222,6 +209,19 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
         encapsulatedTriangleFromVertices(
                 boxVa, numVertices, directBuffer, triangleVa);
+    }
+
+    /**
+     * Enlarge the box to include the specified location.
+     *
+     * @param location the location to include (not {@code null}, unaffected)
+     */
+    public void encapsulate(Vec3Arg location) {
+        long boxVa = va();
+        float locX = location.getX();
+        float locY = location.getY();
+        float locZ = location.getZ();
+        encapsulate(boxVa, locX, locY, locZ);
     }
 
     /**
@@ -843,10 +843,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static long createBiggest();
 
+    native private static long createCopy(long originalVa);
+
     native private static long createCubic(
             float centerX, float centerY, float centerZ, float halfExtent);
-
-    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
@@ -883,9 +883,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static float getSqDistanceTo(
             long boxVa, float px, float py, float pz);
 
-    native private static float getSurfaceArea(long boxVa);
-
     native private static void getSupport(long boxVa, FloatBuffer tmpFloats);
+
+    native private static float getSurfaceArea(long boxVa);
 
     native private static float getVolume(long boxVa);
 

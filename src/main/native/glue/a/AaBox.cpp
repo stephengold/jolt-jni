@@ -94,6 +94,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createBiggest
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createCopy
+  BODYOF_CREATE_COPY(AABox)
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    createCubic
  * Signature: (FFFF)J
  */
@@ -105,14 +113,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createCubic
     TRACE_NEW("AABox", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
-
-/*
- * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    createCopy
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createCopy
-  BODYOF_CREATE_COPY(AABox)
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
@@ -325,18 +325,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSqDistance
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    getSurfaceArea
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSurfaceArea
-  (JNIEnv *, jclass, jlong boxVa) {
-    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    const float result = pBox->GetSurfaceArea();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    getSupport
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
@@ -350,6 +338,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_getSupport
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getSurfaceArea
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSurfaceArea
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const float result = pBox->GetSurfaceArea();
+    return result;
 }
 
 /*
