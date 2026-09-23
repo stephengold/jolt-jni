@@ -328,7 +328,7 @@ jobs:
 
   Java21-x-Android:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/setup-java@v6
         with:
