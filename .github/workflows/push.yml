@@ -15,8 +15,7 @@ jobs:
           java-version: 17
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
-      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64 build install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64 build install \
             --console=plain \
@@ -39,15 +38,13 @@ jobs:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.357.1
       - run: clang++ --version
-      - name: gradlew -Ptarget=Linux64 -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Ptarget=Linux64 -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - name: gradlew -Partifact=jolt-jni-Linux64 -Ptarget=Linux64 -PuseVK=set clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-Linux64 -Ptarget=Linux64 -PuseVK=set clean release \
             --console=plain \
@@ -55,10 +52,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-Linux64_fma:
@@ -76,15 +73,13 @@ jobs:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.357.1
       - run: clang++ --version
-      - name: gradlew -Ptarget=Linux64_fma -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Ptarget=Linux64_fma -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - name: gradlew -Partifact=jolt-jni-Linux64_fma -Ptarget=Linux64_fma -PuseVK=set clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-Linux64_fma -Ptarget=Linux64_fma -PuseVK=set clean release \
             --console=plain \
@@ -92,10 +87,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_ARM64:
@@ -111,13 +106,11 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt install g++-11-aarch64-linux-gnu
       - run: aarch64-linux-gnu-g++-11 --version
-      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux_ARM64 assemble
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux_ARM64 assemble \
             --console=plain
-      - name: gradlew -Partifact=jolt-jni-Linux_ARM64 -Ptarget=Linux_ARM64 clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-Linux_ARM64 -Ptarget=Linux_ARM64 clean release \
             --console=plain \
@@ -125,10 +118,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-MacOSX64:
@@ -144,20 +137,17 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '26.6.0'
-      - name: gradlew unpackJoltSource
-        run: |
+      - run: |
           ./gradlew unpackJoltSource \
             --console=plain
       - run: clang++ --version
-      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -PuseMTL=set -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -PuseMTL=set -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - name: gradlew -Partifact=jolt-jni-MacOSX64 -Ptarget=MacOSX64 -PuseMTL=set clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-MacOSX64 -Ptarget=MacOSX64 -PuseMTL=set clean release \
             --console=plain \
@@ -165,10 +155,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-MacOSX_ARM64:
@@ -184,18 +174,15 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '26.6.0'
-      - name: gradlew unpackJoltSource
-        run: |
+      - run: |
           ./gradlew unpackJoltSource \
             --console=plain
       - run: clang++ --version
-      - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -PuseMTL=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -PuseMTL=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain
-      - name: gradlew -Partifact=jolt-jni-MacOSX_ARM64 -PuseMTL=set -Ptarget=MacOSX_ARM64 clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-MacOSX_ARM64 -PuseMTL=set -Ptarget=MacOSX_ARM64 clean release \
             --console=plain \
@@ -203,10 +190,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-Windows64:
@@ -223,16 +210,14 @@ jobs:
         with:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.357.0
-      - name: gradlew -Ptarget=Windows64 -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Ptarget=Windows64 -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
         shell: bash
-      - name: gradlew -Partifact=jolt-jni-Windows64 -Ptarget=Windows64 -PuseVK=set clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-Windows64 -Ptarget=Windows64 -PuseVK=set clean release \
             --console=plain \
@@ -241,10 +226,10 @@ jobs:
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
 
@@ -262,16 +247,14 @@ jobs:
         with:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.357.0
-      - name: gradlew -Ptarget=Windows64_avx2 -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Ptarget=Windows64_avx2 -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
         shell: bash
-      - name: gradlew -Partifact=jolt-jni-Windows64_avx2 -Ptarget=Windows64_avx2 -PuseVK=set clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-Windows64_avx2 -Ptarget=Windows64_avx2 -PuseVK=set clean release \
             --console=plain \
@@ -280,10 +263,10 @@ jobs:
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
 
@@ -301,16 +284,14 @@ jobs:
         with:
           vulkan-components: Vulkan-Headers
           vulkan-query-version: 1.4.357.0
-      - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows_ARM64 -PuseVK=set -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows_ARM64 -PuseVK=setx checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
         shell: bash
-      - name: gradlew -Partifact=jolt-jni-Windows_ARM64 -Ptarget=Windows_ARM64 -PuseVK=set clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-Windows_ARM64 -Ptarget=Windows_ARM64 -PuseVK=set clean release \
             --console=plain \
@@ -319,10 +300,10 @@ jobs:
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
 
@@ -336,20 +317,17 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
-      - name: gradlew classes unpackJoltSource unpackTestFramework unpackVhacdSource
-        run: |
+      - run: |
           ./gradlew classes unpackJoltSource unpackTestFramework unpackVhacdSource \
             --console=plain
       - run: cp android.gradle build.gradle
-      - name: gradlew -Pflavor=Sp -Ptarget=Android_ARM8 -PuseVK=set install lint
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Pflavor=Sp -Ptarget=Android_ARM8 -PuseVK=set install lint \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - name: gradlew -Partifact=jolt-jni-Android -Pflavor=Sp -PuseVK=set clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-Android -Pflavor=Sp -PuseVK=set clean release \
             --console=plain \
@@ -357,10 +335,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_ARM32hf:
@@ -376,15 +354,13 @@ jobs:
       - run: sudo apt install g++-11-arm-linux-gnueabihf
       - uses: gradle/actions/setup-gradle@v6
       - run: arm-linux-gnueabihf-g++-11 --version
-      - name: gradlew -Ptarget=Linux_ARM32hf install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Ptarget=Linux_ARM32hf install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - name: gradlew -Partifact=jolt-jni-Linux_ARM32hf -Ptarget=Linux_ARM32hf clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-Linux_ARM32hf -Ptarget=Linux_ARM32hf clean release \
             --console=plain \
@@ -392,10 +368,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_LoongArch64:
@@ -411,8 +387,7 @@ jobs:
       - run: sudo apt install g++-13-loongarch64-linux-gnu
       - uses: gradle/actions/setup-gradle@v6
       - run: loongarch64-linux-gnu-g++-13 --version
-      - name: gradlew -Ptarget=Linux_LoongArch64 assemble
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Ptarget=Linux_LoongArch64 assemble \
             --console=plain
@@ -427,8 +402,7 @@ jobs:
           java-version: 26
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
-      - name: gradlew -Pbt=Release -Pflavor=Dp -Ptarget=Linux64 -Ptool=gcc build install
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew -Pbt=Release -Pflavor=Dp -Ptarget=Linux64 -Ptool=gcc build install \
             --console=plain \
