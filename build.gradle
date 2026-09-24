@@ -534,20 +534,15 @@ tasks.register('runTest000', JavaExec) {
     mainClass = 'testjoltjni.TestUtils'
 }
 
-Boolean enableNativeAccess = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     dependsOn('assemble')
     enableAssertions = true
-    if (enableNativeAccess) {
-        jvmArgs '--enable-native-access=ALL-UNNAMED' // suppress System::load() warning
-    }
+    jvmArgs '--enable-native-access=ALL-UNNAMED' // suppress System::load() warning
 }
 tasks.withType(Test).configureEach {
     dependsOn('unpackJoltAssets')
-    if (enableNativeAccess) {
-        jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
-    }
+    jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
     //testLogging.showStandardStreams = true
 }
 test.dependsOn('assemble')
