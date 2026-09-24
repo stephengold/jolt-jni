@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,8 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics powered
  * slider-constraint test.
@@ -56,7 +56,7 @@ public void Initialize()
 	body1.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 
-	Op.plusEquals(position ,new Vec3(box_size + 10.0f, 0, 0));
+	plusEquals(position ,new Vec3(box_size + 10.0f, 0, 0));
 
 	mBody2 = mBodyInterface.createBody(new BodyCreationSettings(box, position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
 	mBody2.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));

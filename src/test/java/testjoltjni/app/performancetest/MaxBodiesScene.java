@@ -22,7 +22,7 @@ SOFTWARE.
 package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
+import static com.github.stephengold.joltjni.operator.Op.*;
 
 /**
  * A line-for-line Java translation of the Jolt-Physics "max-bodies scene"
@@ -64,7 +64,7 @@ class MaxBodiesScene implements  PerformanceTestScene
 		Vec3 half_extent = Vec3.sReplicate(0.5f);
 		BodyCreationSettings bcs=new BodyCreationSettings(new BoxShape(half_extent), RVec3.sZero(), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 		bcs.setOverrideMassProperties ( EOverrideMassProperties.MassAndInertiaProvided);
-		bcs.getMassPropertiesOverride().setMassAndInertiaOfSolidBox(Op.star(2.0f , half_extent), 1000.0f);
+		bcs.getMassPropertiesOverride().setMassAndInertiaOfSolidBox(star(2.0f , half_extent), 1000.0f);
 		for (int z = 0; z < num_per_axis && body_ids.size() < num_bodies; ++z)
 			for (int y = 0; y < num_per_axis && body_ids.size() < num_bodies; ++y)
 				for (int x = 0; x < num_per_axis && body_ids.size() < num_bodies; ++x)

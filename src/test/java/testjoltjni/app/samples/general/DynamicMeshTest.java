@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,8 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics dynamic-mesh test.
  * <p>
@@ -46,7 +46,7 @@ public void Initialize()
 
 	// Mesh cannot calculate its mass, we must provide it
 	settings.setOverrideMassProperties ( EOverrideMassProperties.MassAndInertiaProvided);
-	settings.getMassPropertiesOverride().setMassAndInertiaOfSolidBox(Op.star(2.0f ,new Vec3(cTorusRadius, cTubeRadius, cTorusRadius)), 1000.0f);
+	settings.getMassPropertiesOverride().setMassAndInertiaOfSolidBox(star(2.0f ,new Vec3(cTorusRadius, cTubeRadius, cTorusRadius)), 1000.0f);
 
 	mBodyInterface.createAndAddBody(settings, EActivation.Activate);
 

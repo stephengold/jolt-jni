@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.JphMath.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics contact-manifold test.
  * <p>
@@ -49,7 +49,7 @@ public void Initialize()
 			mBodyInterface.createAndAddBody(new BodyCreationSettings(big_box,new RVec3(-20.0f + i * 10.0f, 4, -20.0f + j * 40.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 
 			// Place a dynamic body on it
-			mBodyInterface.createAndAddBody(new BodyCreationSettings(j == 0? capsule : long_box,new RVec3(-20.0f + i * 10.0f, 12, -5.0f + i * 5.0f - 20.0f + j * 40.0f), Op.star(Quat.sRotation(Vec3.sAxisY(), 0.1f * JPH_PI) , Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI)), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
+			mBodyInterface.createAndAddBody(new BodyCreationSettings(j == 0? capsule : long_box,new RVec3(-20.0f + i * 10.0f, 12, -5.0f + i * 5.0f - 20.0f + j * 40.0f), star(Quat.sRotation(Vec3.sAxisY(), 0.1f * JPH_PI) , Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI)), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 		}
 }
 }

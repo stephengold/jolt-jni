@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import static com.github.stephengold.joltjni.JphMath.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
@@ -128,7 +128,7 @@ class RagdollScene implements PerformanceTestScene
 					JointState root = pose_copy.getJoint(0);
 					root.setTranslation (new Vec3(0, mVerticalSeparation * (i + 1), 0));
 					float angle = 2.0f * JPH_PI * (float)(i) / (float)(mPileSize);
-					root.setRotation ( Op.star(Quat.sRotation(Vec3.sAxisY(), angle) , root.getRotation()));
+					root.setRotation ( star(Quat.sRotation(Vec3.sAxisY(), angle) , root.getRotation()));
 					pose_copy.calculateJointMatrices();
 
 					// Drive to pose

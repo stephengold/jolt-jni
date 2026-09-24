@@ -23,11 +23,11 @@ package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.lambda.TriFunction;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.std.Mt19937;
 import java.util.*;
 import static com.github.stephengold.joltjni.JphMath.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 
 /**
  * A line-for-line Java translation of the Jolt-Physics "high-speed scene"
@@ -108,7 +108,7 @@ class HighSpeedScene implements  PerformanceTestScene
 			dynamic_body_settings.setRotation ( Quat.sRandom(rnd));
 			dynamic_body_settings.setFriction ( random_float.apply(rnd, 0.5f, 1.0f));
 			dynamic_body_settings.setRestitution ( random_float.apply(rnd, 0.9f, 1.0f));
-			dynamic_body_settings.setLinearVelocity ( Op.star(speed , Vec3.sRandom(rnd)));
+			dynamic_body_settings.setLinearVelocity ( star(speed , Vec3.sRandom(rnd)));
 			bi.createAndAddBody(dynamic_body_settings, EActivation.Activate);
 		}
 	}
