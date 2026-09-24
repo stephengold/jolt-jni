@@ -342,6 +342,7 @@ final public class SmokeTestAll {
      * Smoke test the "character" package.
      */
     private static void smokeTestCharacter() {
+        smokeTest(new CharacterGatheringTest());
         smokeTest(new CharacterPlanetTest());
         smokeTest(new CharacterSpaceShipTest());
 
