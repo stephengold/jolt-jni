@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,7 +45,8 @@ public void Initialize()
 		BodyCreationSettings settings=new BodyCreationSettings(sphere, new RVec3(-50.0f + i * 10.0f, 20.0f, -20.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 		settings.setRestitution ( 0.1f * i);
 		settings.setLinearDamping ( 0.0f);
-		mBodyInterface.createAndAddBody(settings, EActivation.Activate);
+		int id = mBodyInterface.createAndAddBody(settings, EActivation.Activate);
+		SetBodyLabel(id, String.format("Restitution: %.1f", (double)(settings.getRestitution())));
 	}
 
 	for (int i = 0; i <= 10; ++i)
@@ -53,7 +54,15 @@ public void Initialize()
 		BodyCreationSettings settings=new BodyCreationSettings(box, new RVec3(-50.0f + i * 10.0f, 20.0f, 20.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 		settings.setRestitution ( 0.1f * i);
 		settings.setLinearDamping ( 0.0f);
-		mBodyInterface.createAndAddBody(settings, EActivation.Activate);
+		int id = mBodyInterface.createAndAddBody(settings, EActivation.Activate);
+		SetBodyLabel(id, String.format("Restitution: %.1f", (double)(settings.getRestitution())));
 	}
+}
+
+public void PrePhysicsUpdate( PreUpdateParams inParams)
+{
+	// Draw a line to show the initial height of the bodies
+	mDebugRenderer.drawLine(new RVec3(-55.0f, 20.0f, -20.0f),new RVec3(55.0f, 20.0f, -20.0f), Color.sGreen);
+	mDebugRenderer.drawLine(new RVec3(-55.0f, 20.0f, 20.0f),new RVec3(55.0f, 20.0f, 20.0f), Color.sGreen);
 }
 }
