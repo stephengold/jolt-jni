@@ -63,7 +63,8 @@ public class SkeletalAnimation extends JoltPhysicsObject implements RefTarget {
      * animation is unaffected.
      *
      * @param time the animation time to use (in seconds)
-     * @param storePose storage for the interpolated pose (not null, modified)
+     * @param storePose storage for the interpolated pose (not {@code null},
+     * modified)
      */
     public void sample(float time, SkeletonPose storePose) {
         long animationVa = va();

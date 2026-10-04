@@ -54,7 +54,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Return the upper limit of the specified degree of freedom. The constraint
      * is unaffected.
      *
-     * @param dof which DOF to query (not null)
+     * @param dof which DOF to query (not {@code null})
      * @return the limit value
      */
     public float getLimitsMax(EAxis dof) {
@@ -69,7 +69,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Return the lower limit of the specified degree of freedom. The constraint
      * is unaffected.
      *
-     * @param dof which DOF to query (not null)
+     * @param dof which DOF to query (not {@code null})
      * @return the limit value
      */
     public float getLimitsMin(EAxis dof) {
@@ -84,7 +84,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Access the spring settings of the specified degree of freedom. The
      * constraint is unaffected.
      *
-     * @param dof which degree of freedom to query (not null)
+     * @param dof which degree of freedom to query (not {@code null})
      * @return a new JVM object with the pre-existing native object assigned
      */
     public ConstSpringSettings getLimitsSpringSettings(EAxis dof) {
@@ -100,7 +100,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Return the maximum friction of the specified degree of freedom. The
      * constraint is unaffected.
      *
-     * @param dof which DPF to alter (not null)
+     * @param dof which DPF to alter (not {@code null})
      * @return the friction value
      */
     public float getMaxFriction(EAxis dof) {
@@ -114,7 +114,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Access the motor settings of the specified degree of freedom.
      *
-     * @param dof which degree of freedom to query (not null)
+     * @param dof which degree of freedom to query (not {@code null})
      * @return a new JVM object with the pre-existing native object assigned
      */
     public MotorSettings getMotorSettings(EAxis dof) {
@@ -130,8 +130,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Return the motor state of the specified degree of freedom. The constraint
      * is unaffected.
      *
-     * @param dof which DOF to alter (not null)
-     * @return an enum value (not null)
+     * @param dof which DOF to alter (not {@code null})
+     * @return an enum value (not {@code null})
      */
     public EMotorState getMotorState(EAxis dof) {
         long constraintVa = va();
@@ -171,7 +171,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Copy the rotation upper limits. The constraint is unaffected.
      *
-     * @return the upper limit for each axis (not null)
+     * @return the upper limit for each axis (not {@code null})
      */
     public Vec3 getRotationLimitsMax() {
         long constraintVa = va();
@@ -197,7 +197,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Copy the rotation lower limits. The constraint is unaffected.
      *
-     * @return the lower limit for each axis (not null)
+     * @return the lower limit for each axis (not {@code null})
      */
     public Vec3 getRotationLimitsMin() {
         long constraintVa = va();
@@ -341,7 +341,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Copy the translation upper limits. The constraint is unaffected.
      *
-     * @return the upper limit for each axis (not null)
+     * @return the upper limit for each axis (not {@code null})
      */
     public Vec3 getTranslationLimitsMax() {
         long constraintVa = va();
@@ -367,7 +367,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Copy the translation lower limits. The constraint is unaffected.
      *
-     * @return the lower limit for each axis (not null)
+     * @return the lower limit for each axis (not {@code null})
      */
     public Vec3 getTranslationLimitsMin() {
         long constraintVa = va();
@@ -394,7 +394,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Test whether the specified degree of freedom is fixed. The constraint is
      * unaffected.
      *
-     * @param dof which DOF to query (not null)
+     * @param dof which DOF to query (not {@code null})
      * @return {@code true} if fixed, otherwise {@code false}
      */
     public boolean isFixedAxis(EAxis dof) {
@@ -409,7 +409,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Test whether the specified degree of freedom is free. The constraint is
      * unaffected.
      *
-     * @param dof which DOF to query (not null)
+     * @param dof which DOF to query (not {@code null})
      * @return {@code true} if free, otherwise {@code false}
      */
     public boolean isFreeAxis(EAxis dof) {

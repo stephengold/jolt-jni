@@ -37,7 +37,7 @@ public class PlaneShape extends Shape {
     /**
      * Instantiate the specified shape without creating a settings object.
      *
-     * @param plane the plane to use (not null, unaffected)
+     * @param plane the plane to use (not {@code null}, unaffected)
      */
     public PlaneShape(ConstPlane plane) {
         this(plane, null);
@@ -46,7 +46,7 @@ public class PlaneShape extends Shape {
     /**
      * Instantiate the specified shape without creating a settings object.
      *
-     * @param plane the plane to use (not null, unaffected)
+     * @param plane the plane to use (not {@code null}, unaffected)
      * @param material the desired surface properties (unaffected) or
      * {@code null} for default properties (default=null)
      */
@@ -57,7 +57,7 @@ public class PlaneShape extends Shape {
     /**
      * Instantiate the specified shape without creating a settings object.
      *
-     * @param plane the plane to use (not null, unaffected)
+     * @param plane the plane to use (not {@code null}, unaffected)
      * @param material the desired surface properties (unaffected) or
      * {@code null} for default properties (default=null)
      * @param halfExtent the desired radius of the bounding box (&gt;0,

@@ -69,7 +69,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     /**
      * Add the specified constraint.
      *
-     * @param constraint (not null)
+     * @param constraint (not {@code null})
      */
     public void addAdditionalConstraint(AdditionalConstraint constraint) {
         long settingsVa = va();
@@ -117,8 +117,8 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
      *
      * @param groupId the collision group for the bodies
      * @param userData the desired user-data value
-     * @param physicsSystem where to add the bodies and constraints (not null,
-     * modified)
+     * @param physicsSystem where to add the bodies and constraints (not
+     * {@code null}, modified)
      * @return a new ragdoll instance, or {@code null} when out of bodies
      */
     public Ragdoll createRagdoll(
@@ -204,7 +204,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
      * Save the settings to the specified binary stream. The settings are
      * unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      * @param saveShapes if true, save the shapes
      * @param saveGroupFilter if true, save the group filter
      */
@@ -229,7 +229,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     /**
      * Replace the skeleton. (native attribute: mSkeleton)
      *
-     * @param skeleton the desired skeleton (not null)
+     * @param skeleton the desired skeleton (not {@code null})
      */
     public void setSkeleton(Skeleton skeleton) {
         long settingsVa = va();
@@ -240,8 +240,8 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     /**
      * Read a ragdoll from the specified input stream.
      *
-     * @param stream the stream to read from (not null)
-     * @return the result of the read (not null)
+     * @param stream the stream to read from (not {@code null})
+     * @return the result of the read (not {@code null})
      */
     public static RagdollResult sRestoreFromBinaryState(StreamIn stream) {
         long streamVa = stream.va();

@@ -54,8 +54,8 @@ public class SphereShapeSettings extends ConvexShapeSettings {
      * Instantiate settings for the specified radius and material.
      *
      * @param radius the desired radius (&ge;0)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
      */
     public SphereShapeSettings(float radius, ConstPhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.targetVaOrZero();

@@ -324,7 +324,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      * Return which space the other properties are specified in. The settings
      * are unaffected. (native attribute: mSpace)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EConstraintSpace getSpace() {
         long settingsVa = va();

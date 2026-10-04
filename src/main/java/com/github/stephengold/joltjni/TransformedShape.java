@@ -74,8 +74,8 @@ public class TransformedShape
     /**
      * Cast a ray and find the closest hit. The shape is unaffected.
      *
-     * @param raycast the test ray (not null, unaffected)
-     * @param storeResult storage for the result (not null, modified)
+     * @param raycast the test ray (not {@code null}, unaffected)
+     * @param storeResult storage for the result (not {@code null}, modified)
      * @return {@code true} if a hit was found, otherwise {@code false}
      */
     @Override

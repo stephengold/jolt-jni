@@ -111,8 +111,9 @@ final public class Std {
     /**
      * Shuffle the specified array.
      *
-     * @param indices the values to shuffle (not null, modified)
-     * @param generator the sequence generator to use (not null, modified)
+     * @param indices the values to shuffle (not {@code null}, modified)
+     * @param generator the sequence generator to use (not {@code null},
+     * modified)
      */
     public static void shuffle(int[] indices, DefaultRandomEngine generator) {
         long generatorVa = generator.va();
@@ -122,8 +123,9 @@ final public class Std {
     /**
      * Shuffle the specified Java list.
      *
-     * @param list the list to shuffle (not null, modified)
-     * @param generator the sequence generator to use (not null, modified)
+     * @param list the list to shuffle (not {@code null}, modified)
+     * @param generator the sequence generator to use (not {@code null},
+     * modified)
      */
     public static void shuffle(
             List<Object> list, DefaultRandomEngine generator) {
@@ -144,7 +146,7 @@ final public class Std {
     /**
      * Count the number of elements in the specified array.
      *
-     * @param array the array to measure (not null, unaffected)
+     * @param array the array to measure (not {@code null}, unaffected)
      * @return the number of elements (&ge;0)
      */
     public static int size(Object[] array) {
@@ -164,8 +166,8 @@ final public class Std {
     /**
      * Compare the specified strings lexicographically.
      *
-     * @param lhs the first string to compare (not null)
-     * @param rhs the 2nd string to compare (not null)
+     * @param lhs the first string to compare (not {@code null})
+     * @param rhs the 2nd string to compare (not {@code null})
      * @return a negative value if {@code lhs} precedes {@code rhs} in
      * lexicographical order, or greater than zero if {@code lhs} follows
      * {@code rhs}, or zero if they are equal

@@ -46,7 +46,7 @@ public class Rtti extends JoltPhysicsObject {
      * Return the name of the C++ identifier. The type information is
      * unaffected.
      *
-     * @return the name (not null)
+     * @return the name (not {@code null})
      */
     public String getName() {
         long rttiVa = va();

@@ -187,7 +187,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Return the upper limit of the specified degree of freedom. The settings
      * are unaffected. (native attribute: mLimitMax)
      *
-     * @param dof which DOF (not null)
+     * @param dof which DOF (not {@code null})
      * @return the upper limit
      */
     public float getLimitMax(EAxis dof) {
@@ -215,7 +215,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Return the lower limit of the specified degree of freedom. The settings
      * are unaffected. (native attribute: mLimitMin)
      *
-     * @param dof which DOF (not null)
+     * @param dof which DOF (not {@code null})
      * @return the lower limit
      */
     public float getLimitMin(EAxis dof) {
@@ -243,7 +243,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Access the spring settings for the specified degree of freedom. (native
      * attribute: mLimitsSpringSettings)
      *
-     * @param translationDof which DOF (not null, not a rotation DOF)
+     * @param translationDof which DOF (not {@code null}, not a rotation DOF)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public SpringSettings getLimitsSpringSettings(EAxis translationDof) {
@@ -261,7 +261,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Return the maximum friction of the specified degree of freedom. The
      * settings are unaffected. (native attribute: mMaxFriction)
      *
-     * @param dof which DOF (not null)
+     * @param dof which DOF (not {@code null})
      * @return the maximum friction value
      */
     public float getMaxFriction(EAxis dof) {
@@ -276,7 +276,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Access the motor settings for the specified degree of freedom. (native
      * attribute: mMotorSettings)
      *
-     * @param dof which DOF (not null)
+     * @param dof which DOF (not {@code null})
      * @return a new JVM object with the pre-existing native object assigned
      */
     public MotorSettings getMotorSettings(EAxis dof) {
@@ -362,7 +362,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Return which space the other properties are specified in. The settings
      * are unaffected. (native attribute: mSpace)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EConstraintSpace getSpace() {
         long settingsVa = va();
@@ -376,7 +376,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Return type of swing constraint. The settings are unaffected. (native
      * attribute: mSwingType)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public ESwingType getSwingType() {
         long settingsVa = va();
@@ -390,7 +390,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Test whether the specified degree of freedom is fixed. The settings are
      * unaffected.
      *
-     * @param dof which DOF to test (not null)
+     * @param dof which DOF to test (not {@code null})
      * @return {@code true} if fixed, otherwise {@code false}
      */
     public boolean isFixedAxis(EAxis dof) {
@@ -405,7 +405,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Test whether the specified degree of freedom is free. The settings are
      * unaffected.
      *
-     * @param dof which DOF to test (not null)
+     * @param dof which DOF to test (not {@code null})
      * @return {@code true} if free, otherwise {@code false}
      */
     public boolean isFreeAxis(EAxis dof) {
@@ -419,7 +419,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Make the specified degree of freedom a fixed one.
      *
-     * @param dof which DOF to modify (not null)
+     * @param dof which DOF to modify (not {@code null})
      */
     public void makeFixedAxis(EAxis dof) {
         int dofIndex = dof.ordinal();
@@ -439,7 +439,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Make the specified degree of freedom a free one.
      *
-     * @param dof which DOF to modify (not null)
+     * @param dof which DOF to modify (not {@code null})
      */
     public void makeFreeAxis(EAxis dof) {
         int dofIndex = dof.ordinal();
@@ -582,7 +582,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the limits of the specified degree of freedom.
      *
-     * @param dof which DOF to modify (not null)
+     * @param dof which DOF to modify (not {@code null})
      * @param min the desired minimum value
      * @param max the desired maximum value
      */
@@ -607,7 +607,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the upper limit of the specified degree of freedom. (native
      * attribute: mLimitMax)
      *
-     * @param dof which DOF to modify (not null)
+     * @param dof which DOF to modify (not {@code null})
      * @param max the desired limit value (default=MAX_VALUE)
      */
     public void setLimitMax(EAxis dof, float max) {
@@ -619,7 +619,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the lower limit of the specified DOF. (native attribute: mLimitMin)
      *
-     * @param dof which DOF to modify (not null)
+     * @param dof which DOF to modify (not {@code null})
      * @param min the desired limit value (default=-MAX_VALUE)
      */
     public void setLimitMin(EAxis dof, float min) {
@@ -632,7 +632,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the maximum friction of the specified degree of freedom. (native
      * attribute: mMaxFriction)
      *
-     * @param dof which DOF to modify (not null)
+     * @param dof which DOF to modify (not {@code null})
      * @param friction the desired value (default=0)
      */
     public void setMaxFriction(EAxis dof, float friction) {
@@ -645,8 +645,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the motor settings for the specified degree of freedom. (native
      * attribute: mMotorSettings)
      *
-     * @param dof which DOF (not null)
-     * @param motorSettings the settings to copy (not null, unaffected)
+     * @param dof which DOF (not {@code null})
+     * @param motorSettings the settings to copy (not {@code null}, unaffected)
      * @return the motor settings, for chaining
      */
     public MotorSettings setMotorSettings(
@@ -662,7 +662,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * attribute: mMotorSettings)
      *
      * @param dofIndex which DOF (&ge;0, &lt;6)
-     * @param motorSettings the settings to copy (not null, unaffected)
+     * @param motorSettings the settings to copy (not {@code null}, unaffected)
      */
     public void setMotorSettings(int dofIndex, MotorSettings motorSettings) {
         long constraintSettingsVa = va();
@@ -685,7 +685,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 1. (native attribute: mPosition1)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
      */
@@ -714,7 +714,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 2. (native attribute: mPosition2)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
      */
@@ -732,7 +732,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Alter which space the other properties are specified in. (native
      * attribute: mSpace)
      *
-     * @param space an enum value (not null, default=WorldSpace)
+     * @param space an enum value (not {@code null}, default=WorldSpace)
      */
     public void setSpace(EConstraintSpace space) {
         long settingsVa = va();
@@ -743,7 +743,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the type of swing constraint. (native attribute: mSwingType)
      *
-     * @param swingType an enum value (not null, default=Cone)
+     * @param swingType an enum value (not {@code null}, default=Cone)
      */
     public void setSwingType(ESwingType swingType) {
         long settingsVa = va();

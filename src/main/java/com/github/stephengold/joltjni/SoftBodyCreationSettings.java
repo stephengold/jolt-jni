@@ -120,7 +120,7 @@ public class SoftBodyCreationSettings
      * Read the state of this object from the specified stream, excluding the
      * shape and group filter.
      *
-     * @param stream where to read objects from (not null)
+     * @param stream where to read objects from (not {@code null})
      */
     public void restoreBinaryState(StreamIn stream) {
         long bodySettingsVa = va();
@@ -308,8 +308,8 @@ public class SoftBodyCreationSettings
      * Alter the (initial) location of the body's origin. (native member:
      * mPosition)
      *
-     * @param location the desired location (in system coordinates, not null,
-     * unaffected, default=(0,0,0))
+     * @param location the desired location (in system coordinates, not
+     * {@code null}, unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public SoftBodyCreationSettings setPosition(RVec3Arg location) {
@@ -353,7 +353,7 @@ public class SoftBodyCreationSettings
      * Alter the (initial) orientation. (native member: mRotation)
      *
      * @param orientation the desired location (relative to system axes, not
-     * null, unaffected, default=(0,0,0,1))
+     * {@code null}, unaffected, default=(0,0,0,1))
      * @return the modified settings, for chaining
      */
     public SoftBodyCreationSettings setRotation(QuatArg orientation) {
@@ -427,10 +427,12 @@ public class SoftBodyCreationSettings
     /**
      * Read a settings object from the specified binary stream.
      *
-     * @param stream where to read objects (not null)
-     * @param settingsMap track multiple uses of shared settings (not null)
-     * @param materialMap track multiple uses of physics materials (not null)
-     * @param filterMap track multiple uses of group filters (not null)
+     * @param stream where to read objects (not {@code null})
+     * @param settingsMap track multiple uses of shared settings (not
+     * {@code null})
+     * @param materialMap track multiple uses of physics materials (not
+     * {@code null})
+     * @param filterMap track multiple uses of group filters (not {@code null})
      * @return a new object
      */
     public static SbcsResult sRestoreWithChildren(

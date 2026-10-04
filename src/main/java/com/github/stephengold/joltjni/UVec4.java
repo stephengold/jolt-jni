@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -80,7 +80,7 @@ final public class UVec4 implements UVec4Arg {
     /**
      * Instantiate a copy of the argument.
      *
-     * @param vec the vector to copy (not null, unaffected)
+     * @param vec the vector to copy (not {@code null}, unaffected)
      */
     public UVec4(UVec4Arg vec) {
         this.w = vec.getW();
@@ -187,8 +187,9 @@ final public class UVec4 implements UVec4Arg {
     // Object methods
 
     /**
-     * Tests for exact equality with the argument. If {@code other} is null,
-     * false is returned. Either way, the current instance is unaffected.
+     * Tests for exact equality with the argument. If {@code other} is
+     * {@code null}, false is returned. Either way, the current instance is
+     * unaffected.
      *
      * @param other the object to compare (unaffected) or {@code null}
      * @return {@code true} if {@code this} and {@code other} have identical
@@ -235,7 +236,7 @@ final public class UVec4 implements UVec4Arg {
      * UVec4(0 0 0 0)
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

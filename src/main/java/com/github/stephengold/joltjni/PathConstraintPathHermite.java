@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -55,9 +55,11 @@ public class PathConstraintPathHermite extends PathConstraintPath {
     /**
      * Add a point to the end of the path.
      *
-     * @param location the location of the point (not null, unaffected)
-     * @param tangent the tangent direction at the point (not null, unaffected)
-     * @param normal the normal direction at the point (not null, unaffected)
+     * @param location the location of the point (not {@code null}, unaffected)
+     * @param tangent the tangent direction at the point (not {@code null},
+     * unaffected)
+     * @param normal the normal direction at the point (not {@code null},
+     * unaffected)
      */
     public void addPoint(Vec3Arg location, Vec3Arg tangent, Vec3Arg normal) {
         long pathVa = va();

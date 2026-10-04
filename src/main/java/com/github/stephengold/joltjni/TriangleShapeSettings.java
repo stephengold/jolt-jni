@@ -55,8 +55,8 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
      * @param v3y the Y coordinate of the 3rd vertex
      * @param v3z the Z coordinate of the 3rd vertex
      * @param convexRadius the desired convex radius (default=0)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
      */
     public TriangleShapeSettings(float v1x, float v1y, float v1z, float v2x,
             float v2y, float v2z, float v3x, float v3y, float v3z,
@@ -91,9 +91,9 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified vertices.
      *
-     * @param v1 the location of the first vertex (not null, unaffected)
-     * @param v2 the location of the 2nd vertex (not null, unaffected)
-     * @param v3 the location of the 3rd vertex (not null, unaffected)
+     * @param v1 the location of the first vertex (not {@code null}, unaffected)
+     * @param v2 the location of the 2nd vertex (not {@code null}, unaffected)
+     * @param v3 the location of the 3rd vertex (not {@code null}, unaffected)
      */
     public TriangleShapeSettings(Vec3Arg v1, Vec3Arg v2, Vec3Arg v3) {
         this(v1, v2, v3, 0f);
@@ -102,9 +102,9 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified vertices.
      *
-     * @param v1 the location of the first vertex (not null, unaffected)
-     * @param v2 the location of the 2nd vertex (not null, unaffected)
-     * @param v3 the location of the 3rd vertex (not null, unaffected)
+     * @param v1 the location of the first vertex (not {@code null}, unaffected)
+     * @param v2 the location of the 2nd vertex (not {@code null}, unaffected)
+     * @param v3 the location of the 3rd vertex (not {@code null}, unaffected)
      * @param convexRadius the desired convex radius (default=0)
      */
     public TriangleShapeSettings(
@@ -115,12 +115,12 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified vertices.
      *
-     * @param v1 the location of the first vertex (not null, unaffected)
-     * @param v2 the location of the 2nd vertex (not null, unaffected)
-     * @param v3 the location of the 3rd vertex (not null, unaffected)
+     * @param v1 the location of the first vertex (not {@code null}, unaffected)
+     * @param v2 the location of the 2nd vertex (not {@code null}, unaffected)
+     * @param v3 the location of the 3rd vertex (not {@code null}, unaffected)
      * @param convexRadius the desired convex radius (default=0)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
      */
     public TriangleShapeSettings(Vec3Arg v1, Vec3Arg v2, Vec3Arg v3,
             float convexRadius, PhysicsMaterial material) {

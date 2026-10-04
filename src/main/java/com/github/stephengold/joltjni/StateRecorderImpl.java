@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@ final public class StateRecorderImpl extends StateRecorder {
     /**
      * Write binary data.
      *
-     * @param data the bytes to write (not null, unaffected)
+     * @param data the bytes to write (not {@code null}, unaffected)
      */
     public void writeBytes(byte[] data) {
         writeBytes(data, data.length);
@@ -66,7 +66,7 @@ final public class StateRecorderImpl extends StateRecorder {
     /**
      * Write binary data.
      *
-     * @param data the bytes to write (not null, unaffected)
+     * @param data the bytes to write (not {@code null}, unaffected)
      * @param numBytes the number of byte to write (&ge;0)
      */
     public void writeBytes(byte[] data, int numBytes) {

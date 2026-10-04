@@ -758,8 +758,8 @@ final public class RVec3 implements RVec3Arg {
 
     /**
      * Tests for exact equality with the argument, distinguishing -0 from 0. If
-     * {@code other} is null, {@code false} is returned. Either way, the current
-     * instance is unaffected.
+     * {@code other} is {@code null}, {@code false} is returned. Either way, the
+     * current instance is unaffected.
      *
      * @param other the object to compare (unaffected) or {@code null}
      * @return {@code true} if {@code this} and {@code other} have identical

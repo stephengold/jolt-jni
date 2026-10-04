@@ -61,8 +61,8 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     /**
      * Instantiate a settings object with the specified offset and base shape.
      *
-     * @param offset (not null, unaffected)
-     * @param baseShape the desired base shape (not null)
+     * @param offset (not {@code null}, unaffected)
+     * @param baseShape the desired base shape (not {@code null})
      */
     public OffsetCenterOfMassShapeSettings(
             Vec3Arg offset, ConstShape baseShape) {
@@ -79,8 +79,9 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
      * Instantiate a settings object with the specified offset and base-shape
      * settings.
      *
-     * @param offset (not null, unaffected)
-     * @param baseShapeSettings settings to create the base shape (not null)
+     * @param offset (not {@code null}, unaffected)
+     * @param baseShapeSettings settings to create the base shape (not
+     * {@code null})
      */
     public OffsetCenterOfMassShapeSettings(
             Vec3Arg offset, ConstShapeSettings baseShapeSettings) {
@@ -124,7 +125,7 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     /**
      * Alter the offset relative to the base shape. (native attribute: mOffset)
      *
-     * @param offset the desired offset vector (not null, unaffected,
+     * @param offset the desired offset vector (not {@code null}, unaffected,
      * default=(0,0,0))
      */
     public void setOffset(Vec3Arg offset) {

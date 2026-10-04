@@ -73,7 +73,7 @@ final public class SpringSettings
     /**
      * Load settings from the specified binary stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      */
     public void restoreBinaryState(StreamIn stream) {
         long settingsVa = va();
@@ -135,7 +135,8 @@ final public class SpringSettings
     /**
      * Alter how the spring is specified. (native attribute: mMode)
      *
-     * @param mode the desired mode (not null, default=FrequencyAndDamping)
+     * @param mode the desired mode (not {@code null},
+     * default=FrequencyAndDamping)
      * @return the modified settings, for chaining
      */
     public SpringSettings setMode(ESpringMode mode) {
@@ -254,7 +255,7 @@ final public class SpringSettings
      * Return how the spring is specified. The settings are unaffected. (native
      * attribute: mMode)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public ESpringMode getMode() {
@@ -305,7 +306,7 @@ final public class SpringSettings
      * Save the settings to the specified binary stream. The settings are
      * unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

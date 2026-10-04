@@ -77,7 +77,7 @@ abstract public class TwoBodyConstraint
      * Copy the first body's pivot location. The constraint is unaffected.
      *
      * @param storeResult storage for the location in system coordinates (not
-     * null, modified)
+     * {@code null}, modified)
      */
     @Override
     public void getBody1PivotLocation(DoubleBuffer storeResult) {
@@ -117,7 +117,7 @@ abstract public class TwoBodyConstraint
      * Copy the 2nd body's pivot location. The constraint is unaffected.
      *
      * @param storeResult storage for the location in system coordinates (not
-     * null, modified)
+     * {@code null}, modified)
      */
     @Override
     public void getBody2PivotLocation(DoubleBuffer storeResult) {

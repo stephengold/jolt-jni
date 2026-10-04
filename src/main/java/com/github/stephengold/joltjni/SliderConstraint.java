@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -124,7 +124,7 @@ public class SliderConstraint extends TwoBodyConstraint {
     /**
      * Return the state of the motor. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EMotorState getMotorState() {
         long constraintVa = va();
@@ -194,7 +194,7 @@ public class SliderConstraint extends TwoBodyConstraint {
     /**
      * Alter the state of the motor.
      *
-     * @param state the desired state (not null)
+     * @param state the desired state (not {@code null})
      */
     public void setMotorState(EMotorState state) {
         long constraintVa = va();

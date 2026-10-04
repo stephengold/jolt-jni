@@ -129,7 +129,7 @@ abstract public class Shape
     /**
      * Recreate a shape from the specified stream.
      *
-     * @param stream the stream to read (not null)
+     * @param stream the stream to read (not {@code null})
      * @return a new object
      */
     public static ShapeResult sRestoreFromBinaryState(StreamIn stream) {
@@ -193,7 +193,7 @@ abstract public class Shape
      * mass to system coordinates (not {@code null}, unaffected)
      * @param scale the desired scaling (not {@code null}, unaffected)
      * @param color the desired color if {@code useMaterialColors} is false (not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param useMaterialColors {@code true} to use the color in the shape's
      * material
      * @param wireframe {@code true} to draw a wire frame, {@code false} for

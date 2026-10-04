@@ -70,7 +70,7 @@ final public class TwoBodyConstraintRef
      * and its center of mass has shifted by deltaCom.
      *
      * @param bodyId the ID of the body that changed
-     * @param deltaCom the offset of the shift (not null, unaffected)
+     * @param deltaCom the offset of the shift (not {@code null}, unaffected)
      */
     public void notifyShapeChanged(int bodyId, Vec3Arg deltaCom) {
         long constraintVa = targetVa();
@@ -140,7 +140,7 @@ final public class TwoBodyConstraintRef
      * Copy the 2nd body's pivot location. The constraint is unaffected.
      *
      * @param storeResult storage for the location in system coordinates (not
-     * null, modified)
+     * {@code null}, modified)
      */
     @Override
     public void getBody2PivotLocation(DoubleBuffer storeResult) {

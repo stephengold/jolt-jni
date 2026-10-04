@@ -70,7 +70,7 @@ public class PhysicsMaterial
     /**
      * Read a material from the specified binary stream.
      *
-     * @param stream where to read objects (not null)
+     * @param stream where to read objects (not {@code null})
      * @return a new object
      */
     public static PhysicsMaterialResult sRestoreFromBinaryState(
@@ -131,7 +131,7 @@ public class PhysicsMaterial
      * Save the material to the specified binary stream. The material is
      * unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

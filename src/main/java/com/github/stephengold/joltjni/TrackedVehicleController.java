@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -76,7 +76,8 @@ public class TrackedVehicleController extends VehicleController {
     /**
      * Configure debug rendering of the RPM meter.
      *
-     * @param location the desired location of the meter (not null, unaffected)
+     * @param location the desired location of the meter (not {@code null},
+     * unaffected)
      * @param size the desired size of the meter
      */
     public void setRpmMeter(Vec3Arg location, float size) {

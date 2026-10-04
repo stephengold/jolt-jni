@@ -43,7 +43,7 @@ public class StreamOutWrapper extends StreamOut {
     /**
      * Instantiate using an already-open file stream.
      *
-     * @param data the underlying stream (not null)
+     * @param data the underlying stream (not {@code null})
      */
     public StreamOutWrapper(OfStream data) {
         this.stream = data;
@@ -55,7 +55,7 @@ public class StreamOutWrapper extends StreamOut {
     /**
      * Open a {@code StringStream} for output.
      *
-     * @param data the underlying stream (not null)
+     * @param data the underlying stream (not {@code null})
      */
     public StreamOutWrapper(StringStream data) {
         this.stream = data;

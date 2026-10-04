@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ public class StringStream extends JoltPhysicsObject {
     /**
      * Instantiate a stream from the specified string of text.
      *
-     * @param string the desired initial content (not null)
+     * @param string the desired initial content (not {@code null})
      */
     public StringStream(String string) {
         long streamVa = createFromString(string);

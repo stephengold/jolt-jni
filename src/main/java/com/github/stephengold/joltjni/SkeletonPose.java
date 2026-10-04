@@ -49,7 +49,7 @@ public class SkeletonPose
     /**
      * Instantiate a clone of the specified pose.
      *
-     * @param original the pose to clone (not null, unaffected)
+     * @param original the pose to clone (not {@code null}, unaffected)
      */
     public SkeletonPose(ConstSkeletonPose original) {
         long originalVa = original.targetVa();

@@ -119,7 +119,7 @@ public class VehicleTransmissionSettings
      * forward gear. The first element is for 1st gear. (native attribute:
      * mGearRatios)
      *
-     * @param ratios the desired ratios (not null)
+     * @param ratios the desired ratios (not {@code null})
      */
     public void setGearRatios(float... ratios) {
         long settingsVa = va();
@@ -129,7 +129,7 @@ public class VehicleTransmissionSettings
     /**
      * Alter the type of transmission. (native attribute: mMode)
      *
-     * @param mode the desired mode (not null, default=Auto)
+     * @param mode the desired mode (not {@code null}, default=Auto)
      */
     public void setMode(ETransmissionMode mode) {
         long settingsVa = va();
@@ -141,7 +141,7 @@ public class VehicleTransmissionSettings
      * Alter the number of engine rotations per gearbox rotation for each
      * reverse gear. (native attribute: mReverseGearRatios)
      *
-     * @param ratios the desired ratios (not null)
+     * @param ratios the desired ratios (not {@code null})
      */
     public void setReverseGearRatios(float... ratios) {
         long settingsVa = va();
@@ -241,7 +241,7 @@ public class VehicleTransmissionSettings
      * Return the type of transmission. The settings are unaffected. (native
      * attribute: mMode)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public ETransmissionMode getMode() {

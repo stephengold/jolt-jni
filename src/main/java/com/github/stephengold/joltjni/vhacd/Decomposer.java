@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -75,7 +75,8 @@ public class Decomposer extends JoltPhysicsObject {
     /**
      * Register the specified progress listener.
      *
-     * @param listener the listener to register (not null, alias created)
+     * @param listener the listener to register (not {@code null}, alias
+     * created)
      * @return the modified properties, for chaining
      */
     public Decomposer addProgressListener(ProgressListener listener) {
@@ -89,11 +90,11 @@ public class Decomposer extends JoltPhysicsObject {
     /**
      * Generate convex hulls to approximate the specified mesh.
      *
-     * @param locations the locations of all mesh vertices (not null, length a
-     * multiple of 3, unaffected)
-     * @param indices the vertex indices of all mesh triangles (not null, length
-     * a multiple of 3, unaffected)
-     * @param params the tuning parameters to use (not null, unaffected)
+     * @param locations the locations of all mesh vertices (not {@code null},
+     * length a multiple of 3, unaffected)
+     * @param indices the vertex indices of all mesh triangles (not
+     * {@code null}, length a multiple of 3, unaffected)
+     * @param params the tuning parameters to use (not {@code null}, unaffected)
      * @return a new unmodifiable collection of hulls, or an empty collection if
      * the algorithm failed
      */
@@ -118,11 +119,11 @@ public class Decomposer extends JoltPhysicsObject {
     /**
      * Generate convex hulls to approximate the specified mesh.
      *
-     * @param locations the locations of all mesh vertices (not null, direct,
-     * capacity a multiple of 3, unaffected)
-     * @param indices the vertex indices of all mesh triangles (not null,
+     * @param locations the locations of all mesh vertices (not {@code null},
      * direct, capacity a multiple of 3, unaffected)
-     * @param params the tuning parameters to use (not null, unaffected)
+     * @param indices the vertex indices of all mesh triangles (not
+     * {@code null}, direct, capacity a multiple of 3, unaffected)
+     * @param params the tuning parameters to use (not {@code null}, unaffected)
      * @return a new unmodifiable collection of hulls, or an empty collection if
      * the algorithm failed
      */
@@ -149,7 +150,8 @@ public class Decomposer extends JoltPhysicsObject {
     /**
      * De-register the specified progress listener.
      *
-     * @param listener the listener to de-register (not null, unaffected)
+     * @param listener the listener to de-register (not {@code null},
+     * unaffected)
      */
     public void removeProgressListener(ProgressListener listener) {
         Objects.requireNonNull(listener, "listener must not be null");

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -55,7 +55,7 @@ final public class ScaleHelpers {
     /**
      * Test whether the specified scale turns 3-D normals inside-out.
      *
-     * @param scale the scale vector to test (not null, unaffected)
+     * @param scale the scale vector to test (not {@code null}, unaffected)
      * @return {@code true} if it turns normals inside-out, otherwise
      * {@code false}
      */
@@ -74,7 +74,7 @@ final public class ScaleHelpers {
     /**
      * Test whether the specified scale is close to identity.
      *
-     * @param scale the scale vector to test (not null, unaffected)
+     * @param scale the scale vector to test (not {@code null}, unaffected)
      * @return {@code true} if identity, otherwise {@code false}
      */
     public static boolean isNotScaled(Vec3Arg scale) {

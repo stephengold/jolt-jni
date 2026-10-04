@@ -55,7 +55,7 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
      * Instantiate a material with the specified properties.
      *
      * @param name the desired name
-     * @param color the desired color (not null, unaffected)
+     * @param color the desired color (not {@code null}, unaffected)
      */
     public PhysicsMaterialSimple(String name, ConstColor color) {
         int colorInt = color.getUInt32();

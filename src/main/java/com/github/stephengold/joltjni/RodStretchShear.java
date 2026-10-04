@@ -84,7 +84,7 @@ public class RodStretchShear
     /**
      * Alter the Bishop frame of the rod. (native attribute: mBishop)
      *
-     * @param bishop the desired orientation (not null, unaffected)
+     * @param bishop the desired orientation (not {@code null}, unaffected)
      * @return the modified settings, for chaining
      */
     public RodStretchShear setBishop(QuatArg bishop) {

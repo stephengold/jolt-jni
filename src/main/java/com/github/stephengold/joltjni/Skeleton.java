@@ -140,7 +140,7 @@ public class Skeleton
     /**
      * Find the index of the named joint.
      *
-     * @param name the name of the joint to find (not null)
+     * @param name the name of the joint to find (not {@code null})
      * @return the joint index
      */
     @Override
@@ -173,7 +173,7 @@ public class Skeleton
     /**
      * Save the skeleton to the specified binary stream.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

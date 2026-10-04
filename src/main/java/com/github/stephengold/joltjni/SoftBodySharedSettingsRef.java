@@ -496,7 +496,7 @@ final public class SoftBodySharedSettingsRef
      * Write the vertex indices of all edges to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *
-     * @param storeIndices the destination buffer (not null, modified)
+     * @param storeIndices the destination buffer (not {@code null}, modified)
      */
     @Override
     public void putEdgeIndices(IntBuffer storeIndices) {
@@ -511,7 +511,7 @@ final public class SoftBodySharedSettingsRef
      * Write the vertex indices of all faces to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *
-     * @param storeIndices the destination buffer (not null, modified)
+     * @param storeIndices the destination buffer (not {@code null}, modified)
      */
     @Override
     public void putFaceIndices(IntBuffer storeIndices) {
@@ -526,7 +526,7 @@ final public class SoftBodySharedSettingsRef
      * Write the vertex indices of all Cosserat rods to the specified buffer and
      * advance the buffer's position. The settings are unaffected.
      *
-     * @param storeIndices the destination buffer (not null, modified)
+     * @param storeIndices the destination buffer (not {@code null}, modified)
      */
     @Override
     public void putRodIndices(IntBuffer storeIndices) {

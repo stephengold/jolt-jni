@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ public class PointConvexSupport extends JoltPhysicsObject {
     /**
      * Instantiate a point at the specified location.
      *
-     * @param location the desired location (not null, unaffected)
+     * @param location the desired location (not {@code null}, unaffected)
      */
     public PointConvexSupport(Vec3Arg location) {
         float x = location.getX();

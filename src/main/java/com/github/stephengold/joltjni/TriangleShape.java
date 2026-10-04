@@ -67,9 +67,9 @@ public class TriangleShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified vertices.
      *
-     * @param v1 the location of the first vertex (not null, unaffected)
-     * @param v2 the location of the 2nd vertex (not null, unaffected)
-     * @param v3 the location of the 3rd vertex (not null, unaffected)
+     * @param v1 the location of the first vertex (not {@code null}, unaffected)
+     * @param v2 the location of the 2nd vertex (not {@code null}, unaffected)
+     * @param v3 the location of the 3rd vertex (not {@code null}, unaffected)
      */
     public TriangleShape(Vec3Arg v1, Vec3Arg v2, Vec3Arg v3) {
         this(v1, v2, v3, 0f);
@@ -78,9 +78,9 @@ public class TriangleShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified vertices and convex radius.
      *
-     * @param v1 the location of the first vertex (not null, unaffected)
-     * @param v2 the location of the 2nd vertex (not null, unaffected)
-     * @param v3 the location of the 3rd vertex (not null, unaffected)
+     * @param v1 the location of the first vertex (not {@code null}, unaffected)
+     * @param v2 the location of the 2nd vertex (not {@code null}, unaffected)
+     * @param v3 the location of the 3rd vertex (not {@code null}, unaffected)
      * @param convexRadius the desired convex radius (default=0)
      */
     public TriangleShape(

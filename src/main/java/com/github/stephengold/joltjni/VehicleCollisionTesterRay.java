@@ -47,7 +47,7 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
      *
      * @param objectLayer the index of the desired object layer for collisions
      * (&ge;0)
-     * @param up the "up" direction (in system coordinates, not null,
+     * @param up the "up" direction (in system coordinates, not {@code null},
      * unaffected, default=(0,1,0))
      */
     public VehicleCollisionTesterRay(int objectLayer, Vec3Arg up) {
@@ -58,7 +58,7 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
      * Instantiate a tester with the specified properties.
      *
      * @param objectLayer the index of the desired object layer for collisions
-     * @param up the "up" direction (in system coordinates, not null,
+     * @param up the "up" direction (in system coordinates, not {@code null},
      * unaffected, default=(0,1,0))
      * @param maxSlopeAngle the maximum angle to consider for colliding wheels
      * (in radians, default=4*Pi/9)

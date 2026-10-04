@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,7 +79,7 @@ public class Support extends JoltPhysicsObject {
     /**
      * Calculate a support vector for the specified direction.
      *
-     * @param direction the input direction (not null, unaffected)
+     * @param direction the input direction (not {@code null}, unaffected)
      * @return a new location vector relative to the shape's center of mass
      */
     public Vec3 getSupport(Vec3Arg direction) {
@@ -94,10 +94,10 @@ public class Support extends JoltPhysicsObject {
     /**
      * Calculate support vectors for the specified directions.
      *
-     * @param directions the input directions (not null, capacity a multiple of
-     * 3, unaffected)
+     * @param directions the input directions (not {@code null}, capacity a
+     * multiple of 3, unaffected)
      * @param storePoints storage for location vectors relative to the shape's
-     * center of mass (not null, same capacity as {@code directions})
+     * center of mass (not {@code null}, same capacity as {@code directions})
      */
     public void getSupportBulk(
             FloatBuffer directions, FloatBuffer storePoints) {

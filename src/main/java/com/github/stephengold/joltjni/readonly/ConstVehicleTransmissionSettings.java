@@ -60,7 +60,7 @@ public interface ConstVehicleTransmissionSettings
     /**
      * Return the type of transmission. The settings are unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     ETransmissionMode getMode();
 

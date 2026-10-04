@@ -1138,7 +1138,7 @@ final public class Vec3 implements Vec3Arg {
 
     /**
      * Tests for exact equality with the argument, distinguishing -0 from 0. If
-     * {@code other} is null, false is returned. Either way, the current
+     * {@code other} is {@code null}, false is returned. Either way, the current
      * instance is unaffected.
      *
      * @param other the object to compare (unaffected) or {@code null}

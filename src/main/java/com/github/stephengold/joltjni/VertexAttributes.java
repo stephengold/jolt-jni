@@ -77,7 +77,7 @@ public class VertexAttributes
      * @param bendCompliance the desired compliance for bend edges
      * (default=MAX_VALUE)
      * @param lraType the desired long-range attachment (LRA) constraint (not
-     * null, default=None)
+     * {@code null}, default=None)
      */
     public VertexAttributes(float compliance, float shearCompliance,
             float bendCompliance, ELraType lraType) {
@@ -92,7 +92,7 @@ public class VertexAttributes
      * @param bendCompliance the desired compliance for bend edges
      * (default=MAX_VALUE)
      * @param lraType the desired long-range attachment (LRA) constraint (not
-     * null, default=None)
+     * {@code null}, default=None)
      * @param lraMultiplier the desired multiplier for the maximum distance of
      * the LRA constraint (relative to the rest-pose distance, default=1)
      */

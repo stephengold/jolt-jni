@@ -455,7 +455,7 @@ abstract public class DebugRenderer extends NonCopyable {
      * {@code null}, unaffected)
      * @param radius the desired radius of the circle (in meters)
      * @param normal a normal to the plane that contains the desired circle (not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param axis the desired zero-angle direction (not {@code null},
      * unaffected)
      * @param minAngle the desired angle where the sector begins (in radians)

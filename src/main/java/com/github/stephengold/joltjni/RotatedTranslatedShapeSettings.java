@@ -280,7 +280,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * Alter the offset relative to the base shape. (native attribute:
      * mPosition)
      *
-     * @param offset the desired offset vector (not null, unaffected,
+     * @param offset the desired offset vector (not {@code null}, unaffected,
      * default=(0,0,0))
      */
     public void setPosition(Vec3Arg offset) {
@@ -295,7 +295,8 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * Alter the rotation relative to the base shape. (native attribute:
      * mRotation)
      *
-     * @param rotation the desired rotation quaternion (not null, unaffected)
+     * @param rotation the desired rotation quaternion (not {@code null},
+     * unaffected)
      */
     public void setRotation(QuatArg rotation) {
         long rtssVa = va();

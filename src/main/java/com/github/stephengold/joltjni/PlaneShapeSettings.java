@@ -53,7 +53,7 @@ public class PlaneShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified plane.
      *
-     * @param plane the desired surface plane (not null, unaffected)
+     * @param plane the desired surface plane (not {@code null}, unaffected)
      */
     public PlaneShapeSettings(ConstPlane plane) {
         this(plane, null);
@@ -62,9 +62,9 @@ public class PlaneShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified plane and material.
      *
-     * @param plane the desired surface plane (not null, unaffected)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
+     * @param plane the desired surface plane (not {@code null}, unaffected)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
      */
     public PlaneShapeSettings(ConstPlane plane, ConstPhysicsMaterial material) {
         this(plane, material, cDefaultHalfExtent);
@@ -73,9 +73,9 @@ public class PlaneShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified plane, material, and extent.
      *
-     * @param plane the desired surface plane (not null, unaffected)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
+     * @param plane the desired surface plane (not {@code null}, unaffected)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
      * @param halfExtent the desired radius of the bounding box (&gt;0,
      * default=1000)
      */
@@ -198,7 +198,7 @@ public class PlaneShapeSettings extends ShapeSettings {
     /**
      * Alter the surface equation. (native attribute: mPlane)
      *
-     * @param plane the desired surface (not null, unaffected,
+     * @param plane the desired surface (not {@code null}, unaffected,
      * default=((0,0,0),0))
      */
     public void setPlane(ConstPlane plane) {

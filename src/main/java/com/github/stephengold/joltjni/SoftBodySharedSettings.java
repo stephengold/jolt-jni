@@ -111,7 +111,7 @@ public class SoftBodySharedSettings
      * Append the specified inverse-bind matrix. (native member:
      * mInvBindMatrices)
      *
-     * @param invBind the matrix to add (not null)
+     * @param invBind the matrix to add (not {@code null})
      */
     public void addInvBindMatrix(InvBind invBind) {
         long settingsVa = va();
@@ -169,7 +169,7 @@ public class SoftBodySharedSettings
     /**
      * Add the specified volume constraint.
      *
-     * @param volume the constraint to add (not null, unaffected)
+     * @param volume the constraint to add (not {@code null}, unaffected)
      */
     public void addVolumeConstraint(ConstVolume volume) {
         long settingsVa = va();
@@ -214,7 +214,7 @@ public class SoftBodySharedSettings
      *
      * @param vertexAttributes the desired attributes (one for each vertex)
      * @param numAttributes the number of attributes provided (&ge;0)
-     * @param bendType the desired type of bend constraint (not null,
+     * @param bendType the desired type of bend constraint (not {@code null},
      * default=Distance)
      */
     public void createConstraints(ConstVertexAttributes vertexAttributes,
@@ -227,7 +227,7 @@ public class SoftBodySharedSettings
      * Automatically generate constraints based on the faces.
      *
      * @param vertexAttributes the desired attributes (one for each vertex)
-     * @param bendType the desired type of bend constraint (not null,
+     * @param bendType the desired type of bend constraint (not {@code null},
      * default=Distance)
      */
     public void createConstraints(
@@ -269,7 +269,7 @@ public class SoftBodySharedSettings
      * Read the state of this object from the specified stream, excluding the
      * shape and group filter.
      *
-     * @param stream where to read objects from (not null)
+     * @param stream where to read objects from (not {@code null})
      */
     public void restoreBinaryState(StreamIn stream) {
         long settingsVa = va();
@@ -320,7 +320,7 @@ public class SoftBodySharedSettings
     /**
      * Read a settings object from the specified binary stream.
      *
-     * @param stream where to read objects (not null)
+     * @param stream where to read objects (not {@code null})
      * @param settingsMap track multiple uses of shared settings (not
      * {@code null})
      * @param materialMap track multiple uses of physics materials (not
@@ -535,7 +535,7 @@ public class SoftBodySharedSettings
      * Write the vertex indices of all edges to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *
-     * @param storeIndices the destination buffer (not null, modified)
+     * @param storeIndices the destination buffer (not {@code null}, modified)
      */
     @Override
     public void putEdgeIndices(IntBuffer storeIndices) {
@@ -550,7 +550,7 @@ public class SoftBodySharedSettings
      * Write the vertex indices of all faces to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *
-     * @param storeIndices the destination buffer (not null, modified)
+     * @param storeIndices the destination buffer (not {@code null}, modified)
      */
     @Override
     public void putFaceIndices(IntBuffer storeIndices) {
@@ -565,7 +565,7 @@ public class SoftBodySharedSettings
      * Write the vertex indices of all Cosserat rods to the specified buffer and
      * advance the buffer's position. The settings are unaffected.
      *
-     * @param storeIndices the destination buffer (not null, modified)
+     * @param storeIndices the destination buffer (not {@code null}, modified)
      */
     @Override
     public void putRodIndices(IntBuffer storeIndices) {

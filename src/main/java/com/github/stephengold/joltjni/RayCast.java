@@ -52,8 +52,9 @@ public class RayCast extends JoltPhysicsObject {
     /**
      * Instantiate a ray cast with the specified endpoints.
      *
-     * @param startLocation the desired start location (not null, unaffected)
-     * @param offset the desired end offset from the start (not null,
+     * @param startLocation the desired start location (not {@code null},
+     * unaffected)
+     * @param offset the desired end offset from the start (not {@code null},
      * unaffected)
      */
     public RayCast(Vec3Arg startLocation, Vec3Arg offset) {

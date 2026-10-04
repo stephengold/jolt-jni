@@ -133,7 +133,7 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
      * child. The sub-shape is unaffected.
      *
      * @param scale the scale of the child in the local space of this shape (not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @return a new transform matrix
      */
     @Override

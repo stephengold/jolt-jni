@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ public class RayInvDirection extends JoltPhysicsObject {
     /**
      * Instantiate inverse of the specified direction.
      *
-     * @param direction the direction to use (not null, unaffected)
+     * @param direction the direction to use (not {@code null}, unaffected)
      */
     public RayInvDirection(Vec3Arg direction) {
         float dx = direction.getX();
@@ -74,7 +74,7 @@ public class RayInvDirection extends JoltPhysicsObject {
     /**
      * Specify a new direction.
      *
-     * @param direction the direction to use (not null, unaffected)
+     * @param direction the direction to use (not {@code null}, unaffected)
      */
     public void set(Vec3Arg direction) {
         long dirVa = va();
@@ -87,7 +87,8 @@ public class RayInvDirection extends JoltPhysicsObject {
     /**
      * Directly alter the inverse direction. (native attribute: mInvDirection)
      *
-     * @param invDirection the desired inverse direction (not null, unaffected)
+     * @param invDirection the desired inverse direction (not {@code null},
+     * unaffected)
      */
     public void setInvDirection(Vec3Arg invDirection) {
         long dirVa = va();

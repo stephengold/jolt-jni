@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -99,7 +99,7 @@ public class PathConstraint extends TwoBodyConstraint {
     /**
      * Return the state of the position motor. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EMotorState getPositionMotorState() {
         long constraintVa = va();
@@ -185,7 +185,7 @@ public class PathConstraint extends TwoBodyConstraint {
     /**
      * Replace the path.
      *
-     * @param path the desired path (not null)
+     * @param path the desired path (not {@code null})
      * @param amount how far the body is along the new path
      */
     public void setPath(PathConstraintPath path, float amount) {
@@ -197,7 +197,7 @@ public class PathConstraint extends TwoBodyConstraint {
     /**
      * Alter the state of the position motor.
      *
-     * @param state the desired state (not null)
+     * @param state the desired state (not {@code null})
      */
     public void setPositionMotorState(EMotorState state) {
         long constraintVa = va();

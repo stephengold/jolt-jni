@@ -625,7 +625,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * @param location the desired location (in system coordinates, not
      * {@code null}, unaffected)
      * @param orientation the desired orientation (in system coordinates, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param activation whether to activate the character (not {@code null},
      * default=Activate)
      */
@@ -640,7 +640,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * @param location the desired location (in system coordinates, not
      * {@code null}, unaffected)
      * @param orientation the desired orientation (in system coordinates, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param activation whether to activate the character (not {@code null},
      * default=Activate)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -702,7 +702,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Re-orient and activate the character using the locking body interface.
      *
      * @param orientation the desired orientation (in system coordinates, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      */
     public void setRotation(QuatArg orientation) {
         setRotation(orientation, EActivation.Activate);
@@ -712,7 +712,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Re-orient the character, optionally activating it.
      *
      * @param orientation the desired orientation (in system coordinates, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param activation whether to activate the character (not {@code null},
      * default=Activate)
      */
@@ -724,7 +724,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Re-orient the character, optionally activating it.
      *
      * @param orientation the desired orientation (in system coordinates, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param activation whether to activate the character (not {@code null},
      * default=Activate)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
