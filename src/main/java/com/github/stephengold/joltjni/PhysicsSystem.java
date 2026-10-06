@@ -453,10 +453,13 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * coordinates)
      * @param z the Z component of the desired acceleration vector (in system
      * coordinates)
+     * @return the current system (for chaining)
      */
-    public void setGravity(float x, float y, float z) {
+    public PhysicsSystem setGravity(float x, float y, float z) {
         long systemVa = va();
         setGravity(systemVa, x, y, z);
+
+        return this;
     }
 
     /**
@@ -464,13 +467,16 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      *
      * @param gravity the desired acceleration vector (in system coordinates,
      * not {@code null}, unaffected, default=(0,-9.81,0))
+     * @return the current system (for chaining)
      */
-    public void setGravity(Vec3Arg gravity) {
+    public PhysicsSystem setGravity(Vec3Arg gravity) {
         long systemVa = va();
         float x = gravity.getX();
         float y = gravity.getY();
         float z = gravity.getZ();
         setGravity(systemVa, x, y, z);
+
+        return this;
     }
 
     /**
