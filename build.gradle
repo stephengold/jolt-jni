@@ -250,6 +250,8 @@ model {
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/main/native"; objcppCompiler.args "/I$projectDir/src/main/native"
                     cppCompiler.args "/I$projectDir/src/main/native/TestFramework" // for External/Perlin.h
+                    cppCompiler.args '/MP' // enable concurrent builds
+                    cppCompiler.args '/nologo' // suppress sign-on banner
                     cppCompiler.args '/std:c++17'; objcppCompiler.args '/std:c++17'
                     cppCompiler.args '/wd4577' // disable warnings about using noexcept
 
