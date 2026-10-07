@@ -643,6 +643,10 @@ final public class TestUtils {
             }
         }
 
+        if (success) {
+            String actualBuildType = Jolt.buildType();
+            assert buildType.equals(actualBuildType) : actualBuildType;
+        }
         return success;
     }
 
