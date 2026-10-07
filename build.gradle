@@ -245,6 +245,7 @@ model {
                     cppCompiler.define 'JPH_SHARED_LIBRARY'
                     cppCompiler.define 'WIN32'
                     //cppCompiler.args '/EHsc' // to enable synchronous C++ exceptions
+                    cppCompiler.args '/fp:except-' // inexact floating-point exceptions
                     cppCompiler.args '/GR-' // disable C++ runtime type info
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
@@ -260,8 +261,10 @@ model {
                         cppCompiler.args '/MTd' // to use LIBCMTD
                         linker.args '/DEBUG'
                     } else { // buildType == Release
+                        cppCompiler.args '/GS-' // disable buffer-overrun checks
                         cppCompiler.args '/O2'
                         cppCompiler.args '/Ob3'
+                        cppCompiler.args '/Zc:inline' // omit unreferenced symbols
                     }
 
                     if (project.hasProperty('useVK')) {
