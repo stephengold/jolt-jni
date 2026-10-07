@@ -101,7 +101,7 @@ final public class SmokeTestAll {
         System.out.println(Jolt.getConfigurationString());
         System.out.print(" built-in compute systems:");
         System.out.print(Jolt.implementsComputeCpu() ? " CPU" : "");
-        System.out.print(Jolt.implementsComputeDx12() ? " DX12" : "");
+        System.out.print(Jolt.implementsComputeDx12() ? " DirectX12" : "");
         System.out.print(Jolt.implementsComputeMtl() ? " Metal" : "");
         System.out.print(Jolt.implementsComputeVk() ? " Vulkan" : "");
         System.out.println();
