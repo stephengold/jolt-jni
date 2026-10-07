@@ -255,6 +255,7 @@ model {
                     cppCompiler.args '/nologo' // suppress sign-on banner
                     cppCompiler.args '/std:c++17'; objcppCompiler.args '/std:c++17'
                     cppCompiler.args '/wd4577' // disable warnings about using noexcept
+                    cppCompiler.args '/Zc:__cplusplus' // to enable "__cplusplus" macro
 
                     if (isDebug) {
                         cppCompiler.define 'JPH_FLOATING_POINT_EXCEPTIONS_ENABLED'
