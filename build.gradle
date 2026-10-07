@@ -218,14 +218,14 @@ model {
                 // buildtype-specific preprocessor defines:
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
+                    cppCompiler.define 'JPH_DEBUG'; objcppCompiler.define 'JPH_DEBUG'
                     cppCompiler.define 'JPH_DEBUG_RENDERER'
                     //cppCompiler.define 'JPH_DET_LOG' // to implement the determinism log
                     //cppCompiler.define 'JPH_DISABLE_CUSTOM_ALLOCATOR'
-                    cppCompiler.define 'JPH_ENABLE_ASSERTS'; objcppCompiler.define 'JPH_ENABLE_ASSERTS'
                     //cppCompiler.define 'JPH_TRACK_NARROWPHASE_STATS' // to collect statistics
 
                 } else { // buildTypes.Release
-                    cppCompiler.define 'JPH_NO_DEBUG'; objcppCompiler.define 'JPH_NO_DEBUG'
+                    cppCompiler.define 'NDEBUG'; objcppCompiler.define 'NDEBUG'
                 }
 
                 // flavor-specific preprocessor defines:
