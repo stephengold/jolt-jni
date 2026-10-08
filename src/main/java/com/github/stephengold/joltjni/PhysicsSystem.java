@@ -402,11 +402,15 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * Replace the system's {@code BodyActivationListener}.
      *
      * @param listener the desired listener, or {@code null} for none
+     * @return the current system (for chaining)
      */
-    public void setBodyActivationListener(BodyActivationListener listener) {
+    public PhysicsSystem setBodyActivationListener(
+            BodyActivationListener listener) {
         long systemVa = va();
         long listenerVa = (listener == null) ? 0L : listener.va();
         setBodyActivationListener(systemVa, listenerVa);
+
+        return this;
     }
 
     /**
@@ -414,34 +418,43 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      *
      * @param function the desired function (not {@code null},
      * default=geometricMean)
+     * @return the current system (for chaining)
      */
-    public void setCombineFriction(CombineFunction function) {
+    public PhysicsSystem setCombineFriction(CombineFunction function) {
         long systemVa = va();
         long functionVa = function.va();
         setCombineFriction(systemVa, functionVa);
+
+        return this;
     }
 
     /**
      * Replace the combining function for restitutions.
      *
      * @param function the desired function (not {@code null}, default=max)
+     * @return the current system (for chaining)
      */
-    public void setCombineRestitution(CombineFunction function) {
+    public PhysicsSystem setCombineRestitution(CombineFunction function) {
         long systemVa = va();
         long functionVa = function.va();
         setCombineRestitution(systemVa, functionVa);
+
+        return this;
     }
 
     /**
      * Replace or remove the system's contact listener.
      *
      * @param listener the desired listener, or {@code null} for none
+     * @return the current system (for chaining)
      */
-    public void setContactListener(ContactListener listener) {
+    public PhysicsSystem setContactListener(ContactListener listener) {
         this.contactListener = listener;
         long systemVa = va();
         long listenerVa = (listener == null) ? 0L : listener.va();
         setContactListener(systemVa, listenerVa);
+
+        return this;
     }
 
     /**
@@ -483,24 +496,31 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * Copy the specified settings to the system.
      *
      * @param settings the desired settings (not {@code null}, unaffected)
+     * @return the current system (for chaining)
      *
      * @see #getPhysicsSettings()
      */
-    public void setPhysicsSettings(ConstPhysicsSettings settings) {
+    public PhysicsSystem setPhysicsSettings(ConstPhysicsSettings settings) {
         long systemVa = va();
         long settingsVa = settings.targetVa();
         setPhysicsSettings(systemVa, settingsVa);
+
+        return this;
     }
 
     /**
      * Replace the system's body-vs-body collide function.
      *
      * @param bodyVsBody the desired function (not {@code null})
+     * @return the current system (for chaining)
      */
-    public void setSimCollideBodyVsBody(SimCollideBodyVsBody bodyVsBody) {
+    public PhysicsSystem setSimCollideBodyVsBody(
+            SimCollideBodyVsBody bodyVsBody) {
         long systemVa = va();
         long colliderVa = bodyVsBody.va();
         setSimCollideBodyVsBody(systemVa, colliderVa);
+
+        return this;
     }
 
     /**
@@ -508,24 +528,31 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      *
      * @param shapeFilter the desired filter, or {@code null} to remove a filter
      * previously set
+     * @return the current system (for chaining)
      */
-    public void setSimShapeFilter(SimShapeFilter shapeFilter) {
+    public PhysicsSystem setSimShapeFilter(SimShapeFilter shapeFilter) {
         this.simShapeFilter = shapeFilter;
         long systemVa = va();
         long filterVa = (shapeFilter == null) ? 0L : shapeFilter.va();
         setSimShapeFilter(systemVa, filterVa);
+
+        return this;
     }
 
     /**
      * Replace or remove the system's soft-body contact listener.
      *
      * @param listener the desired listener, or {@code null} for none
+     * @return the current system (for chaining)
      */
-    public void setSoftBodyContactListener(SoftBodyContactListener listener) {
+    public PhysicsSystem setSoftBodyContactListener(
+            SoftBodyContactListener listener) {
         this.softContactListener = listener;
         long systemVa = va();
         long listenerVa = (listener == null) ? 0L : listener.va();
         setSoftBodyContactListener(systemVa, listenerVa);
+
+        return this;
     }
 
     /**
