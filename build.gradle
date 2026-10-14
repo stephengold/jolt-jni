@@ -411,11 +411,6 @@ tasks.withType(JavaCompile).configureEach { // Java compile-time options:
 
 // Register JVM-execution tasks:
 
-application {
-    // default settings for the 'run' task:
-    mainClass = 'testjoltjni.app.helloworld.HelloWorld'
-}
-
 tasks.register('debugConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
     debug = true
