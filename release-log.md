@@ -1,9 +1,21 @@
 # Release log for the Jolt-JNI project
 
+## Version 6.2.0 released on TBD
+
++ Bugfix:  incorrect records in "module-info.class" cause modular builds to fail
+
++ Added chaining to 10 public setters in `PhysicsSystem`.
+
++ Added Visual C++ options for more-optimal builds.
++ Updated the Jolt-Physics sourcecode and assets to a4b24c3 (sg261013).
++ Updated the Android Gradle plugin to v9.4.1 .
++ Began using Vulkan v1.4.363.0 headers when building native libraries.
++ Updated the OSHI library to v7.7.1 .
+
 ## Version 6.1.1 released on 21 September 2026
 
 Bugfix:  Linux natives fail to load on some systems because they were
-accidentally built with Clang v21.1.8  
+accidentally built with Clang v21.1.8
 
 
 ## Version 6.1.0 released on 21 September 2026
