@@ -93,7 +93,7 @@ model {
             architecture 'arm-v8'
             operatingSystem 'osx'
         }
-        Windows64 {
+        Windows64 { // Windows on a generic 64-bit x86 architecture with SSE2
             architecture 'x86-64'
             operatingSystem 'windows'
         }
@@ -541,7 +541,7 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     enableAssertions = true
     jvmArgs '--enable-native-access=ALL-UNNAMED' // suppress System::load() warning
 }
-tasks.withType(Test).configureEach {
+tasks.withType(Test).configureEach { // Java runtime options for automated tests:
     dependsOn('unpackJoltAssets')
     jvmArgs '--enable-native-access=ALL-UNNAMED' // suppress System::load() warning
     //testLogging.showStandardStreams = true
