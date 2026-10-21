@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
+import com.github.stephengold.joltjni.readonly.ConstPart;
 
 /**
  * Settings used to generate a rigid body in a {@code Ragdoll}. (native type:
@@ -30,7 +31,7 @@ import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Part extends BodyCreationSettings {
+public class Part extends BodyCreationSettings implements ConstPart {
     // *************************************************************************
     // constructors
 
@@ -50,8 +51,8 @@ public class Part extends BodyCreationSettings {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public Part(Part original) {
-        long originalVa = original.va();
+    public Part(ConstPart original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsOwner(copyVa);
     }
@@ -65,6 +66,7 @@ public class Part extends BodyCreationSettings {
      * @param subType the expected type of constraint (not {@code null})
      * @return a new JVM with the pre-existing native object assigned
      */
+    @Override
     public ConstraintSettings getToParent(EConstraintSubType subType) {
         long partVa = va();
         int ordinal = subType.ordinal();
