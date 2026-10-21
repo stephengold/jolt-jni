@@ -127,7 +127,8 @@ public class BodyIdArray extends JoltPhysicsObject implements ConstBodyIdArray {
      */
     public void set(int elementIndex, int bodyId) {
         assert elementIndex >= 0 && elementIndex < length :
-                "Out of range:  index=" + elementIndex + " length=" + length;
+                "Out of range:  elementIndex=" + elementIndex
+                + " length=" + length;
 
         long arrayVa = va();
         setId(arrayVa, elementIndex, bodyId);
@@ -145,7 +146,8 @@ public class BodyIdArray extends JoltPhysicsObject implements ConstBodyIdArray {
     @Override
     public int get(int elementIndex) {
         assert elementIndex >= 0 && elementIndex < length :
-                "Out of range:  index=" + elementIndex + " length=" + length;
+                "Out of range:  elementIndex=" + elementIndex
+                + " length=" + length;
 
         long arrayVa = va();
         int result = getId(arrayVa, elementIndex);
