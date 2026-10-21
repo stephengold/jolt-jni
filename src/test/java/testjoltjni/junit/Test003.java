@@ -75,6 +75,7 @@ import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstSphere;
 import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.std.IntPair;
 import com.github.stephengold.joltjni.vhacd.FillMode;
 import com.github.stephengold.joltjni.vhacd.Parameters;
 import java.nio.IntBuffer;
@@ -128,6 +129,7 @@ public class Test003 {
         doContactListenerList();
         doContactSettings();
         doFilteredContactListener();
+        doIntPair();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
         doLinearCurve();
@@ -472,6 +474,22 @@ public class Test003 {
         testFilteredContactListenerSetters(listener);
 
         TestUtils.testClose(listener);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code IntPair} class.
+     */
+    private static void doIntPair() {
+        IntPair pair = new IntPair(3, -1);
+        Assert.assertTrue(pair.hasAssignedNativeObject());
+        Assert.assertTrue(pair.ownsNativeObject());
+        Assert.assertNotEquals(0L, pair.va());
+
+        Assert.assertEquals(3, pair.get(0));
+        Assert.assertEquals(-1, pair.get(1));
+
+        TestUtils.testClose(pair);
         System.gc();
     }
 

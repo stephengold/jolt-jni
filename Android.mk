@@ -184,6 +184,7 @@ $(N)/glue/i/IgnoreMultipleBodiesFilter.cpp \
 $(N)/glue/i/IndexedTriangle.cpp \
 $(N)/glue/i/IndexedTriangleList.cpp \
 $(N)/glue/i/IndexedTriangleNoMaterial.cpp \
+$(N)/glue/i/IntPair.cpp \
 $(N)/glue/i/InvBind.cpp \
 $(N)/glue/j/JobSystem.cpp \
 $(N)/glue/j/JobSystemSingleThreaded.cpp \
