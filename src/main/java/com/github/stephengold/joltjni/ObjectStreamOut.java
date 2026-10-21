@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstHairSettings;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsScene;
+import com.github.stephengold.joltjni.readonly.ConstRagdollSettings;
 import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
@@ -84,7 +85,7 @@ final public class ObjectStreamOut {
         } else if (writeObject instanceof ConstPhysicsScene) {
             result = sWritePhysicsSceneToFile(fileName, ordinal, objVa);
 
-        } else if (writeObject instanceof RagdollSettings) {
+        } else if (writeObject instanceof ConstRagdollSettings) {
             result = sWriteRagdollSettingsToFile(fileName, ordinal, objVa);
 
         } else { // TODO: implement for other types
@@ -129,7 +130,7 @@ final public class ObjectStreamOut {
         } else if (writeObject instanceof ConstPhysicsScene) {
             result = sWritePhysicsScene(streamVa, ordinal, objVa);
 
-        } else if (writeObject instanceof RagdollSettings) {
+        } else if (writeObject instanceof ConstRagdollSettings) {
             result = sWriteRagdollSettings(streamVa, ordinal, objVa);
 
         } else { // TODO: implement for other types

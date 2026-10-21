@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstRagdollSettings;
+import com.github.stephengold.joltjni.std.IntPair;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
@@ -28,7 +30,9 @@ import com.github.stephengold.joltjni.template.RefTarget;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
+public class RagdollSettings
+        extends JoltPhysicsObject
+        implements ConstRagdollSettings, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -57,8 +61,8 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public RagdollSettings(RagdollSettings original) {
-        long originalVa = original.va();
+    public RagdollSettings(ConstRagdollSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         long refVa = toRef(copyVa);
         setVirtualAddress(copyVa, () -> RagdollSettingsRef.free(refVa));
@@ -113,30 +117,6 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Generate a ragdoll instance from the settings, which are unaffected.
-     *
-     * @param groupId the collision group for the bodies
-     * @param userData the desired user-data value
-     * @param physicsSystem where to add the bodies and constraints (not
-     * {@code null}, modified)
-     * @return a new ragdoll instance, or {@code null} when out of bodies
-     */
-    public Ragdoll createRagdoll(
-            int groupId, long userData, PhysicsSystem physicsSystem) {
-        long settingsVa = va();
-        long systemVa = physicsSystem.va();
-        long resultVa = createRagdoll(settingsVa, groupId, userData, systemVa);
-
-        Ragdoll result;
-        if (resultVa == 0L) {
-            result = null;
-        } else {
-            result = new Ragdoll(resultVa, physicsSystem);
-        }
-        return result;
-    }
-
-    /**
      * Create and add collision filters to all bodies in the ragdoll and
      * configure them so parents and children don't collide.
      */
@@ -165,32 +145,6 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Return the index of the constraint upstream from the specified body.
-     *
-     * @param bodyIndex index of the body in the ragdoll (&ge;0)
-     * @return the constraint index
-     */
-    public int getConstraintIndexForBodyIndex(int bodyIndex) {
-        long settingsVa = va();
-        int result = getConstraintIndexForBodyIndex(settingsVa, bodyIndex);
-
-        return result;
-    }
-
-    /**
-     * Access the skeleton. (native attribute: mSkeleton)
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public Skeleton getSkeleton() {
-        long settingsVa = va();
-        long skeletonVa = getSkeleton(settingsVa);
-        Skeleton result = new Skeleton(skeletonVa);
-
-        return result;
-    }
-
-    /**
      * Resize the parts array.
      *
      * @param numParts the desired number of parts (&ge;0)
@@ -201,28 +155,13 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Save the settings to the specified binary stream. The settings are
-     * unaffected.
-     *
-     * @param stream the stream to write to (not {@code null})
-     * @param saveShapes if true, save the shapes
-     * @param saveGroupFilter if true, save the group filter
-     */
-    public void saveBinaryState(
-            StreamOut stream, boolean saveShapes, boolean saveGroupFilter) {
-        long settingsVa = va();
-        long streamVa = stream.va();
-        saveBinaryState(settingsVa, streamVa, saveShapes, saveGroupFilter);
-    }
-
-    /**
      * Copy the argument to the current settings.
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(RagdollSettings source) {
+    public void set(ConstRagdollSettings source) {
         long targetVa = va();
-        long sourceVa = source.va();
+        long sourceVa = source.targetVa();
         assign(targetVa, sourceVa);
     }
 
@@ -261,6 +200,122 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
         boolean result = stabilize(settingsVa);
 
         return result;
+    }
+    // *************************************************************************
+    // ConstRagdollSettings methods
+
+    /**
+     * Generate a ragdoll instance from the settings, which are unaffected.
+     *
+     * @param groupId the collision group for the bodies
+     * @param userData the desired user-data value
+     * @param physicsSystem where to add the bodies and constraints (not
+     * {@code null}, modified)
+     * @return a new ragdoll instance, or {@code null} when out of bodies
+     */
+    @Override
+    public Ragdoll createRagdoll(
+            int groupId, long userData, PhysicsSystem physicsSystem) {
+        long settingsVa = va();
+        long systemVa = physicsSystem.va();
+        long resultVa = createRagdoll(settingsVa, groupId, userData, systemVa);
+
+        Ragdoll result;
+        if (resultVa == 0L) {
+            result = null;
+        } else {
+            result = new Ragdoll(resultVa, physicsSystem);
+        }
+        return result;
+    }
+
+    /**
+     * Access the body-index pair for the specified constraint.
+     *
+     * @param constraintIndex the index of the constraint (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public IntPair getBodyIndicesForConstraintIndex(int constraintIndex) {
+        long settingsVa = va();
+        long pairVa
+                = getBodyIndicesForConstraintIndex(settingsVa, constraintIndex);
+        IntPair result = new IntPair(this, pairVa);
+
+        return result;
+    }
+
+    /**
+     * Return the index of the constraint upstream from the specified body. The
+     * settings are unaffected.
+     *
+     * @param bodyIndex index of the body in the ragdoll (&ge;0)
+     * @return the constraint index
+     */
+    @Override
+    public int getConstraintIndexForBodyIndex(int bodyIndex) {
+        long settingsVa = va();
+        int result = getConstraintIndexForBodyIndex(settingsVa, bodyIndex);
+
+        return result;
+    }
+
+    /**
+     * Count the parts. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getNumParts() {
+        long settingsVa = va();
+        int result = getNumParts(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Access the part for the specified index.
+     *
+     * @param partIndex index of the part (&ge;0)
+     * @return a new JVM object with pre-existing native object assigned
+     */
+    @Override
+    public Part getPart(int partIndex) {
+        long settingsVa = va();
+        long partVa = getPart(settingsVa, partIndex);
+        Part result = new Part(this, partVa);
+
+        return result;
+    }
+
+    /**
+     * Access the skeleton. (native attribute: mSkeleton)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public Skeleton getSkeleton() {
+        long settingsVa = va();
+        long skeletonVa = getSkeleton(settingsVa);
+        Skeleton result = new Skeleton(skeletonVa);
+
+        return result;
+    }
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not {@code null})
+     * @param saveShapes if true, save the shapes
+     * @param saveGroupFilter if true, save the group filter
+     */
+    @Override
+    public void saveBinaryState(
+            StreamOut stream, boolean saveShapes, boolean saveGroupFilter) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(settingsVa, streamVa, saveShapes, saveGroupFilter);
     }
     // *************************************************************************
     // RefTarget methods
@@ -324,6 +379,9 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
             long settingsVa, int groupId, long userData, long systemVa);
 
     native static void disableParentChildCollisions(long settingsVa);
+
+    native static long getBodyIndicesForConstraintIndex(
+            long settingsVa, int constraintIndex);
 
     native static int getConstraintIndexForBodyIndex(
             long settingsVa, int bodyIndex);

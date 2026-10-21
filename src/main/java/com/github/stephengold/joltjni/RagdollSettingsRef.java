@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstRagdollSettings;
+import com.github.stephengold.joltjni.std.IntPair;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -29,7 +31,9 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class RagdollSettingsRef extends Ref {
+final public class RagdollSettingsRef
+        extends Ref
+        implements ConstRagdollSettings {
     // *************************************************************************
     // constructors
 
@@ -118,31 +122,6 @@ final public class RagdollSettingsRef extends Ref {
     }
 
     /**
-     * Generate a ragdoll instance from the settings, which are unaffected.
-     *
-     * @param groupId the collision group for the bodies
-     * @param userData the desired user-data value
-     * @param physicsSystem where to add the bodies and constraints (not
-     * {@code null}, modified)
-     * @return a new ragdoll instance, or {@code null} when out of bodies
-     */
-    public Ragdoll createRagdoll(
-            int groupId, long userData, PhysicsSystem physicsSystem) {
-        long settingsVa = targetVa();
-        long systemVa = physicsSystem.va();
-        long resultVa = RagdollSettings.createRagdoll(
-                settingsVa, groupId, userData, systemVa);
-
-        Ragdoll result;
-        if (resultVa == 0L) {
-            result = null;
-        } else {
-            result = new Ragdoll(resultVa, physicsSystem);
-        }
-        return result;
-    }
-
-    /**
      * Create and add collision filters to all bodies in the ragdoll and
      * configure them so parents and children don't collide.
      */
@@ -171,33 +150,6 @@ final public class RagdollSettingsRef extends Ref {
     }
 
     /**
-     * Return the index of the constraint upstream from the specified body.
-     *
-     * @param bodyIndex index of the body in the ragdoll (&ge;0)
-     * @return the constraint index
-     */
-    public int getConstraintIndexForBodyIndex(int bodyIndex) {
-        long settingsVa = targetVa();
-        int result = RagdollSettings.getConstraintIndexForBodyIndex(
-                settingsVa, bodyIndex);
-
-        return result;
-    }
-
-    /**
-     * Access the skeleton. (native attribute: mSkeleton)
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public Skeleton getSkeleton() {
-        long settingsVa = targetVa();
-        long skeletonVa = RagdollSettings.getSkeleton(settingsVa);
-        Skeleton result = new Skeleton(skeletonVa);
-
-        return result;
-    }
-
-    /**
      * Resize the parts array.
      *
      * @param numParts the desired number of parts (&ge;0)
@@ -205,22 +157,6 @@ final public class RagdollSettingsRef extends Ref {
     public void resizeParts(int numParts) {
         long settingsVa = targetVa();
         RagdollSettings.resizeParts(settingsVa, numParts);
-    }
-
-    /**
-     * Save the settings to the specified binary stream. The settings are
-     * unaffected.
-     *
-     * @param stream the stream to write to (not {@code null})
-     * @param saveShapes if true, save the shapes
-     * @param saveGroupFilter if true, save the group filter
-     */
-    public void saveBinaryState(
-            StreamOut stream, boolean saveShapes, boolean saveGroupFilter) {
-        long settingsVa = targetVa();
-        long streamVa = stream.va();
-        RagdollSettings.saveBinaryState(
-                settingsVa, streamVa, saveShapes, saveGroupFilter);
     }
 
     /**
@@ -273,6 +209,125 @@ final public class RagdollSettingsRef extends Ref {
         } else {
             this.ptr = new RagdollSettings(targetVa);
         }
+    }
+    // *************************************************************************
+    // ConstRagdollSettings methods
+
+    /**
+     * Generate a ragdoll instance from the settings, which are unaffected.
+     *
+     * @param groupId the collision group for the bodies
+     * @param userData the desired user-data value
+     * @param physicsSystem where to add the bodies and constraints (not
+     * {@code null}, modified)
+     * @return a new ragdoll instance, or {@code null} when out of bodies
+     */
+    @Override
+    public Ragdoll createRagdoll(
+            int groupId, long userData, PhysicsSystem physicsSystem) {
+        long settingsVa = targetVa();
+        long systemVa = physicsSystem.va();
+        long resultVa = RagdollSettings.createRagdoll(
+                settingsVa, groupId, userData, systemVa);
+
+        Ragdoll result;
+        if (resultVa == 0L) {
+            result = null;
+        } else {
+            result = new Ragdoll(resultVa, physicsSystem);
+        }
+        return result;
+    }
+
+    /**
+     * Access the body-index pair for the specified constraint.
+     *
+     * @param constraintIndex the index of the constraint (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public IntPair getBodyIndicesForConstraintIndex(int constraintIndex) {
+        long settingsVa = targetVa();
+        long pairVa = RagdollSettings.getBodyIndicesForConstraintIndex(
+                settingsVa, constraintIndex);
+        IntPair result = new IntPair(this, pairVa);
+
+        return result;
+    }
+
+    /**
+     * Return the index of the constraint upstream from the specified body. The
+     * settings are unaffected.
+     *
+     * @param bodyIndex index of the body in the ragdoll (&ge;0)
+     * @return the constraint index
+     */
+    @Override
+    public int getConstraintIndexForBodyIndex(int bodyIndex) {
+        long settingsVa = targetVa();
+        int result = RagdollSettings.getConstraintIndexForBodyIndex(
+                settingsVa, bodyIndex);
+
+        return result;
+    }
+
+    /**
+     * Count the parts. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getNumParts() {
+        long settingsVa = targetVa();
+        int result = RagdollSettings.getNumParts(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Access the part for the specified index.
+     *
+     * @param partIndex index of the part (&ge;0)
+     * @return a new JVM object with pre-existing native object assigned
+     */
+    @Override
+    public Part getPart(int partIndex) {
+        long settingsVa = targetVa();
+        long partVa = RagdollSettings.getPart(settingsVa, partIndex);
+        Part result = new Part(this, partVa);
+
+        return result;
+    }
+
+    /**
+     * Access the skeleton. (native attribute: mSkeleton)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public Skeleton getSkeleton() {
+        long settingsVa = targetVa();
+        long skeletonVa = RagdollSettings.getSkeleton(settingsVa);
+        Skeleton result = new Skeleton(skeletonVa);
+
+        return result;
+    }
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not {@code null})
+     * @param saveShapes if true, save the shapes
+     * @param saveGroupFilter if true, save the group filter
+     */
+    @Override
+    public void saveBinaryState(
+            StreamOut stream, boolean saveShapes, boolean saveGroupFilter) {
+        long settingsVa = targetVa();
+        long streamVa = stream.va();
+        RagdollSettings.saveBinaryState(
+                settingsVa, streamVa, saveShapes, saveGroupFilter);
     }
     // *************************************************************************
     // Ref methods

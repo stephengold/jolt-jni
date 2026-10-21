@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.rig;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.readonly.ConstRagdollSettings;
 import testjoltjni.app.samples.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics create-rig test.
@@ -43,7 +44,7 @@ public void Initialize()
 	CreateFloor();
 
 	// Create ragdoll
-	RagdollSettings settings = RagdollLoader.sCreate();
+	ConstRagdollSettings settings = RagdollLoader.sCreate();
 	mRagdoll = settings.createRagdoll(0, 0, mPhysicsSystem).toRef();
 	mRagdoll.addToPhysicsSystem(EActivation.Activate);
 }
