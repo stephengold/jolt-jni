@@ -53,6 +53,8 @@ public class IntPair extends JoltPhysicsObject {
     public IntPair(JoltPhysicsObject container, long pairVa) {
         super(container, pairVa);
     }
+    // *************************************************************************
+    // new methods exposed
 
     /**
      * Return the value at the specified index.
