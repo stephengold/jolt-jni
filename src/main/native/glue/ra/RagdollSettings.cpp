@@ -148,9 +148,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_disab
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_getConstraintIndexForBodyIndex
   (JNIEnv *, jclass, jlong settingsVa, jint bodyIndex) {
-    RagdollSettings * const pSettings
+    const RagdollSettings * const pSettings
             = reinterpret_cast<RagdollSettings *> (settingsVa);
-    int result = pSettings->GetConstraintIndexForBodyIndex(bodyIndex);
+    const int result = pSettings->GetConstraintIndexForBodyIndex(bodyIndex);
     return result;
 }
 
