@@ -76,17 +76,17 @@ final public class ObjectStreamOut {
         } else if (writeObject instanceof ConstHairSettings) {
             result = sWriteHairSettingsToFile(fileName, ordinal, objVa);
 
-        } else if (writeObject instanceof ConstSoftBodyCreationSettings) {
-            result = sWriteSbcsToFile(fileName, ordinal, objVa);
-
-        } else if (writeObject instanceof ConstSoftBodySharedSettings) {
-            result = sWriteSbssToFile(fileName, ordinal, objVa);
-
         } else if (writeObject instanceof ConstPhysicsScene) {
             result = sWritePhysicsSceneToFile(fileName, ordinal, objVa);
 
         } else if (writeObject instanceof ConstRagdollSettings) {
             result = sWriteRagdollSettingsToFile(fileName, ordinal, objVa);
+
+        } else if (writeObject instanceof ConstSoftBodyCreationSettings) {
+            result = sWriteSbcsToFile(fileName, ordinal, objVa);
+
+        } else if (writeObject instanceof ConstSoftBodySharedSettings) {
+            result = sWriteSbssToFile(fileName, ordinal, objVa);
 
         } else { // TODO: implement for other types
             Class<?> clas = writeObject.getClass();
@@ -121,17 +121,17 @@ final public class ObjectStreamOut {
         } else if (writeObject instanceof ConstHairSettings) {
             result = sWriteHairSettings(streamVa, ordinal, objVa);
 
-        } else if (writeObject instanceof ConstSoftBodyCreationSettings) {
-            result = sWriteSbcs(streamVa, ordinal, objVa);
-
-        } else if (writeObject instanceof ConstSoftBodySharedSettings) {
-            result = sWriteSbss(streamVa, ordinal, objVa);
-
         } else if (writeObject instanceof ConstPhysicsScene) {
             result = sWritePhysicsScene(streamVa, ordinal, objVa);
 
         } else if (writeObject instanceof ConstRagdollSettings) {
             result = sWriteRagdollSettings(streamVa, ordinal, objVa);
+
+        } else if (writeObject instanceof ConstSoftBodyCreationSettings) {
+            result = sWriteSbcs(streamVa, ordinal, objVa);
+
+        } else if (writeObject instanceof ConstSoftBodySharedSettings) {
+            result = sWriteSbss(streamVa, ordinal, objVa);
 
         } else { // TODO: implement for other types
             Class<?> clas = writeObject.getClass();
