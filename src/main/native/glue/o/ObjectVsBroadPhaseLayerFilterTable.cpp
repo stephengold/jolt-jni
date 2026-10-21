@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjectVsBroadPhaseLa
             = reinterpret_cast<ObjectLayerPairFilter *> (olpfVa);
     const ObjectVsBroadPhaseLayerFilterTable * const pFilter
             = new ObjectVsBroadPhaseLayerFilterTable(
-                    *pBpli, numObjectLayers, *pOlpf, numBpLayers);
+                    *pBpli, numBpLayers, *pOlpf, numObjectLayers);
     TRACE_NEW("ObjectVsBroadPhaseLayerFilterTable", pFilter)
     return reinterpret_cast<jlong> (pFilter);
 }
