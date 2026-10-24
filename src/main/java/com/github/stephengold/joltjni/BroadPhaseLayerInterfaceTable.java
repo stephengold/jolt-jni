@@ -60,6 +60,23 @@ public class BroadPhaseLayerInterfaceTable extends BroadPhaseLayerInterface {
 
         return this;
     }
+
+    /**
+     * If profiling is enabled, alter the name of the specified layer. Otherwise
+     * this has no effect.
+     *
+     * @param bpLayer the index of the broad-phase layer to modify (&ge;0, &lt;
+     * numBpLayers)
+     * @param name the desired name (not {@code null})
+     * @return the modified map, for chaining
+     */
+    public BroadPhaseLayerInterfaceTable setBroadPhaseLayerName(
+            int bpLayer, String name) {
+        long mapVa = va();
+        setBroadPhaseLayerName(mapVa, bpLayer, name);
+
+        return this;
+    }
     // *************************************************************************
     // native private methods
 
@@ -70,4 +87,7 @@ public class BroadPhaseLayerInterfaceTable extends BroadPhaseLayerInterface {
 
     native private static void mapObjectToBroadPhaseLayer(
             long mapVa, int objLayer, int bpLayer);
+
+    native private static void setBroadPhaseLayerName(
+            long mapVa, int bpLayer, String name);
 }

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -61,4 +61,22 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterf
     BroadPhaseLayerInterfaceTable * const pMap
             = reinterpret_cast<BroadPhaseLayerInterfaceTable *> (mapVa);
     pMap->MapObjectToBroadPhaseLayer(objLayer, (BroadPhaseLayer) bpLayer);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BroadPhaseLayerInterfaceTable
+ * Method:    setBroadPhaseLayerName
+ * Signature: (JILjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterfaceTable_setBroadPhaseLayerName
+  (JNIEnv *pEnv, jclass, jlong mapVa, jint bpLayerIndex, jstring name) {
+#if defined(JPH_EXTERNAL_PROFILE) || defined(JPH_PROFILE_ENABLED)
+    BroadPhaseLayerInterfaceTable * const pMap
+            = reinterpret_cast<BroadPhaseLayerInterfaceTable *> (mapVa);
+    jboolean isCopy;
+    const char * strName = pEnv->GetStringUTFChars(name, &isCopy);
+    const BroadPhaseLayer bpLayer = (BroadPhaseLayer) bpLayerIndex;
+    pMap->SetBroadPhaseLayerName(bpLayer, strName);
+    pEnv->ReleaseStringUTFChars(name, strName);
+#endif
 }
