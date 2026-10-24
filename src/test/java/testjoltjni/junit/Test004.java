@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.BodyIdVector;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
 import com.github.stephengold.joltjni.CombineFunction;
+import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JphMath;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
@@ -78,6 +79,14 @@ public class Test004 {
         Assert.assertEquals(0, mapObj2Bp.getBroadPhaseLayer(0));
         Assert.assertEquals(0, mapObj2Bp.getBroadPhaseLayer(1));
         Assert.assertEquals(0, mapObj2Bp.getBroadPhaseLayer(2));
+        for (int bpLayer = 0; bpLayer < numBpLayers; ++bpLayer) {
+            String name = mapObj2Bp.getBroadPhaseLayerName(bpLayer);
+            if (Jolt.implementsProfiling()) {
+                Assert.assertEquals("Undefined", name);
+            } else {
+                Assert.assertNull(name);
+            }
+        }
 
         ObjVsBpFilter objVsBpFilter
                 = new ObjVsBpFilter(numObjLayers, numBpLayers);
