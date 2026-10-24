@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectVsBroadPhaseLayerFilter
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjectVsBroadPhaseLayerFilter_createDefault
+  BODYOF_CREATE_DEFAULT(ObjectVsBroadPhaseLayerFilter)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectVsBroadPhaseLayerFilter
  * Method:    free
  * Signature: (J)V
  */

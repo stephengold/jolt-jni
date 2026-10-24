@@ -28,11 +28,19 @@ import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilte
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class ObjectVsBroadPhaseLayerFilter
+public class ObjectVsBroadPhaseLayerFilter
         extends NonCopyable
         implements ConstObjectVsBroadPhaseLayerFilter {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate a default filter, for which all layers collide.
+     */
+    public ObjectVsBroadPhaseLayerFilter() {
+        long filterVa = createDefault();
+        setVirtualAddressAsOwner(filterVa);
+    }
 
     /**
      * Instantiate a filter with no native object assigned.
@@ -75,8 +83,10 @@ abstract public class ObjectVsBroadPhaseLayerFilter
     // *************************************************************************
     // native private methods
 
+    native private static long createDefault();
+
     native private static void free(long filterVa);
 
     native private static boolean shouldCollide(
-            long mapVa, int objLayer, int bpLayer);
+            long filterVa, int objLayer, int bpLayer);
 }
