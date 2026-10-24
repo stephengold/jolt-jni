@@ -42,17 +42,17 @@ final public class Jolt {
     // constants
 
     /**
-     * invalid broad-phase layer
-     * <p>
-     * value should match Jolt/Physics/Collision/BroadPhase/BroadPhaseLayer.h
-     */
-    final public static int cBroadPhaseLayerInvalid = 0xFF;
-    /**
      * default rounding of corners in convex shapes (in meters)
      * <p>
      * value should match Jolt/Physics/PhysicsSettings.h
      */
     final public static float cDefaultConvexRadius = 0.05f;
+    /**
+     * invalid broad-phase layer
+     * <p>
+     * value should match Jolt/Physics/Collision/BroadPhase/BroadPhaseLayer.h
+     */
+    final public static int cBroadPhaseLayerInvalid = 0xFF;
     /**
      * empty sub-shape ID
      * <p>
