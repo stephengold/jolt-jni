@@ -220,6 +220,7 @@ $(N)/glue/o/ObjectLayerPairFilterTable.cpp \
 $(N)/glue/o/ObjectStreamIn.cpp \
 $(N)/glue/o/ObjectStreamOut.cpp \
 $(N)/glue/o/ObjectVsBroadPhaseLayerFilter.cpp \
+$(N)/glue/o/ObjectVsBroadPhaseLayerFilterMask.cpp \
 $(N)/glue/o/ObjectVsBroadPhaseLayerFilterTable.cpp \
 $(N)/glue/o/ObjVsBpFilter.cpp \
 $(N)/glue/o/ObjVsObjFilter.cpp \
