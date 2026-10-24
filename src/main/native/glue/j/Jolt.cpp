@@ -255,6 +255,20 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsDe
 #endif
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    implementsProfiling
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsProfiling
+  (JNIEnv *, jclass) {
+#if defined(JPH_EXTERNAL_PROFILE) || defined(JPH_PROFILE_ENABLED)
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
 JavaVM *gpVM; // the virtual machine used by both AndroidTrace() and JavaTrace()
 
 #ifdef ANDROID

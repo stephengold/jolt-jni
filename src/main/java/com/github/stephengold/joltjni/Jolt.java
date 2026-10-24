@@ -229,6 +229,14 @@ final public class Jolt {
     native public static boolean implementsDeterminismLog();
 
     /**
+     * Test whether the native library implements profiling. (native macros:
+     * JPH_EXTERNAL_PROFILE and JPH_PROFILE_ENABLED)
+     *
+     * @return {@code true} if implemented, otherwise {@code false}
+     */
+    native public static boolean implementsProfiling();
+
+    /**
      * Install an alternative trace callback that sends to the Android log with
      * the specified priority and tag.
      *
