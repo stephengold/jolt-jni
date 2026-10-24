@@ -50,10 +50,11 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterf
  * Signature: (JI)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterface_getBroadPhaseLayerName
-  (JNIEnv *pEnv, jclass, jlong mapVa, jint bpLayer) {
+  (JNIEnv *pEnv, jclass, jlong mapVa, jint bpLayerIndex) {
 #if defined(JPH_EXTERNAL_PROFILE) || defined(JPH_PROFILE_ENABLED)
     const BroadPhaseLayerInterface * const pMap
             = reinterpret_cast<BroadPhaseLayerInterface *> (mapVa);
+    const BroadPhaseLayer bpLayer = (BroadPhaseLayer) bpLayerIndex;
     const char* const name = pMap->GetBroadPhaseLayerName(bpLayer);
     const jstring result = pEnv->NewStringUTF(name);
     JPH_ASSERT(result);
