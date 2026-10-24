@@ -57,6 +57,21 @@ abstract public class BroadPhaseLayerInterface
     }
 
     /**
+     * Return the name of the specified layer.
+     *
+     * @param bpLayer the index of the broad-phase layer to query (&ge;0, &lt;
+     * numBpLayers)
+     * @return the name currently assigned, or {@code null} if profiling is
+     * disabled
+     */
+    public String getBroadPhaseLayerName(int bpLayer) {
+        long mapVa = va();
+        String result = getBroadPhaseLayerName(mapVa, bpLayer);
+
+        return result;
+    }
+
+    /**
      * Count how many broad-phase layers there are.
      *
      * @return the count (&ge;0)
@@ -72,6 +87,9 @@ abstract public class BroadPhaseLayerInterface
     // native private methods
 
     native private static int getBroadPhaseLayer(long mapVa, int objectLayer);
+
+    native private static String getBroadPhaseLayerName(
+            long mapVa, int bpLayer);
 
     native private static int getNumBroadPhaseLayers(long mapVa);
 }

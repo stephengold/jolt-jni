@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/BroadPhase/BroadPhaseLayer.h"
 #include "auto/com_github_stephengold_joltjni_BroadPhaseLayerInterface.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -41,6 +42,26 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterf
     const BroadPhaseLayer bpLayer = pMap->GetBroadPhaseLayer(objLayer);
     const uint8 result = bpLayer.GetValue();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BroadPhaseLayerInterface
+ * Method:    getBroadPhaseLayerName
+ * Signature: (JI)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterface_getBroadPhaseLayerName
+  (JNIEnv *pEnv, jclass, jlong mapVa, jint bpLayer) {
+#if defined(JPH_EXTERNAL_PROFILE) || defined(JPH_PROFILE_ENABLED)
+    const BroadPhaseLayerInterface * const pMap
+            = reinterpret_cast<BroadPhaseLayerInterface *> (mapVa);
+    const char* const name = pMap->GetBroadPhaseLayerName(bpLayer);
+    const jstring result = pEnv->NewStringUTF(name);
+    JPH_ASSERT(result);
+    EXCEPTION_CHECK(pEnv)
+    return result;
+#else
+    return (jstring)NULL;
+#endif
 }
 
 /*
