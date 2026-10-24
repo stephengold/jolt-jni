@@ -45,16 +45,15 @@ public class ObjectVsBroadPhaseLayerFilterTable
     public ObjectVsBroadPhaseLayerFilterTable(
             BroadPhaseLayerInterface bplInterface, int numBpLayers,
             ObjectLayerPairFilter olPairFilter, int numObjLayers) {
+        super(true);
         long bpliVa = bplInterface.va();
         long olpfVa = olPairFilter.va();
-        long mapVa = create(bpliVa, numBpLayers, olpfVa, numObjLayers);
-        setVirtualAddress(mapVa, () -> free(mapVa));
+        long filterVa = create(bpliVa, numBpLayers, olpfVa, numObjLayers);
+        setVirtualAddressAsOwner(filterVa);
     }
     // *************************************************************************
     // native private methods
 
     native private static long create(
             long bpliVa, int numBpLayers, long olpfVa, int numObjLayers);
-
-    native private static void free(long mapVa);
 }

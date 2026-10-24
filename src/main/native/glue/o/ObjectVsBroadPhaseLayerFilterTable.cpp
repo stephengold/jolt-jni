@@ -48,11 +48,3 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjectVsBroadPhaseLa
     TRACE_NEW("ObjectVsBroadPhaseLayerFilterTable", pFilter)
     return reinterpret_cast<jlong> (pFilter);
 }
-
-/*
- * Class:     com_github_stephengold_joltjni_ObjectVsBroadPhaseLayerFilterTable
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjectVsBroadPhaseLayerFilterTable_free
-  BODYOF_FREE(ObjectVsBroadPhaseLayerFilterTable)

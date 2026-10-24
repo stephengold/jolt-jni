@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -136,11 +136,3 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_disable
             = reinterpret_cast<ObjVsBpFilter *> (filterVa);
     pFilter->DisablePair(objLayer, BroadPhaseLayer(bpLayer));
 }
-
-/*
- * Class:     com_github_stephengold_joltjni_ObjVsBpFilter
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_free
-  BODYOF_FREE(ObjVsBpFilter)

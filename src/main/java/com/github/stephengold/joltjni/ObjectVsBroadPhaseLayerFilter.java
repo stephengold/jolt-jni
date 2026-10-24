@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,8 +36,10 @@ abstract public class ObjectVsBroadPhaseLayerFilter
 
     /**
      * Instantiate a filter with no native object assigned.
+     *
+     * @param dummy unused argument to distinguish from the zero-arg constructor
      */
-    ObjectVsBroadPhaseLayerFilter() {
+    ObjectVsBroadPhaseLayerFilter(boolean dummy) {
     }
     // *************************************************************************
     // ConstObjectVsBroadPhaseLayerFilter methods
@@ -57,7 +59,23 @@ abstract public class ObjectVsBroadPhaseLayerFilter
         return result;
     }
     // *************************************************************************
+    // protected methods
+
+    /**
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
+     *
+     * @param filterVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    final void setVirtualAddressAsOwner(long filterVa) {
+        Runnable freeingAction = () -> free(filterVa);
+        setVirtualAddress(filterVa, freeingAction);
+    }
+    // *************************************************************************
     // native private methods
+
+    native private static void free(long filterVa);
 
     native private static boolean shouldCollide(
             long mapVa, int objLayer, int bpLayer);

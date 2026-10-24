@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,8 +38,9 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
      * @param numBpLayers the number of broad-phase layers (&ge;1)
      */
     public ObjVsBpFilter(int numObjectLayers, int numBpLayers) {
+        super(true);
         long filterVa = createObjVsBpFilter(numObjectLayers, numBpLayers);
-        setVirtualAddress(filterVa, () -> free(filterVa));
+        setVirtualAddressAsOwner(filterVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -95,6 +96,4 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
 
     native private static void disablePair(
             long filterVa, int objLayer, int bpLayer);
-
-    native private static void free(long filterVa);
 }
