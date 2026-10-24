@@ -43,6 +43,7 @@ $(N)/glue/b/BroadPhaseCastResult.cpp \
 $(N)/glue/b/BroadPhase.cpp \
 $(N)/glue/b/BroadPhaseLayerFilter.cpp \
 $(N)/glue/b/BroadPhaseLayerInterface.cpp \
+$(N)/glue/b/BroadPhaseLayerInterfaceMask.cpp \
 $(N)/glue/b/BroadPhaseLayerInterfaceTable.cpp \
 $(N)/glue/b/BroadPhaseQuadTree.cpp \
 $(N)/glue/b/BroadPhaseQuery.cpp \
