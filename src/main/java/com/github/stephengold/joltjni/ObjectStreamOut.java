@@ -34,9 +34,9 @@ import com.github.stephengold.joltjni.std.StringStream;
 
 /**
  * Utility class for writing uncooked Jolt-Physics objects to files or streams.
- * Data serialized this way is more like to be compatible with future versions
- * of the library than the
- * {@code saveBinaryState()}/{@code restoreBinaryState()} methods.
+ * Data serialized this way is more likely to be compatible with future versions
+ * of the library than if the {@code saveBinaryState()} and
+ * {@code restoreBinaryState()} methods are used.
  *
  * @author Stephen Gold sgold@sonic.net
  * @see com.github.stephengold.joltjni.ObjectStreamIn

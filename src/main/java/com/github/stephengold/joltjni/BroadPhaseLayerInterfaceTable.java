@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,9 +34,8 @@ public class BroadPhaseLayerInterfaceTable extends BroadPhaseLayerInterface {
      * Instantiate a default map with the specified capacity. It maps every
      * object layer to broad-phase layer zero.
      *
-     * @param numObjLayers the desired capacity (number of object layers)
-     * (&ge;1)
-     * @param numBpLayers the number of broad-phase layers (&ge;1)
+     * @param numObjLayers the desired capacity (number of object layers, &ge;1)
+     * @param numBpLayers the desired number of broad-phase layers (&ge;1)
      */
     public BroadPhaseLayerInterfaceTable(int numObjLayers, int numBpLayers) {
         long mapVa = createDefault(numObjLayers, numBpLayers);
