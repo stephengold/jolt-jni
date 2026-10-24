@@ -39,7 +39,7 @@ public class BroadPhaseLayerInterfaceTable extends BroadPhaseLayerInterface {
      */
     public BroadPhaseLayerInterfaceTable(int numObjLayers, int numBpLayers) {
         long mapVa = createDefault(numObjLayers, numBpLayers);
-        setVirtualAddress(mapVa, () -> free(mapVa));
+        setVirtualAddressAsOwner(mapVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -80,10 +80,7 @@ public class BroadPhaseLayerInterfaceTable extends BroadPhaseLayerInterface {
     // *************************************************************************
     // native private methods
 
-    native private static long createDefault(
-            int numObjLayers, int numBpLayers);
-
-    native private static void free(long mapVa);
+    native private static long createDefault(int numObjLayers, int numBpLayers);
 
     native private static void mapObjectToBroadPhaseLayer(
             long mapVa, int objLayer, int bpLayer);

@@ -84,7 +84,23 @@ abstract public class BroadPhaseLayerInterface
         return result;
     }
     // *************************************************************************
+    // protected methods
+
+    /**
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
+     *
+     * @param mapVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    final void setVirtualAddressAsOwner(long mapVa) {
+        Runnable freeingAction = () -> free(mapVa);
+        setVirtualAddress(mapVa, freeingAction);
+    }
+    // *************************************************************************
     // native private methods
+
+    native private static void free(long mapVa);
 
     native private static int getBroadPhaseLayer(long mapVa, int objectLayer);
 

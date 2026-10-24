@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhaseLayerInterface
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterface_free
+  BODYOF_FREE(BroadPhaseLayerInterface)
+
+/*
+ * Class:     com_github_stephengold_joltjni_BroadPhaseLayerInterface
  * Method:    getBroadPhaseLayer
  * Signature: (JI)I
  */

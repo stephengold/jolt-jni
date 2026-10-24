@@ -45,14 +45,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInter
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhaseLayerInterfaceTable
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterfaceTable_free
-  BODYOF_FREE(BroadPhaseLayerInterfaceTable)
-
-/*
- * Class:     com_github_stephengold_joltjni_BroadPhaseLayerInterfaceTable
  * Method:    mapObjectToBroadPhaseLayer
  * Signature: (JII)V
  */
