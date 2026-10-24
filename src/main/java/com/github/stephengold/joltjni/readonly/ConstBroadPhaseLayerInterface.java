@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,16 @@ public interface ConstBroadPhaseLayerInterface extends ConstJoltPhysicsObject {
      * @return the index of the corresponding broad-phase layer
      */
     int getBroadPhaseLayer(int objectLayer);
+
+    /**
+     * Return the name of the specified layer.
+     *
+     * @param bpLayer the index of the broad-phase layer to query (&ge;0, &lt;
+     * numBpLayers)
+     * @return the name currently assigned, or {@code null} if profiling is
+     * disabled
+     */
+    String getBroadPhaseLayerName(int bpLayer);
 
     /**
      * Count how many broad-phase layers there are.
