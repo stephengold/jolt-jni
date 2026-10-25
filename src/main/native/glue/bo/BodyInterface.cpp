@@ -871,8 +871,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getWor
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
-    Mat44 * const pResult = new Mat44();
-    TRACE_NEW("Mat44", pResult)
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", pResult)
     *pResult = pInterface->GetWorldTransform(id);
     return reinterpret_cast<jlong> (pResult);
 }
