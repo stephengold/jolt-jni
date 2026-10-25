@@ -150,9 +150,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_getB
   (JNIEnv *, jclass, jlong settingsVa, jint constraintIndex) {
     const RagdollSettings * const pSettings
             = reinterpret_cast<RagdollSettings *> (settingsVa);
-    const std::pair<int, int> & result
-            = pSettings->GetBodyIndicesForConstraintIndex(constraintIndex);
-    return reinterpret_cast<jlong> (&result);
+    std::pair<int, int> * const pResult = new std::pair<int, int>();
+    TRACE_NEW("pair<int, int>", pResult)
+    *pResult = pSettings->GetBodyIndicesForConstraintIndex(constraintIndex);
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*

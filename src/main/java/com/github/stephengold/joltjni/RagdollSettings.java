@@ -230,17 +230,17 @@ public class RagdollSettings
     }
 
     /**
-     * Access the body-index pair for the specified constraint.
+     * Copy the body-index pair for the specified constraint.
      *
      * @param constraintIndex the index of the constraint (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new object
      */
     @Override
     public IntPair getBodyIndicesForConstraintIndex(int constraintIndex) {
         long settingsVa = va();
         long pairVa
                 = getBodyIndicesForConstraintIndex(settingsVa, constraintIndex);
-        IntPair result = new IntPair(this, pairVa);
+        IntPair result = new IntPair(pairVa, true);
 
         return result;
     }
