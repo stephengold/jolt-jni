@@ -48,3 +48,16 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjectVsBroadPhaseLa
     TRACE_NEW("ObjectVsBroadPhaseLayerFilterTable", pFilter)
     return reinterpret_cast<jlong> (pFilter);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectVsBroadPhaseLayerFilterTable
+ * Method:    getNumBroadPhaseLayers
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ObjectVsBroadPhaseLayerFilterTable_getNumBroadPhaseLayers
+  (JNIEnv *, jclass, jlong filterVa) {
+    const ObjectVsBroadPhaseLayerFilterTable * const pFilter
+             = reinterpret_cast<ObjectVsBroadPhaseLayerFilterTable *> (filterVa);
+    const uint result = pFilter->GetNumBroadPhaseLayers();
+    return result;
+}

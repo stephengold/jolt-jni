@@ -27,7 +27,6 @@ import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
 import com.github.stephengold.joltjni.ObjectLayerPairFilter;
 import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
-import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
@@ -719,9 +718,11 @@ final public class TestUtils {
                 = new ObjectLayerPairFilterTable(numObjLayers)
                         .enableCollision(objLayerMoving, objLayerMoving)
                         .enableCollision(objLayerMoving, objLayerNonMoving);
-        ObjectVsBroadPhaseLayerFilter objVsBpFilter
+        ObjectVsBroadPhaseLayerFilterTable objVsBpFilter
                 = new ObjectVsBroadPhaseLayerFilterTable(
                         mapObj2Bp, numBpLayers, objVsObjFilter, numObjLayers);
+        Assert.assertEquals(
+                numBpLayers, objVsBpFilter.getNumBroadPhaseLayers());
 
         int numBodyMutexes = 0; // 0 means "use the default value"
         int maxBodyPairs = 65_536;

@@ -52,8 +52,24 @@ public class ObjectVsBroadPhaseLayerFilterTable
         setVirtualAddressAsOwner(filterVa);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the number of broad-phase layers.
+     *
+     * @return the count (&ge;1)
+     */
+    public int getNumBroadPhaseLayers() {
+        long filterVa = va();
+        int result = getNumBroadPhaseLayers(filterVa);
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long create(
             long bpliVa, int numBpLayers, long olpfVa, int numObjLayers);
+
+    native private static int getNumBroadPhaseLayers(long filterVa);
 }
