@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstContactManifold;
+import com.github.stephengold.joltjni.readonly.ConstContactSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -61,15 +62,14 @@ final public class MiscUtil {
      * @param manifold the collision manifold (not {@code null}, unaffected)
      * @param storeResult storage for impulses and velocities (not {@code null},
      * modified)
-     * @param combinedFriction the combined friction of the 2 bodies
-     * @param combinedRestitution the combined restitution of the 2 bodies
+     * @param contactSettings the settings to use (not {@code null}, unaffected)
      */
     public static void estimateCollisionResponse(
             ConstBody body1, ConstBody body2, ConstContactManifold manifold,
-            CollisionEstimationResult storeResult, float combinedFriction,
-            float combinedRestitution) {
-        estimateCollisionResponse(body1, body2, manifold, storeResult,
-                combinedFriction, combinedRestitution, 1f);
+            CollisionEstimationResult storeResult,
+            ConstContactSettings contactSettings) {
+        estimateCollisionResponse(
+                body1, body2, manifold, storeResult, contactSettings, 1f);
     }
 
     /**
@@ -81,17 +81,16 @@ final public class MiscUtil {
      * @param manifold the collision manifold (not {@code null}, unaffected)
      * @param storeResult storage for impulses and velocities (not {@code null},
      * modified)
-     * @param combinedFriction the combined friction of the 2 bodies
-     * @param combinedRestitution the combined restitution of the 2 bodies
+     * @param contactSettings the settings to use (not {@code null}, unaffected)
      * @param minVelocity the minimum speed for restitution to be applied (in
      * meters per second, default=1)
      */
     public static void estimateCollisionResponse(
             ConstBody body1, ConstBody body2, ConstContactManifold manifold,
-            CollisionEstimationResult storeResult, float combinedFriction,
-            float combinedRestitution, float minVelocity) {
+            CollisionEstimationResult storeResult,
+            ConstContactSettings contactSettings, float minVelocity) {
         estimateCollisionResponse(body1, body2, manifold, storeResult,
-                combinedFriction, combinedRestitution, minVelocity, 10);
+                contactSettings, minVelocity, 10);
     }
 
     /**
@@ -103,8 +102,7 @@ final public class MiscUtil {
      * @param manifold the collision manifold (not {@code null}, unaffected)
      * @param storeResult storage for impulses and velocities (not {@code null},
      * modified)
-     * @param combinedFriction the combined friction of the 2 bodies
-     * @param combinedRestitution the combined restitution of the 2 bodies
+     * @param contactSettings the settings to use (not {@code null}, unaffected)
      * @param minVelocity the minimum speed for restitution to be applied (in
      * meters per second, default=1)
      * @param numIterations the number of iterations the impulse solver to use
@@ -112,15 +110,16 @@ final public class MiscUtil {
      */
     public static void estimateCollisionResponse(
             ConstBody body1, ConstBody body2, ConstContactManifold manifold,
-            CollisionEstimationResult storeResult, float combinedFriction,
-            float combinedRestitution, float minVelocity, int numIterations) {
+            CollisionEstimationResult storeResult,
+            ConstContactSettings contactSettings,
+            float minVelocity, int numIterations) {
         long body1Va = body1.targetVa();
         long body2Va = body2.targetVa();
         long manifoldVa = manifold.targetVa();
         long resultVa = storeResult.va();
-        estimateCollisionResponse(
-                body1Va, body2Va, manifoldVa, resultVa, combinedFriction,
-                combinedRestitution, minVelocity, numIterations);
+        long settingsVa = contactSettings.targetVa();
+        estimateCollisionResponse(body1Va, body2Va, manifoldVa, resultVa,
+                settingsVa, minVelocity, numIterations);
     }
 
     /**
@@ -512,8 +511,7 @@ final public class MiscUtil {
 
     native private static void estimateCollisionResponse(
             long body1Va, long body2Va, long manifoldVa, long resultVa,
-            float combinedFriction, float combinedRestitution,
-            float minVelocity, int numIterations);
+            long settingsVa, float minVelocity, int numIterations);
 
     native private static long hashBytes(
             double xx, double yy, double zz, long oldHash);

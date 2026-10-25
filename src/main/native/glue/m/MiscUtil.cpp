@@ -100,20 +100,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MiscUtil_sSetNextChar
 /*
  * Class:     com_github_stephengold_joltjni_MiscUtil
  * Method:    estimateCollisionResponse
- * Signature: (JJJJFFFI)V
+ * Signature: (JJJJJFI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MiscUtil_estimateCollisionResponse
   (JNIEnv *, jclass, jlong body1Va, jlong body2Va, jlong manifoldVa,
-  jlong resultVa, jfloat combinedFriction, jfloat combinedRestitution,
-  jfloat minVelocity, jint numIterations) {
+  jlong resultVa, jlong settingsVa, jfloat minVelocity, jint numIterations) {
     const Body * const pBody1 = reinterpret_cast<Body *> (body1Va);
     const Body * const pBody2 = reinterpret_cast<Body *> (body2Va);
     const ContactManifold * const pManifold
             = reinterpret_cast<ContactManifold *> (manifoldVa);
     CollisionEstimationResult * const pResult
             = reinterpret_cast<CollisionEstimationResult *> (resultVa);
+    const ContactSettings * const pSettings
+            = reinterpret_cast<ContactSettings *> (settingsVa);
     EstimateCollisionResponse(*pBody1, *pBody2, *pManifold, *pResult,
-            combinedFriction, combinedRestitution, minVelocity, numIterations);
+            *pSettings, minVelocity, numIterations);
 }
 
 /*

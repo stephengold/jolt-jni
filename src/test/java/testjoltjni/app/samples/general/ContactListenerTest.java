@@ -149,7 +149,7 @@ public void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactMan
 
 	// Estimate the contact impulses.
 	CollisionEstimationResult result=new CollisionEstimationResult();
-	estimateCollisionResponse(inBody1, inBody2, inManifold, result, ioSettings.getCombinedFriction(), ioSettings.getCombinedRestitution());
+	estimateCollisionResponse(inBody1, inBody2, inManifold, result, ioSettings);
 
 	// Trace the result
 	String impulses_str="";
