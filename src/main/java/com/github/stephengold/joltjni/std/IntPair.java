@@ -53,6 +53,19 @@ public class IntPair extends JoltPhysicsObject {
     public IntPair(JoltPhysicsObject container, long pairVa) {
         super(container, pairVa);
     }
+
+    /**
+     * Instantiate a pair with the specified native object assigned.
+     *
+     * @param pairVa the virtual address of the native object to assign (not
+     * zero)
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
+     */
+    public IntPair(long pairVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(pairVa) : null;
+        setVirtualAddress(pairVa, freeingAction);
+    }
     // *************************************************************************
     // new methods exposed
 
