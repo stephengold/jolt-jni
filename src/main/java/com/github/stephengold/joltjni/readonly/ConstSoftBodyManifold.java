@@ -67,7 +67,7 @@ public interface ConstSoftBodyManifold extends ConstJoltPhysicsObject {
 
     /**
      * Return the ID of the specified sensor contact. The manifold is
-     * unaffected. (native method: GetSensorContactBodyID)
+     * unaffected.
      *
      * @param index among the sensor contacts (&ge;0)
      * @return the {@code BodyID} value

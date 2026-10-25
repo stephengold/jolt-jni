@@ -43,16 +43,14 @@ public interface ConstSubShape extends ConstJoltPhysicsObject {
     Mat44 getLocalTransformNoScale(Vec3Arg scale);
 
     /**
-     * Copy the center-of-mass location. The sub-shape is unaffected. (native
-     * function: GetPositionCOM)
+     * Copy the center-of-mass location. The sub-shape is unaffected.
      *
      * @return a new vector
      */
     Vec3 getPositionCom();
 
     /**
-     * Copy the center-of-mass location. The sub-shape is unaffected. (native
-     * function: GetPositionCOM)
+     * Copy the center-of-mass location. The sub-shape is unaffected.
      *
      * @param storeResult storage for the location (not {@code null}, modified)
      */
