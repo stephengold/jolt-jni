@@ -696,6 +696,20 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Copy the inverse of the inertia tensor in system coordinates.
+     *
+     * @param bodyId the ID of the body to query
+     * @return a new matrix
+     */
+    public Mat44 getInverseInertia(int bodyId) {
+        long bodyInterfaceVa = va();
+        long matrixVa = getInverseInertia(bodyInterfaceVa, bodyId);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the linear velocity of the specified body.
      *
      * @param bodyId the ID of the body
@@ -722,20 +736,6 @@ public class BodyInterface extends NonCopyable {
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(bodyInterfaceVa, bodyId, storeFloats);
         storeVelocity.set(storeFloats);
-    }
-
-    /**
-     * Copy the inverse of the inertia tensor in system coordinates.
-     *
-     * @param bodyId the ID of the body to query
-     * @return a new matrix
-     */
-    public Mat44 getInverseInertia(int bodyId) {
-        long bodyInterfaceVa = va();
-        long matrixVa = getInverseInertia(bodyInterfaceVa, bodyId);
-        Mat44 result = new Mat44(matrixVa, true);
-
-        return result;
     }
 
     /**
