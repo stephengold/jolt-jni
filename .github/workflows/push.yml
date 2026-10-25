@@ -341,7 +341,6 @@ jobs:
             -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
-# TODO: stop publishing for Linux_ARM32hf
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
@@ -357,23 +356,8 @@ jobs:
       - run: arm-linux-gnueabihf-g++-11 --version
       - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Linux_ARM32hf install \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          ./gradlew -Partifact=jolt-jni-Linux_ARM32hf -Ptarget=Linux_ARM32hf clean release \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
-            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          bash/uploadToCentral.sh \
-            -p '${{ secrets.CENTRAL_PASSWORD }}' \
-            -u '${{ secrets.CENTRAL_USERNAME }}'
+          ./gradlew -Ptarget=Linux_ARM32hf assemble \
+            --console=plain
 
   Java21-x-Linux_LoongArch64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
