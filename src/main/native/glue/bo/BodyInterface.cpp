@@ -246,6 +246,35 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addTorq
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    assignBodyId
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyInterface_assignBodyId__JJ
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyVa) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const bool result = pInterface->AssignBodyID(pBody);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    assignBodyId
+ * Signature: (JJI)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyInterface_assignBodyId__JJI
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyVa, jint bodyId) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const BodyID id(bodyId);
+    const bool result = pInterface->AssignBodyID(pBody, id);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    createBody
  * Signature: (JJ)J
  */
@@ -256,6 +285,38 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_create
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (settingsVa);
     const Body * const pResult = pInterface->CreateBody(*pSettings);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    createBodyWithId
+ * Signature: (JIJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_createBodyWithId
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jlong settingsVa) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (settingsVa);
+    const BodyID id(bodyId);
+    const Body * const pResult = pInterface->CreateBodyWithID(id, *pSettings);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    createBodyWithoutId
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_createBodyWithoutId
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong settingsVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (settingsVa);
+    const Body * const pResult
+            = pInterface->CreateBodyWithoutID(*pSettings);
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -290,6 +351,39 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_create
     const SoftBodyCreationSettings * const pSettings
             = reinterpret_cast<SoftBodyCreationSettings *> (settingsVa);
     const Body * const pResult = pInterface->CreateSoftBody(*pSettings);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    createSoftBodyWithId
+ * Signature: (JIJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_createSoftBodyWithId
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jlong settingsVa) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (settingsVa);
+    const BodyID id(bodyId);
+    const Body * const pResult
+            = pInterface->CreateSoftBodyWithID(id, *pSettings);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    createSoftBodyWithoutId
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_createSoftBodyWithoutId
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong settingsVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (settingsVa);
+    const Body * const pResult
+            = pInterface->CreateSoftBodyWithoutID(*pSettings);
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -344,6 +438,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroy
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
     pInterface->DestroyBody(id);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    destroyBodyWithoutId
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroyBodyWithoutId
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    pInterface->DestroyBodyWithoutID(pBody);
 }
 
 /*
@@ -414,6 +521,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCen
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getCollisionGroup
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCollisionGroup
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const CollisionGroup * const pResult = &pInterface->GetCollisionGroup(id);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getFriction
  * Signature: (JI)F
  */
@@ -458,6 +579,28 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getInv
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getLinearAndAngularVelocity
+ * Signature: (JILjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLinearAndAngularVelocity
+  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jint bodyId, jobject storeFloats) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 6);
+    Vec3 linear, angular;
+    pInterface->GetLinearAndAngularVelocity(id, linear, angular);
+    pFloats[0] = linear.GetX();
+    pFloats[1] = linear.GetY();
+    pFloats[2] = linear.GetZ();
+    pFloats[3] = angular.GetX();
+    pFloats[4] = angular.GetY();
+    pFloats[5] = angular.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getLinearVelocity
  * Signature: (JILjava/nio/FloatBuffer;)V
  */
@@ -472,6 +615,50 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLine
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getMaterial
+ * Signature: (JII)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMaterial
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jint subShapeId) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID bid(bodyId);
+    SubShapeID ssid;
+    ssid.SetValue(subShapeId);
+    const PhysicsMaterial * const pResult = pInterface->GetMaterial(bid, ssid);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getMaxAngularVelocity
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMaxAngularVelocity
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const float result = pInterface->GetMaxAngularVelocity(id);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getMaxLinearVelocity
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMaxLinearVelocity
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const float result = pInterface->GetMaxLinearVelocity(id);
+    return result;
 }
 
 /*
@@ -514,6 +701,26 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getObje
     const BodyID id(bodyId);
     const ObjectLayer result = pInterface->GetObjectLayer(id);
     return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getPointVelocity
+ * Signature: (JIDDDLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPointVelocity
+  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jint bodyId,
+  jdouble xx, jdouble yy, jdouble zz, jobject storeFloats) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const RVec3 point(xx, yy, zz);
+    Vec3 result = pInterface->GetPointVelocity(id, point);
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -656,6 +863,35 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyInterface_get
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getWorldTransform
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getWorldTransform
+  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = pInterface->GetWorldTransform(id);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    invalidateContactCache
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_invalidateContactCache
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    pInterface->InvalidateContactCache(id);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    isActive
  * Signature: (JI)Z
  */
@@ -757,6 +993,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_removeB
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    resetSleepTimer
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_resetSleepTimer
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    pInterface->ResetSleepTimer(id);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    setAngularVelocity
  * Signature: (JIFFF)V
  */
@@ -768,6 +1017,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setAngu
     const BodyID id(bodyId);
     const Vec3 omega(wx, wy, wz);
     pInterface->SetAngularVelocity(id, omega);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setCollisionGroup
+ * Signature: (JIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setCollisionGroup
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jlong groupVa) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const CollisionGroup * const pGroup
+            = reinterpret_cast<CollisionGroup *> (groupVa);
+    pInterface->SetCollisionGroup(id, *pGroup);
 }
 
 /*
@@ -839,6 +1103,32 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setLine
     const BodyID id(bodyId);
     const Vec3 velocity(vx, vy, vz);
     pInterface->SetLinearVelocity(id, velocity);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setMaxAngularVelocity
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setMaxAngularVelocity
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jfloat maxSpeed) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    pInterface->SetMaxAngularVelocity(id, maxSpeed);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setMaxLinearVelocity
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setMaxLinearVelocity
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jfloat maxSpeed) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    pInterface->SetMaxLinearVelocity(id, maxSpeed);
 }
 
 /*
@@ -921,6 +1211,45 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setPosi
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setPositionAndRotationWhenChanged
+ * Signature: (JIDDDFFFFI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setPositionAndRotationWhenChanged
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jdouble xx, jdouble yy,
+  jdouble zz, jfloat qx, jfloat qy, jfloat qz, jfloat qw, jint ordinal) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const RVec3 location(xx, yy, zz);
+    const Quat orientation(qx, qy, qz, qw);
+    const EActivation activation = (EActivation) ordinal;
+    pInterface->SetPositionAndRotationWhenChanged(
+            id, location, orientation, activation);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setPositionRotationAndVelocity
+ * Signature: (JIDDDLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setPositionRotationAndVelocity
+  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jint bodyId,
+  jdouble xx, jdouble yy, jdouble zz, jobject floats) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const RVec3 location(xx, yy, zz);
+    DIRECT_FLOAT_BUFFER(pEnv, floats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 10);
+    const Quat orientation(pFloats[0], pFloats[1], pFloats[2], pFloats[3]);
+    const Vec3 linearVelocity(pFloats[4], pFloats[5], pFloats[6]);
+    const Vec3 angularVelocity(pFloats[7], pFloats[8], pFloats[9]);
+    pInterface->SetPositionRotationAndVelocity(
+            id, location, orientation, linearVelocity, angularVelocity);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    setRestitution
  * Signature: (JIF)V
  */
@@ -950,6 +1279,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setShap
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setUseManifoldReduction
+ * Signature: (JIZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setUseManifoldReduction
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jboolean setting) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    pInterface->SetUseManifoldReduction(id, setting);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    setUserData
  * Signature: (JIJ)V
  */
@@ -959,4 +1301,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setUser
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
     pInterface->SetUserData(id, value);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    unassignBodyId
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_unassignBodyId
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const Body * const pResult = pInterface->UnassignBodyID(id);
+    return reinterpret_cast<jlong> (pResult);
 }
