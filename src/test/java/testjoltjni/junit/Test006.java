@@ -109,11 +109,15 @@ public class Test006 {
      */
     private static void doBoxShapeSettings() {
         BoxShapeSettings settings = new BoxShapeSettings();
-
         testBoxSsDefaults(settings);
-        testBoxSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        BoxShapeSettings copy = new BoxShapeSettings(settings);
+        testBoxSsSetters(settings);
+        testBoxSsDefaults(copy);
+        settings.set(copy);
+        testBoxSsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -122,11 +126,15 @@ public class Test006 {
      */
     private static void doCapsuleShapeSettings() {
         CapsuleShapeSettings settings = new CapsuleShapeSettings();
-
         testCapsuleSsDefaults(settings);
-        testCapsuleSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        CapsuleShapeSettings copy = new CapsuleShapeSettings(settings);
+        testCapsuleSsSetters(settings);
+        testCapsuleSsDefaults(copy);
+        settings.set(copy);
+        testCapsuleSsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -136,9 +144,13 @@ public class Test006 {
     private static void doConvexHullShapeSettings() {
         // no-arg constructor:
         ConvexHullShapeSettings settings = new ConvexHullShapeSettings();
-
         testConvexHullSsDefaults(settings);
+
+        ConvexHullShapeSettings copy = new ConvexHullShapeSettings(settings);
         testConvexHullSsSetters(settings);
+        testConvexHullSsDefaults(copy);
+        settings.set(copy);
+        testConvexHullSsDefaults(settings);
 
         // instantiate from a collection:
         Collection<Vec3Arg> list = List.of();
@@ -147,7 +159,7 @@ public class Test006 {
         testConvexHullSsDefaults(settings2);
         testConvexHullSsSetters(settings2);
 
-        TestUtils.testClose(settings2, settings);
+        TestUtils.testClose(settings2, copy, settings);
         System.gc();
     }
 
@@ -157,9 +169,13 @@ public class Test006 {
     private static void doCylinderShapeSettings() {
         // no-arg constructor:
         CylinderShapeSettings settings = new CylinderShapeSettings();
-
         testCylinderSsDefaults(settings);
+
+        CylinderShapeSettings copy = new CylinderShapeSettings(settings);
         testCylinderSsSetters(settings);
+        testCylinderSsDefaults(copy);
+        settings.set(copy);
+        testCylinderSsDefaults(settings);
 
         // instantiate from dimensions:
         CylinderShapeSettings settings2 = new CylinderShapeSettings(0f, 0f, 0f);
@@ -167,7 +183,7 @@ public class Test006 {
         testCylinderSsDefaults(settings2);
         testCylinderSsSetters(settings2);
 
-        TestUtils.testClose(settings2, settings);
+        TestUtils.testClose(settings2, copy, settings);
         System.gc();
     }
 
@@ -176,11 +192,13 @@ public class Test006 {
      */
     private static void doEmptyShapeSettings() {
         EmptyShapeSettings settings = new EmptyShapeSettings();
-
         testEmptySsDefaults(settings);
-        testSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        EmptyShapeSettings copy = new EmptyShapeSettings(settings);
+        testSsSetters(settings);
+        testEmptySsDefaults(copy);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -190,9 +208,13 @@ public class Test006 {
     private static void doHeightFieldShapeSettings() {
         // no-arg constructor:
         HeightFieldShapeSettings settings0 = new HeightFieldShapeSettings();
-
         testHeightFieldSsDefaults(settings0);
+
+        HeightFieldShapeSettings copy = new HeightFieldShapeSettings(settings0);
         testHeightFieldSsSetters(settings0);
+        testHeightFieldSsDefaults(copy);
+        settings0.set(copy);
+        testHeightFieldSsDefaults(settings0);
 
         // instantiate from a buffer:
         int sampleCount = 0;
@@ -216,7 +238,7 @@ public class Test006 {
         testHeightFieldSsDefaults(settings2);
         testHeightFieldSsSetters(settings2);
 
-        TestUtils.testClose(settings2, settings, mats, settings0);
+        TestUtils.testClose(settings2, settings, mats, copy, settings0);
         System.gc();
     }
 
@@ -226,8 +248,12 @@ public class Test006 {
     private static void doMeshShapeSettings() {
         // no-arg constructor:
         MeshShapeSettings settings = new MeshShapeSettings();
-
         testMeshSsDefaults(settings);
+
+        MeshShapeSettings copy = new MeshShapeSettings(settings);
+        testMeshSsSetters(settings);
+        testMeshSsDefaults(copy);
+        settings.set(copy);
         testMeshSsSetters(settings);
 
         // instantiate from an array:
@@ -245,7 +271,7 @@ public class Test006 {
         testMeshSsDefaults(settings3);
         testMeshSsSetters(settings3);
 
-        TestUtils.testClose(settings3, settings2, mats, settings);
+        TestUtils.testClose(settings3, settings2, mats, copy, settings);
         System.gc();
     }
 
@@ -256,7 +282,14 @@ public class Test006 {
         MutableCompoundShapeSettings settings
                 = new MutableCompoundShapeSettings();
         testMutableCompoundSsDefaults(settings);
-        TestUtils.testClose(settings);
+
+        MutableCompoundShapeSettings copy
+                = new MutableCompoundShapeSettings(settings);
+        testMutableCompoundSsDefaults(copy);
+        settings.set(copy);
+        testMutableCompoundSsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -267,11 +300,16 @@ public class Test006 {
         SphereShape baseShape = new SphereShape(1f);
         OffsetCenterOfMassShapeSettings settings
                 = new OffsetCenterOfMassShapeSettings(new Vec3(), baseShape);
-
         testOffsetCenterOfMassSsDefaults(settings);
+
+        OffsetCenterOfMassShapeSettings copy
+                = new OffsetCenterOfMassShapeSettings(settings);
+        testOffsetCenterOfMassSsSetters(settings);
+        testOffsetCenterOfMassSsDefaults(copy);
+        settings.set(copy);
         testOffsetCenterOfMassSsSetters(settings);
 
-        TestUtils.testClose(settings, baseShape);
+        TestUtils.testClose(copy, settings, baseShape);
         System.gc();
     }
 
@@ -281,9 +319,13 @@ public class Test006 {
     private static void doPlaneShapeSettings() {
         // no-arg constructor:
         PlaneShapeSettings settings = new PlaneShapeSettings();
-
         testPlaneSsDefaults(settings);
+
+        PlaneShapeSettings copy = new PlaneShapeSettings(settings);
         testPlaneSsSetters(settings);
+        testPlaneSsDefaults(copy);
+        settings.set(copy);
+        testPlaneSsDefaults(settings);
 
         // instantiate from a Plane:
         ConstPlane plane = new Plane(0f, 0f, 0f, 0f);
@@ -292,7 +334,7 @@ public class Test006 {
         testPlaneSsDefaults(settings2);
         testPlaneSsSetters(settings2);
 
-        TestUtils.testClose(settings2, settings);
+        TestUtils.testClose(settings2, copy, settings);
         System.gc();
     }
 
@@ -304,11 +346,16 @@ public class Test006 {
         RotatedTranslatedShapeSettings settings
                 = new RotatedTranslatedShapeSettings(
                         new Vec3(), new Quat(), baseShape);
-
         testRotatedTranslatedSsDefaults(settings);
+
+        RotatedTranslatedShapeSettings copy
+                = new RotatedTranslatedShapeSettings(settings);
+        testRotatedTranslatedSsSetters(settings);
+        testRotatedTranslatedSsDefaults(copy);
+        settings.set(copy);
         testRotatedTranslatedSsSetters(settings);
 
-        TestUtils.testClose(settings, baseShape);
+        TestUtils.testClose(copy, settings, baseShape);
         System.gc();
     }
 
@@ -319,10 +366,14 @@ public class Test006 {
         SphereShape baseShape = new SphereShape(1f);
         ScaledShapeSettings settings
                 = new ScaledShapeSettings(baseShape, new Vec3(1f, 1f, 1f));
-
         testScaledSsDefaults(settings);
 
-        TestUtils.testClose(settings, baseShape);
+        ScaledShapeSettings copy = new ScaledShapeSettings(settings);
+        testScaledSsDefaults(copy);
+        settings.set(copy);
+        testScaledSsDefaults(settings);
+
+        TestUtils.testClose(settings, copy, baseShape);
         System.gc();
     }
 
@@ -331,11 +382,15 @@ public class Test006 {
      */
     private static void doSphereShapeSettings() {
         SphereShapeSettings settings = new SphereShapeSettings(1f);
-
         testSphereSsDefaults(settings);
+
+        SphereShapeSettings copy = new SphereShapeSettings(settings);
+        testSphereSsSetters(settings);
+        testSphereSsDefaults(copy);
+        settings.set(copy);
         testSphereSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -347,7 +402,13 @@ public class Test006 {
                 = new StaticCompoundShapeSettings();
         testStaticCompoundSsDefaults(settings);
 
-        TestUtils.testClose(settings);
+        StaticCompoundShapeSettings copy
+                = new StaticCompoundShapeSettings(settings);
+        testStaticCompoundSsDefaults(copy);
+        settings.set(copy);
+        testStaticCompoundSsDefaults(settings);
+
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -357,11 +418,16 @@ public class Test006 {
     private static void doTaperedCapsuleShapeSettings() {
         TaperedCapsuleShapeSettings settings
                 = new TaperedCapsuleShapeSettings();
-
         testTaperedCapsuleSsDefaults(settings);
+
+        TaperedCapsuleShapeSettings copy
+                = new TaperedCapsuleShapeSettings(settings);
+        testTaperedCapsuleSsSetters(settings);
+        testTaperedCapsuleSsDefaults(copy);
+        settings.set(copy);
         testTaperedCapsuleSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -371,11 +437,16 @@ public class Test006 {
     private static void doTaperedCylinderShapeSettings() {
         TaperedCylinderShapeSettings settings
                 = new TaperedCylinderShapeSettings();
-
         testTaperedCylinderSsDefaults(settings);
+
+        TaperedCylinderShapeSettings copy
+                = new TaperedCylinderShapeSettings(settings);
+        testTaperedCylinderSsSetters(settings);
+        testTaperedCylinderSsDefaults(copy);
+        settings.set(copy);
         testTaperedCylinderSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
@@ -384,11 +455,15 @@ public class Test006 {
      */
     private static void doTriangleShapeSettings() {
         TriangleShapeSettings settings = new TriangleShapeSettings();
-
         testTriangleSsDefaults(settings);
+
+        TriangleShapeSettings copy = new TriangleShapeSettings(settings);
+        testTriangleSsSetters(settings);
+        testTriangleSsDefaults(copy);
+        settings.set(copy);
         testTriangleSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(copy, settings);
         System.gc();
     }
 
