@@ -97,6 +97,32 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
+ * Method:    isSphere
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_isSphere
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CapsuleShapeSettings * const pSettings
+            = reinterpret_cast<CapsuleShapeSettings *> (settingsVa);
+    const bool result = pSettings->IsSphere();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
+ * Method:    isValid
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_isValid
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CapsuleShapeSettings * const pSettings
+            = reinterpret_cast<CapsuleShapeSettings *> (settingsVa);
+    const bool result = pSettings->IsValid();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
  * Method:    setHalfHeightOfCylinder
  * Signature: (JF)V
  */

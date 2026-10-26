@@ -114,6 +114,30 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
+     * Test whether the settings describe a sphere. The settings are unaffected.
+     *
+     * @return {@code true} if spherical, otherwise {@code false}
+     */
+    public boolean isSphere() {
+        long settingsVa = va();
+        boolean result = isSphere(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the settings are valid. The settings are unaffected.
+     *
+     * @return {@code true} if valid, otherwise {@code false}
+     */
+    public boolean isValid() {
+        long settingsVa = va();
+        boolean result = isValid(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Copy the argument to the current settings.
      *
      * @param source the settings to copy (not {@code null}, unaffected)
@@ -161,7 +185,11 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
 
     native private static float getRadius(long settingsVa);
 
-    native private static void setHalfHeightOfCylinder(
+    native private static boolean isSphere(long settingsVa);
+
+    native private static boolean isValid(long settingsVa);
+
+     native private static void setHalfHeightOfCylinder(
             long settingsVa, float halfHeight);
 
     native private static void setRadius(long settingsVa, float radius);
