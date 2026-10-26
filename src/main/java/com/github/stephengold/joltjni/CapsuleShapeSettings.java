@@ -189,7 +189,7 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
 
     native private static boolean isValid(long settingsVa);
 
-     native private static void setHalfHeightOfCylinder(
+    native private static void setHalfHeightOfCylinder(
             long settingsVa, float halfHeight);
 
     native private static void setRadius(long settingsVa, float radius);
