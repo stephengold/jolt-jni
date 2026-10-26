@@ -915,6 +915,8 @@ public class Test006 {
         Assert.assertEquals(0f, settings.getBottomRadius(), 0f);
         Assert.assertEquals(0f, settings.getHalfHeightOfTaperedCylinder(), 0f);
         Assert.assertEquals(0f, settings.getTopRadius(), 0f);
+        Assert.assertTrue(settings.isSphere());
+        Assert.assertFalse(settings.isValid());
     }
 
     /**
@@ -938,6 +940,8 @@ public class Test006 {
         ConstPhysicsMaterial actualMaterial = settings.getMaterial();
         Assert.assertEquals(material, actualMaterial);
         Assert.assertEquals(0.3f, settings.getTopRadius(), 0f);
+        Assert.assertFalse(settings.isSphere());
+        Assert.assertTrue(settings.isValid());
 
         TestUtils.testClose(actualMaterial, material);
     }

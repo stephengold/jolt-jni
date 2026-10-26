@@ -112,6 +112,32 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_TaperedCapsuleShape
 
 /*
  * Class:     com_github_stephengold_joltjni_TaperedCapsuleShapeSettings
+ * Method:    isSphere
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_TaperedCapsuleShapeSettings_isSphere
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const TaperedCapsuleShapeSettings * const pSettings
+            = reinterpret_cast<TaperedCapsuleShapeSettings *> (settingsVa);
+    const bool result = pSettings->IsSphere();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TaperedCapsuleShapeSettings
+ * Method:    isValid
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_TaperedCapsuleShapeSettings_isValid
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const TaperedCapsuleShapeSettings * const pSettings
+            = reinterpret_cast<TaperedCapsuleShapeSettings *> (settingsVa);
+    const bool result = pSettings->IsValid();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TaperedCapsuleShapeSettings
  * Method:    setBottomRadius
  * Signature: (JF)V
  */
