@@ -559,6 +559,16 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_isDoublePrec
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    objectLayerBits
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Jolt_objectLayerBits
+  (JNIEnv *, jclass) {
+    return JPH_OBJECT_LAYER_BITS;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    newFactory
  * Signature: ()Z
  */

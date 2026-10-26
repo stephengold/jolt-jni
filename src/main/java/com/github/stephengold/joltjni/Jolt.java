@@ -486,6 +486,14 @@ final public class Jolt {
     }
 
     /**
+     * Return the size of an object-layer ID. (native macro:
+     * JPH_OBJECT_LAYER_BITS)
+     *
+     * @return the size (in bits, either 16 or 32 or 64)
+     */
+    native public static int objectLayerBits();
+
+    /**
      * Create a factory for collision dispatch and object-stream serialization.
      *
      * @return {@code true} if successful, otherwise {@code false}
