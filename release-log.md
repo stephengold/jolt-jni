@@ -1,5 +1,37 @@
 # Release log for the Jolt-JNI project
 
+## Version 7.0.0 released on TBD
+
++ API changes in `MiscUtil.estimateCollisionResponse()`
++ Stopped publishing native libraries for the Linux_ARM32hf platform.
+
++ Bugfix:  logic error in `ObjectVsBroadPhaseLayerFilterTable` (issue #55)
+
++ Added classes and interfaces:
+  + class `BroadPhaseLayerInterfaceMask`
+  + class `IntPair`
+  + class `ObjectVsBroadPhaseLayerFilterMask`
+  + interface `ConstPart`
+  + interface `ConstRagdollSettings`
++ Converted `ObjectVsBroadPhaseLayerFilter` from an abstract class
+  to a concrete one.
+
++ Added public methods:
+  + 23 methods in `BodyInterface`
+  + `BroadPhaseLayerInterfaceTable.setBroadPhaseLayerName()`
+  + `CapsuleShapeSettings.isSphere()`
+  + `CapsuleShapeSettings.isValid()`
+  + `ConstBroadPhaseLayerInterface.getBroadPhaseLayerName()`
+  + `Jolt.implementsProfiling()`
+  + `Jolt.objectLayerBits()`
+  + `ObjectVsBroadPhaseLayerFilterTable.getNumBroadPhaseLayers()`
+  + `TaperedCapsuleShapeSettings.isSphere()`
+  + `TaperedCapsuleShapeSettings.isValid()`
+
++ Updated the Jolt-Physics sourcecode and assets to f8ff0f2 (sg261025).
++ Updated the OSHI library to v7.7.2 .
+
+
 ## Version 6.2.0 released on 14 October 2026
 
 + Bugfix:  incorrect records in "module-info.class" cause modular builds to fail
