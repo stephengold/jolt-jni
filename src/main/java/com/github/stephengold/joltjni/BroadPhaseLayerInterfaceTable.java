@@ -62,8 +62,8 @@ public class BroadPhaseLayerInterfaceTable extends BroadPhaseLayerInterface {
     }
 
     /**
-     * If profiling is enabled, alter the name of the specified layer. Otherwise
-     * this has no effect.
+     * If profiling is enabled, alter the name of the specified layer.
+     * Otherwise, this has no effect.
      *
      * @param bpLayer the index of the broad-phase layer to modify (&ge;0, &lt;
      * numBpLayers)

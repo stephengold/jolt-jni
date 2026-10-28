@@ -72,7 +72,7 @@ public class Test020 {
     }
 
     /**
-     * Construct an offset sphere using {@codeTaperedCapsuleShapeSettings}.
+     * Construct an offset sphere using {@code TaperedCapsuleShapeSettings}.
      */
     private static void testTcapOffsetSphere() {
         float topR = 4f;
@@ -91,7 +91,7 @@ public class Test020 {
     }
 
     /**
-     * Construct a sphere using {@codeTaperedCapsuleShapeSettings}.
+     * Construct a sphere using {@code TaperedCapsuleShapeSettings}.
      */
     private static void testTcapSphere() {
         float radius = 4f;
@@ -110,7 +110,7 @@ public class Test020 {
     }
 
     /**
-     * Construct a cylinder using {@codeTaperedCylinderShapeSettings}.
+     * Construct a cylinder using {@code TaperedCylinderShapeSettings}.
      */
     private static void testTcylCylinder() {
         float radius = 1f;

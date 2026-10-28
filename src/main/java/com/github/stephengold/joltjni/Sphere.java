@@ -36,7 +36,7 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
     // constructors
 
     /**
-     * Instantiate an default sphere.
+     * Instantiate a default sphere.
      */
     public Sphere() {
         long sphereVa = createDefault();

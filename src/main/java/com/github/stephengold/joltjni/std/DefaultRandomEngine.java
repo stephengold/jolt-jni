@@ -89,7 +89,7 @@ public class DefaultRandomEngine
     /**
      * Return the next integer in the sequence.
      *
-     * @return an signed 32-bit value
+     * @return a signed 32-bit value
      */
     @Override
     public int nextInt() {
