@@ -650,9 +650,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         FloatBuffer tmpFloats = Temporaries.floatBuffer1.get();
         direction.copyTo(tmpFloats);
         getSupport(boxVa, tmpFloats);
-        Vec3 vec3 = new Vec3(tmpFloats);
+        Vec3 result = new Vec3(tmpFloats);
 
-        return vec3;
+        return result;
     }
 
     /**

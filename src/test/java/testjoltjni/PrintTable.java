@@ -227,16 +227,16 @@ final public class PrintTable {
              * by capitalizing some known initialisms.
              */
             String cppId = basicJavaClass
-                    .replaceAll("Aa", "AA")
-                    .replaceAll("Bcs", "BCS")
-                    .replaceAll("Epa", "EPA")
-                    .replaceAll("Dof", "DOF")
-                    .replaceAll("Id", "ID")
-                    .replaceAll("Lra", "LRA")
-                    .replaceAll("Rtti", "RTTI")
-                    .replaceAll("Sbcs", "SBCS")
-                    .replaceAll("Tv", "TV")
-                    .replaceAll("Wv", "WV");
+                    .replace("Aa", "AA")
+                    .replace("Bcs", "BCS")
+                    .replace("Epa", "EPA")
+                    .replace("Dof", "DOF")
+                    .replace("Id", "ID")
+                    .replace("Lra", "LRA")
+                    .replace("Rtti", "RTTI")
+                    .replace("Sbcs", "SBCS")
+                    .replace("Tv", "TV")
+                    .replace("Wv", "WV");
 
             // Access the Javadoc site for Jolt JNI via HTTPS:
             if (!doesJavadocExist(basicJavaClass)) {

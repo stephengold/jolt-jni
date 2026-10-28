@@ -295,8 +295,8 @@ final public class Quat implements QuatArg {
         long em = engine.min();
         float er = (float) (engine.max() - em);
         float x0 = (engine.nextUnsigned() - em) / er;
-        float r1 = (float) JphMath.sqrt(1f - x0);
-        float r2 = (float) JphMath.sqrt(x0);
+        float r1 = JphMath.sqrt(1f - x0);
+        float r2 = JphMath.sqrt(x0);
 
         float twoPiOverEr = 2f * JphMath.JPH_PI / er;
         float px = twoPiOverEr * (engine.nextUnsigned() - em);
