@@ -2,7 +2,7 @@
 
 ## Version 7.0.0 released on 26 October 2026
 
-+ Made API changes in `MiscUtil.estimateCollisionResponse()`
++ Made API changes in `MiscUtil.estimateCollisionResponse()`.
 + Stopped publishing native libraries for the Linux_ARM32hf platform.
 
 + Bugfix:  logic error in `ObjectVsBroadPhaseLayerFilterTable` (issue #55)
