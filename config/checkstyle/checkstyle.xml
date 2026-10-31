@@ -87,6 +87,7 @@
             <property name="tokens" value="LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH, ARRAY_INIT, INSTANCE_INIT, LITERAL_CASE, LITERAL_CATCH, LITERAL_DEFAULT, LITERAL_DO, LITERAL_FOR, LITERAL_SYNCHRONIZED, LITERAL_WHILE, STATIC_INIT"/>
         </module>
         <module name="EmptyCatchBlock"/>
+        <module name="GoogleRightCurly"/>
         <module name="LeftCurly">
             <property name="tokens" value="ANNOTATION_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, LAMBDA, LITERAL_CASE, LITERAL_CATCH, LITERAL_DEFAULT, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, METHOD_DEF, OBJBLOCK, STATIC_INIT, RECORD_DEF, COMPACT_CTOR_DEF"/>
         </module>
@@ -158,11 +159,17 @@
             <property name="query" value="//SINGLE_LINE_COMMENT[./COMMENT_CONTENT[not(starts-with(@text, ' ')) and not(starts-with(@text, '/')) and not(@text = '\n') and not(ends-with(@text, '//\n'))]]"/>
             <message key="matchxpath.match" value="''//'' must be followed by a whitespace."/>
         </module>
+        <module name="MatchXpath">
+            <property name="id" value="CompactSourceFileNotAllowed"/>
+            <property name="query" value="/COMPACT_COMPILATION_UNIT"/>
+            <message key="matchxpath.match" value="Compact source file is not allowed."/>
+        </module>
         <module name="MissingSwitchDefault"/>
         <module name="ModifiedControlVariable"/>
         <module name="MultipleVariableDeclarations"/>
         <module name="NoFinalizer"/>
         <module name="OneStatementPerLine"/>
+        <module name="PackageDeclaration"/>
         <module name="TextBlockGoogleStyleFormatting"/>
         <module name="VariableDeclarationUsageDistance"/>
 
@@ -241,6 +248,10 @@
             <property name="modifiersOrder" value="abstract, default, final, native, non-sealed, private, protected, public, sealed, static, strictfp, synchronized, transient, volatile"/>
         </module>
         <module name="RedundantModifier"/>
+
+        <!-- Module check:                            -->
+        <!-- See https://checkstyle.org/checks/modules -->
+        <module name="ModuleDirectiveOrder"/>
 
         <!-- Checks for naming conventions:           -->
         <!-- See https://checkstyle.org/checks/naming -->
