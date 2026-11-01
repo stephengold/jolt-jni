@@ -160,6 +160,11 @@
             <property name="query" value="/COMPACT_COMPILATION_UNIT"/>
             <message key="matchxpath.match" value="Compact source file is not allowed."/>
         </module>
+        <module name="MatchXpath">
+            <property name="id" value="unnecessaryParenthesesInReturn"/>
+            <property name="query" value="//LITERAL_RETURN/EXPR[./LPAREN and ./RPAREN and not(./LPAREN/preceding-sibling::*)]"/>
+            <message key="matchxpath.match" value="Unnecessary parentheses in return statement."/>
+        </module>
         <module name="MissingSwitchDefault"/>
         <module name="ModifiedControlVariable"/>
         <module name="MultipleVariableDeclarations"/>
@@ -332,6 +337,9 @@
 
         <!-- Checks for size violations:             -->
         <!-- See https://checkstyle.org/checks/sizes -->
+        <module name="LambdaBodyLength">
+            <property name="max" value="8"/>
+        </module>
         <module name="MethodLength">
             <property name="max" value="130"/>
         </module>
