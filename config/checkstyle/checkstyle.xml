@@ -77,7 +77,9 @@
         </module>
         <module name="AnnotationUseStyle"/>
         <module name="MissingDeprecated"/>
+        <module name="MissingOverride"/>
         <module name="MissingOverrideOnRecordAccessor"/>
+        <module name="OpenjdkAnnotationLocation"/>
         <module name="SuppressWarningsHolder"/>
 
         <!-- Checks for blocks:                       -->
@@ -170,6 +172,7 @@
         <module name="NoFinalizer"/>
         <module name="OneStatementPerLine"/>
         <module name="PackageDeclaration"/>
+        <module name="ParameterAssignment"/>
         <module name="TextBlockGoogleStyleFormatting"/>
         <module name="VariableDeclarationUsageDistance"/>
 
@@ -223,6 +226,7 @@
         <!-- See https://checkstyle.org/checks/misc -->
         <module name="ArrayTypeStyle"/>
         <module name="AvoidEscapedUnicodeCharacters"/>
+        <module name="ClassHeaderWrapOpenjdk"/>
         <module name="CommentsIndentation"/>
         <module name="HexLiteralCase"/>
         <module name="Indentation">
@@ -369,6 +373,7 @@
             <property name="tokens" value="COMMA, SEMI, POST_INC, POST_DEC, DOT, LABELED_STAT, METHOD_REF, ELLIPSIS"/>
         </module>
         <module name="NoWhitespaceBeforeCaseDefaultColon"/>
+        <module name="OpenjdkMethodParameterAlignment"/>
         <module name="OperatorWrap">
             <property name="id" value="OperatorWrapEOL"/>
             <property name="option" value="EOL"/>
