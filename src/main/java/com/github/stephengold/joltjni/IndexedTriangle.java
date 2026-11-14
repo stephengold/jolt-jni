@@ -35,7 +35,7 @@ final public class IndexedTriangle
     // constructors
 
     /**
-     * Instantiate a triangle with all indices zero.
+     * Instantiate a default triangle with all indices zero.
      */
     public IndexedTriangle() {
         this(0, 0, 0, 0);

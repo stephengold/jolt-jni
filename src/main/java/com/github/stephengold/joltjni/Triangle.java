@@ -58,7 +58,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
-     * Instantiate the specified triangle.
+     * Instantiate a triangle with the specified vertices and material.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
      * unaffected)
