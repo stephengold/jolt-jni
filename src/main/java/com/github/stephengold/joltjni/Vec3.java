@@ -483,6 +483,38 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Component-wise maximum of 2 vectors.
+     *
+     * @param v1 the first vector (not {@code null}, unaffected)
+     * @param v2 the 2nd vector (not {@code null}, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 sMax(Vec3Arg v1, Vec3Arg v2) {
+        float x = Math.max(v1.getX(), v2.getX());
+        float y = Math.max(v1.getY(), v2.getY());
+        float z = Math.max(v1.getZ(), v2.getZ());
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Component-wise minimum of 2 vectors.
+     *
+     * @param v1 the first vector (not {@code null}, unaffected)
+     * @param v2 the 2nd vector (not {@code null}, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 sMin(Vec3Arg v1, Vec3Arg v2) {
+        float x = Math.min(v1.getX(), v2.getX());
+        float y = Math.min(v1.getY(), v2.getY());
+        float z = Math.min(v1.getZ(), v2.getZ());
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
      * Create a vector with all components set to one.
      *
      * @return a new vector
