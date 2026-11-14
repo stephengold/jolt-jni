@@ -96,8 +96,8 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
         float v3x = v3.x();
         float v3y = v3.y();
         float v3z = v3.z();
-        long triangleVa = createTriangle(v1x, v1y, v1z, v2x, v2y, v2z,
-                v3x, v3y, v3z, materialIndex, userData);
+        long triangleVa = create(v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z,
+                materialIndex, userData);
         setVirtualAddress(triangleVa, () -> free(triangleVa));
     }
 
@@ -148,8 +148,8 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     public Triangle(float v1x, float v1y, float v1z,
             float v2x, float v2y, float v2z,
             float v3x, float v3y, float v3z, int materialIndex, int userData) {
-        long triangleVa = createTriangle(v1x, v1y, v1z, v2x, v2y, v2z,
-                v3x, v3y, v3z, materialIndex, userData);
+        long triangleVa = create(v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z,
+                materialIndex, userData);
         setVirtualAddress(triangleVa, () -> free(triangleVa));
     }
 
@@ -205,8 +205,8 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
         float v3x = v3.getX();
         float v3y = v3.getY();
         float v3z = v3.getZ();
-        long triangleVa = createTriangle(v1x, v1y, v1z, v2x, v2y, v2z,
-                v3x, v3y, v3z, materialIndex, userData);
+        long triangleVa = create(v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z,
+                materialIndex, userData);
         setVirtualAddress(triangleVa, () -> free(triangleVa));
     }
     // *************************************************************************
@@ -294,13 +294,13 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
 
     native private static void assign(long targetVa, long sourceVa);
 
+    native private static long create(float v1x, float v1y, float v1z,
+            float v2x, float v2y, float v2z, float v3x, float v3y, float v3z,
+            int materialIndex, int userData);
+
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
-
-    native private static long createTriangle(float v1x, float v1y, float v1z,
-            float v2x, float v2y, float v2z, float v3x, float v3y, float v3z,
-            int materialIndex, int userData);
 
     native private static void free(long triangleVa);
 

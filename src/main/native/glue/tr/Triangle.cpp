@@ -40,6 +40,23 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Triangle_assign
 
 /*
  * Class:     com_github_stephengold_joltjni_Triangle
+ * Method:    create
+ * Signature: (FFFFFFFFFII)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_create
+  (JNIEnv *, jclass, jfloat v1x, jfloat v1y, jfloat v1z, jfloat v2x, jfloat v2y,
+  jfloat v2z, jfloat v3x, jfloat v3y, jfloat v3z, jint materialIndex, jint userData) {
+    const Vec3 v1(v1x, v1y, v1z);
+    const Vec3 v2(v2x, v2y, v2z);
+    const Vec3 v3(v3x, v3y, v3z);
+    Triangle * const pTriangle
+            = new Triangle(v1, v2, v3, materialIndex, userData);
+    TRACE_NEW("Triangle", pTriangle)
+    return reinterpret_cast<jlong> (pTriangle);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Triangle
  * Method:    createCopy
  * Signature: (J)J
  */
@@ -53,23 +70,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createCopy
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createDefault
   BODYOF_CREATE_DEFAULT(Triangle)
-
-/*
- * Class:     com_github_stephengold_joltjni_Triangle
- * Method:    createTriangle
- * Signature: (FFFFFFFFFII)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createTriangle
-  (JNIEnv *, jclass, jfloat v1x, jfloat v1y, jfloat v1z, jfloat v2x, jfloat v2y,
-  jfloat v2z, jfloat v3x, jfloat v3y, jfloat v3z, jint materialIndex, jint userData) {
-    const Vec3 v1(v1x, v1y, v1z);
-    const Vec3 v2(v2x, v2y, v2z);
-    const Vec3 v3(v3x, v3y, v3z);
-    Triangle * const pTriangle
-            = new Triangle(v1, v2, v3, materialIndex, userData);
-    TRACE_NEW("Triangle", pTriangle)
-    return reinterpret_cast<jlong> (pTriangle);
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_Triangle
