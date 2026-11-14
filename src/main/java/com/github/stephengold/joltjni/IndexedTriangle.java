@@ -42,6 +42,17 @@ final public class IndexedTriangle
     }
 
     /**
+     * Instantiate a copy of the specified triangle.
+     *
+     * @param original the triangle to copy (not {@code null}, unaffected)
+     */
+    public IndexedTriangle(ConstIndexedTriangle original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddressAsOwner(copyVa);
+    }
+
+    /**
      * Instantiate a triangle with the specified indices.
      *
      * @param vi0 the desired first mesh-vertex index
@@ -80,6 +91,17 @@ final public class IndexedTriangle
     // new public methods
 
     /**
+     * Copy the argument to the current triangle.
+     *
+     * @param source the triangle to copy (not {@code null}, unaffected)
+     */
+    public void set(ConstIndexedTriangle source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the triangle's material index. (native attribute: mMaterialIndex)
      *
      * @param materialIndex the desired material index
@@ -106,6 +128,10 @@ final public class IndexedTriangle
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createIndexedTriangle(
             int vi0, int vi1, int vi2, int materialIndex);

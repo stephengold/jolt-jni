@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,22 @@ SOFTWARE.
 #include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_IndexedTriangle
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangle_assign
+  BODYOF_ASSIGN(IndexedTriangle)
+
+/*
+ * Class:     com_github_stephengold_joltjni_IndexedTriangle
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangle_createCopy
+  BODYOF_CREATE_COPY(IndexedTriangle)
 
 /*
  * Class:     com_github_stephengold_joltjni_IndexedTriangle
