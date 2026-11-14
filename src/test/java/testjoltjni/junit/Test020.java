@@ -49,6 +49,7 @@ public class Test020 {
         TestUtils.initializeNativeLibrary();
 
         testCapSphere();
+        testTcapCapsule();
         testTcapOffsetSphere();
         testTcapSphere();
         testTcylCylinder();
@@ -86,6 +87,24 @@ public class Test020 {
         ShapeRefC shapeRef = result.get();
         Assert.assertEquals(
                 EShapeSubType.RotatedTranslated, shapeRef.getSubType());
+
+        TestUtils.testClose(shapeRef.getPtr(), shapeRef, result, ss);
+    }
+
+    /**
+     * Construct a capsule using {@code TaperedCapsuleShapeSettings}.
+     */
+    private static void testTcapCapsule() {
+        float radius = 4f;
+        float height = 6f;
+        TaperedCapsuleShapeSettings ss
+                = new TaperedCapsuleShapeSettings(height / 2f, radius, radius);
+        Assert.assertEquals(ss.getTopRadius(), ss.getBottomRadius(), 0f);
+        Assert.assertEquals(3f, ss.getHalfHeightOfTaperedCylinder(), 0f);
+        Assert.assertTrue(ss.isValid());
+        ShapeResult result = ss.create();
+        ShapeRefC shapeRef = result.get();
+        Assert.assertEquals(EShapeSubType.Capsule, shapeRef.getSubType());
 
         TestUtils.testClose(shapeRef.getPtr(), shapeRef, result, ss);
     }
