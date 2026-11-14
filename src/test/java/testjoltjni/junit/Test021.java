@@ -1,0 +1,96 @@
+/*
+Copyright (c) 2026 Stephen Gold
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
+package testjoltjni.junit;
+
+import com.github.stephengold.joltjni.JphMath;
+import org.junit.Assert;
+import org.junit.Test;
+import testjoltjni.TestUtils;
+
+/**
+ * Automated JUnit4 tests for global static functions.
+ *
+ * @author Stephen Gold sgold@sonic.net
+ */
+public class Test021 {
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Test the JphMath functions.
+     */
+    @Test
+    public void test021() {
+        TestUtils.loadNativeLibrary();
+        TestUtils.initializeNativeLibrary();
+
+        Assert.assertEquals(1.3694384f, JphMath.aCos(0.2f), 0f);
+        Assert.assertEquals(3.1415927f, JphMath.aCos(-2f), 0f);
+        Assert.assertEquals(0f, JphMath.aCos(Float.MAX_VALUE), 0f);
+        Assert.assertEquals(0f, JphMath.aCos(Float.NaN), 0f);
+        Assert.assertEquals(0f, JphMath.aCos(Float.POSITIVE_INFINITY), 0f);
+
+        Assert.assertEquals(0.29145682f, JphMath.aTan(0.3f), 0f);
+        Assert.assertEquals(1.5707964f, JphMath.aTan(Float.MAX_VALUE), 0f);
+        Assert.assertTrue(Float.isNaN(JphMath.aTan(Float.NaN)));
+        Assert.assertEquals(-1.5707964f,
+                JphMath.aTan(Float.NEGATIVE_INFINITY), 0f);
+
+        Assert.assertEquals(2.4668517f, JphMath.aTan2(0.4f, -0.5f), 0f);
+        Assert.assertTrue(Float.isNaN(JphMath.aTan2(0f, Float.NaN)));
+        Assert.assertTrue(Float.isNaN(JphMath.aTan2(Float.NaN, 0f)));
+
+        Assert.assertEquals(-0.5f, JphMath.clamp(-0.7f, -0.5f, 0.6f), 0f);
+        Assert.assertEquals(2f, JphMath.clamp(2f, 1f, 3f), 0f);
+        Assert.assertEquals(-0.5f, JphMath.clamp(-0.7f, -0.5f, 0.6f), 0f);
+        Assert.assertTrue(Float.isNaN(JphMath.clamp(Float.NaN, -0.5f, 0.6f)));
+
+        Assert.assertEquals(0.7648422f, JphMath.cos(0.7f), 0f);
+        Assert.assertTrue(Float.isNaN(JphMath.cos(Float.NaN)));
+
+        Assert.assertEquals(0.013962634f, JphMath.degreesToRadians(0.8f), 0f);
+        Assert.assertEquals(51.566196f, JphMath.radiansToDegrees(0.9f), 0f);
+
+        Assert.assertEquals(-1f, JphMath.sign(-1.1f), 0f);
+        Assert.assertEquals(1f, JphMath.sign(-0f), 0f);
+        Assert.assertEquals(1f, JphMath.sign(Float.NaN), 0f);
+        Assert.assertEquals(1f, JphMath.sign(Float.POSITIVE_INFINITY), 0f);
+
+        Assert.assertEquals(0.09983342f, JphMath.sin(0.1f), 0f);
+        Assert.assertTrue(Float.isNaN(JphMath.sin(Float.NaN)));
+
+        Assert.assertEquals(0.31622776f, JphMath.sqrt(0.1f), 0f);
+        Assert.assertEquals(0f, JphMath.sqrt(-0f), 0f);
+        Assert.assertTrue(Float.isNaN(JphMath.sqrt(-1f)));
+        Assert.assertEquals(Float.POSITIVE_INFINITY,
+                JphMath.sqrt(Float.POSITIVE_INFINITY), 0);
+
+        Assert.assertEquals(0.040000003f, JphMath.square(0.2f), 0f);
+        Assert.assertEquals(81, JphMath.square(-9));
+        Assert.assertEquals(Float.POSITIVE_INFINITY,
+                JphMath.square(Float.NEGATIVE_INFINITY), 0);
+
+        Assert.assertEquals(0.42279324f, JphMath.tan(0.4f), 0f);
+
+        TestUtils.cleanup();
+    }
+}
