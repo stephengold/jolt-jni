@@ -74,6 +74,16 @@ final public class JphMath {
     native public static float aTan2(float opposite, float adjacent);
 
     /**
+     * Clamp a single-precision value between two values. (see Jolt/Math/Math.h)
+     *
+     * @param x the input value
+     * @param min the minimum value
+     * @param max the maximum value
+     * @return the clamped value
+     */
+    native public static float clamp(float x, float min, float max);
+
+    /**
      * Return the cosine of the specified single-precision angle. (see
      * Jolt/Math/Trigonometry.h)
      *

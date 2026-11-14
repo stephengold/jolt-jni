@@ -63,6 +63,17 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JphMath_aTan2
 
 /*
  * Class:     com_github_stephengold_joltjni_JphMath
+ * Method:    clamp
+ * Signature: (FFF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JphMath_clamp
+  (JNIEnv *, jclass, jfloat x, jfloat min, jfloat max) {
+    const float result = Clamp(x, min, max);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_JphMath
  * Method:    cos
  * Signature: (F)F
  */
