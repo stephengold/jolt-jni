@@ -105,6 +105,19 @@ final public class VertexList implements ConstVertexList {
      * Store the specified vertex location at the specified index.
      *
      * @param vertexIndex an index in the list (&ge;0, &lt;size)
+     * @param location the data to store (not {@code null}, unaffected)
+     */
+    public void set(int vertexIndex, ConstFloat3 location) {
+        float x = location.x();
+        float y = location.y();
+        float z = location.z();
+        set(vertexIndex, x, y, z);
+    }
+
+    /**
+     * Store the specified vertex location at the specified index.
+     *
+     * @param vertexIndex an index in the list (&ge;0, &lt;size)
      * @param x the X-coordinate to store
      * @param y the Y-coordinate to store
      * @param z the Z-coordinate to store
@@ -118,19 +131,6 @@ final public class VertexList implements ConstVertexList {
         buffer.put(numAxes * vertexIndex, x);
         buffer.put(numAxes * vertexIndex + 1, y);
         buffer.put(numAxes * vertexIndex + 2, z);
-    }
-
-    /**
-     * Store the specified vertex location at the specified index.
-     *
-     * @param vertexIndex an index in the list (&ge;0, &lt;size)
-     * @param location the data to store (not {@code null}, unaffected)
-     */
-    public void set(int vertexIndex, ConstFloat3 location) {
-        float x = location.x();
-        float y = location.y();
-        float z = location.z();
-        set(vertexIndex, x, y, z);
     }
 
     /**
