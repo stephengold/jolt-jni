@@ -85,12 +85,22 @@ public class Test021 {
         Assert.assertTrue(Float.isNaN(JphMath.clamp(Float.NaN, -0.5f, 0.6f)));
 
         Assert.assertEquals(0.7648422f, JphMath.cos(0.7f), 0f);
+        Assert.assertTrue(Float.isNaN(JphMath.cos(Float.MAX_VALUE)));
+        Assert.assertEquals(1f, JphMath.cos(Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.cos(Float.NaN)));
         Assert.assertTrue(Float.isNaN(JphMath.cos(Float.NEGATIVE_INFINITY)));
         Assert.assertTrue(Float.isNaN(JphMath.cos(Float.POSITIVE_INFINITY)));
 
         Assert.assertEquals(0.013962634f, JphMath.degreesToRadians(0.8f), 0f);
+        Assert.assertEquals(5.939047e36f,
+                JphMath.degreesToRadians(Float.MAX_VALUE), 0f);
+        Assert.assertEquals(0f, JphMath.degreesToRadians(Float.MIN_VALUE), 0f);
+
         Assert.assertEquals(51.566196f, JphMath.radiansToDegrees(0.9f), 0f);
+        Assert.assertEquals(Float.POSITIVE_INFINITY,
+                JphMath.radiansToDegrees(Float.MAX_VALUE), 0f);
+        Assert.assertEquals(7.987401246651457e-44,
+                JphMath.radiansToDegrees(Float.MIN_VALUE), 0f);
 
         Assert.assertEquals(-1f, JphMath.sign(-1.1f), 0f);
         Assert.assertEquals(1f, JphMath.sign(-0f), 0f);
@@ -99,6 +109,9 @@ public class Test021 {
         Assert.assertEquals(1f, JphMath.sign(Float.POSITIVE_INFINITY), 0f);
 
         Assert.assertEquals(0.09983342f, JphMath.sin(0.1f), 0f);
+        Assert.assertEquals(Float.NEGATIVE_INFINITY,
+                JphMath.sin(Float.MAX_VALUE), 0f);
+        Assert.assertEquals(1.4e-45f, JphMath.sin(Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.sin(Float.NaN)));
         Assert.assertTrue(Float.isNaN(JphMath.sin(Float.NEGATIVE_INFINITY)));
         Assert.assertTrue(Float.isNaN(JphMath.sin(Float.POSITIVE_INFINITY)));
@@ -106,6 +119,8 @@ public class Test021 {
         Assert.assertEquals(0.31622776f, JphMath.sqrt(0.1f), 0f);
         Assert.assertEquals(0f, JphMath.sqrt(-0f), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.sqrt(-1f)));
+        Assert.assertEquals(1.8446743e19f, JphMath.sqrt(Float.MAX_VALUE), 0f);
+        Assert.assertEquals(3.743392e-23f, JphMath.sqrt(Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.sqrt(Float.NaN)));
         Assert.assertTrue(Float.isNaN(JphMath.sqrt(Float.NEGATIVE_INFINITY)));
         Assert.assertEquals(Float.POSITIVE_INFINITY,
@@ -113,6 +128,9 @@ public class Test021 {
 
         Assert.assertEquals(0.040000003f, JphMath.square(0.2f), 0f);
         Assert.assertEquals(81, JphMath.square(-9));
+        Assert.assertEquals(Float.POSITIVE_INFINITY,
+                JphMath.square(Float.MAX_VALUE), 0f);
+        Assert.assertEquals(0f, JphMath.square(Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.square(Float.NaN)));
         Assert.assertEquals(Float.POSITIVE_INFINITY,
                 JphMath.square(Float.NEGATIVE_INFINITY), 0);
@@ -120,6 +138,9 @@ public class Test021 {
                 JphMath.square(Float.POSITIVE_INFINITY), 0);
 
         Assert.assertEquals(0.42279324f, JphMath.tan(0.4f), 0f);
+        Assert.assertEquals(Float.POSITIVE_INFINITY,
+                JphMath.tan(Float.MAX_VALUE), 0f);
+        Assert.assertEquals(1.4e-45f, JphMath.tan(Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.tan(Float.NaN)));
         float tanNinf = JphMath.tan(Float.NEGATIVE_INFINITY);
         float tanPinf = JphMath.tan(Float.POSITIVE_INFINITY);
