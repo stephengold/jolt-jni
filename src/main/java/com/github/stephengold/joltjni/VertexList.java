@@ -139,6 +139,19 @@ final public class VertexList implements ConstVertexList {
      * @param vertexIndex an index in the list (&ge;0, &lt;size)
      * @param location the data to store (not {@code null}, unaffected)
      */
+    public void set(int vertexIndex, FloatBuffer location) {
+        float x = location.get(0);
+        float y = location.get(1);
+        float z = location.get(2);
+        set(vertexIndex, x, y, z);
+    }
+
+    /**
+     * Store the specified vertex location at the specified index.
+     *
+     * @param vertexIndex an index in the list (&ge;0, &lt;size)
+     * @param location the data to store (not {@code null}, unaffected)
+     */
     public void set(int vertexIndex, Vec3Arg location) {
         float x = location.getX();
         float y = location.getY();
