@@ -172,6 +172,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    countMaterials
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_countMaterials
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const PhysicsMaterialList::size_type result = pSettings->mMaterials.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    countTriangles
  * Signature: (J)I
  */
@@ -212,6 +225,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_g
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    getBuildQuality
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_getBuildQuality
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const MeshShapeSettings::EBuildQuality result = pSettings->mBuildQuality;
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    getMaxTrianglesPerLeaf
  * Signature: (J)I
  */
@@ -234,6 +260,24 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings
             = reinterpret_cast<MeshShapeSettings *> (settingsVa);
     const bool result = pSettings->mPerTriangleUserData;
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    getTriangleVertex
+ * Signature: (JILjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_getTriangleVertex
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jint vertexIndex,
+  jobject storeFloats) {
+    const MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Float3 result = pSettings->mTriangleVertices[vertexIndex];
+    pFloats[0] = result.x;
+    pFloats[1] = result.y;
+    pFloats[2] = result.z;
 }
 
 /*

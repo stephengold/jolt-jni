@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.EBuildQuality;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstMeshShapeSettings;
@@ -344,6 +345,19 @@ public class MeshShapeSettings
     // ConstMeshShapeSettings methods
 
     /**
+     * Count the physics materials. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countMaterials() {
+        long settingsVa = va();
+        int result = countMaterials(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Count the triangles in the mesh. The settings are unaffected.
      *
      * @return the count (&ge;0)
@@ -379,6 +393,58 @@ public class MeshShapeSettings
     public float getActiveEdgeCosThresholdAngle() {
         long settingsVa = va();
         float result = getActiveEdgeCosThresholdAngle(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the build quality. The settings are unaffected. (native attribute:
+     * mBuildQuality)
+     *
+     * @return an enum value (not {@code null})
+     */
+    @Override
+    public EBuildQuality getBuildQuality() {
+        long settingsVa = va();
+        int ordinal = getBuildQuality(settingsVa);
+        EBuildQuality result = EBuildQuality.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Copy the specified vertex. The settings are unaffected.
+     *
+     * @param vertexIndex the index of the vertex to copy (&ge;0)
+     * @return a new vector
+     */
+    @Override
+    public Float3 getTriangleVertex(int vertexIndex) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTriangleVertex(settingsVa, vertexIndex, storeFloats);
+        Float3 result = new Float3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the vertex list. The settings are unaffected. (native attribute:
+     * mTriangleVertices)
+     *
+     * @return a new object
+     */
+    @Override
+    public VertexList getTriangleVertices() {
+        VertexList result = new VertexList();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+
+        long settingsVa = va();
+        long numVertices = countTriangleVertices(settingsVa);
+        for (int vertexIndex = 0; vertexIndex < numVertices; ++vertexIndex) {
+            getTriangleVertex(settingsVa, vertexIndex, storeFloats);
+            result.set(vertexIndex, storeFloats);
+        }
 
         return result;
     }
@@ -435,15 +501,22 @@ public class MeshShapeSettings
     native private static long createSettingsFromTriangles(
             int numTriangles, FloatBuffer buffer, long materialsVa);
 
+    native private static int countMaterials(long settingsVa);
+
     native private static int countTriangles(long settingsVa);
 
     native private static int countTriangleVertices(long settingsVa);
 
     native private static float getActiveEdgeCosThresholdAngle(long settingsVa);
 
+    native private static int getBuildQuality(long settingsVa);
+
     native private static int getMaxTrianglesPerLeaf(long settingsVa);
 
     native private static boolean getPerTriangleUserData(long settingsVa);
+
+    native private static void getTriangleVertex(
+            long settingsVa, int vertexIndex, FloatBuffer storeFloats);
 
     native private static void reserveIndexedTriangles(
             long settingsVa, int numTriangles);

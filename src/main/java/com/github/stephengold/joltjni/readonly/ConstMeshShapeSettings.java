@@ -21,6 +21,10 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Float3;
+import com.github.stephengold.joltjni.VertexList;
+import com.github.stephengold.joltjni.enumerate.EBuildQuality;
+
 /**
  * Read-only access to a {@code MeshShapeSettings} object. (native type: const
  * MeshShapeSettings)
@@ -28,6 +32,13 @@ package com.github.stephengold.joltjni.readonly;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstMeshShapeSettings extends ConstShapeSettings {
+    /**
+     * Count the physics materials. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    int countMaterials();
+
     /**
      * Count the triangles in the mesh. The settings are unaffected.
      *
@@ -51,6 +62,13 @@ public interface ConstMeshShapeSettings extends ConstShapeSettings {
     float getActiveEdgeCosThresholdAngle();
 
     /**
+     * Return the build quality. The settings are unaffected.
+     *
+     * @return an enum value (not {@code null})
+     */
+    EBuildQuality getBuildQuality();
+
+    /**
      * Return the maximum number of triangles per leaf. The settings are
      * unaffected.
      *
@@ -66,4 +84,19 @@ public interface ConstMeshShapeSettings extends ConstShapeSettings {
      * {@code false}
      */
     boolean getPerTriangleUserData();
+
+    /**
+     * Copy the specified vertex. The settings are unaffected.
+     *
+     * @param vertexIndex the index of the vertex to copy (&ge;0)
+     * @return a new vector
+     */
+    Float3 getTriangleVertex(int vertexIndex);
+
+    /**
+     * Copy the vertex list. The settings are unaffected.
+     *
+     * @return a new object
+     */
+    VertexList getTriangleVertices();
 }
