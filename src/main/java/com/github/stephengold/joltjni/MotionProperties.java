@@ -58,17 +58,6 @@ public class MotionProperties
     }
 
     /**
-     * Instantiate a copy of the specified properties.
-     *
-     * @param original the settings to copy (not {@code null}, unaffected)
-     */
-    public MotionProperties(ConstMotionProperties original) {
-        long originalVa = original.targetVa();
-        long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa, () -> free(copyVa));
-    }
-
-    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -119,17 +108,6 @@ public class MotionProperties
     public void resetTorque() {
         long propertiesVa = va();
         resetTorque(propertiesVa);
-    }
-
-    /**
-     * Copy the argument to the current properties.
-     *
-     * @param source the properties to copy (not {@code null}, unaffected)
-     */
-    public void set(ConstMotionProperties source) {
-        long targetVa = va();
-        long sourceVa = source.targetVa();
-        assign(targetVa, sourceVa);
     }
 
     /**
@@ -720,10 +698,6 @@ public class MotionProperties
     }
     // *************************************************************************
     // native private methods
-
-    native private static void assign(long targetVa, long sourceVa);
-
-    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

@@ -32,22 +32,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    assign
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_assign
-  BODYOF_ASSIGN(MotionProperties)
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    createCopy
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotionProperties_createCopy
-  BODYOF_CREATE_COPY(MotionProperties)
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    createDefault
  * Signature: ()J
  */
