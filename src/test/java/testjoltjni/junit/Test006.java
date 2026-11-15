@@ -50,6 +50,7 @@ import com.github.stephengold.joltjni.TriangleShapeSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstConvexShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstMeshShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
@@ -693,7 +694,7 @@ public class Test006 {
      *
      * @param settings the settings to test (not {@code null}, unaffected)
      */
-    private static void testMeshSsDefaults(MeshShapeSettings settings) {
+    private static void testMeshSsDefaults(ConstMeshShapeSettings settings) {
         testSsDefaults(settings);
 
         Assert.assertEquals(0, settings.countTriangles());

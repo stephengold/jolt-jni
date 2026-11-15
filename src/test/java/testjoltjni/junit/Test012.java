@@ -93,6 +93,7 @@ import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstHairSettings;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
+import com.github.stephengold.joltjni.readonly.ConstMeshShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
@@ -1083,7 +1084,7 @@ public class Test012 {
         HeightFieldShapeSettings heightField = new HeightFieldShapeSettings();
         testShapeSettings(heightField);
 
-        MeshShapeSettings mesh = new MeshShapeSettings();
+        ConstMeshShapeSettings mesh = new MeshShapeSettings();
         testShapeSettings(mesh);
 
         OffsetCenterOfMassShapeSettings ocom

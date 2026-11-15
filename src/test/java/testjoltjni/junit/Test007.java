@@ -69,6 +69,7 @@ import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstFloat3;
+import com.github.stephengold.joltjni.readonly.ConstMeshShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -298,7 +299,8 @@ public class Test007 {
         IndexedTriangle triangle2 = new IndexedTriangle(3, 1, 0);
         indices.pushBack(triangle1);
         indices.pushBack(triangle2);
-        MeshShapeSettings settings = new MeshShapeSettings(vertices, indices);
+        ConstMeshShapeSettings settings
+                = new MeshShapeSettings(vertices, indices);
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -318,7 +320,7 @@ public class Test007 {
         list.add(tri1);
         list.add(tri2);
         PhysicsMaterialList mats = new PhysicsMaterialList();
-        MeshShapeSettings settings2 = new MeshShapeSettings(list, mats);
+        ConstMeshShapeSettings settings2 = new MeshShapeSettings(list, mats);
 
         ShapeResult result2 = settings2.create();
         Assert.assertFalse(result2.hasError());
@@ -329,7 +331,7 @@ public class Test007 {
         testMeshDefaults(shape2);
 
         ConstTriangle[] array = {tri1, tri2};
-        MeshShapeSettings settings3 = new MeshShapeSettings(array, mats);
+        ConstMeshShapeSettings settings3 = new MeshShapeSettings(array, mats);
 
         ShapeResult result3 = settings3.create();
         Assert.assertFalse(result3.hasError());

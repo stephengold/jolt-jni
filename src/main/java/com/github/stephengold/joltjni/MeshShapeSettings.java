@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstFloat3;
+import com.github.stephengold.joltjni.readonly.ConstMeshShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.ConstVertexList;
 import java.nio.FloatBuffer;
@@ -33,7 +34,9 @@ import java.util.List;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MeshShapeSettings extends ShapeSettings {
+public class MeshShapeSettings
+        extends ShapeSettings
+        implements ConstMeshShapeSettings {
     // *************************************************************************
     // constructors
 
@@ -91,6 +94,17 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public MeshShapeSettings(ConstMeshShapeSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Mesh);
+    }
+
+    /**
      * Instantiate settings for the specified vertices without indices.
      *
      * @param positionBuffer the vertex positions (not {@code null}, capacity a
@@ -115,17 +129,6 @@ public class MeshShapeSettings extends ShapeSettings {
      */
     MeshShapeSettings(long settingsVa) {
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
-    }
-
-    /**
-     * Instantiate a copy of the specified settings.
-     *
-     * @param original the settings to copy (not {@code null}, unaffected)
-     */
-    public MeshShapeSettings(MeshShapeSettings original) {
-        long originalVa = original.va();
-        long copyVa = createCopy(originalVa);
-        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Mesh);
     }
 
     /**
@@ -274,70 +277,6 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Count the triangles in the mesh. The settings are unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    public int countTriangles() {
-        long settingsVa = va();
-        int result = countTriangles(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Count the vertices in the mesh. The settings are unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    public int countTriangleVertices() {
-        long settingsVa = va();
-        int result = countTriangleVertices(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the cosine of the active-edge threshold angle. The settings are
-     * unaffected. (native attribute: mActiveEdgeCosThresholdAngle)
-     *
-     * @return the cosine
-     */
-    public float getActiveEdgeCosThresholdAngle() {
-        long settingsVa = va();
-        float result = getActiveEdgeCosThresholdAngle(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum number of triangles per leaf. The settings are
-     * unaffected. (native attribute: mMaxTrianglesPerLeaf)
-     *
-     * @return the maximum number
-     */
-    public int getMaxTrianglesPerLeaf() {
-        long settingsVa = va();
-        int result = getMaxTrianglesPerLeaf(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether each triangle will include user data. The settings are
-     * unaffected. (native attribute: mPerTriangleUserData)
-     *
-     * @return {@code true} if per-triangle data is included, otherwise
-     * {@code false}
-     */
-    public boolean getPerTriangleUserData() {
-        long settingsVa = va();
-        boolean result = getPerTriangleUserData(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Reserve storage for the specified number of triangles.
      *
      * @param numTriangles the desired capacity
@@ -362,9 +301,9 @@ public class MeshShapeSettings extends ShapeSettings {
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(MeshShapeSettings source) {
+    public void set(ConstMeshShapeSettings source) {
         long targetVa = va();
-        long sourceVa = source.va();
+        long sourceVa = source.targetVa();
         assign(targetVa, sourceVa);
     }
 
@@ -400,6 +339,77 @@ public class MeshShapeSettings extends ShapeSettings {
     public void setPerTriangleUserData(boolean include) {
         long settingsVa = va();
         setPerTriangleUserData(settingsVa, include);
+    }
+    // *************************************************************************
+    // ConstMeshShapeSettings methods
+
+    /**
+     * Count the triangles in the mesh. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countTriangles() {
+        long settingsVa = va();
+        int result = countTriangles(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the vertices in the mesh. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countTriangleVertices() {
+        long settingsVa = va();
+        int result = countTriangleVertices(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the cosine of the active-edge threshold angle. The settings are
+     * unaffected. (native attribute: mActiveEdgeCosThresholdAngle)
+     *
+     * @return the cosine
+     */
+    @Override
+    public float getActiveEdgeCosThresholdAngle() {
+        long settingsVa = va();
+        float result = getActiveEdgeCosThresholdAngle(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum number of triangles per leaf. The settings are
+     * unaffected. (native attribute: mMaxTrianglesPerLeaf)
+     *
+     * @return the maximum number
+     */
+    @Override
+    public int getMaxTrianglesPerLeaf() {
+        long settingsVa = va();
+        int result = getMaxTrianglesPerLeaf(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether each triangle will include user data. The settings are
+     * unaffected. (native attribute: mPerTriangleUserData)
+     *
+     * @return {@code true} if per-triangle data is included, otherwise
+     * {@code false}
+     */
+    @Override
+    public boolean getPerTriangleUserData() {
+        long settingsVa = va();
+        boolean result = getPerTriangleUserData(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods
