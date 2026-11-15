@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni.enumerate;
 
 /**
  * Enumerate strategies for constructing the AABB tree of a {code MeshShape}.
+ * (native type: MeshShapeSettings::EBuildQuality)
  *
  * @author Stephen Gold sgold@sonic.net
  */
