@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.JphMath;
+import electrostatic4j.snaploader.platform.util.NativeVariant;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -46,7 +47,12 @@ public class Test021 {
         Assert.assertEquals(1.3694384f, JphMath.aCos(0.2f), 0f);
         Assert.assertEquals(3.1415927f, JphMath.aCos(-2f), 0f);
         Assert.assertEquals(0f, JphMath.aCos(Float.MAX_VALUE), 0f);
-        Assert.assertEquals(0f, JphMath.aCos(Float.NaN), 0f);
+        float acosNan = JphMath.aCos(Float.NaN);
+        if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
+            Assert.assertTrue(Float.isNaN(acosNan));
+        } else {
+            Assert.assertEquals(0f, acosNan, 0f);
+        }
         Assert.assertEquals(0f, JphMath.aCos(Float.POSITIVE_INFINITY), 0f);
 
         Assert.assertEquals(0.29145682f, JphMath.aTan(0.3f), 0f);
