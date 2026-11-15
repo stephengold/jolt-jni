@@ -47,13 +47,13 @@ public class Test021 {
         Assert.assertEquals(1.3694384f, JphMath.aCos(0.2f), 0f);
         Assert.assertEquals(3.1415927f, JphMath.aCos(-2f), 0f);
         Assert.assertEquals(0f, JphMath.aCos(Float.MAX_VALUE), 0f);
+        Assert.assertEquals(1.5707964f, JphMath.aCos(Float.MIN_VALUE), 0f);
         float acosNan = JphMath.aCos(Float.NaN);
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
-            Assert.assertTrue(Float.isNaN(acosNan));
+            assertIsNan(acosNan);
         } else {
             Assert.assertEquals(0f, acosNan, 0f);
         }
-        Assert.assertEquals(1.5707964f, JphMath.aCos(Float.MIN_VALUE), 0f);
         Assert.assertEquals(3.1415927f,
                 JphMath.aCos(Float.NEGATIVE_INFINITY), 0f);
         Assert.assertEquals(0f, JphMath.aCos(Float.POSITIVE_INFINITY), 0f);
@@ -61,7 +61,7 @@ public class Test021 {
         Assert.assertEquals(0.29145682f, JphMath.aTan(0.3f), 0f);
         Assert.assertEquals(1.5707964f, JphMath.aTan(Float.MAX_VALUE), 0f);
         Assert.assertEquals(1.4e-45f, JphMath.aTan(Float.MIN_VALUE), 0f);
-        Assert.assertTrue(Float.isNaN(JphMath.aTan(Float.NaN)));
+        assertIsNan(JphMath.aTan(Float.NaN));
         Assert.assertEquals(-1.5707964f,
                 JphMath.aTan(Float.NEGATIVE_INFINITY), 0f);
         Assert.assertEquals(1.5707964f,
@@ -72,12 +72,12 @@ public class Test021 {
                 JphMath.aTan2(Float.MAX_VALUE, Float.MAX_VALUE), 0f);
         Assert.assertEquals(0.7853982f,
                 JphMath.aTan2(Float.MIN_VALUE, Float.MIN_VALUE), 0f);
-        Assert.assertTrue(Float.isNaN(JphMath.aTan2(0f, Float.NaN)));
-        Assert.assertTrue(Float.isNaN(JphMath.aTan2(Float.NaN, 0f)));
-        Assert.assertTrue(Float.isNaN(JphMath.aTan2(Float.NaN, Float.NaN)));
-        Assert.assertTrue(Float.isNaN(
+        assertIsNan(JphMath.aTan2(0f, Float.NaN));
+        assertIsNan(JphMath.aTan2(Float.NaN, 0f));
+        assertIsNan(JphMath.aTan2(Float.NaN, Float.NaN));
+        assertIsNan(
                 JphMath.aTan2(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
-        ));
+        );
 
         Assert.assertEquals(-0.5f, JphMath.clamp(-0.7f, -0.5f, 0.6f), 0f);
         Assert.assertEquals(2f, JphMath.clamp(2f, 1f, 3f), 0f);
@@ -89,12 +89,12 @@ public class Test021 {
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
             Assert.assertEquals(Float.NEGATIVE_INFINITY, cosMax, 0f);
         } else {
-            Assert.assertTrue(Float.isNaN(cosMax));
+            assertIsNan(cosMax);
         }
         Assert.assertEquals(1f, JphMath.cos(Float.MIN_VALUE), 0f);
-        Assert.assertTrue(Float.isNaN(JphMath.cos(Float.NaN)));
-        Assert.assertTrue(Float.isNaN(JphMath.cos(Float.NEGATIVE_INFINITY)));
-        Assert.assertTrue(Float.isNaN(JphMath.cos(Float.POSITIVE_INFINITY)));
+        assertIsNan(JphMath.cos(Float.NaN));
+        assertIsNan(JphMath.cos(Float.NEGATIVE_INFINITY));
+        assertIsNan(JphMath.cos(Float.POSITIVE_INFINITY));
 
         Assert.assertEquals(0.013962634f, JphMath.degreesToRadians(0.8f), 0f);
         Assert.assertEquals(5.939047e36f,
@@ -116,22 +116,22 @@ public class Test021 {
         Assert.assertEquals(0.09983342f, JphMath.sin(0.1f), 0f);
         float sinMax = JphMath.sin(Float.MAX_VALUE);
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
-            Assert.assertTrue(Float.isNaN(sinMax));
+            assertIsNan(sinMax);
         } else {
             Assert.assertEquals(Float.NEGATIVE_INFINITY, sinMax, 0f);
         }
         Assert.assertEquals(1.4e-45f, JphMath.sin(Float.MIN_VALUE), 0f);
-        Assert.assertTrue(Float.isNaN(JphMath.sin(Float.NaN)));
-        Assert.assertTrue(Float.isNaN(JphMath.sin(Float.NEGATIVE_INFINITY)));
-        Assert.assertTrue(Float.isNaN(JphMath.sin(Float.POSITIVE_INFINITY)));
+        assertIsNan(JphMath.sin(Float.NaN));
+        assertIsNan(JphMath.sin(Float.NEGATIVE_INFINITY));
+        assertIsNan(JphMath.sin(Float.POSITIVE_INFINITY));
 
         Assert.assertEquals(0.31622776f, JphMath.sqrt(0.1f), 0f);
         Assert.assertEquals(0f, JphMath.sqrt(-0f), 0f);
-        Assert.assertTrue(Float.isNaN(JphMath.sqrt(-1f)));
+        assertIsNan(JphMath.sqrt(-1f));
         Assert.assertEquals(1.8446743e19f, JphMath.sqrt(Float.MAX_VALUE), 0f);
         Assert.assertEquals(3.743392e-23f, JphMath.sqrt(Float.MIN_VALUE), 0f);
-        Assert.assertTrue(Float.isNaN(JphMath.sqrt(Float.NaN)));
-        Assert.assertTrue(Float.isNaN(JphMath.sqrt(Float.NEGATIVE_INFINITY)));
+        assertIsNan(JphMath.sqrt(Float.NaN));
+        assertIsNan(JphMath.sqrt(Float.NEGATIVE_INFINITY));
         Assert.assertEquals(Float.POSITIVE_INFINITY,
                 JphMath.sqrt(Float.POSITIVE_INFINITY), 0);
 
@@ -140,7 +140,7 @@ public class Test021 {
         Assert.assertEquals(Float.POSITIVE_INFINITY,
                 JphMath.square(Float.MAX_VALUE), 0f);
         Assert.assertEquals(0f, JphMath.square(Float.MIN_VALUE), 0f);
-        Assert.assertTrue(Float.isNaN(JphMath.square(Float.NaN)));
+        assertIsNan(JphMath.square(Float.NaN));
         Assert.assertEquals(Float.POSITIVE_INFINITY,
                 JphMath.square(Float.NEGATIVE_INFINITY), 0);
         Assert.assertEquals(Float.POSITIVE_INFINITY,
@@ -148,7 +148,7 @@ public class Test021 {
 
         Assert.assertEquals(0.42279324f, JphMath.tan(0.4f), 0f);
         Assert.assertEquals(1.4e-45f, JphMath.tan(Float.MIN_VALUE), 0f);
-        Assert.assertTrue(Float.isNaN(JphMath.tan(Float.NaN)));
+        assertIsNan(JphMath.tan(Float.NaN));
         float tanMax = JphMath.tan(Float.MAX_VALUE);
         float tanNinf = JphMath.tan(Float.NEGATIVE_INFINITY);
         float tanPinf = JphMath.tan(Float.POSITIVE_INFINITY);
@@ -163,5 +163,16 @@ public class Test021 {
         }
 
         TestUtils.cleanup();
+    }
+    // *************************************************************************
+    // private methods
+
+    /**
+     * Verify that a single-precision value is Not A Number (NaN).
+     *
+     * @param actual the value to test
+     */
+    private static void assertIsNan(float actual) {
+        Assert.assertEquals(Float.NaN, actual, 0f);
     }
 }
