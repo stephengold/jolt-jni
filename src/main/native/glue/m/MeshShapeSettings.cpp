@@ -91,7 +91,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
             = reinterpret_cast<TriangleList *> (listVa);
     MeshShapeSettings * const pResult = new MeshShapeSettings(*pList);
     TRACE_NEW_TARGET("MeshShapeSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);    
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
@@ -265,19 +265,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
- * Method:    getMaxTrianglesPerLeaf
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_getMaxTrianglesPerLeaf
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const MeshShapeSettings * const pSettings
-            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
-    const uint result = pSettings->mMaxTrianglesPerLeaf;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    getMaterials
  * Signature: (J)J
  */
@@ -287,6 +274,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_ge
             = reinterpret_cast<MeshShapeSettings *> (settingsVa);
     PhysicsMaterialList * const pResult = &pSettings->mMaterials;
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    getMaxTrianglesPerLeaf
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_getMaxTrianglesPerLeaf
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const uint result = pSettings->mMaxTrianglesPerLeaf;
+    return result;
 }
 
 /*

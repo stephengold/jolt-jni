@@ -106,6 +106,64 @@ public class MeshShapeSettings
     }
 
     /**
+     * Instantiate settings for the specified array of triangles.
+     *
+     * @param triangleArray the array of triangles (not {@code null},
+     * unaffected)
+     */
+    public MeshShapeSettings(ConstTriangle... triangleArray) {
+        int numTriangles = triangleArray.length;
+        int numVertices = 3 * numTriangles;
+        int numFloats = 3 * numVertices;
+        FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
+        for (ConstTriangle triangle : triangleArray) {
+            triangle.putVertices(buffer);
+        }
+        long settingsVa = createFromTrianglesNoMats(numTriangles, buffer);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param triangleArray the array of triangles (not {@code null},
+     * unaffected)
+     * @param materials the desired surface properties (not {@code null},
+     * unaffected)
+     */
+    public MeshShapeSettings(
+            ConstTriangle[] triangleArray, PhysicsMaterialList materials) {
+        int numTriangles = triangleArray.length;
+        int numVertices = 3 * numTriangles;
+        int numFloats = 3 * numVertices;
+        FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
+        for (ConstTriangle triangle : triangleArray) {
+            triangle.putVertices(buffer);
+        }
+        long materialsVa = materials.va();
+        long settingsVa = createSettingsFromTriangles(
+                numTriangles, buffer, materialsVa);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
+    }
+
+    /**
+     * Instantiate settings for the specified vertices and indices.
+     *
+     * @param vertices list of vertex locations (not {@code null}, unaffected)
+     * @param indices list of triangles that use those vertices (not
+     * {@code null})
+     */
+    public MeshShapeSettings(
+            ConstVertexList vertices, IndexedTriangleList indices) {
+        int numVertices = vertices.size();
+        FloatBuffer buffer = vertices.toDirectBuffer();
+        long indicesVa = indices.va();
+        long settingsVa
+                = createMeshShapeSettings(numVertices, buffer, indicesVa);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
+    }
+
+    /**
      * Instantiate settings for the specified vertices without indices.
      *
      * @param positionBuffer the vertex positions (not {@code null}, capacity a
@@ -119,16 +177,6 @@ public class MeshShapeSettings
 
         long settingsVa
                 = createFromTrianglesNoMats(numTriangles, positionBuffer);
-        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
-    }
-
-    /**
-     * Instantiate with the specified native object assigned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    MeshShapeSettings(long settingsVa) {
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
@@ -192,60 +240,12 @@ public class MeshShapeSettings
     }
 
     /**
-     * Instantiate settings for the specified vertices and indices.
+     * Instantiate with the specified native object assigned.
      *
-     * @param vertices list of vertex locations (not {@code null}, unaffected)
-     * @param indices list of triangles that use those vertices (not
-     * {@code null})
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
      */
-    public MeshShapeSettings(
-            ConstVertexList vertices, IndexedTriangleList indices) {
-        int numVertices = vertices.size();
-        FloatBuffer buffer = vertices.toDirectBuffer();
-        long indicesVa = indices.va();
-        long settingsVa
-                = createMeshShapeSettings(numVertices, buffer, indicesVa);
-        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
-    }
-
-    /**
-     * Instantiate settings for the specified array of triangles.
-     *
-     * @param triangleArray the array of triangles (not {@code null},
-     * unaffected)
-     */
-    public MeshShapeSettings(ConstTriangle... triangleArray) {
-        int numTriangles = triangleArray.length;
-        int numVertices = 3 * numTriangles;
-        int numFloats = 3 * numVertices;
-        FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (ConstTriangle triangle : triangleArray) {
-            triangle.putVertices(buffer);
-        }
-        long settingsVa = createFromTrianglesNoMats(numTriangles, buffer);
-        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
-    }
-
-    /**
-     * Instantiate settings for the specified parameters.
-     *
-     * @param triangleArray the array of triangles (not {@code null},
-     * unaffected)
-     * @param materials the desired surface properties (not {@code null},
-     * unaffected)
-     */
-    public MeshShapeSettings(
-            ConstTriangle[] triangleArray, PhysicsMaterialList materials) {
-        int numTriangles = triangleArray.length;
-        int numVertices = 3 * numTriangles;
-        int numFloats = 3 * numVertices;
-        FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (ConstTriangle triangle : triangleArray) {
-            triangle.putVertices(buffer);
-        }
-        long materialsVa = materials.va();
-        long settingsVa = createSettingsFromTriangles(
-                numTriangles, buffer, materialsVa);
+    MeshShapeSettings(long settingsVa) {
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
@@ -573,9 +573,9 @@ public class MeshShapeSettings
 
     native private static long getIndexedTriangles(long settingsVa);
 
-    native private static int getMaxTrianglesPerLeaf(long settingsVa);
-
     native private static long getMaterials(long settingsVa);
+
+    native private static int getMaxTrianglesPerLeaf(long settingsVa);
 
     native private static boolean getPerTriangleUserData(long settingsVa);
 
