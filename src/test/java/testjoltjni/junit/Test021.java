@@ -85,7 +85,12 @@ public class Test021 {
         Assert.assertTrue(Float.isNaN(JphMath.clamp(Float.NaN, -0.5f, 0.6f)));
 
         Assert.assertEquals(0.7648422f, JphMath.cos(0.7f), 0f);
-        Assert.assertTrue(Float.isNaN(JphMath.cos(Float.MAX_VALUE)));
+        float cosMax = JphMath.cos(Float.MAX_VALUE);
+        if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
+            Assert.assertEquals(Float.NEGATIVE_INFINITY, cosMax, 0f);
+        } else {
+            Assert.assertTrue(Float.isNaN(cosMax));
+        }
         Assert.assertEquals(1f, JphMath.cos(Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.cos(Float.NaN)));
         Assert.assertTrue(Float.isNaN(JphMath.cos(Float.NEGATIVE_INFINITY)));
@@ -109,8 +114,12 @@ public class Test021 {
         Assert.assertEquals(1f, JphMath.sign(Float.POSITIVE_INFINITY), 0f);
 
         Assert.assertEquals(0.09983342f, JphMath.sin(0.1f), 0f);
-        Assert.assertEquals(Float.NEGATIVE_INFINITY,
-                JphMath.sin(Float.MAX_VALUE), 0f);
+        float sinMax = JphMath.sin(Float.MAX_VALUE);
+        if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
+            Assert.assertTrue(Float.isNaN(sinMax));
+        } else {
+            Assert.assertEquals(Float.NEGATIVE_INFINITY, sinMax, 0f);
+        }
         Assert.assertEquals(1.4e-45f, JphMath.sin(Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.sin(Float.NaN)));
         Assert.assertTrue(Float.isNaN(JphMath.sin(Float.NEGATIVE_INFINITY)));
@@ -138,16 +147,17 @@ public class Test021 {
                 JphMath.square(Float.POSITIVE_INFINITY), 0);
 
         Assert.assertEquals(0.42279324f, JphMath.tan(0.4f), 0f);
-        Assert.assertEquals(Float.POSITIVE_INFINITY,
-                JphMath.tan(Float.MAX_VALUE), 0f);
         Assert.assertEquals(1.4e-45f, JphMath.tan(Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.tan(Float.NaN)));
+        float tanMax = JphMath.tan(Float.MAX_VALUE);
         float tanNinf = JphMath.tan(Float.NEGATIVE_INFINITY);
         float tanPinf = JphMath.tan(Float.POSITIVE_INFINITY);
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
+            Assert.assertEquals(-0f, tanMax, 0f);
             Assert.assertEquals(0f, tanNinf, 0f);
             Assert.assertEquals(-0f, tanPinf, 0f);
         } else {
+            Assert.assertEquals(Float.POSITIVE_INFINITY, tanMax, 0f);
             Assert.assertEquals(Float.NEGATIVE_INFINITY, tanNinf, 0f);
             Assert.assertEquals(Float.POSITIVE_INFINITY, tanPinf, 0f);
         }
