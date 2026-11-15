@@ -53,17 +53,31 @@ public class Test021 {
         } else {
             Assert.assertEquals(0f, acosNan, 0f);
         }
+        Assert.assertEquals(1.5707964f, JphMath.aCos(Float.MIN_VALUE), 0f);
+        Assert.assertEquals(3.1415927f,
+                JphMath.aCos(Float.NEGATIVE_INFINITY), 0f);
         Assert.assertEquals(0f, JphMath.aCos(Float.POSITIVE_INFINITY), 0f);
 
         Assert.assertEquals(0.29145682f, JphMath.aTan(0.3f), 0f);
         Assert.assertEquals(1.5707964f, JphMath.aTan(Float.MAX_VALUE), 0f);
+        Assert.assertEquals(1.4e-45f, JphMath.aTan(Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.aTan(Float.NaN)));
         Assert.assertEquals(-1.5707964f,
                 JphMath.aTan(Float.NEGATIVE_INFINITY), 0f);
+        Assert.assertEquals(1.5707964f,
+                JphMath.aTan(Float.POSITIVE_INFINITY), 0f);
 
         Assert.assertEquals(2.4668517f, JphMath.aTan2(0.4f, -0.5f), 0f);
+        Assert.assertEquals(0.7853982f,
+                JphMath.aTan2(Float.MAX_VALUE, Float.MAX_VALUE), 0f);
+        Assert.assertEquals(0.7853982f,
+                JphMath.aTan2(Float.MIN_VALUE, Float.MIN_VALUE), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.aTan2(0f, Float.NaN)));
         Assert.assertTrue(Float.isNaN(JphMath.aTan2(Float.NaN, 0f)));
+        Assert.assertTrue(Float.isNaN(JphMath.aTan2(Float.NaN, Float.NaN)));
+        Assert.assertTrue(Float.isNaN(
+                JphMath.aTan2(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
+        ));
 
         Assert.assertEquals(-0.5f, JphMath.clamp(-0.7f, -0.5f, 0.6f), 0f);
         Assert.assertEquals(2f, JphMath.clamp(2f, 1f, 3f), 0f);
@@ -72,6 +86,8 @@ public class Test021 {
 
         Assert.assertEquals(0.7648422f, JphMath.cos(0.7f), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.cos(Float.NaN)));
+        Assert.assertTrue(Float.isNaN(JphMath.cos(Float.NEGATIVE_INFINITY)));
+        Assert.assertTrue(Float.isNaN(JphMath.cos(Float.POSITIVE_INFINITY)));
 
         Assert.assertEquals(0.013962634f, JphMath.degreesToRadians(0.8f), 0f);
         Assert.assertEquals(51.566196f, JphMath.radiansToDegrees(0.9f), 0f);
@@ -79,23 +95,36 @@ public class Test021 {
         Assert.assertEquals(-1f, JphMath.sign(-1.1f), 0f);
         Assert.assertEquals(1f, JphMath.sign(-0f), 0f);
         Assert.assertEquals(1f, JphMath.sign(Float.NaN), 0f);
+        Assert.assertEquals(-1f, JphMath.sign(Float.NEGATIVE_INFINITY), 0f);
         Assert.assertEquals(1f, JphMath.sign(Float.POSITIVE_INFINITY), 0f);
 
         Assert.assertEquals(0.09983342f, JphMath.sin(0.1f), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.sin(Float.NaN)));
+        Assert.assertTrue(Float.isNaN(JphMath.sin(Float.NEGATIVE_INFINITY)));
+        Assert.assertTrue(Float.isNaN(JphMath.sin(Float.POSITIVE_INFINITY)));
 
         Assert.assertEquals(0.31622776f, JphMath.sqrt(0.1f), 0f);
         Assert.assertEquals(0f, JphMath.sqrt(-0f), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.sqrt(-1f)));
+        Assert.assertTrue(Float.isNaN(JphMath.sqrt(Float.NaN)));
+        Assert.assertTrue(Float.isNaN(JphMath.sqrt(Float.NEGATIVE_INFINITY)));
         Assert.assertEquals(Float.POSITIVE_INFINITY,
                 JphMath.sqrt(Float.POSITIVE_INFINITY), 0);
 
         Assert.assertEquals(0.040000003f, JphMath.square(0.2f), 0f);
         Assert.assertEquals(81, JphMath.square(-9));
+        Assert.assertTrue(Float.isNaN(JphMath.square(Float.NaN)));
         Assert.assertEquals(Float.POSITIVE_INFINITY,
                 JphMath.square(Float.NEGATIVE_INFINITY), 0);
+        Assert.assertEquals(Float.POSITIVE_INFINITY,
+                JphMath.square(Float.POSITIVE_INFINITY), 0);
 
         Assert.assertEquals(0.42279324f, JphMath.tan(0.4f), 0f);
+        Assert.assertTrue(Float.isNaN(JphMath.tan(Float.NaN)));
+        Assert.assertEquals(Float.NEGATIVE_INFINITY,
+                JphMath.tan(Float.NEGATIVE_INFINITY), 0f);
+        Assert.assertEquals(Float.POSITIVE_INFINITY,
+                JphMath.tan(Float.POSITIVE_INFINITY), 0f);
 
         TestUtils.cleanup();
     }
