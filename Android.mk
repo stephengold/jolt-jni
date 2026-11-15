@@ -347,6 +347,7 @@ $(N)/glue/tr/TransformedShape.cpp \
 $(N)/glue/tr/TransformedSphere.cpp \
 $(N)/glue/tr/TriangleConvexSupport.cpp \
 $(N)/glue/tr/Triangle.cpp \
+$(N)/glue/tr/TriangleList.cpp \
 $(N)/glue/tr/TriangleShape.cpp \
 $(N)/glue/tr/TriangleShapeSettings.cpp \
 $(N)/glue/t/TaperedCapsuleShape.cpp \

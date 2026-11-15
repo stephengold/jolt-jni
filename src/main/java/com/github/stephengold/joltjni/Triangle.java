@@ -154,6 +154,17 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
+     * Instantiate a triangle with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param triangleVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    Triangle(JoltPhysicsObject container, long triangleVa) {
+        super(container, triangleVa);
+    }
+
+    /**
      * Instantiate a triangle from {@code Vec3Arg} locations.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
