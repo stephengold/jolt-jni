@@ -248,6 +248,17 @@ public class MeshShapeSettings
                 numTriangles, buffer, materialsVa);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
+
+    /**
+     * Instantiate settings for the specified list of triangles.
+     *
+     * @param triangleList the list of triangles (not {@code null}, unaffected)
+     */
+    public MeshShapeSettings(TriangleList triangleList) {
+        long listVa = triangleList.va();
+        long settingsVa = createFromTriangleList(listVa);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
+    }
     // *************************************************************************
     // new public methods
 
@@ -278,6 +289,33 @@ public class MeshShapeSettings
     }
 
     /**
+     * Access the list of indexed triangles. (native attribute:
+     * mIndexedTriangles)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public IndexedTriangleList getIndexedTriangles() {
+        long settingsVa = va();
+        long resultVa = getIndexedTriangles(settingsVa);
+        IndexedTriangleList result = new IndexedTriangleList(this, resultVa);
+
+        return result;
+    }
+
+    /**
+     * Access the list of physics materials. (native attribute: mMaterials)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public PhysicsMaterialList getMaterials() {
+        long settingsVa = va();
+        long resultVa = getMaterials(settingsVa);
+        PhysicsMaterialList result = new PhysicsMaterialList(this, resultVa);
+
+        return result;
+    }
+
+    /**
      * Reserve storage for the specified number of triangles.
      *
      * @param numTriangles the desired capacity
@@ -295,6 +333,14 @@ public class MeshShapeSettings
     public void reserveTriangleVertices(int numVertices) {
         long settingsVa = va();
         reserveTriangleVertices(settingsVa, numVertices);
+    }
+
+    /**
+     * Sanitize the mesh data to remove degenerate and duplicate triangles.
+     */
+    public void sanitize() {
+        long settingsVa = va();
+        sanitize(settingsVa);
     }
 
     /**
@@ -317,6 +363,18 @@ public class MeshShapeSettings
     public void setActiveEdgeCosThresholdAngle(float cosine) {
         long settingsVa = va();
         setActiveEdgeCosThresholdAngle(settingsVa, cosine);
+    }
+
+    /**
+     * Alter the build quality. (native attribute: mBuildQuality)
+     *
+     * @param quality the desired quality (not {@code null},
+     * default=FavorRuntimePerformance)
+     */
+    public void setBuildQuality(EBuildQuality quality) {
+        long settingsVa = va();
+        int ordinal = quality.ordinal();
+        setBuildQuality(settingsVa, ordinal);
     }
 
     /**
@@ -492,6 +550,8 @@ public class MeshShapeSettings
 
     native private static long createDefault();
 
+    native private static long createFromTriangleList(long listVa);
+
     native private static long createFromTrianglesNoMats(
             int numTriangles, FloatBuffer positionBuffer);
 
@@ -511,7 +571,11 @@ public class MeshShapeSettings
 
     native private static int getBuildQuality(long settingsVa);
 
+    native private static long getIndexedTriangles(long settingsVa);
+
     native private static int getMaxTrianglesPerLeaf(long settingsVa);
+
+    native private static long getMaterials(long settingsVa);
 
     native private static boolean getPerTriangleUserData(long settingsVa);
 
@@ -524,8 +588,12 @@ public class MeshShapeSettings
     native private static void reserveTriangleVertices(
             long settingsVa, int numVertices);
 
+    native private static void sanitize(long settingsVa);
+
     native private static void setActiveEdgeCosThresholdAngle(
             long settingsVa, float cosine);
+
+    native private static void setBuildQuality(long settingsVa, int ordinal);
 
     native private static void setMaxTrianglesPerLeaf(
             long settingsVa, int numTriangles);

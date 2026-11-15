@@ -40,6 +40,17 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
         long listVa = createDefault();
         setVirtualAddress(listVa, () -> free(listVa));
     }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param listVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    PhysicsMaterialList(JoltPhysicsObject container, long listVa) {
+        super(container, listVa);
+    }
     // *************************************************************************
     // Array<PhysicsMaterialRef> methods
 

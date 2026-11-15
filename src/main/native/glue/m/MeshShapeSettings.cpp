@@ -82,6 +82,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    createFromTriangleList
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_createFromTriangleList
+  (JNIEnv *, jclass, jlong listVa) {
+    const TriangleList * const pList
+            = reinterpret_cast<TriangleList *> (listVa);
+    MeshShapeSettings * const pResult = new MeshShapeSettings(*pList);
+    TRACE_NEW_TARGET("MeshShapeSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);    
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    createFromTrianglesNoMats
  * Signature: (ILjava/nio/FloatBuffer;)J
  */
@@ -238,6 +252,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_get
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    getIndexedTriangles
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_getIndexedTriangles
+  (JNIEnv *, jclass, jlong settingsVa) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    IndexedTriangleList * const pResult = &pSettings->mIndexedTriangles;
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    getMaxTrianglesPerLeaf
  * Signature: (J)I
  */
@@ -247,6 +274,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_get
             = reinterpret_cast<MeshShapeSettings *> (settingsVa);
     const uint result = pSettings->mMaxTrianglesPerLeaf;
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    getMaterials
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_getMaterials
+  (JNIEnv *, jclass, jlong settingsVa) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    PhysicsMaterialList * const pResult = &pSettings->mMaterials;
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
@@ -306,6 +346,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_res
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    sanitize
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_sanitize
+  (JNIEnv *, jclass, jlong settingsVa) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    pSettings->Sanitize();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    setActiveEdgeCosThresholdAngle
  * Signature: (JF)V
  */
@@ -314,6 +366,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_set
     MeshShapeSettings * const pSettings
             = reinterpret_cast<MeshShapeSettings *> (settingsVa);
     pSettings->mActiveEdgeCosThresholdAngle = cosine;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    setBuildQuality
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_setBuildQuality
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    pSettings->mBuildQuality = (MeshShapeSettings::EBuildQuality) ordinal;
 }
 
 /*
