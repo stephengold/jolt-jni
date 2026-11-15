@@ -121,8 +121,12 @@ public class Test021 {
 
         Assert.assertEquals(0.42279324f, JphMath.tan(0.4f), 0f);
         Assert.assertTrue(Float.isNaN(JphMath.tan(Float.NaN)));
-        Assert.assertEquals(Float.NEGATIVE_INFINITY,
-                JphMath.tan(Float.NEGATIVE_INFINITY), 0f);
+        float tanNinf = JphMath.tan(Float.NEGATIVE_INFINITY);
+        if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
+            Assert.assertEquals(0f, tanNinf, 0f);
+        } else {
+            Assert.assertEquals(Float.NEGATIVE_INFINITY, tanNinf, 0f);
+        }
         Assert.assertEquals(Float.POSITIVE_INFINITY,
                 JphMath.tan(Float.POSITIVE_INFINITY), 0f);
 
