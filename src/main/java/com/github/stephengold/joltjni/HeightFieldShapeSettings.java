@@ -585,8 +585,8 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Count the samples. The settings are unaffected. (native attribute:
-     * mSampleCount)
+     * Count the samples along each edge. The settings are unaffected. (native
+     * attribute: mSampleCount)
      *
      * @return the number of samples (&ge;0)
      */
