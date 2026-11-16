@@ -36,6 +36,7 @@ import static com.github.stephengold.joltjni.std.Std.*;
  */
 abstract public class Test {
 protected BodyInterface mBodyInterface;
+protected Map<Integer,String>mBodyLabels;
 protected ComputeQueue mComputeQueue;
 protected ComputeSystem mComputeSystem;
 protected DebugRenderer mDebugRenderer;
@@ -219,5 +220,19 @@ final protected Body CreateHeightFieldTerrain()
 	Body floor = mBodyInterface.createBody(new BodyCreationSettings(height_field, RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
 	mBodyInterface.addBody(floor.getId(), EActivation.DontActivate);
 	return floor;
+}
+
+final protected void DrawBodyLabels()
+{
+	for (Map.Entry<Integer,String>  l : mBodyLabels.entrySet())
+	{
+		BodyLockRead body_lock=new BodyLockRead(mPhysicsSystem.getBodyLockInterface(), l.getKey());
+		if (body_lock.succeeded())
+		{
+			ConstBody  body = body_lock.getBody();
+			mDebugRenderer.drawText3D(body.getPosition(), l.getValue(), Color.sWhite, GetWorldScale() * 0.5f);
+		}
+                body_lock.releaseLock();
+	}
 }
 }
