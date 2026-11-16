@@ -61,7 +61,7 @@ public void Initialize()
 			triangles.add(new Triangle(v1, v4, v2, 0));
 		}
 	PhysicsMaterialList materials=new PhysicsMaterialList();
-	materials.pushBack(new PhysicsMaterialSimple().toRef());
+	materials.pushBack(new PhysicsMaterialSimple().toRefC());
 	ShapeSettingsRef mesh_shape = new MeshShapeSettings(triangles, materials).toRef();
 
 	// Floor

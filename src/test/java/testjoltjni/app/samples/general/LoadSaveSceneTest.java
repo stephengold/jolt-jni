@@ -91,7 +91,7 @@ static MeshShapeSettings sCreateMesh()
 	// Create materials
 	PhysicsMaterialList materials=new PhysicsMaterialList();
 	for (int i = 0; i <= max_material_index; ++i)
-		materials.pushBack(new PhysicsMaterialSimple("Mesh Material " + (i), Color.sGetDistinctColor(i)).toRef());
+		materials.pushBack(new PhysicsMaterialSimple("Mesh Material " + (i), Color.sGetDistinctColor(i)).toRefC());
 
 	return new MeshShapeSettings(triangles, (materials));
 }
@@ -124,7 +124,7 @@ static HeightFieldShapeSettings sCreateHeightField()
 	// Create materials
 	PhysicsMaterialList materials=new PhysicsMaterialList();
 	for (byte i = 0; i <= max_material_index; ++i)
-		materials.pushBack(new PhysicsMaterialSimple("HeightField Material " + Integer.toString((i)), Color.sGetDistinctColor(i)).toRef());
+		materials.pushBack(new PhysicsMaterialSimple("HeightField Material " + Integer.toString((i)), Color.sGetDistinctColor(i)).toRefC());
 
 	// Create height field
 	return new HeightFieldShapeSettings(heights,new Vec3(-0.5f * cell_size * n, 0.0f, -0.5f * cell_size * n),new Vec3(cell_size, 1.0f, cell_size), n, material_indices, materials);

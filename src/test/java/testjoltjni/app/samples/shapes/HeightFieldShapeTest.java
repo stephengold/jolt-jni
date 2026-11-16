@@ -104,7 +104,7 @@ public void Initialize()
 
 		// Create materials
 		for (byte i = 0; i <= max_material_index; ++i)
-			mMaterials.pushBack(new PhysicsMaterialSimple("Material " + i, Color.sGetDistinctColor(i)).toRef());
+			mMaterials.pushBack(new PhysicsMaterialSimple("Material " + i, Color.sGetDistinctColor(i)).toRefC());
 
 		// Determine scale and offset (deliberately apply extra offset and scale in Y direction)
 		mTerrainOffset =new Vec3(-0.5f * cell_size * n, -2.0f, -0.5f * cell_size * n);

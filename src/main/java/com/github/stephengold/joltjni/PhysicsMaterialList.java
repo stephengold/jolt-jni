@@ -29,7 +29,7 @@ import com.github.stephengold.joltjni.template.Array;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
+public class PhysicsMaterialList extends Array<PhysicsMaterialRefC> {
     // *************************************************************************
     // constructors
 
@@ -52,7 +52,7 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
         super(container, listVa);
     }
     // *************************************************************************
-    // Array<PhysicsMaterialRef> methods
+    // Array<PhysicsMaterialRefC> methods
 
     /**
      * Count how many references the currently allocated storage can hold. The
@@ -87,17 +87,17 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
      * @return a new counted reference to the same material
      */
     @Override
-    public PhysicsMaterialRef get(int elementIndex) {
+    public PhysicsMaterialRefC get(int elementIndex) {
         long listVa = va();
         long refVa = get(listVa, elementIndex); // returns a new ref
-        long targetVa = PhysicsMaterialRef.getPtr(refVa);
+        long targetVa = PhysicsMaterialRefC.getPtr(refVa);
 
-        PhysicsMaterialRef result;
+        PhysicsMaterialRefC result;
         if (targetVa == 0L) {
-            result = new PhysicsMaterialRef(refVa);
+            result = new PhysicsMaterialRefC(refVa);
         } else {
             PhysicsMaterial target = new PhysicsMaterial(targetVa);
-            result = new PhysicsMaterialRef(refVa, target);
+            result = new PhysicsMaterialRefC(refVa, target);
         }
 
         return result;
@@ -121,7 +121,7 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
      * @param reference the reference to put (not {@code null})
      */
     @Override
-    public void set(int elementIndex, PhysicsMaterialRef reference) {
+    public void set(int elementIndex, PhysicsMaterialRefC reference) {
         long listVa = va();
         long refVa = reference.va();
         set(listVa, elementIndex, refVa);
