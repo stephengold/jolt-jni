@@ -29,7 +29,9 @@ import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class ShapeSettingsRefC extends JoltPhysicsObject {
+final public class ShapeSettingsRefC
+        extends JoltPhysicsObject
+        implements ConstShapeSettings {
     // *************************************************************************
     // fields
 
@@ -74,12 +76,56 @@ final public class ShapeSettingsRefC extends JoltPhysicsObject {
     public ConstShapeSettings getPtr() {
         return ptr;
     }
+    // *************************************************************************
+    // ConstShapeSettings methods
+
+    /**
+     * Generate a {@code ShapeResult} from these settings.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ShapeResult create() {
+        long settingsVa = targetVa();
+        long resultVa = ShapeSettings.create(settingsVa);
+        ShapeResult result = new ShapeResult(resultVa, true);
+
+        return result;
+    }
+
+    /**
+     * Count the active references to the native {@code ShapeSettings}. The
+     * settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long settingsVa = targetVa();
+        int result = ShapeSettings.getRefCount(settingsVa);
+        return result;
+    }
+
+    /**
+     * Access the run-time type information of the current object.
+     *
+     * @return a new object
+     */
+    @Override
+    public Rtti getRtti() {
+        long settingsVa = targetVa();
+        long resultVa = SerializableObject.getRtti(settingsVa);
+
+        Rtti result = new Rtti(resultVa);
+        return result;
+    }
 
     /**
      * Create another read-only counted reference to the targeted settings.
      *
      * @return a new JVM object with a new native object assigned
      */
+    @Override
     public ShapeSettingsRefC toRefC() {
         long refVa = va();
         long copyVa = copy(refVa);
