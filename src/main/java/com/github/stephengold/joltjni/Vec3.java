@@ -178,6 +178,23 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Negate the specified components.
+     *
+     * @param xi +1 to keep the first (X) component -1 to negate it
+     * @param yi +1 to keep the 2nd (Y) component -1 to negate it
+     * @param zi +1 to keep the 3rd (Z) component -1 to negate it
+     */
+    public void flipSignInPlace(int xi, int yi, int zi) {
+        assert xi == 1 || xi == -1 : "xi must be 1 or -1";
+        assert yi == 1 || yi == -1 : "yi must be 1 or -1";
+        assert zi == 1 || zi == -1 : "zi must be 1 or -1";
+
+        this.x *= xi;
+        this.y *= yi;
+        this.z *= zi;
+    }
+
+    /**
      * Set all components to 1.
      */
     public void loadOne() {
@@ -383,6 +400,32 @@ final public class Vec3 implements Vec3Arg {
         this.x = source.getX();
         this.y = source.getY();
         this.z = source.getZ();
+    }
+
+    /**
+     * Alter the specified component.
+     *
+     * @param index 0, 1, or 2
+     * @param newValue the desired value
+     * @throws IllegalArgumentException if index is not 0, 1, or 2
+     */
+    public void setComponent(int index, float newValue) {
+        switch (index) {
+            case 0:
+                this.x = newValue;
+                return;
+
+            case 1:
+                this.y = newValue;
+                return;
+
+            case 2:
+                this.z = newValue;
+                return;
+
+            default:
+                throw new IllegalArgumentException("index must be 0, 1 or 2");
+        }
     }
 
     /**
