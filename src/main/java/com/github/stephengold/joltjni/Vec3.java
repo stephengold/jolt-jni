@@ -1128,7 +1128,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Copy the specified components to a new vector. The current vector is
+     * Copy the specified components to a form new vector. The current vector is
      * unaffected.
      *
      * @param xi index of the component to copy to the first (X) component of

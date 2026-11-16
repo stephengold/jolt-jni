@@ -664,10 +664,10 @@ void CharacterBaseTest::ProcessInput(const ProcessInputParams &inParams)
 {
 	// Determine controller input
 	mControlInput = Vec3::sZero();
-	if (inParams.mKeyboard->IsKeyPressed(DIK_LEFT))		mControlInput.SetZ(-1);
-	if (inParams.mKeyboard->IsKeyPressed(DIK_RIGHT))	mControlInput.SetZ(1);
-	if (inParams.mKeyboard->IsKeyPressed(DIK_UP))		mControlInput.SetX(1);
-	if (inParams.mKeyboard->IsKeyPressed(DIK_DOWN))		mControlInput.SetX(-1);
+	if (inParams.mKeyboard->IsKeyPressed(EKey::Left))	mControlInput.SetZ(-1);
+	if (inParams.mKeyboard->IsKeyPressed(EKey::Right))	mControlInput.SetZ(1);
+	if (inParams.mKeyboard->IsKeyPressed(EKey::Up))		mControlInput.SetX(1);
+	if (inParams.mKeyboard->IsKeyPressed(EKey::Down))	mControlInput.SetX(-1);
 	if (mControlInput != Vec3::sZero())
 		mControlInput = mControlInput.Normalized();
 
@@ -679,8 +679,8 @@ void CharacterBaseTest::ProcessInput(const ProcessInputParams &inParams)
 	mControlInput = rotation * mControlInput;
 
 	// Check actions
-	mJump = inParams.mKeyboard->IsKeyPressedAndTriggered(DIK_RCONTROL, mWasJump);
-	mSwitchStance = inParams.mKeyboard->IsKeyPressedAndTriggered(DIK_RSHIFT, mWasSwitchStance);
+	mJump = inParams.mKeyboard->IsKeyPressedAndTriggered(EKey::RControl, mWasJump);
+	mSwitchStance = inParams.mKeyboard->IsKeyPressedAndTriggered(EKey::RShift, mWasSwitchStance);
 }
 */
 
