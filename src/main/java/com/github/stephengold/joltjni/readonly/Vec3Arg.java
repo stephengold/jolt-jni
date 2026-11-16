@@ -94,6 +94,17 @@ public interface Vec3Arg {
     float dot(Vec3Arg factor);
 
     /**
+     * Copy or negate each component to form a new vector. The current vector is
+     * unaffected.
+     *
+     * @param xi +1 to copy the first (X) component -1 to negate it
+     * @param yi +1 to copy the 2nd (Y) component -1 to negate it
+     * @param zi +1 to copy the 3rd (Z) component -1 to negate it
+     * @return the new vector
+     */
+    Vec3 flipSign(int xi, int yi, int zi);
+
+    /**
      * Return the specified component. The vector is unaffected.
      *
      * @param index 0, 1, or 2

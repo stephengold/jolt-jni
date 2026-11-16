@@ -790,6 +790,29 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Copy or negate each component to form a new vector. The current vector is
+     * unaffected.
+     *
+     * @param xi +1 to copy the first (X) component -1 to negate it
+     * @param yi +1 to copy the 2nd (Y) component -1 to negate it
+     * @param zi +1 to copy the 3rd (Z) component -1 to negate it
+     * @return the new vector
+     */
+    @Override
+    public Vec3 flipSign(int xi, int yi, int zi) {
+        assert xi == 1 || xi == -1 : "xi must be 1 or -1";
+        assert yi == 1 || yi == -1 : "yi must be 1 or -1";
+        assert zi == 1 || zi == -1 : "zi must be 1 or -1";
+
+        float newX = x * xi;
+        float newY = y * yi;
+        float newZ = z * zi;
+        Vec3 result = new Vec3(newX, newY, newZ);
+
+        return result;
+    }
+
+    /**
      * Return the specified component. The vector is unaffected.
      *
      * @param index 0, 1, or 2
