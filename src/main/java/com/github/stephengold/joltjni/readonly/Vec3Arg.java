@@ -144,6 +144,17 @@ public interface Vec3Arg {
     float getZ();
 
     /**
+     * Test whether the specified vector lies within the specified squared
+     * distance of this one. Both vectors are unaffected.
+     *
+     * @param v2 the vector to compare with (not {@code null}, unaffected)
+     * @param maxDistSq the maximum allowed squared distance (&ge;0)
+     * @return {@code true} if within the squared distance, otherwise
+     * {@code false}
+     */
+    boolean isClose(Vec3Arg v2, float maxDistSq);
+
+    /**
      * Test whether the vector contains infinities or NaNs. The vector is
      * unaffected.
      *
@@ -192,17 +203,6 @@ public interface Vec3Arg {
      * @return {@code true} if normalized, otherwise {@code false}
      */
     boolean isNormalized(float tolerance);
-
-    /**
-     * Test whether the specified vector lies within the specified squared
-     * distance of this one. Both vectors are unaffected.
-     *
-     * @param v2 the vector to compare with (not {@code null}, unaffected)
-     * @param maxDistSq the maximum allowed squared distance (&ge;0)
-     * @return {@code true} if within the squared distance, otherwise
-     * {@code false}
-     */
-    boolean isClose(Vec3Arg v2, float maxDistSq);
 
     /**
      * Return the length. The vector is unaffected.
