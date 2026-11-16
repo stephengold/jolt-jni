@@ -423,7 +423,7 @@ public void Initialize()
 
 		// Create stairs from triangles
 		{
-			List<Triangle> triangles=new ArrayList<>();
+			TriangleList triangles=new TriangleList();
 
 			float rear_z = 10 * cStairsStepHeight;
 
@@ -443,17 +443,17 @@ public void Initialize()
 				Vec3 s2 = plus(s1 , width);
 				Vec3 p2 = plus(p1 , width);
 
-				triangles.add(new Triangle(s1, b1, s2));
-				triangles.add(new Triangle(b1, b2, s2));
-				triangles.add(new Triangle(s1, p2, p1));
-				triangles.add(new Triangle(s1, s2, p2));
+				triangles.pushBack(new Triangle(s1, b1, s2));
+				triangles.pushBack(new Triangle(b1, b2, s2));
+				triangles.pushBack(new Triangle(s1, p2, p1));
+				triangles.pushBack(new Triangle(s1, s2, p2));
 
 				// Side of stairs
 				Vec3 rb2 = b2; rb2.setZ(rear_z);
 				Vec3 rs2 = s2; rs2.setZ(rear_z);
 
-				triangles.add(new Triangle(s2, b2, rs2));
-				triangles.add(new Triangle(rs2, b2, rb2));
+				triangles.pushBack(new Triangle(s2, b2, rs2));
+				triangles.pushBack(new Triangle(rs2, b2, rb2));
 			}
 
 			MeshShapeSettings mesh=new MeshShapeSettings(triangles);
@@ -477,7 +477,7 @@ public void Initialize()
 
 		// Create stairs with too little space between the steps consisting of triangles
 		{
-			List<Triangle> triangles=new ArrayList<>(40);
+			TriangleList triangles=new TriangleList();
 
 			for (int i = 0; i < 10; ++i)
 			{
@@ -495,10 +495,10 @@ public void Initialize()
 				Vec3 s2 = plus(s1 , width);
 				Vec3 p2 = plus(p1 , width);
 
-				triangles.add(new Triangle(s1, s2, b1));
-				triangles.add(new Triangle(b1, s2, b2));
-				triangles.add(new Triangle(s1, p1, p2));
-				triangles.add(new Triangle(s1, p2, s2));
+				triangles.pushBack(new Triangle(s1, s2, b1));
+				triangles.pushBack(new Triangle(b1, s2, b2));
+				triangles.pushBack(new Triangle(s1, p1, p2));
+				triangles.pushBack(new Triangle(s1, p2, s2));
 			}
 
 			MeshShapeSettings mesh=new MeshShapeSettings(triangles);
@@ -509,15 +509,15 @@ public void Initialize()
 
 		// Create mesh with walls at varying angles
 		{
-			List<Triangle> triangles=new ArrayList<>();
+			TriangleList triangles=new TriangleList();
 			Vec3 p1=new Vec3(0.5f * cMeshWallWidth, 0, 0);
 			Vec3 h=new Vec3(0, cMeshWallHeight, 0);
 			for (int i = 0; i < cMeshWallSegments; ++i)
 			{
 				float delta = cMeshWallStepStart + i * (cMeshWallStepEnd - cMeshWallStepStart) / (cMeshWallSegments - 1);
 				Vec3 p2 =new Vec3(((i & 1) != 0x0)? 0.5f * cMeshWallWidth : -0.5f * cMeshWallWidth, 0, p1.getZ() + delta);
-				triangles.add(new Triangle(p1, plus(p1 , h), plus(p2 , h)));
-				triangles.add(new Triangle(p1, plus(p2 , h), p2));
+				triangles.pushBack(new Triangle(p1, plus(p1 , h), plus(p2 , h)));
+				triangles.pushBack(new Triangle(p1, plus(p2 , h), p2));
 				p1 = p2;
 			}
 
@@ -884,31 +884,31 @@ void DrawPaddedCharacter(ConstShape inShape, float inPadding, RMat44Arg inCenter
 {
 	if (inShape.getSubType() == EShapeSubType.Capsule)
 	{
-		 CapsuleShape capsule = ( CapsuleShape )(inShape);
+		final CapsuleShape capsule = ( CapsuleShape )(inShape);
 		mDebugRenderer.drawCapsule(inCenterOfMass, capsule.getHalfHeightOfCylinder(), capsule.getRadius() + inPadding, Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
 	}
 	else if (inShape.getSubType() == EShapeSubType.Cylinder)
 	{
 		// Not correct as the edges should be rounded
-		 CylinderShape cylinder = ( CylinderShape )(inShape);
+		final CylinderShape cylinder = ( CylinderShape )(inShape);
 		mDebugRenderer.drawCylinder(inCenterOfMass, cylinder.getHalfHeight() + inPadding, cylinder.getRadius() + inPadding, Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
 	}
 	else if (inShape.getSubType() == EShapeSubType.Box)
 	{
 		// Not correct as the edges should be rounded
-		 BoxShape box = ( BoxShape )(inShape);
+		final BoxShape box = ( BoxShape )(inShape);
 		AaBox bounds = box.getLocalBounds();
 		bounds.expandBy(Vec3.sReplicate(inPadding));
 		mDebugRenderer.drawWireBox(inCenterOfMass, bounds, Color.sGrey);
 	}
 	else if (inShape.getSubType() == EShapeSubType.RotatedTranslated)
 	{
-		 RotatedTranslatedShape rt = ( RotatedTranslatedShape )(inShape);
+		final RotatedTranslatedShape rt = ( RotatedTranslatedShape )(inShape);
 		DrawPaddedCharacter(rt.getInnerShape(), inPadding, inCenterOfMass);
 	}
 	else if (inShape.getType() == EShapeType.Compound)
 	{
-		 CompoundShape compound = ( CompoundShape )(inShape);
+		final CompoundShape compound = ( CompoundShape )(inShape);
 		for (ConstSubShape  sub_shape : compound.getSubShapes())
 			DrawPaddedCharacter(sub_shape.getShape(), inPadding, star(inCenterOfMass , sub_shape.getLocalTransformNoScale(Vec3.sOne())));
 	}
