@@ -270,6 +270,87 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     // new methods exposed
 
     /**
+     * Calculate the minimum bits per sample that will provide the specified
+     * error tolerance. The settings are unaffected.
+     *
+     * @param maxError the allowable tolerance
+     * @return the (hypothetical) bits per sample
+     */
+    public int calculateBitsPerSampleForError(float maxError) {
+        long settingsVa = va();
+        int result = calculateBitsPerSampleForError(settingsVa, maxError);
+
+        return result;
+    }
+
+    /**
+     * Count the height samples, including {@code cNoCollisionValue}. The
+     * settings are unaffected.
+     *
+     * @return the actual number of samples in the array (&ge;0)
+     */
+    public int countHeights() {
+        long settingsVa = va();
+        int result = countHeights(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the references in the material list, including null refs. The
+     * settings are unaffected.
+     *
+     * @return the actual number of references in the list (&ge;0)
+     */
+    public int countMaterials() {
+        long settingsVa = va();
+        int result = countMaterials(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the squares. The settings are unaffected.
+     *
+     * @return the actual number of material indices in the array (&ge;0)
+     */
+    public int countSquares() {
+        long settingsVa = va();
+        int result = countSquares(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Calculate 3 quantization parameters of the current settings. The settings
+     * are unaffected.
+     *
+     * @param storeMin storage for the minimum height (ignoring
+     * {@code cNoCollisionValue}) or {@code MIN_VALUE} if no samples have
+     * collision
+     * @param storeMax storage for the maximum height (ignoring
+     * {@code cNoCollisionValue}) or {@code MAX_VALUE} if no samples have
+     * collision
+     * @param storeQuantScale storage for the quantization scale factor
+     */
+    public void determineMinAndMaxSample(
+            float[] storeMin, float[] storeMax, float[] storeQuantScale) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        determineMinAndMaxSample(settingsVa, storeFloats);
+
+        if (storeMin != null && storeMin.length > 0) {
+            storeMin[0] = storeFloats.get(0);
+        }
+        if (storeMax != null && storeMax.length > 0) {
+            storeMax[0] = storeFloats.get(1);
+        }
+        if (storeQuantScale != null && storeQuantScale.length > 0) {
+            storeQuantScale[0] = storeFloats.get(2);
+        }
+    }
+
+    /**
      * Return the cosine of the active-edge threshold angle. The settings are
      * unaffected. (native attribute: mActiveEdgeCosThresholdAngle)
      *
@@ -309,6 +390,155 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     public int getBlockSize() {
         long settingsVa = va();
         int result = getBlockSize(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the height of the specified sample. The settings are unaffected.
+     *
+     * @param sampleIndex the array index (&ge;0, &lt;sampleCount^2)
+     * @return the sample height or {@code cNoCollisionValue}
+     */
+    public float getHeightSample(int sampleIndex) {
+        long settingsVa = va();
+        float result = getHeightForSi(settingsVa, sampleIndex);
+
+        return result;
+    }
+
+    /**
+     * Return the height of the specified sample. The settings are unaffected.
+     *
+     * @param x the X index of the sample (&ge;0, &lt;sampleCount)
+     * @param y the Y index of the sample (&ge;0, &lt;sampleCount)
+     * @return the sample height or {@code cNoCollisionValue}
+     */
+    public float getHeightSample(int x, int y) {
+        long settingsVa = va();
+        float result = getHeightForXY(settingsVa, x, y);
+
+        return result;
+    }
+
+    /**
+     * Return the material index for the specified square. The settings are
+     * unaffected.
+     *
+     * @param squareIndex the index of the square (&ge;0, &lt;(sampleCount-1)^2)
+     * @return an index into the material list (&ge;0)
+     */
+    public int getMaterialIndex(int squareIndex) {
+        long settingsVa = va();
+        int result = getMaterialIndexForSi(settingsVa, squareIndex);
+
+        return result;
+    }
+
+    /**
+     * Return the material index for the specified square. The settings are
+     * unaffected.
+     *
+     * @param x the X index of the square (&ge;0, &lt;sampleCount-1)
+     * @param y the Y index of the square (&ge;0, &lt;sampleCount-1)
+     * @return an index into the material list (&ge;0)
+     */
+    public int getMaterialIndex(int x, int y) {
+        long settingsVa = va();
+        int result = getMaterialIndexForXY(settingsVa, x, y);
+
+        return result;
+    }
+
+    /**
+     * Return a reference to the material for the specified material index.
+     *
+     * @param materialIndex the index in the local table (&ge;0)
+     * @return a new counted reference to the existing material
+     */
+    public PhysicsMaterialRefC getMaterialRef(int materialIndex) {
+        long settingsVa = va();
+        long refVa = getMaterialRefForMi(settingsVa, materialIndex);
+        long targetVa = PhysicsMaterialRef.getPtr(refVa);
+
+        PhysicsMaterialRefC result;
+        if (targetVa == 0L) {
+            result = new PhysicsMaterialRefC(refVa);
+        } else {
+            PhysicsMaterial target = new PhysicsMaterial(targetVa);
+            result = new PhysicsMaterialRefC(refVa, target);
+        }
+
+        return result;
+    }
+
+    /**
+     * Return a reference to the material for the specified square.
+     *
+     * @param x the X index of the square (&ge;0, &lt;sampleCount-1)
+     * @param y the Y index of the square (&ge;0, &lt;sampleCount-1)
+     * @return a new counted reference to the existing material
+     */
+    public PhysicsMaterialRefC getMaterialRef(int x, int y) {
+        long settingsVa = va();
+        long refVa = getMaterialRefForXY(settingsVa, x, y);
+        long targetVa = PhysicsMaterialRef.getPtr(refVa);
+
+        PhysicsMaterialRefC result;
+        if (targetVa == 0L) {
+            result = new PhysicsMaterialRefC(refVa);
+        } else {
+            PhysicsMaterial target = new PhysicsMaterial(targetVa);
+            result = new PhysicsMaterialRefC(refVa, target);
+        }
+
+        return result;
+    }
+
+    /**
+     * Return a reference to the material for the specified square.
+     *
+     * @param squareIndex the index of the square (&ge;0, &lt;(sampleCount-1)^2)
+     * @return a new counted reference to the existing material
+     */
+    public PhysicsMaterialRefC getMaterialRefForSquare(int squareIndex) {
+        long settingsVa = va();
+        long refVa = getMaterialRefForSi(settingsVa, squareIndex);
+        long targetVa = PhysicsMaterialRef.getPtr(refVa);
+
+        PhysicsMaterialRefC result;
+        if (targetVa == 0L) {
+            result = new PhysicsMaterialRefC(refVa);
+        } else {
+            PhysicsMaterial target = new PhysicsMaterial(targetVa);
+            result = new PhysicsMaterialRefC(refVa, target);
+        }
+
+        return result;
+    }
+
+    /**
+     * Access the material list. (native attribute: mMaterials)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public PhysicsMaterialList getMaterials() {
+        long settingsVa = va();
+        long listVa = getMaterials(settingsVa);
+        PhysicsMaterialList result = new PhysicsMaterialList(this, listVa);
+
+        return result;
+    }
+
+    /**
+     * Return the artificial minimum capacity for the created shape's material
+     * list. The settings are unaffected. (native attribute: mMaterialsCapacity)
+     *
+     * @return the capacity (in refs)
+     */
+    public int getMaterialsCapacity() {
+        long settingsVa = va();
+        int result = getMaterialsCapacity(settingsVa);
 
         return result;
     }
@@ -431,6 +661,89 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Alter the height of the specified sample.
+     *
+     * @param sampleIndex the array index (&ge;0, &lt;sampleCount^2)
+     * @param height the desired height, or {@code cNoCollisionValue} for no
+     * collision
+     */
+    public void setHeightSample(int sampleIndex, float height) {
+        long settingsVa = va();
+        setHeightForSi(settingsVa, sampleIndex, height);
+    }
+
+    /**
+     * Alter the height of the specified sample.
+     *
+     * @param x the X index of the sample (&ge;0, &lt;sampleCount)
+     * @param y the Y index of the sample (&ge;0, &lt;sampleCount)
+     * @param height the desired height, or {@code cNoCollisionValue} for no
+     * collision
+     */
+    public void setHeightSample(int x, int y, float height) {
+        long settingsVa = va();
+        setHeightForXY(settingsVa, x, y, height);
+    }
+
+    /**
+     * Alter the material reference for the specified list index.
+     *
+     * @param materialIndex the list index at which to put the reference (&ge;0)
+     * @param reference the reference to store (not {@code null})
+     */
+    public void setMaterial(int materialIndex, PhysicsMaterialRef reference) {
+        long settingsVa = va();
+        long refVa = reference.va();
+        setMaterialForMi(settingsVa, materialIndex, refVa);
+    }
+
+    /**
+     * Alter the material index of the specified square.
+     *
+     * @param squareIndex the index of the square (&ge;0, &lt;(sampleCount-1)^2)
+     * @param materialIndex the desired material index
+     */
+    public void setMaterialIndex(int squareIndex, int materialIndex) {
+        long settingsVa = va();
+        setMaterialForSi(settingsVa, squareIndex, materialIndex);
+    }
+
+    /**
+     * Alter the material index for the specified square.
+     *
+     * @param x the X index of the square (&ge;0, &lt;sampleCount-1)
+     * @param y the Y index of the square (&ge;0, &lt;sampleCount-1)
+     * @param materialIndex the desired index into the material list (&ge;0)
+     */
+    public void setMaterialIndex(int x, int y, int materialIndex) {
+        long settingsVa = va();
+        setMaterialIndexForXY(settingsVa, x, y, materialIndex);
+    }
+
+    /**
+     * Replace the existing material list with a copy of the specified list.
+     * (native attribute: mMaterials)
+     *
+     * @param list the desired material for each material index
+     */
+    public void setMaterials(PhysicsMaterialList list) {
+        long settingsVa = va();
+        long listVa = list.va();
+        setMaterials(settingsVa, listVa);
+    }
+
+    /**
+     * Alter the artificial minimum capacity for the created shape's material
+     * list. (native attribute: mMaterialsCapacity)
+     *
+     * @param numRefs the desired minimum capacity (in refs, default=0)
+     */
+    public void setMaterialsCapacity(int numRefs) {
+        long settingsVa = va();
+        setMaterialsCapacity(settingsVa, numRefs);
+    }
+
+    /**
      * Alter the artificial maximum height. (native attribute: mMaxHeightValue)
      *
      * @param maxHeight the desired height value (default=-1e15)
@@ -465,6 +778,17 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Alter the number of samples along each dimension. (native attribute:
+     * mSampleCount)
+     *
+     * @param sampleCount the desired number of samples (&ge;0, default=0)
+     */
+    public void setSampleCount(int sampleCount) {
+        long settingsVa = va();
+        setSampleCount(settingsVa, sampleCount);
+    }
+
+    /**
      * Alter the scale factors. (native attribute: mScale)
      *
      * @param scale the desired scale factors (not {@code null}, unaffected,
@@ -481,6 +805,15 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     // native private methods
 
     native private static void assign(long targetVa, long sourceVa);
+
+    native private static int calculateBitsPerSampleForError(
+            long settingsVa, float maxError);
+
+    native private static int countHeights(long settingsVa);
+
+    native private static int countMaterials(long settingsVa);
+
+    native private static int countSquares(long settingsVa);
 
     native private static long createCopy(long originalVa);
 
@@ -500,11 +833,38 @@ public class HeightFieldShapeSettings extends ShapeSettings {
             float scaleX, float scaleY, float scaleZ, int sampleCount,
             byte[] materialIndices, long listVa);
 
+    native private static void determineMinAndMaxSample(
+            long settingsVa, FloatBuffer storeFloats);
+
     native private static float getActiveEdgeCosThresholdAngle(long settingsVa);
 
     native private static int getBitsPerSample(long settingsVa);
 
     native private static int getBlockSize(long settingsVa);
+
+    native private static float getHeightForSi(
+            long settingsVa, int sampleIndex);
+
+    native private static float getHeightForXY(long settingsVa, int x, int y);
+
+    native private static int getMaterialIndexForSi(
+            long settingsVa, int squareIndex);
+
+    native private static int getMaterialIndexForXY(
+            long settingsVa, int x, int y);
+
+    native private static long getMaterialRefForMi(
+            long settingsVa, int materialIndex);
+
+    native private static long getMaterialRefForSi(
+            long settingsVa, int squareIndex);
+
+    native private static long getMaterialRefForXY(
+            long settingsVa, int x, int y);
+
+    native private static long getMaterials(long settingsVa);
+
+    native private static int getMaterialsCapacity(long settingsVa);
 
     native private static float getMaxHeightValue(long settingsVa);
 
@@ -525,6 +885,26 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     native private static void setBlockSize(long settingsVa, int numRows);
 
+    native private static void setHeightForSi(
+            long settingsVa, int sampleIndex, float height);
+
+    native private static void setHeightForXY(
+            long settingsVa, int x, int y, float height);
+
+    native private static void setMaterialForMi(
+            long settingsVa, int materialIndex, long refVa);
+
+    native private static void setMaterialForSi(
+            long settingsVa, int squareIndex, int materialIndex);
+
+    native private static void setMaterialIndexForXY(
+            long settingsVa, int x, int y, int materialIndex);
+
+    native private static void setMaterials(long settingsVa, long listVa);
+
+    native private static void setMaterialsCapacity(
+            long settingsVa, int numRefs);
+
     native private static void setMaxHeightValue(
             long settingsVa, float maxHeight);
 
@@ -533,6 +913,8 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     native private static void setOffset(
             long settingsVa, float dx, float dy, float dz);
+
+    native private static void setSampleCount(long settingsVa, int sampleCount);
 
     native private static void setScale(
             long settingsVa, float sx, float sy, float sz);

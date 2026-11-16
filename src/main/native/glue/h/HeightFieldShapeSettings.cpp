@@ -40,6 +40,58 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    calculateBitsPerSampleForError
+ * Signature: (JF)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_calculateBitsPerSampleForError
+  (JNIEnv *, jclass, jlong settingsVa, jfloat maxError) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const float result = pSettings->CalculateBitsPerSampleForError(maxError);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    countHeights
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_countHeights
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const size_t result = pSettings->mHeightSamples.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    countMaterials
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_countMaterials
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const size_t result = pSettings->mMaterials.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    countSquares
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_countSquares
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const size_t result = pSettings->mMaterialIndices.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
  * Method:    createCopy
  * Signature: (J)J
  */
@@ -138,6 +190,24 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSett
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    determineMinAndMaxSample
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_determineMinAndMaxSample
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    float storeMinValue, storeMaxValue, storeQuantScale;
+    pSettings->DetermineMinAndMaxSample(storeMinValue, storeMaxValue, storeQuantScale);
+    pFloats[0] = storeMinValue;
+    pFloats[1] = storeMaxValue;
+    pFloats[2] = storeQuantScale;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
  * Method:    getActiveEdgeCosThresholdAngle
  * Signature: (J)F
  */
@@ -172,6 +242,140 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSetti
     const HeightFieldShapeSettings * const pSettings
             = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
     const uint32 result = pSettings->mBlockSize;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getHeightForSi
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getHeightForSi
+  (JNIEnv *, jclass, jlong settingsVa, jint sampleIndex) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const float result = pSettings->mHeightSamples[sampleIndex];
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getHeightForXY
+ * Signature: (JII)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getHeightForXY
+  (JNIEnv *, jclass, jlong settingsVa, jint x, jint y) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint32 sampleCount = pSettings->mSampleCount;
+    const size_t sampleIndex = y * sampleCount + x;
+    const float result = pSettings->mHeightSamples[sampleIndex];
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getMaterialIndexForSi
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getMaterialIndexForSi
+  (JNIEnv *, jclass, jlong settingsVa, jint squareIndex) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint8 result = pSettings->mMaterialIndices[squareIndex];
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getMaterialIndexForXY
+ * Signature: (JII)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getMaterialIndexForXY
+  (JNIEnv *, jclass, jlong settingsVa, jint x, jint y) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint32 sampleCount = pSettings->mSampleCount;
+    const size_t squareIndex = x + y * (sampleCount - 1);
+    const uint8 result = pSettings->mMaterialIndices[squareIndex];
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getMaterialRefForMi
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getMaterialRefForMi
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jint materialIndex) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    RefConst<PhysicsMaterial>& ref = pSettings->mMaterials.at(materialIndex);
+    RefConst<PhysicsMaterial>* const pResult
+            = new RefConst<PhysicsMaterial>(ref);
+    TRACE_NEW("RefConst<PhysicsMaterial>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getMaterialRefForSi
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getMaterialRefForSi
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jint squareIndex) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint8 materialIndex = pSettings->mMaterialIndices[squareIndex];
+    RefConst<PhysicsMaterial>& ref = pSettings->mMaterials.at(materialIndex);
+    RefConst<PhysicsMaterial>* const pResult
+            = new RefConst<PhysicsMaterial>(ref);
+    TRACE_NEW("RefConst<PhysicsMaterial>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getMaterialRefForXY
+ * Signature: (JII)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getMaterialRefForXY
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jint x, jint y) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint32 sampleCount = pSettings->mSampleCount;
+    const size_t squareIndex = x + y * (sampleCount - 1);
+    const uint8 materialIndex = pSettings->mMaterialIndices[squareIndex];
+    RefConst<PhysicsMaterial>& ref = pSettings->mMaterials.at(materialIndex);
+    RefConst<PhysicsMaterial>* const pResult
+            = new RefConst<PhysicsMaterial>(ref);
+    TRACE_NEW("RefConst<PhysicsMaterial>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getMaterials
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getMaterials
+  (JNIEnv *, jclass, jlong settingsVa) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    PhysicsMaterialList * const pResult = &pSettings->mMaterials;
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getMaterialsCapacity
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getMaterialsCapacity
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint32 result = pSettings->mMaterialsCapacity;
     return result;
 }
 
@@ -286,6 +490,101 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setHeightForSi
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setHeightForSi
+  (JNIEnv *, jclass, jlong settingsVa, jint sampleIndex, jfloat height) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    pSettings->mHeightSamples[sampleIndex] = height;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setHeightForXY
+ * Signature: (JIIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setHeightForXY
+  (JNIEnv *, jclass, jlong settingsVa, jint x, jint y, jfloat height) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint32 sampleCount = pSettings->mSampleCount;
+    const size_t sampleIndex = y * sampleCount + x;
+    pSettings->mHeightSamples[sampleIndex] = height;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setMaterialForMi
+ * Signature: (JIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setMaterialForMi
+  (JNIEnv *, jclass, jlong settingsVa, jint materialIndex, jlong refVa) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    RefConst<PhysicsMaterial> * const pRef
+            = reinterpret_cast<RefConst<PhysicsMaterial> *> (refVa);
+    RefConst<PhysicsMaterial> * const pNewRef
+            = new RefConst<PhysicsMaterial>(*pRef);
+    TRACE_NEW("RefConst<PhysicsMaterial>", pNewRef)
+    pSettings->mMaterials.at(materialIndex) = *pNewRef;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setMaterialForSi
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setMaterialForSi
+  (JNIEnv *, jclass, jlong settingsVa, jint squareIndex, jint materialIndex) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    pSettings->mMaterialIndices[squareIndex] = materialIndex;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setMaterialIndexForXY
+ * Signature: (JIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setMaterialIndexForXY
+  (JNIEnv *, jclass, jlong settingsVa, jint x, jint y, jint materialIndex) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint32 sampleCount = pSettings->mSampleCount;
+    const size_t squareIndex = x + y * (sampleCount - 1);
+    pSettings->mMaterialIndices[squareIndex] = materialIndex;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setMaterials
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setMaterials
+  (JNIEnv *, jclass, jlong settingsVa, jlong listVa) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const PhysicsMaterialList * const pList
+            = reinterpret_cast<PhysicsMaterialList *> (listVa);
+    pSettings->mMaterials = *pList;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setMaterialsCapacity
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setMaterialsCapacity
+  (JNIEnv *, jclass, jlong settingsVa, jint numRefs) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    pSettings->mMaterialsCapacity = numRefs;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
  * Method:    setMaxHeightValue
  * Signature: (JF)V
  */
@@ -319,6 +618,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSetti
             = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
     const Vec3 offset(dx, dy, dz);
     pSettings->mOffset = offset;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setSampleCount
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setSampleCount
+  (JNIEnv *, jclass, jlong settingsVa, jint sampleCount) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    pSettings->mSampleCount = sampleCount;
 }
 
 /*
