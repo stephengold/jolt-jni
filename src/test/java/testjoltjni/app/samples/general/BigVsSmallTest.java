@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,6 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import java.util.*;
 import testjoltjni.app.samples.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics big-versus-small test.
@@ -35,8 +34,8 @@ public class BigVsSmallTest extends Test{
 public void Initialize()
 {
 	// Create a big triangle
-	List<Triangle> triangles=new ArrayList<>(1);
-	triangles.add(new Triangle(new Float3(-100, 0, 0),new Float3(0, 0, 100),new Float3(100, 0, -100)));
+	TriangleList triangles=new TriangleList();
+	triangles.pushBack(new Triangle(new Float3(-100, 0, 0),new Float3(0, 0, 100),new Float3(100, 0, -100)));
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new MeshShapeSettings(triangles), RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 
 	// A small box

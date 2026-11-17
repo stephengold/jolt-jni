@@ -138,7 +138,7 @@ public void Initialize()
 	{
 		CreateFloor();
 
-		List<Triangle> triangles = new ArrayList<>(800);
+		TriangleList triangles = new TriangleList();
 		final int cNumSegments = 100;
 		final float cLoopWidth = 20.0f;
 		final float cLoopRadius = 20.0f;
@@ -155,18 +155,18 @@ public void Initialize()
 			if (i > 0)
 			{
 				// Top surface
-				triangles.add(new Triangle(plus(prev_center , half_width), minus(prev_center , half_width), minus(center , half_width)));
-				triangles.add(new Triangle(plus(prev_center , half_width), minus(center , half_width), plus(center , half_width)));
+				triangles.pushBack(new Triangle(plus(prev_center , half_width), minus(prev_center , half_width), minus(center , half_width)));
+				triangles.pushBack(new Triangle(plus(prev_center , half_width), minus(center , half_width), plus(center , half_width)));
 
 				// Bottom surface
-				triangles.add(new Triangle(plus(prev_center_bottom , half_width), minus(center_bottom , half_width), minus(prev_center_bottom , half_width)));
-				triangles.add(new Triangle(plus(prev_center_bottom , half_width), plus(center_bottom , half_width), minus(center_bottom , half_width)));
+				triangles.pushBack(new Triangle(plus(prev_center_bottom , half_width), minus(center_bottom , half_width), minus(prev_center_bottom , half_width)));
+				triangles.pushBack(new Triangle(plus(prev_center_bottom , half_width), plus(center_bottom , half_width), minus(center_bottom , half_width)));
 
 				// Sides
-				triangles.add(new Triangle(plus(prev_center , half_width), plus(center , half_width), plus(prev_center_bottom , half_width)));
-				triangles.add(new Triangle(plus(prev_center_bottom , half_width), plus(center , half_width), plus(center_bottom , half_width)));
-				triangles.add(new Triangle(minus(prev_center , half_width), minus(prev_center_bottom , half_width), minus(center , half_width)));
-				triangles.add(new Triangle(minus(prev_center_bottom , half_width), minus(center_bottom , half_width), minus(center , half_width)));
+				triangles.pushBack(new Triangle(plus(prev_center , half_width), plus(center , half_width), plus(prev_center_bottom , half_width)));
+				triangles.pushBack(new Triangle(plus(prev_center_bottom , half_width), plus(center , half_width), plus(center_bottom , half_width)));
+				triangles.pushBack(new Triangle(minus(prev_center , half_width), minus(prev_center_bottom , half_width), minus(center , half_width)));
+				triangles.pushBack(new Triangle(minus(prev_center_bottom , half_width), minus(center_bottom , half_width), minus(center , half_width)));
 			}
 			prev_center = center;
 			prev_center_bottom = center_bottom;

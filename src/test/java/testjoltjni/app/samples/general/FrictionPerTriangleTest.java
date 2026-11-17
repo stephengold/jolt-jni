@@ -23,7 +23,6 @@ package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
-import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.JphMath.*;
@@ -49,7 +48,7 @@ public void Initialize()
 	final float section_size = 50.0f;
 
 	// Create a strip of triangles
-	List<Triangle> triangles=new ArrayList<>(2*num_sections+2);
+	TriangleList triangles=new TriangleList();
 	for (int z = 0; z <= num_sections; ++z)
 	{
 		float z1 = section_size * (z - 0.5f * num_sections);
@@ -60,8 +59,8 @@ public void Initialize()
 		ConstFloat3 v3 =new Float3(-100.0f, 0, z2);
 		ConstFloat3 v4 =new Float3(100.0f, 0, z2);
 
-		triangles.add(new Triangle(v1, v3, v4, z));
-		triangles.add(new Triangle(v1, v4, v2, z));
+		triangles.pushBack(new Triangle(v1, v3, v4, z));
+		triangles.pushBack(new Triangle(v1, v4, v2, z));
 	}
 
 	// Create materials with increasing friction

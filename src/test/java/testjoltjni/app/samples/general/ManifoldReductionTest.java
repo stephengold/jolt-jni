@@ -23,7 +23,6 @@ package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
-import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.JphMath.*;
 import static com.github.stephengold.joltjni.MiscUtil.*;
@@ -43,7 +42,7 @@ public void Initialize()
 	final float cPerturbance = 0.02f;
 
 	// Create mesh of regular grid of triangles
-	List<Triangle> triangles=new ArrayList<>(800);
+	TriangleList triangles=new TriangleList();
 	for (int x = -10; x < 10; ++x)
 		for (int z = -10; z < 10; ++z)
 		{
@@ -57,8 +56,8 @@ public void Initialize()
 			ConstFloat3 v3 =new Float3(x1, cPerturbance * perlinNoise3(x1, 0, z2, 256, 256, 256), z2);
 			ConstFloat3 v4 =new Float3(x2, cPerturbance * perlinNoise3(x2, 0, z2, 256, 256, 256), z2);
 
-			triangles.add(new Triangle(v1, v3, v4, 0));
-			triangles.add(new Triangle(v1, v4, v2, 0));
+			triangles.pushBack(new Triangle(v1, v3, v4, 0));
+			triangles.pushBack(new Triangle(v1, v4, v2, 0));
 		}
 	PhysicsMaterialList materials=new PhysicsMaterialList();
 	materials.pushBack(new PhysicsMaterialSimple().toRefC());

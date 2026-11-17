@@ -23,7 +23,6 @@ package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
-import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.JphMath.*;
@@ -94,7 +93,7 @@ public void Initialize()
 	{
 		// Create a dense grid of triangles so that we have a large chance of hitting an internal edge
 		final float size = 2.0f;
-		List<Triangle> triangles=new ArrayList<>();
+		TriangleList triangles=new TriangleList();
 		for (int x = -10; x < 10; ++x)
 			for (int z = -10; z < 10; ++z)
 			{
@@ -108,8 +107,8 @@ public void Initialize()
 				ConstFloat3 v3 =new Float3(x1, 0, z2);
 				ConstFloat3 v4 =new Float3(x2, 0, z2);
 
-				triangles.add(new Triangle(v1, v3, v4));
-				triangles.add(new Triangle(v1, v4, v2));
+				triangles.pushBack(new Triangle(v1, v3, v4));
+				triangles.pushBack(new Triangle(v1, v4, v2));
 			}
 
 		MeshShapeSettings mesh_settings=new MeshShapeSettings(triangles);
@@ -123,14 +122,14 @@ public void Initialize()
 	// This test tests that we only ignore edges that are shared with voided triangles
 	{
 		// Create an L shape mesh lying on its back
-		List<Triangle> triangles=new ArrayList<>();
+		TriangleList triangles=new TriangleList();
 		final float height = 0.5f;
 		final float half_width = 5.0f;
 		final float half_length = 2.0f;
-		triangles.add(new Triangle(new Float3(-half_length, 0, half_width), new Float3(half_length, 0, -half_width), new Float3(-half_length, 0, -half_width)));
-		triangles.add(new Triangle(new Float3(-half_length, 0, half_width), new Float3(half_length, 0, half_width), new Float3(half_length, 0, -half_width)));
-		triangles.add(new Triangle(new Float3(half_length, height, half_width), new Float3(half_length, height, -half_width), new Float3(half_length, 0, half_width)));
-		triangles.add(new Triangle(new Float3(half_length, 0, half_width), new Float3(half_length, height, -half_width), new Float3(half_length, 0, -half_width)));
+		triangles.pushBack(new Triangle(new Float3(-half_length, 0, half_width), new Float3(half_length, 0, -half_width), new Float3(-half_length, 0, -half_width)));
+		triangles.pushBack(new Triangle(new Float3(-half_length, 0, half_width), new Float3(half_length, 0, half_width), new Float3(half_length, 0, -half_width)));
+		triangles.pushBack(new Triangle(new Float3(half_length, height, half_width), new Float3(half_length, height, -half_width), new Float3(half_length, 0, half_width)));
+		triangles.pushBack(new Triangle(new Float3(half_length, 0, half_width), new Float3(half_length, height, -half_width), new Float3(half_length, 0, -half_width)));
 		mBodyInterface.createAndAddBody(new BodyCreationSettings(new MeshShapeSettings(triangles), new RVec3(0, 0, 30), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 
 		// Roll a sphere towards the edge pointing upwards
@@ -178,6 +177,7 @@ public void Initialize()
 		BodyCreationSettings slope_plane=new BodyCreationSettings(plane_mesh, new RVec3(10, 0, 50), Quat.sRotation(Vec3.sAxisX(), degreesToRadians(45)), EMotionType.Static, Layers.NON_MOVING);
 		slope_plane.setFriction ( 1);
 		mBodyInterface.createAndAddBody(slope_plane, EActivation.DontActivate);
+		SetBodyLabel(id, "Dense triangle mesh");
 
 		// Roll a ball over it
 		BodyCreationSettings slope_ball=new BodyCreationSettings(new SphereShape(0.5f), new RVec3(10, 8, 44), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
@@ -210,7 +210,7 @@ public void Initialize()
 	// Create a super dense grid of triangles
 	{
 		final float size = 0.25f;
-		List<Triangle> triangles=new ArrayList<>();
+		TriangleList triangles=new TriangleList();
 		for (int x = -100; x < 100; ++x)
 			for (int z = -5; z < 5; ++z)
 			{
@@ -224,8 +224,8 @@ public void Initialize()
 				Float3 v3 =new Float3(x1, 0, z2);
 				Float3 v4 =new Float3(x2, 0, z2);
 
-				triangles.add(new Triangle(v1, v3, v4));
-				triangles.add(new Triangle(v1, v4, v2));
+				triangles.pushBack(new Triangle(v1, v3, v4));
+				triangles.pushBack(new Triangle(v1, v4, v2));
 			}
 
 		MeshShapeSettings mesh_settings=new MeshShapeSettings(triangles);

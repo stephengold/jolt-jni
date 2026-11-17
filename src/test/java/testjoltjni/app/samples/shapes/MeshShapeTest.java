@@ -23,7 +23,6 @@ package testjoltjni.app.samples.shapes;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
-import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.JphMath.*;
@@ -39,7 +38,7 @@ public void Initialize()
 {
 	// Create regular grid of triangles
 	int max_material_index = 0;
-	List<Triangle> triangles=new ArrayList<>(800);
+	TriangleList triangles=new TriangleList();
 	for (int x = -10; x < 10; ++x)
 		for (int z = -10; z < 10; ++z)
 		{
@@ -55,8 +54,8 @@ public void Initialize()
 
 			int material_index = (int)(Vec3.sum(new Vec3(v1) ,new Vec3(v2) ,new Vec3(v3) ,new Vec3(v4)).length() / 40.0f);
 			max_material_index = Math.max(max_material_index, material_index);
-			triangles.add(new Triangle(v1, v3, v4, material_index));
-			triangles.add(new Triangle(v1, v4, v2, material_index));
+			triangles.pushBack(new Triangle(v1, v3, v4, material_index));
+			triangles.pushBack(new Triangle(v1, v4, v2, material_index));
 		}
 
 	// Create materials

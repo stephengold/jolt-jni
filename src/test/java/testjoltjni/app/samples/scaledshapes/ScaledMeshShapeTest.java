@@ -23,7 +23,6 @@ package testjoltjni.app.samples.scaledshapes;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
-import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.MiscUtil.*;
 /**
@@ -63,7 +62,7 @@ public void Initialize()
 	}
 
 	// Create regular grid of triangles
-	List<Triangle> triangles=new ArrayList<>(2*n*n);
+	TriangleList triangles=new TriangleList();
 	for (int x = 0; x < n; ++x)
 		for (int z = 0; z < n; ++z)
 		{
@@ -79,8 +78,8 @@ public void Initialize()
 			ConstFloat3 v3 =new Float3(x1, heights[x][z + 1], z2);
 			ConstFloat3 v4 =new Float3(x2, heights[x + 1][z + 1], z2);
 
-			triangles.add(new Triangle(v1, v3, v4));
-			triangles.add(new Triangle(v1, v4, v2));
+			triangles.pushBack(new Triangle(v1, v3, v4));
+			triangles.pushBack(new Triangle(v1, v4, v2));
 		}
 
 	ConstShapeSettings mesh_shape = new MeshShapeSettings(triangles);

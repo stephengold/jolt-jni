@@ -24,7 +24,6 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
 import com.github.stephengold.joltjni.std.*;
-import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.JphMath.*;
@@ -101,13 +100,13 @@ void CreateSimpleScene()
 
 	{
 		// U shaped set of thin walls
-		List<Triangle> triangles=new ArrayList<>(2*num_walls+1);
+		TriangleList triangles=new TriangleList();
 		for (int i = 0; i < num_walls; ++i)
 		{
-			triangles.add(new Triangle(new Float3(2.0f*i-1,0,-1-radius),new Float3(2.0f*i+1,0,-1-radius),new Float3(2.0f*i,2,-1-radius)));
-			triangles.add(new Triangle(new Float3(2.0f*i-1,0,1+radius),new Float3(2.0f*i,2,1+radius),new Float3(2.0f*i+1,0,1+radius)));
+			triangles.pushBack(new Triangle(new Float3(2.0f*i-1,0,-1-radius),new Float3(2.0f*i+1,0,-1-radius),new Float3(2.0f*i,2,-1-radius)));
+			triangles.pushBack(new Triangle(new Float3(2.0f*i-1,0,1+radius),new Float3(2.0f*i,2,1+radius),new Float3(2.0f*i+1,0,1+radius)));
 		}
-		triangles.add(new Triangle(new Float3(-1-radius,0,-1),new Float3(-1-radius,2,0),new Float3(-1-radius,0,1)));
+		triangles.pushBack(new Triangle(new Float3(-1-radius,0,-1),new Float3(-1-radius,2,0),new Float3(-1-radius,0,1)));
 		Body walls = mBodyInterface.createBody(new BodyCreationSettings(new MeshShapeSettings(triangles), offset, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
 		walls.setRestitution(1.0f);
 		walls.setFriction(0.0f);

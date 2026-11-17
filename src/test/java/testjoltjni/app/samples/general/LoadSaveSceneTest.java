@@ -66,7 +66,7 @@ static MeshShapeSettings sCreateMesh()
 
 	// Create regular grid of triangles
 	int max_material_index = 0;
-	List<Triangle> triangles=new ArrayList<>(2*n*n);
+	TriangleList triangles=new TriangleList();
 	for (int x = 0; x < n; ++x)
 		for (int z = 0; z < n; ++z)
 		{
@@ -84,8 +84,8 @@ static MeshShapeSettings sCreateMesh()
 
 			int material_index = (int)(Vec3.sum(new Vec3(v1) ,new Vec3(v2) ,new Vec3(v3) ,new Vec3(v4)).length() / 4.0f / cell_size);
 			max_material_index = Math.max(max_material_index, material_index);
-			triangles.add(new Triangle(v1, v3, v4, material_index));
-			triangles.add(new Triangle(v1, v4, v2, material_index));
+			triangles.pushBack(new Triangle(v1, v3, v4, material_index));
+			triangles.pushBack(new Triangle(v1, v4, v2, material_index));
 		}
 
 	// Create materials

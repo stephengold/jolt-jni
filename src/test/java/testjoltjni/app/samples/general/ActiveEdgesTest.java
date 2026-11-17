@@ -22,7 +22,6 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.JphMath.*;
@@ -49,7 +48,7 @@ public void Initialize()
 	box_settings.setAllowSleeping ( false);
 
 	// Create various triangle strips
-	List<Triangle> triangles=new ArrayList<>();
+	TriangleList triangles=new TriangleList();
 	for (int angle = -90; angle <= 90; angle++)
 	{
 		// Under which normal we want to place the block
@@ -80,15 +79,15 @@ public void Initialize()
 			}
 
 			// Add segment
-			triangles.add(new Triangle(v1, v3, v4));
-			triangles.add(new Triangle(v1, v4, v2));
+			triangles.pushBack(new Triangle(v1, v3, v4));
+			triangles.pushBack(new Triangle(v1, v4, v2));
 
 			// Add segment mirrored in Z axis
 			if (cur_segment != 0)
 			{
 				Vec3 flip=new Vec3(1, 1, -1);
-				triangles.add(new Triangle(star(flip , v1), star(flip , v4), star(flip , v3)));
-				triangles.add(new Triangle(star(flip , v1), star(flip , v2), star(flip , v4)));
+				triangles.pushBack(new Triangle(star(flip , v1), star(flip , v4), star(flip , v3)));
+				triangles.pushBack(new Triangle(star(flip , v1), star(flip , v2), star(flip , v4)));
 			}
 
 			// The end of the segment will be the start for the next iteration
