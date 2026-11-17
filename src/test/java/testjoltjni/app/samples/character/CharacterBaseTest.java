@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.character;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.lambda.*;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
@@ -75,6 +76,9 @@ private CharacterVirtualRef mAnimatedCharacterVirtualWithInnerBody=new Character
 private Vec3 mControlInput = Vec3.sZero();
 private boolean mJump;
 private boolean mSwitchStance;
+class MovingCorner{int mBodyID;RVec3 mPosition;MovingCorner(int b,RVec3 p){mBodyID=b;mPosition=p;}};
+List<MovingCorner> mMovingCorners=new ArrayList<>();
+int obcoindex=0;
 
 public static String sScenes[] =
 {
@@ -132,6 +136,10 @@ static final int cMeshWallSegments = 25;
 static final RVec3 cHalfCylinderPosition=new RVec3(5.0f, 0, 8.0f);
 static final RVec3 cMeshBoxPosition=new RVec3(30.0f, 1.5f, 5.0f);
 static final RVec3 cSensorPosition=new RVec3(30, 0.9f, -5);
+static final RVec3 cCornersPosition=new RVec3(-20.0f, 0, -35.0f);
+static final RVec3 cMovingCornersPosition=new RVec3(-20.0f, 0, -45.0f);
+static final Vec3 cCornersDelta=new Vec3(7.0f, 0, 0);
+static final Quat cCornersOrientation = Quat.sRotation(Vec3.sAxisY(), -0.5f * JPH_PI);
 static final RVec3 cCharacterPosition=new RVec3(-3.5f, 0, 3.0f);
 static final RVec3 cCharacterVirtualPosition=new RVec3(-5.0f, 0, 3.0f);
 static final RVec3 cCharacterVirtualWithInnerBodyPosition=new RVec3(-6.5f, 0, 3.0f);
@@ -233,7 +241,7 @@ public void Initialize()
 	else if (strcmp(sSceneName, "ObstacleCourse") == 0)
 	{
 		// Default terrain
-		CreateFloor(350.0f);
+		CreateFloor(1000.0f);
 
 		{
 			// Create ramps with different inclinations
@@ -386,6 +394,20 @@ public void Initialize()
 		{
 			Quat rotation = Quat.sRotation(Vec3.sAxisY(), 0.5f * JPH_PI * i);
 			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, plus(new RVec3(10.0f, 0.1f, 5.0f) , star(rotation , new Vec3(0.2f, 0, 0))), star(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+		}
+
+		// Create mesh with a steep slope and an acute angle with triangles that face downwards
+		{
+			TriangleList triangles=new TriangleList();
+			triangles.pushBack(new Triangle(new Vec3(-0.5f, 0, 0),new  Vec3(0.5f, 0, 0),new  Vec3(-0.5f, 1.1f, -1)));
+			triangles.pushBack(new Triangle(new Vec3(0.5f, 0, 0),new  Vec3(0.5f, 1.1f, -1),new  Vec3(-0.5f, 1.1f, -1)));
+			triangles.pushBack(new Triangle(new Vec3(-0.5f, 0, 0),new  Vec3(-0.5f, 0, -1),new  Vec3(0.5f, 0, 0)));
+			triangles.pushBack(new Triangle(new Vec3(0.5f, 0, 0),new  Vec3(-0.5f, 0, -1),new  Vec3(0.5f, 0, -1)));
+
+			MeshShapeSettings mesh=new MeshShapeSettings(triangles);
+			mesh.setEmbedded();
+			BodyCreationSettings body=new BodyCreationSettings(mesh,new RVec3(12.5f, 0.5f, 4.0f), Quat.sRotation(Vec3.sAxisY(), JPH_PI), EMotionType.Static, Layers.NON_MOVING);
+			mBodyInterface.createAndAddBody(body, EActivation.DontActivate);
 		}
 
 		// Create small bumps
@@ -642,6 +664,189 @@ public void Initialize()
 			mAnimatedCharacterVirtualWithInnerBody.getPtr().setCharacterVsCharacterCollision(mCharacterVsCharacterCollision);
 			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtualWithInnerBody.getPtr());
 		}
+
+		// Create corners and slopes that used to make CharacterVirtual jitter (see also the TestJumpIntoCorner, TestWalkIntoCornerOnSlope and TestWalkUpSlopeIntoWall unit tests).
+		// Each configuration is a single shape so that it can be moved as a whole. We create a static and a moving version of each.
+		// In local space the character should approach them from +X, the shapes are rotated so that they open towards the player starting position.
+		{
+			// Add two vertical walls that meet at inApex with inCornerAngle between them, the corner opens towards +X
+			final TriConsumer<TriangleList,Vec3Arg,Float>add_corner_walls = ( ioTriangles,  inApex,  inCornerAngle)->
+			{
+				final float cWallLength = 3.5f;
+				Vec3 bottom = minus(inApex ,new Vec3(0, 1.5f, 0)), top = plus(inApex ,new Vec3(0, 3.0f, 0));
+				float half_angle = 0.5f * inCornerAngle;
+				Vec3 end = star(cWallLength ,new Vec3(cos(half_angle), 0, sin(half_angle)));
+				ioTriangles.pushBack(new Triangle(bottom, top, plus(end , top)));
+				ioTriangles.pushBack(new Triangle(bottom, plus(end , top), plus(end , bottom)));
+				end.flipSignInPlace(1, 1, -1);
+				ioTriangles.pushBack(new Triangle(bottom, plus(end , top), top));
+				ioTriangles.pushBack(new Triangle(bottom, plus(end , bottom), plus(end , top)));
+			};
+
+			// Add a box to a compound shape. The center of the top surface of the box is at inTopCenter and the box is rotated by inRotation.
+			final FiveConsumer<StaticCompoundShapeSettings,Vec3Arg,QuatArg,Float,Float>add_slab = ( ioCompound,  inTopCenter,  inRotation,  inHalfLength,  inHalfWidth)->
+			{
+				final float cHalfThickness = 0.15f;
+				ioCompound.addShape(minus(inTopCenter , star(cHalfThickness , star(inRotation , Vec3.sAxisY()))), inRotation, new BoxShape(new Vec3(inHalfLength, cHalfThickness, inHalfWidth), 0.0f));
+			};
+
+			// Create a static and a moving body for a compound shape (plus optional walls), inHeight is the height at which to place the bodies
+			final TriConsumer<StaticCompoundShapeSettings,TriangleList,Float>create_bodies = (ioCompound, inWalls, inHeight)->
+			{
+				if (!inWalls.empty())
+					ioCompound.addShape(Vec3.sZero(), Quat.sIdentity(),new MeshShapeSettings(inWalls).create().get());
+				ShapeRefC shape = ioCompound.create().get();
+
+				Vec3 offset = plus(star((float)(obcoindex++) , cCornersDelta) ,new Vec3(0, inHeight, 0));
+				mBodyInterface.createAndAddBody(new BodyCreationSettings(shape, plus(cCornersPosition , offset), cCornersOrientation, EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+
+				// Create the moving version at the position it will have at time 0
+				RVec3 position = plus(cMovingCornersPosition , offset);
+				BodyCreationSettings moving=new BodyCreationSettings(shape, plus(position ,new Vec3(0, 0, 2.0f)), cCornersOrientation, EMotionType.Kinematic, Layers.MOVING);
+				moving.setOverrideMassProperties ( EOverrideMassProperties.MassAndInertiaProvided); // Mesh shapes have no mass properties
+				moving.getMassPropertiesOverride().setMassAndInertiaOfSolidBox(Vec3.sReplicate(5.0f), 1000.0f);
+				mMovingCorners.add(new MovingCorner(mBodyInterface.createAndAddBody(moving, EActivation.Activate), position));
+			};
+
+			// Walk up a 10 degree slope into a 135 degree corner
+			{
+				float slope = degreesToRadians(10.0f);
+				Quat rotation = Quat.sRotation(Vec3.sAxisZ(), -slope);
+				StaticCompoundShapeSettings compound=new StaticCompoundShapeSettings();
+				add_slab.accept(compound, star(rotation ,new Vec3(1.5f, 0, 0)), rotation, 2.5f, 3.0f);
+				TriangleList walls=new TriangleList();
+				add_corner_walls.accept(walls, Vec3.sZero(), degreesToRadians(135.0f));
+				create_bodies.accept(compound, walls, 4.0f * sin(slope) + 0.5f);
+			}
+
+			// Walk up a 10 degree slope into a wall at an angle so that the character slides along the wall
+			{
+				float slope = degreesToRadians(10.0f);
+				Quat rotation = Quat.sRotation(Vec3.sAxisZ(), -slope);
+				StaticCompoundShapeSettings compound=new StaticCompoundShapeSettings();
+				add_slab.accept(compound, star(rotation ,new Vec3(1.5f, 0, 0)), rotation, 2.5f, 3.0f);
+				TriangleList walls=new TriangleList();
+				add_corner_walls.accept(walls, Vec3.sZero(), JPH_PI);
+				create_bodies.accept(compound, walls, 4.0f * sin(slope) + 0.5f);
+			}
+
+			// Steep pocket: Walk up a 30 degree ramp that turns into a 70 degree slope inside a 120 degree corner
+			{
+				float ramp = degreesToRadians(30.0f), steep = degreesToRadians(70.0f);
+				Quat ramp_rotation = Quat.sRotation(Vec3.sAxisZ(), -ramp);
+				Quat steep_rotation = Quat.sRotation(Vec3.sAxisZ(), -steep);
+				StaticCompoundShapeSettings compound=new StaticCompoundShapeSettings();
+				add_slab.accept(compound, star(ramp_rotation ,new Vec3(1.0f, 0, 0)), ramp_rotation, 2.0f, 2.5f);
+				Vec3 steep_start=new Vec3(-0.3f, tan(ramp) * 0.3f, 0);
+				add_slab.accept(compound, plus(steep_start , star(steep_rotation ,new Vec3(-1.2f, 0, 0))), steep_rotation, 1.5f, 1.5f);
+				TriangleList walls=new TriangleList();
+				add_corner_walls.accept(walls,new Vec3(-1.0f, 0, 0), degreesToRadians(120.0f));
+				create_bodies.accept(compound, walls, 3.0f * sin(ramp) + 0.5f);
+			}
+
+			// Steep V: Walk up a valley formed by a 55 and a 60 degree slope, the valley rises 10 degrees towards -X
+			{
+				float incline = degreesToRadians(10.0f);
+				Quat tilt = Quat.sRotation(Vec3.sAxisZ(), -incline);
+				StaticCompoundShapeSettings compound=new StaticCompoundShapeSettings();
+				for (float side_angle : new float[]{ 55.0f, -60.0f })
+				{
+					Quat rotation = star(tilt , Quat.sRotation(Vec3.sAxisX(), degreesToRadians(side_angle)));
+					add_slab.accept(compound, star(rotation ,new Vec3(0, 0, side_angle > 0.0f? -1.45f : 1.45f)), rotation, 3.0f, 1.5f);
+				}
+				create_bodies.accept(compound,new TriangleList(), 3.0f * sin(incline));
+			}
+
+			// Jump into a 130 and a 100 degree corner
+			for (float corner_angle : new float[]{ 130.0f, 100.0f })
+			{
+				StaticCompoundShapeSettings compound=new StaticCompoundShapeSettings();
+				add_slab.accept(compound,new Vec3(1.5f, 0, 0), Quat.sIdentity(), 2.5f, 3.0f);
+				TriangleList walls=new TriangleList();
+				add_corner_walls.accept(walls, Vec3.sZero(), degreesToRadians(corner_angle));
+				create_bodies.accept(compound, walls, 0.5f);
+			}
+
+			// Gondola: A narrow aisle between two benches made out of multiple segments, with pillars and a console at the far end.
+			// The character can walk in from +X.
+			{
+				// Add a box made out of triangles that face outwards
+				final TriConsumer<TriangleList,Vec3Arg,Vec3Arg> add_box = ( ioTriangles,  inMin,  inMax)->
+				{
+					for (int axis = 0; axis < 3; ++axis)
+						for (int side = 0; side < 2; ++side)
+						{
+							// Pick the tangent axes so that u x v points out of the box
+							int u = (axis + 1) % 3, v = (axis + 2) % 3;
+							if (side == 0)
+								{int temp=u;u=v;v=temp;}
+							Vec3 quad[]=new Vec3[4];
+							for (int i = 0; i < 4; ++i)
+							{
+								Vec3 p = side == 0?new Vec3(inMin) :new Vec3(inMax);
+								p.setComponent(u, (i == 1 || i == 2)? inMax.get(u) : inMin.get(u));
+								p.setComponent(v, i >= 2? inMax.get(v) : inMin.get(v));
+								quad[i] = p;
+							}
+							ioTriangles.pushBack(new Triangle(quad[0], quad[1], quad[2]));
+							ioTriangles.pushBack(new Triangle(quad[0], quad[2], quad[3]));
+						}
+				};
+
+				final float cHalfLength = 3.0f;			// Gondola goes from -cHalfLength to cHalfLength along X
+				final float cAisleHalfWidth = 0.5f;		// A bit wider than the character
+				final float cBenchDepth = 0.5f;
+				final float cBenchHeight = 0.45f;
+				final float cBenchStart = -1.8f;		// Benches go from here to cHalfLength along X
+				final float cBenchSegmentLength = 1.2f;
+				final float cWallThickness = 0.05f;
+				final float cWallHeight = 1.0f;
+				final float cPillarHalfSize = 0.04f;
+				final float cPillarTop = 2.2f;
+				final float cBenchOuter = cAisleHalfWidth + cBenchDepth;
+
+				TriangleList triangles=new TriangleList();
+
+				// Floor
+				add_box.accept(triangles,new Vec3(-cHalfLength, -0.1f, -cBenchOuter - cWallThickness),new Vec3(cHalfLength, 0, cBenchOuter + cWallThickness));
+
+				for (float sign : new float[]{ -1.0f, 1.0f })
+				{
+					// Benches consisting of multiple segments
+					for (float x = cBenchStart; x < cHalfLength - 1.0e-3f; x += cBenchSegmentLength)
+					{
+						Vec3 p1=new Vec3(x, 0, sign * cAisleHalfWidth), p2=new Vec3(x + cBenchSegmentLength, cBenchHeight, sign * cBenchOuter);
+						add_box.accept(triangles, Vec3.sMin(p1, p2), Vec3.sMax(p1, p2));
+					}
+
+					// Side walls
+					Vec3 w1=new Vec3(-cHalfLength, 0, sign * cBenchOuter), w2=new Vec3(cHalfLength, cWallHeight, sign * (cBenchOuter + cWallThickness));
+					add_box.accept(triangles, Vec3.sMin(w1, w2), Vec3.sMax(w1, w2));
+
+					// Pillars on top of the side walls
+					for (float x = -cHalfLength; x < cHalfLength + 1.0e-3f; x += cBenchSegmentLength)
+					{
+						Vec3 center=new Vec3(clamp(x, -cHalfLength + cPillarHalfSize, cHalfLength - cPillarHalfSize), 0, sign * (cBenchOuter + 0.5f * cWallThickness));
+						add_box.accept(triangles, plus(center ,new Vec3(-cPillarHalfSize, cWallHeight, -cPillarHalfSize)), plus(center ,new Vec3(cPillarHalfSize, cPillarTop, cPillarHalfSize)));
+					}
+				}
+
+				// Front wall
+				add_box.accept(triangles,new Vec3(-cHalfLength - cWallThickness, 0, -cBenchOuter - cWallThickness),new Vec3(-cHalfLength, cWallHeight, cBenchOuter + cWallThickness));
+
+				// Console against the front wall
+				add_box.accept(triangles,new Vec3(-cHalfLength, 0, -0.6f),new Vec3(-cHalfLength + 0.4f, 1.0f, 0.6f));
+
+				// Pole next to the console that goes up to the roof
+				add_box.accept(triangles,new Vec3(-cHalfLength + 0.5f, 0, -0.6f),new Vec3(-cHalfLength + 0.58f, cPillarTop, -0.52f));
+
+				// Stool in front of the console
+				add_box.accept(triangles,new Vec3(-2.35f, 0, 0.1f),new Vec3(-2.05f, 0.6f, 0.4f));
+
+				StaticCompoundShapeSettings compound=new StaticCompoundShapeSettings();
+				create_bodies.accept(compound, triangles, 0.5f);
+			}
+		}
 	}
         else if(supportsObjectStream())
 	{
@@ -712,6 +917,8 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 			mReversingVerticallyMovingVelocity = -1.0f;
 		mBodyInterface.moveKinematic(mReversingVerticallyMovingBody, plus(pos, new Vec3(0, mReversingVerticallyMovingVelocity * 3.0f * inParams.mDeltaTime, 0)), cReversingVerticallyMovingOrientation, inParams.mDeltaTime);
 	}
+	for (MovingCorner corner : mMovingCorners)
+		mBodyInterface.moveKinematic(corner.mBodyID, plus(corner.mPosition , star(2.0f ,new Vec3(sin(0.25f * JPH_PI * mTime), 1.0f - cos(0.1f * JPH_PI * mTime), cos(0.25f * JPH_PI * mTime)))), star(Quat.sRotation(Vec3.sAxisY(), 0.25f * JPH_PI * sin(mTime)) , cCornersOrientation), inParams.mDeltaTime);
 
 	// Animate character
 	if (mAnimatedCharacter.getPtr() != nullptr)
@@ -877,7 +1084,8 @@ void DrawCharacterState(ConstCharacterBase  inCharacter, RMat44Arg inCharacterTr
 	ConstPhysicsMaterial  ground_material = inCharacter.getGroundMaterial();
 	Vec3 horizontal_velocity =new Vec3(inCharacterVelocity);
 	horizontal_velocity.setY(0);
-	mDebugRenderer.drawText3D(inCharacterTransform.getTranslation(), String.format("State: %s\nMat: %s\nHorizontal Vel: %.1f m/s\nVertical Vel: %.1f m/s", ground_state, ground_material.getDebugName(), (double)horizontal_velocity.length(), (double)inCharacterVelocity.getY()), Color.sWhite, 0.25f);
+	ConstColor color = (horizontal_velocity.length() > 1.01f * sCharacterSpeed)? Color.sRed : Color.sWhite;
+	mDebugRenderer.drawText3D(inCharacterTransform.getTranslation(), String.format("State: %s\nMat: %s\nHorizontal Vel: %.1f m/s\nVertical Vel: %.1f m/s", ground_state, ground_material.getDebugName(), (double)horizontal_velocity.length(), (double)inCharacterVelocity.getY()), color, 0.25f);
 }
 
 void DrawPaddedCharacter(ConstShape inShape, float inPadding, RMat44Arg inCenterOfMass)
