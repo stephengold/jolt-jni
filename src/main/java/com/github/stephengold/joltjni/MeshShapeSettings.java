@@ -259,6 +259,21 @@ public class MeshShapeSettings
         long settingsVa = createFromTriangleList(listVa);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param triangleList the list of triangles (not {@code null}, unaffected)
+     * @param materials the desired surface properties (not {@code null},
+     * unaffected)
+     */
+    public MeshShapeSettings(
+            TriangleList triangleList, PhysicsMaterialList materials) {
+        long listVa = triangleList.va();
+        long materialsVa = materials.va();
+        long settingsVa = createFromTwoLists(listVa, materialsVa);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
+    }
     // *************************************************************************
     // new public methods
 
@@ -554,6 +569,9 @@ public class MeshShapeSettings
 
     native private static long createFromTrianglesNoMats(
             int numTriangles, FloatBuffer positionBuffer);
+
+    native private static long createFromTwoLists(
+            long listVa, long materialsVa);
 
     native private static long createMeshShapeSettings(
             int numVertices, FloatBuffer vertices, long indicesVa);

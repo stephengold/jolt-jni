@@ -127,6 +127,23 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    createFromTwoLists
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_createFromTwoLists
+  (JNIEnv *pEnv, jclass, jlong listVa, jlong materialsVa) {
+    const TriangleList * const pList
+            = reinterpret_cast<TriangleList *> (listVa);
+    const PhysicsMaterialList * const pMaterials
+            = reinterpret_cast<PhysicsMaterialList *> (materialsVa);
+    MeshShapeSettings * const pResult
+            = new MeshShapeSettings(*pList, *pMaterials);
+    TRACE_NEW_TARGET("MeshShapeSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    createMeshShapeSettings
  * Signature: (ILjava/nio/FloatBuffer;J)J
  */
