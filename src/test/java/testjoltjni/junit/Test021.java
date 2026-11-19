@@ -146,6 +146,26 @@ public class Test021 {
         Assert.assertEquals(Float.POSITIVE_INFINITY,
                 JphMath.square(Float.POSITIVE_INFINITY), 0);
 
+        testTan();
+
+        TestUtils.cleanup();
+    }
+    // *************************************************************************
+    // private methods
+
+    /**
+     * Verify that a single-precision value is Not A Number (NaN).
+     *
+     * @param actual the value to test
+     */
+    private static void assertIsNan(float actual) {
+        Assert.assertEquals(Float.NaN, actual, 0f);
+    }
+
+    /**
+     * Test {@code JphMath.tan()}.
+     */
+    private static void testTan() {
         Assert.assertEquals(0.42279324f, JphMath.tan(0.4f), 0f);
         Assert.assertEquals(1.4e-45f, JphMath.tan(Float.MIN_VALUE), 0f);
         Assert.assertEquals(2.3915296e14f, JphMath.tan(1e9f), 0f);
@@ -158,7 +178,9 @@ public class Test021 {
         Assert.assertEquals(7.1206887e22f, JphMath.tan(3.36e9f), 0f);
         Assert.assertEquals(1.8405395e22f, JphMath.tan(3.37e9f), 0f);
         Assert.assertEquals(-1.8405395e22f, JphMath.tan(-3.37e9f), 0f);
+
         assertIsNan(JphMath.tan(Float.NaN));
+
         float tanBig = JphMath.tan(3.38e9f);
         float tanMax = JphMath.tan(Float.MAX_VALUE);
         float tanNinf = JphMath.tan(Float.NEGATIVE_INFINITY);
@@ -174,18 +196,5 @@ public class Test021 {
             Assert.assertEquals(Float.NEGATIVE_INFINITY, tanNinf, 0f);
             Assert.assertEquals(Float.POSITIVE_INFINITY, tanPinf, 0f);
         }
-
-        TestUtils.cleanup();
-    }
-    // *************************************************************************
-    // private methods
-
-    /**
-     * Verify that a single-precision value is Not A Number (NaN).
-     *
-     * @param actual the value to test
-     */
-    private static void assertIsNan(float actual) {
-        Assert.assertEquals(Float.NaN, actual, 0f);
     }
 }
