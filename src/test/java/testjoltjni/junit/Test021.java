@@ -148,6 +148,16 @@ public class Test021 {
 
         Assert.assertEquals(0.42279324f, JphMath.tan(0.4f), 0f);
         Assert.assertEquals(1.4e-45f, JphMath.tan(Float.MIN_VALUE), 0f);
+        Assert.assertEquals(-0.03577214f, JphMath.tan(1e5f), 0f);
+        Assert.assertEquals(-0.40967944f, JphMath.tan(1e6f), 0f);
+        Assert.assertEquals(-0.1379948f, JphMath.tan(1e7f), 0f);
+        Assert.assertEquals(-4.412631f, JphMath.tan(1e8f), 0f);
+        Assert.assertEquals(2.3915296e14f, JphMath.tan(1e9f), 0f);
+        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e12f), 0f);
+        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e20f), 0f);
+        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e25f), 0f);
+        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e30f), 0f);
+        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e28f), 0f);
         assertIsNan(JphMath.tan(Float.NaN));
         float tanMax = JphMath.tan(Float.MAX_VALUE);
         float tanNinf = JphMath.tan(Float.NEGATIVE_INFINITY);
