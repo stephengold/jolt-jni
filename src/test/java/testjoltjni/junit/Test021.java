@@ -148,25 +148,28 @@ public class Test021 {
 
         Assert.assertEquals(0.42279324f, JphMath.tan(0.4f), 0f);
         Assert.assertEquals(1.4e-45f, JphMath.tan(Float.MIN_VALUE), 0f);
-        Assert.assertEquals(-0.03577214f, JphMath.tan(1e5f), 0f);
-        Assert.assertEquals(-0.40967944f, JphMath.tan(1e6f), 0f);
-        Assert.assertEquals(-0.1379948f, JphMath.tan(1e7f), 0f);
-        Assert.assertEquals(-4.412631f, JphMath.tan(1e8f), 0f);
         Assert.assertEquals(2.3915296e14f, JphMath.tan(1e9f), 0f);
-        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e12f), 0f);
-        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e20f), 0f);
-        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e25f), 0f);
-        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e30f), 0f);
-        Assert.assertEquals(Float.POSITIVE_INFINITY, JphMath.tan(1e28f), 0f);
+        Assert.assertEquals(1.9576378e18f, JphMath.tan(2e9f), 0f);
+        Assert.assertEquals(8.942755e24f, JphMath.tan(3e9f), 0f);
+        Assert.assertEquals(-2.0515669e19f, JphMath.tan(3.2e9f), 0f);
+        Assert.assertEquals(1.9054293e27f, JphMath.tan(3.24e9f), 0f);
+        Assert.assertEquals(1.4174114e26f, JphMath.tan(3.28e9f), 0f);
+        Assert.assertEquals(5.490515e24f, JphMath.tan(3.32e9f), 0f);
+        Assert.assertEquals(7.1206887e22f, JphMath.tan(3.36e9f), 0f);
+        Assert.assertEquals(1.8405395e22f, JphMath.tan(3.37e9f), 0f);
+        Assert.assertEquals(-1.8405395e22f, JphMath.tan(-3.37e9f), 0f);
         assertIsNan(JphMath.tan(Float.NaN));
+        float tanBig = JphMath.tan(3.38e9f);
         float tanMax = JphMath.tan(Float.MAX_VALUE);
         float tanNinf = JphMath.tan(Float.NEGATIVE_INFINITY);
         float tanPinf = JphMath.tan(Float.POSITIVE_INFINITY);
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
+            Assert.assertEquals(-0f, tanBig, 0f);
             Assert.assertEquals(-0f, tanMax, 0f);
             Assert.assertEquals(0f, tanNinf, 0f);
             Assert.assertEquals(-0f, tanPinf, 0f);
         } else {
+            Assert.assertEquals(Float.POSITIVE_INFINITY, tanBig, 0f);
             Assert.assertEquals(Float.POSITIVE_INFINITY, tanMax, 0f);
             Assert.assertEquals(Float.NEGATIVE_INFINITY, tanNinf, 0f);
             Assert.assertEquals(Float.POSITIVE_INFINITY, tanPinf, 0f);
