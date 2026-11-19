@@ -35,7 +35,7 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public class MotionProperties
-        extends JoltPhysicsObject
+        extends NonCopyable
         implements ConstMotionProperties {
     // *************************************************************************
     // constructors
