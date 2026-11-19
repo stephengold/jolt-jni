@@ -147,6 +147,10 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+      - if: "failure() && !startsWith(github.ref, 'refs/tags/')"
+        run: |
+          ls /Users/runner/work/jolt-jni/jolt-jni/hs_err_pid*.log
+          cat /Users/runner/work/jolt-jni/jolt-jni/hs_err_pid*.log
       - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-MacOSX64 -Ptarget=MacOSX64 -PuseMTL=set clean release \
@@ -184,7 +188,9 @@ jobs:
             --console=plain
       - if: "failure() && !startsWith(github.ref, 'refs/tags/')"
         run: |
-          cat /Users/runner/work/jolt-jni/jolt-jni/build/reports/tests/test/testjoltjni.junit.Test021/test021.html
+          #cat /Users/runner/work/jolt-jni/jolt-jni/build/reports/tests/test/testjoltjni.junit.Test021/test021.html
+          ls /Users/runner/work/jolt-jni/jolt-jni/hs_err_pid*.log
+          cat /Users/runner/work/jolt-jni/jolt-jni/hs_err_pid*.log
       - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=jolt-jni-MacOSX_ARM64 -PuseMTL=set -Ptarget=MacOSX_ARM64 clean release \
