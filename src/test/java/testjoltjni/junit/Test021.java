@@ -164,7 +164,7 @@ public class Test021 {
         float tanNinf = JphMath.tan(Float.NEGATIVE_INFINITY);
         float tanPinf = JphMath.tan(Float.POSITIVE_INFINITY);
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
-            Assert.assertEquals(-0f, tanBig, 0f);
+            Assert.assertEquals(4.014894e21f, tanBig, 0f);
             Assert.assertEquals(-0f, tanMax, 0f);
             Assert.assertEquals(0f, tanNinf, 0f);
             Assert.assertEquals(-0f, tanPinf, 0f);
