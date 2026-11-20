@@ -66,11 +66,47 @@ final public class VertexList implements ConstVertexList {
     // new methods exposed
 
     /**
+     * Make the list empty again.
+     */
+    public void clear() {
+        if (!allowModification) {
+            throw new IllegalStateException(
+                    "Modification is no longer allowed.");
+        }
+
+        buffer.limit(0);
+    }
+
+    /**
      * Append the specified vertex to the end.
      *
      * @param location the vertex to append (not {@code null}, unaffected)
      */
     public void pushBack(ConstFloat3 location) {
+        int numElements = size();
+        resize(numElements + 1);
+        set(numElements, location);
+    }
+
+    /**
+     * Append the specified vertex location to the end.
+     *
+     * @param x the X-coordinate to store
+     * @param y the Y-coordinate to store
+     * @param z the Z-coordinate to store
+     */
+    public void pushBack(float x, float y, float z) {
+        int numElements = size();
+        resize(numElements + 1);
+        set(numElements, x, y, z);
+    }
+
+    /**
+     * Append the specified vertex to the end.
+     *
+     * @param location the vertex to append (not {@code null}, unaffected)
+     */
+    public void pushBack(Vec3Arg location) {
         int numElements = size();
         resize(numElements + 1);
         set(numElements, location);
