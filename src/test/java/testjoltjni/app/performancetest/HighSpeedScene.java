@@ -23,7 +23,6 @@ package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.lambda.TriFunction;
-import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.std.Mt19937;
 import java.util.*;
 import static com.github.stephengold.joltjni.JphMath.*;
@@ -53,10 +52,10 @@ class HighSpeedScene implements  PerformanceTestScene
 		compound.addShape(new Vec3(0, shape_size, 0), Quat.sIdentity(), new CapsuleShapeSettings(shape_size, 0.25f * shape_size));
 		compound.addShape(new Vec3(shape_size, 0, 0), Quat.sIdentity(), new BoxShapeSettings(new Vec3(shape_size, 0.25f * shape_size, 0.25f * shape_size)));
 
-		mShapes = List.of(
-			new SphereShape(shape_size),
-			new BoxShape(new Vec3(0.5f * shape_size, shape_size, 1.0f * shape_size)),
-			compound.create().get().getPtr()
+		mShapes = new ShapeList(
+			new SphereShape(shape_size).toRefC(),
+			new BoxShape(new Vec3(0.5f * shape_size, shape_size, 1.0f * shape_size)).toRefC(),
+			compound.create().get()
 		);
 
 		return true;
@@ -113,5 +112,5 @@ class HighSpeedScene implements  PerformanceTestScene
 		}
 	}
 
-	List<ConstShape>		mShapes=new ArrayList<>();
+	ShapeList		mShapes=new ShapeList();
 };
