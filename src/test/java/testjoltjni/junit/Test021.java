@@ -85,10 +85,18 @@ public class Test021 {
         Assert.assertTrue(Float.isNaN(JphMath.clamp(Float.NaN, -0.5f, 0.6f)));
 
         Assert.assertEquals(0.7648422f, JphMath.cos(0.7f), 0f);
+        Assert.assertEquals(2.1511508e10f, JphMath.cos(3.37e9f), 0f);
+        Assert.assertEquals(2.1511508e10f, JphMath.cos(-3.37e9f), 0f);
+        float cosBigNeg = JphMath.cos(-3.38e9f);
+        float cosBigPos = JphMath.cos(3.38e9f);
         float cosMax = JphMath.cos(Float.MAX_VALUE);
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
+            Assert.assertEquals(Float.NEGATIVE_INFINITY, cosBigNeg, 0f);
+            Assert.assertEquals(Float.NEGATIVE_INFINITY, cosBigPos, 0f);
             Assert.assertEquals(Float.NEGATIVE_INFINITY, cosMax, 0f);
         } else {
+            Assert.assertEquals(Float.POSITIVE_INFINITY, cosBigNeg, 0f);
+            Assert.assertEquals(Float.POSITIVE_INFINITY, cosBigPos, 0f);
             assertIsNan(cosMax);
         }
         Assert.assertEquals(1f, JphMath.cos(Float.MIN_VALUE), 0f);
@@ -114,10 +122,18 @@ public class Test021 {
         Assert.assertEquals(1f, JphMath.sign(Float.POSITIVE_INFINITY), 0f);
 
         Assert.assertEquals(0.09983342f, JphMath.sin(0.1f), 0f);
+        Assert.assertEquals(-2.330975e9f, JphMath.sin(3.37e9f), 0f);
+        Assert.assertEquals(2.330975e9f, JphMath.sin(-3.37e9f), 0f);
+        float sinBigNeg = JphMath.sin(-3.38e9f);
+        float sinBigPos = JphMath.sin(3.38e9f);
         float sinMax = JphMath.sin(Float.MAX_VALUE);
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
+            assertIsNan(sinBigNeg);
+            assertIsNan(sinBigPos);
             assertIsNan(sinMax);
         } else {
+            Assert.assertEquals(Float.POSITIVE_INFINITY, sinBigNeg, 0f);
+            Assert.assertEquals(Float.NEGATIVE_INFINITY, sinBigPos, 0f);
             Assert.assertEquals(Float.NEGATIVE_INFINITY, sinMax, 0f);
         }
         Assert.assertEquals(1.4e-45f, JphMath.sin(Float.MIN_VALUE), 0f);
