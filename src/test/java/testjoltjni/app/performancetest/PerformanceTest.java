@@ -92,6 +92,8 @@ public static void main(  String[] argv)throws IOException
 				scene = new RagdollScene(1, 160, 0.4f);
 			else if (arg.substring(3).equals("ConvexVsMesh"))
 				scene = new ConvexVsMeshScene();
+			else if (arg.substring(3).equals("ConvexHullPile"))
+				scene = new ConvexHullPileScene();
 			else if (arg.substring(3).equals("Pyramid"))
 				scene = new PyramidScene();
 			else if (arg.substring(3).equals("LargeMesh"))

@@ -468,6 +468,12 @@ tasks.register('runCharacterVirtual', JavaExec) {
     enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
+tasks.register('runConvexHullPile', JavaExec) {
+    args '-s=ConvexHullPile'
+    description = 'Measures performance on the ConvexHullPile scene.'
+    enableAssertions = false
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
+}
 tasks.register('runConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
     description = 'Measures performance on the ConvexVsMesh scene.'
