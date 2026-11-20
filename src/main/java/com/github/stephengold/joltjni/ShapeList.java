@@ -35,22 +35,22 @@ final public class ShapeList extends Array<ShapeRefC> {
     // constructors
 
     /**
-     * Instantiate an empty list.
-     */
-    public ShapeList() {
-        long listVa = createDefault();
-        setVirtualAddress(listVa, () -> free(listVa));
-    }
-
-    /**
      * Instantiate a list containing a single shape.
      *
-     * @param shapeRef a counted reference to the desired shape (not
-     * {@code null})
+     * @param refs counted references to the desired shapes (or {@code null} for
+     * none)
      */
-    public ShapeList(ShapeRefC shapeRef) {
-        this();
-        pushBack(shapeRef);
+    public ShapeList(ShapeRefC... refs) {
+        super();
+
+        long listVa = createDefault();
+        setVirtualAddress(listVa, () -> free(listVa));
+
+        if (refs != null) {
+            for (ShapeRefC shapeRef : refs) {
+                pushBack(shapeRef);
+            }
+        }
     }
     // *************************************************************************
     // Array<ShapeRefC> methods
