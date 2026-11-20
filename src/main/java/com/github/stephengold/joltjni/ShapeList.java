@@ -41,8 +41,6 @@ final public class ShapeList extends Array<ShapeRefC> {
      * none)
      */
     public ShapeList(ShapeRefC... refs) {
-        super();
-
         long listVa = createDefault();
         setVirtualAddress(listVa, () -> free(listVa));
 
