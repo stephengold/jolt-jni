@@ -1,5 +1,47 @@
 # Release log for the Jolt-JNI project
 
+## Version 8.0.0 released on TBD
+
++ API changes:
+  + Removed the copy constructor and `set()` method from `MotionProperties`.
+  + Each element of a `PhysicsMaterialList` is actually
+    a `PhysicsMaterialRefC`, not a `PhysicsMaterialRef`.
+
++ Added the `EBuildQuality` enum and the `TriangleList` class.
+
++ Added constructors:
+  + copy constructor for `IndexedTriangle`
+  + construct a `VertexList` with a specific capacity
+  + 3 constructors for `ConvexHullShapeSettings`
+  + 2 constructors for `MeshShapeSettings`
++ Combined and generalized the `ShapeList` constructors.
++ Added interfaces:
+  + `ConstConvexHullShapeSettings`
+  + `ConstHeightFieldShapeSettings`
+  + `ConstMeshShapeSettings`
+  + `FiveConsumer`
+  + `TriConsumer`
+
++ Added public methods:
+  + 22 methods added to `HeightFieldShapeSettings`
+  + 8 methods added to `MeshShapeSettings`
+  + 7 methods added to `VertexList`
+  + `IndexedTriangle.set()`
+  + `JphMath.clamp()`
+  + `Vec3.flipSign()`
+  + `Vec3.flipSignInPlace()`
+  + `Vec3.setComponent()`
+  + `Vec3.sMax()`
+  + `Vec3.sMin()`
+
++ Extended `ShapeSettingsRefC` so it implements `ConstShapeSettings`.
++ Caused `MotionProperties` to extend `NonCopyable`.
+
++ Updated Jolt-Physics sources/assets to b761456 (sg261119).
++ Updated the Android Gradle plugin to v9.5.1 .
++ Began using the Vulkan v1.4.363.1 headers when building native libraries.
+
+
 ## Version 7.0.0 released on 26 October 2026
 
 + Made API changes in `MiscUtil.estimateCollisionResponse()`.
