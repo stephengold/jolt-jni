@@ -43,7 +43,7 @@ and public member data are involved. For instance:
 + The `mConvexRadius` member of the `BoxShapeSettings` class
   is accessed using `getConvexRadius()` and `setConvexRadius()` in Jolt JNI.
 
-For a couple well-known Jolt Physics examples,
+For well-known Jolt Physics examples,
 [line-for-line translations into Java](https://github.com/stephengold/jolt-jni/tree/master/src/test/java/testjoltjni/app)
 are provided.
 
