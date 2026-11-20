@@ -128,8 +128,8 @@ public class Test021 {
         float sinBigPos = JphMath.sin(3.38e9f);
         float sinMax = JphMath.sin(Float.MAX_VALUE);
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
-            assertIsNan(sinBigNeg);
-            assertIsNan(sinBigPos);
+            Assert.assertEquals(1.02463245e9, sinBigNeg, 0f);
+            Assert.assertEquals(-1.02463245e9, sinBigPos, 0f);
             assertIsNan(sinMax);
         } else {
             Assert.assertEquals(Float.POSITIVE_INFINITY, sinBigNeg, 0f);
