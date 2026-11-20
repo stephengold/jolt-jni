@@ -46,14 +46,12 @@ public
 		Mt19937 random=new Mt19937();
 		UniformFloatDistribution random_float = new UniformFloatDistribution(         -1.0f,  1.0f );
 
-		List<Vec3> points=new ArrayList<>(40);
 		final int cNumPoints = 40;
-		//points.reserve(cNumPoints);
 		for (int i = 0; i < 100; ++i)
 		{
-			points.clear();
+			VertexList points=new VertexList(cNumPoints);
 			for (int j = 0; j < cNumPoints; ++j)
-				points.add(new Vec3(1.5f * random_float.nextFloat(random), 0.5f * random_float.nextFloat(random), 0.75f * random_float.nextFloat(random)));
+				points.pushBack(1.5f * random_float.nextFloat(random), 0.5f * random_float.nextFloat(random), 0.75f * random_float.nextFloat(random));
 			mShapes.pushBack(new ConvexHullShapeSettings(points).create().get());
 		}
 

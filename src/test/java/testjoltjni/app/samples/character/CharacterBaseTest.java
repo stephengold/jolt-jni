@@ -551,7 +551,7 @@ public void Initialize()
 
 		// Create a half cylinder with caps for testing contact point limit
 		{
-			List<ConstFloat3> vertices=new ArrayList<>();
+			VertexList vertices=new VertexList();
 			IndexedTriangleList triangles=new IndexedTriangleList();
 
 			// The half cylinder
@@ -570,7 +570,7 @@ public void Initialize()
 					float x = cCylinderLength * (-0.5f + (float)(pos) / (cPosSegments - 1));
 					float y = angle == 0 || angle == cAngleSegments - 1? 0.5f : (1.0f - c) * radius;
 					float z = s * radius;
-					vertices.add(new Float3(x, y, z));
+					vertices.pushBack(x, y, z);
 
 					if (pos > 0 && angle > 0)
 					{
