@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstConvexHullShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+import com.github.stephengold.joltjni.readonly.ConstVertexList;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -110,6 +111,46 @@ public class ConvexHullShapeSettings
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsCoOwner(copyVa, EShapeSubType.ConvexHull);
+    }
+
+    /**
+     * Instantiate settings for the specified vertex list.
+     *
+     * @param points a list of point locations (not {@code null}, unaffected)
+     */
+    public ConvexHullShapeSettings(ConstVertexList points) {
+        this(points, Jolt.cDefaultConvexRadius);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param points a list of point locations (not {@code null}, unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     */
+    public ConvexHullShapeSettings(
+            ConstVertexList points, float maxConvexRadius) {
+        this(points, maxConvexRadius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param points a list of point locations (not {@code null}, unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
+     */
+    public ConvexHullShapeSettings(ConstVertexList points,
+            float maxConvexRadius, ConstPhysicsMaterial material) {
+        int numPoints = points.size();
+        FloatBuffer buffer = points.toDirectBuffer();
+        long materialVa = (material == null) ? 0L : material.targetVaOrZero();
+        long settingsVa = createSettings(
+                numPoints, buffer, maxConvexRadius, materialVa);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.ConvexHull);
     }
 
     /**
