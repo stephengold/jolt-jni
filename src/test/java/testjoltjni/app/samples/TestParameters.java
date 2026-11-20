@@ -33,6 +33,12 @@ class TestParameters {
     // fields
 
     /**
+     * whether to use a GPU-based compute system
+     */
+    @Parameter(names = {"-g", "--gpu"},
+            description = "Use a GPU-based compute system.")
+    private boolean gpuCompute;
+    /**
      * whether to simply display the usage message and exit
      */
     @Parameter(names = {"-h", "--help"},
@@ -58,6 +64,15 @@ class TestParameters {
     private boolean verboseLogging;
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Test whether to use a GPU-based compute system.
+     *
+     * @return {@code true} to use GPU, {@code false} to use CPU
+     */
+    boolean gpuCompute() {
+        return gpuCompute;
+    }
 
     /**
      * Test whether to display the usage message and then exit.

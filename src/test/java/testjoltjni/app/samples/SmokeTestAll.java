@@ -132,12 +132,21 @@ final public class SmokeTestAll {
         tempAllocator = new TempAllocatorImpl(numBytes);
 
         // All tests share a single ComputeSystem:
-        ComputeSystemResult csResult = ComputeSystem.createComputeSystem();
-        if (csResult.hasError()) {
-            System.out.println(csResult.getError());
-            // If no GPU or driver, fall back upon a CPU compute system:
+        ComputeSystemResult csResult;
+        if (globalParameters.gpuCompute()) {
+            csResult = ComputeSystem.createComputeSystem();
+            if (csResult.hasError()) {
+                System.err.println(
+                        "createComputeSystem():  " + csResult.getError());
+            }
+        } else {
             csResult = ComputeSystem.createComputeSystemCpu();
+            if (csResult.hasError()) {
+                System.err.println(
+                        "createComputeSystemCpu():  " + csResult.getError());
+            }
         }
+        System.err.flush();
         assert !csResult.hasError();
         computeSystem = csResult.get().getPtr();
         Rtti rtti = computeSystem.getRtti();

@@ -527,7 +527,13 @@ tasks.register('runRagdollSinglePile', JavaExec) {
 tasks.register('runSmokeTestAll', JavaExec) {
     args '-n', staNumSteps
     dependsOn('unpackHairStraight', 'unpackJoltAssets')
-    description = 'Performs a "smoke test" of each of the Samples tests.'
+    description = 'Performs a "smoke test" of each of the Samples tests, using CPU-based compute.'
+    mainClass = 'testjoltjni.app.samples.SmokeTestAll'
+}
+tasks.register('runSmokeTestAllGpu', JavaExec) {
+    args '-g', '-n', staNumSteps
+    dependsOn('unpackHairStraight', 'unpackJoltAssets')
+    description = 'Performs a "smoke test" of each of the Samples tests, using GPU-based compute.'
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
 }
 tasks.register('runTest', JavaExec) {
