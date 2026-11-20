@@ -222,6 +222,11 @@ final public class PrintTable {
 
         Collections.sort(basicJavaClasses);
         for (String basicJavaClass : basicJavaClasses) {
+            // Access the Javadoc site for Jolt JNI via HTTPS:
+            if (!doesJavadocExist(basicJavaClass)) {
+                System.out.println(" no Javadoc found for " + basicJavaClass);
+                continue;
+            }
             /*
              * Convert the Java class name to a hypothetical C++ identifier
              * by capitalizing some known initialisms.
@@ -237,12 +242,6 @@ final public class PrintTable {
                     .replace("Sbcs", "SBCS")
                     .replace("Tv", "TV")
                     .replace("Wv", "WV");
-
-            // Access the Javadoc site for Jolt JNI via HTTPS:
-            if (!doesJavadocExist(basicJavaClass)) {
-                System.out.println(" no Javadoc found for " + basicJavaClass);
-                continue;
-            }
 
             // Access the Doxygen site for Jolt Physics via HTTPS:
             if (doesIdExist("class", cppId)) {
@@ -286,6 +285,7 @@ final public class PrintTable {
             if (refClasses.contains(refc) && doesJavadocExist(refc)) {
                 stream.printf(" +%n {url-api}/%s.html[%s]", refc, refc);
             }
+
             stream.println();
         }
 
