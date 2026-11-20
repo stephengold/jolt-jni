@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstConvexHullShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -33,7 +34,9 @@ import java.util.Collection;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ConvexHullShapeSettings extends ConvexShapeSettings {
+public class ConvexHullShapeSettings
+        extends ConvexShapeSettings
+        implements ConstConvexHullShapeSettings {
     // *************************************************************************
     // constants
 
@@ -103,8 +106,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public ConvexHullShapeSettings(ConvexHullShapeSettings original) {
-        long originalVa = original.va();
+    public ConvexHullShapeSettings(ConstConvexHullShapeSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddressAsCoOwner(copyVa, EShapeSubType.ConvexHull);
     }
@@ -241,101 +244,13 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Copy one of the points to use when creating the hull. The settings are
-     * unaffected.
-     *
-     * @param index the index of the point to copy (&ge;0)
-     * @return a new location vector
-     */
-    public Vec3 copyPoint(int index) {
-        long settingsVa = va();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getPoint(settingsVa, index, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
-    }
-
-    /**
-     * Copy the points to use when creating the hull. The settings are
-     * unaffected. (native attribute: mPoints)
-     *
-     * @return a new array of new vectors
-     */
-    public Vec3[] copyPoints() {
-        long settingsVa = va();
-        int numPoints = countPoints(settingsVa);
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        Vec3[] result = new Vec3[numPoints];
-        for (int i = 0; i < numPoints; ++i) {
-            getPoint(settingsVa, i, storeFloats);
-            result[i] = new Vec3(storeFloats);
-        }
-
-        return result;
-    }
-
-    /**
-     * Count the points to use when creating the hull. The settings are
-     * unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    public int countPoints() {
-        long settingsVa = va();
-        int result = countPoints(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the positional tolerance used when generating the hull. The
-     * settings are unaffected. (native attribute: mHullTolerance)
-     *
-     * @return the distance (&ge;0)
-     */
-    public float getHullTolerance() {
-        long settingsVa = va();
-        float result = getHullTolerance(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the convex radius. The settings are unaffected. (native attribute:
-     * mMaxConvexRadius)
-     *
-     * @return the convex radius (&ge;0)
-     */
-    public float getMaxConvexRadius() {
-        long settingsVa = va();
-        float result = getMaxConvexRadius(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum separation between the shrunk hull + convex radius and
-     * the actual hull. The settings are unaffected. (native attribute:
-     * mMaxErrorConvexRadius)
-     *
-     * @return the maximum separation (&ge;0)
-     */
-    public float getMaxErrorConvexRadius() {
-        long settingsVa = va();
-        float result = getMaxErrorConvexRadius(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Copy the argument to the current settings.
      *
      * @param source the settings to copy (not {@code null}, unaffected)
      */
-    public void set(ConvexHullShapeSettings source) {
+    public void set(ConstConvexHullShapeSettings source) {
         long targetVa = va();
-        long sourceVa = source.va();
+        long sourceVa = source.targetVa();
         assign(targetVa, sourceVa);
     }
 
@@ -430,6 +345,102 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         transformPoints(settingsVa, matrixVa);
 
         return this;
+    }
+    // *************************************************************************
+    // ConstConvexHullShapeSettings methods
+
+    /**
+     * Copy one of the points to use when creating the hull. The settings are
+     * unaffected.
+     *
+     * @param index the index of the point to copy (&ge;0)
+     * @return a new location vector
+     */
+    @Override
+    public Vec3 copyPoint(int index) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPoint(settingsVa, index, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the points to use when creating the hull. The settings are
+     * unaffected. (native attribute: mPoints)
+     *
+     * @return a new array of new vectors
+     */
+    @Override
+    public Vec3[] copyPoints() {
+        long settingsVa = va();
+        int numPoints = countPoints(settingsVa);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        Vec3[] result = new Vec3[numPoints];
+        for (int i = 0; i < numPoints; ++i) {
+            getPoint(settingsVa, i, storeFloats);
+            result[i] = new Vec3(storeFloats);
+        }
+
+        return result;
+    }
+
+    /**
+     * Count the points to use when creating the hull. The settings are
+     * unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countPoints() {
+        long settingsVa = va();
+        int result = countPoints(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the positional tolerance used when generating the hull. The
+     * settings are unaffected. (native attribute: mHullTolerance)
+     *
+     * @return the distance (&ge;0)
+     */
+    @Override
+    public float getHullTolerance() {
+        long settingsVa = va();
+        float result = getHullTolerance(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the convex radius. The settings are unaffected. (native attribute:
+     * mMaxConvexRadius)
+     *
+     * @return the convex radius (&ge;0)
+     */
+    @Override
+    public float getMaxConvexRadius() {
+        long settingsVa = va();
+        float result = getMaxConvexRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum separation between the shrunk hull + convex radius and
+     * the actual hull. The settings are unaffected. (native attribute:
+     * mMaxErrorConvexRadius)
+     *
+     * @return the maximum separation (&ge;0)
+     */
+    @Override
+    public float getMaxErrorConvexRadius() {
+        long settingsVa = va();
+        float result = getMaxErrorConvexRadius(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

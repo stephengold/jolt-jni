@@ -45,9 +45,9 @@ import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
+import com.github.stephengold.joltjni.readonly.ConstConvexHullShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstShape;
-import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -182,7 +182,8 @@ public class Test002 {
         ConstShape boxShape = new BoxShape(new Vec3(0.5f, 0.75f, 1f));
         ConstShape sphereShape = new SphereShape(0.5f);
         ConstShape capsuleShape = new CapsuleShape(0.75f, 0.5f);
-        ConstShapeSettings chss = new ConvexHullShapeSettings(hullVertices);
+        ConstConvexHullShapeSettings chss
+                = new ConvexHullShapeSettings(hullVertices);
         ShapeResult chssResult = chss.create();
         dynamicShapes = new ShapeRefC[] {
             boxShape.toRefC(),

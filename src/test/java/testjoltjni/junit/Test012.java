@@ -90,6 +90,7 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstConvexHullShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstHairSettings;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
@@ -1071,7 +1072,7 @@ public class Test012 {
         CapsuleShapeSettings capsule = new CapsuleShapeSettings(1f, 2f);
         testShapeSettings(capsule);
 
-        ConvexHullShapeSettings convexHull = new ConvexHullShapeSettings(
+        ConstConvexHullShapeSettings convexHull = new ConvexHullShapeSettings(
                 new Vec3(1f, 2f, 3f), new Vec3(4f, 5f, 6f), new Vec3());
         testShapeSettings(convexHull);
 

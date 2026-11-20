@@ -68,6 +68,7 @@ import com.github.stephengold.joltjni.VertexList;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstConvexHullShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstMeshShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstTriangle;
@@ -170,7 +171,8 @@ public class Test007 {
         // Create a tetrahedron:
         Vec3Arg[] points = {new Vec3(3f, 3f, 3f), new Vec3(-3f, 3f, -3f),
             new Vec3(3f, -3f, -3f), new Vec3(-3f, -3f, 3f)};
-        ConvexHullShapeSettings settings = new ConvexHullShapeSettings(points);
+        ConstConvexHullShapeSettings settings
+                = new ConvexHullShapeSettings(points);
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
         Assert.assertTrue(result.isValid());
@@ -185,7 +187,8 @@ public class Test007 {
         list.add(new Vec3(-3f, 3f, -3f));
         list.add(new Vec3(3f, -3f, -3f));
         list.add(new Vec3(-3f, -3f, 3f));
-        ConvexHullShapeSettings settings2 = new ConvexHullShapeSettings(list);
+        ConstConvexHullShapeSettings settings2
+                = new ConvexHullShapeSettings(list);
         ShapeResult result2 = settings2.create();
         Assert.assertFalse(result2.hasError());
         Assert.assertTrue(result2.isValid());

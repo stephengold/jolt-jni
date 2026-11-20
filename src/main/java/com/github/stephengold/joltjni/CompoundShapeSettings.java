@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstConvexHullShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -57,7 +58,7 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
             FloatBuffer points = hull.getPointsAsBuffer();
             int numFloats = points.capacity();
             int numPoints = numFloats / 3;
-            ConvexHullShapeSettings childSettings
+            ConstConvexHullShapeSettings childSettings
                     = new ConvexHullShapeSettings(numPoints, points);
             addShape(0f, 0f, 0f, childSettings);
             childSettings.close();

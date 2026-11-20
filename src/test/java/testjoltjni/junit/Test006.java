@@ -49,6 +49,7 @@ import com.github.stephengold.joltjni.Triangle;
 import com.github.stephengold.joltjni.TriangleShapeSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstConvexHullShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstConvexShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstMeshShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
@@ -547,7 +548,7 @@ public class Test006 {
      * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testConvexHullSsDefaults(
-            ConvexHullShapeSettings settings) {
+            ConstConvexHullShapeSettings settings) {
         testConvexSsDefaults(settings);
 
         Assert.assertEquals(0, settings.countPoints());
