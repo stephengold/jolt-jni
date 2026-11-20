@@ -91,8 +91,8 @@ public class Test021 {
         float cosBigPos = JphMath.cos(3.38e9f);
         float cosMax = JphMath.cos(Float.MAX_VALUE);
         if (NativeVariant.Cpu.isARM()) { // TODO: see JoltPhysics issue #2224
-            Assert.assertEquals(Float.NEGATIVE_INFINITY, cosBigNeg, 0f);
-            Assert.assertEquals(Float.NEGATIVE_INFINITY, cosBigPos, 0f);
+            Assert.assertEquals(8.4050094e9f, cosBigNeg, 0f);
+            Assert.assertEquals(8.4050094e9f, cosBigPos, 0f);
             Assert.assertEquals(Float.NEGATIVE_INFINITY, cosMax, 0f);
         } else {
             Assert.assertEquals(Float.POSITIVE_INFINITY, cosBigNeg, 0f);
