@@ -59,7 +59,17 @@ final public class VertexList implements ConstVertexList {
      * Instantiate an empty list.
      */
     public VertexList() {
-        this.buffer = Jolt.newDirectFloatBuffer(99);
+        this(33);
+    }
+
+    /**
+     * Instantiate an empty list with the specified capacity.
+     *
+     * @param capacity the desired number of vertices (&ge;0)
+     */
+    public VertexList(int capacity) {
+        int numFloats = numAxes * capacity;
+        this.buffer = Jolt.newDirectFloatBuffer(numFloats);
         buffer.flip();
     }
     // *************************************************************************
