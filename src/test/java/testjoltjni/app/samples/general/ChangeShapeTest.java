@@ -23,7 +23,6 @@ package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import static com.github.stephengold.joltjni.Jolt.*;
-import java.util.*;
 import testjoltjni.app.samples.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics change shape test.
@@ -34,7 +33,7 @@ import testjoltjni.app.samples.*;
 public class ChangeShapeTest extends Test{
 int mBodyID=cInvalidBodyId;
 boolean mActivateAfterSwitch = true;
-List<ShapeRefC> mShapes=new ArrayList<>();
+ShapeList mShapes=new ShapeList();
 float mTime = 0.0f;
 int mShapeIdx = 0;
 
@@ -44,17 +43,17 @@ public void Initialize()
 	CreateFloor();
 
 	// Shapes
-	mShapes.add(new BoxShape(new Vec3(0.5f, 1.5f, 0.5f)).toRefC());
-	mShapes.add(new SphereShape(0.5f).toRefC());
-	mShapes.add(new CapsuleShape(1.0f, 0.5f).toRefC());
-	mShapes.add(new TaperedCapsuleShapeSettings(1.0f, 0.5f, 0.3f).create().get());
+	mShapes.pushBack(new BoxShape(new Vec3(0.5f, 1.5f, 0.5f)).toRefC());
+	mShapes.pushBack(new SphereShape(0.5f).toRefC());
+	mShapes.pushBack(new CapsuleShape(1.0f, 0.5f).toRefC());
+	mShapes.pushBack(new TaperedCapsuleShapeSettings(1.0f, 0.5f, 0.3f).create().get());
 
 	// Compound with center of mass shifted (this requires a correction of the position in the body)
 	StaticCompoundShapeSettings compound_settings=new StaticCompoundShapeSettings();
 	compound_settings.addShape(new Vec3(0, 1.5f, 0), Quat.sIdentity(), new CapsuleShape(1.5f, 0.5f));
 	compound_settings.addShape(new Vec3(0, 3, 0), Quat.sIdentity(), new SphereShape(1));
 	ShapeRefC compound = compound_settings.create().get();
-	mShapes.add(compound);
+	mShapes.pushBack(compound);
 
 	// Create dynamic body that changes shape
 	BodyCreationSettings settings=new BodyCreationSettings();
