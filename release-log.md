@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 8.0.0 released on TBD
+## Version 8.0.0 released on 20 November 2026
 
 + API changes:
   + Removed the copy constructor and `set()` method from `MotionProperties`.
