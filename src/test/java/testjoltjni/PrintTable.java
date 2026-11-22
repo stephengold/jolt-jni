@@ -32,7 +32,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -182,9 +184,9 @@ final public class PrintTable {
             stream.println();
         }
 
-        // Enumerate Jolt JNI's basic classes and Ref/RefC classes:
+        // Enumerate Jolt JNI's basic classes and derived classes:
         List<String> basicJavaClasses = new ArrayList<>();
-        Set<String> refClasses = new TreeSet<>();
+        Map<String, String> derivedClasses = new TreeMap<>();
         {
             String corePackage = "com.github.stephengold.joltjni";
             Set<Class<?>> coreClasses = MiscUtil.listClasses(corePackage);
@@ -200,8 +202,58 @@ final public class PrintTable {
                     continue; // skip to the next Java class
                 }
 
-                if (simpleName.endsWith("Ref") || simpleName.endsWith("RefC")) {
-                    refClasses.add(simpleName);
+                if (simpleName.endsWith("Ref")) {
+                    String base = MyString.removeSuffix(simpleName, "Ref");
+                    derivedClasses.put(simpleName, base);
+                } else if (simpleName.endsWith("RefC")) {
+                    String base = MyString.removeSuffix(simpleName, "RefC");
+                    derivedClasses.put(simpleName, base);
+
+                } else if (simpleName.equals("BcsResult")) {
+                    derivedClasses.put(simpleName, "BodyCreationSettings");
+                } else if (simpleName.equals("BodyVector")) {
+                    derivedClasses.put(simpleName, "Body");
+                } else if (simpleName.equals("ComputeQueueResult")) {
+                    derivedClasses.put(simpleName, "ComputeQueue");
+                } else if (simpleName.equals("ComputeSystemResult")) {
+                    derivedClasses.put(simpleName, "ComputeSystem");
+                } else if (simpleName.equals("ConstraintResult")
+                        || simpleName.equals("Constraints")) {
+                    derivedClasses.put(simpleName, "Constraint");
+                } else if (simpleName.equals("ContactSet")) {
+                    derivedClasses.put(simpleName, "CharacterContactKey");
+                } else if (simpleName.equals("GroupFilterResult")) {
+                    derivedClasses.put(simpleName, "GroupFilter");
+                } else if (simpleName.equals("IndexedTriangleList")) {
+                    derivedClasses.put(simpleName, "IndexedTriangle");
+                } else if (simpleName.equals("Mat44Array")) {
+                    derivedClasses.put(simpleName, "Mat44");
+                } else if (simpleName.equals("PathResult")) {
+                    derivedClasses.put(simpleName, "PathConstraintPath");
+                } else if (simpleName.equals("PhysicsMaterialList")
+                        || simpleName.equals("PhysicsMaterialResult")) {
+                    derivedClasses.put(simpleName, "PhysicsMaterial");
+                } else if (simpleName.equals("PhysicsSceneResult")) {
+                    derivedClasses.put(simpleName, "PhysicsScene");
+                } else if (simpleName.equals("RagdollResult")) {
+                    derivedClasses.put(simpleName, "RagdollSettings");
+                } else if (simpleName.equals("SbcsResult")) {
+                    derivedClasses.put(simpleName, "SoftBodyCreationSettings");
+                } else if (simpleName.equals("SettingsResult")) {
+                    derivedClasses.put(simpleName, "SoftBodySharedSettings");
+                } else if (simpleName.equals("ShapeList")
+                        || simpleName.equals("ShapeRefCArray")
+                        || simpleName.equals("ShapeResult")) {
+                    derivedClasses.put(simpleName, "Shape");
+                } else if (simpleName.equals("TransformedShapeArray")) {
+                    derivedClasses.put(simpleName, "TransformedShape");
+                } else if (simpleName.equals("TriangleList")) {
+                    derivedClasses.put(simpleName, "Triangle");
+                } else if (simpleName.equals("VertexArray")) {
+                    derivedClasses.put(simpleName, "Vec3");
+                } else if (simpleName.equals("VertexList")) {
+                    derivedClasses.put(simpleName, "Float3");
+
                 } else {
                     basicJavaClasses.add(simpleName);
                 }
@@ -276,14 +328,20 @@ final public class PrintTable {
                 stream.printf(" +%n {url-api}/readonly/%s.html[%s]", ro2, ro2);
             }
 
-            String ref = basicJavaClass + "Ref";
-            if (refClasses.contains(ref) && doesJavadocExist(ref)) {
-                stream.printf(" +%n {url-api}/%s.html[%s]", ref, ref);
-            }
+            if (derivedClasses.containsValue(basicJavaClass)) {
+                Set<String> derivatives = new TreeSet<>();
+                for (Map.Entry<String, String> e : derivedClasses.entrySet()) {
+                    if (e.getValue().equals(basicJavaClass)) {
+                        String der = e.getKey();
+                        if (doesJavadocExist(der)) {
+                            derivatives.add(der);
+                        }
+                    }
+                }
 
-            String refc = basicJavaClass + "RefC";
-            if (refClasses.contains(refc) && doesJavadocExist(refc)) {
-                stream.printf(" +%n {url-api}/%s.html[%s]", refc, refc);
+                for (String der : derivatives) {
+                    stream.printf(" +%n {url-api}/%s.html[%s]", der, der);
+                }
             }
 
             stream.println();
