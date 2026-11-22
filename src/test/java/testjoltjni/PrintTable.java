@@ -66,7 +66,7 @@ final public class PrintTable {
     /**
      * Main entry point for the PrintTable application.
      *
-     * @param arguments array of command-line arguments (not null)
+     * @param arguments array of command-line arguments (not {@code null})
      */
     public static void main(String[] arguments) {
         try {
@@ -88,7 +88,8 @@ final public class PrintTable {
      *
      * @param section the section of the site to search in ("class",
      * "namespace", or "struct")
-     * @param cppId the top-level C++ identifier to search for (not null)
+     * @param cppId the top-level C++ identifier to search for (not
+     * {@code null})
      * @return {@code true} if the URL returns {@code HTTP_OK}, otherwise
      * {@code false}
      * @throws IOException from HttpURLConnection
@@ -99,7 +100,7 @@ final public class PrintTable {
         String doxygenUrlString = String.format(
                 "https://jrouwe.github.io/JoltPhysics/%s_%s.html",
                 section, urlFragment);
-        URL doxygenUrl = new URL(doxygenUrlString);
+        URL doxygenUrl = new URL(doxygenUrlString); // TODO: deprecated
         boolean result = doesPageExist(doxygenUrl);
 
         return result;
@@ -108,7 +109,8 @@ final public class PrintTable {
     /**
      * Test whether a specific webpage exists in the Javadoc site for Jolt JNI.
      *
-     * @param className the top-level class name to search for (not null)
+     * @param className the top-level class name to search for (not
+     * {@code null})
      * @return {@code true} if the URL returns {@code HTTP_OK}, otherwise
      * {@code false}
      * @throws IOException from HttpURLConnection
@@ -119,7 +121,7 @@ final public class PrintTable {
                 "https://stephengold.github.io/jolt-jni-docs/javadoc/latest/"
                 + "com.github.stephengold.joltjni/"
                 + "com/github/stephengold/joltjni/%s.html", className);
-        URL javadocUrl = new URL(javadocString);
+        URL javadocUrl = new URL(javadocString); // TODO: deprecated
         boolean result = doesPageExist(javadocUrl);
 
         return result;
@@ -128,7 +130,7 @@ final public class PrintTable {
     /**
      * Test whether a page exists at the specified URL.
      *
-     * @param url the URL to test (not null)
+     * @param url the URL to test (not {@code null})
      * @return {@code true} if the URL returns {@code HTTP_OK}, otherwise
      * {@code false}
      * @throws IOException from HttpURLConnection
@@ -153,7 +155,7 @@ final public class PrintTable {
     /**
      * Convert a C++ identifier to a URL fragment following Doxygen conventions.
      *
-     * @param cppId the identifier to convert (not null)
+     * @param cppId the identifier to convert (not {@code null})
      * @return the filename
      */
     private static String escape(String cppId) {
