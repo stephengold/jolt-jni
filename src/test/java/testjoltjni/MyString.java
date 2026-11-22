@@ -98,6 +98,26 @@ final public class MyString {
     }
 
     /**
+     * Extract the remainder of the specified string after removing the
+     * specified suffix.
+     *
+     * @param input the input string (not {@code null})
+     * @param suffix the suffix string (not {@code null})
+     * @return the remainder of the input (not {@code null})
+     */
+    public static String removeSuffix(String input, String suffix) {
+        if (!input.endsWith(suffix)) {
+            throw new IllegalArgumentException("input must end with suffix.");
+        }
+
+        int endPosition = input.length() - suffix.length();
+        String result = input.substring(0, endPosition);
+
+        assert result != null;
+        return result;
+    }
+
+    /**
      * Enclose the specified text in quotation marks and escape all tab, quote,
      * newline, and backslash characters.
      *
