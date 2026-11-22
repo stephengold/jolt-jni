@@ -48,6 +48,19 @@ final public class PrintTable {
     // fields
 
     /**
+     * list of non-derived classes in Jolt JNI
+     */
+    final private static List<String> basicJavaClasses = new ArrayList<>(99);
+    /**
+     * maps the name of each derived class to the name of the basic class from
+     * which it's derived
+     */
+    final private static Map<String, String> derivedClasses = new TreeMap<>();
+    /**
+     * collection of read-only interfaces in Jolt JNI
+     */
+    final private static Set<String> readOnlyNames = new TreeSet<>();
+    /**
      * reusable builder
      */
     final private static StringBuilder builder = new StringBuilder();
@@ -81,6 +94,94 @@ final public class PrintTable {
     }
     // *************************************************************************
     // private methods
+
+    /**
+     * Classify a Jolt-JNI class as either basic or derived and add it to the
+     * appropriate Collection.
+     * <p>
+     * For instance, {@code Shape} is a basic class, from which
+     * {@code ConstShape}, {@code ShapeList}, {@code ShapeRefC}, and
+     * {@code ShapeResult} are derived.
+     *
+     * @param simpleName the simple name of a Java class (not {@code null})
+     */
+    private static void classifyName(String simpleName) {
+        if (simpleName.endsWith("Ref")) {
+            String base = MyString.removeSuffix(simpleName, "Ref");
+            derivedClasses.put(simpleName, base);
+
+        } else if (simpleName.endsWith("RefC")) {
+            String base = MyString.removeSuffix(simpleName, "RefC");
+            derivedClasses.put(simpleName, base);
+
+        } else if (simpleName.equals("BcsResult")) {
+            derivedClasses.put(simpleName, "BodyCreationSettings");
+
+        } else if (simpleName.equals("BodyVector")) {
+            derivedClasses.put(simpleName, "Body");
+
+        } else if (simpleName.equals("ComputeQueueResult")) {
+            derivedClasses.put(simpleName, "ComputeQueue");
+
+        } else if (simpleName.equals("ComputeSystemResult")) {
+            derivedClasses.put(simpleName, "ComputeSystem");
+
+        } else if (simpleName.equals("ConstraintResult")
+                || simpleName.equals("Constraints")) {
+            derivedClasses.put(simpleName, "Constraint");
+
+        } else if (simpleName.equals("ContactSet")) {
+            derivedClasses.put(simpleName, "CharacterContactKey");
+
+        } else if (simpleName.equals("GroupFilterResult")) {
+            derivedClasses.put(simpleName, "GroupFilter");
+
+        } else if (simpleName.equals("IndexedTriangleList")) {
+            derivedClasses.put(simpleName, "IndexedTriangle");
+
+        } else if (simpleName.equals("Mat44Array")) {
+            derivedClasses.put(simpleName, "Mat44");
+
+        } else if (simpleName.equals("PathResult")) {
+            derivedClasses.put(simpleName, "PathConstraintPath");
+
+        } else if (simpleName.equals("PhysicsMaterialList")
+                || simpleName.equals("PhysicsMaterialResult")) {
+            derivedClasses.put(simpleName, "PhysicsMaterial");
+
+        } else if (simpleName.equals("PhysicsSceneResult")) {
+            derivedClasses.put(simpleName, "PhysicsScene");
+
+        } else if (simpleName.equals("RagdollResult")) {
+            derivedClasses.put(simpleName, "RagdollSettings");
+
+        } else if (simpleName.equals("SbcsResult")) {
+            derivedClasses.put(simpleName, "SoftBodyCreationSettings");
+
+        } else if (simpleName.equals("SettingsResult")) {
+            derivedClasses.put(simpleName, "SoftBodySharedSettings");
+
+        } else if (simpleName.equals("ShapeList")
+                || simpleName.equals("ShapeRefCArray")
+                || simpleName.equals("ShapeResult")) {
+            derivedClasses.put(simpleName, "Shape");
+
+        } else if (simpleName.equals("TransformedShapeArray")) {
+            derivedClasses.put(simpleName, "TransformedShape");
+
+        } else if (simpleName.equals("TriangleList")) {
+            derivedClasses.put(simpleName, "Triangle");
+
+        } else if (simpleName.equals("VertexArray")) {
+            derivedClasses.put(simpleName, "Vec3");
+
+        } else if (simpleName.equals("VertexList")) {
+            derivedClasses.put(simpleName, "Float3");
+
+        } else { // The class is not recognized, so assume it's basic.
+            basicJavaClasses.add(simpleName);
+        }
+    }
 
     /**
      * Test whether a specific webpage exists in the Doxygen site for Jolt
@@ -176,9 +277,89 @@ final public class PrintTable {
     }
 
     /**
+     * Print one row of the table to the specified stream, including a terminal
+     * newline. If no Doxygen is found for the C++ class, a diagnostic is
+     * printed to {@code System.out} instead.
+     *
+     * @param stream the output stream to use (not {@code null})
+     * @param basicJavaClass the simple name of a basic Java class (not
+     * {@code null})
+     */
+    private static void printRowTo(PrintStream stream, String basicJavaClass)
+            throws IOException {
+        /*
+         * Convert the Java class name to a hypothetical C++ identifier
+         * by capitalizing some known initialisms.
+         */
+        String cppId = basicJavaClass
+                .replace("Aa", "AA")
+                .replace("Bcs", "BCS")
+                .replace("Epa", "EPA")
+                .replace("Dof", "DOF")
+                .replace("Id", "ID")
+                .replace("Lra", "LRA")
+                .replace("Rtti", "RTTI")
+                .replace("Sbcs", "SBCS")
+                .replace("Tv", "TV")
+                .replace("Wv", "WV");
+
+        // Print a weblink to the Doxygen site for Jolt Physics:
+        if (doesIdExist("class", cppId)) {
+            stream.printf("%n|{url-jolt}%s.html[JPH::%s]%n",
+                    escape(cppId), cppId);
+
+        } else if (doesIdExist("struct", cppId)) {
+            stream.printf("%n|{url-jolt-struct}%s.html[JPH::%s]%n",
+                    escape(cppId), cppId);
+
+        } else if (doesIdExist("namespace", cppId)) {
+            stream.printf("%n|{url-jolt-namespace}%s.html[%s::]%n",
+                    escape(cppId), cppId);
+
+        } else { // not a top-level class, struct, or namespace in Jolt
+            System.out.println(" no Doxygen found for " + basicJavaClass);
+            return; // skip to the next Java class
+        }
+
+        // Print a weblink to the Javadoc for the basic Java class:
+        stream.printf("|{url-api}/%s.html[%s]", basicJavaClass, basicJavaClass);
+
+        String ro1 = "Const" + basicJavaClass;
+        if (readOnlyNames.contains(ro1)
+                && doesJavadocExist("readonly/" + ro1)) {
+            stream.printf(" +%n {url-api}/readonly/%s.html[%s]", ro1, ro1);
+        }
+
+        String ro2 = basicJavaClass + "Arg";
+        if (readOnlyNames.contains(ro2)
+                && doesJavadocExist("readonly/" + ro2)) {
+            stream.printf(" +%n {url-api}/readonly/%s.html[%s]", ro2, ro2);
+        }
+
+        if (derivedClasses.containsValue(basicJavaClass)) {
+            Set<String> derivatives = new TreeSet<>(); // temporary collection
+
+            for (Map.Entry<String, String> entry : derivedClasses.entrySet()) {
+                String base = entry.getValue();
+                if (base.equals(basicJavaClass)) {
+                    String der = entry.getKey();
+                    assert doesJavadocExist(der) : der;
+                    derivatives.add(der);
+                }
+            }
+
+            for (String der : derivatives) { // in lexical order
+                stream.printf(" +%n {url-api}/%s.html[%s]", der, der);
+            }
+        }
+
+        stream.println();
+    }
+
+    /**
      * Print a table of correspondences to the specified stream.
      *
-     * @param stream the output stream to use (not null)
+     * @param stream the output stream to use (not {@code null})
      */
     private static void printTableTo(PrintStream stream) throws IOException {
         // Print blank lines to simplify file comparisons:
@@ -187,91 +368,31 @@ final public class PrintTable {
         }
 
         // Enumerate Jolt JNI's basic classes and derived classes:
-        List<String> basicJavaClasses = new ArrayList<>();
-        Map<String, String> derivedClasses = new TreeMap<>();
-        {
-            String corePackage = "com.github.stephengold.joltjni";
-            Set<Class<?>> coreClasses = MiscUtil.listClasses(corePackage);
-            for (Class<?> coreClass : coreClasses) {
-                String simpleName = coreClass.getSimpleName();
-                if (simpleName.isBlank()) {
-                    continue; // skip to the next Java class
-                }
-                int classModifiers = coreClass.getModifiers();
-                if (!Modifier.isPublic(classModifiers)) {
-                    System.out.printf(" skipping %s because it's not public%n",
-                            simpleName);
-                    continue; // skip to the next Java class
-                }
-
-                if (simpleName.endsWith("Ref")) {
-                    String base = MyString.removeSuffix(simpleName, "Ref");
-                    derivedClasses.put(simpleName, base);
-                } else if (simpleName.endsWith("RefC")) {
-                    String base = MyString.removeSuffix(simpleName, "RefC");
-                    derivedClasses.put(simpleName, base);
-
-                } else if (simpleName.equals("BcsResult")) {
-                    derivedClasses.put(simpleName, "BodyCreationSettings");
-                } else if (simpleName.equals("BodyVector")) {
-                    derivedClasses.put(simpleName, "Body");
-                } else if (simpleName.equals("ComputeQueueResult")) {
-                    derivedClasses.put(simpleName, "ComputeQueue");
-                } else if (simpleName.equals("ComputeSystemResult")) {
-                    derivedClasses.put(simpleName, "ComputeSystem");
-                } else if (simpleName.equals("ConstraintResult")
-                        || simpleName.equals("Constraints")) {
-                    derivedClasses.put(simpleName, "Constraint");
-                } else if (simpleName.equals("ContactSet")) {
-                    derivedClasses.put(simpleName, "CharacterContactKey");
-                } else if (simpleName.equals("GroupFilterResult")) {
-                    derivedClasses.put(simpleName, "GroupFilter");
-                } else if (simpleName.equals("IndexedTriangleList")) {
-                    derivedClasses.put(simpleName, "IndexedTriangle");
-                } else if (simpleName.equals("Mat44Array")) {
-                    derivedClasses.put(simpleName, "Mat44");
-                } else if (simpleName.equals("PathResult")) {
-                    derivedClasses.put(simpleName, "PathConstraintPath");
-                } else if (simpleName.equals("PhysicsMaterialList")
-                        || simpleName.equals("PhysicsMaterialResult")) {
-                    derivedClasses.put(simpleName, "PhysicsMaterial");
-                } else if (simpleName.equals("PhysicsSceneResult")) {
-                    derivedClasses.put(simpleName, "PhysicsScene");
-                } else if (simpleName.equals("RagdollResult")) {
-                    derivedClasses.put(simpleName, "RagdollSettings");
-                } else if (simpleName.equals("SbcsResult")) {
-                    derivedClasses.put(simpleName, "SoftBodyCreationSettings");
-                } else if (simpleName.equals("SettingsResult")) {
-                    derivedClasses.put(simpleName, "SoftBodySharedSettings");
-                } else if (simpleName.equals("ShapeList")
-                        || simpleName.equals("ShapeRefCArray")
-                        || simpleName.equals("ShapeResult")) {
-                    derivedClasses.put(simpleName, "Shape");
-                } else if (simpleName.equals("TransformedShapeArray")) {
-                    derivedClasses.put(simpleName, "TransformedShape");
-                } else if (simpleName.equals("TriangleList")) {
-                    derivedClasses.put(simpleName, "Triangle");
-                } else if (simpleName.equals("VertexArray")) {
-                    derivedClasses.put(simpleName, "Vec3");
-                } else if (simpleName.equals("VertexList")) {
-                    derivedClasses.put(simpleName, "Float3");
-
-                } else {
-                    basicJavaClasses.add(simpleName);
-                }
+        String corePackage = "com.github.stephengold.joltjni";
+        Set<Class<?>> coreClasses = MiscUtil.listClasses(corePackage);
+        for (Class<?> coreClass : coreClasses) {
+            String simpleName = coreClass.getSimpleName();
+            if (simpleName.isBlank()) {
+                continue; // skip to the next Java class
             }
+
+            int classModifiers = coreClass.getModifiers();
+            if (!Modifier.isPublic(classModifiers)) {
+                System.out.printf(" skipping %s because it's not public%n",
+                        simpleName);
+                continue; // skip to the next Java class
+            }
+
+            classifyName(simpleName);
         }
 
         // Enumerate Jolt JNI's read-only interfaces:
-        Set<String> readOnlyNames = new TreeSet<>();
-        {
-            String readOnlyPackage = "com.github.stephengold.joltjni.readonly";
-            Set<Class<?>> readOnlyClasses
-                    = MiscUtil.listClasses(readOnlyPackage);
-            for (Class<?> readOnlyClass : readOnlyClasses) {
-                String simpleName = readOnlyClass.getSimpleName();
-                readOnlyNames.add(simpleName);
-            }
+        String readOnlyPackage = "com.github.stephengold.joltjni.readonly";
+        Set<Class<?>> readOnlyClasses
+                = MiscUtil.listClasses(readOnlyPackage);
+        for (Class<?> readOnlyClass : readOnlyClasses) {
+            String simpleName = readOnlyClass.getSimpleName();
+            readOnlyNames.add(simpleName);
         }
 
         Collections.sort(basicJavaClasses);
@@ -281,72 +402,7 @@ final public class PrintTable {
                 System.out.println(" no Javadoc found for " + basicJavaClass);
                 continue;
             }
-            /*
-             * Convert the Java class name to a hypothetical C++ identifier
-             * by capitalizing some known initialisms.
-             */
-            String cppId = basicJavaClass
-                    .replace("Aa", "AA")
-                    .replace("Bcs", "BCS")
-                    .replace("Epa", "EPA")
-                    .replace("Dof", "DOF")
-                    .replace("Id", "ID")
-                    .replace("Lra", "LRA")
-                    .replace("Rtti", "RTTI")
-                    .replace("Sbcs", "SBCS")
-                    .replace("Tv", "TV")
-                    .replace("Wv", "WV");
-
-            // Access the Doxygen site for Jolt Physics via HTTPS:
-            if (doesIdExist("class", cppId)) {
-                stream.printf("%n|{url-jolt}%s.html[JPH::%s]%n",
-                        escape(cppId), cppId);
-
-            } else if (doesIdExist("struct", cppId)) {
-                stream.printf("%n|{url-jolt-struct}%s.html[JPH::%s]%n",
-                        escape(cppId), cppId);
-
-            } else if (doesIdExist("namespace", cppId)) {
-                stream.printf("%n|{url-jolt-namespace}%s.html[%s::]%n",
-                        escape(cppId), cppId);
-
-            } else { // not a top-level class, struct, or namespace in Jolt
-                System.out.println(" no Doxygen found for " + basicJavaClass);
-                continue; // skip to the next Java class
-            }
-
-            stream.printf("|{url-api}/%s.html[%s]",
-                    basicJavaClass, basicJavaClass);
-
-            String ro1 = "Const" + basicJavaClass;
-            if (readOnlyNames.contains(ro1)
-                    && doesJavadocExist("readonly/" + ro1)) {
-                stream.printf(" +%n {url-api}/readonly/%s.html[%s]", ro1, ro1);
-            }
-
-            String ro2 = basicJavaClass + "Arg";
-            if (readOnlyNames.contains(ro2)
-                    && doesJavadocExist("readonly/" + ro2)) {
-                stream.printf(" +%n {url-api}/readonly/%s.html[%s]", ro2, ro2);
-            }
-
-            if (derivedClasses.containsValue(basicJavaClass)) {
-                Set<String> derivatives = new TreeSet<>();
-                for (Map.Entry<String, String> e : derivedClasses.entrySet()) {
-                    if (e.getValue().equals(basicJavaClass)) {
-                        String der = e.getKey();
-                        if (doesJavadocExist(der)) {
-                            derivatives.add(der);
-                        }
-                    }
-                }
-
-                for (String der : derivatives) {
-                    stream.printf(" +%n {url-api}/%s.html[%s]", der, der);
-                }
-            }
-
-            stream.println();
+            printRowTo(stream, basicJavaClass);
         }
 
         stream.println();
